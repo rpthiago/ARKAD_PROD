@@ -49,7 +49,10 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
-def _normalize_local_endpoint(endpoint_url: str) -> str:
+def _resolve_endpoint_url() -> str:
+    env_url = os.getenv("ARKAD_API_URL", "").strip()
+    if env_url:
+        return env_url
     return FIXED_ENDPOINT_URL
 
 
@@ -128,7 +131,7 @@ def _load_master_rodo_cuts(cfg: dict[str, Any]) -> tuple[list[dict[str, Any]], s
 
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
     runtime = cfg.get("runtime_data", {})
-    endpoint_url = _normalize_local_endpoint(str(runtime.get("endpoint_url", "")).strip())
+    endpoint_url = _resolve_endpoint_url()
     if not endpoint_url:
         return pd.DataFrame(), "Endpoint nao configurado"
 
@@ -300,7 +303,7 @@ def main() -> None:
 
     try:
         cfg_dbg = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
-        endpoint_dbg = _normalize_local_endpoint(str(cfg_dbg.get("runtime_data", {}).get("endpoint_url", "")))
+        endpoint_dbg = _resolve_endpoint_url()
         if endpoint_dbg:
             st.write(f"Debug API URL: {endpoint_dbg}")
     except Exception:
