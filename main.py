@@ -374,13 +374,14 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
         {
             "Hora": df[time_col],
             "Jogo": df.get("Jogo", ""),
+            "Metodo": df.get(method_col, ""),
             "Odd sugerida": pd.to_numeric(df.get(odd_col), errors="coerce"),
             "Status": df["Status"],
             "__mins": pd.to_numeric(df["__mins"], errors="coerce"),
             "PnL_Linha": pd.to_numeric(df.get("PnL_Linha"), errors="coerce"),
         }
     )
-    return out.sort_values("__mins").reset_index(drop=True), f"{source_label} | {rodo_label}"
+    return out.sort_values(["__mins", "Jogo", "Metodo"]).reset_index(drop=True), f"{source_label} | {rodo_label}"
 
 
 def main() -> None:
@@ -454,7 +455,7 @@ def main() -> None:
         if entry_window.empty:
             st.info("Aguardando próxima oportunidade confirmada pelo Rodo")
         else:
-            entry_view = entry_window[["Hora", "Jogo", "Odd sugerida", "Status"]].copy()
+            entry_view = entry_window[["Hora", "Jogo", "Metodo", "Odd sugerida", "Status"]].copy()
             entry_view["Odd sugerida"] = pd.to_numeric(entry_view["Odd sugerida"], errors="coerce").map(
                 lambda x: f"{x:.2f}" if pd.notna(x) else "N/A"
             )
@@ -467,7 +468,7 @@ def main() -> None:
         if agenda.empty:
             st.info("Nenhuma oportunidade segura no momento. Aguardando mercado.")
         else:
-            agenda_view = agenda[["Hora", "Jogo", "Odd sugerida", "Status"]].copy()
+            agenda_view = agenda[["Hora", "Jogo", "Metodo", "Odd sugerida", "Status"]].copy()
             agenda_view["Odd sugerida"] = pd.to_numeric(agenda_view["Odd sugerida"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
             st.table(agenda_view)
 
@@ -476,7 +477,7 @@ def main() -> None:
         if approved_today.empty:
             st.info("Sem jogos aprovados no dia inteiro.")
         else:
-            full_day_view = approved_today[["Hora", "Jogo", "Odd sugerida", "Status", "__mins"]].copy()
+            full_day_view = approved_today[["Hora", "Jogo", "Metodo", "Odd sugerida", "Status", "__mins"]].copy()
             full_day_view["Destaque"] = full_day_view["__mins"].map(
                 lambda m: "ENTRADA AGORA" if (pd.notna(m) and now_minutes <= float(m)) else (
                     "HOJE MAIS TARDE" if (pd.notna(m) and float(m) > now_minutes) else "JA PASSOU"
@@ -485,7 +486,7 @@ def main() -> None:
             full_day_view["Odd sugerida"] = pd.to_numeric(full_day_view["Odd sugerida"], errors="coerce").map(
                 lambda x: f"{x:.2f}" if pd.notna(x) else "N/A"
             )
-            full_day_view = full_day_view[["Destaque", "Hora", "Jogo", "Odd sugerida", "Status"]]
+            full_day_view = full_day_view[["Destaque", "Hora", "Jogo", "Metodo", "Odd sugerida", "Status"]]
 
             def _highlight_row(row: pd.Series) -> list[str]:
                 tag = str(row.get("Destaque", ""))
@@ -498,9 +499,9 @@ def main() -> None:
             st.dataframe(full_day_view.style.apply(_highlight_row, axis=1), use_container_width=True)
 
         if approved_today.empty:
-            csv_data = "Hora,Jogo,Odd sugerida,Status\n"
+            csv_data = "Hora,Jogo,Metodo,Odd sugerida,Status\n"
         else:
-            download_df = approved_today[["Hora", "Jogo", "Odd sugerida", "Status"]].copy()
+            download_df = approved_today[["Hora", "Jogo", "Metodo", "Odd sugerida", "Status"]].copy()
             download_df["Odd sugerida"] = pd.to_numeric(download_df["Odd sugerida"], errors="coerce")
             csv_data = download_df.to_csv(index=False)
         st.download_button(
