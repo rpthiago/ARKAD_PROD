@@ -439,7 +439,7 @@ def main() -> None:
         now_minutes = now.hour * 60 + now.minute
 
         agenda = approved_today[approved_today["__mins"] >= now_minutes].copy() if not approved_today.empty else pd.DataFrame()
-        entry_window = agenda[agenda["__mins"] <= (now_minutes + 120)].copy() if not agenda.empty else pd.DataFrame()
+        entry_window = agenda.copy() if not agenda.empty else pd.DataFrame()
 
         lucro_hoje = float(pd.to_numeric(approved_today.get("PnL_Linha"), errors="coerce").fillna(0).sum()) if not approved_today.empty else 0.0
         status_txt = "Oportunidade encontrada" if not entry_window.empty else "Aguardando oportunidade"
@@ -490,8 +490,8 @@ def main() -> None:
         else:
             full_day_view = approved_today[["Hora", "Jogo", "Odd sugerida", "Status", "__mins"]].copy()
             full_day_view["Destaque"] = full_day_view["__mins"].map(
-                lambda m: "ENTRADA AGORA" if (pd.notna(m) and now_minutes <= float(m) <= (now_minutes + 120)) else (
-                    "HOJE MAIS TARDE" if (pd.notna(m) and float(m) > (now_minutes + 120)) else "JA PASSOU"
+                lambda m: "ENTRADA AGORA" if (pd.notna(m) and now_minutes <= float(m)) else (
+                    "HOJE MAIS TARDE" if (pd.notna(m) and float(m) > now_minutes) else "JA PASSOU"
                 )
             )
             full_day_view["Odd sugerida"] = pd.to_numeric(full_day_view["Odd sugerida"], errors="coerce").map(
