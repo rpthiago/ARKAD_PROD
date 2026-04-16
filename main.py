@@ -98,6 +98,8 @@ def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
         return "🟢", "Servidor Online"
+    if s.startswith("fallback local"):
+        return "🟡", "Fallback Local Ativo"
     if s.startswith("endpoint indisponivel"):
         return "🔴", "Servidor Offline"
     return "🟠", "Status Indefinido"
@@ -154,8 +156,18 @@ def _load_master_rodo_cuts(cfg: dict[str, Any]) -> tuple[list[dict[str, Any]], s
 
 
 def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: str) -> tuple[pd.DataFrame, str]:
+    reason_l = str(reason or "").lower()
+    if "resposta do endpoint invalida" in reason_l:
+        reason_ui = "resposta invalida da API"
+    elif "endpoint indisponivel" in reason_l or "connection" in reason_l or "refused" in reason_l:
+        reason_ui = "endpoint local offline"
+    elif "endpoint nao configurado" in reason_l:
+        reason_ui = "endpoint nao configurado"
+    else:
+        reason_ui = "falha de comunicacao com API"
+
     if not LOCAL_FALLBACK_PATH.exists():
-        return pd.DataFrame(), f"Endpoint indisponivel ({reason}) | fallback local ausente"
+        return pd.DataFrame(), f"Endpoint indisponivel ({reason_ui}) | fallback local ausente"
 
     try:
         df = pd.read_csv(LOCAL_FALLBACK_PATH)
@@ -165,7 +177,7 @@ def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: 
     if date_col not in df.columns:
         df = df.copy()
         df[date_col] = target_date_iso
-    return df, f"Fallback local ({LOCAL_FALLBACK_PATH.name}) | motivo: {reason}"
+    return df, f"Fallback local ({LOCAL_FALLBACK_PATH.name}) | motivo: {reason_ui}"
 
 
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
