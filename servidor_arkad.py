@@ -50,6 +50,15 @@ def _matches_cut(row: pd.Series, cut: dict[str, Any], league_col: str, method_co
     method = str(row.get(method_col, ""))
     odd = pd.to_numeric(row.get(odd_col), errors="coerce")
 
+    def _expand_method_aliases(value: str) -> set[str]:
+        s = str(value or "")
+        variants = {s}
+        if "Lay_CS_0x1_" in s:
+            variants.add(s.replace("Lay_CS_0x1_", "Lay_CS_1x0_"))
+        if "Lay_CS_1x0_" in s:
+            variants.add(s.replace("Lay_CS_1x0_", "Lay_CS_0x1_"))
+        return variants
+
     cut_leagues = set(cut.get("leagues", []))
     if cut.get("league"):
         cut_leagues.add(str(cut["league"]))
@@ -58,7 +67,7 @@ def _matches_cut(row: pd.Series, cut: dict[str, Any], league_col: str, method_co
 
     method_equals = cut.get("method_equals")
     method_contains = cut.get("method_contains")
-    if method_equals and method != str(method_equals):
+    if method_equals and method not in _expand_method_aliases(str(method_equals)):
         return False
     if method_contains and str(method_contains) not in method:
         return False
