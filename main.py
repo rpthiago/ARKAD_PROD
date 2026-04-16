@@ -227,6 +227,15 @@ def _load_live_then_local_fallback(
 
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
     runtime = cfg.get("runtime_data", {})
+
+    # Prioriza ingestao live para evitar dependencia de localhost em ambientes cloud.
+    live_df, live_source = load_live_dataframe(target_date_iso, cfg)
+    if not live_df.empty:
+        if date_col not in live_df.columns:
+            live_df = live_df.copy()
+            live_df[date_col] = target_date_iso
+        return live_df, live_source
+
     endpoint_url = _resolve_endpoint_url()
     if not endpoint_url:
         return _load_live_then_local_fallback(target_date_iso, date_col, cfg, "endpoint nao configurado")

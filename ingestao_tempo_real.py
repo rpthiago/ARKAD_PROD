@@ -11,6 +11,28 @@ import requests
 DEFAULT_TIMEOUT_SEC = 15.0
 
 
+def _resolve_token(token_env: str) -> str:
+    names = [n for n in [token_env, "FUTPYTHON_TOKEN", "FUTPYTHON_API_TOKEN", "API_TOKEN"] if n]
+
+    for name in names:
+        token = os.getenv(name, "").strip()
+        if token:
+            return token
+
+    # Streamlit Cloud costuma usar secrets em vez de variaveis de ambiente.
+    try:
+        import streamlit as st  # type: ignore
+
+        for name in names:
+            token = str(st.secrets.get(name, "")).strip()
+            if token:
+                return token
+    except Exception:
+        pass
+
+    return ""
+
+
 def _extract_records(payload: Any) -> list[dict[str, Any]]:
     if isinstance(payload, list):
         return [x for x in payload if isinstance(x, dict)]
@@ -177,7 +199,7 @@ def _load_from_custom_provider(
     auth_header = str(provider_cfg.get("auth_header", "Authorization")).strip() or "Authorization"
     auth_scheme = str(provider_cfg.get("auth_scheme", "Bearer")).strip()
     if token_env and auth_header not in headers:
-        token = os.getenv(token_env, "").strip()
+        token = _resolve_token(token_env)
         if token:
             headers[auth_header] = f"{auth_scheme} {token}".strip() if auth_scheme else token
 
