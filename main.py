@@ -16,6 +16,7 @@ ROOT_DIR = Path(__file__).resolve().parent
 PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
 FIXED_ENDPOINT_URL = "http://127.0.0.1:8080/arkad/sinais"
+LOCAL_FALLBACK_PATH = ROOT_DIR / "recalculo_sem_combos_usuario.csv"
 
 
 def _parse_hhmm_to_minutes(value: Any) -> int | None:
@@ -65,7 +66,38 @@ def _resolve_endpoint_url() -> str:
     env_url = os.getenv("ARKAD_API_URL", "").strip()
     if env_url:
         return env_url
+
+    # Fallback opcional por arquivo de config (util para ambientes sem secrets).
+    try:
+        cfg_raw = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
+        cfg_url = str(cfg_raw.get("runtime_data", {}).get("endpoint_url", "")).strip()
+        if cfg_url:
+            return cfg_url
+    except Exception:
+        pass
+
     return FIXED_ENDPOINT_URL
+
+
+def _probe_api_url(api_url: str) -> tuple[bool, str]:
+    if not api_url:
+        return False, "URL vazia"
+    headers = {"ngrok-skip-browser-warning": "true"}
+    proxies = {"http": None, "https": None}
+    test_date = datetime.now().date().isoformat()
+    try:
+        resp = requests.get(api_url, params={"date": test_date}, headers=headers, timeout=10.0, proxies=proxies)
+        if 200 <= resp.status_code < 300:
+            return True, f"HTTP {resp.status_code} OK"
+        body = (resp.text or "").strip().replace("\n", " ")
+        return False, f"HTTP {resp.status_code} | body: {body[:220]}"
+    except Exception as exc:
+        return False, str(exc)
+
+
+def _is_local_endpoint(url: str) -> bool:
+    s = str(url or "").strip().lower()
+    return "127.0.0.1" in s or "localhost" in s or "0.0.0.0" in s
 
 
 def _is_endpoint_connection_error(source_label: str) -> bool:
@@ -80,6 +112,10 @@ def _is_endpoint_connection_error(source_label: str) -> bool:
         "httpconnectionpool",
     ]
     return any(marker in s for marker in connection_markers)
+
+
+def _is_local_fallback(source_label: str) -> bool:
+    return str(source_label or "").lower().startswith("fallback local")
 
 
 def _server_status(source_label: str) -> tuple[str, str]:
@@ -141,16 +177,32 @@ def _load_master_rodo_cuts(cfg: dict[str, Any]) -> tuple[list[dict[str, Any]], s
     return cuts, f"Rodo master: {path.name}", None
 
 
+def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: str) -> tuple[pd.DataFrame, str]:
+    if not LOCAL_FALLBACK_PATH.exists():
+        return pd.DataFrame(), f"Endpoint indisponivel ({reason}) | fallback local ausente"
+
+    try:
+        df = pd.read_csv(LOCAL_FALLBACK_PATH)
+    except Exception as exc:
+        return pd.DataFrame(), f"Endpoint indisponivel ({reason}) | fallback local falhou: {exc}"
+
+    if date_col not in df.columns:
+        df = df.copy()
+        df[date_col] = target_date_iso
+    return df, f"Fallback local ({LOCAL_FALLBACK_PATH.name}) | motivo: {reason}"
+
+
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
     runtime = cfg.get("runtime_data", {})
     endpoint_url = _resolve_endpoint_url()
     if not endpoint_url:
-        return pd.DataFrame(), "Endpoint nao configurado"
+        return _load_local_fallback_dataframe(target_date_iso, date_col, "endpoint nao configurado")
 
     method = str(runtime.get("method", "GET")).strip().upper()
     date_param = str(runtime.get("date_param", "date")).strip() or "date"
     timeout_sec = max(float(runtime.get("timeout_sec", 10.0)), 10.0)
     headers = dict(runtime.get("headers", {}) or {})
+    headers.setdefault("ngrok-skip-browser-warning", "true")
     proxies = {"http": None, "https": None}
 
     token_env = str(runtime.get("auth_token_env", "")).strip()
@@ -172,7 +224,7 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec, proxies=proxies)
         response.raise_for_status()
     except Exception as exc:
-        return pd.DataFrame(), f"Endpoint indisponivel: {exc}"
+        return _load_local_fallback_dataframe(target_date_iso, date_col, f"endpoint indisponivel: {exc}")
 
     content_type = (response.headers.get("Content-Type") or "").lower()
     df = pd.DataFrame()
@@ -187,7 +239,7 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             except Exception:
                 df = pd.read_csv(StringIO(response.text))
     except Exception as exc:
-        return pd.DataFrame(), f"Resposta do endpoint invalida: {exc}"
+        return _load_local_fallback_dataframe(target_date_iso, date_col, f"resposta do endpoint invalida: {exc}")
 
     if df.empty:
         return pd.DataFrame(), f"Endpoint em tempo real: {endpoint_url}"
@@ -312,6 +364,14 @@ def main() -> None:
         help="Se preenchido, esta URL sobrescreve secret/env apenas nesta sessao.",
     )
 
+    if st.sidebar.button("🧪 Testar Conexao da API", use_container_width=True):
+        active_url = _resolve_endpoint_url()
+        ok, msg = _probe_api_url(active_url)
+        if ok:
+            st.sidebar.success(f"Conexao OK: {msg}")
+        else:
+            st.sidebar.error(f"Falha na API: {msg}")
+
     if st.sidebar.button("🔄 Tentar Reconectar Agora", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
@@ -327,6 +387,8 @@ def main() -> None:
         endpoint_dbg = _resolve_endpoint_url()
         if endpoint_dbg:
             st.write(f"Debug API URL: {endpoint_dbg}")
+            if _is_local_endpoint(endpoint_dbg):
+                st.warning("No Streamlit Cloud, configure ARKAD_API_URL com o link HTTPS publico do Ngrok.")
     except Exception:
         pass
 
@@ -337,6 +399,8 @@ def main() -> None:
         _update_connection_state(source_label)
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
+        if _is_local_fallback(source_label):
+            st.warning("API indisponivel. Operando com fallback local em arquivo.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
@@ -434,6 +498,8 @@ def main() -> None:
         _update_connection_state(source_label)
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
+        if _is_local_fallback(source_label):
+            st.warning("API indisponivel. Operando com fallback local em arquivo.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
