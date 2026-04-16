@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from datetime import date, datetime
 from io import StringIO
 from pathlib import Path
@@ -45,6 +46,34 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
                 return [x for x in value if isinstance(x, dict)]
         return [payload]
     return []
+
+
+def _is_endpoint_connection_error(source_label: str) -> bool:
+    s = (source_label or "").lower()
+    if not s.startswith("endpoint indisponivel"):
+        return False
+    connection_markers = [
+        "connection",
+        "refused",
+        "failed to establish",
+        "max retries exceeded",
+        "httpconnectionpool",
+    ]
+    return any(marker in s for marker in connection_markers)
+
+
+def _server_status(source_label: str) -> tuple[str, str]:
+    s = (source_label or "").lower()
+    if s.startswith("endpoint em tempo real"):
+        return "🟢", "Servidor Online"
+    if s.startswith("endpoint indisponivel"):
+        return "🔴", "Servidor Offline"
+    return "🟠", "Status Indefinido"
+
+
+def _render_server_badge(source_label: str) -> None:
+    icon, text = _server_status(source_label)
+    st.markdown(f"**Status do Servidor:** {icon} {text}")
 
 
 def _extract_rodo_cuts(data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -234,6 +263,10 @@ def main() -> None:
     st.set_page_config(page_title="Arkad Sinais", layout="centered")
     st.title("🎯 Arkad: Sinais de Hoje")
 
+    if st.sidebar.button("🔄 Tentar Reconectar Agora", use_container_width=True):
+        st.cache_data.clear()
+        st.rerun()
+
     selected_date = st.sidebar.date_input("📅 Ver Outra Data", value=date.today(), format="YYYY-MM-DD")
 
     now = datetime.now()
@@ -243,7 +276,13 @@ def main() -> None:
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
+        _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
+        if _is_endpoint_connection_error(source_label):
+            st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
+            st.caption("Nova tentativa automática em 30 segundos...")
+            time.sleep(30)
+            st.rerun()
         approved_today = games_today[games_today["Status"] == "EXECUTED"].copy() if not games_today.empty else pd.DataFrame()
         now_minutes = now.hour * 60 + now.minute
 
@@ -333,7 +372,13 @@ def main() -> None:
         )
     else:
         historical_games, source_label = _load_games_for_date(str(PROD_CFG_PATH), selected_iso)
+        _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
+        if _is_endpoint_connection_error(source_label):
+            st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
+            st.caption("Nova tentativa automática em 30 segundos...")
+            time.sleep(30)
+            st.rerun()
         historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
 
         st.divider()
