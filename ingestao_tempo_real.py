@@ -108,8 +108,28 @@ def _normalize_provider_frame(
         if home_col and away_col:
             out["Jogo"] = out[home_col].astype(str).str.strip() + " x " + out[away_col].astype(str).str.strip()
 
-    # Se Odd_Base nao vier pronta, usa a primeira odd numerica disponivel (payload FutPython).
-    if odd_col not in out.columns or pd.to_numeric(out.get(odd_col), errors="coerce").isna().all():
+    # Scanner master FutPython: expande em duas linhas por jogo (Lay 0x1 e Lay 1x0)
+    # usando as colunas corretas de correct score antes do filtro de Rodo.
+    cs_01_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_0x1"), None)
+    cs_10_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_1x0"), None)
+
+    provider_suffix = "BF" if "fair" in str(provider_name).lower() else "B365"
+    if cs_01_col or cs_10_col:
+        expanded_frames: list[pd.DataFrame] = []
+        if cs_01_col:
+            df_01 = out.copy()
+            df_01[method_col] = f"Lay_CS_0x1_{provider_suffix}"
+            df_01[odd_col] = pd.to_numeric(df_01[cs_01_col], errors="coerce")
+            expanded_frames.append(df_01)
+        if cs_10_col:
+            df_10 = out.copy()
+            df_10[method_col] = f"Lay_CS_1x0_{provider_suffix}"
+            df_10[odd_col] = pd.to_numeric(df_10[cs_10_col], errors="coerce")
+            expanded_frames.append(df_10)
+        if expanded_frames:
+            out = pd.concat(expanded_frames, ignore_index=True, sort=False)
+    elif odd_col not in out.columns or pd.to_numeric(out.get(odd_col), errors="coerce").isna().all():
+        # Fallback generico para provedores sem colunas de scanner CS.
         odd_candidates = [
             c
             for c in out.columns
