@@ -50,6 +50,18 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 
 
 def _resolve_endpoint_url() -> str:
+    session_url = str(st.session_state.get("api_url_override", "")).strip()
+    if session_url:
+        return session_url
+
+    secret_url = ""
+    try:
+        secret_url = str(st.secrets.get("ARKAD_API_URL", "")).strip()
+    except Exception:
+        secret_url = ""
+    if secret_url:
+        return secret_url
+
     env_url = os.getenv("ARKAD_API_URL", "").strip()
     if env_url:
         return env_url
@@ -289,6 +301,16 @@ def main() -> None:
             "source": "Nao testado",
             "updated_at": datetime.now().isoformat(timespec="seconds"),
         }
+    if "api_url_override" not in st.session_state:
+        st.session_state["api_url_override"] = ""
+
+    st.sidebar.subheader("Configurar URL da API")
+    st.sidebar.text_input(
+        "Cole a URL do endpoint (sessao atual)",
+        key="api_url_override",
+        placeholder="https://xxxx.ngrok-free.app/arkad/sinais",
+        help="Se preenchido, esta URL sobrescreve secret/env apenas nesta sessao.",
+    )
 
     if st.sidebar.button("🔄 Tentar Reconectar Agora", use_container_width=True):
         st.cache_data.clear()
@@ -302,12 +324,13 @@ def main() -> None:
     is_today_selected = selected_iso == today_iso
 
     try:
-        cfg_dbg = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
         endpoint_dbg = _resolve_endpoint_url()
         if endpoint_dbg:
             st.write(f"Debug API URL: {endpoint_dbg}")
     except Exception:
         pass
+
+    st.caption("Se o status estiver vermelho, verifique o tunel Ngrok no PC de BH")
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
