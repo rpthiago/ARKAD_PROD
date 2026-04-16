@@ -15,7 +15,7 @@
     "max_sequential_reds": 3
   },
   "runtime_data": {
-    "endpoint_url": "http://localhost:8080/arkad/sinais",
+    "endpoint_url": "http://127.0.0.1:8080/arkad/sinais",
     "method": "GET",
     "date_param": "date",
     "timeout_sec": 20,

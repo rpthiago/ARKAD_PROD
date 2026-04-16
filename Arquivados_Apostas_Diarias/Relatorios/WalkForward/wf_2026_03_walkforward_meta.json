@@ -1,0 +1,11 @@
+{
+  "run_id": "wf_2026_03",
+  "input": "recalculo_2026_03.csv",
+  "config": "config_prod_v1.json",
+  "environment": "historico",
+  "train_days": 14,
+  "test_days": 7,
+  "step_days": 7,
+  "folds": 1,
+  "generated_at_utc": "2026-04-16T01:39:33.104370"
+}

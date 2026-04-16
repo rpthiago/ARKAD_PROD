@@ -1,0 +1,11 @@
+{
+  "run_id": "wf_2026_03_sem_liq",
+  "input": "recalculo_2026_03.csv",
+  "config": "config_prod_v1_sem_liq.json",
+  "environment": "historico",
+  "train_days": 14,
+  "test_days": 7,
+  "step_days": 7,
+  "folds": 1,
+  "generated_at_utc": "2026-04-16T01:40:03.636548"
+}

@@ -1,0 +1,5 @@
+﻿Fold,Estrategia,Segmento,Data_Inicio,Data_Fim,Dias,Linhas_Entrada,Linhas_Apos_Filtro,Entradas_Executadas,Entradas_Skipadas,Win_Rate_Executadas_%,Lucro_Final,Max_Drawdown_Abs,Max_Drawdown_%,Step_Ups,Step_Downs,Saques_Realizados,Profit_Factor
+1,Baseline_Sem_Filtro,treino,2026-03-01,2026-03-16,14,37,37,0,37,0.0,0.0,0.0,0.0,0,0,0,0.0
+1,Atual_Filtrada,treino,2026-03-01,2026-03-16,14,37,20,0,20,0.0,0.0,0.0,0.0,0,0,0,0.0
+1,Baseline_Sem_Filtro,teste,2026-03-17,2026-03-27,7,13,13,0,13,0.0,0.0,0.0,0.0,0,0,0,0.0
+1,Atual_Filtrada,teste,2026-03-17,2026-03-27,7,13,8,0,8,0.0,0.0,0.0,0.0,0,0,0,0.0

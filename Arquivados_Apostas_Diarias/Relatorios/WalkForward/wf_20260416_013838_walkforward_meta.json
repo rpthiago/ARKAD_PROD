@@ -1,0 +1,11 @@
+{
+  "run_id": "wf_20260416_013838",
+  "input": "recalculo_sem_combos_usuario.csv",
+  "config": "config_prod_v1.json",
+  "environment": "historico",
+  "train_days": 90,
+  "test_days": 14,
+  "step_days": 14,
+  "folds": 8,
+  "generated_at_utc": "2026-04-16T01:38:39.416502"
+}
