@@ -7,6 +7,7 @@ from typing import Any
 
 import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.middleware.cors import CORSMiddleware
 
 ROOT_DIR = Path(__file__).resolve().parent
 CSV_PATH = ROOT_DIR / "recalculo_sem_combos_usuario.csv"
@@ -14,6 +15,13 @@ PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODO_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
 
 app = FastAPI(title="Servidor Arkad", version="1.0.0")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _parse_hhmm_to_minutes(value: Any) -> int | None:
