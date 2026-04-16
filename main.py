@@ -454,25 +454,13 @@ def main() -> None:
         if entry_window.empty:
             st.info("Aguardando próxima oportunidade confirmada pelo Rodo")
         else:
-            jogo_atual = entry_window.iloc[0]
-            jogo_nome = str(jogo_atual.get("Jogo", "Jogo sem nome"))
-            hora = str(jogo_atual.get("Hora", "--:--"))
-            odd = pd.to_numeric(jogo_atual.get("Odd sugerida"), errors="coerce")
-            odd_txt = f"{float(odd):.2f}" if pd.notna(odd) else "N/A"
-
-            st.success(f"### {jogo_nome}")
-            c1, c2, c3 = st.columns(3)
-            c1.write(f"**Horario:** {hora}")
-            c2.write(f"**Odd Sugerida:** {odd_txt}")
-            if c3.button("COPIAR NOME"):
-                st.session_state["nome_jogo_copiado"] = jogo_nome
-                st.toast("Nome pronto para copiar", icon="📋")
-
-            if st.session_state.get("nome_jogo_copiado"):
-                st.caption("Copie o nome abaixo:")
-                st.code(st.session_state["nome_jogo_copiado"], language="text")
-
-            st.info("👉 Va para a Betfair e procure por este jogo no mercado 'Resultado Correto' (Lay 0x1)")
+            entry_view = entry_window[["Hora", "Jogo", "Odd sugerida", "Status"]].copy()
+            entry_view["Odd sugerida"] = pd.to_numeric(entry_view["Odd sugerida"], errors="coerce").map(
+                lambda x: f"{x:.2f}" if pd.notna(x) else "N/A"
+            )
+            st.success(f"{len(entry_view)} oportunidade(s) confirmada(s) pelo Rodo")
+            st.table(entry_view)
+            st.info("👉 Procure os jogos acima na Betfair no mercado 'Resultado Correto' (Lay 0x1 / Lay 1x0)")
 
         st.divider()
         st.subheader("📅 Proximos Jogos Aprovados")
