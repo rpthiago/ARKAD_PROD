@@ -9,6 +9,8 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
+from ingestao_tempo_real import load_live_dataframe
+
 ROOT_DIR = Path(__file__).resolve().parent
 CSV_PATH = ROOT_DIR / "recalculo_sem_combos_usuario.csv"
 PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
@@ -95,7 +97,7 @@ def _load_json(path: Path) -> dict[str, Any]:
         raise HTTPException(status_code=500, detail=f"JSON invalido em {path.name}: {exc}") from exc
 
 
-def _load_approved_signals(target_date_iso: str) -> list[dict[str, Any]]:
+def _load_approved_signals(target_date_iso: str) -> tuple[list[dict[str, Any]], str]:
     cfg = _load_json(PROD_CFG_PATH)
     rodo_master = _load_json(RODO_MASTER_PATH)
 
@@ -103,13 +105,21 @@ def _load_approved_signals(target_date_iso: str) -> list[dict[str, Any]]:
     if not cuts:
         raise HTTPException(status_code=500, detail="config_rodos_master.json sem filtros_rodo validos")
 
-    if not CSV_PATH.exists():
-        raise HTTPException(status_code=500, detail=f"Arquivo de dados nao encontrado: {CSV_PATH.name}")
-
-    try:
-        df = pd.read_csv(CSV_PATH)
-    except Exception as exc:
-        raise HTTPException(status_code=500, detail=f"Falha ao ler CSV de sinais: {exc}") from exc
+    live_df, live_source = load_live_dataframe(target_date_iso, cfg)
+    if not live_df.empty:
+        df = live_df.copy()
+        source_used = live_source
+    else:
+        if not CSV_PATH.exists():
+            raise HTTPException(
+                status_code=500,
+                detail=f"Ingestao falhou ({live_source}) e arquivo local ausente: {CSV_PATH.name}",
+            )
+        try:
+            df = pd.read_csv(CSV_PATH)
+            source_used = f"Fallback CSV local ({CSV_PATH.name}) | motivo: {live_source}"
+        except Exception as exc:
+            raise HTTPException(status_code=500, detail=f"Falha ao ler CSV de sinais: {exc}") from exc
 
     dt_cfg = cfg.get("input", {}).get("datetime", {})
     col_cfg = cfg.get("input", {}).get("columns", {})
@@ -129,19 +139,19 @@ def _load_approved_signals(target_date_iso: str) -> list[dict[str, Any]]:
     df["__date"] = pd.to_datetime(df[date_col], errors="coerce").dt.normalize()
     df = df[df["__date"] == target_date].copy()
     if df.empty:
-        return []
+        return [], source_used
 
     blocked = df.apply(lambda r: any(_matches_cut(r, cut, league_col, method_col, odd_col) for cut in cuts), axis=1)
 
     df["__mins"] = df[time_col].apply(_parse_hhmm_to_minutes)
     df = df[df["__mins"].notna()].copy()
     if df.empty:
-        return []
+        return [], source_used
 
     df["Status"] = blocked.reindex(df.index).map(lambda x: "SKIP" if bool(x) else "EXECUTED")
     approved = df[df["Status"] == "EXECUTED"].copy()
     if approved.empty:
-        return []
+        return [], source_used
 
     approved = approved.sort_values("__mins").reset_index(drop=True)
 
@@ -158,16 +168,17 @@ def _load_approved_signals(target_date_iso: str) -> list[dict[str, Any]]:
     response_cols = [c for c in response_cols if c is not None]
 
     records = approved[response_cols].to_dict(orient="records")
-    return records
+    return records, source_used
 
 
 @app.get("/arkad/sinais")
 def get_sinais(date: str = Query(default_factory=lambda: date.today().isoformat())) -> dict[str, Any]:
     print("REQ RECEBIDA")
-    records = _load_approved_signals(date)
+    records, source_used = _load_approved_signals(date)
     return {
         "date": date,
         "count": len(records),
+        "source": source_used,
         "items": records,
     }
 

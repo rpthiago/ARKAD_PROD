@@ -23,7 +23,54 @@
     "auth_token_env": "ARKAD_API_TOKEN",
     "headers": {},
     "fixed_query_params": {},
-    "fixed_body": {}
+    "fixed_body": {},
+    "live_ingestion": {
+      "enabled": true,
+      "timeout_sec": 15,
+      "active_sources": [
+        "bet365"
+      ],
+      "providers": {
+        "bet365": {
+          "endpoint_url": "https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/",
+          "url_template": "https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/{data}/",
+          "base_download_url": "https://api.futpythontrader.com/api/dados/bet365/download/",
+          "date_param": "date",
+          "token_env": "FUTPYTHON_TOKEN",
+          "auth_header": "Authorization",
+          "auth_scheme": "Token",
+          "append_date_path": true,
+          "headers": {
+            "User-Agent": "Mozilla/5.0"
+          },
+          "query_params": {},
+          "default_method": "Lay_CS_0x1_B365",
+          "bookmaker_key": "bet365"
+        },
+        "betfair": {
+          "endpoint_url": "https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/",
+          "url_template": "https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/{data}/",
+          "base_download_url": "https://api.futpythontrader.com/api/dados/betfair/download/",
+          "date_param": "date",
+          "token_env": "FUTPYTHON_TOKEN",
+          "auth_header": "Authorization",
+          "auth_scheme": "Token",
+          "append_date_path": true,
+          "headers": {
+            "User-Agent": "Mozilla/5.0"
+          },
+          "query_params": {},
+          "default_method": "Lay_CS_0x1_BF",
+          "bookmaker_key": "betfair"
+        }
+      },
+      "odds_api": {
+        "enabled": false,
+        "api_key_env": "ODDS_API_KEY",
+        "base_url": "https://api.the-odds-api.com/v4/sports/upcoming/odds",
+        "sport_key": "soccer"
+      }
+    }
   },
   "filtros_rodo": [
     {
