@@ -12,6 +12,8 @@ import pandas as pd
 import requests
 import streamlit as st
 
+from ingestao_tempo_real import load_live_dataframe
+
 ROOT_DIR = Path(__file__).resolve().parent
 PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
@@ -98,6 +100,8 @@ def _is_local_fallback(source_label: str) -> bool:
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
+        return "🟢", "Servidor Online"
+    if s.startswith("ingestao em tempo real ativa"):
         return "🟢", "Servidor Online"
     if s.startswith("fallback local"):
         return "🟡", "Fallback Local Ativo"
@@ -203,11 +207,29 @@ def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: 
     return df, f"Fallback local ({bases_txt}) | motivo: {reason_ui}"
 
 
+def _load_live_then_local_fallback(
+    target_date_iso: str,
+    date_col: str,
+    cfg: dict[str, Any],
+    reason: str,
+) -> tuple[pd.DataFrame, str]:
+    try:
+        live_df, live_source = load_live_dataframe(target_date_iso, cfg)
+        if not live_df.empty:
+            if date_col not in live_df.columns:
+                live_df = live_df.copy()
+                live_df[date_col] = target_date_iso
+            return live_df, f"{live_source} | fallback apos: {reason}"
+    except Exception:
+        pass
+    return _load_local_fallback_dataframe(target_date_iso, date_col, reason)
+
+
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
     runtime = cfg.get("runtime_data", {})
     endpoint_url = _resolve_endpoint_url()
     if not endpoint_url:
-        return _load_local_fallback_dataframe(target_date_iso, date_col, "endpoint nao configurado")
+        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, "endpoint nao configurado")
 
     method = str(runtime.get("method", "GET")).strip().upper()
     date_param = str(runtime.get("date_param", "date")).strip() or "date"
@@ -234,7 +256,7 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec, proxies=proxies)
         response.raise_for_status()
     except Exception as exc:
-        return _load_local_fallback_dataframe(target_date_iso, date_col, f"endpoint indisponivel: {exc}")
+        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, f"endpoint indisponivel: {exc}")
 
     content_type = (response.headers.get("Content-Type") or "").lower()
     df = pd.DataFrame()
@@ -249,7 +271,7 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             except Exception:
                 df = pd.read_csv(StringIO(response.text))
     except Exception as exc:
-        return _load_local_fallback_dataframe(target_date_iso, date_col, f"resposta do endpoint invalida: {exc}")
+        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, f"resposta do endpoint invalida: {exc}")
 
     if df.empty:
         return pd.DataFrame(), f"Endpoint em tempo real: {endpoint_url}"
