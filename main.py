@@ -51,38 +51,14 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 
 
 def _resolve_endpoint_url() -> str:
-    session_url = str(st.session_state.get("api_url_override", "")).strip()
-    if session_url:
-        return session_url
-
-    secret_url = ""
-    try:
-        secret_url = str(st.secrets.get("ARKAD_API_URL", "")).strip()
-    except Exception:
-        secret_url = ""
-    if secret_url:
-        return secret_url
-
-    env_url = os.getenv("ARKAD_API_URL", "").strip()
-    if env_url:
-        return env_url
-
-    # Fallback opcional por arquivo de config (util para ambientes sem secrets).
-    try:
-        cfg_raw = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
-        cfg_url = str(cfg_raw.get("runtime_data", {}).get("endpoint_url", "")).strip()
-        if cfg_url:
-            return cfg_url
-    except Exception:
-        pass
-
+    # Fluxo fixo local para evitar URL antiga de tunel/externa.
     return FIXED_ENDPOINT_URL
 
 
 def _probe_api_url(api_url: str) -> tuple[bool, str]:
     if not api_url:
         return False, "URL vazia"
-    headers = {"ngrok-skip-browser-warning": "true"}
+    headers: dict[str, str] = {}
     proxies = {"http": None, "https": None}
     test_date = datetime.now().date().isoformat()
     try:
@@ -202,7 +178,6 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
     date_param = str(runtime.get("date_param", "date")).strip() or "date"
     timeout_sec = max(float(runtime.get("timeout_sec", 10.0)), 10.0)
     headers = dict(runtime.get("headers", {}) or {})
-    headers.setdefault("ngrok-skip-browser-warning", "true")
     proxies = {"http": None, "https": None}
 
     token_env = str(runtime.get("auth_token_env", "")).strip()
@@ -353,16 +328,6 @@ def main() -> None:
             "source": "Nao testado",
             "updated_at": datetime.now().isoformat(timespec="seconds"),
         }
-    if "api_url_override" not in st.session_state:
-        st.session_state["api_url_override"] = ""
-
-    st.sidebar.subheader("Configurar URL da API")
-    st.sidebar.text_input(
-        "Cole a URL do endpoint (sessao atual)",
-        key="api_url_override",
-        placeholder="https://xxxx.ngrok-free.app/arkad/sinais",
-        help="Se preenchido, esta URL sobrescreve secret/env apenas nesta sessao.",
-    )
 
     if st.sidebar.button("🧪 Testar Conexao da API", use_container_width=True):
         active_url = _resolve_endpoint_url()
@@ -387,12 +352,10 @@ def main() -> None:
         endpoint_dbg = _resolve_endpoint_url()
         if endpoint_dbg:
             st.write(f"Debug API URL: {endpoint_dbg}")
-            if _is_local_endpoint(endpoint_dbg):
-                st.warning("No Streamlit Cloud, configure ARKAD_API_URL com o link HTTPS publico do Ngrok.")
     except Exception:
         pass
 
-    st.caption("Se o status estiver vermelho, verifique o tunel Ngrok no PC de BH")
+    st.caption("Se o status estiver vermelho, verifique o servidor local no PC de BH (porta 8080).")
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
