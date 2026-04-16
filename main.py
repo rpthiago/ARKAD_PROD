@@ -15,6 +15,7 @@ import streamlit as st
 ROOT_DIR = Path(__file__).resolve().parent
 PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
+FIXED_ENDPOINT_URL = "http://127.0.0.1:8080/arkad/sinais"
 
 
 def _parse_hhmm_to_minutes(value: Any) -> int | None:
@@ -49,10 +50,7 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
 
 
 def _normalize_local_endpoint(endpoint_url: str) -> str:
-    s = str(endpoint_url or "").strip()
-    if not s:
-        return s
-    return s.replace("://localhost", "://127.0.0.1")
+    return FIXED_ENDPOINT_URL
 
 
 def _is_endpoint_connection_error(source_label: str) -> bool:
@@ -81,6 +79,16 @@ def _server_status(source_label: str) -> tuple[str, str]:
 def _render_server_badge(source_label: str) -> None:
     icon, text = _server_status(source_label)
     st.markdown(f"**Status do Servidor:** {icon} {text}")
+
+
+def _update_connection_state(source_label: str) -> None:
+    icon, text = _server_status(source_label)
+    st.session_state["server_connection"] = {
+        "icon": icon,
+        "text": text,
+        "source": source_label,
+        "updated_at": datetime.now().isoformat(timespec="seconds"),
+    }
 
 
 def _extract_rodo_cuts(data: dict[str, Any]) -> list[dict[str, Any]]:
@@ -271,6 +279,14 @@ def main() -> None:
     st.set_page_config(page_title="Arkad Sinais", layout="centered")
     st.title("🎯 Arkad: Sinais de Hoje")
 
+    if "server_connection" not in st.session_state:
+        st.session_state["server_connection"] = {
+            "icon": "🟠",
+            "text": "Status Indefinido",
+            "source": "Nao testado",
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+        }
+
     if st.sidebar.button("🔄 Tentar Reconectar Agora", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
@@ -292,6 +308,7 @@ def main() -> None:
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
+        _update_connection_state(source_label)
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
         if _is_endpoint_connection_error(source_label):
@@ -388,6 +405,7 @@ def main() -> None:
         )
     else:
         historical_games, source_label = _load_games_for_date(str(PROD_CFG_PATH), selected_iso)
+        _update_connection_state(source_label)
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
         if _is_endpoint_connection_error(source_label):

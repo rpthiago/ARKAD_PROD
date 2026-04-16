@@ -163,6 +163,7 @@ def _load_approved_signals(target_date_iso: str) -> list[dict[str, Any]]:
 
 @app.get("/arkad/sinais")
 def get_sinais(date: str = Query(default_factory=lambda: date.today().isoformat())) -> dict[str, Any]:
+    print("REQ RECEBIDA")
     records = _load_approved_signals(date)
     return {
         "date": date,
@@ -175,4 +176,4 @@ if __name__ == "__main__":
     import uvicorn
 
     print("🚀 Servidor Arkad Online na porta 8080. Dashboard pronto para receber sinais!")
-    uvicorn.run("servidor_arkad:app", host="127.0.0.1", port=8080, reload=False)
+    uvicorn.run("servidor_arkad:app", host="0.0.0.0", port=8080, reload=False)
