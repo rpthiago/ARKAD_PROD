@@ -17,6 +17,7 @@ PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
 FIXED_ENDPOINT_URL = "http://127.0.0.1:8080/arkad/sinais"
 LOCAL_FALLBACK_PATH = ROOT_DIR / "recalculo_sem_combos_usuario.csv"
+OPERATIONAL_GLOBS = ["Apostas_*.xlsx", "Apostas_*.xls"]
 
 
 def _parse_hhmm_to_minutes(value: Any) -> int | None:
@@ -166,18 +167,40 @@ def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: 
     else:
         reason_ui = "falha de comunicacao com API"
 
-    if not LOCAL_FALLBACK_PATH.exists():
+    fallback_frames: list[pd.DataFrame] = []
+    base_names: list[str] = []
+
+    # Base operacional do dia: somente planilhas Apostas_*.xlsx na raiz do projeto.
+    for glob_pattern in OPERATIONAL_GLOBS:
+        for p_file in sorted(ROOT_DIR.glob(glob_pattern)):
+            try:
+                df_op = pd.read_excel(p_file)
+                if not df_op.empty:
+                    fallback_frames.append(df_op)
+                    base_names.append(p_file.name)
+            except Exception:
+                continue
+
+    # Base complementar local (recalculo).
+    if LOCAL_FALLBACK_PATH.exists():
+        try:
+            df_csv = pd.read_csv(LOCAL_FALLBACK_PATH)
+            if not df_csv.empty:
+                fallback_frames.append(df_csv)
+                base_names.append(LOCAL_FALLBACK_PATH.name)
+        except Exception as exc:
+            return pd.DataFrame(), f"Endpoint indisponivel ({reason}) | fallback local falhou: {exc}"
+
+    if not fallback_frames:
         return pd.DataFrame(), f"Endpoint indisponivel ({reason_ui}) | fallback local ausente"
 
-    try:
-        df = pd.read_csv(LOCAL_FALLBACK_PATH)
-    except Exception as exc:
-        return pd.DataFrame(), f"Endpoint indisponivel ({reason}) | fallback local falhou: {exc}"
-
+    df = pd.concat(fallback_frames, ignore_index=True, sort=False)
     if date_col not in df.columns:
         df = df.copy()
         df[date_col] = target_date_iso
-    return df, f"Fallback local ({LOCAL_FALLBACK_PATH.name}) | motivo: {reason_ui}"
+
+    bases_txt = ", ".join(base_names)
+    return df, f"Fallback local ({bases_txt}) | motivo: {reason_ui}"
 
 
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
