@@ -14,6 +14,17 @@
     "max_daily_drawdown": -1.5,
     "max_sequential_reds": 3
   },
+  "runtime_data": {
+    "endpoint_url": "http://127.0.0.1:8080/arkad/sinais",
+    "method": "GET",
+    "date_param": "date",
+    "timeout_sec": 20,
+    "rodo_master_path": "config_rodos_master.json",
+    "auth_token_env": "ARKAD_API_TOKEN",
+    "headers": {},
+    "fixed_query_params": {},
+    "fixed_body": {}
+  },
   "filtros_rodo": [
     {
       "id": 1,
