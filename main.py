@@ -48,6 +48,13 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
+def _normalize_local_endpoint(endpoint_url: str) -> str:
+    s = str(endpoint_url or "").strip()
+    if not s:
+        return s
+    return s.replace("://localhost", "://127.0.0.1")
+
+
 def _is_endpoint_connection_error(source_label: str) -> bool:
     s = (source_label or "").lower()
     if not s.startswith("endpoint indisponivel"):
@@ -113,14 +120,15 @@ def _load_master_rodo_cuts(cfg: dict[str, Any]) -> tuple[list[dict[str, Any]], s
 
 def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, Any]) -> tuple[pd.DataFrame, str]:
     runtime = cfg.get("runtime_data", {})
-    endpoint_url = str(runtime.get("endpoint_url", "")).strip()
+    endpoint_url = _normalize_local_endpoint(str(runtime.get("endpoint_url", "")).strip())
     if not endpoint_url:
         return pd.DataFrame(), "Endpoint nao configurado"
 
     method = str(runtime.get("method", "GET")).strip().upper()
     date_param = str(runtime.get("date_param", "date")).strip() or "date"
-    timeout_sec = float(runtime.get("timeout_sec", 20.0))
+    timeout_sec = max(float(runtime.get("timeout_sec", 10.0)), 10.0)
     headers = dict(runtime.get("headers", {}) or {})
+    proxies = {"http": None, "https": None}
 
     token_env = str(runtime.get("auth_token_env", "")).strip()
     if token_env:
@@ -136,9 +144,9 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
 
     try:
         if method == "POST":
-            response = requests.post(endpoint_url, json=body, headers=headers, timeout=timeout_sec)
+            response = requests.post(endpoint_url, json=body, headers=headers, timeout=timeout_sec, proxies=proxies)
         else:
-            response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec)
+            response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec, proxies=proxies)
         response.raise_for_status()
     except Exception as exc:
         return pd.DataFrame(), f"Endpoint indisponivel: {exc}"
@@ -273,6 +281,14 @@ def main() -> None:
     today_iso = now.date().isoformat()
     selected_iso = selected_date.isoformat()
     is_today_selected = selected_iso == today_iso
+
+    try:
+        cfg_dbg = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
+        endpoint_dbg = _normalize_local_endpoint(str(cfg_dbg.get("runtime_data", {}).get("endpoint_url", "")))
+        if endpoint_dbg:
+            st.write(f"Debug API URL: {endpoint_dbg}")
+    except Exception:
+        pass
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
