@@ -354,6 +354,10 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     if df.empty:
         return pd.DataFrame(), source_label
 
+    rodo_mode = str(cfg.get("runtime_data", {}).get("rodo_mode", "whitelist")).strip().lower()
+    if rodo_mode not in {"whitelist", "blacklist"}:
+        rodo_mode = "whitelist"
+
     cuts, rodo_label, rodo_err = _load_master_rodo_cuts(cfg)
     if rodo_err:
         return pd.DataFrame(), f"{source_label} | {rodo_label} | {rodo_err}"
@@ -369,15 +373,18 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
         return pd.DataFrame(), source_label
 
     if cuts:
-        blocked = df.apply(lambda r: any(_matches_cut(r, cut, league_col, method_col, odd_col) for cut in cuts), axis=1)
+        matched_rodo = df.apply(lambda r: any(_matches_cut(r, cut, league_col, method_col, odd_col) for cut in cuts), axis=1)
     else:
-        blocked = pd.Series([False] * len(df), index=df.index)
+        matched_rodo = pd.Series([False] * len(df), index=df.index)
 
     df["__mins"] = df[time_col].apply(_parse_hhmm_to_minutes)
     df = df[df["__mins"].notna()].copy()
     if df.empty:
         return pd.DataFrame(), source_label
-    df["Status"] = blocked.reindex(df.index).map(lambda x: "SKIP" if bool(x) else "EXECUTED")
+    if rodo_mode == "whitelist":
+        df["Status"] = matched_rodo.reindex(df.index).map(lambda x: "EXECUTED" if bool(x) else "SKIP")
+    else:
+        df["Status"] = matched_rodo.reindex(df.index).map(lambda x: "SKIP" if bool(x) else "EXECUTED")
 
     out = pd.DataFrame(
         {
