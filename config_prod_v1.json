@@ -27,9 +27,10 @@
     "live_ingestion": {
       "enabled": true,
       "timeout_sec": 15,
-      "cross_b365_games_with_betfair_odds": false,
+      "cross_b365_games_with_betfair_odds": true,
       "active_sources": [
-        "bet365"
+        "bet365",
+        "betfair"
       ],
       "providers": {
         "bet365": {
