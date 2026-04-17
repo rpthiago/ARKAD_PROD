@@ -138,13 +138,43 @@ def _normalize_provider_frame(
         if home_col and away_col:
             out["Jogo"] = out[home_col].astype(str).str.strip() + " x " + out[away_col].astype(str).str.strip()
 
+    # Scanner Master (paridade): quando o feed traz Back/Lay de CS,
+    # usa Back para filtro (Odd_Base) e Lay para odd real (Odd_Betfair).
+    cs_01_back_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_0x1_back"), None)
+    cs_01_lay_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_0x1_lay"), None)
+    cs_10_back_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_1x0_back"), None)
+    cs_10_lay_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_1x0_lay"), None)
+
+    if any([cs_01_back_col, cs_10_back_col]):
+        expanded_frames: list[pd.DataFrame] = []
+        method_suffix = "B365" if "fair" in str(provider_name).lower() else ("BF" if "fair" in str(provider_name).lower() else "B365")
+
+        if cs_01_back_col:
+            df_01 = out.copy()
+            df_01[method_col] = f"Lay_CS_0x1_{method_suffix}"
+            df_01[odd_col] = pd.to_numeric(df_01[cs_01_back_col], errors="coerce")
+            if cs_01_lay_col:
+                df_01["Odd_Betfair"] = pd.to_numeric(df_01[cs_01_lay_col], errors="coerce")
+            expanded_frames.append(df_01)
+
+        if cs_10_back_col:
+            df_10 = out.copy()
+            df_10[method_col] = f"Lay_CS_1x0_{method_suffix}"
+            df_10[odd_col] = pd.to_numeric(df_10[cs_10_back_col], errors="coerce")
+            if cs_10_lay_col:
+                df_10["Odd_Betfair"] = pd.to_numeric(df_10[cs_10_lay_col], errors="coerce")
+            expanded_frames.append(df_10)
+
+        if expanded_frames:
+            out = pd.concat(expanded_frames, ignore_index=True, sort=False)
+
     # Scanner master FutPython: expande em duas linhas por jogo (Lay 0x1 e Lay 1x0)
-    # usando as colunas corretas de correct score antes do filtro de Rodo.
+    # usando colunas CS simples quando Back/Lay nao estiverem disponiveis.
     cs_01_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_0x1"), None)
     cs_10_col = next((c for c in out.columns if str(c).strip().lower() == "odd_cs_1x0"), None)
 
     provider_suffix = "BF" if "fair" in str(provider_name).lower() else "B365"
-    if cs_01_col or cs_10_col:
+    if (cs_01_col or cs_10_col) and not any([cs_01_back_col, cs_10_back_col]):
         expanded_frames: list[pd.DataFrame] = []
         if cs_01_col:
             df_01 = out.copy()
@@ -180,11 +210,23 @@ def _normalize_provider_frame(
 
     # Mantem colunas explicitas de origem de odd para consumo no dashboard/API.
     if "fair" in str(provider_name).lower():
-        out["Odd_Betfair"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        if "Odd_Betfair" not in out.columns:
+            out["Odd_Betfair"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        else:
+            out["Odd_Betfair"] = pd.to_numeric(out["Odd_Betfair"], errors="coerce").where(
+                pd.to_numeric(out["Odd_Betfair"], errors="coerce").notna(),
+                pd.to_numeric(out.get(odd_col), errors="coerce"),
+            )
         if "Odd_B365" not in out.columns:
             out["Odd_B365"] = pd.NA
     else:
-        out["Odd_B365"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        if "Odd_B365" not in out.columns:
+            out["Odd_B365"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        else:
+            out["Odd_B365"] = pd.to_numeric(out["Odd_B365"], errors="coerce").where(
+                pd.to_numeric(out["Odd_B365"], errors="coerce").notna(),
+                pd.to_numeric(out.get(odd_col), errors="coerce"),
+            )
         if "Odd_Betfair" not in out.columns:
             out["Odd_Betfair"] = pd.NA
     return out
@@ -556,6 +598,18 @@ def load_live_dataframe(target_date_iso: str, cfg: dict[str, Any]) -> tuple[pd.D
             frames.append(df_prov)
             provider_frames[provider_name] = df_prov
             used_sources.append(provider_name)
+
+    # Paridade com Scanner Master: Lay_CS_*_B365 pode vir direto do feed Betfair
+    # com Odd_Base=Back (filtro) e Odd_Betfair=Lay (odd real de execucao).
+    bf_direct = provider_frames.get("betfair", pd.DataFrame())
+    if not bf_direct.empty and "Metodo" in bf_direct.columns:
+        bf_mask = bf_direct["Metodo"].astype(str).str.contains(r"Lay_CS_(?:0x1|1x0)_B365", case=False, regex=True)
+        if "Odd_Betfair" in bf_direct.columns:
+            bf_mask = bf_mask & pd.to_numeric(bf_direct["Odd_Betfair"], errors="coerce").notna()
+        bf_parity = bf_direct[bf_mask].copy()
+        if not bf_parity.empty:
+            bf_parity = bf_parity.drop_duplicates(subset=["Jogo", "Horario_Entrada", "Metodo"], keep="first")
+            return bf_parity, "Ingestao em tempo real ativa (betfair cs back+lay parity)"
 
     if cross_mode:
         b365_df = provider_frames.get("bet365", pd.DataFrame())

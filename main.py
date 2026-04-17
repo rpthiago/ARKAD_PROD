@@ -393,6 +393,8 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     if "Fonte" in df.columns:
         fonte_is_betfair = df["Fonte"].astype(str).str.contains("fair", case=False, na=False)
         odd_real = odd_real.where(odd_real.notna(), odd_source.where(fonte_is_betfair))
+    # Fallback final para evitar N/A quando nao houver casamento Betfair.
+    odd_real = odd_real.where(odd_real.notna(), odd_source)
 
     out = pd.DataFrame(
         {
