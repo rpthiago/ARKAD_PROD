@@ -1,0 +1,42 @@
+{
+  "periodo": {
+    "inicio": "2025-08-01",
+    "fim": "2026-04-14"
+  },
+  "walk_forward": {
+    "train_days": 90,
+    "test_days": 14,
+    "step_days": 14,
+    "folds": 8
+  },
+  "cenario_escada": {
+    "initial_base": 500.0,
+    "teto": 2000.0,
+    "step_up_target_multiplier": 4.0,
+    "step_down_limit_multiplier": -2.0,
+    "compound_limit_multiplier": 2.0,
+    "ramp_transition_enabled": true
+  },
+  "cenario_resp_fixa_500": {
+    "initial_base": 500.0,
+    "teto": 500.0,
+    "step_up_target_multiplier": 999999.0,
+    "step_down_limit_multiplier": -999999.0,
+    "compound_limit_multiplier": 1.0,
+    "ramp_transition_enabled": false
+  },
+  "regras_execucao": {
+    "commission_rate": 0.065,
+    "liquidity_filter": false,
+    "slippage_protection": false
+  },
+  "colunas_chave": {
+    "data": "Data_Arquivo",
+    "liga": "Liga",
+    "jogo": "Jogo",
+    "metodo": "Metodo",
+    "odd_exec": "Odd_Exec",
+    "odd_base": "Odd_Base",
+    "resultado": "Resultado_1_0"
+  }
+}

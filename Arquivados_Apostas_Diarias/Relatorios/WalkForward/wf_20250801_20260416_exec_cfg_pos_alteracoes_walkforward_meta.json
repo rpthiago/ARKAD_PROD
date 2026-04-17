@@ -1,0 +1,11 @@
+{
+  "run_id": "wf_20250801_20260416_exec_cfg_pos_alteracoes",
+  "input": "recalculo_sem_combos_usuario.csv",
+  "config": "config_backtest_exec.json",
+  "environment": "historico",
+  "train_days": 90,
+  "test_days": 14,
+  "step_days": 14,
+  "folds": 8,
+  "generated_at_utc": "2026-04-17T01:16:41.083763"
+}
