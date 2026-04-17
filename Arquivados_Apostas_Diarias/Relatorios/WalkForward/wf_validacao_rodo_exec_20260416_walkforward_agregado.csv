@@ -1,0 +1,5 @@
+﻿Estrategia,Segmento,Folds,Executadas_Media,WinRate_Medio,Lucro_Total,Drawdown_Max_Abs,Drawdown_Max_Pct,ProfitFactor_Medio
+Atual_Filtrada,teste,8,22.5,96.06375,4417.83,579.43,215.53,376.2877375
+Baseline_Sem_Filtro,teste,8,33.25,91.875,2459.08,781.47,739.52,1.997775
+Atual_Filtrada,treino,8,155.875,97.5,159137.31,4251.68,35.68,6.17085
+Baseline_Sem_Filtro,treino,8,228.625,93.17750000000001,97218.62,7033.4,64.67,1.67265
