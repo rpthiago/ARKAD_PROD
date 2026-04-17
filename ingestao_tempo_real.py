@@ -177,6 +177,16 @@ def _normalize_provider_frame(
 
     if "Fonte" not in out.columns:
         out["Fonte"] = provider_name
+
+    # Mantem colunas explicitas de origem de odd para consumo no dashboard/API.
+    if "fair" in str(provider_name).lower():
+        out["Odd_Betfair"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        if "Odd_B365" not in out.columns:
+            out["Odd_B365"] = pd.NA
+    else:
+        out["Odd_B365"] = pd.to_numeric(out.get(odd_col), errors="coerce")
+        if "Odd_Betfair" not in out.columns:
+            out["Odd_Betfair"] = pd.NA
     return out
 
 
@@ -359,6 +369,8 @@ def _cross_b365_with_betfair_odds(
         side = _extract_method_side(str(row.get(method_col, "")))
 
         new_row = row.copy()
+        new_row["Odd_B365"] = pd.to_numeric(row.get(odd_col), errors="coerce")
+        new_row["Odd_Betfair"] = pd.NA
         new_row["Fonte"] = "bet365"
 
         if not bf.empty:
@@ -392,6 +404,7 @@ def _cross_b365_with_betfair_odds(
                 if float(best.get("__score", 0.0)) >= 0.45:
                     odd_bf = pd.to_numeric(best.get(odd_col), errors="coerce")
                     if pd.notna(odd_bf):
+                        new_row["Odd_Betfair"] = float(odd_bf)
                         new_row[odd_col] = float(odd_bf)
                         new_row["Fonte"] = "cross_b365_game_betfair_odd"
 

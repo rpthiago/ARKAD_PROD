@@ -386,13 +386,21 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     else:
         df["Status"] = matched_rodo.reindex(df.index).map(lambda x: "SKIP" if bool(x) else "EXECUTED")
 
+    odd_betfair = pd.to_numeric(df.get("Odd_Betfair"), errors="coerce")
+    odd_source = pd.to_numeric(df.get(odd_col), errors="coerce")
+    # Odd real deve refletir a odd da Betfair. Em registros BF puros, usa a odd da linha.
+    odd_real = odd_betfair.copy()
+    if "Fonte" in df.columns:
+        fonte_is_betfair = df["Fonte"].astype(str).str.contains("fair", case=False, na=False)
+        odd_real = odd_real.where(odd_real.notna(), odd_source.where(fonte_is_betfair))
+
     out = pd.DataFrame(
         {
             "Hora": df[time_col],
             "Liga": df.get(league_col, ""),
             "Jogo": df.get("Jogo", ""),
             "Metodo": df.get(method_col, ""),
-            "Odd real": pd.to_numeric(df.get(odd_col), errors="coerce"),
+            "Odd real": odd_real,
             "Status": df["Status"],
             "__mins": pd.to_numeric(df["__mins"], errors="coerce"),
             "PnL_Linha": pd.to_numeric(df.get("PnL_Linha"), errors="coerce"),

@@ -177,6 +177,8 @@ def _load_approved_signals(target_date_iso: str) -> tuple[list[dict[str, Any]], 
         "Jogo" if "Jogo" in approved.columns else None,
         method_col,
         odd_col,
+        "Odd_Betfair" if "Odd_Betfair" in approved.columns else None,
+        "Fonte" if "Fonte" in approved.columns else None,
         "PnL_Linha" if "PnL_Linha" in approved.columns else None,
         "Status",
     ]
