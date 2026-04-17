@@ -10,6 +10,11 @@ from typing import Any
 import pandas as pd
 import requests
 
+try:
+    from rename import TIMES_BETFAIR as RENAME_TIMES_BETFAIR
+except Exception:
+    RENAME_TIMES_BETFAIR = {}
+
 
 DEFAULT_TIMEOUT_SEC = 15.0
 
@@ -238,6 +243,33 @@ def _normalize_name_for_match(name: str) -> str:
     return " ".join(tokens)
 
 
+def _canonical_team_name(team_name: str, league_name: str, source_name: str) -> str:
+    team = str(team_name or "").strip()
+    league = str(league_name or "").strip()
+    source = str(source_name or "").strip().lower()
+    if not team:
+        return team
+
+    # O arquivo rename.py contem mapeamentos detalhados de alias -> padrao,
+    # especialmente para feed Betfair, e melhora o pareamento no cross.
+    if "fair" in source and isinstance(RENAME_TIMES_BETFAIR, dict):
+        liga_map = RENAME_TIMES_BETFAIR.get(league, {})
+        if isinstance(liga_map, dict) and liga_map:
+            if team in liga_map:
+                return str(liga_map[team])
+
+            team_norm = _normalize_name_for_match(team)
+            for src_name, std_name in liga_map.items():
+                if _normalize_name_for_match(str(src_name)) == team_norm:
+                    return str(std_name)
+
+            for std_name in liga_map.values():
+                if _normalize_name_for_match(str(std_name)) == team_norm:
+                    return str(std_name)
+
+    return team
+
+
 def _split_game_name(game_name: str) -> tuple[str, str]:
     s = str(game_name or "")
     for sep in (" x ", " vs ", " - "):
@@ -294,8 +326,24 @@ def _cross_b365_with_betfair_odds(
     if not betfair_df.empty:
         bf = betfair_df.copy()
         bf["__home"], bf["__away"] = zip(*bf["Jogo"].map(_split_game_name))
-        bf["__home_n"] = bf["__home"].map(_normalize_name_for_match)
-        bf["__away_n"] = bf["__away"].map(_normalize_name_for_match)
+        bf["__home_c"] = bf.apply(
+            lambda r: _canonical_team_name(
+                r.get("__home", ""),
+                r.get(league_col, ""),
+                r.get("Fonte", "betfair"),
+            ),
+            axis=1,
+        )
+        bf["__away_c"] = bf.apply(
+            lambda r: _canonical_team_name(
+                r.get("__away", ""),
+                r.get(league_col, ""),
+                r.get("Fonte", "betfair"),
+            ),
+            axis=1,
+        )
+        bf["__home_n"] = bf["__home_c"].map(_normalize_name_for_match)
+        bf["__away_n"] = bf["__away_c"].map(_normalize_name_for_match)
         bf["__side"] = bf[method_col].map(_extract_method_side)
         bf["__mins"] = bf[time_col].map(_hhmm_to_minutes)
     else:
@@ -304,8 +352,10 @@ def _cross_b365_with_betfair_odds(
     for _, row in b365_df.iterrows():
         jogo = str(row.get("Jogo", ""))
         home, away = _split_game_name(jogo)
-        home_n = _normalize_name_for_match(home)
-        away_n = _normalize_name_for_match(away)
+        row_league = str(row.get(league_col, ""))
+        row_source = str(row.get("Fonte", "bet365"))
+        home_n = _normalize_name_for_match(_canonical_team_name(home, row_league, row_source))
+        away_n = _normalize_name_for_match(_canonical_team_name(away, row_league, row_source))
         side = _extract_method_side(str(row.get(method_col, "")))
 
         new_row = row.copy()
