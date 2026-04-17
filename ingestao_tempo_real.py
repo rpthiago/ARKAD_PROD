@@ -273,12 +273,31 @@ def _cross_b365_with_betfair_odds(
 
     out_rows: list[pd.Series] = []
 
+    def _hhmm_to_minutes(value: Any) -> int | None:
+        if value is None or pd.isna(value):
+            return None
+        s = str(value).strip()
+        if not s or ":" not in s:
+            return None
+        parts = s.split(":")
+        if len(parts) < 2:
+            return None
+        try:
+            hh = int(float(parts[0]))
+            mm = int(float(parts[1]))
+        except Exception:
+            return None
+        if not (0 <= hh <= 23 and 0 <= mm <= 59):
+            return None
+        return hh * 60 + mm
+
     if not betfair_df.empty:
         bf = betfair_df.copy()
         bf["__home"], bf["__away"] = zip(*bf["Jogo"].map(_split_game_name))
         bf["__home_n"] = bf["__home"].map(_normalize_name_for_match)
         bf["__away_n"] = bf["__away"].map(_normalize_name_for_match)
         bf["__side"] = bf[method_col].map(_extract_method_side)
+        bf["__mins"] = bf[time_col].map(_hhmm_to_minutes)
     else:
         bf = pd.DataFrame()
 
@@ -293,21 +312,34 @@ def _cross_b365_with_betfair_odds(
         new_row["Fonte"] = "bet365"
 
         if not bf.empty:
-            cand = bf[(bf[time_col].astype(str) == str(row.get(time_col, ""))) & (bf["__side"] == side)].copy()
+            cand = bf[bf["__side"] == side].copy()
             if league_col in row.index and league_col in bf.columns and not cand.empty:
                 same_league = cand[cand[league_col].astype(str) == str(row.get(league_col, ""))]
                 if not same_league.empty:
                     cand = same_league
 
             if not cand.empty:
+                row_mins = _hhmm_to_minutes(row.get(time_col, ""))
+
                 def _score(c: pd.Series) -> float:
                     h = SequenceMatcher(None, home_n, str(c.get("__home_n", ""))).ratio()
                     a = SequenceMatcher(None, away_n, str(c.get("__away_n", ""))).ratio()
-                    return (h + a) / 2.0
+                    name_score = (h + a) / 2.0
+
+                    c_mins = c.get("__mins")
+                    if row_mins is None or c_mins is None or pd.isna(c_mins):
+                        time_score = 0.5
+                    else:
+                        diff = abs(int(row_mins) - int(c_mins))
+                        # 0 min => 1.0 ; 180+ min => 0.0
+                        time_score = max(0.0, 1.0 - (float(diff) / 180.0))
+
+                    # Prioriza nome do confronto, usando horario como desempate.
+                    return (name_score * 0.85) + (time_score * 0.15)
 
                 cand["__score"] = cand.apply(_score, axis=1)
                 best = cand.sort_values("__score", ascending=False).iloc[0]
-                if float(best.get("__score", 0.0)) >= 0.55:
+                if float(best.get("__score", 0.0)) >= 0.45:
                     odd_bf = pd.to_numeric(best.get(odd_col), errors="coerce")
                     if pd.notna(odd_bf):
                         new_row[odd_col] = float(odd_bf)
