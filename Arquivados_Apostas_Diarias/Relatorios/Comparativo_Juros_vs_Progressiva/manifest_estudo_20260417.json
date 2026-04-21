@@ -1,0 +1,25 @@
+{
+  "generated_at": "2026-04-17T08:05:19.324164",
+  "study_id": "comparativo_5_metodos_20260417",
+  "base_folder": "Arquivados_Apostas_Diarias\\Relatorios\\Comparativo_Juros_vs_Progressiva",
+  "input_dataset": "Arquivados_Apostas_Diarias/Relatorios/WalkForward/pacote_reproducao_todos_jogos_20250801_20260414.csv",
+  "metodos": {
+    "Juros_Rampa": "config_backtest_exec.json",
+    "Progressiva_Fixa500": "config_backtest_resp_fixa_500.json",
+    "Metodo3_Hibrido": "config_backtest_metodo3_hibrido.json",
+    "Metodo3_B_Defensivo": "config_backtest_metodo3b_defensivo.json",
+    "Metodo3_C_Agressivo": "config_backtest_metodo3c_agressivo.json"
+  },
+  "campeoes": {
+    "regua_50_30_20": "Metodo3_C_Agressivo",
+    "regua_conservadora_35_45_20": "Progressiva_Fixa500",
+    "regua_agressiva_65_20_15": "Metodo3_C_Agressivo"
+  },
+  "arquivos_chave": [
+    "grid_decisao_5_metodos_20260417.csv",
+    "grid_decisao_5_metodos_custom_50_30_20_20260417.csv",
+    "grid_decisao_5_metodos_conservadora_35_45_20_20260417.csv",
+    "grid_decisao_5_metodos_agressiva_65_20_15_20260417.csv",
+    "grid_decisao_5_metodos_duas_reguas_20260417.csv"
+  ]
+}

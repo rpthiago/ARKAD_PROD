@@ -1,0 +1,6 @@
+﻿Metodo,Rank_Conservadora,Score_Conservadora,Rank_Agressiva,Score_Agressiva
+Progressiva_Fixa500,1,0.65,5,0.35
+Metodo3_B_Defensivo,2,0.5981785357849039,4,0.4681506095662612
+Metodo3_Hibrido,3,0.5629641774006872,3,0.491910179461473
+Metodo3_C_Agressivo,4,0.4698086452153662,1,0.680296169082081
+Juros_Rampa,5,0.35,2,0.65

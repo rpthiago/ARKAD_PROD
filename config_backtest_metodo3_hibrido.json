@@ -1,0 +1,1102 @@
+{
+  "version": "v1-prod-2026-04-15",
+  "environment": "producao",
+  "odd_exec_col": "Odd_Execucao",
+  "skip_if_exec_odd_missing": true,
+  "enable_rampa": true,
+  "enable_slippage_protection": false,
+  "enable_liquidity_filter": false,
+  "base_stake": 500.0,
+  "teto_stake": 2000.0,
+  "max_ticks": 3,
+  "min_volume": 1000.0,
+  "circuit_breaker": {
+    "max_daily_drawdown": -1.5,
+    "max_sequential_reds": 3
+  },
+  "runtime_data": {
+    "endpoint_url": "http://127.0.0.1:8080/arkad/sinais",
+    "method": "GET",
+    "date_param": "date",
+    "timeout_sec": 20,
+    "rodo_master_path": "config_rodos_master.json",
+    "auth_token_env": "ARKAD_API_TOKEN",
+    "headers": {},
+    "fixed_query_params": {},
+    "fixed_body": {},
+    "live_ingestion": {
+      "enabled": true,
+      "timeout_sec": 15,
+      "active_sources": [
+        "bet365"
+      ],
+      "providers": {
+        "bet365": {
+          "endpoint_url": "https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/",
+          "url_template": "https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/{data}/",
+          "base_download_url": "https://api.futpythontrader.com/api/dados/bet365/download/",
+          "date_param": "date",
+          "token_env": "FUTPYTHON_TOKEN",
+          "auth_header": "Authorization",
+          "auth_scheme": "Token",
+          "append_date_path": true,
+          "headers": {
+            "User-Agent": "Mozilla/5.0"
+          },
+          "query_params": {},
+          "default_method": "Lay_CS_0x1_B365",
+          "bookmaker_key": "bet365"
+        },
+        "betfair": {
+          "endpoint_url": "https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/",
+          "url_template": "https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/{data}/",
+          "base_download_url": "https://api.futpythontrader.com/api/dados/betfair/download/",
+          "date_param": "date",
+          "token_env": "FUTPYTHON_TOKEN",
+          "auth_header": "Authorization",
+          "auth_scheme": "Token",
+          "append_date_path": true,
+          "headers": {
+            "User-Agent": "Mozilla/5.0"
+          },
+          "query_params": {},
+          "default_method": "Lay_CS_0x1_BF",
+          "bookmaker_key": "betfair"
+        }
+      },
+      "odds_api": {
+        "enabled": false,
+        "api_key_env": "ODDS_API_KEY",
+        "base_url": "https://api.the-odds-api.com/v4/sports/upcoming/odds",
+        "sport_key": "soccer"
+      }
+    }
+  },
+  "filtros_rodo": [
+    {
+      "id": 1,
+      "name": "Rodo_01 SPAIN 1 | Lay_CS_1x0_B365 | Odd 6-8",
+      "league": "SPAIN 1",
+      "method_equals": "Lay_CS_1x0_B365",
+      "odd_min": 6.0,
+      "odd_max": 8.0,
+      "lucro_combo": -3920.07,
+      "apostas": 22
+    },
+    {
+      "id": 2,
+      "name": "Rodo_02 SPAIN 1 | Lay_CS_1x0_B365 | Odd <=6",
+      "league": "SPAIN 1",
+      "method_equals": "Lay_CS_1x0_B365",
+      "odd_min": null,
+      "odd_max": 6.0,
+      "lucro_combo": -1572.11,
+      "apostas": 17
+    },
+    {
+      "id": 3,
+      "name": "Rodo_03 USA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "USA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -1551.11,
+      "apostas": 1
+    },
+    {
+      "id": 4,
+      "name": "Rodo_04 AUSTRIA 2 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "AUSTRIA 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -918.9,
+      "apostas": 14
+    },
+    {
+      "id": 5,
+      "name": "Rodo_05 EGYPT 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "EGYPT 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -873.45,
+      "apostas": 12
+    },
+    {
+      "id": 6,
+      "name": "Rodo_06 BOSNIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "BOSNIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -870.47,
+      "apostas": 1
+    },
+    {
+      "id": 7,
+      "name": "Rodo_07 BELGIUM 2 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "BELGIUM 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": -852.65,
+      "apostas": 1
+    },
+    {
+      "id": 8,
+      "name": "Rodo_08 IRELAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "IRELAND 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -668.77,
+      "apostas": 5
+    },
+    {
+      "id": 9,
+      "name": "Rodo_09 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "BULGARIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -543.02,
+      "apostas": 15
+    },
+    {
+      "id": 10,
+      "name": "Rodo_10 BRAZIL 2 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "BRAZIL 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -485.78,
+      "apostas": 11
+    },
+    {
+      "id": 11,
+      "name": "Rodo_11 ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12",
+      "league": "ITALY 1",
+      "method_equals": "Lay_CS_1x0_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": -479.19,
+      "apostas": 2
+    },
+    {
+      "id": 12,
+      "name": "Rodo_12 GREECE 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "GREECE 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -479.06,
+      "apostas": 3
+    },
+    {
+      "id": 13,
+      "name": "Rodo_13 ENGLAND 4 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "ENGLAND 4",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -399.03,
+      "apostas": 2
+    },
+    {
+      "id": 14,
+      "name": "Rodo_14 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "SWEDEN 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -244.39,
+      "apostas": 5
+    },
+    {
+      "id": 15,
+      "name": "Rodo_15 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "SCOTLAND 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -199.52,
+      "apostas": 7
+    },
+    {
+      "id": 16,
+      "name": "Rodo_16 PARAGUAY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "PARAGUAY 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -185.21,
+      "apostas": 9
+    },
+    {
+      "id": 17,
+      "name": "Rodo_17 ISRAEL 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "ISRAEL 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -62.61,
+      "apostas": 7
+    },
+    {
+      "id": 18,
+      "name": "Rodo_18 SCOTLAND 2 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "SCOTLAND 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -47.37,
+      "apostas": 5
+    },
+    {
+      "id": 19,
+      "name": "Rodo_19 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "BULGARIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": -28.48,
+      "apostas": 6
+    },
+    {
+      "id": 20,
+      "name": "Rodo_20 SERBIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "SERBIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": -2.07,
+      "apostas": 11
+    },
+    {
+      "id": 21,
+      "name": "Rodo_21 WALES 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "WALES 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": 1.41,
+      "apostas": 4
+    },
+    {
+      "id": 22,
+      "name": "Rodo_22 ITALY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "ITALY 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": 11.3,
+      "apostas": 16
+    },
+    {
+      "id": 23,
+      "name": "Rodo_23 ENGLAND 2 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "ENGLAND 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 46.61,
+      "apostas": 1
+    },
+    {
+      "id": 24,
+      "name": "Rodo_24 CHINA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "CHINA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 46.61,
+      "apostas": 1
+    },
+    {
+      "id": 25,
+      "name": "Rodo_25 ESTONIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "ESTONIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 46.61,
+      "apostas": 1
+    },
+    {
+      "id": 26,
+      "name": "Rodo_26 FINLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+      "league": "FINLAND 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 8.0,
+      "odd_max": 10.0,
+      "lucro_combo": 52.94,
+      "apostas": 1
+    },
+    {
+      "id": 27,
+      "name": "Rodo_27 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "SWEDEN 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 56.23,
+      "apostas": 1
+    },
+    {
+      "id": 28,
+      "name": "Rodo_28 SLOVENIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "SLOVENIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 57.73,
+      "apostas": 1
+    },
+    {
+      "id": 29,
+      "name": "Rodo_29 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "SCOTLAND 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 58.66,
+      "apostas": 1
+    },
+    {
+      "id": 30,
+      "name": "Rodo_30 CROATIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "CROATIA 1",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 58.66,
+      "apostas": 1
+    },
+    {
+      "id": 31,
+      "name": "Rodo_31 ITALY 2 | Lay_CS_0x1_B365 | Odd 10-12",
+      "league": "ITALY 2",
+      "method_equals": "Lay_CS_0x1_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": 63.21,
+      "apostas": 1
+    }
+  ],
+  "input": {
+    "datetime": {
+      "date_col": "Data_Arquivo",
+      "time_col": "Horario_Entrada"
+    },
+    "columns": {
+      "league_col": "Liga",
+      "method_col": "Metodo",
+      "odd_signal_col": "Odd_Base",
+      "result_col": "1/0",
+      "odd_exec_col": "Odd_Execucao",
+      "odd_exec_col_candidates": [
+        "Odd_Execucao",
+        "Odd_Exec",
+        "Preco_Execucao_API"
+      ],
+      "liquidity_col": "Liquidez_Disponivel",
+      "liquidity_col_candidates": [
+        "Liquidez_Disponivel",
+        "Liquidity_Matched"
+      ]
+    }
+  },
+  "filters": {
+    "exclude_leagues": [],
+    "conditional_rules": [],
+    "odd_bands": [
+      {
+        "label": "<=6",
+        "min": null,
+        "max": 6.0
+      },
+      {
+        "label": "6-8",
+        "min": 6.0,
+        "max": 8.0
+      },
+      {
+        "label": "8-10",
+        "min": 8.0,
+        "max": 10.0
+      },
+      {
+        "label": "10-12",
+        "min": 10.0,
+        "max": 12.0
+      },
+      {
+        "label": "12-20",
+        "min": 12.0,
+        "max": 20.0
+      },
+      {
+        "label": ">20",
+        "min": 20.0,
+        "max": null
+      }
+    ],
+    "filtros_rodo": [
+      {
+        "id": 1,
+        "name": "Rodo_01 SPAIN 1 | Lay_CS_1x0_B365 | Odd 6-8",
+        "league": "SPAIN 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": 6.0,
+        "odd_max": 8.0,
+        "lucro_combo": -3920.07,
+        "apostas": 22
+      },
+      {
+        "id": 2,
+        "name": "Rodo_02 SPAIN 1 | Lay_CS_1x0_B365 | Odd <=6",
+        "league": "SPAIN 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": null,
+        "odd_max": 6.0,
+        "lucro_combo": -1572.11,
+        "apostas": 17
+      },
+      {
+        "id": 3,
+        "name": "Rodo_03 USA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "USA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -1551.11,
+        "apostas": 1
+      },
+      {
+        "id": 4,
+        "name": "Rodo_04 AUSTRIA 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "AUSTRIA 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -918.9,
+        "apostas": 14
+      },
+      {
+        "id": 5,
+        "name": "Rodo_05 EGYPT 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "EGYPT 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -873.45,
+        "apostas": 12
+      },
+      {
+        "id": 6,
+        "name": "Rodo_06 BOSNIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BOSNIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -870.47,
+        "apostas": 1
+      },
+      {
+        "id": 7,
+        "name": "Rodo_07 BELGIUM 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "BELGIUM 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -852.65,
+        "apostas": 1
+      },
+      {
+        "id": 8,
+        "name": "Rodo_08 IRELAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "IRELAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -668.77,
+        "apostas": 5
+      },
+      {
+        "id": 9,
+        "name": "Rodo_09 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BULGARIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -543.02,
+        "apostas": 15
+      },
+      {
+        "id": 10,
+        "name": "Rodo_10 BRAZIL 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BRAZIL 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -485.78,
+        "apostas": 11
+      },
+      {
+        "id": 11,
+        "name": "Rodo_11 ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12",
+        "league": "ITALY 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -479.19,
+        "apostas": 2
+      },
+      {
+        "id": 12,
+        "name": "Rodo_12 GREECE 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "GREECE 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -479.06,
+        "apostas": 3
+      },
+      {
+        "id": 13,
+        "name": "Rodo_13 ENGLAND 4 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ENGLAND 4",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -399.03,
+        "apostas": 2
+      },
+      {
+        "id": 14,
+        "name": "Rodo_14 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SWEDEN 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -244.39,
+        "apostas": 5
+      },
+      {
+        "id": 15,
+        "name": "Rodo_15 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SCOTLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -199.52,
+        "apostas": 7
+      },
+      {
+        "id": 16,
+        "name": "Rodo_16 PARAGUAY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "PARAGUAY 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -185.21,
+        "apostas": 9
+      },
+      {
+        "id": 17,
+        "name": "Rodo_17 ISRAEL 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ISRAEL 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -62.61,
+        "apostas": 7
+      },
+      {
+        "id": 18,
+        "name": "Rodo_18 SCOTLAND 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SCOTLAND 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -47.37,
+        "apostas": 5
+      },
+      {
+        "id": 19,
+        "name": "Rodo_19 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "BULGARIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -28.48,
+        "apostas": 6
+      },
+      {
+        "id": 20,
+        "name": "Rodo_20 SERBIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SERBIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -2.07,
+        "apostas": 11
+      },
+      {
+        "id": 21,
+        "name": "Rodo_21 WALES 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "WALES 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 1.41,
+        "apostas": 4
+      },
+      {
+        "id": 22,
+        "name": "Rodo_22 ITALY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ITALY 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 11.3,
+        "apostas": 16
+      },
+      {
+        "id": 23,
+        "name": "Rodo_23 ENGLAND 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ENGLAND 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 24,
+        "name": "Rodo_24 CHINA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "CHINA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 25,
+        "name": "Rodo_25 ESTONIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ESTONIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 26,
+        "name": "Rodo_26 FINLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "FINLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 52.94,
+        "apostas": 1
+      },
+      {
+        "id": 27,
+        "name": "Rodo_27 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SWEDEN 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 56.23,
+        "apostas": 1
+      },
+      {
+        "id": 28,
+        "name": "Rodo_28 SLOVENIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SLOVENIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 57.73,
+        "apostas": 1
+      },
+      {
+        "id": 29,
+        "name": "Rodo_29 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SCOTLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 58.66,
+        "apostas": 1
+      },
+      {
+        "id": 30,
+        "name": "Rodo_30 CROATIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "CROATIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 58.66,
+        "apostas": 1
+      },
+      {
+        "id": 31,
+        "name": "Rodo_31 ITALY 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ITALY 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 63.21,
+        "apostas": 1
+      }
+    ],
+    "toxic_cuts": [
+      {
+        "id": 1,
+        "name": "Rodo_01 SPAIN 1 | Lay_CS_1x0_B365 | Odd 6-8",
+        "league": "SPAIN 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": 6.0,
+        "odd_max": 8.0,
+        "lucro_combo": -3920.07,
+        "apostas": 22
+      },
+      {
+        "id": 2,
+        "name": "Rodo_02 SPAIN 1 | Lay_CS_1x0_B365 | Odd <=6",
+        "league": "SPAIN 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": null,
+        "odd_max": 6.0,
+        "lucro_combo": -1572.11,
+        "apostas": 17
+      },
+      {
+        "id": 3,
+        "name": "Rodo_03 USA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "USA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -1551.11,
+        "apostas": 1
+      },
+      {
+        "id": 4,
+        "name": "Rodo_04 AUSTRIA 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "AUSTRIA 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -918.9,
+        "apostas": 14
+      },
+      {
+        "id": 5,
+        "name": "Rodo_05 EGYPT 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "EGYPT 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -873.45,
+        "apostas": 12
+      },
+      {
+        "id": 6,
+        "name": "Rodo_06 BOSNIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BOSNIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -870.47,
+        "apostas": 1
+      },
+      {
+        "id": 7,
+        "name": "Rodo_07 BELGIUM 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "BELGIUM 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -852.65,
+        "apostas": 1
+      },
+      {
+        "id": 8,
+        "name": "Rodo_08 IRELAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "IRELAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -668.77,
+        "apostas": 5
+      },
+      {
+        "id": 9,
+        "name": "Rodo_09 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BULGARIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -543.02,
+        "apostas": 15
+      },
+      {
+        "id": 10,
+        "name": "Rodo_10 BRAZIL 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "BRAZIL 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -485.78,
+        "apostas": 11
+      },
+      {
+        "id": 11,
+        "name": "Rodo_11 ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12",
+        "league": "ITALY 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -479.19,
+        "apostas": 2
+      },
+      {
+        "id": 12,
+        "name": "Rodo_12 GREECE 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "GREECE 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -479.06,
+        "apostas": 3
+      },
+      {
+        "id": 13,
+        "name": "Rodo_13 ENGLAND 4 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ENGLAND 4",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -399.03,
+        "apostas": 2
+      },
+      {
+        "id": 14,
+        "name": "Rodo_14 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SWEDEN 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -244.39,
+        "apostas": 5
+      },
+      {
+        "id": 15,
+        "name": "Rodo_15 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SCOTLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -199.52,
+        "apostas": 7
+      },
+      {
+        "id": 16,
+        "name": "Rodo_16 PARAGUAY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "PARAGUAY 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -185.21,
+        "apostas": 9
+      },
+      {
+        "id": 17,
+        "name": "Rodo_17 ISRAEL 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ISRAEL 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -62.61,
+        "apostas": 7
+      },
+      {
+        "id": 18,
+        "name": "Rodo_18 SCOTLAND 2 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SCOTLAND 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -47.37,
+        "apostas": 5
+      },
+      {
+        "id": 19,
+        "name": "Rodo_19 BULGARIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "BULGARIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -28.48,
+        "apostas": 6
+      },
+      {
+        "id": 20,
+        "name": "Rodo_20 SERBIA 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "SERBIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": -2.07,
+        "apostas": 11
+      },
+      {
+        "id": 21,
+        "name": "Rodo_21 WALES 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "WALES 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 1.41,
+        "apostas": 4
+      },
+      {
+        "id": 22,
+        "name": "Rodo_22 ITALY 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "ITALY 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 11.3,
+        "apostas": 16
+      },
+      {
+        "id": 23,
+        "name": "Rodo_23 ENGLAND 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ENGLAND 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 24,
+        "name": "Rodo_24 CHINA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "CHINA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 25,
+        "name": "Rodo_25 ESTONIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ESTONIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 46.61,
+        "apostas": 1
+      },
+      {
+        "id": 26,
+        "name": "Rodo_26 FINLAND 1 | Lay_CS_0x1_B365 | Odd 8-10",
+        "league": "FINLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 8.0,
+        "odd_max": 10.0,
+        "lucro_combo": 52.94,
+        "apostas": 1
+      },
+      {
+        "id": 27,
+        "name": "Rodo_27 SWEDEN 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SWEDEN 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 56.23,
+        "apostas": 1
+      },
+      {
+        "id": 28,
+        "name": "Rodo_28 SLOVENIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SLOVENIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 57.73,
+        "apostas": 1
+      },
+      {
+        "id": 29,
+        "name": "Rodo_29 SCOTLAND 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "SCOTLAND 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 58.66,
+        "apostas": 1
+      },
+      {
+        "id": 30,
+        "name": "Rodo_30 CROATIA 1 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "CROATIA 1",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 58.66,
+        "apostas": 1
+      },
+      {
+        "id": 31,
+        "name": "Rodo_31 ITALY 2 | Lay_CS_0x1_B365 | Odd 10-12",
+        "league": "ITALY 2",
+        "method_equals": "Lay_CS_0x1_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": 63.21,
+        "apostas": 1
+      }
+    ]
+  },
+  "execution_guards": {
+    "slippage": {
+      "enabled": false,
+      "max_slippage_ticks": 3,
+      "odd_tick_size": 0.1,
+      "max_delta_odd": 0.3,
+      "skip_if_exec_odd_missing": true
+    },
+    "liquidity": {
+      "enabled": false,
+      "min_matched_liquidity": 1000.0,
+      "required_multiplier_of_run": 1.0,
+      "skip_if_liquidity_missing": false
+    }
+  },
+  "cycle": {
+    "commission_rate": 0.065,
+    "initial_base": 500.0,
+    "teto": 1000.0,
+    "compound_limit_multiplier": 1.6,
+    "step_up_target_multiplier": 3.0,
+    "step_down_limit_multiplier": -1.5,
+    "ramp_transition": {
+      "enabled": true
+    }
+  },
+  "monitoring": {
+    "kpi_json_filename": "kpis_latest_prod_v1.json",
+    "sqlite_filename": "monitoring_kpis_prod_v1.db",
+    "sqlite_table_kpis": "kpis",
+    "sqlite_table_ops": "ops"
+  }
+}

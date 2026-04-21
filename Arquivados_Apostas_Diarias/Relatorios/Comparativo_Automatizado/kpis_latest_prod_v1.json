@@ -1,0 +1,22 @@
+{
+  "run_id": "comparativo_resp500_mesma_base",
+  "ts": "2026-04-17T03:15:09.261035",
+  "processed_rows": 15,
+  "executed_rows": 15,
+  "skipped_rows": 0,
+  "wins": 14,
+  "losses": 1,
+  "win_rate": 93.33,
+  "lucro_acumulado": 282.67,
+  "drawdown_abs": 0.0,
+  "drawdown_pct": 0.0,
+  "current_base": 500.0,
+  "current_run": 500.0,
+  "level_profit": 282.67,
+  "stake_multiplier": 1.0,
+  "stake_phase": "Sem_Rampa",
+  "phase2_kpi_positive": true,
+  "step_ups": 0,
+  "step_downs": 0,
+  "saques_realizados": 0
+}

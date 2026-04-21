@@ -1,0 +1,22 @@
+{
+  "run_id": "metodo3c_agressivo_hist_20260417",
+  "ts": "2026-04-17T11:00:58.381908",
+  "processed_rows": 357,
+  "executed_rows": 357,
+  "skipped_rows": 0,
+  "wins": 349,
+  "losses": 8,
+  "win_rate": 97.76,
+  "lucro_acumulado": 46933.34,
+  "drawdown_abs": 2611.82,
+  "drawdown_pct": 5.56,
+  "current_base": 1000.0,
+  "current_run": 1000.0,
+  "level_profit": 917.73,
+  "stake_multiplier": 1.0,
+  "stake_phase": "Fase_3_100pct",
+  "phase2_kpi_positive": true,
+  "step_ups": 11,
+  "step_downs": 0,
+  "saques_realizados": 5
+}
