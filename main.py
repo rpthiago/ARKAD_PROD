@@ -15,6 +15,7 @@ import streamlit as st
 from ingestao_tempo_real import load_live_dataframe
 
 ROOT_DIR = Path(__file__).resolve().parent
+APOSTAS_DIR = ROOT_DIR / "Apostas_Diarias"
 PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
 FIXED_ENDPOINT_URL = "http://127.0.0.1:8080/arkad/sinais"
@@ -174,9 +175,9 @@ def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: 
     fallback_frames: list[pd.DataFrame] = []
     base_names: list[str] = []
 
-    # Base operacional do dia: somente planilhas Apostas_*.xlsx na raiz do projeto.
+    # Base operacional do dia: somente planilhas Apostas_*.xlsx na pasta Apostas_Diarias/.
     for glob_pattern in OPERATIONAL_GLOBS:
-        for p_file in sorted(ROOT_DIR.glob(glob_pattern)):
+        for p_file in sorted(APOSTAS_DIR.glob(glob_pattern)):
             try:
                 df_op = pd.read_excel(p_file)
                 if not df_op.empty:

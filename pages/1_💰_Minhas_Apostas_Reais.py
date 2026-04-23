@@ -17,7 +17,7 @@ import streamlit as st
 st.set_page_config(page_title="Minhas Apostas Reais", page_icon="💰", layout="wide")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
-DIR_APOSTAS = ROOT_DIR  # planilhas ficam na raiz: Apostas_*.xlsx
+DIR_APOSTAS = ROOT_DIR / "Apostas_Diarias"  # planilhas: Apostas_*.xlsx
 
 
 # ─── Carregamento ─────────────────────────────────────────────────────────────
@@ -83,11 +83,11 @@ def _prio_label(row: pd.Series) -> str:
 
 def main() -> None:
     st.title("💰 Minhas Apostas Reais")
-    st.caption("Consolidação baseada nas planilhas `Apostas_*.xlsx` na raiz do projeto.")
+    st.caption("Consolidação baseada nas planilhas `Apostas_*.xlsx` na pasta `Apostas_Diarias/`.")
 
     df_raw = _carregar_planilhas()
     if df_raw.empty:
-        st.info("📂 Nenhuma planilha `Apostas_*.xlsx` encontrada. Salve as planilhas operacionais na raiz do projeto.")
+        st.info("📂 Nenhuma planilha `Apostas_*.xlsx` encontrada na pasta `Apostas_Diarias/`. Salve as planilhas operacionais lá.")
         return
 
     # ── Normalizar coluna de resultado
