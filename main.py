@@ -4,7 +4,7 @@ import json
 import os
 import time
 from datetime import date, datetime
-from io import StringIO
+from io import BytesIO, StringIO
 from pathlib import Path
 from typing import Any
 
@@ -540,16 +540,22 @@ def main() -> None:
             st.dataframe(full_day_view.style.apply(_highlight_row, axis=1), use_container_width=True)
 
         if approved_today.empty:
-            csv_data = "Prio,Hora,Liga,Jogo,Metodo,Odd real,Status\n"
+            _xls_data = b""
+            _xls_disabled = True
         else:
             download_df = approved_today[["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"]].copy()
             download_df["Odd real"] = pd.to_numeric(download_df["Odd real"], errors="coerce")
-            csv_data = download_df.to_csv(index=False)
+            _buf = BytesIO()
+            with pd.ExcelWriter(_buf, engine="openpyxl") as _w:
+                download_df.to_excel(_w, index=False, sheet_name="Jogos")
+            _xls_data = _buf.getvalue()
+            _xls_disabled = False
         st.download_button(
-            "📥 Baixar Lista de Hoje",
-            data=csv_data,
-            file_name=f"jogos_hoje_{today_iso}.csv",
-            mime="text/csv",
+            "📥 Baixar Lista de Hoje (Excel)",
+            data=_xls_data,
+            file_name=f"jogos_hoje_{today_iso}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            disabled=_xls_disabled,
             use_container_width=True,
         )
     else:
