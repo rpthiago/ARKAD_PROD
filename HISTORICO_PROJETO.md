@@ -1,6 +1,6 @@
 # Histórico do Projeto ARKAD_PROD
 
-> Última atualização: 23/04/2026  
+> Última atualização: 23/04/2026 (sessão 2)  
 > Objetivo: registro completo de tudo que foi construído, decidido e testado — serve de ponto de partida para qualquer sessão futura.
 
 ---
@@ -16,7 +16,7 @@ Sistema de **sinais de apostas lay (mercado Resultado Correto / Correct Score)**
 | Ingestão | `ingestao_tempo_real.py` | Busca dados Bet365/Betfair via FutPython |
 | Motor | `engine_ciclo_producao.py` | Simulação/backtesting com stake progressivo |
 | Backtesting WF | `walk_forward_backtest.py` | Validação out-of-sample walk-forward |
-| Filtro operacional | `config_rodos_master.json` | Whitelist de combos Liga+Método+Odd permitidos |
+| Filtro operacional | `config_rodos_master.json` | **Blacklist** de combos Liga+Método+Odd tóxicos |
 | Config produção | `config_prod_v1.json` | Parâmetros ativos em produção |
 
 ---
@@ -89,6 +89,103 @@ Arquivos de referência:
 
 ---
 
+### 2026-04-23 — Sessão 2: bug crítico do filtro, comparativo JC, coluna Prio
+
+#### 2026-04-23-A — Bug crítico: rodo_mode estava invertido
+
+**Problema encontrado:** `config_prod_v1.json` não tinha a chave `rodo_mode`, então o código defaultava para `"whitelist"`. Em modo whitelist, o engine executa **apenas** os combos que batem nas regras. Como **todas** as 31 regras do `config_rodos_master.json` definem combos **tóxicos** (lucro_combo negativo), o sistema estava executando exclusivamente as piores combinações históricas.
+
+**Prova numérica (dataset 527 entradas ago/2025–abr/2026):**
+
+| Modo | Entradas | WR | Lucro |
+|---|---|---|---|
+| Whitelist (bug) | ~170 | 84.8% | −R$ 3.380 |
+| **Blacklist (correto)** | 357 | 97.8% | **+R$ 50.635** |
+
+**Correção:** adicionado `"rodo_mode": "blacklist"` em `runtime_data` do `config_prod_v1.json`.
+
+**Commit:** `cb191d1`
+
+---
+
+#### 2026-04-23-B — Comparativo: Scanner Juros Compostos (DASHBOARD_ARKAD-1) vs Blacklist Atual
+
+O repositório paralelo `DASHBOARD_ARKAD-1` tinha um scanner chamado "Juros Compostos" (`streamlit_scanner_juros_compostos.py` / página `27_📈_Scanner_Juros_Compostos.py`) com filtros baseados em:
+- Lay 0x1: odd entre 8-11, exclui 8 ligas genéricas
+- Lay 1x0: ligas `ITALY 1`, `SPAIN 1`, `SPAIN 2` apenas, odd ≤ 11
+
+**Resultados no mesmo dataset (527 entradas):**
+
+| Cenário | Entradas | WR | Lucro | DD | Score L/DD |
+|---|---|---|---|---|---|
+| Sem filtro | 527 | 93.4% | +R$ 36.212 | R$ 5.222 | 6.93 |
+| Juros Compostos (JC) | 475 | 92.8% | +R$ 27.733 | R$ 6.449 | 4.30 |
+| **Blacklist Atual** | **357** | **97.8%** | **+R$ 50.635** | **R$ 2.861** | **17.70** |
+
+**Análise de overlap:**
+- Aprovados por ambos: 314 entradas | WR 97.5%
+- Só JC aprova: 161 entradas | WR 83.9% ← 26 perdas extras
+- Só Blacklist aprova: 43 entradas | WR **100%** ← JC bloqueava greens
+
+**Conclusão:** Blacklist é superior em todas as dimensões. O JC usa regras por liga inteira (impreciso); a Blacklist usa combos Liga+Método+Odd (cirúrgico).
+
+Script de análise: `_comparativo_jc_vs_bl_tmp.py` (temporário, não commitado)
+
+---
+
+#### 2026-04-23-C — Análise de volume diário e regra de prioridade
+
+**Contexto:** usuário relatou dificuldade em executar todos os jogos em dias de alto volume.
+
+**Dados históricos (pós-blacklist):**
+- Máximo histórico: 5 entradas/dia
+- Média: 2.2 entradas/dia | Mediana: 2 entradas/dia
+- Nunca houve mais de 5 entradas num único dia
+
+**WR por faixa de odd e método:**
+
+| Método | Faixa | WR |
+|---|---|---|
+| Lay 0x1 | odd 9-11 | 94% |
+| Lay 0x1 | odd 7-9 | 93.4% |
+| Lay 1x0 | odd < 9 | 90.7% |
+| Lay 1x0 | odd 7-9 | 88.5% |
+
+**Regra de prioridade definida:**
+- P1 ⭐ → Lay 0x1 odd ≥ 9
+- P2 → Lay 0x1 odd 7-9
+- P3 → Lay 1x0 odd < 9
+- P4 → Lay 1x0 odd ≥ 9
+
+**Backtest cap 4/dia vs blacklist puro:**
+
+| Métrica | Blacklist Puro | BL + Cap 4/dia |
+|---|---|---|
+| Entradas | 357 | 348 |
+| Lucro | **+R$ 50.635** | +R$ 46.628 |
+| DD | **R$ 2.861** | R$ 4.252 |
+| Score | **17.70** | 10.97 |
+
+**Conclusão do backtest:** o cap piora o resultado. As 9 entradas descartadas pelo cap foram **100% GREEN**. O filtro blacklist já é preciso o suficiente — não há entradas ruins que um cap eliminaria. A prioridade serve apenas como **guia operacional manual** em dias com múltiplos jogos simultâneos, não como filtro matemático.
+
+Script de análise: `_backtest_prioridade_tmp.py` (temporário, não commitado)
+
+---
+
+#### 2026-04-23-D — Coluna Prio no dashboard (`main.py`)
+
+**Mudança implementada em `main.py`:**
+- Nova função `_calc_prio(metodo, odd)` calcula P1/P2/P3/P4 por linha
+- Coluna `Prio` adicionada ao DataFrame de saída do `_apply_rodo_filter`
+- Lista de jogos agora **ordenada por prioridade** (P1 no topo) em vez de por horário
+- Coluna `Prio` exibida nas 3 tabelas: "ENTRADA AGORA", "Próximos Jogos", "Dia Inteiro"
+- CSV de download também inclui a coluna `Prio`
+- Seção histórica (data diferente de hoje) também mostra `Prio`
+
+**Commit:** `ddc4b93`
+
+---
+
 ## 3. Arquitetura Atual (23/04/2026)
 
 ### 3.1 Pipeline de sinais (produção)
@@ -122,11 +219,12 @@ Arquivos de referência:
 
 ### 3.2 Filtro Rodo (`config_rodos_master.json`)
 
-- **Modo:** `whitelist` — um jogo só aparece como EXECUTED se **bater** em algum filtro.
-- **20+ regras** do tipo: Liga + Método + faixa de Odd.
-- Cada regra tem `lucro_combo` histórico registrado (negativo = combinação tóxica que foi excluída).
-- Exemplo de regra excluída: `SPAIN 1 | Lay_CS_1x0_B365 | Odd 6-8` → lucro histórico: -3.920.
+- **Modo:** `blacklist` — um jogo aparece como EXECUTED se **NÃO bater** em nenhum filtro.
+- **31 regras** do tipo: Liga + Método + faixa de Odd.
+- Cada regra tem `lucro_combo` histórico negativo = combinação tóxica que é bloqueada.
+- Exemplo de regra bloqueada: `SPAIN 1 | Lay_CS_1x0_B365 | Odd 6-8` → lucro histórico: −3.920.
 - Origem: gerado a partir de `config_prod_v1.json` em 15/04/2026.
+- Bug corrigido em 23/04/2026: `rodo_mode` estava ausente (defaultava para whitelist = invertido).
 
 ### 3.3 Motor de Stake (`engine_ciclo_producao.py`)
 
@@ -238,14 +336,13 @@ streamlit run main.py
 
 ## 7. Próximos Passos (pendentes)
 
-### 7.1 Análise do filtro Rodo (próxima sessão)
-- **Ponto de parada:** filtro precisa ser reanalisado.
-- Verificar se as 20+ regras do `config_rodos_master.json` ainda fazem sentido com os dados atuais.
-- Avaliar se o modo whitelist está cortando entradas boas ou deixando passar entradas ruins.
-- Possíveis ações:
-  - Recalcular `lucro_combo` por regra com dataset mais recente.
-  - Testar impacto de remover/adicionar regras individualmente.
-  - Comparar Baseline_Sem_Filtro vs Atual_Filtrada no walk-forward.
+### 7.1 Análise do filtro Rodo — status atualizado (23/04/2026)
+- ✅ Bug do rodo_mode corrigido (whitelist → blacklist)
+- ✅ Comparativo com Scanner Juros Compostos feito — Blacklist é superior
+- **Pendente:**
+  - Investigar janeiro/2026 especificamente: único mês onde blacklist ficou abaixo do sem-filtro (R$ +3.574 vs R$ +1.011 — na verdade blacklist foi melhor, mas vale stress-test)
+  - Considerar remover as 11 regras Rodo com apenas 1 entrada histórica (Rodo_22 a Rodo_31) — base estatística insuficiente
+  - Recalcular `lucro_combo` por regra com dataset pós-14/04/2026 quando disponível
 
 ### 7.2 Próximos passos do estudo de métodos (DOSSIE_20260417)
 1. Stress test por subperíodos (mensal/trimestral) para M3-C Agressivo.
