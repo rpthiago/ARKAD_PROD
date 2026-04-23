@@ -1,5 +1,5 @@
 """
-Minhas Apostas Reais � ARKAD_PROD
+Minhas Apostas Reais — ARKAD_PROD
 Tabela consolidada de todas as apostas em Apostas_Diarias/*.xlsx
 """
 from __future__ import annotations
@@ -13,13 +13,13 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-st.set_page_config(page_title="Minhas Apostas Reais", page_icon="??", layout="wide")
+st.set_page_config(page_title="Minhas Apostas Reais", page_icon="💰", layout="wide")
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DIR_APOSTAS = ROOT_DIR / "Apostas_Diarias"
 
 
-# -- Helpers -------------------------------------------------------------------
+# ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _carregar() -> pd.DataFrame:
     arquivos = sorted(glob.glob(str(DIR_APOSTAS / "Apostas_*.xlsx")))
@@ -70,7 +70,7 @@ def _prio(row: pd.Series) -> str:
     )
     o = float(o) if pd.notna(o) else 0.0
     if m == "Lay_CS_0x1_B365":
-        return "P1 ?" if o >= 9 else "P2"
+        return "P1 ⭐" if o >= 9 else "P2"
     if m == "Lay_CS_1x0_B365":
         return "P3" if o < 9 else "P4"
     return "P?"
@@ -83,13 +83,13 @@ def _to_excel(df: pd.DataFrame) -> bytes:
     return buf.getvalue()
 
 
-# -- App -----------------------------------------------------------------------
+# ── App ───────────────────────────────────────────────────────────────────────
 
-st.title("?? Minhas Apostas Reais")
+st.title("💰 Minhas Apostas Reais")
 
 df = _carregar()
 if df.empty:
-    st.info("?? Nenhuma planilha `Apostas_*.xlsx` encontrada em `Apostas_Diarias/`.")
+    st.info("📂 Nenhuma planilha `Apostas_*.xlsx` encontrada em `Apostas_Diarias/`.")
     st.stop()
 
 res_col = next((c for c in df.columns if "resultado" in c.lower()), None)
@@ -102,7 +102,7 @@ df["Prio"] = df.apply(_prio, axis=1)
 resolvidas = df[df["PnL"].notna()].copy()
 pendentes  = df[df["PnL"].isna()].copy()
 
-# -- M�tricas ------------------------------------------------------------------
+# ── Métricas ──────────────────────────────────────────────────────────────────
 greens = int((resolvidas["PnL"] > 0).sum())
 reds   = int((resolvidas["PnL"] < 0).sum())
 lucro  = float(resolvidas["PnL"].sum())
@@ -118,7 +118,7 @@ c5.metric("Lucro Total", f"R$ {sinal}{lucro:,.2f}".replace(",", "X").replace("."
 
 st.divider()
 
-# -- Gr�fico curva de banca ----------------------------------------------------
+# ── Gráfico curva de banca ────────────────────────────────────────────────────
 date_col = next((c for c in resolvidas.columns
                  if "data" in c.lower() or c.lower() == "date"), None)
 df_ord = resolvidas.sort_values(date_col) if date_col else resolvidas.copy()
@@ -134,8 +134,8 @@ fig.add_trace(go.Scatter(
 ))
 fig.add_hline(y=0, line_dash="dash", line_color="gray")
 fig.update_layout(
-    title="Evolu��o do P&L Acumulado",
-    xaxis_title="N� Aposta",
+    title="Evolução do P&L Acumulado",
+    xaxis_title="Nº Aposta",
     yaxis_title="Lucro Acumulado (R$)",
     height=280,
     margin=dict(l=0, r=0, t=30, b=0),
@@ -144,8 +144,8 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
-# -- Tabela principal ----------------------------------------------------------
-st.subheader("?? Hist�rico Consolidado")
+# ── Tabela principal ──────────────────────────────────────────────────────────
+st.subheader("📋 Histórico Consolidado")
 
 cols_exibir = []
 for c in ["Prio", date_col, "Horario_Entrada", "Liga", "Jogo", "Metodo",
@@ -158,7 +158,8 @@ if not cols_exibir:
 
 tbl = resolvidas[cols_exibir].copy()
 
-def _cor(row: pd.Series) -> list[str]:
+
+def _cor(row: pd.Series) -> list:
     r = str(row.get("Resultado", "")).upper()
     if any(k in r for k in ("GREEN", "VITORIA")):
         return ["background-color: #d1fae5; color: #065f46"] * len(row)
@@ -166,22 +167,25 @@ def _cor(row: pd.Series) -> list[str]:
         return ["background-color: #fee2e2; color: #991b1b"] * len(row)
     return ["color: #6b7280"] * len(row)
 
+
 fmt = {}
-for c in ["PnL"]:
-    if c in tbl.columns: fmt[c] = "R$ {:+,.2f}"
-for c in ["Odd_Base", "Odd_Real_Pega"]:
-    if c in tbl.columns: fmt[c] = "{:.2f}"
+if "PnL" in tbl.columns:
+    fmt["PnL"] = "R$ {:+,.2f}"
+if "Odd_Base" in tbl.columns:
+    fmt["Odd_Base"] = "{:.2f}"
+if "Odd_Real_Pega" in tbl.columns:
+    fmt["Odd_Real_Pega"] = "{:.2f}"
 
 st.dataframe(
-    tbl.style.apply(_cor, axis=1).format(fmt, na_rep="�"),
+    tbl.style.apply(_cor, axis=1).format(fmt, na_rep="-"),
     use_container_width=True,
     hide_index=True,
     height=420,
 )
 
-# -- Pendentes (expander) ------------------------------------------------------
+# ── Pendentes (expander) ──────────────────────────────────────────────────────
 if not pendentes.empty:
-    with st.expander(f"? Pendentes de resultado ({len(pendentes)})"):
+    with st.expander(f"⏳ Pendentes de resultado ({len(pendentes)})"):
         cols_p = [c for c in ["Prio", date_col, "Liga", "Jogo", "Metodo", "Odd_Base", "Stake"]
                   if c and c in pendentes.columns]
         st.dataframe(pendentes[cols_p] if cols_p else pendentes,
@@ -189,9 +193,9 @@ if not pendentes.empty:
 
 st.divider()
 
-# -- Download Excel ------------------------------------------------------------
+# ── Download Excel ────────────────────────────────────────────────────────────
 st.download_button(
-    "?? Baixar Excel consolidado",
+    "📥 Baixar Excel consolidado",
     data=_to_excel(tbl),
     file_name="apostas_reais_consolidado.xlsx",
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
