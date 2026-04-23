@@ -570,18 +570,48 @@ def main() -> None:
             st.caption("Nova tentativa automática em 30 segundos...")
             time.sleep(30)
             st.rerun()
-        historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
+        is_future = selected_iso > today_iso
+        if is_future:
+            # Para datas futuras mostra todos os jogos aprovados (ainda não executados)
+            historical_exec = historical_games.copy() if not historical_games.empty else pd.DataFrame()
+        else:
+            historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
 
         st.divider()
-        st.subheader(f"✅ Jogos Selecionados em {selected_iso}")
+        label_data = "🔜 Jogos Aprovados para" if is_future else "✅ Jogos Selecionados em"
+        st.subheader(f"{label_data} {selected_iso}")
         if historical_exec.empty:
-            st.info("Nenhum jogo processado nesta data.")
+            st.info("Nenhum jogo encontrado para esta data.")
         else:
-            hist_view = historical_exec[["Prio", "Hora", "Liga", "Jogo", "Odd real", "PnL_Linha"]].copy()
-            hist_view = hist_view.rename(columns={"Odd real": "Odd", "PnL_Linha": "PnL"})
-            hist_view["Odd"] = pd.to_numeric(hist_view["Odd"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
-            hist_view["PnL"] = pd.to_numeric(hist_view["PnL"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
-            st.table(hist_view)
+            _cols_hist = [c for c in ["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status", "PnL_Linha"] if c in historical_exec.columns]
+            hist_view = historical_exec[_cols_hist].copy()
+            if "Odd real" in hist_view.columns:
+                hist_view["Odd real"] = pd.to_numeric(hist_view["Odd real"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
+            if "PnL_Linha" in hist_view.columns:
+                hist_view = hist_view.rename(columns={"PnL_Linha": "PnL"})
+                hist_view["PnL"] = pd.to_numeric(hist_view["PnL"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
+            st.dataframe(hist_view, use_container_width=True, hide_index=True)
+
+        # Download Excel para qualquer data selecionada
+        _dl_df = historical_exec[[c for c in ["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"] if c in historical_exec.columns]].copy() if not historical_exec.empty else pd.DataFrame()
+        if not _dl_df.empty:
+            _dl_df["Odd real"] = pd.to_numeric(_dl_df.get("Odd real"), errors="coerce")
+            _buf2 = BytesIO()
+            with pd.ExcelWriter(_buf2, engine="openpyxl") as _w2:
+                _dl_df.to_excel(_w2, index=False, sheet_name="Jogos")
+            _xls2 = _buf2.getvalue()
+            _dis2 = False
+        else:
+            _xls2 = b""
+            _dis2 = True
+        st.download_button(
+            "📥 Baixar Lista (Excel)",
+            data=_xls2,
+            file_name=f"jogos_{selected_iso}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            disabled=_dis2,
+            use_container_width=True,
+        )
 
     if st.sidebar.button("🚨 EMERGENCY ROLLBACK", type="primary"):
         st.sidebar.error("SISTEMA REVERTIDO!")
