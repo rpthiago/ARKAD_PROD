@@ -20,6 +20,7 @@
     "date_param": "date",
     "timeout_sec": 20,
     "rodo_master_path": "config_rodos_master.json",
+    "rodo_mode": "blacklist",
     "auth_token_env": "ARKAD_API_TOKEN",
     "headers": {},
     "fixed_query_params": {},
