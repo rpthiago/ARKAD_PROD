@@ -332,6 +332,28 @@ def _matches_cut(row: pd.Series, cut: dict[str, Any], league_col: str, method_co
     return True
 
 
+def _build_apostas_excel(df: pd.DataFrame, data_iso: str) -> bytes:
+    """Monta Excel de apostas com colunas extras para preenchimento manual."""
+    cols_base = ["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real"]
+    out = df[[c for c in cols_base if c in df.columns]].copy()
+    out.rename(columns={"Odd real": "Odd_Base"}, inplace=True)
+    out.insert(0, "Data", data_iso)
+    # Colunas para preencher após o jogo
+    out["Odd_Real_Pega"] = ""       # odd exata pega na hora
+    out["Stake"] = ""               # responsabilidade apostada (R$)
+    out["Resultado"] = ""           # GREEN / RED / VOID
+    out["Lucro_Prejuizo"] = ""      # preencher se quiser sobrescrever o cálculo automático
+    buf = BytesIO()
+    with pd.ExcelWriter(buf, engine="openpyxl") as w:
+        out.to_excel(w, index=False, sheet_name="Apostas")
+        ws = w.sheets["Apostas"]
+        # largura das colunas
+        for col_cells in ws.columns:
+            max_len = max(len(str(cell.value or "")) for cell in col_cells)
+            ws.column_dimensions[col_cells[0].column_letter].width = min(max_len + 4, 40)
+    return buf.getvalue()
+
+
 @st.cache_data(ttl=60)
 def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFrame, str]:
     p_cfg = Path(cfg_path)
@@ -543,17 +565,12 @@ def main() -> None:
             _xls_data = b""
             _xls_disabled = True
         else:
-            download_df = approved_today[["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"]].copy()
-            download_df["Odd real"] = pd.to_numeric(download_df["Odd real"], errors="coerce")
-            _buf = BytesIO()
-            with pd.ExcelWriter(_buf, engine="openpyxl") as _w:
-                download_df.to_excel(_w, index=False, sheet_name="Jogos")
-            _xls_data = _buf.getvalue()
+            _xls_data = _build_apostas_excel(approved_today, today_iso)
             _xls_disabled = False
         st.download_button(
-            "📥 Baixar Lista de Hoje (Excel)",
+            "📥 Baixar Apostas de Hoje (Excel)",
             data=_xls_data,
-            file_name=f"jogos_hoje_{today_iso}.xlsx",
+            file_name=f"Apostas_{today_iso.replace('-','')}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             disabled=_xls_disabled,
             use_container_width=True,
@@ -593,21 +610,16 @@ def main() -> None:
             st.dataframe(hist_view, use_container_width=True, hide_index=True)
 
         # Download Excel para qualquer data selecionada
-        _dl_df = historical_exec[[c for c in ["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"] if c in historical_exec.columns]].copy() if not historical_exec.empty else pd.DataFrame()
-        if not _dl_df.empty:
-            _dl_df["Odd real"] = pd.to_numeric(_dl_df.get("Odd real"), errors="coerce")
-            _buf2 = BytesIO()
-            with pd.ExcelWriter(_buf2, engine="openpyxl") as _w2:
-                _dl_df.to_excel(_w2, index=False, sheet_name="Jogos")
-            _xls2 = _buf2.getvalue()
+        if not historical_exec.empty:
+            _xls2 = _build_apostas_excel(historical_exec, selected_iso)
             _dis2 = False
         else:
             _xls2 = b""
             _dis2 = True
         st.download_button(
-            "📥 Baixar Lista (Excel)",
+            "📥 Baixar Apostas (Excel)",
             data=_xls2,
-            file_name=f"jogos_{selected_iso}.xlsx",
+            file_name=f"Apostas_{selected_iso.replace('-','')}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             disabled=_dis2,
             use_container_width=True,
