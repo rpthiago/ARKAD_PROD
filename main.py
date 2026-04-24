@@ -377,6 +377,27 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     if df.empty:
         return pd.DataFrame(), source_label
 
+    # Filtro de range de odd por metodo (espelha servidor_arkad.py)
+    filtros_metodo = cfg.get("runtime_data", {}).get("filtros_metodo", {})
+    if filtros_metodo and method_col in df.columns and odd_col in df.columns:
+        def _passes_odd_filter(row: pd.Series) -> bool:
+            m = str(row.get(method_col, ""))
+            flt = filtros_metodo.get(m)
+            if not flt:
+                return True
+            odd = pd.to_numeric(row.get(odd_col), errors="coerce")
+            if pd.isna(odd):
+                return False
+            omn, omx = flt.get("odd_min"), flt.get("odd_max")
+            if omn is not None and float(odd) < float(omn):
+                return False
+            if omx is not None and float(odd) > float(omx):
+                return False
+            return True
+        df = df[df.apply(_passes_odd_filter, axis=1)].copy()
+        if df.empty:
+            return pd.DataFrame(), source_label
+
     rodo_mode = str(cfg.get("runtime_data", {}).get("rodo_mode", "whitelist")).strip().lower()
     if rodo_mode not in {"whitelist", "blacklist"}:
         rodo_mode = "whitelist"
@@ -423,6 +444,19 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     suspended = odd_real >= 100
     if suspended.any():
         df.loc[suspended[suspended].index, "Status"] = "SKIP"
+
+    # Regra de confirmacao dupla: Lay_CS_1x0_B365 so executa se Lay_CS_0x1_B365 tambem EXECUTED no mesmo jogo
+    if "Jogo" in df.columns and method_col in df.columns:
+        exec_mask = df["Status"] == "EXECUTED"
+        jogos_com_0x1_exec = set(
+            df.loc[exec_mask & (df[method_col] == "Lay_CS_0x1_B365"), "Jogo"].astype(str).str.strip()
+        )
+        solo_1x0 = (
+            (df[method_col] == "Lay_CS_1x0_B365") &
+            (df["Status"] == "EXECUTED") &
+            (~df["Jogo"].astype(str).str.strip().isin(jogos_com_0x1_exec))
+        )
+        df.loc[solo_1x0, "Status"] = "SKIP"
 
     def _calc_prio(metodo: str, odd: float) -> str:
         if metodo == "Lay_CS_0x1_B365":
@@ -482,13 +516,6 @@ def main() -> None:
     today_iso = now.date().isoformat()
     selected_iso = selected_date.isoformat()
     is_today_selected = selected_iso == today_iso
-
-    try:
-        endpoint_dbg = _resolve_endpoint_url()
-        if endpoint_dbg:
-            st.write(f"Debug API URL: {endpoint_dbg}")
-    except Exception:
-        pass
 
     st.caption("Se o status estiver vermelho, verifique o servidor local no PC de BH (porta 8080).")
 
