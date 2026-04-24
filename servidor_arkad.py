@@ -193,6 +193,19 @@ def _load_approved_signals(target_date_iso: str) -> tuple[list[dict[str, Any]], 
 
     approved = approved.sort_values("__mins").reset_index(drop=True)
 
+    # Regra de confirmacao dupla: Lay_CS_1x0_B365 so e executado se
+    # Lay_CS_0x1_B365 tambem estiver aprovado para o mesmo jogo no mesmo dia.
+    # Backtest mostrou: 1x0 sozinho WR 82.9% (-R$4.611); 1x0 com 0x1 WR 92.3% (+R$449)
+    if "Jogo" in approved.columns:
+        jogos_com_0x1 = set(
+            approved.loc[approved[method_col] == "Lay_CS_0x1_B365", "Jogo"].str.strip()
+        )
+        mask_confirmado = ~(
+            (approved[method_col] == "Lay_CS_1x0_B365") &
+            (~approved["Jogo"].str.strip().isin(jogos_com_0x1))
+        )
+        approved = approved[mask_confirmado].copy()
+
     response_cols = [
         date_col,
         time_col,
