@@ -150,6 +150,11 @@ def _is_network_timeout_fallback(source_label: str) -> bool:
     return "timed out" in s or "connect timeout" in s or "timeout" in s
 
 
+def _is_auth_denied_fallback(source_label: str) -> bool:
+    s = (source_label or "").lower()
+    return "acesso negado (401/403)" in s or "401" in s or "403" in s
+
+
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
@@ -296,9 +301,9 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
 
     endpoint_url = _resolve_endpoint_url(cfg)
     if _is_streamlit_cloud_runtime() and _is_local_endpoint(endpoint_url):
-        reason = "endpoint local indisponivel no Streamlit Cloud"
-        if live_fail_reason:
-            reason = f"{reason} | live: {live_fail_reason}"
+        # No Streamlit Cloud, localhost nunca estará disponível.
+        # Se a ingestão live já trouxe motivo (ex: 401/403), prioriza esse diagnóstico.
+        reason = live_fail_reason or "endpoint local indisponivel no Streamlit Cloud"
         return _load_local_fallback_dataframe(target_date_iso, date_col, reason)
 
     if not endpoint_url:
@@ -590,7 +595,10 @@ def main() -> None:
     selected_iso = selected_date.isoformat()
     is_today_selected = selected_iso == today_iso
 
-    st.caption("Se o status estiver vermelho, verifique o servidor local no PC de BH (porta 8080).")
+    if _is_streamlit_cloud_runtime():
+        st.caption("No Streamlit Cloud, dados em tempo real dependem do token da API FutPython nos Secrets.")
+    else:
+        st.caption("Se o status estiver vermelho, verifique o servidor local no PC de BH (porta 8080).")
 
     if is_today_selected:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
@@ -598,7 +606,9 @@ def main() -> None:
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
         if _is_local_fallback(source_label):
-            if _is_network_timeout_fallback(source_label):
+            if _is_auth_denied_fallback(source_label):
+                st.error("🔐 API FutPython negou acesso (401/403). Verifique o FUTPYTHON_TOKEN nos Secrets do Streamlit Cloud.")
+            elif _is_network_timeout_fallback(source_label):
                 st.info("💻 API FutPython inacessível por rede. Exibindo sinais da base local.")
             else:
                 st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
