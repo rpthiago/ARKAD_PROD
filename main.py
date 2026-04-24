@@ -114,6 +114,14 @@ def _is_local_endpoint(url: str) -> bool:
     return "127.0.0.1" in s or "localhost" in s or "0.0.0.0" in s
 
 
+def _is_streamlit_cloud_runtime() -> bool:
+    if os.getenv("STREAMLIT_SHARING_MODE", ""):
+        return True
+    if os.getenv("ARKAD_CLOUD_MODE", ""):
+        return True
+    return os.getenv("HOME", "") == "/home/appuser"
+
+
 def _is_endpoint_connection_error(source_label: str) -> bool:
     s = (source_label or "").lower()
     if not s.startswith("endpoint indisponivel"):
@@ -287,6 +295,12 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
     live_fail_reason = live_source if live_df.empty else ""
 
     endpoint_url = _resolve_endpoint_url(cfg)
+    if _is_streamlit_cloud_runtime() and _is_local_endpoint(endpoint_url):
+        reason = "endpoint local indisponivel no Streamlit Cloud"
+        if live_fail_reason:
+            reason = f"{reason} | live: {live_fail_reason}"
+        return _load_local_fallback_dataframe(target_date_iso, date_col, reason)
+
     if not endpoint_url:
         reason = f"endpoint nao configurado | live: {live_fail_reason}" if live_fail_reason else "endpoint nao configurado"
         return _load_live_then_local_fallback(target_date_iso, date_col, cfg, reason)
