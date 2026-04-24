@@ -3,10 +3,18 @@ from __future__ import annotations
 import json
 import os
 import time
+import zoneinfo
 from datetime import date, datetime
 from io import BytesIO, StringIO
 from pathlib import Path
 from typing import Any
+
+_TZ_BR = zoneinfo.ZoneInfo("America/Sao_Paulo")
+
+
+def _now_br() -> datetime:
+    """Retorna o datetime atual no fuso de Brasilia (UTC-3 / UTC-2 no verao)."""
+    return datetime.now(tz=_TZ_BR)
 
 import pandas as pd
 import requests
@@ -64,7 +72,7 @@ def _probe_api_url(api_url: str) -> tuple[bool, str]:
         return False, "URL vazia"
     headers: dict[str, str] = {}
     proxies = {"http": None, "https": None}
-    test_date = datetime.now().date().isoformat()
+    test_date = _now_br().date().isoformat()
     try:
         resp = requests.get(api_url, params={"date": test_date}, headers=headers, timeout=10.0, proxies=proxies)
         if 200 <= resp.status_code < 300:
@@ -122,7 +130,7 @@ def _update_connection_state(source_label: str) -> None:
         "icon": icon,
         "text": text,
         "source": source_label,
-        "updated_at": datetime.now().isoformat(timespec="seconds"),
+        "updated_at": _now_br().isoformat(timespec="seconds"),
     }
 
 
@@ -495,7 +503,7 @@ def main() -> None:
             "icon": "🟠",
             "text": "Status Indefinido",
             "source": "Nao testado",
-            "updated_at": datetime.now().isoformat(timespec="seconds"),
+            "updated_at": _now_br().isoformat(timespec="seconds"),
         }
 
     if st.sidebar.button("🧪 Testar Conexao da API", use_container_width=True):
@@ -510,9 +518,9 @@ def main() -> None:
         st.cache_data.clear()
         st.rerun()
 
-    selected_date = st.sidebar.date_input("📅 Ver Outra Data", value=date.today(), format="YYYY-MM-DD")
+    selected_date = st.sidebar.date_input("📅 Ver Outra Data", value=_now_br().date(), format="YYYY-MM-DD")
 
-    now = datetime.now()
+    now = _now_br()
     today_iso = now.date().isoformat()
     selected_iso = selected_date.isoformat()
     is_today_selected = selected_iso == today_iso
