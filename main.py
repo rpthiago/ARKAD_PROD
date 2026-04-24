@@ -628,9 +628,11 @@ def main() -> None:
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {_compact_source_label(source_label)}")
         show_technical_details = False
+        expand_technical_details = False
         if _is_local_fallback(source_label):
             if _is_auth_denied_fallback(source_label):
                 st.error("Falha de autenticacao na API (401/403). Verifique FUTPYTHON_TOKEN nos Secrets do Streamlit Cloud.")
+                expand_technical_details = True
             elif _is_network_timeout_fallback(source_label):
                 st.info("API ao vivo indisponivel por rede/timeout. Exibindo sinais da base local.")
             else:
@@ -639,7 +641,7 @@ def main() -> None:
         elif _is_cloud_fallback(source_label):
             st.info("Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
         if show_technical_details:
-            with st.expander("Detalhes tecnicos da fonte de dados"):
+            with st.expander("Detalhes tecnicos da fonte de dados", expanded=expand_technical_details):
                 st.code(source_label, language=None)
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
