@@ -628,11 +628,7 @@ def main() -> None:
             time.sleep(30)
             st.rerun()
         is_future = selected_iso > today_iso
-        if is_future:
-            # Para datas futuras mostra todos os jogos aprovados (ainda não executados)
-            historical_exec = historical_games.copy() if not historical_games.empty else pd.DataFrame()
-        else:
-            historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
+        historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
 
         st.divider()
         label_data = "🔜 Jogos Aprovados para" if is_future else "✅ Jogos Selecionados em"
