@@ -651,38 +651,12 @@ def main() -> None:
         approved_today = games_today[games_today["Status"] == "EXECUTED"].copy() if not games_today.empty else pd.DataFrame()
         now_minutes = now.hour * 60 + now.minute
 
-        agenda = approved_today[approved_today["__mins"] >= now_minutes].copy() if not approved_today.empty else pd.DataFrame()
-        entry_window = agenda.copy() if not agenda.empty else pd.DataFrame()
-
         lucro_hoje = float(pd.to_numeric(approved_today.get("PnL_Linha"), errors="coerce").fillna(0).sum()) if not approved_today.empty else 0.0
-        status_txt = "Oportunidade encontrada" if not entry_window.empty else "Aguardando oportunidade"
+        status_txt = "Com jogos aprovados" if not approved_today.empty else "Sem jogos aprovados"
 
         col1, col2 = st.columns(2)
         col1.metric("Lucro Hoje", f"R$ {lucro_hoje:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
         col2.metric("Status", status_txt)
-
-        st.divider()
-        st.subheader("🔥 ENTRADA AGORA")
-
-        if entry_window.empty:
-            st.info("Aguardando próxima oportunidade confirmada pelo Rodo")
-        else:
-            entry_view = entry_window[["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"]].copy()
-            entry_view["Odd real"] = pd.to_numeric(entry_view["Odd real"], errors="coerce").map(
-                lambda x: f"{x:.2f}" if pd.notna(x) else "N/A"
-            )
-            st.success(f"{len(entry_view)} oportunidade(s) confirmada(s) pelo Rodo")
-            st.table(entry_view)
-            st.info("👉 Procure os jogos acima na Betfair no mercado 'Resultado Correto' (Lay 0x1 / Lay 1x0)")
-
-        st.divider()
-        st.subheader("📅 Proximos Jogos Aprovados")
-        if agenda.empty:
-            st.info("Nenhuma oportunidade segura no momento. Aguardando mercado.")
-        else:
-            agenda_view = agenda[["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real", "Status"]].copy()
-            agenda_view["Odd real"] = pd.to_numeric(agenda_view["Odd real"], errors="coerce").map(lambda x: f"{x:.2f}" if pd.notna(x) else "N/A")
-            st.table(agenda_view)
 
         st.divider()
         st.subheader("✅ Jogos Aprovados do Dia Inteiro")
