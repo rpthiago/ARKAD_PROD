@@ -419,6 +419,11 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     # Fallback final para evitar N/A quando nao houver casamento Betfair.
     odd_real = odd_real.where(odd_real.notna(), odd_source)
 
+    # Bloqueia odds absurdas (>= 100): na Betfair significa mercado suspenso/indisponível.
+    suspended = odd_real >= 100
+    if suspended.any():
+        df.loc[suspended[suspended].index, "Status"] = "SKIP"
+
     def _calc_prio(metodo: str, odd: float) -> str:
         if metodo == "Lay_CS_0x1_B365":
             return "P1 ⭐" if odd >= 9 else "P2"
