@@ -596,11 +596,6 @@ def load_live_dataframe(target_date_iso: str, cfg: dict[str, Any]) -> tuple[pd.D
     if not bool(ingest_cfg.get("enabled", False)):
         return pd.DataFrame(), "Ingestao em tempo real desabilitada"
 
-    # No Streamlit Cloud a API FutPython é inacessível por rede (timeout).
-    # Pular chamadas live para evitar travar ~30s antes do fallback.
-    if _is_streamlit_cloud():
-        return pd.DataFrame(), "Modo cloud: API FutPython inacessivel remotamente (usando base local)"
-
     timeout_sec = max(float(ingest_cfg.get("timeout_sec", DEFAULT_TIMEOUT_SEC)), 3.0)
     providers = dict(ingest_cfg.get("providers", {}) or {})
     cross_mode = bool(ingest_cfg.get("cross_b365_games_with_betfair_odds", True))
