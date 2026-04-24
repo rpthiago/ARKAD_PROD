@@ -1,0 +1,22 @@
+{
+  "run_id": "abril_proposta_a",
+  "ts": "2026-04-24T04:20:51.443688",
+  "processed_rows": 104,
+  "executed_rows": 104,
+  "skipped_rows": 0,
+  "wins": 92,
+  "losses": 12,
+  "win_rate": 88.46,
+  "lucro_acumulado": -792.27,
+  "drawdown_abs": 1288.18,
+  "drawdown_pct": 510.71,
+  "current_base": 500.0,
+  "current_run": 743.68,
+  "level_profit": -792.27,
+  "stake_multiplier": 1.0,
+  "stake_phase": "Fase_3_100pct",
+  "phase2_kpi_positive": true,
+  "step_ups": 0,
+  "step_downs": 0,
+  "saques_realizados": 0
+}

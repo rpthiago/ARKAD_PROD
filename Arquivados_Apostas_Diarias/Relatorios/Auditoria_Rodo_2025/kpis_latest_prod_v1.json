@@ -1,0 +1,22 @@
+{
+  "run_id": "hist_com_rodo",
+  "ts": "2026-04-24T09:51:30.323621",
+  "processed_rows": 357,
+  "executed_rows": 357,
+  "skipped_rows": 0,
+  "wins": 349,
+  "losses": 8,
+  "win_rate": 97.76,
+  "lucro_acumulado": 50635.31,
+  "drawdown_abs": 2861.34,
+  "drawdown_pct": 5.65,
+  "current_base": 2000.0,
+  "current_run": 2000.0,
+  "level_profit": 2145.62,
+  "stake_multiplier": 1.0,
+  "stake_phase": "Fase_3_100pct",
+  "phase2_kpi_positive": true,
+  "step_ups": 8,
+  "step_downs": 0,
+  "saques_realizados": 3
+}

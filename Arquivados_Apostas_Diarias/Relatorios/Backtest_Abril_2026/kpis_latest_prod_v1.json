@@ -1,0 +1,22 @@
+{
+  "run_id": "abril_2026_D_somente_0x1",
+  "ts": "2026-04-24T04:15:17.109927",
+  "processed_rows": 94,
+  "executed_rows": 94,
+  "skipped_rows": 0,
+  "wins": 85,
+  "losses": 9,
+  "win_rate": 90.43,
+  "lucro_acumulado": -815.35,
+  "drawdown_abs": 1702.44,
+  "drawdown_pct": 236.05,
+  "current_base": 500.0,
+  "current_run": 665.86,
+  "level_profit": -815.35,
+  "stake_multiplier": 1.0,
+  "stake_phase": "Fase_3_100pct",
+  "phase2_kpi_positive": true,
+  "step_ups": 0,
+  "step_downs": 0,
+  "saques_realizados": 0
+}

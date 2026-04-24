@@ -1,6 +1,7 @@
 {
-  "version": "v1-prod-2026-04-15",
+  "version": "v2-proxy-2026-04-24",
   "environment": "producao",
+  "arkad_api_url": "http://127.0.0.1:8080",
   "odd_exec_col": "Odd_Execucao",
   "skip_if_exec_odd_missing": true,
   "enable_rampa": true,
