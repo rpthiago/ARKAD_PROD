@@ -213,7 +213,7 @@ def _load_local_fallback_dataframe(target_date_iso: str, date_col: str, reason: 
         df[date_col] = target_date_iso
 
     bases_txt = ", ".join(base_names)
-    return df, f"Fallback local ({bases_txt}) | motivo: {reason_ui}"
+    return df, f"Fallback local ({bases_txt}) | motivo: {reason_ui} | detalhe: {reason}"
 
 
 def _load_live_then_local_fallback(
@@ -546,6 +546,8 @@ def main() -> None:
         st.caption(f"Fonte de dados: {source_label}")
         if _is_local_fallback(source_label):
             st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
+            with st.expander("🔍 Diagnóstico da falha de conexão"):
+                st.code(source_label, language=None)
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
