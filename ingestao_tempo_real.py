@@ -279,22 +279,63 @@ def _load_from_custom_provider(
     token_env = str(provider_cfg.get("token_env", "")).strip()
     auth_header = str(provider_cfg.get("auth_header", "Authorization")).strip() or "Authorization"
     auth_scheme = str(provider_cfg.get("auth_scheme", "Bearer")).strip()
-    if token_env and auth_header not in headers:
-        token = _resolve_token(token_env)
-        if token:
-            headers[auth_header] = f"{auth_scheme} {token}".strip() if auth_scheme else token
+    token = _resolve_token(token_env) if token_env else ""
 
-    try:
-        response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec)
-        response.raise_for_status()
-        payload = response.json()
-        records = _extract_records(payload)
-        raw = pd.DataFrame(records)
-        default_method = str(provider_cfg.get("default_method", "Lay_CS_0x1_B365")).strip() or "Lay_CS_0x1_B365"
-        out = _normalize_provider_frame(provider_name, raw, cfg, target_date_iso, default_method)
-        return out, None
-    except Exception as exc:
-        return pd.DataFrame(), f"{provider_name}: {exc}"
+    # Tentativa 1: exatamente conforme configurado.
+    attempt_headers: list[dict[str, str]] = [dict(headers)]
+    attempt_params: list[dict[str, Any]] = [dict(params)]
+
+    if token:
+        configured_header = dict(headers)
+        if auth_header not in configured_header:
+            configured_header[auth_header] = f"{auth_scheme} {token}".strip() if auth_scheme else token
+        attempt_headers[0] = configured_header
+
+        # Fallbacks de autenticação para provedores que variam entre ambientes.
+        h_token = dict(headers)
+        h_token["Authorization"] = f"Token {token}"
+        h_bearer = dict(headers)
+        h_bearer["Authorization"] = f"Bearer {token}"
+        h_raw = dict(headers)
+        h_raw["Authorization"] = token
+        h_x_api = dict(headers)
+        h_x_api["X-API-KEY"] = token
+        attempt_headers.extend([h_token, h_bearer, h_raw, h_x_api])
+
+        p_token = dict(params)
+        p_token.setdefault("token", token)
+        p_api_key = dict(params)
+        p_api_key.setdefault("api_key", token)
+        attempt_params.extend([p_token, p_api_key])
+
+    last_exc: Exception | None = None
+    auth_statuses: list[int] = []
+
+    # Combina tentativas de header x query param, parando no primeiro 2xx.
+    for h in attempt_headers:
+        for p in attempt_params:
+            try:
+                response = requests.get(endpoint_url, params=p, headers=h, timeout=timeout_sec)
+                if response.status_code in (401, 403):
+                    auth_statuses.append(response.status_code)
+                    continue
+                response.raise_for_status()
+                payload = response.json()
+                records = _extract_records(payload)
+                raw = pd.DataFrame(records)
+                default_method = str(provider_cfg.get("default_method", "Lay_CS_0x1_B365")).strip() or "Lay_CS_0x1_B365"
+                out = _normalize_provider_frame(provider_name, raw, cfg, target_date_iso, default_method)
+                return out, None
+            except Exception as exc:
+                last_exc = exc
+
+    if auth_statuses and all(s in (401, 403) for s in auth_statuses):
+        return pd.DataFrame(), (
+            f"{provider_name}: acesso negado (401/403). "
+            "Verifique FUTPYTHON_TOKEN nos Secrets do Streamlit e permissao do endpoint."
+        )
+
+    return pd.DataFrame(), f"{provider_name}: {last_exc}" if last_exc else f"{provider_name}: erro desconhecido"
 
 
 def _normalize_name_for_match(name: str) -> str:
