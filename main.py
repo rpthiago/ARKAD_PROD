@@ -257,6 +257,12 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             live_df[date_col] = target_date_iso
         return live_df, live_source
 
+    # Modo cloud: API FutPython inacessivel por rede — pular localhost (tb inacessivel)
+    # e ir direto ao fallback local, preservando o label "Modo cloud: ..." para o badge.
+    if live_source.lower().startswith("modo cloud"):
+        df_local, _ = _load_local_fallback_dataframe(target_date_iso, date_col, live_source)
+        return df_local, live_source
+
     # live_source contém o motivo pelo qual a API live falhou; propagar para diagnóstico.
     live_fail_reason = live_source if live_df.empty else ""
 
