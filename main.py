@@ -106,12 +106,18 @@ def _is_local_fallback(source_label: str) -> bool:
     return str(source_label or "").lower().startswith("fallback local")
 
 
+def _is_cloud_fallback(source_label: str) -> bool:
+    return str(source_label or "").lower().startswith("modo cloud")
+
+
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
         return "🟢", "Servidor Online"
     if s.startswith("ingestao em tempo real ativa"):
         return "🟢", "Servidor Online"
+    if s.startswith("modo cloud"):
+        return "🟡", "Modo Cloud (base local)"
     if s.startswith("fallback local"):
         return "🟡", "Fallback Local Ativo"
     if s.startswith("endpoint indisponivel"):
@@ -548,6 +554,8 @@ def main() -> None:
             st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
             with st.expander("🔍 Diagnóstico da falha de conexão"):
                 st.code(source_label, language=None)
+        elif _is_cloud_fallback(source_label):
+            st.info("💻 Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
@@ -640,6 +648,8 @@ def main() -> None:
                 st.info("📂 Usando base histórica local (sem dados ao vivo para datas futuras).")
             else:
                 st.info("📂 Usando base histórica local para esta data. API só fornece dados do dia atual.")
+        elif _is_cloud_fallback(source_label):
+            st.info("💻 Modo cloud: usando base local.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")

@@ -19,6 +19,16 @@ except Exception:
 DEFAULT_TIMEOUT_SEC = 15.0
 
 
+def _is_streamlit_cloud() -> bool:
+    """Detecta se estamos rodando no Streamlit Community Cloud.
+
+    O Streamlit Cloud define STREAMLIT_SHARING_MODE=1 em todos os deployments.
+    Nesse ambiente, api.futpythontrader.com é inacessível (timeout de rede),
+    portanto as chamadas live devem ser puladas para evitar travar a página.
+    """
+    return bool(os.getenv("STREAMLIT_SHARING_MODE", ""))
+
+
 def _resolve_token(token_env: str) -> str:
     names = [n for n in [token_env, "FUTPYTHON_TOKEN", "FUTPYTHON_API_TOKEN", "API_TOKEN"] if n]
 
@@ -574,6 +584,11 @@ def load_live_dataframe(target_date_iso: str, cfg: dict[str, Any]) -> tuple[pd.D
     ingest_cfg = dict(runtime.get("live_ingestion", {}) or {})
     if not bool(ingest_cfg.get("enabled", False)):
         return pd.DataFrame(), "Ingestao em tempo real desabilitada"
+
+    # No Streamlit Cloud a API FutPython é inacessível por rede (timeout).
+    # Pular chamadas live para evitar travar ~30s antes do fallback.
+    if _is_streamlit_cloud():
+        return pd.DataFrame(), "Modo cloud: API FutPython inacessivel remotamente (usando base local)"
 
     timeout_sec = max(float(ingest_cfg.get("timeout_sec", DEFAULT_TIMEOUT_SEC)), 5.0)
     providers = dict(ingest_cfg.get("providers", {}) or {})
