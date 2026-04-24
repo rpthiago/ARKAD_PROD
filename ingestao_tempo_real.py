@@ -16,7 +16,7 @@ except Exception:
     RENAME_TIMES_BETFAIR = {}
 
 
-DEFAULT_TIMEOUT_SEC = 15.0
+DEFAULT_TIMEOUT_SEC = 5.0
 
 
 def _is_streamlit_cloud() -> bool:
@@ -612,7 +612,7 @@ def load_live_dataframe(target_date_iso: str, cfg: dict[str, Any]) -> tuple[pd.D
     if _is_streamlit_cloud():
         return pd.DataFrame(), "Modo cloud: API FutPython inacessivel remotamente (usando base local)"
 
-    timeout_sec = max(float(ingest_cfg.get("timeout_sec", DEFAULT_TIMEOUT_SEC)), 5.0)
+    timeout_sec = max(float(ingest_cfg.get("timeout_sec", DEFAULT_TIMEOUT_SEC)), 3.0)
     providers = dict(ingest_cfg.get("providers", {}) or {})
     cross_mode = bool(ingest_cfg.get("cross_b365_games_with_betfair_odds", True))
     active_sources_raw = ingest_cfg.get("active_sources", ["bet365", "betfair"])

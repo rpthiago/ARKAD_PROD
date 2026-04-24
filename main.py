@@ -110,6 +110,12 @@ def _is_cloud_fallback(source_label: str) -> bool:
     return str(source_label or "").lower().startswith("modo cloud")
 
 
+def _is_network_timeout_fallback(source_label: str) -> bool:
+    """True quando o fallback ocorreu por timeout de rede (ex: cloud sem acesso à API)."""
+    s = (source_label or "").lower()
+    return "timed out" in s or "connect timeout" in s or "timeout" in s
+
+
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
@@ -551,9 +557,12 @@ def main() -> None:
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
         if _is_local_fallback(source_label):
-            st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
-            with st.expander("🔍 Diagnóstico da falha de conexão"):
-                st.code(source_label, language=None)
+            if _is_network_timeout_fallback(source_label):
+                st.info("💻 API FutPython inacessível por rede. Exibindo sinais da base local.")
+            else:
+                st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
+                with st.expander("🔍 Diagnóstico da falha de conexão"):
+                    st.code(source_label, language=None)
         elif _is_cloud_fallback(source_label):
             st.info("💻 Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
         if _is_endpoint_connection_error(source_label):
