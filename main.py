@@ -570,7 +570,7 @@ def main() -> None:
                 with st.expander("🔍 Diagnóstico da falha de conexão"):
                     st.code(source_label, language=None)
         elif _is_cloud_fallback(source_label):
-            st.info("💻 Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
+            st.info("Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
