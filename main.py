@@ -245,9 +245,13 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             live_df[date_col] = target_date_iso
         return live_df, live_source
 
+    # live_source contém o motivo pelo qual a API live falhou; propagar para diagnóstico.
+    live_fail_reason = live_source if live_df.empty else ""
+
     endpoint_url = _resolve_endpoint_url()
     if not endpoint_url:
-        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, "endpoint nao configurado")
+        reason = f"endpoint nao configurado | live: {live_fail_reason}" if live_fail_reason else "endpoint nao configurado"
+        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, reason)
 
     method = str(runtime.get("method", "GET")).strip().upper()
     date_param = str(runtime.get("date_param", "date")).strip() or "date"
@@ -274,7 +278,10 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             response = requests.get(endpoint_url, params=params, headers=headers, timeout=timeout_sec, proxies=proxies)
         response.raise_for_status()
     except Exception as exc:
-        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, f"endpoint indisponivel: {exc}")
+        reason = f"endpoint indisponivel: {exc}"
+        if live_fail_reason:
+            reason = f"{reason} | live: {live_fail_reason}"
+        return _load_live_then_local_fallback(target_date_iso, date_col, cfg, reason)
 
     content_type = (response.headers.get("Content-Type") or "").lower()
     df = pd.DataFrame()
@@ -538,7 +545,7 @@ def main() -> None:
         _render_server_badge(source_label)
         st.caption(f"Fonte de dados: {source_label}")
         if _is_local_fallback(source_label):
-            st.warning("API indisponivel. Operando com fallback local em arquivo.")
+            st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
@@ -624,15 +631,18 @@ def main() -> None:
         historical_games, source_label = _load_games_for_date(str(PROD_CFG_PATH), selected_iso)
         _update_connection_state(source_label)
         _render_server_badge(source_label)
+        is_future = selected_iso > today_iso
         st.caption(f"Fonte de dados: {source_label}")
         if _is_local_fallback(source_label):
-            st.warning("API indisponivel. Operando com fallback local em arquivo.")
+            if is_future:
+                st.info("📂 Usando base histórica local (sem dados ao vivo para datas futuras).")
+            else:
+                st.info("📂 Usando base histórica local para esta data. API só fornece dados do dia atual.")
         if _is_endpoint_connection_error(source_label):
             st.warning("⚠️ Aguardando conexão com o servidor de sinais...")
             st.caption("Nova tentativa automática em 30 segundos...")
             time.sleep(30)
             st.rerun()
-        is_future = selected_iso > today_iso
         historical_exec = historical_games[historical_games["Status"] == "EXECUTED"].copy() if not historical_games.empty else pd.DataFrame()
 
         st.divider()
