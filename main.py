@@ -155,6 +155,28 @@ def _is_auth_denied_fallback(source_label: str) -> bool:
     return "acesso negado (401/403)" in s or "401" in s or "403" in s
 
 
+def _compact_source_label(source_label: str) -> str:
+    s = str(source_label or "").strip()
+    sl = s.lower()
+    if not s:
+        return "Fonte de dados indisponivel"
+    if sl.startswith("ingestao em tempo real ativa"):
+        return "Ingestao em tempo real ativa"
+    if sl.startswith("endpoint em tempo real"):
+        return "Endpoint em tempo real ativo"
+    if sl.startswith("fallback local"):
+        if _is_auth_denied_fallback(s):
+            return "Fallback local: autenticacao da API negada (401/403)."
+        if _is_network_timeout_fallback(s):
+            return "Fallback local: timeout/rede na API ao vivo."
+        if "endpoint local indisponivel no streamlit cloud" in sl:
+            return "Fallback local: endpoint local indisponivel no Streamlit Cloud."
+        return "Fallback local: API indisponivel no momento."
+    if len(s) > 180:
+        return s[:177] + "..."
+    return s
+
+
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
@@ -604,16 +626,16 @@ def main() -> None:
         games_today, source_label = _load_games_for_date(str(PROD_CFG_PATH), today_iso)
         _update_connection_state(source_label)
         _render_server_badge(source_label)
-        st.caption(f"Fonte de dados: {source_label}")
+        st.caption(f"Fonte de dados: {_compact_source_label(source_label)}")
         if _is_local_fallback(source_label):
             if _is_auth_denied_fallback(source_label):
-                st.error("🔐 API FutPython negou acesso (401/403). Verifique o FUTPYTHON_TOKEN nos Secrets do Streamlit Cloud.")
+                st.error("Falha de autenticacao na API (401/403). Verifique FUTPYTHON_TOKEN nos Secrets do Streamlit Cloud.")
             elif _is_network_timeout_fallback(source_label):
-                st.info("💻 API FutPython inacessível por rede. Exibindo sinais da base local.")
+                st.info("API ao vivo indisponivel por rede/timeout. Exibindo sinais da base local.")
             else:
-                st.warning("⚠️ API indisponível agora. Exibindo sinais do arquivo local (dados podem estar desatualizados).")
-                with st.expander("🔍 Diagnóstico da falha de conexão"):
-                    st.code(source_label, language=None)
+                st.warning("API indisponivel no momento. Exibindo sinais do arquivo local.")
+            with st.expander("Detalhes tecnicos da fonte de dados"):
+                st.code(source_label, language=None)
         elif _is_cloud_fallback(source_label):
             st.info("Rodando no Streamlit Cloud. API FutPython não é acessível remotamente. Use o app local para sinais em tempo real.")
         if _is_endpoint_connection_error(source_label):

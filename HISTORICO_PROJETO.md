@@ -23,6 +23,51 @@ Sistema de **sinais de apostas lay (mercado Resultado Correto / Correct Score)**
 
 ## 2. Histórico de Marcos
 
+### 2026-04-24 — Incidente Streamlit Cloud (fallback persistente) e estabilização
+
+#### Sintoma observado
+
+- Painel em fallback local com mensagens longas e diagnóstico misturando causas diferentes.
+- Status frequente: `Fallback Local Ativo`.
+- Erro final identificado no cloud: `401/403` nos endpoints FutPython (não era mais erro de conectividade local).
+
+#### Causas raiz mapeadas
+
+- Detecção de cloud previamente agressiva, forçando fallback antes de tentar fluxo live.
+- Tentativa de endpoint local (`127.0.0.1`) no Streamlit Cloud, gerando ruído de diagnóstico.
+- Token/permissão FutPython retornando `401/403` no ambiente cloud.
+
+#### Correções aplicadas
+
+- Restauração do fluxo live normal sem bloqueio automático por cloud.
+- Bloqueio de tentativa de localhost quando em runtime Streamlit Cloud.
+- Fallback de autenticação FutPython com múltiplos formatos (header/query) para reduzir 401/403.
+- Limpeza fina do painel:
+  - `Fonte de dados` agora exibe resumo curto.
+  - Detalhes completos ficam em expander técnico.
+  - Mensagem específica para autenticação negada (`401/403`).
+
+#### Playbook rápido (para não repetir demora)
+
+1. Verificar o texto de `Fonte de dados`:
+  - Se contiver `401/403`: foco em token/permissão, não em rede.
+  - Se contiver `timed out`: foco em rede/timeout.
+2. No Streamlit Cloud, validar Secrets:
+  - `FUTPYTHON_TOKEN` sem espaços e com valor atualizado.
+3. Reboot no app após alterar Secrets.
+4. Confirmar sucesso quando aparecer:
+  - `Ingestao em tempo real ativa (...)`.
+5. Se cair em fallback:
+  - Abrir expander `Detalhes tecnicos da fonte de dados` e usar a causa direta para correção.
+
+#### Commits de referência desta estabilização
+
+- `8968839` — restaura ingestão live sem bloqueio cloud.
+- `4f12ba3` — não tenta localhost no Streamlit Cloud.
+- `55c1054` — fallback de autenticação FutPython (redução de 401/403).
+- `0ecc1f1` — tratamento de 401/403 no painel sem mensagem de localhost.
+
+
 ### 2026-04-15 — Migração e reestruturação (ARKAD_PROD)
 
 - Projeto migrado de `DASHBOARD_ARKAD-1` para repositório dedicado `ARKAD_PROD`.
