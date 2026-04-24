@@ -22,11 +22,22 @@ DEFAULT_TIMEOUT_SEC = 15.0
 def _is_streamlit_cloud() -> bool:
     """Detecta se estamos rodando no Streamlit Community Cloud.
 
-    O Streamlit Cloud define STREAMLIT_SHARING_MODE=1 em todos os deployments.
-    Nesse ambiente, api.futpythontrader.com é inacessível (timeout de rede),
+    Usa múltiplos indicadores (qualquer um é suficiente):
+    - STREAMLIT_SHARING_MODE=1  (legado, Streamlit Sharing)
+    - ARKAD_CLOUD_MODE=1        (custom, configurar nos Secrets do app)
+    - HOME=/home/appuser        (container Linux do Streamlit Cloud roda como appuser)
+
+    Nesse ambiente, api.futpythontrader.com é inacessível por rede (timeout),
     portanto as chamadas live devem ser puladas para evitar travar a página.
     """
-    return bool(os.getenv("STREAMLIT_SHARING_MODE", ""))
+    if os.getenv("STREAMLIT_SHARING_MODE", ""):
+        return True
+    if os.getenv("ARKAD_CLOUD_MODE", ""):
+        return True
+    # Streamlit Community Cloud roda em Linux como usuário "appuser"
+    if os.getenv("HOME", "") == "/home/appuser":
+        return True
+    return False
 
 
 def _resolve_token(token_env: str) -> str:
