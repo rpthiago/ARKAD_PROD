@@ -26,6 +26,7 @@ def _is_streamlit_cloud() -> bool:
     - STREAMLIT_SHARING_MODE=1  (legado, Streamlit Sharing)
     - ARKAD_CLOUD_MODE=1        (custom, configurar nos Secrets do app)
     - HOME=/home/appuser        (container Linux do Streamlit Cloud roda como appuser)
+    - token presente em st.secrets mas ausente em os.environ (indica deploy cloud)
 
     Nesse ambiente, api.futpythontrader.com é inacessível por rede (timeout),
     portanto as chamadas live devem ser puladas para evitar travar a página.
@@ -37,6 +38,16 @@ def _is_streamlit_cloud() -> bool:
     # Streamlit Community Cloud roda em Linux como usuário "appuser"
     if os.getenv("HOME", "") == "/home/appuser":
         return True
+    # Se o token FutPython vem de st.secrets mas NÃO de os.environ,
+    # estamos em um ambiente cloud sem variáveis de ambiente locais.
+    try:
+        import streamlit as st  # type: ignore
+        token_names = ["FUTPYTHON_TOKEN", "FUTPYTHON_API_TOKEN", "API_TOKEN", "ARKAD_CLOUD_MODE"]
+        for name in token_names:
+            if str(st.secrets.get(name, "")).strip() and not os.getenv(name, "").strip():
+                return True
+    except Exception:
+        pass
     return False
 
 

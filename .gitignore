@@ -1,3 +1,6 @@
 ﻿__pycache__/
 *.py[cod]
 .vscode/
+
+.streamlit/secrets.toml
+.env
