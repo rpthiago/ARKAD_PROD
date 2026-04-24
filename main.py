@@ -597,19 +597,6 @@ def main() -> None:
             "updated_at": _now_br().isoformat(timespec="seconds"),
         }
 
-    if st.sidebar.button("🧪 Testar Conexao da API", use_container_width=True):
-        cfg_probe = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
-        active_url = _resolve_endpoint_url(cfg_probe)
-        ok, msg = _probe_api_url(active_url)
-        if ok:
-            st.sidebar.success(f"Conexao OK: {msg}")
-        else:
-            st.sidebar.error(f"Falha na API: {msg}")
-
-    if st.sidebar.button("🔄 Tentar Reconectar Agora", use_container_width=True):
-        st.cache_data.clear()
-        st.rerun()
-
     selected_date = st.sidebar.date_input("📅 Ver Outra Data", value=_now_br().date(), format="YYYY-MM-DD")
 
     now = _now_br()
@@ -650,13 +637,6 @@ def main() -> None:
             st.rerun()
         approved_today = games_today[games_today["Status"] == "EXECUTED"].copy() if not games_today.empty else pd.DataFrame()
         now_minutes = now.hour * 60 + now.minute
-
-        lucro_hoje = float(pd.to_numeric(approved_today.get("PnL_Linha"), errors="coerce").fillna(0).sum()) if not approved_today.empty else 0.0
-        status_txt = "Com jogos aprovados" if not approved_today.empty else "Sem jogos aprovados"
-
-        col1, col2 = st.columns(2)
-        col1.metric("Lucro Hoje", f"R$ {lucro_hoje:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
-        col2.metric("Status", status_txt)
 
         st.divider()
         st.subheader("✅ Jogos Aprovados do Dia Inteiro")
@@ -748,10 +728,6 @@ def main() -> None:
             disabled=_dis2,
             use_container_width=True,
         )
-
-    if st.sidebar.button("🚨 EMERGENCY ROLLBACK", type="primary"):
-        st.sidebar.error("SISTEMA REVERTIDO!")
-
 
 if __name__ == "__main__":
     main()
