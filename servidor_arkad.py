@@ -153,6 +153,29 @@ def _load_approved_signals(target_date_iso: str) -> tuple[list[dict[str, Any]], 
     if df.empty:
         return [], source_used
 
+    # Filtros por metodo: replica o universo exato do backtest historico
+    # Lay_CS_0x1_B365: odd 8.0-11.0 | Lay_CS_1x0_B365: odd 4.5-11.0
+    filtros_metodo = cfg.get("runtime_data", {}).get("filtros_metodo", {})
+    if filtros_metodo:
+        def _passes_method_odd_filter(row: pd.Series) -> bool:
+            m = str(row.get(method_col, ""))
+            flt = filtros_metodo.get(m)
+            if not flt:
+                return True
+            odd = pd.to_numeric(row.get(odd_col), errors="coerce")
+            if pd.isna(odd):
+                return False
+            omn = flt.get("odd_min")
+            omx = flt.get("odd_max")
+            if omn is not None and float(odd) < float(omn):
+                return False
+            if omx is not None and float(odd) > float(omx):
+                return False
+            return True
+        df = df[df.apply(_passes_method_odd_filter, axis=1)].copy()
+        if df.empty:
+            return [], source_used
+
     matched_rodo = df.apply(lambda r: any(_matches_cut(r, cut, league_col, method_col, odd_col) for cut in cuts), axis=1)
 
     df["__mins"] = df[time_col].apply(_parse_hhmm_to_minutes)

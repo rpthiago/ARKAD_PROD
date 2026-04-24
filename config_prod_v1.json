@@ -73,6 +73,10 @@
         "base_url": "https://api.the-odds-api.com/v4/sports/upcoming/odds",
         "sport_key": "soccer"
       }
+    },
+    "filtros_metodo": {
+      "Lay_CS_0x1_B365": {"odd_min": 8.0, "odd_max": 11.5},
+      "Lay_CS_1x0_B365": {"odd_min": 4.5, "odd_max": 11.5}
     }
   },
   "filtros_rodo": [
