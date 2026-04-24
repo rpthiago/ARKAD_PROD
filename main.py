@@ -62,9 +62,35 @@ def _extract_records(payload: Any) -> list[dict[str, Any]]:
     return []
 
 
-def _resolve_endpoint_url() -> str:
-    # Fluxo fixo local para evitar URL antiga de tunel/externa.
-    return FIXED_ENDPOINT_URL
+def _resolve_endpoint_url(cfg: dict[str, Any] | None = None) -> str:
+    def _normalize_api_url(url: str) -> str:
+        u = str(url or "").strip()
+        if not u:
+            return ""
+        low = u.lower()
+        if low.endswith("/sinais") or low.endswith("/arkad/sinais"):
+            return u
+        if low.startswith("http://") or low.startswith("https://"):
+            return u.rstrip("/") + "/sinais"
+        return u
+
+    # Prioridade: variavel de ambiente > config raiz > runtime_data.endpoint_url > fallback local.
+    env_url = str(os.getenv("ARKAD_API_URL", "")).strip()
+    if env_url:
+        return _normalize_api_url(env_url)
+
+    cfg = cfg or {}
+    root_url = str(cfg.get("arkad_api_url", "")).strip()
+    if root_url:
+        return _normalize_api_url(root_url)
+
+    runtime = cfg.get("runtime_data", {}) if isinstance(cfg, dict) else {}
+    runtime_url = str(runtime.get("endpoint_url", "")).strip()
+    if runtime_url:
+        return _normalize_api_url(runtime_url)
+
+    # Fallback local padrao.
+    return _normalize_api_url(FIXED_ENDPOINT_URL)
 
 
 def _probe_api_url(api_url: str) -> tuple[bool, str]:
@@ -257,16 +283,10 @@ def _read_source_dataframe(target_date_iso: str, date_col: str, cfg: dict[str, A
             live_df[date_col] = target_date_iso
         return live_df, live_source
 
-    # Modo cloud: API FutPython inacessivel por rede — pular localhost (tb inacessivel)
-    # e ir direto ao fallback local, preservando o label "Modo cloud: ..." para o badge.
-    if live_source.lower().startswith("modo cloud"):
-        df_local, _ = _load_local_fallback_dataframe(target_date_iso, date_col, live_source)
-        return df_local, live_source
-
     # live_source contém o motivo pelo qual a API live falhou; propagar para diagnóstico.
     live_fail_reason = live_source if live_df.empty else ""
 
-    endpoint_url = _resolve_endpoint_url()
+    endpoint_url = _resolve_endpoint_url(cfg)
     if not endpoint_url:
         reason = f"endpoint nao configurado | live: {live_fail_reason}" if live_fail_reason else "endpoint nao configurado"
         return _load_live_then_local_fallback(target_date_iso, date_col, cfg, reason)
@@ -537,7 +557,8 @@ def main() -> None:
         }
 
     if st.sidebar.button("🧪 Testar Conexao da API", use_container_width=True):
-        active_url = _resolve_endpoint_url()
+        cfg_probe = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
+        active_url = _resolve_endpoint_url(cfg_probe)
         ok, msg = _probe_api_url(active_url)
         if ok:
             st.sidebar.success(f"Conexao OK: {msg}")
