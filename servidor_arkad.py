@@ -171,6 +171,11 @@ def _load_approved_signals(target_date_iso: str) -> tuple[list[dict[str, Any]], 
                 return False
             if omx is not None and float(odd) > float(omx):
                 return False
+            ligas_perm = flt.get("ligas_permitidas")
+            if ligas_perm:
+                liga = str(row.get(league_col, "")).strip().upper()
+                if liga not in {l.strip().upper() for l in ligas_perm}:
+                    return False
             return True
         df = df[df.apply(_passes_method_odd_filter, axis=1)].copy()
         if df.empty:
