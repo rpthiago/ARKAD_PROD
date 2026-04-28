@@ -97,7 +97,6 @@ Data_Arquivo,Horario_Entrada,Liga,Jogo,Metodo,Odd_Base,Odd_Real_Pega,1/0
 2026-04-08,13:00:00,GREECE 1,Atromitos x Kifisia,Lay_CS_1x0_B365,9.2,9.2,1.0
 2026-04-08,14:00:00,TURKEY 1,Goztepe x Galatasaray,Lay_CS_0x1_B365,8.8,8.8,1.0
 2026-04-08,09:30:00,ITALY 3,Juventus B x Ternana,Lay_CS_1x0_B365,10.0,10.0,1.0
-2026-04-08,08:30:00,TURKEY 2,Serik Belediyespor x Van Buyuksehir Belediyespor,Lay_CS_0x1_B365,11.5,11.5,1.0
 2026-04-09,13:00:00,SAUDI ARABIA 1,Dhamk x Al-Quadisiya (KSA),Lay_CS_0x1_B365,11.5,11.5,1.0
 2026-04-10,15:00:00,FRANCE 2,Annecy x Montpellier,Lay_CS_0x1_B365,10.5,10.5,1.0
 2026-04-10,15:00:00,FRANCE 2,Annecy x Montpellier,Lay_CS_1x0_B365,9.8,9.8,1.0
@@ -137,7 +136,6 @@ Data_Arquivo,Horario_Entrada,Liga,Jogo,Metodo,Odd_Base,Odd_Real_Pega,1/0
 2026-04-13,14:00:00,PORTUGAL 2,Lusitania Futebol Clube x Porto B,Lay_CS_0x1_B365,11.0,11.0,1.0
 2026-04-13,14:00:00,PORTUGAL 2,Lusitania Futebol Clube x Porto B,Lay_CS_1x0_B365,9.0,9.0,1.0
 2026-04-13,15:30:00,ITALY 3,Renate x Pro Vercelli,Lay_CS_1x0_B365,9.4,9.4,1.0
-2026-04-13,14:00:00,TURKEY 2,Sakaryaspor x Erokspor A.S,Lay_CS_0x1_B365,9.2,9.2,1.0
 2026-04-13,21:00:00,CHILE 1,Union La Calera x Deportes Concepcion,Lay_CS_1x0_B365,8.4,8.4,0.0
 2026-04-13,15:30:00,ROMANIA 1,Universitatea Cluj x Universitatea Craiova,Lay_CS_0x1_B365,9.0,9.0,1.0
 2026-04-13,15:30:00,ROMANIA 1,Universitatea Cluj x Universitatea Craiova,Lay_CS_1x0_B365,10.5,10.5,1.0
@@ -182,3 +180,42 @@ Data_Arquivo,Horario_Entrada,Liga,Jogo,Metodo,Odd_Base,Odd_Real_Pega,1/0
 2026-04-23,14:00:00,SPAIN 1,Levante x Sevilla,Lay_CS_0x1_B365,10.5,10.5,1.0
 2026-04-23,16:30:00,SPAIN 1,Oviedo x Villarreal,Lay_CS_0x1_B365,9.6,9.6,1.0
 2026-04-23,14:00:00,SPAIN 1,Levante x Sevilla,Lay_CS_1x0_B365,9.0,9.0,1.0
+2026-04-24,15:00:00,FRANCE 2,Amiens x Montpellier,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-24,15:00:00,FRANCE 2,Clermont x Bastia,Lay_CS_0x1_B365,9.6,9.6,1.0
+2026-04-24,15:45:00,FRANCE 1,Brest x Lens,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-25,09:00:00,FRANCE 2,Grenoble x Le Mans,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-25,11:00:00,CZECH 1,Banik Ostrava x Plzen,Lay_CS_0x1_B365,11.5,11.5,0.0
+2026-04-25,11:00:00,CZECH 1,Bohemians 1905 x Sparta Prague,Lay_CS_0x1_B365,9.6,9.6,1.0
+2026-04-25,11:00:00,NORWAY 1,Fredrikstad x Viking,Lay_CS_0x1_B365,11.5,11.5,1.0
+2026-04-25,11:00:00,CZECH 1,Teplice x Hradec Kralove,Lay_CS_0x1_B365,9.4,9.4,0.0
+2026-04-25,11:30:00,PORTUGAL 1,Tondela x CD Nacional Funchal,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-25,13:00:00,ITALY 1,Bologna x Roma,Lay_CS_0x1_B365,9.0,9.0,1.0
+2026-04-25,13:30:00,SPAIN 2,Burgos x Deportivo,Lay_CS_0x1_B365,9.0,9.0,1.0
+2026-04-25,14:00:00,FRANCE 1,Angers x Paris St-G,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-25,14:00:00,PORTUGAL 2,Felgueiras x Leiria,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-25,15:00:00,NETHERLANDS 1,NAC Breda x Ajax,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-25,15:45:00,ITALY 1,Verona x Lecce,Lay_CS_0x1_B365,8.6,8.6,1.0
+2026-04-25,13:30:00,SPAIN 2,Burgos x Deportivo,Lay_CS_1x0_B365,8.2,8.2,1.0
+2026-04-25,15:45:00,ITALY 1,Verona x Lecce,Lay_CS_1x0_B365,7.4,7.4,1.0
+2026-04-26,04:30:00,CHINA 1,Changchun Yatai x Guangdong GZ-Power FC,Lay_CS_0x1_B365,9.2,9.2,1.0
+2026-04-26,06:00:00,CHINA 1,Qingdao Hainiu x Shandong Taishan,Lay_CS_0x1_B365,9.4,9.4,1.0
+2026-04-26,07:00:00,UKRAINE 1,Kryvbas Krivyi Rih x Dynamo Kiev,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-26,07:00:00,PORTUGAL 2,Lusitania Futebol Clube x Pacos Ferreira,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-26,07:15:00,POLAND 1,Wisla Plock x Radomiak Radom,Lay_CS_0x1_B365,11.0,11.0,0.0
+2026-04-26,08:30:00,TURKEY 1,Genclerbirligi x Kocaelispor,Lay_CS_0x1_B365,9.8,9.8,1.0
+2026-04-26,09:00:00,DENMARK 1,Silkeborg x Randers,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-26,11:15:00,SPAIN 2,Granada x Almeria,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-26,11:15:00,SPAIN 1,Oviedo x Elche,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-26,11:30:00,PORTUGAL 1,Estoril Praia x Famalicao,Lay_CS_0x1_B365,11.5,11.5,0.0
+2026-04-26,12:00:00,UKRAINE 1,FK Kudrivka x Shakhtar,Lay_CS_0x1_B365,9.4,9.4,1.0
+2026-04-26,12:15:00,FRANCE 1,Paris FC x Lille,Lay_CS_0x1_B365,10.0,10.0,0.0
+2026-04-26,13:00:00,BULGARIA 1,Arda x Botev Plovdiv,Lay_CS_0x1_B365,9.4,9.4,1.0
+2026-04-26,13:00:00,ITALY 3,Atalanta B x Catania,Lay_CS_0x1_B365,11.5,11.5,1.0
+2026-04-26,13:00:00,ITALY 1,Torino x Inter,Lay_CS_0x1_B365,9.8,9.8,1.0
+2026-04-26,10:00:00,ITALY 1,Genoa x Como,Lay_CS_0x1_B365,8.2,8.2,1.0
+2026-04-27,11:30:00,ROMANIA 1,FC Metaloglobus Bucuresti x Unirea Slobozia,Lay_CS_0x1_B365,10.0,10.0,1.0
+2026-04-27,13:30:00,ITALY 1,Cagliari x Atalanta,Lay_CS_0x1_B365,9.0,9.0,1.0
+2026-04-27,14:50:00,SAUDI ARABIA 1,Al-Jndal x Al Orubah,Lay_CS_0x1_B365,9.6,9.6,1.0
+2026-04-27,15:45:00,FRANCE 2,Boulogne x Dunkerque,Lay_CS_0x1_B365,10.5,10.5,1.0
+2026-04-27,18:45:00,ARGENTINA 1,Velez Sarsfield x Union Santa Fe,Lay_CS_0x1_B365,11.0,11.0,1.0
+2026-04-27,15:30:00,SPAIN 2,Cadiz x Las Palmas,Lay_CS_0x1_B365,8.4,8.4,1.0

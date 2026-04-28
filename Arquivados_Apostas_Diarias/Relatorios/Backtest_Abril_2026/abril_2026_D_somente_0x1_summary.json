@@ -1,14 +1,14 @@
 {
-  "Total_Linhas_Filtradas": 94,
-  "Entradas_Executadas": 94,
+  "Total_Linhas_Filtradas": 123,
+  "Entradas_Executadas": 123,
   "Entradas_Skipadas": 0,
-  "Win_Rate_Executadas_%": 90.43,
-  "Lucro_Final": -815.35,
-  "Max_Drawdown_Abs": 1702.44,
-  "Max_Drawdown_%": 236.05,
+  "Win_Rate_Executadas_%": 88.62,
+  "Lucro_Final": -2619.07,
+  "Max_Drawdown_Abs": 3664.9,
+  "Max_Drawdown_%": 568.91,
   "Step_Ups": 0,
   "Saques_Realizados": 0,
   "Step_Downs": 0,
-  "Fase2_Lucro": 599.53,
+  "Fase2_Lucro": 550.9,
   "Fase2_KPI_Positivo": true
 }

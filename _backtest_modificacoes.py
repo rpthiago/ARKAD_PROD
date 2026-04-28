@@ -54,6 +54,12 @@ def passes_odd(row):
         return False
     if omx is not None and float(odd) > float(omx):
         return False
+        
+    ligas_permitidas = flt.get("ligas_permitidas")
+    if ligas_permitidas is not None:
+        if str(row.get("Liga", "")).strip().upper() not in [lg.upper() for lg in ligas_permitidas]:
+            return False
+            
     return True
 
 mask_odd = df.apply(passes_odd, axis=1)

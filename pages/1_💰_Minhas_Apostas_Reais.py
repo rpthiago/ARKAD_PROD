@@ -191,6 +191,98 @@ if not pendentes.empty:
         st.dataframe(pendentes[cols_p] if cols_p else pendentes,
                      use_container_width=True, hide_index=True)
 
+# ── Seção de Estatísticas Avançadas ──────────────────────────────────────────
+st.divider()
+st.subheader("📈 Análise Estatística Completa")
+
+tab1, tab2, tab3 = st.tabs(["📊 Performance Geral", "🏆 Ligas & Métodos", "📉 Curva & Tendência"])
+
+with tab1:
+    # Métricas avançadas
+    investido = resolvidas["Stake"].sum()
+    roi = (lucro / investido * 100) if investido > 0 else 0
+    
+    # Profit Factor
+    ganhos = resolvidas[resolvidas["PnL"] > 0]["PnL"].sum()
+    perdas = abs(resolvidas[resolvidas["PnL"] < 0]["PnL"].sum())
+    pf = ganhos / perdas if perdas > 0 else float('inf')
+    
+    # Max Drawdown (Simples)
+    mdd = (df_ord["_acum"] - df_ord["_acum"].cummax()).min()
+    
+    # Odd Média
+    odd_col = next((c for c in resolvidas.columns if "odd" in c.lower()), None)
+    odd_med = resolvidas[odd_col].mean() if odd_col else 0
+
+    m1, m2, m3, m4 = st.columns(4)
+    m1.metric("ROI Real", f"{roi:.2f}%")
+    m2.metric("Profit Factor", f"{pf:.2f}" if pf != float('inf') else "∞")
+    m3.metric("Max Drawdown", f"R$ {mdd:,.2f}".replace(",", "."))
+    m4.metric("Odd Média", f"{odd_med:.2f}")
+
+with tab2:
+    c_liga, c_met = st.columns(2)
+    
+    with c_liga:
+        st.markdown("##### 🌍 Top Ligas (P&L)")
+        liga_stats = resolvidas.groupby("Liga").agg(
+            Apostas=("PnL", "count"),
+            Greens=("PnL", lambda x: (x > 0).sum()),
+            PnL=("PnL", "sum")
+        ).reset_index()
+        liga_stats["WR%"] = (liga_stats["Greens"] / liga_stats["Apostas"] * 100)
+        
+        melhores = liga_stats.sort_values("PnL", ascending=False).head(5)
+        piores = liga_stats.sort_values("PnL", ascending=True).head(5)
+        
+        st.dataframe(
+            melhores[["Liga", "Apostas", "WR%", "PnL"]].style.format({"WR%": "{:.1f}%", "PnL": "R$ {:,.2f}"}),
+            use_container_width=True, hide_index=True
+        )
+        st.markdown("##### ⚠️ Ligas com Menor Performance")
+        st.dataframe(
+            piores[["Liga", "Apostas", "WR%", "PnL"]].style.format({"WR%": "{:.1f}%", "PnL": "R$ {:,.2f}"}),
+            use_container_width=True, hide_index=True
+        )
+
+    with c_met:
+        st.markdown("##### 🎯 Win Rate por Método")
+        met_stats = resolvidas.groupby("Metodo").agg(
+            Apostas=("PnL", "count"),
+            Greens=("PnL", lambda x: (x > 0).sum()),
+            PnL=("PnL", "sum")
+        ).reset_index()
+        met_stats["WinRate"] = (met_stats["Greens"] / met_stats["Apostas"] * 100)
+        
+        fig_met = go.Figure(go.Bar(
+            x=met_stats["Metodo"],
+            y=met_stats["WinRate"],
+            text=[f"{v:.1f}%" for v in met_stats["WinRate"]],
+            textposition='auto',
+            marker_color='#3498db'
+        ))
+        fig_met.update_layout(title="Win Rate % por Método", height=300, margin=dict(l=0,r=0,t=30,b=0))
+        st.plotly_chart(fig_met, use_container_width=True)
+        
+        st.dataframe(
+            met_stats[["Metodo", "Apostas", "WinRate", "PnL"]].style.format({"WinRate": "{:.1f}%", "PnL": "R$ {:,.2f}"}),
+            use_container_width=True, hide_index=True
+        )
+
+with tab3:
+    st.markdown("##### 📅 Performance por Dia da Semana")
+    resolvidas['DOW'] = pd.to_datetime(resolvidas[date_col]).dt.day_name()
+    dow_order = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    dow_stats = resolvidas.groupby('DOW')['PnL'].sum().reindex(dow_order).reset_index()
+    
+    fig_dow = go.Figure(go.Bar(
+        x=dow_stats['DOW'],
+        y=dow_stats['PnL'],
+        marker_color=['#2ecc71' if v > 0 else '#e74c3c' for v in dow_stats['PnL']]
+    ))
+    fig_dow.update_layout(title="P&L por Dia da Semana", height=300)
+    st.plotly_chart(fig_dow, use_container_width=True)
+
 st.divider()
 
 # ── Download Excel ────────────────────────────────────────────────────────────
@@ -201,3 +293,4 @@ st.download_button(
     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     use_container_width=True,
 )
+
