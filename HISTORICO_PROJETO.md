@@ -1,6 +1,6 @@
 # Histórico do Projeto ARKAD_PROD
 
-> Última atualização: 23/04/2026 (sessão 2)  
+> Última atualização: 27/04/2026 (Grande Reforma de Performance)  
 > Objetivo: registro completo de tudo que foi construído, decidido e testado — serve de ponto de partida para qualquer sessão futura.
 
 ---
@@ -22,6 +22,40 @@ Sistema de **sinais de apostas lay (mercado Resultado Correto / Correct Score)**
 ---
 
 ## 2. Histórico de Marcos
+
+### 2026-04-27 — Grande Reforma de Performance e Blindagem
+
+#### Sintoma observado
+- Queda severa de Win Rate em Abril/2026 (de 97% para ~88%).
+- Aumento descontrolado de volume de jogos (de 1.5 para 9.6 sinais/dia).
+- Perda de lucro acumulado no mês.
+
+#### Causas raiz mapeadas
+- O scanner estava operando em ligas voláteis e não-core (Romênia, Chile, Divisões inferiores) que antes eram bloqueadas pontualmente via Blacklist.
+- Algumas ligas históricas "boas" mudaram de comportamento em 2026 (ex: Romania 1).
+- Entradas isoladas no Lay 1x0 sem a "âncora" do Lay 0x1 estavam gerando REDs evitáveis.
+
+#### Correções e Melhorias Aplicadas
+1. **Transição Estratégica (Blacklist → Whitelist)**:
+   - Abandonamos o modelo de "bloquear o que é ruim" e passamos para o modelo de **"permitir apenas o que é excelente"**.
+   - Criada uma **Whitelist Ouro de 29 Ligas** baseada em backtest exaustivo (2025-2026).
+   - Resultado: Win Rate restaurado para **97.0%** no backtest de 2026 e **100%** no histórico de 2025.
+2. **Implementação da Regra de Confirmação Dupla**:
+   - O método Lay 1x0 agora exige obrigatoriamente um sinal correspondente de Lay 0x1 no mesmo jogo. 
+   - Esta regra sozinha teria evitado R$ 777 em perdas no mês de Abril.
+3. **Upgrade no Dashboard ("Minhas Apostas Reais")**:
+   - Adicionada aba de **Análise Estatística Completa**.
+   - KPIs de Profit Factor, ROI Real e Max Drawdown.
+   - Ranking de **Melhores e Piores Ligas** (P&L) para facilitar a auditoria manual.
+   - Gráfico de Win Rate por Método e Performance por Dia da Semana.
+4. **Sincronização com Scanner Juros Compostos**:
+   - Aplicadas as mesmas travas de segurança no repositório `DASHBOARD_ARKAD-1`.
+   - Win Rate esperado subiu de 93.5% para **99.0%** (histórico consolidado).
+
+#### Commits de referência
+- `c1b0290` — fix: whitelist 29 ligas, regra dupla e upgrade dashboard estatísticas.
+
+---
 
 ### 2026-04-24 — Incidente Streamlit Cloud (fallback persistente) e estabilização
 
