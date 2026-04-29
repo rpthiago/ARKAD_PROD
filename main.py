@@ -573,24 +573,6 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     if suspended.any():
         df.loc[suspended[suspended].index, "Status"] = "SKIP"
 
-    # NOVO: Filtro de segurança final na Odd Real (Betfair)
-    if not df.empty:
-        def _check_real_odd_limit(row: pd.Series) -> str:
-            current_status = str(row.get("Status", "SKIP"))
-            if current_status != "EXECUTED":
-                return current_status
-            
-            m = str(row.get(method_col, ""))
-            _, omx = _get_odd_limits(m)
-            
-            o_real = pd.to_numeric(row.get("__odd_real_val"), errors="coerce") # use temporary val
-            if omx is not None and pd.notna(o_real) and float(o_real) > float(omx):
-                return "SKIP"
-            return "EXECUTED"
-        
-        df["__odd_real_val"] = odd_real
-        df["Status"] = df.apply(_check_real_odd_limit, axis=1)
-
     # Regra de confirmacao dupla: Lay_CS_1x0_B365 so executa se Lay_CS_0x1_B365 tambem EXECUTED no mesmo jogo
     if "Jogo" in df.columns and method_col in df.columns:
         exec_mask = df["Status"] == "EXECUTED"
