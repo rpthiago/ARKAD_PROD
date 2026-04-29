@@ -1,0 +1,86 @@
+Data,lado,motivo,rodo,Liga,Metodo,Jogo,Odd_Base,arquivo_origem,key
+2026-04-02,somente_live,nao_veio_na_base,,BRAZIL 1,Lay_CS_0x1_B365,Chapecoense x Atletico MG,8.6,Apostas_20260402.xlsx,2026-04-02|BRAZIL 1|Lay_CS_0x1_B365|chapecoense|atletico mg
+2026-04-02,somente_live,nao_veio_na_base,,BRAZIL 1,Lay_CS_0x1_B365,Red Bull Bragantino x Flamengo,8.6,Apostas_20260402.xlsx,2026-04-02|BRAZIL 1|Lay_CS_0x1_B365|red bull bragantino|flamengo
+2026-04-03,somente_live,nao_veio_na_base,,ROMANIA 1,Lay_CS_0x1_B365,Botosani x FCSB,9.8,Apostas_20260403.xlsx,2026-04-03|ROMANIA 1|Lay_CS_0x1_B365|botosani|fcsb
+2026-04-03,somente_live,nao_veio_na_base,,FRANCE 2,Lay_CS_0x1_B365,Annecy x Guingamp,10.5,Apostas_20260403.xlsx,2026-04-03|FRANCE 2|Lay_CS_0x1_B365|annecy|guingamp
+2026-04-03,somente_live,nao_veio_na_base,,FRANCE 2,Lay_CS_0x1_B365,Grenoble x Clermont,10.5,Apostas_20260403.xlsx,2026-04-03|FRANCE 2|Lay_CS_0x1_B365|grenoble|clermont
+2026-04-04,somente_live,nao_veio_na_base,,ROMANIA 1,Lay_CS_0x1_B365,Otelul Galati x Hermannstadt,10.5,Apostas_20260404.xlsx,2026-04-04|ROMANIA 1|Lay_CS_0x1_B365|otelul galati|hermannstadt
+2026-04-04,somente_live,nao_veio_na_base,,SLOVAKIA 1,Lay_CS_0x1_B365,Zemplin x Zilina,11.5,Apostas_20260404.xlsx,2026-04-04|SLOVAKIA 1|Lay_CS_0x1_B365|zemplin|zilina
+2026-04-04,somente_live,nao_veio_na_base,,SCOTLAND 2,Lay_CS_0x1_B365,Ayr x Partick,11.5,Apostas_20260404.xlsx,2026-04-04|SCOTLAND 2|Lay_CS_0x1_B365|ayr|partick
+2026-04-05,somente_live,nao_veio_na_base,,CHINA 1,Lay_CS_0x1_B365,Tianjin Jinmen Tiger FC x Shanghai Shenhua,10.5,Apostas_20260405.xlsx,2026-04-05|CHINA 1|Lay_CS_0x1_B365|tianjin jinmen tiger fc|shanghai shenhua
+2026-04-05,somente_live,nao_veio_na_base,,SWEDEN 1,Lay_CS_0x1_B365,Kalmar FF x Vasteras SK,11.5,Apostas_20260405.xlsx,2026-04-05|SWEDEN 1|Lay_CS_0x1_B365|kalmar ff|vasteras sk
+2026-04-05,somente_live,nao_veio_na_base,,SWEDEN 2,Lay_CS_0x1_B365,Sundsvall x United IK Nordic,11.5,Apostas_20260405.xlsx,2026-04-05|SWEDEN 2|Lay_CS_0x1_B365|sundsvall|united ik nordic
+2026-04-05,somente_live,nao_veio_na_base,,ITALY 1,Lay_CS_0x1_B365,US Cremonese x Bologna,9.6,Apostas_20260405.xlsx,2026-04-05|ITALY 1|Lay_CS_0x1_B365|us cremonese|bologna
+2026-04-05,somente_live,nao_veio_na_base,,SERBIA 1,Lay_CS_0x1_B365,Radnik Surdulica x Crvena Zvezda,11.0,Apostas_20260405.xlsx,2026-04-05|SERBIA 1|Lay_CS_0x1_B365|radnik surdulica|crvena zvezda
+2026-04-05,somente_live,nao_veio_na_base,,SCOTLAND 1,Lay_CS_0x1_B365,Dundee x Celtic,11.5,Apostas_20260405.xlsx,2026-04-05|SCOTLAND 1|Lay_CS_0x1_B365|dundee|celtic
+2026-04-05,somente_live,nao_veio_na_base,,ISRAEL 1,Lay_CS_0x1_B365,Hapoel Haifa x Maccabi Tel Aviv,10.5,Apostas_20260405.xlsx,2026-04-05|ISRAEL 1|Lay_CS_0x1_B365|hapoel haifa|maccabi tel aviv
+2026-04-05,somente_live,nao_veio_na_base,,BRAZIL 1,Lay_CS_0x1_B365,Chapecoense x EC Vitoria Salvador,11.0,Apostas_20260405.xlsx,2026-04-05|BRAZIL 1|Lay_CS_0x1_B365|chapecoense|ec vitoria salvador
+2026-04-05,somente_live,nao_veio_na_base,,BRAZIL 1,Lay_CS_0x1_B365,Bahia x SE Palmeiras,11.5,Apostas_20260405.xlsx,2026-04-05|BRAZIL 1|Lay_CS_0x1_B365|bahia|se palmeiras
+2026-04-05,somente_live,nao_veio_na_base,,BRAZIL 1,Lay_CS_0x1_B365,Corinthians x Internacional,11.5,Apostas_20260405.xlsx,2026-04-05|BRAZIL 1|Lay_CS_0x1_B365|corinthians|internacional
+2026-04-05,somente_live,nao_veio_na_base,,SCOTLAND 1,Lay_CS_0x1_B365,Livingston x Hearts,8.8,Apostas_20260405.xlsx,2026-04-05|SCOTLAND 1|Lay_CS_0x1_B365|livingston|hearts
+2026-04-05,somente_live,nao_veio_na_base,,ITALY 1,Lay_CS_0x1_B365,Pisa x Torino,8.6,Apostas_20260405.xlsx,2026-04-05|ITALY 1|Lay_CS_0x1_B365|pisa|torino
+2026-04-05,somente_live,nao_veio_na_base,,CHILE 1,Lay_CS_0x1_B365,Deportes Concepcion x Colo Colo,8.8,Apostas_20260405.xlsx,2026-04-05|CHILE 1|Lay_CS_0x1_B365|deportes concepcion|colo colo
+2026-04-06,somente_live,nao_veio_na_base,,POLAND 1,Lay_CS_0x1_B365,Nieciecza x Piast Gliwice,10.5,Apostas_20260406.xlsx,2026-04-06|POLAND 1|Lay_CS_0x1_B365|nieciecza|piast gliwice
+2026-04-06,somente_live,nao_veio_na_base,,SWITZERLAND 1,Lay_CS_0x1_B365,Grasshoppers Zurich x Sion,11.5,Apostas_20260406.xlsx,2026-04-06|SWITZERLAND 1|Lay_CS_0x1_B365|grasshoppers zurich|sion
+2026-04-06,somente_live,nao_veio_na_base,,DENMARK 1,Lay_CS_0x1_B365,Vejle x Randers,11.0,Apostas_20260406.xlsx,2026-04-06|DENMARK 1|Lay_CS_0x1_B365|vejle|randers
+2026-04-06,somente_live,nao_veio_na_base,,ITALY 2,Lay_CS_0x1_B365,Catanzaro x AC Monza,11.0,Apostas_20260406.xlsx,2026-04-06|ITALY 2|Lay_CS_0x1_B365|catanzaro|ac monza
+2026-04-06,somente_live,nao_veio_na_base,,ITALY 2,Lay_CS_0x1_B365,Reggiana x Pescara,10.5,Apostas_20260406.xlsx,2026-04-06|ITALY 2|Lay_CS_0x1_B365|reggiana|pescara
+2026-04-06,somente_live,nao_veio_na_base,,NORWAY 1,Lay_CS_0x1_B365,Ham-Kam x Brann,10.5,Apostas_20260406.xlsx,2026-04-06|NORWAY 1|Lay_CS_0x1_B365|ham-kam|brann
+2026-04-06,somente_live,nao_veio_na_base,,ITALY 2,Lay_CS_0x1_B365,Sampdoria x Empoli,11.0,Apostas_20260406.xlsx,2026-04-06|ITALY 2|Lay_CS_0x1_B365|sampdoria|empoli
+2026-04-06,somente_live,nao_veio_na_base,,TURKEY 1,Lay_CS_0x1_B365,Kocaelispor x Basaksehir,9.8,Apostas_20260406.xlsx,2026-04-06|TURKEY 1|Lay_CS_0x1_B365|kocaelispor|basaksehir
+2026-04-06,somente_live,nao_veio_na_base,,PARAGUAY 1,Lay_CS_0x1_B365,Sportivo Trinidense x Rubio Nu,11.0,Apostas_20260406.xlsx,2026-04-06|PARAGUAY 1|Lay_CS_0x1_B365|sportivo trinidense|rubio nu
+2026-04-06,somente_live,nao_veio_na_base,,BRAZIL 2,Lay_CS_0x1_B365,Goias x Criciuma,11.5,Apostas_20260406.xlsx,2026-04-06|BRAZIL 2|Lay_CS_0x1_B365|goias|criciuma
+2026-04-06,somente_live,nao_veio_na_base,,PORTUGAL 2,Lay_CS_0x1_B365,Porto B x Chaves,8.8,Apostas_20260406.xlsx,2026-04-06|PORTUGAL 2|Lay_CS_0x1_B365|porto b|chaves
+2026-04-07,somente_live,nao_veio_na_base,,POLAND 1,Lay_CS_0x1_B365,Arka Gdynia x Zaglebie Lubin,9.8,Apostas_20260407.xlsx,2026-04-07|POLAND 1|Lay_CS_0x1_B365|arka gdynia|zaglebie lubin
+2026-04-07,somente_live,nao_veio_na_base,,SCOTLAND 2,Lay_CS_0x1_B365,Ayr x Dunfermline,10.0,Apostas_20260407.xlsx,2026-04-07|SCOTLAND 2|Lay_CS_0x1_B365|ayr|dunfermline
+2026-04-10,somente_live,nao_veio_na_base,,FRANCE 2,Lay_CS_0x1_B365,Annecy x Montpellier,10.5,Apostas_20260410.xlsx,2026-04-10|FRANCE 2|Lay_CS_0x1_B365|annecy|montpellier
+2026-04-10,somente_live,nao_veio_na_base,,FRANCE 2,Lay_CS_0x1_B365,Clermont x Nancy,11.0,Apostas_20260410.xlsx,2026-04-10|FRANCE 2|Lay_CS_0x1_B365|clermont|nancy
+2026-04-10,somente_live,nao_veio_na_base,,SCOTLAND 2,Lay_CS_0x1_B365,Queens Park x Ross Co,9.6,Apostas_20260410.xlsx,2026-04-10|SCOTLAND 2|Lay_CS_0x1_B365|queens park|ross co
+2026-04-12,somente_live,nao_veio_na_base,,PORTUGAL 2,Lay_CS_0x1_B365,Feirense x Vizela,9.6,Apostas_20260412.xlsx,2026-04-12|PORTUGAL 2|Lay_CS_0x1_B365|feirense|vizela
+2026-04-12,somente_live,nao_veio_na_base,,NETHERLANDS 2,Lay_CS_0x1_B365,FC Dordrecht x ADO Den Haag,11.5,Apostas_20260412.xlsx,2026-04-12|NETHERLANDS 2|Lay_CS_0x1_B365|dordrecht|ado den haag
+2026-04-12,somente_live,nao_veio_na_base,,SCOTLAND 1,Lay_CS_0x1_B365,Falkirk x Rangers,11.0,Apostas_20260412.xlsx,2026-04-12|SCOTLAND 1|Lay_CS_0x1_B365|falkirk|rangers
+2026-04-12,somente_live,nao_veio_na_base,,CHINA 1,Lay_CS_0x1_B365,Shijiazhuang Gongfu FC x Foshan Nanshi FC,10.5,Apostas_20260412.xlsx,2026-04-12|CHINA 1|Lay_CS_0x1_B365|shijiazhuang gongfu fc|foshan nanshi fc
+2026-04-12,somente_live,nao_veio_na_base,,ENGLAND 1,Lay_CS_0x1_B365,Crystal Palace x Newcastle,11.5,Apostas_20260412.xlsx,2026-04-12|ENGLAND 1|Lay_CS_0x1_B365|crystal palace|newcastle
+2026-04-12,somente_live,nao_veio_na_base,,SWEDEN 2,Lay_CS_0x1_B365,IK Brage x Oddevold,11.0,Apostas_20260412.xlsx,2026-04-12|SWEDEN 2|Lay_CS_0x1_B365|ik brage|oddevold
+2026-04-12,somente_live,nao_veio_na_base,,ENGLAND 1,Lay_CS_0x1_B365,Nottm Forest x Aston Villa,11.0,Apostas_20260412.xlsx,2026-04-12|ENGLAND 1|Lay_CS_0x1_B365|nottm forest|aston villa
+2026-04-12,somente_live,nao_veio_na_base,,ENGLAND 1,Lay_CS_0x1_B365,Sunderland x Tottenham,11.5,Apostas_20260412.xlsx,2026-04-12|ENGLAND 1|Lay_CS_0x1_B365|sunderland|tottenham
+2026-04-12,somente_live,nao_veio_na_base,,AUSTRIA 1,Lay_CS_0x1_B365,Austria Wien x Rapid Vienna,10.0,Apostas_20260412.xlsx,2026-04-12|AUSTRIA 1|Lay_CS_0x1_B365|austria wien|rapid vienna
+2026-04-12,somente_live,nao_veio_na_base,,DENMARK 1,Lay_CS_0x1_B365,Randers x FC Copenhagen,10.5,Apostas_20260412.xlsx,2026-04-12|DENMARK 1|Lay_CS_0x1_B365|randers|copenhagen
+2026-04-13,somente_live,nao_veio_na_base,,ROMANIA 1,Lay_CS_0x1_B365,FC Metaloglobus Bucuresti x Csikszereda,10.5,Apostas_20260413.xlsx,2026-04-13|ROMANIA 1|Lay_CS_0x1_B365|metaloglobus bucuresti|csikszereda
+2026-04-13,somente_live,nao_veio_na_base,,BULGARIA 1,Lay_CS_0x1_B365,CSKA Sofia x PFC Levski Sofia,11.5,Apostas_20260413.xlsx,2026-04-13|BULGARIA 1|Lay_CS_0x1_B365|cska sofia|plevski sofia
+2026-04-13,somente_live,nao_veio_na_base,,PORTUGAL 2,Lay_CS_0x1_B365,Lusitania Futebol Clube x Porto B,11.0,Apostas_20260413.xlsx,2026-04-13|PORTUGAL 2|Lay_CS_0x1_B365|lusitania futebol clube|porto b
+2026-04-13,somente_live,nao_veio_na_base,,ROMANIA 1,Lay_CS_0x1_B365,Universitatea Cluj x Universitatea Craiova,9.0,Apostas_20260413.xlsx,2026-04-13|ROMANIA 1|Lay_CS_0x1_B365|universitatea cluj|universitatea craiova
+2026-04-13,somente_live,nao_veio_na_base,,TURKEY 1,Lay_CS_0x1_B365,Eyupspor x Samsunspor,8.8,Apostas_20260413.xlsx,2026-04-13|TURKEY 1|Lay_CS_0x1_B365|eyupspor|samsunspor
+2026-04-14,somente_live,nao_veio_na_base,,BULGARIA 1,Lay_CS_0x1_B365,Botev Vratsa x Lokomotiv Sofia,9.2,Apostas_20260414.xlsx,2026-04-14|BULGARIA 1|Lay_CS_0x1_B365|botev vratsa|lokomotiv sofia
+2026-04-14,somente_live,nao_veio_na_base,,BULGARIA 1,Lay_CS_0x1_B365,Dobrudzha x Botev Plovdiv,9.8,Apostas_20260414.xlsx,2026-04-14|BULGARIA 1|Lay_CS_0x1_B365|dobrudzha|botev plovdiv
+2026-04-02,somente_base,nao_veio_no_live,,BRAZIL 1,Lay_CS_0x1_B365,Chapecoense-SC vs Atletico-MG,8.23,,2026-04-02|BRAZIL 1|Lay_CS_0x1_B365|chapecoense-sc|atletico-mg
+2026-04-02,somente_base,nao_veio_no_live,,BRAZIL 1,Lay_CS_0x1_B365,Bragantino vs Flamengo RJ,8.43,,2026-04-02|BRAZIL 1|Lay_CS_0x1_B365|bragantino|flamengo rj
+2026-04-03,somente_base,nao_veio_no_live,,ESTONIA 1,Lay_CS_0x1_B365,Kalju vs Narva,11.03,,2026-04-03|ESTONIA 1|Lay_CS_0x1_B365|kalju|narva
+2026-04-03,somente_base,nao_veio_no_live,,SWEDEN 2,Lay_CS_0x1_B365,Helsingborg vs Oster,8.03,,2026-04-03|SWEDEN 2|Lay_CS_0x1_B365|helsingborg|oster
+2026-04-03,somente_base,nao_veio_no_live,,SLOVENIA 1,Lay_CS_0x1_B365,Aluminij vs Radomlje,11.03,,2026-04-03|SLOVENIA 1|Lay_CS_0x1_B365|aluminij|radomlje
+2026-04-03,somente_base,nao_veio_no_live,,AUSTRIA 2,Lay_CS_0x1_B365,A. Salzburg vs Bregenz,8.53,,2026-04-03|AUSTRIA 2|Lay_CS_0x1_B365|a. salzburg|bregenz
+2026-04-03,somente_base,nao_veio_no_live,,SPAIN 1,Lay_CS_1x0_B365,Rayo Vallecano vs Elche,7.53,,2026-04-03|SPAIN 1|Lay_CS_1x0_B365|rayo vallecano|elche
+2026-04-04,somente_base,nao_veio_no_live,,SPAIN 1,Lay_CS_1x0_B365,Real Sociedad vs Levante,9.03,,2026-04-04|SPAIN 1|Lay_CS_1x0_B365|real sociedad|levante
+2026-04-05,somente_base,nao_veio_no_live,,SPAIN 3,Lay_CS_0x1_B365,Arenteiro vs Arenas Getxo,8.03,,2026-04-05|SPAIN 3|Lay_CS_0x1_B365|arenteiro|arenas getxo
+2026-04-05,somente_base,nao_veio_no_live,,GERMANY 3,Lay_CS_0x1_B365,Ulm vs Verl,11.03,,2026-04-05|GERMANY 3|Lay_CS_0x1_B365|ulm|verl
+2026-04-05,somente_base,nao_veio_no_live,,CHINA 1,Lay_CS_0x1_B365,Tianjin Jinmen Tiger vs Shanghai Shenhua,9.63,,2026-04-05|CHINA 1|Lay_CS_0x1_B365|tianjin jinmen tiger|shanghai shenhua
+2026-04-05,somente_base,nao_veio_no_live,,AUSTRIA 1,Lay_CS_0x1_B365,Hartberg vs Salzburg,8.53,,2026-04-05|AUSTRIA 1|Lay_CS_0x1_B365|hartberg|salzburg
+2026-04-05,somente_base,nao_veio_no_live,,SPAIN 1,Lay_CS_1x0_B365,Valencia vs Celta Vigo,8.23,,2026-04-05|SPAIN 1|Lay_CS_1x0_B365|valencia|celta vigo
+2026-04-06,somente_base,nao_veio_no_live,,POLAND 1,Lay_CS_0x1_B365,Termalica B-B. vs Piast Gliwice,9.03,,2026-04-06|POLAND 1|Lay_CS_0x1_B365|termalica b-b.|piast gliwice
+2026-04-06,somente_base,nao_veio_no_live,,AUSTRIA 2,Lay_CS_0x1_B365,Liefering vs Amstetten,9.03,,2026-04-06|AUSTRIA 2|Lay_CS_0x1_B365|liefering|amstetten
+2026-04-06,somente_base,nao_veio_no_live,,ITALY 2,Lay_CS_0x1_B365,Catanzaro vs Monza,8.53,,2026-04-06|ITALY 2|Lay_CS_0x1_B365|catanzaro|monza
+2026-04-06,somente_base,nao_veio_no_live,,NORWAY 1,Lay_CS_0x1_B365,HamKam vs Brann,8.53,,2026-04-06|NORWAY 1|Lay_CS_0x1_B365|hamkam|brann
+2026-04-07,somente_base,nao_veio_no_live,,TURKEY 2,Lay_CS_0x1_B365,Bandirmaspor vs Sariyer,9.63,,2026-04-07|TURKEY 2|Lay_CS_0x1_B365|bandirmaspor|sariyer
+2026-04-07,somente_base,nao_veio_no_live,,CROATIA 1,Lay_CS_0x1_B365,Vukovar 1991 vs Lok. Zagreb,8.53,,2026-04-07|CROATIA 1|Lay_CS_0x1_B365|vukovar 1991|lok. zagreb
+2026-04-07,somente_base,nao_veio_no_live,,ENGLAND 3,Lay_CS_0x1_B365,Port Vale vs Rotherham,8.03,,2026-04-07|ENGLAND 3|Lay_CS_0x1_B365|port vale|rotherham
+2026-04-10,somente_base,nao_veio_no_live,,SLOVENIA 1,Lay_CS_0x1_B365,Primorje vs Koper,9.63,,2026-04-10|SLOVENIA 1|Lay_CS_0x1_B365|primorje|koper
+2026-04-10,somente_base,nao_veio_no_live,,FRANCE 1,Lay_CS_0x1_B365,Paris FC vs Monaco,11.03,,2026-04-10|FRANCE 1|Lay_CS_0x1_B365|paris fc|monaco
+2026-04-10,somente_base,nao_veio_no_live,,FRANCE 3,Lay_CS_0x1_B365,Stade Briochin vs Villefranche,8.43,,2026-04-10|FRANCE 3|Lay_CS_0x1_B365|stade briochin|villefranche
+2026-04-12,somente_base,nao_veio_no_live,,SPAIN 3,Lay_CS_0x1_B365,Villarreal B vs Algeciras,10.03,,2026-04-12|SPAIN 3|Lay_CS_0x1_B365|villarreal b|algeciras
+2026-04-12,somente_base,nao_veio_no_live,,ESTONIA 1,Lay_CS_0x1_B365,Tammeka vs Paide,8.53,,2026-04-12|ESTONIA 1|Lay_CS_0x1_B365|tammeka|paide
+2026-04-12,somente_base,nao_veio_no_live,,PORTUGAL 3,Lay_CS_0x1_B365,Paredes vs Braga B,8.03,,2026-04-12|PORTUGAL 3|Lay_CS_0x1_B365|paredes|braga b
+2026-04-13,somente_base,nao_veio_no_live,,ROMANIA 1,Lay_CS_0x1_B365,Metaloglobus Bucharest vs Csikszereda M. Ciuc,8.03,,2026-04-13|ROMANIA 1|Lay_CS_0x1_B365|metaloglobus bucharest|csikszereda m. ciuc
+2026-04-13,somente_base,nao_veio_no_live,,EGYPT 1,Lay_CS_0x1_B365,Pharco vs Haras El Hodood,8.43,,2026-04-13|EGYPT 1|Lay_CS_0x1_B365|pharco|haras el hodood
+2026-04-13,somente_base,nao_veio_no_live,,TURKEY 2,Lay_CS_0x1_B365,Sakaryaspor vs Erokspor,8.83,,2026-04-13|TURKEY 2|Lay_CS_0x1_B365|sakaryaspor|erokspor
+2026-04-13,somente_base,nao_veio_no_live,,EGYPT 1,Lay_CS_0x1_B365,El Gaish vs Petrojet,8.43,,2026-04-13|EGYPT 1|Lay_CS_0x1_B365|el gaish|petrojet
+2026-04-14,somente_base,nao_veio_no_live,,COPA LIBERTADORES,Lay_CS_0x1_B365,U. de Deportes (Per) vs Coquimbo (Chi),8.03,,2026-04-14|COPA LIBERTADORES|Lay_CS_0x1_B365|u. de deportes|coquimbo
