@@ -7,8 +7,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-import matplotlib.pyplot as plt
 import pandas as pd
+
+try:
+    import matplotlib.pyplot as plt
+    _MPL_AVAILABLE = True
+except ImportError:
+    plt = None  # type: ignore[assignment]
+    _MPL_AVAILABLE = False
 
 
 def _to_float(v: Any) -> float | None:
@@ -800,6 +806,8 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
 
 
 def plot_equity(df: pd.DataFrame, png_path: Path) -> None:
+    if not _MPL_AVAILABLE:
+        return
     plt.figure(figsize=(14, 7))
     x = range(len(df))
     plt.plot(x, df["Lucro_Acumulado"], linewidth=2.0, color="#1f77b4", label="Lucro Acumulado")
