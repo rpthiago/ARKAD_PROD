@@ -24,7 +24,7 @@ from ingestao_tempo_real import load_live_dataframe
 
 ROOT_DIR = Path(__file__).resolve().parent
 APOSTAS_DIR = ROOT_DIR / "Apostas_Diarias"
-PROD_CFG_PATH = ROOT_DIR / "config_prod_v1.json"
+PROD_CFG_PATH = ROOT_DIR / "config_universo_97.json"
 RODOS_MASTER_PATH = ROOT_DIR / "config_rodos_master.json"
 FIXED_ENDPOINT_URL = "http://127.0.0.1:8080/arkad/sinais"
 LOCAL_FALLBACK_PATH = ROOT_DIR / "recalculo_sem_combos_usuario.csv"
