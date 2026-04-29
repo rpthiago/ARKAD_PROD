@@ -1,0 +1,18 @@
+{
+  "referencia": "commit eb4e32e / abril_cenario_B_filtros.csv",
+  "base_antiga_linhas": 36,
+  "base_antiga_greens": 34,
+  "base_antiga_reds": 2,
+  "base_antiga_wr_pct": 94.44,
+  "base_atual_linhas": 124,
+  "base_atual_greens": 112,
+  "base_atual_reds": 12,
+  "base_atual_wr_pct": 90.32,
+  "linhas_adicionadas": 94,
+  "linhas_removidas": 6,
+  "reds_novos": 11,
+  "greens_novos": 83,
+  "reds_removidos": 1,
+  "greens_removidos": 5,
+  "arquivo_reds_novos": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_reds_novos.csv"
+}

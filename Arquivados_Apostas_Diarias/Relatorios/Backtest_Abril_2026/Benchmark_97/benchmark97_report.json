@@ -1,0 +1,18 @@
+{
+  "commit_referencia": "eb4e32e",
+  "wr_referencia": 96.0,
+  "wr_replay_benchmark": 96.0,
+  "wr_replay_igual_referencia": true,
+  "executadas_referencia": 25,
+  "executadas_replay": 25,
+  "linhas_adicionadas_vs_referencia": 94,
+  "linhas_removidas_vs_referencia": 6,
+  "arquivos": {
+    "referencia_csv": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/referencia_eb4e32e_abril_cenario_B_filtros.csv",
+    "referencia_summary": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/referencia_eb4e32e_abril_2026_B_filtros_summary.json",
+    "referencia_config": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/referencia_eb4e32e_config_backtest_exec.json",
+    "replay_summary": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/replay_eb4e32e_cfg_commit_summary.json",
+    "delta_adicionadas": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/delta_atual_vs_ref_linhas_adicionadas.csv",
+    "delta_removidas": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/Benchmark_97/delta_atual_vs_ref_linhas_removidas.csv"
+  }
+}

@@ -9,6 +9,7 @@ Cenários:
 Usa --environment historico no engine (sem slippage/liquidez - resultados já são reais).
 """
 import glob, subprocess, sys, json
+from copy import deepcopy
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -161,6 +162,22 @@ print(f"Cenário D: {len(filt_d)} entradas - {csv_d.name}")
 config = "config_backtest_exec.json"  # rampa on, slippage off, liquidity off
 resultados_dir = str(OUT)
 
+# Evita filtro duplo: os cenarios ja chegam pre-filtrados neste script.
+with open(config, "r", encoding="utf-8") as f:
+    cfg_engine = json.load(f)
+
+cfg_sem_filtro = deepcopy(cfg_engine)
+cfg_sem_filtro["filters"] = {
+    "exclude_leagues": [],
+    "conditional_rules": [],
+    "odd_bands": cfg_engine.get("filters", {}).get("odd_bands", []),
+    "filtros_rodo": [],
+    "toxic_cuts": [],
+}
+
+config_sem_filtro = OUT / "config_backtest_exec_sem_filtros_engine.json"
+config_sem_filtro.write_text(json.dumps(cfg_sem_filtro, ensure_ascii=True, indent=2), encoding="utf-8")
+
 cenarios = [
     ("A_sem_filtro",       csv_a, "Sem filtros (tudo apostado)"),
     ("B_filtros",          csv_b, "Filtros corretos (odd + blacklist)"),
@@ -176,7 +193,7 @@ for run_id, csv_path, descricao in cenarios:
     cmd = [
         sys.executable, "engine_ciclo_producao.py",
         "--input", str(csv_path),
-        "--config", config,
+        "--config", str(config_sem_filtro),
         "--environment", "historico",
         "--output-dir", resultados_dir,
         "--run-id", f"abril_2026_{run_id}",
@@ -206,12 +223,12 @@ for run_id, csv_path, descricao in cenarios:
             s = json.load(f)
         rows.append({
             "Cenário": descricao,
-            "Entradas": s.get("executed_rows", s.get("total_rows", "?")),
-            "Greens": s.get("wins", "?"),
-            "Reds": s.get("losses", "?"),
-            "WR%": round(s.get("win_rate", 0) * 100, 1),
-            "P&L (R$)": round(s.get("lucro_acumulado", 0), 2),
-            "DD abs (R$)": round(s.get("drawdown_abs", 0), 2),
+            "Entradas": s.get("Entradas_Executadas", "?"),
+            "Greens": "?",
+            "Reds": "?",
+            "WR%": round(s.get("Win_Rate_Executadas_%", 0), 1),
+            "P&L (R$)": round(s.get("Lucro_Final", 0), 2),
+            "DD abs (R$)": round(s.get("Max_Drawdown_Abs", 0), 2),
         })
     else:
         # Fallback: lê ops CSV e calcula na mão

@@ -1,0 +1,35 @@
+{
+  "referencia": "commit eb4e32e / abril_cenario_B_filtros.csv",
+  "base_antiga": {
+    "linhas": 36,
+    "greens": 34,
+    "reds": 2,
+    "wr_pct": 94.44
+  },
+  "base_atual": {
+    "linhas": 124,
+    "greens": 112,
+    "reds": 12,
+    "wr_pct": 90.32
+  },
+  "delta": {
+    "linhas_adicionadas": 94,
+    "linhas_removidas": 6,
+    "greens_novos": 83,
+    "reds_novos": 11,
+    "greens_removidos": 5,
+    "reds_removidos": 1
+  },
+  "checagem_reconciliacao": {
+    "greens_antigo_mais_delta_igual_atual": true,
+    "reds_antigo_mais_delta_igual_atual": true,
+    "linhas_antigo_mais_delta_igual_atual": true
+  },
+  "arquivos": {
+    "greens_novos": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_greens_novos.csv",
+    "linhas_removidas": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_linhas_removidas.csv",
+    "greens_removidos": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_greens_removidos.csv",
+    "reds_removidos": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_reds_removidos.csv",
+    "reconciliacao_completa": "Arquivados_Apostas_Diarias/Relatorios/Backtest_Abril_2026/auditoria_wr97_vs_atual_reconciliacao_completa.csv"
+  }
+}

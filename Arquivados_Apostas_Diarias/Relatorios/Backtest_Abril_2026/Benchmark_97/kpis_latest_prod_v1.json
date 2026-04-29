@@ -1,0 +1,22 @@
+{
+  "run_id": "universo_97_96_exec",
+  "ts": "2026-04-29T03:51:34.936955",
+  "processed_rows": 25,
+  "executed_rows": 25,
+  "skipped_rows": 0,
+  "wins": 24,
+  "losses": 1,
+  "win_rate": 96.0,
+  "lucro_acumulado": 522.04,
+  "drawdown_abs": 165.06,
+  "drawdown_pct": 31.62,
+  "current_base": 500.0,
+  "current_run": 574.34,
+  "level_profit": 522.04,
+  "stake_multiplier": 0.6,
+  "stake_phase": "Fase_2_60pct",
+  "phase2_kpi_positive": false,
+  "step_ups": 0,
+  "step_downs": 0,
+  "saques_realizados": 0
+}
