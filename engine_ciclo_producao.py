@@ -343,6 +343,17 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
                 allowed = False
                 reason = "slippage_exceeded"
 
+            # NOVO: Filtro de segurança absoluto na Odd de Execução (espelha main.py)
+            if allowed:
+                filtros_metodo = cfg.get("runtime_data", {}).get("filtros_metodo", {})
+                m = str(row.get(method_col, ""))
+                flt = filtros_metodo.get(m)
+                if flt:
+                    omx = flt.get("odd_max")
+                    if omx is not None and float(odd_exec) > float(omx):
+                        allowed = False
+                        reason = f"odd_exec_too_high_{odd_exec}"
+
         effective_run = current_run * stake_mult
         if allowed and liq_enabled:
             if liquidity is None:
