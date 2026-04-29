@@ -512,6 +512,12 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
     if rodo_err:
         return pd.DataFrame(), f"{source_label} | {rodo_label} | {rodo_err}"
 
+    # Mescla rodos definidos diretamente no cfg (ex: config_universo_97.json tem rodos extras)
+    cfg_cuts = _extract_rodo_cuts(cfg)
+    if cfg_cuts:
+        existing_ids = {c.get("id") for c in cuts if c.get("id") is not None}
+        cuts = cuts + [c for c in cfg_cuts if c.get("id") not in existing_ids]
+
     if date_col not in df.columns or time_col not in df.columns:
         return pd.DataFrame(), source_label
 
