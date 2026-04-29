@@ -208,16 +208,32 @@ def _update_connection_state(source_label: str) -> None:
 
 
 def _extract_rodo_cuts(data: dict[str, Any]) -> list[dict[str, Any]]:
-    cuts = data.get("filtros_rodo")
-    if isinstance(cuts, list):
-        return [c for c in cuts if isinstance(c, dict)]
+    """Coleta rodos de todas as fontes possiveis e retorna lista deduplicada por id."""
+    all_cuts: list[dict[str, Any]] = []
+    seen_ids: set = set()
 
+    def _add(source: Any) -> None:
+        if not isinstance(source, list):
+            return
+        for c in source:
+            if not isinstance(c, dict):
+                continue
+            cid = c.get("id")
+            if cid is not None:
+                if cid in seen_ids:
+                    continue
+                seen_ids.add(cid)
+            all_cuts.append(c)
+
+    # 1. top-level filtros_rodo
+    _add(data.get("filtros_rodo"))
+    # 2. filters.filtros_rodo e filters.toxic_cuts (podem ter rodos extras)
     filters = data.get("filters", {})
     if isinstance(filters, dict):
-        nested_cuts = filters.get("filtros_rodo") or filters.get("toxic_cuts")
-        if isinstance(nested_cuts, list):
-            return [c for c in nested_cuts if isinstance(c, dict)]
-    return []
+        _add(filters.get("filtros_rodo"))
+        _add(filters.get("toxic_cuts"))
+
+    return all_cuts
 
 
 def _load_master_rodo_cuts(cfg: dict[str, Any]) -> tuple[list[dict[str, Any]], str, str | None]:
