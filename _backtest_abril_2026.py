@@ -21,6 +21,7 @@ OUT.mkdir(parents=True, exist_ok=True)
 # ── Carrega todas as planilhas de abril ─────────────────────────────────────
 frames = []
 for arq in sorted(glob.glob(str(DIR / "Apostas_*.xlsx"))):
+    if "reais" in arq.lower(): continue
     df2 = pd.read_excel(arq)
     df2["__arquivo"] = Path(arq).name
     frames.append(df2)
@@ -40,7 +41,7 @@ raw["1/0"] = raw["Resultado"].apply(resultado_para_binario)
 raw["Data_Arquivo"] = raw["__arquivo"].str.extract(r"Apostas_(\d{4})(\d{2})(\d{2})").apply(
     lambda r: f"{r[0]}-{r[1]}-{r[2]}", axis=1
 )
-raw["Horario_Entrada"] = raw["Hora"].astype(str)
+raw["Horario_Entrada"] = raw["Hora"].fillna("00:00").astype(str)
 raw["Jogo"] = raw["Jogo"]
 
 # Remove pendentes/sem resultado
@@ -74,7 +75,7 @@ colunas_engine = ["Data_Arquivo","Horario_Entrada","Liga","Jogo","Metodo",
 # ────────────────────────────────────────────────────────────────────────────
 csv_a = OUT / "abril_cenario_A_sem_filtro.csv"
 raw[colunas_engine].to_csv(csv_a, index=False)
-print(f"\nCenário A: {len(raw)} entradas → {csv_a.name}")
+print(f"\nCenário A: {len(raw)} entradas - {csv_a.name}")
 
 # ────────────────────────────────────────────────────────────────────────────
 # CENÁRIO B — filtro odd + blacklist
@@ -87,7 +88,7 @@ filt_b = filt_b[~filt_b["bloq"]].copy()
 
 csv_b = OUT / "abril_cenario_B_filtros.csv"
 filt_b[colunas_engine].to_csv(csv_b, index=False)
-print(f"Cenário B: {len(filt_b)} entradas → {csv_b.name}")
+print(f"Cenário B: {len(filt_b)} entradas - {csv_b.name}")
 
 # ────────────────────────────────────────────────────────────────────────────
 # CENÁRIO C — filtros + 1x0 restrito às ligas históricas válidas
@@ -100,7 +101,7 @@ filt_c = filt_b[mask_0x1_c | mask_1x0_c].copy()
 
 csv_c = OUT / "abril_cenario_C_1x0_apenas_hist.csv"
 filt_c[colunas_engine].to_csv(csv_c, index=False)
-print(f"Cenário C: {len(filt_c)} entradas → {csv_c.name}")
+print(f"Cenário C: {len(filt_c)} entradas - {csv_c.name}")
 print(f"  (0x1: {mask_0x1_c.sum()} | 1x0 históricas: {mask_1x0_c[mask_1x0_c].count()})")
 
 # ────────────────────────────────────────────────────────────────────────────
@@ -109,7 +110,7 @@ print(f"  (0x1: {mask_0x1_c.sum()} | 1x0 históricas: {mask_1x0_c[mask_1x0_c].co
 filt_d = filt_b[filt_b["Metodo"] == "Lay_CS_0x1_B365"].copy()
 csv_d = OUT / "abril_cenario_D_somente_0x1.csv"
 filt_d[colunas_engine].to_csv(csv_d, index=False)
-print(f"Cenário D: {len(filt_d)} entradas → {csv_d.name}")
+print(f"Cenário D: {len(filt_d)} entradas - {csv_d.name}")
 
 # ── Roda o engine para cada cenário ─────────────────────────────────────────
 config = "config_backtest_exec.json"  # rampa on, slippage off, liquidity off
