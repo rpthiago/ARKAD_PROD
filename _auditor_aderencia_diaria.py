@@ -3,15 +3,25 @@ Auditoria diaria de aderencia: jogos do dia (Apostas_YYYYMMDD.xlsx)
 vs referencia de backtest (recalculo_sem_combos_usuario.csv + filtros da config).
 
 Gera automaticamente:
-1) tabela de match por dia;
-2) lista de divergencias com motivo;
+1) tabela de match por dia (match exato + match fuzzy);
+2) lista de divergencias com motivo detalhado;
 3) semaforo (verde/amarelo/vermelho) diario e geral.
+
+Motivos de divergencia:
+- match_exato          : chave identica (data|liga|metodo|home|away)
+- nome_diferente_fuzzy : mesmo jogo, nome ligeiramente diferente na API vs base
+- liga_fora_do_universo: liga nao mapeada na config_universo_97 (aposta sem historico!)
+- nao_veio_na_base     : jogo da API sem correspondente na base (liga nova ou sazonalidade)
+- nao_veio_no_live     : jogo do backtest que nao apareceu no dia (cancelado/horario)
+- fora_da_liga / fora_faixa_odd / metodo_nao_mapeado: filtros nao respeitados
 """
 
 from __future__ import annotations
 
 import json
 import re
+import unicodedata
+from difflib import SequenceMatcher
 from pathlib import Path
 
 import pandas as pd
@@ -23,8 +33,33 @@ DIARIO_DIR = ROOT / "Apostas_Diarias"
 OUT_DIR = ROOT / "Arquivados_Apostas_Diarias" / "Relatorios" / "Comparativo_Automatizado" / "Auditoria_Aderencia_Diaria"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+# Prefixos e sufixos de clube para remover na normalização fuzzy
+_CLUB_PREFIXES = [
+    "red bull ", "rb ", "1. ", "1.", "fc ", "fk ", "sk ", "sc ", "ac ",
+    "ss ", "us ", "sv ", "gd ", "as ", "cf ", "bk ", "hb ", "if ",
+    "aik ", "il ", "ik ", "bk ", "nk ", "ok ", "rk ", "sd ", "cd ",
+    "ud ", "sd ", "rcd ", "rc ", "ca ", "sa ", "se ", "ec ", "cr ",
+    "esporte clube ", "atletico ", "atletico-",
+]
+_CLUB_SUFFIXES = [
+    " fc", " fk", " sc", " sk", " ac", " cf", " bk", " if",
+    " ec", " se", " cr", " ca",
+    " (per)", " (chi)", " (col)", " (uru)", " (arg)", " (bra)",
+    "-sc", "-fc",
+]
+# Abreviações de estado/cidade frequentes na base brasileira
+_STATE_ABBR_RE = re.compile(r"\b(mg|rj|sp|sc|rs|pr|ba|ce|go|pe|am)\b")
+FUZZY_SIMILARITY_THRESHOLD = 0.80
+
+
+def _strip_accents(text: str) -> str:
+    return "".join(
+        c for c in unicodedata.normalize("NFD", text) if unicodedata.category(c) != "Mn"
+    )
+
 
 def _normalize_text(text: object) -> str:
+    """Normalização leve — usada para chave exata."""
     if not isinstance(text, str):
         return ""
     out = text.lower().strip()
@@ -38,6 +73,42 @@ def _normalize_text(text: object) -> str:
     return out.strip()
 
 
+def _fuzzy_team(name: object) -> str:
+    """Normalização agressiva para matching fuzzy de nomes de clube."""
+    if not isinstance(name, str):
+        return ""
+    out = _strip_accents(name.lower().strip())
+    # substitui hifens por espaço
+    out = out.replace("-", " ")
+    # remove pontuação exceto espaços
+    out = re.sub(r"[^\w\s]", " ", out)
+    # remove abreviações de estado BR
+    out = _STATE_ABBR_RE.sub("", out)
+    # remove prefixos de clube
+    for prefix in _CLUB_PREFIXES:
+        if out.startswith(prefix):
+            out = out[len(prefix):]
+            break
+    # remove sufixos de clube
+    for suffix in _CLUB_SUFFIXES:
+        if out.endswith(suffix):
+            out = out[: -len(suffix)]
+            break
+    return re.sub(r"\s+", " ", out).strip()
+
+
+def _teams_similar(a: str, b: str) -> bool:
+    """Retorna True se dois nomes de time são suficientemente similares."""
+    fa, fb = _fuzzy_team(a), _fuzzy_team(b)
+    if fa == fb:
+        return True
+    # um é substring do outro (cobre "Atletico MG" vs "Atletico")
+    if fa in fb or fb in fa:
+        return True
+    ratio = SequenceMatcher(None, fa, fb).ratio()
+    return ratio >= FUZZY_SIMILARITY_THRESHOLD
+
+
 def _split_match(jogo: object) -> tuple[str, str]:
     if not isinstance(jogo, str):
         return "", ""
@@ -46,6 +117,16 @@ def _split_match(jogo: object) -> tuple[str, str]:
     if len(parts) >= 2:
         return _normalize_text(parts[0]), _normalize_text(parts[1])
     return _normalize_text(norm), ""
+
+
+def _split_fuzzy(jogo: object) -> tuple[str, str]:
+    if not isinstance(jogo, str):
+        return "", ""
+    norm = jogo.replace(" VS ", " x ").replace(" vs ", " x ").replace(" Vs ", " x ")
+    parts = [p.strip() for p in norm.split(" x ")]
+    if len(parts) >= 2:
+        return _fuzzy_team(parts[0]), _fuzzy_team(parts[1])
+    return _fuzzy_team(norm), ""
 
 
 def _build_rodo_list(cfg: dict) -> list[dict]:
@@ -126,12 +207,17 @@ def _load_base() -> pd.DataFrame:
     base["Metodo"] = base["Metodo"].astype(str).str.strip()
     base["Odd_Base"] = pd.to_numeric(base["Odd_Base"], errors="coerce")
     base[["home_norm", "away_norm"]] = base["Jogo"].apply(lambda s: pd.Series(_split_match(s)))
+    base[["home_fuzzy", "away_fuzzy"]] = base["Jogo"].apply(lambda s: pd.Series(_split_fuzzy(s)))
     base["key"] = base.apply(
         lambda r: f"{r['Data']}|{r['Liga']}|{r['Metodo']}|{r['home_norm']}|{r['away_norm']}",
         axis=1,
     )
     base["key_no_method"] = base.apply(
         lambda r: f"{r['Data']}|{r['Liga']}|{r['home_norm']}|{r['away_norm']}",
+        axis=1,
+    )
+    base["key_fuzzy"] = base.apply(
+        lambda r: f"{r['Data']}|{r['Liga']}|{r['Metodo']}|{r['home_fuzzy']}|{r['away_fuzzy']}",
         axis=1,
     )
     return base
@@ -159,12 +245,17 @@ def _load_live_from_xlsx() -> pd.DataFrame:
         else:
             x["Odd_Base"] = pd.NA
         x[["home_norm", "away_norm"]] = x["Jogo"].apply(lambda s: pd.Series(_split_match(s)))
+        x[["home_fuzzy", "away_fuzzy"]] = x["Jogo"].apply(lambda s: pd.Series(_split_fuzzy(s)))
         x["key"] = x.apply(
             lambda r: f"{r['Data']}|{r['Liga']}|{r['Metodo']}|{r['home_norm']}|{r['away_norm']}",
             axis=1,
         )
         x["key_no_method"] = x.apply(
             lambda r: f"{r['Data']}|{r['Liga']}|{r['home_norm']}|{r['away_norm']}",
+            axis=1,
+        )
+        x["key_fuzzy"] = x.apply(
+            lambda r: f"{r['Data']}|{r['Liga']}|{r['Metodo']}|{r['home_fuzzy']}|{r['away_fuzzy']}",
             axis=1,
         )
         x["arquivo_origem"] = p.name
@@ -176,10 +267,50 @@ def _load_live_from_xlsx() -> pd.DataFrame:
     return pd.concat(frames, ignore_index=True)
 
 
+def _find_fuzzy_match(
+    live_row: pd.Series,
+    base_df: pd.DataFrame,
+    ligas_u97: set[str],
+) -> tuple[bool, str]:
+    """
+    Tenta casar live_row com alguma linha da base para a mesma data+liga+metodo
+    usando similaridade fuzzy de nomes de time.
+    Retorna (matched, motivo_se_nao_match).
+    """
+    d = live_row["Data"]
+    liga = str(live_row.get("Liga", "")).strip()
+    metodo = str(live_row.get("Metodo", "")).strip()
+
+    cands = base_df[(base_df["Data"] == d) & (base_df["Liga"] == liga) & (base_df["Metodo"] == metodo)]
+    if cands.empty:
+        # tenta sem metodo
+        cands = base_df[(base_df["Data"] == d) & (base_df["Liga"] == liga)]
+
+    live_home = live_row.get("home_fuzzy", "")
+    live_away = live_row.get("away_fuzzy", "")
+
+    for _, base_row in cands.iterrows():
+        base_home = base_row.get("home_fuzzy", "")
+        base_away = base_row.get("away_fuzzy", "")
+        if _teams_similar(live_home, base_home) and _teams_similar(live_away, base_away):
+            return True, "nome_diferente_fuzzy_match"
+
+    # Não achou na base — classifica o motivo
+    if liga not in ligas_u97:
+        return False, "liga_fora_do_universo"
+    return False, "nao_veio_na_base"
+
+
 def main() -> None:
     cfg = json.loads(CFG_PATH.read_text(encoding="utf-8"))
     filtros_metodo = cfg.get("runtime_data", {}).get("filtros_metodo", {})
     rodos = _build_rodo_list(cfg)
+
+    # Ligas do universo 97 para classificar "liga_fora_do_universo"
+    ligas_u97: set[str] = set()
+    for fm in filtros_metodo.values():
+        for l in fm.get("ligas_permitidas", []):
+            ligas_u97.add(str(l).strip())
 
     base = _load_base()
     live = _load_live_from_xlsx()
@@ -196,91 +327,127 @@ def main() -> None:
     base_c = base[base["Data"].isin(common_dates)].copy()
     live_c = live[live["Data"].isin(common_dates)].copy()
 
-    base_keys = set(base_c["key"])
-    live_keys = set(live_c["key"])
-    inter_keys = base_keys & live_keys
+    base_keys_exact = set(base_c["key"])
+    live_keys_exact = set(live_c["key"])
+    inter_exact = base_keys_exact & live_keys_exact
 
-    rows_daily = []
-    for d in common_dates:
-        b = set(base_c.loc[base_c["Data"] == d, "key"])
-        l = set(live_c.loc[live_c["Data"] == d, "key"])
-        i = b & l
-        match_rate = (len(i) / len(l) * 100.0) if l else 0.0
-        coverage_rate = (len(i) / len(b) * 100.0) if b else 0.0
-        rows_daily.append(
-            {
-                "Data": d,
-                "live_total": len(l),
-                "base_total": len(b),
-                "match_exato": len(i),
-                "precision_live_to_base_pct": round(match_rate, 2),
-                "coverage_base_to_live_pct": round(coverage_rate, 2),
-                "semaforo": _semaforo(match_rate),
-            }
-        )
+    base_keys_fuzzy = set(base_c["key_fuzzy"])
+    live_keys_fuzzy = set(live_c["key_fuzzy"])
+    inter_fuzzy_only = (base_keys_fuzzy & live_keys_fuzzy) - {
+        # converte exact matches para key_fuzzy para excluir do fuzzy-only
+        k for k in inter_exact
+    }
 
-    daily_df = pd.DataFrame(rows_daily).sort_values("Data")
+    # Divergencias do lado live — jogos que nao bateram na chave exata
+    only_live_df = live_c[~live_c["key"].isin(inter_exact)].copy()
+    motivo_live: list[str] = []
+    rodo_live: list[str] = []
+    nome_base_live: list[str] = []
 
-    # Divergencias do lado live
-    only_live_df = live_c[~live_c["key"].isin(inter_keys)].copy()
-    motivo_live = []
-    rodo_live = []
     for _, r in only_live_df.iterrows():
-        has_same_game = bool(
-            ((base_c["Data"] == r["Data"]) & (base_c["key_no_method"] == r["key_no_method"]))
-            .any()
-        )
-        if not has_same_game:
-            motivo_live.append("nao_veio_na_base")
+        # Nível 1: fuzzy key (data|liga|metodo|home_fuzzy|away_fuzzy)
+        if r["key_fuzzy"] in base_keys_fuzzy:
+            motivo_live.append("nome_diferente_fuzzy_match")
             rodo_live.append("")
+            nome_base_live.append("")
+            continue
+
+        # Nível 2: busca por similaridade de strings
+        fuzzy_matched, fuzzy_motivo = _find_fuzzy_match(r, base_c, ligas_u97)
+        if fuzzy_matched:
+            motivo_live.append(fuzzy_motivo)
+            rodo_live.append("")
+            nome_base_live.append("")
+            continue
+
+        # Não achou nem fuzzy — classifica
+        liga = str(r.get("Liga", "")).strip()
+        if liga not in ligas_u97:
+            motivo_live.append("liga_fora_do_universo")
+            rodo_live.append("")
+            nome_base_live.append("")
             continue
 
         ok_metodo, mot_metodo = _passes_method_filters(r, filtros_metodo)
         if not ok_metodo:
             motivo_live.append(mot_metodo)
             rodo_live.append("")
+            nome_base_live.append("")
             continue
 
         blocked, rodo_name = _match_rodo(r, rodos)
         if blocked:
             motivo_live.append("bloqueado_rodo_no_backtest")
             rodo_live.append(rodo_name)
-        else:
-            motivo_live.append("divergencia_sem_regra_clara")
-            rodo_live.append("")
+            nome_base_live.append("")
+            continue
 
+        motivo_live.append("nao_veio_na_base")
+        rodo_live.append("")
+        nome_base_live.append("")
+
+    only_live_df = only_live_df.copy()
     only_live_df["lado"] = "somente_live"
     only_live_df["motivo"] = motivo_live
     only_live_df["rodo"] = rodo_live
 
-    # Divergencias do lado base
-    only_base_df = base_c[~base_c["key"].isin(inter_keys)].copy()
-    motivo_base = []
+    # Divergencias do lado base — jogos do backtest que nao apareceram no dia
+    only_base_df = base_c[~base_c["key"].isin(inter_exact)].copy()
+    motivo_base: list[str] = []
     for _, r in only_base_df.iterrows():
-        has_same_game = bool(
-            ((live_c["Data"] == r["Data"]) & (live_c["key_no_method"] == r["key_no_method"]))
-            .any()
+        if r["key_fuzzy"] in live_keys_fuzzy:
+            motivo_base.append("nome_diferente_fuzzy_match")
+            continue
+        fuzzy_matched, _ = _find_fuzzy_match(r, live_c, ligas_u97)
+        if fuzzy_matched:
+            motivo_base.append("nome_diferente_fuzzy_match")
+            continue
+        has_any_live = bool(
+            ((live_c["Data"] == r["Data"]) & (live_c["key_no_method"] == r["key_no_method"])).any()
         )
-        if has_same_game:
+        if has_any_live:
             motivo_base.append("metodo_ou_liga_divergente_no_live")
         else:
             motivo_base.append("nao_veio_no_live")
 
+    only_base_df = only_base_df.copy()
     only_base_df["lado"] = "somente_base"
     only_base_df["motivo"] = motivo_base
     only_base_df["rodo"] = ""
 
+    # Tabela diária com match exato + fuzzy
+    rows_daily = []
+    for d in common_dates:
+        b_exact = set(base_c.loc[base_c["Data"] == d, "key"])
+        l_exact = set(live_c.loc[live_c["Data"] == d, "key"])
+        b_fuzzy = set(base_c.loc[base_c["Data"] == d, "key_fuzzy"])
+        l_fuzzy = set(live_c.loc[live_c["Data"] == d, "key_fuzzy"])
+        i_exact = len(b_exact & l_exact)
+        i_fuzzy = len((b_fuzzy & l_fuzzy)) - i_exact  # somente fuzzy (não exato)
+        i_total = i_exact + i_fuzzy
+        live_n = len(l_exact)
+        base_n = len(b_exact)
+        match_pct = (i_total / live_n * 100.0) if live_n else 0.0
+        rows_daily.append(
+            {
+                "Data": d,
+                "live_total": live_n,
+                "base_total": base_n,
+                "match_exato": i_exact,
+                "match_fuzzy": i_fuzzy,
+                "match_total": i_total,
+                "precision_total_pct": round(match_pct, 2),
+                "semaforo": _semaforo(match_pct),
+            }
+        )
+
+    daily_df = pd.DataFrame(rows_daily).sort_values("Data")
+
+    # Concat divergências
     div_cols = [
-        "Data",
-        "lado",
-        "motivo",
-        "rodo",
-        "Liga",
-        "Metodo",
-        "Jogo",
-        "Odd_Base",
-        "arquivo_origem",
-        "key",
+        "Data", "lado", "motivo", "rodo",
+        "Liga", "Metodo", "Jogo", "Odd_Base",
+        "arquivo_origem", "key",
     ]
     diverg_df = pd.concat(
         [
@@ -290,8 +457,14 @@ def main() -> None:
         ignore_index=True,
     )
 
-    precision_global = (len(inter_keys) / len(live_keys) * 100.0) if live_keys else 0.0
-    recall_global = (len(inter_keys) / len(base_keys) * 100.0) if base_keys else 0.0
+    # Métricas globais usando match total (exato + fuzzy)
+    total_live = len(live_keys_exact)
+    total_base = len(base_keys_exact)
+    total_exact = len(inter_exact)
+    total_fuzzy_only = len(base_keys_fuzzy & live_keys_fuzzy) - total_exact
+    total_matched = total_exact + max(0, total_fuzzy_only)
+    precision_global = (total_matched / total_live * 100.0) if total_live else 0.0
+    recall_global = (total_matched / total_base * 100.0) if total_base else 0.0
     semaforo_global = _semaforo(precision_global)
 
     motivo_counts = (
@@ -303,12 +476,15 @@ def main() -> None:
         "periodo_comum_fim": str(common_dates[-1]),
         "dias_comuns": len(common_dates),
         "rodos_ativos": len(rodos),
-        "total_live": int(len(live_keys)),
-        "total_base": int(len(base_keys)),
-        "intersecao_exata": int(len(inter_keys)),
-        "precision_live_to_base_pct": round(precision_global, 2),
-        "recall_base_to_live_pct": round(recall_global, 2),
+        "total_live": int(total_live),
+        "total_base": int(total_base),
+        "match_exato": int(total_exact),
+        "match_fuzzy_adicional": int(max(0, total_fuzzy_only)),
+        "match_total": int(total_matched),
+        "precision_total_pct": round(precision_global, 2),
+        "recall_total_pct": round(recall_global, 2),
         "semaforo_global": semaforo_global,
+        "fuzzy_threshold": FUZZY_SIMILARITY_THRESHOLD,
         "regra_semaforo": {
             "verde": ">= 90%",
             "amarelo": ">= 70% e < 90%",
@@ -330,13 +506,16 @@ def main() -> None:
     print("AUDITORIA DE ADERENCIA DIARIA | LIVE (XLSX) x BASE (BACKTEST)")
     print("=" * 68)
     print(f"Periodo comum: {common_dates[0]} a {common_dates[-1]} ({len(common_dates)} dias)")
-    print(f"Live total: {len(live_keys)} | Base total: {len(base_keys)} | Intersecao: {len(inter_keys)}")
-    print(f"Precision live->base: {precision_global:.2f}%")
-    print(f"Recall base->live: {recall_global:.2f}%")
+    print(f"Live total: {total_live} | Base total: {total_base}")
+    print(f"Match exato:         {total_exact:3d}  ({total_exact/total_live*100:.1f}%)" if total_live else "")
+    print(f"Match fuzzy adicional:{max(0,total_fuzzy_only):3d}  ({max(0,total_fuzzy_only)/total_live*100:.1f}%)" if total_live else "")
+    print(f"Match total:         {total_matched:3d}  ({precision_global:.1f}%)")
+    print(f"Recall base->live:   {recall_global:.1f}%")
     print(f"Semaforo global: {semaforo_global.upper()}")
 
-    print("\nTop motivos de divergencia:")
-    print(motivo_counts.head(10).to_string(index=False))
+    print("\nMotivos de divergencia (excluindo matches fuzzy):")
+    real_div = motivo_counts[motivo_counts["motivo"] != "nome_diferente_fuzzy_match"]
+    print(real_div.head(10).to_string(index=False))
 
     print("\nArquivos gerados:")
     print(f"- {daily_path}")
