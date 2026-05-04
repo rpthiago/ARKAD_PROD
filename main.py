@@ -631,6 +631,104 @@ def _build_apostas_excel(df: pd.DataFrame, data_iso: str) -> bytes:
     return buf.getvalue()
 
 
+def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
+    st.divider()
+    st.subheader("🧮 Calculadora Interativa de Stake")
+    st.caption("Preencha os campos abaixo e use o valor sugerido em Stake Final Aplicada.")
+
+    p = dict(profile_info.get("profile", {}) or {})
+    base_default = float(profile_info.get("base_stake", 500.0))
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        metodo = st.selectbox(
+            "Metodo",
+            options=["Lay_CS_0x1_B365", "Lay_CS_1x0_B365", "Outro"],
+            index=0,
+            key="calc_metodo",
+        )
+        odd = st.number_input("Odd", min_value=1.01, max_value=200.0, value=9.0, step=0.01, key="calc_odd")
+    with col2:
+        stake_base = st.number_input(
+            "Stake Base (R$)",
+            min_value=1.0,
+            max_value=100000.0,
+            value=float(base_default),
+            step=10.0,
+            key="calc_stake_base",
+        )
+        greens = st.number_input(
+            "Greens consecutivos no dia",
+            min_value=0,
+            max_value=20,
+            value=0,
+            step=1,
+            key="calc_greens",
+        )
+    with col3:
+        teve_red = st.selectbox("Teve red no dia?", options=["NAO", "SIM"], index=0, key="calc_red")
+        commission_pct = st.number_input(
+            "Comissao (%)",
+            min_value=0.0,
+            max_value=20.0,
+            value=6.5,
+            step=0.1,
+            key="calc_commission",
+        )
+
+    if "0x1" in str(metodo):
+        mult_metodo = float(p.get("m_l0", 1.0))
+    elif "1x0" in str(metodo):
+        mult_metodo = float(p.get("m_l1", 1.0))
+    else:
+        mult_metodo = 1.0
+
+    odd_f = float(odd)
+    if odd_f <= 9.0:
+        mult_odd = float(p.get("m_odd_low_le9", 1.0))
+    elif odd_f <= 10.5:
+        mult_odd = float(p.get("m_odd_mid_9a10_5", 1.0))
+    else:
+        mult_odd = float(p.get("m_odd_high_gt10_5", 1.0))
+
+    anti = float(p.get("anti_martingale", 0.0))
+    cut_after_red = bool(p.get("cut_after_first_red_day", False))
+    red_flag = str(teve_red).strip().upper() == "SIM"
+    if cut_after_red and red_flag:
+        mult_intradia = 0.0
+    else:
+        mult_intradia = 1.0 + anti * int(greens)
+
+    stake_percent = mult_metodo * mult_odd * mult_intradia * 100.0
+    stake_final = float(stake_base) * mult_metodo * mult_odd * mult_intradia
+    commission_rate = float(commission_pct) / 100.0
+
+    if stake_final > 0.0 and odd_f > 1.0:
+        lucro_green = (stake_final / (odd_f - 1.0)) * (1.0 - commission_rate)
+    else:
+        lucro_green = 0.0
+    perda_red = -stake_final
+
+    r1, r2, r3, r4 = st.columns(4)
+    r1.metric("Profile Mode", str(profile_info.get("mode", "legacy_default")))
+    r2.metric("Percentual da Stake", f"{stake_percent:.2f}%")
+    r3.metric("Stake Final Aplicada", f"R$ {stake_final:,.2f}")
+    acao = "NAO APOSTAR" if stake_final <= 0 else "APOSTAR"
+    r4.metric("Acao", acao)
+
+    st.write(
+        {
+            "Mult_Metodo": round(mult_metodo, 4),
+            "Mult_Odd_Band": round(mult_odd, 4),
+            "Mult_Intradia": round(mult_intradia, 4),
+            "Anti_Martingale": anti,
+            "Cut_After_First_Red_Day": cut_after_red,
+            "Lucro_Se_GREEN": round(lucro_green, 2),
+            "Perda_Se_RED": round(perda_red, 2),
+        }
+    )
+
+
 @st.cache_data(ttl=60)
 def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFrame, str]:
     p_cfg = Path(cfg_path)
@@ -803,6 +901,8 @@ def main() -> None:
                 "cut_after_first_red_day": p.get("cut_after_first_red_day"),
             }
         )
+
+    _render_stake_calculator(profile_info)
 
     if "server_connection" not in st.session_state:
         st.session_state["server_connection"] = {
