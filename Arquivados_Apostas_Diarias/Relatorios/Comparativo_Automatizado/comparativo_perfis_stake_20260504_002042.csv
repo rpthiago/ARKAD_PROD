@@ -1,0 +1,5 @@
+﻿Profile_Mode,PnL_Total,ROI_%,DD_Max,Total_Operacoes,Stake_Total_Aplicada,Win_Rate_%
+baseline_legacy,50635.31,9.4299,2861.34,357,536967.98,97.76
+conservador,57574.24,9.8668,2844.87,357,583513.78,97.76
+moderado,57703.12,9.559,3858.37,357,603654.81,97.76
+agressivo,63274.94,9.1051,7489.88,357,694936.76,97.76
