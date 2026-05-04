@@ -636,8 +636,26 @@ def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
     st.subheader("🧮 Calculadora Interativa de Stake")
     st.caption("Preencha os campos abaixo e use o valor sugerido em Stake Final Aplicada.")
 
-    p = dict(profile_info.get("profile", {}) or {})
+    p_active = dict(profile_info.get("profile", {}) or {})
     base_default = float(profile_info.get("base_stake", 500.0))
+
+    p_mode_active = str(profile_info.get("mode", "legacy_default"))
+    p_cfg = json.loads(PROD_CFG_PATH.read_text(encoding="utf-8"))
+    p_all = dict(p_cfg.get("stake_profiles", {}) or {})
+    profile_options = ["ativo"] + sorted([str(k) for k in p_all.keys()])
+    profile_sim = st.selectbox(
+        "Perfil para calcular",
+        options=profile_options,
+        index=0,
+        key="calc_profile_sim",
+        help="Use 'ativo' para o perfil em producao, ou simule conservador/moderado/agressivo.",
+    )
+    if profile_sim == "ativo":
+        p = p_active
+        profile_mode_calc = p_mode_active
+    else:
+        p = dict(p_all.get(profile_sim, {}) or p_active)
+        profile_mode_calc = str(profile_sim)
 
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -657,6 +675,8 @@ def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
             step=10.0,
             key="calc_stake_base",
         )
+        anti_tmp = float(p.get("anti_martingale", 0.0))
+        cut_tmp = bool(p.get("cut_after_first_red_day", False))
         greens = st.number_input(
             "Greens consecutivos no dia",
             min_value=0,
@@ -664,9 +684,18 @@ def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
             value=0,
             step=1,
             key="calc_greens",
+            disabled=anti_tmp <= 0.0,
+            help="So altera stake quando anti_martingale > 0.",
         )
     with col3:
-        teve_red = st.selectbox("Teve red no dia?", options=["NAO", "SIM"], index=0, key="calc_red")
+        teve_red = st.selectbox(
+            "Teve red no dia?",
+            options=["NAO", "SIM"],
+            index=0,
+            key="calc_red",
+            disabled=not cut_tmp,
+            help="So corta stake quando cut_after_first_red_day = true.",
+        )
         commission_pct = st.number_input(
             "Comissao (%)",
             min_value=0.0,
@@ -710,7 +739,7 @@ def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
     perda_red = -stake_final
 
     r1, r2, r3, r4 = st.columns(4)
-    r1.metric("Profile Mode", str(profile_info.get("mode", "legacy_default")))
+    r1.metric("Profile Mode", profile_mode_calc)
     r2.metric("Percentual da Stake", f"{stake_percent:.2f}%")
     r3.metric("Stake Final Aplicada", f"R$ {stake_final:,.2f}")
     acao = "NAO APOSTAR" if stake_final <= 0 else "APOSTAR"
@@ -727,6 +756,11 @@ def _render_stake_calculator(profile_info: dict[str, Any]) -> None:
             "Perda_Se_RED": round(perda_red, 2),
         }
     )
+
+    if anti <= 0.0:
+        st.info("Greens consecutivos nao alteram stake neste perfil (anti_martingale = 0).")
+    if not cut_after_red:
+        st.info("Teve red no dia nao altera stake neste perfil (cut_after_first_red_day = false).")
 
 
 @st.cache_data(ttl=60)
