@@ -193,6 +193,7 @@ def _load_profile_info_for_ui(cfg_path: Path) -> dict[str, Any]:
         return {
             "mode": "legacy_default",
             "profile": default_profile,
+            "base_stake": 500.0,
             "fallback_used": True,
             "fallback_msg": f"fallback: erro ao ler config ({exc})",
         }
@@ -203,6 +204,7 @@ def _load_profile_info_for_ui(cfg_path: Path) -> dict[str, Any]:
         return {
             "mode": "legacy_default",
             "profile": default_profile,
+            "base_stake": float(cfg.get("base_stake", 500.0)),
             "fallback_used": True,
             "fallback_msg": "fallback: profile_mode ausente; usando comportamento legado",
         }
@@ -213,6 +215,7 @@ def _load_profile_info_for_ui(cfg_path: Path) -> dict[str, Any]:
         return {
             "mode": "legacy_default",
             "profile": default_profile,
+            "base_stake": float(cfg.get("base_stake", 500.0)),
             "fallback_used": True,
             "fallback_msg": f"fallback: profile_mode invalido ({mode}); usando comportamento legado",
         }
@@ -228,6 +231,7 @@ def _load_profile_info_for_ui(cfg_path: Path) -> dict[str, Any]:
             "anti_martingale": float(selected.get("anti_martingale", 0.0)),
             "cut_after_first_red_day": bool(selected.get("cut_after_first_red_day", False)),
         },
+        "base_stake": float(cfg.get("base_stake", 500.0)),
         "fallback_used": False,
         "fallback_msg": "",
     }
@@ -500,19 +504,126 @@ def _matches_cut(row: pd.Series, cut: dict[str, Any], league_col: str, method_co
 
 def _build_apostas_excel(df: pd.DataFrame, data_iso: str) -> bytes:
     """Monta Excel de apostas com colunas extras para preenchimento manual."""
+    profile_info = _load_profile_info_for_ui(PROD_CFG_PATH)
+    profile_mode = str(profile_info.get("mode", "legacy_default"))
+    profile = dict(profile_info.get("profile", {}) or {})
+    base_stake = float(profile_info.get("base_stake", 500.0))
+
+    def _mult_metodo(metodo: Any) -> float:
+        m = str(metodo or "")
+        if "0x1" in m:
+            return float(profile.get("m_l0", 1.0))
+        if "1x0" in m:
+            return float(profile.get("m_l1", 1.0))
+        return 1.0
+
+    def _mult_odd(odd: Any) -> float:
+        v = pd.to_numeric(odd, errors="coerce")
+        if pd.isna(v):
+            return 1.0
+        fv = float(v)
+        if fv <= 9.0:
+            return float(profile.get("m_odd_low_le9", 1.0))
+        if fv <= 10.5:
+            return float(profile.get("m_odd_mid_9a10_5", 1.0))
+        return float(profile.get("m_odd_high_gt10_5", 1.0))
+
+    anti = float(profile.get("anti_martingale", 0.0))
+    cut_after_red = bool(profile.get("cut_after_first_red_day", False))
+
     cols_base = ["Prio", "Hora", "Liga", "Jogo", "Metodo", "Odd real"]
     out = df[[c for c in cols_base if c in df.columns]].copy()
     out.rename(columns={"Odd real": "Odd_Base"}, inplace=True)
     out.insert(0, "Data", data_iso)
+
+    out["Profile_Mode"] = profile_mode
+    out["Stake_Base_R$"] = base_stake
+    out["Mult_Metodo"] = out["Metodo"].apply(_mult_metodo)
+    out["Mult_Odd_Band"] = out["Odd_Base"].apply(_mult_odd)
+    out["Greens_Consecutivos_Dia"] = 0
+    out["Teve_Red_no_Dia"] = "NAO"
+    out["Mult_Intradia"] = 1.0
+    out["Percentual_Stake_sobre_Base_%"] = 0.0
+    out["Stake_Final_Aplicada_R$"] = 0.0
+    out["Acao"] = "APOSTAR"
+
+    if cut_after_red:
+        out.loc[:, "Acao"] = "CHECAR RED DO DIA"
+
     # Colunas para preencher após o jogo
     out["Odd_Real_Pega"] = ""       # odd exata pega na hora
     out["Stake"] = ""               # responsabilidade apostada (R$)
     out["Resultado"] = ""           # GREEN / RED / VOID
     out["Lucro_Prejuizo"] = ""      # preencher se quiser sobrescrever o cálculo automático
+
+    ordered_cols = [
+        "Data",
+        "Hora",
+        "Prio",
+        "Liga",
+        "Jogo",
+        "Metodo",
+        "Odd_Base",
+        "Profile_Mode",
+        "Stake_Base_R$",
+        "Mult_Metodo",
+        "Mult_Odd_Band",
+        "Greens_Consecutivos_Dia",
+        "Teve_Red_no_Dia",
+        "Mult_Intradia",
+        "Percentual_Stake_sobre_Base_%",
+        "Stake_Final_Aplicada_R$",
+        "Acao",
+        "Odd_Real_Pega",
+        "Stake",
+        "Resultado",
+        "Lucro_Prejuizo",
+    ]
+    out = out[[c for c in ordered_cols if c in out.columns]]
+
     buf = BytesIO()
     with pd.ExcelWriter(buf, engine="openpyxl") as w:
         out.to_excel(w, index=False, sheet_name="Apostas")
         ws = w.sheets["Apostas"]
+
+        headers = [str(c.value or "") for c in ws[1]]
+        col_idx = {name: i + 1 for i, name in enumerate(headers)}
+        for row in range(2, ws.max_row + 1):
+            mm = col_idx.get("Mult_Metodo")
+            mo = col_idx.get("Mult_Odd_Band")
+            gc = col_idx.get("Greens_Consecutivos_Dia")
+            rd = col_idx.get("Teve_Red_no_Dia")
+            mi = col_idx.get("Mult_Intradia")
+            pc = col_idx.get("Percentual_Stake_sobre_Base_%")
+            bs = col_idx.get("Stake_Base_R$")
+            sf = col_idx.get("Stake_Final_Aplicada_R$")
+            if not all([mm, mo, gc, rd, mi, pc, bs, sf]):
+                continue
+
+            anti_expr = str(anti)
+            red_ref = ws.cell(row=row, column=rd).coordinate
+            greens_ref = ws.cell(row=row, column=gc).coordinate
+            if cut_after_red:
+                intradia_formula = (
+                    f"=IF(OR(UPPER({red_ref})=\"SIM\",UPPER({red_ref})=\"TRUE\",{red_ref}=1),"
+                    f"0,1+({anti_expr}*{greens_ref}))"
+                )
+            else:
+                intradia_formula = f"=1+({anti_expr}*{greens_ref})"
+
+            ws.cell(row=row, column=mi).value = intradia_formula
+            ws.cell(row=row, column=pc).value = (
+                f"={ws.cell(row=row, column=mm).coordinate}*"
+                f"{ws.cell(row=row, column=mo).coordinate}*"
+                f"{ws.cell(row=row, column=mi).coordinate}*100"
+            )
+            ws.cell(row=row, column=sf).value = (
+                f"={ws.cell(row=row, column=bs).coordinate}*"
+                f"{ws.cell(row=row, column=mm).coordinate}*"
+                f"{ws.cell(row=row, column=mo).coordinate}*"
+                f"{ws.cell(row=row, column=mi).coordinate}"
+            )
+
         # largura das colunas
         for col_cells in ws.columns:
             max_len = max(len(str(cell.value or "")) for cell in col_cells)
