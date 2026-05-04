@@ -177,6 +177,62 @@ def _compact_source_label(source_label: str) -> str:
     return s
 
 
+def _load_profile_info_for_ui(cfg_path: Path) -> dict[str, Any]:
+    default_profile = {
+        "m_l0": 1.0,
+        "m_l1": 1.0,
+        "m_odd_low_le9": 1.0,
+        "m_odd_mid_9a10_5": 1.0,
+        "m_odd_high_gt10_5": 1.0,
+        "anti_martingale": 0.0,
+        "cut_after_first_red_day": False,
+    }
+    try:
+        cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return {
+            "mode": "legacy_default",
+            "profile": default_profile,
+            "fallback_used": True,
+            "fallback_msg": f"fallback: erro ao ler config ({exc})",
+        }
+
+    mode_raw = cfg.get("profile_mode")
+    profiles = cfg.get("stake_profiles", {})
+    if mode_raw is None:
+        return {
+            "mode": "legacy_default",
+            "profile": default_profile,
+            "fallback_used": True,
+            "fallback_msg": "fallback: profile_mode ausente; usando comportamento legado",
+        }
+
+    mode = str(mode_raw).strip().lower()
+    selected = profiles.get(mode) if isinstance(profiles, dict) else None
+    if not isinstance(selected, dict):
+        return {
+            "mode": "legacy_default",
+            "profile": default_profile,
+            "fallback_used": True,
+            "fallback_msg": f"fallback: profile_mode invalido ({mode}); usando comportamento legado",
+        }
+
+    return {
+        "mode": mode,
+        "profile": {
+            "m_l0": float(selected.get("m_l0", 1.0)),
+            "m_l1": float(selected.get("m_l1", 1.0)),
+            "m_odd_low_le9": float(selected.get("m_odd_low_le9", 1.0)),
+            "m_odd_mid_9a10_5": float(selected.get("m_odd_mid_9a10_5", 1.0)),
+            "m_odd_high_gt10_5": float(selected.get("m_odd_high_gt10_5", 1.0)),
+            "anti_martingale": float(selected.get("anti_martingale", 0.0)),
+            "cut_after_first_red_day": bool(selected.get("cut_after_first_red_day", False)),
+        },
+        "fallback_used": False,
+        "fallback_msg": "",
+    }
+
+
 def _server_status(source_label: str) -> tuple[str, str]:
     s = (source_label or "").lower()
     if s.startswith("endpoint em tempo real"):
@@ -617,6 +673,25 @@ def _load_games_for_date(cfg_path: str, target_date_iso: str) -> tuple[pd.DataFr
 def main() -> None:
     st.set_page_config(page_title="Arkad Sinais", layout="centered")
     st.title("🎯 Arkad: Sinais de Hoje")
+
+    profile_info = _load_profile_info_for_ui(PROD_CFG_PATH)
+    st.caption(f"Perfil de stake ativo: {profile_info['mode']}")
+    if profile_info.get("fallback_used"):
+        st.warning(profile_info.get("fallback_msg", "fallback legado ativo"))
+    with st.expander("Perfil operacional de stake"):
+        p = profile_info.get("profile", {})
+        st.write(
+            {
+                "Profile_Mode": profile_info.get("mode"),
+                "m_l0": p.get("m_l0"),
+                "m_l1": p.get("m_l1"),
+                "m_odd_low_le9": p.get("m_odd_low_le9"),
+                "m_odd_mid_9a10_5": p.get("m_odd_mid_9a10_5"),
+                "m_odd_high_gt10_5": p.get("m_odd_high_gt10_5"),
+                "anti_martingale": p.get("anti_martingale"),
+                "cut_after_first_red_day": p.get("cut_after_first_red_day"),
+            }
+        )
 
     if "server_connection" not in st.session_state:
         st.session_state["server_connection"] = {

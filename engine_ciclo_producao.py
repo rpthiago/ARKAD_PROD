@@ -251,6 +251,74 @@ def _ramp_multiplier(day_number: int, phase2_profit: float, ramp_enabled: bool =
     return 0.60, "Fase_3_Bloqueada_60pct", False
 
 
+def _resolve_stake_profile(cfg: dict[str, Any]) -> tuple[str, dict[str, float], bool, str]:
+    profile_mode_raw = cfg.get("profile_mode")
+    profiles_cfg = cfg.get("stake_profiles", {})
+    default_profile = {
+        "m_l0": 1.0,
+        "m_l1": 1.0,
+        "m_odd_low_le9": 1.0,
+        "m_odd_mid_9a10_5": 1.0,
+        "m_odd_high_gt10_5": 1.0,
+        "anti_martingale": 0.0,
+        "cut_after_first_red_day": False,
+    }
+
+    if profile_mode_raw is None:
+        return "legacy_default", default_profile, True, "fallback: profile_mode ausente; usando comportamento legado"
+
+    profile_mode = str(profile_mode_raw).strip().lower()
+    profile_cfg = None
+    if isinstance(profiles_cfg, dict):
+        profile_cfg = profiles_cfg.get(profile_mode)
+
+    if not isinstance(profile_cfg, dict):
+        return "legacy_default", default_profile, True, f"fallback: profile_mode invalido ({profile_mode}); usando comportamento legado"
+
+    resolved = {
+        "m_l0": float(profile_cfg.get("m_l0", 1.0)),
+        "m_l1": float(profile_cfg.get("m_l1", 1.0)),
+        "m_odd_low_le9": float(profile_cfg.get("m_odd_low_le9", 1.0)),
+        "m_odd_mid_9a10_5": float(profile_cfg.get("m_odd_mid_9a10_5", 1.0)),
+        "m_odd_high_gt10_5": float(profile_cfg.get("m_odd_high_gt10_5", 1.0)),
+        "anti_martingale": float(profile_cfg.get("anti_martingale", 0.0)),
+        "cut_after_first_red_day": bool(profile_cfg.get("cut_after_first_red_day", False)),
+    }
+    return profile_mode, resolved, False, ""
+
+
+def _method_multiplier(method_name: str, profile: dict[str, float]) -> float:
+    m = str(method_name or "")
+    if "0x1" in m:
+        return float(profile.get("m_l0", 1.0))
+    if "1x0" in m:
+        return float(profile.get("m_l1", 1.0))
+    return 1.0
+
+
+def _odd_band_multiplier(odd_value: float | None, profile: dict[str, float]) -> float:
+    if odd_value is None:
+        return 1.0
+    if odd_value <= 9.0:
+        return float(profile.get("m_odd_low_le9", 1.0))
+    if odd_value <= 10.5:
+        return float(profile.get("m_odd_mid_9a10_5", 1.0))
+    return float(profile.get("m_odd_high_gt10_5", 1.0))
+
+
+def _intraday_multiplier(
+    profile: dict[str, float],
+    has_red_day: bool,
+    consecutive_greens: int,
+) -> float:
+    if bool(profile.get("cut_after_first_red_day", False)) and has_red_day:
+        return 0.0
+    anti = float(profile.get("anti_martingale", 0.0))
+    if anti <= 0.0:
+        return 1.0
+    return 1.0 + (anti * max(consecutive_greens, 0))
+
+
 def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: str = "producao") -> tuple[pd.DataFrame, dict[str, Any]]:
     col_cfg = cfg["input"]["columns"]
     dt_cfg = cfg["input"]["datetime"]
@@ -260,6 +328,7 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     date_col = "__date" if "__date" in df.columns else dt_cfg["date_col"]
     odd_signal_col = col_cfg["odd_signal_col"]
     result_col = col_cfg["result_col"]
+    method_col = col_cfg.get("method_col", "Metodo")
     odd_exec_col = col_cfg.get("odd_exec_col")
     liquidity_col = col_cfg.get("liquidity_col")
 
@@ -286,6 +355,9 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     liq_min_abs = float(liq_cfg.get("min_matched_liquidity", cfg.get("min_volume", 0.0)))
     liq_mult = float(liq_cfg.get("required_multiplier_of_run", 1.0))
     liq_skip_missing = bool(liq_cfg.get("skip_if_liquidity_missing", True))
+
+    profile_mode, profile_cfg, profile_fallback_used, profile_fallback_msg = _resolve_stake_profile(cfg)
+    last_profile_fallback_msg = profile_fallback_msg
 
     dts = pd.to_datetime(df[date_col], errors="coerce").dt.date
     day_map: dict[Any, int] = {}
@@ -321,15 +393,30 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     level_list: list[float] = []
     ramp_mult_list: list[float] = []
     ramp_phase_list: list[str] = []
+    profile_mode_list: list[str] = []
+    mult_metodo_list: list[float] = []
+    mult_odd_band_list: list[float] = []
+    mult_intradia_list: list[float] = []
+    stake_final_aplicada_list: list[float] = []
+
+    intraday_consecutive_greens = 0
+    intraday_has_red_day = False
+    last_day_key: Any = None
 
     for idx, row in df.iterrows():
         day_number = day_numbers[idx]
         stake_mult, stake_phase, _ = _ramp_multiplier(day_number, phase2_profit, ramp_enabled=ramp_enabled)
+        day_key = dts.iloc[idx] if idx < len(dts) else None
+        if day_key != last_day_key:
+            intraday_consecutive_greens = 0
+            intraday_has_red_day = False
+            last_day_key = day_key
 
         odd_signal = _to_float(row.get("__odd_signal", row.get(odd_signal_col)))
         odd_exec = _to_float(row.get("__odd_exec")) if "__odd_exec" in df.columns else (_to_float(row.get(odd_exec_col)) if odd_exec_col in df.columns else None)
         liquidity = _to_float(row.get("__liquidity")) if "__liquidity" in df.columns else (_to_float(row.get(liquidity_col)) if liquidity_col in df.columns else None)
         resultado = int(row.get("__result", row[result_col]))
+        metodo = str(row.get(method_col, ""))
 
         allowed = True
         reason = ""
@@ -360,7 +447,16 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
                         allowed = False
                         reason = f"odd_exec_too_high_{odd_exec}"
 
-        effective_run = current_run * stake_mult
+        stake_base = current_run * stake_mult
+        mult_metodo = _method_multiplier(metodo, profile_cfg)
+        mult_odd_band = _odd_band_multiplier(odd_signal, profile_cfg)
+        mult_intradia = _intraday_multiplier(profile_cfg, intraday_has_red_day, intraday_consecutive_greens)
+        effective_run = stake_base * mult_metodo * mult_odd_band * mult_intradia
+
+        if allowed and effective_run <= 0.0:
+            allowed = False
+            reason = "intraday_cut_after_red"
+
         if allowed and liq_enabled:
             if liquidity is None:
                 if liq_skip_missing:
@@ -425,6 +521,13 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
             skip_reason = reason
             skipped_rows += 1
 
+        if status == "EXECUTED":
+            if resultado == 1:
+                intraday_consecutive_greens += 1
+            else:
+                intraday_has_red_day = True
+                intraday_consecutive_greens = 0
+
         status_list.append(status)
         skip_reason_list.append(skip_reason)
         pnl_list.append(pnl)
@@ -434,6 +537,11 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
         level_list.append(level_profit)
         ramp_mult_list.append(stake_mult)
         ramp_phase_list.append(stake_phase)
+        profile_mode_list.append(profile_mode)
+        mult_metodo_list.append(mult_metodo)
+        mult_odd_band_list.append(mult_odd_band)
+        mult_intradia_list.append(mult_intradia)
+        stake_final_aplicada_list.append(effective_run if status == "EXECUTED" else 0.0)
 
     out = df.copy()
     out["Status_Execucao"] = status_list
@@ -445,6 +553,11 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     out["Level_Profit_Atual"] = level_list
     out["Stake_Multiplier"] = ramp_mult_list
     out["Stake_Phase"] = ramp_phase_list
+    out["Profile_Mode"] = profile_mode_list
+    out["Mult_Metodo"] = mult_metodo_list
+    out["Mult_Odd_Band"] = mult_odd_band_list
+    out["Mult_Intradia"] = mult_intradia_list
+    out["Stake_Final_Aplicada"] = stake_final_aplicada_list
 
     dd_abs, dd_pct = _current_dd(lucro_list)
     win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
@@ -461,6 +574,9 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
         "Step_Downs": step_downs,
         "Fase2_Lucro": round(phase2_profit, 2),
         "Fase2_KPI_Positivo": bool(phase2_profit > 0.0),
+        "Profile_Mode_Ativo": profile_mode,
+        "Profile_Fallback_Used": bool(profile_fallback_used),
+        "Profile_Fallback_Log": last_profile_fallback_msg,
     }
     return out, summary
 
@@ -530,6 +646,7 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
     date_col = "__date" if "__date" in df.columns else dt_cfg["date_col"]
     odd_signal_col = col_cfg["odd_signal_col"]
     result_col = col_cfg["result_col"]
+    method_col = col_cfg.get("method_col", "Metodo")
     odd_exec_col = col_cfg.get("odd_exec_col")
     liquidity_col = col_cfg.get("liquidity_col")
 
@@ -556,6 +673,9 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
     liq_min_abs = float(liq_cfg.get("min_matched_liquidity", cfg.get("min_volume", 0.0)))
     liq_mult = float(liq_cfg.get("required_multiplier_of_run", 1.0))
     liq_skip_missing = bool(liq_cfg.get("skip_if_liquidity_missing", True))
+
+    profile_mode, profile_cfg, profile_fallback_used, profile_fallback_msg = _resolve_stake_profile(cfg)
+    last_profile_fallback_msg = profile_fallback_msg
 
     kpi_json_path = output_dir / mon["kpi_json_filename"]
     sqlite_path = output_dir / mon["sqlite_filename"]
@@ -586,6 +706,11 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
     level_list: list[float] = []
     ramp_mult_list: list[float] = []
     ramp_phase_list: list[str] = []
+    profile_mode_list: list[str] = []
+    mult_metodo_list: list[float] = []
+    mult_odd_band_list: list[float] = []
+    mult_intradia_list: list[float] = []
+    stake_final_aplicada_list: list[float] = []
 
     dts = pd.to_datetime(df[date_col], errors="coerce").dt.date
     day_map: dict[Any, int] = {}
@@ -598,14 +723,24 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
             next_day += 1
         day_numbers.append(day_map[key])
 
+    intraday_consecutive_greens = 0
+    intraday_has_red_day = False
+    last_day_key: Any = None
+
     for idx, row in df.iterrows():
         day_number = day_numbers[idx]
         stake_mult, stake_phase, phase2_kpi_positive = _ramp_multiplier(day_number, phase2_profit, ramp_enabled=ramp_enabled)
+        day_key = dts.iloc[idx] if idx < len(dts) else None
+        if day_key != last_day_key:
+            intraday_consecutive_greens = 0
+            intraday_has_red_day = False
+            last_day_key = day_key
 
         odd_signal = _to_float(row.get("__odd_signal", row.get(odd_signal_col)))
         odd_exec = _to_float(row.get("__odd_exec")) if "__odd_exec" in df.columns else (_to_float(row.get(odd_exec_col)) if odd_exec_col in df.columns else None)
         liquidity = _to_float(row.get("__liquidity")) if "__liquidity" in df.columns else (_to_float(row.get(liquidity_col)) if liquidity_col in df.columns else None)
         resultado = int(row.get("__result", row[result_col]))
+        metodo = str(row.get(method_col, ""))
 
         allowed = True
         reason = ""
@@ -625,7 +760,16 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
                 allowed = False
                 reason = "slippage_exceeded"
 
-        effective_run = current_run * stake_mult
+        stake_base = current_run * stake_mult
+        mult_metodo = _method_multiplier(metodo, profile_cfg)
+        mult_odd_band = _odd_band_multiplier(odd_signal, profile_cfg)
+        mult_intradia = _intraday_multiplier(profile_cfg, intraday_has_red_day, intraday_consecutive_greens)
+        effective_run = stake_base * mult_metodo * mult_odd_band * mult_intradia
+
+        if allowed and effective_run <= 0.0:
+            allowed = False
+            reason = "intraday_cut_after_red"
+
         if allowed and liq_enabled:
             if liquidity is None:
                 if liq_skip_missing:
@@ -690,6 +834,13 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
             skip_reason = reason
             skipped_rows += 1
 
+        if status == "EXECUTED":
+            if resultado == 1:
+                intraday_consecutive_greens += 1
+            else:
+                intraday_has_red_day = True
+                intraday_consecutive_greens = 0
+
         status_list.append(status)
         skip_reason_list.append(skip_reason)
         pnl_list.append(pnl)
@@ -699,6 +850,11 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
         level_list.append(level_profit)
         ramp_mult_list.append(stake_mult)
         ramp_phase_list.append(stake_phase)
+        profile_mode_list.append(profile_mode)
+        mult_metodo_list.append(mult_metodo)
+        mult_odd_band_list.append(mult_odd_band)
+        mult_intradia_list.append(mult_intradia)
+        stake_final_aplicada_list.append(effective_run if status == "EXECUTED" else 0.0)
 
         dd_abs, dd_pct = _current_dd(lucro_list)
         processed_rows = idx + 1
@@ -722,6 +878,9 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
             "stake_multiplier": round(stake_mult, 4),
             "stake_phase": stake_phase,
             "phase2_kpi_positive": bool(phase2_kpi_positive),
+            "profile_mode": profile_mode,
+            "profile_fallback_used": bool(profile_fallback_used),
+            "profile_fallback_log": last_profile_fallback_msg,
             "step_ups": step_ups,
             "step_downs": step_downs,
             "saques_realizados": saques_realizados,
@@ -785,6 +944,11 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
     out["Level_Profit_Atual"] = level_list
     out["Stake_Multiplier"] = ramp_mult_list
     out["Stake_Phase"] = ramp_phase_list
+    out["Profile_Mode"] = profile_mode_list
+    out["Mult_Metodo"] = mult_metodo_list
+    out["Mult_Odd_Band"] = mult_odd_band_list
+    out["Mult_Intradia"] = mult_intradia_list
+    out["Stake_Final_Aplicada"] = stake_final_aplicada_list
 
     dd_abs, dd_pct = _current_dd(lucro_list)
     win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
@@ -801,6 +965,9 @@ def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: 
         "Step_Downs": step_downs,
         "Fase2_Lucro": round(phase2_profit, 2),
         "Fase2_KPI_Positivo": bool(phase2_profit > 0.0),
+        "Profile_Mode_Ativo": profile_mode,
+        "Profile_Fallback_Used": bool(profile_fallback_used),
+        "Profile_Fallback_Log": last_profile_fallback_msg,
     }
     return out, summary
 

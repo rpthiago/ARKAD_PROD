@@ -15,6 +15,36 @@
     "max_daily_drawdown": -1.5,
     "max_sequential_reds": 3
   },
+  "profile_mode": "moderado",
+  "stake_profiles": {
+    "conservador": {
+      "m_l0": 1.1,
+      "m_l1": 0.9,
+      "m_odd_low_le9": 1.0,
+      "m_odd_mid_9a10_5": 1.0,
+      "m_odd_high_gt10_5": 1.0,
+      "anti_martingale": 0.0,
+      "cut_after_first_red_day": false
+    },
+    "moderado": {
+      "m_l0": 1.1,
+      "m_l1": 0.9,
+      "m_odd_low_le9": 1.1,
+      "m_odd_mid_9a10_5": 1.05,
+      "m_odd_high_gt10_5": 1.0,
+      "anti_martingale": 0.0,
+      "cut_after_first_red_day": false
+    },
+    "agressivo": {
+      "m_l0": 1.1,
+      "m_l1": 1.05,
+      "m_odd_low_le9": 1.1,
+      "m_odd_mid_9a10_5": 1.05,
+      "m_odd_high_gt10_5": 1.0,
+      "anti_martingale": 0.1,
+      "cut_after_first_red_day": false
+    }
+  },
   "runtime_data": {
     "endpoint_url": "http://127.0.0.1:8080/arkad/sinais",
     "method": "GET",

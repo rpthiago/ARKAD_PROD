@@ -92,6 +92,22 @@ if st.session_state.u97_ops is None and OPS_PATH.exists() and SUM_PATH.exists():
 st.title("🏆 Universo 97 / 96 — Padrão Ouro")
 st.caption("Recorte canônico do commit `eb4e32e` · 25 entradas · Abril 2026")
 
+try:
+    _cfg_profile = load_config(CFG_PATH)
+    _mode = str(_cfg_profile.get("profile_mode", "legacy_default")).strip().lower()
+    _profiles = _cfg_profile.get("stake_profiles", {})
+    _active = _profiles.get(_mode) if isinstance(_profiles, dict) else None
+    if isinstance(_active, dict):
+        st.caption(
+            f"Perfil de stake: {_mode} | m_l0={_active.get('m_l0', 1.0)} | m_l1={_active.get('m_l1', 1.0)} | "
+            f"odd<=9={_active.get('m_odd_low_le9', 1.0)} | odd9-10.5={_active.get('m_odd_mid_9a10_5', 1.0)} | "
+            f"odd>10.5={_active.get('m_odd_high_gt10_5', 1.0)} | anti={_active.get('anti_martingale', 0.0)}"
+        )
+    else:
+        st.warning("fallback: profile_mode ausente/invalido; usando comportamento legado")
+except Exception as _e:
+    st.warning(f"Falha ao carregar perfil de stake: {_e}")
+
 col_run, _ = st.columns([1, 4])
 with col_run:
     if st.button("▶ Rodar agora", type="primary", use_container_width=True):
