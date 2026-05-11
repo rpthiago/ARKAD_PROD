@@ -11,6 +11,7 @@ Página de auditoria de sinais com filtro SUPER ELITE:
 
 from __future__ import annotations
 
+import io
 import json
 import zoneinfo
 from datetime import date, datetime
@@ -19,6 +20,14 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
+
+# openpyxl para exportação Excel profissional
+try:
+    from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+    from openpyxl.utils import get_column_letter
+    OPENPYXL_OK = True
+except ImportError:
+    OPENPYXL_OK = False
 
 # ── Importar funções do main.py ──────────────────────────────────────────────
 import sys
@@ -138,6 +147,128 @@ def _calcular_ev(odd: float, prob_green: float, is_lay: bool) -> float:
         return round(prob_green * lucro_green - prob_red * 1.0, 4)
     else:
         return round(prob_green * (odd - 1.0) - prob_red * 1.0, 4)
+
+
+def _gerar_excel_elite(df_elite: pd.DataFrame, date_str: str) -> bytes:
+    """
+    Gera Excel profissional com colunas para preenchimento manual:
+    Odd_Real_Pega | Stake | Resultado | Lucro_Prejuizo | 1/0
+    Layout: cabeçalho azul escuro, bordas, linhas alternadas.
+    """
+    output = io.BytesIO()
+
+    # Montar DataFrame de exportação
+    rows = []
+    for _, row in df_elite.iterrows():
+        rows.append({
+            "Data":           date_str,
+            "Hora":           str(row.get("Hora", "") or ""),
+            "Jogo":           str(row.get("Jogo", "") or ""),
+            "Liga":           str(row.get("Liga", "") or ""),
+            "Método":         str(row.get("Método", "") or ""),
+            "Odd_Scanner":    round(float(row.get("Odd", 0) or 0), 2),
+            "ROI_Hist_%":     row.get("ROI_Hist_%", 0),
+            "Green%_Hist":    row.get("Green%_Hist", 0),
+            "EV+":            str(row.get("EV_pct", "") or ""),
+            # ── Colunas para preenchimento manual ──
+            "Odd_Real_Pega":  "",
+            "Stake":          "",
+            "Resultado":      "",
+            "Lucro_Prejuizo": "",
+            "1/0":            "",
+        })
+
+    df_export = pd.DataFrame(rows) if rows else pd.DataFrame(columns=[
+        "Data", "Hora", "Jogo", "Liga", "Método", "Odd_Scanner",
+        "ROI_Hist_%", "Green%_Hist", "EV+",
+        "Odd_Real_Pega", "Stake", "Resultado", "Lucro_Prejuizo", "1/0",
+    ])
+
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        df_export.to_excel(writer, index=False, sheet_name="Sinais_Elite")
+        ws = writer.sheets["Sinais_Elite"]
+
+        # Estilos
+        HEADER_FILL  = PatternFill("solid", fgColor="1F3864")
+        HEADER_FONT  = Font(color="FFFFFF", bold=True, size=11, name="Calibri")
+        HEADER_ALIGN = Alignment(horizontal="center", vertical="center", wrap_text=True)
+        DATA_FONT    = Font(size=10, name="Calibri")
+        CENTER_ALIGN = Alignment(horizontal="center", vertical="center")
+        LEFT_ALIGN   = Alignment(horizontal="left", vertical="center")
+        THIN_BORDER  = Border(
+            left=Side(style="thin"), right=Side(style="thin"),
+            top=Side(style="thin"),  bottom=Side(style="thin"),
+        )
+        ALT_FILL     = PatternFill("solid", fgColor="EBF0FA")
+        # Colunas de preenchimento manual — fundo amarelo claro
+        MANUAL_FILL  = PatternFill("solid", fgColor="FFFACD")
+
+        MANUAL_COLS = {"Odd_Real_Pega", "Stake", "Resultado", "Lucro_Prejuizo", "1/0"}
+
+        ws.row_dimensions[1].height = 28
+        for col_idx, col_name in enumerate(df_export.columns, start=1):
+            cell = ws.cell(row=1, column=col_idx)
+            cell.fill      = HEADER_FILL
+            cell.font      = HEADER_FONT
+            cell.alignment = HEADER_ALIGN
+            cell.border    = THIN_BORDER
+
+        for row_idx in range(2, len(df_export) + 2):
+            alt_fill = ALT_FILL if row_idx % 2 == 0 else None
+            ws.row_dimensions[row_idx].height = 18
+            for col_idx, col_name in enumerate(df_export.columns, start=1):
+                cell = ws.cell(row=row_idx, column=col_idx)
+                cell.font   = DATA_FONT
+                cell.border = THIN_BORDER
+                if col_name in MANUAL_COLS:
+                    cell.fill      = MANUAL_FILL
+                    cell.alignment = CENTER_ALIGN
+                elif col_name in ("Data", "Hora", "Odd_Scanner", "ROI_Hist_%", "Green%_Hist", "EV+"):
+                    cell.alignment = CENTER_ALIGN
+                    if alt_fill:
+                        cell.fill = alt_fill
+                else:
+                    cell.alignment = LEFT_ALIGN
+                    if alt_fill:
+                        cell.fill = alt_fill
+
+        # Larguras
+        col_widths = {
+            "Data": 13, "Hora": 9, "Jogo": 36, "Liga": 22,
+            "Método": 22, "Odd_Scanner": 12, "ROI_Hist_%": 12,
+            "Green%_Hist": 12, "EV+": 10,
+            "Odd_Real_Pega": 14, "Stake": 12,
+            "Resultado": 12, "Lucro_Prejuizo": 16, "1/0": 8,
+        }
+        for col_idx, col_name in enumerate(df_export.columns, start=1):
+            ws.column_dimensions[get_column_letter(col_idx)].width = col_widths.get(col_name, 14)
+
+        ws.freeze_panes = "A2"
+
+        # Aba de instruções
+        ws_info = writer.book.create_sheet("Instrucoes")
+        ws_info["A1"] = "⭐ ARKAD Super Elite — Planilha de Preenchimento"
+        ws_info["A1"].font = Font(bold=True, size=13, color="1F3864", name="Calibri")
+        ws_info["A2"] = f"Data: {date_str}  |  Gerado: {datetime.now().strftime('%d/%m/%Y %H:%M')}"
+        ws_info["A3"] = f"Total de sinais Elite: {len(df_export)}"
+        ws_info["A5"] = "COLUNAS PARA PREENCHIMENTO MANUAL (fundo amarelo):"
+        ws_info["A5"].font = Font(bold=True, size=11, name="Calibri")
+        instrucoes = [
+            ("Odd_Real_Pega",  "Odd que você conseguiu executar na Betfair"),
+            ("Stake",          "Valor apostado (responsabilidade em R$)"),
+            ("Resultado",      "GREEN ou RED"),
+            ("Lucro_Prejuizo", "Valor em R$ ganho (+) ou perdido (-)"),
+            ("1/0",            "1 = GREEN, 0 = RED"),
+        ]
+        for i, (col, desc) in enumerate(instrucoes, start=6):
+            ws_info[f"A{i}"] = col
+            ws_info[f"A{i}"].font = Font(bold=True, name="Calibri")
+            ws_info[f"B{i}"] = desc
+        ws_info.column_dimensions["A"].width = 20
+        ws_info.column_dimensions["B"].width = 50
+
+    output.seek(0)
+    return output.read()
 
 
 def _auditar_sinais_elite(df_jogos: pd.DataFrame, rodos: list[dict]) -> pd.DataFrame:
@@ -461,6 +592,54 @@ def main() -> None:
                 </div>
             </div>
             """, unsafe_allow_html=True)
+
+    # ── Botão de Download Excel ───────────────────────────────────────────────
+    st.divider()
+    st.subheader("⬇️ Exportar Sinais para Preenchimento")
+
+    if not df_elite.empty:
+        st.caption(
+            "Planilha com colunas em **amarelo** para você preencher após os jogos: "
+            "**Odd_Real_Pega** · **Stake** · **Resultado** · **Lucro_Prejuizo** · **1/0**"
+        )
+        col_dl1, col_dl2 = st.columns([3, 1])
+        with col_dl2:
+            st.metric("Sinais Elite", len(df_elite))
+        with col_dl1:
+            if OPENPYXL_OK:
+                try:
+                    xlsx_bytes = _gerar_excel_elite(df_elite, selected_iso)
+                    st.download_button(
+                        label=f"📥 Baixar Excel — {len(df_elite)} sinais Elite ({selected_iso})",
+                        data=xlsx_bytes,
+                        file_name=f"elite_{selected_iso}.xlsx",
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        use_container_width=True,
+                        type="primary",
+                    )
+                    st.success(
+                        "✅ Excel pronto! Colunas **Odd_Real_Pega**, **Stake**, **Resultado**, "
+                        "**Lucro_Prejuizo** e **1/0** em branco (fundo amarelo) para preenchimento."
+                    )
+                except Exception as _e:
+                    st.warning(f"⚠️ Erro ao gerar Excel: {_e}")
+                    st.download_button(
+                        label=f"📥 Baixar CSV — {len(df_elite)} sinais Elite ({selected_iso})",
+                        data=df_elite.to_csv(index=False, encoding="utf-8-sig"),
+                        file_name=f"elite_{selected_iso}.csv",
+                        mime="text/csv",
+                        use_container_width=True,
+                    )
+            else:
+                st.download_button(
+                    label=f"📥 Baixar CSV — {len(df_elite)} sinais Elite ({selected_iso})",
+                    data=df_elite.to_csv(index=False, encoding="utf-8-sig"),
+                    file_name=f"elite_{selected_iso}.csv",
+                    mime="text/csv",
+                    use_container_width=True,
+                )
+    else:
+        st.info("Nenhum sinal Elite disponível para exportar.")
 
     # ── Painel de Governança ──────────────────────────────────────────────────
     st.divider()
