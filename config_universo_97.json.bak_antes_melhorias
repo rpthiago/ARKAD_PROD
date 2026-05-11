@@ -1,5 +1,5 @@
 {
-  "version": "v3-melhorias-2026-05-11",
+  "version": "v2-proxy-2026-04-24",
   "environment": "producao",
   "arkad_api_url": "http://127.0.0.1:8080/sinais",
   "odd_exec_col": "Odd_Execucao",
@@ -108,9 +108,8 @@
     "filtros_metodo": {
       "Lay_CS_0x1_B365": {
         "odd_min": 8.0,
-        "odd_max": 13.0,
+        "odd_max": 11.5,
         "ligas_permitidas": [
-          "AUSTRIA 1",
           "AUSTRIA 2",
           "BELGIUM 1",
           "BELGIUM 2",
@@ -121,7 +120,6 @@
           "CHINA 1",
           "COLOMBIA 1",
           "CROATIA 1",
-          "CZECH 1",
           "CZECH REPUBLIC 1",
           "ECUADOR 1",
           "EGYPT 1",
@@ -129,18 +127,12 @@
           "ENGLAND 3",
           "ENGLAND 4",
           "ESTONIA 1",
-          "EUROPA CHAMPIONS LEAGUE",
           "FINLAND 1",
           "FRANCE 2",
-          "FRANCE 3",
-          "GERMANY 1",
-          "GERMANY 2",
           "GREECE 1",
           "HUNGARY 1",
           "IRELAND 1",
           "ISRAEL 1",
-          "ITALY 2",
-          "ITALY 3",
           "JAPAN 1",
           "JAPAN 2",
           "MEXICO 1",
@@ -155,13 +147,11 @@
           "SOUTH KOREA 1",
           "SWEDEN 1",
           "SWEDEN 2",
-          "SWITZERLAND 1",
           "TURKEY 1",
           "TURKEY 2",
           "USA 1",
           "WALES 1"
-        ],
-        "cap_diario": 6
+        ]
       },
       "Lay_CS_1x0_B365": {
         "odd_min": 4.5,
@@ -170,8 +160,7 @@
           "SPAIN 1",
           "ITALY 1",
           "SPAIN 2"
-        ],
-        "cap_diario": 6
+        ]
       }
     }
   },
@@ -265,6 +254,16 @@
       "odd_max": 10.0,
       "lucro_combo": -485.78,
       "apostas": 11
+    },
+    {
+      "id": 11,
+      "name": "Rodo_11 ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12",
+      "league": "ITALY 1",
+      "method_equals": "Lay_CS_1x0_B365",
+      "odd_min": 10.0,
+      "odd_max": 12.0,
+      "lucro_combo": -479.19,
+      "apostas": 2
     },
     {
       "id": 12,
@@ -456,6 +455,16 @@
         "odd_max": 10.0,
         "lucro_combo": -485.78,
         "apostas": 11
+      },
+      {
+        "id": 11,
+        "name": "Rodo_11 ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12",
+        "league": "ITALY 1",
+        "method_equals": "Lay_CS_1x0_B365",
+        "odd_min": 10.0,
+        "odd_max": 12.0,
+        "lucro_combo": -479.19,
+        "apostas": 2
       },
       {
         "id": 12,
@@ -842,19 +851,5 @@
     "sqlite_filename": "monitoring_kpis_prod_v1.db",
     "sqlite_table_kpis": "kpis",
     "sqlite_table_ops": "ops"
-  },
-  "ultima_atualizacao": "2026-05-11 13:32",
-  "changelog": [
-    {
-      "data": "2026-05-11",
-      "versao": "v3-melhorias-2026-05-11",
-      "mudancas": [
-        "odd_max Lay_CS_0x1_B365: 11.5 -> 13.0",
-        "Novas ligas 0x1: GERMANY 1, GERMANY 2, ITALY 2, ITALY 3, AUSTRIA 1, SWITZERLAND 1, CZECH 1, FRANCE 3, EUROPA CHAMPIONS LEAGUE",
-        "cap_diario 0x1 e 1x0: 4 -> 6",
-        "Removido rodo id=11 (ITALY 1 | Lay_CS_1x0_B365 | Odd 10-12) — 100% green em 2026",
-        "Backtest comparativo: ROI +71% -> +137% | Lucro R$791 -> R$1515 (Jan-Abr 2026)"
-      ]
-    }
-  ]
+  }
 }
