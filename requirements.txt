@@ -7,3 +7,5 @@ fastapi
 uvicorn
 gunicorn
 python-dotenv
+joblib
+scikit-learn
