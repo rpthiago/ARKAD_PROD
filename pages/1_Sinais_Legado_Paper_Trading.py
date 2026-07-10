@@ -176,7 +176,7 @@ METHODS = [
     {"scope": "Betfair", "prefix": "Back_Home", "label": "Back Home Betfair", "odd_col": "Odd_H_Back", "min_prob": 0.40},
 ]
 
-def gerar_sinais(df_raw):
+def gerar_sinais(df_raw, target_date):
     df_feat_b365 = criar_features_b365_live(df_raw)
     df_feat_bf = criar_features_betfair_live(df_raw)
     
@@ -239,21 +239,25 @@ def gerar_sinais(df_raw):
                     elif "1x0" in method["label"]: odd_bf_real = row.get("Odd_CS_1x0_Lay")
                 else:
                     odd_bf_real = odd_sinal
+                    
+                odd_final = round(float(odd_bf_real), 2) if pd.notna(odd_bf_real) else round(float(odd_sinal), 2)
 
                 sinais_encontrados.append({
-                    "Horario": hora_str,
+                    "Data": str(target_date),
+                    "Hora": hora_str,
                     "Liga": str(row.get("League", "")),
                     "Home": str(row.get("Home", "")),
                     "Away": str(row.get("Away", "")),
                     "Metodo": method["label"],
-                    "Odd_Modelo": round(float(odd_sinal), 2) if odd_sinal else 0.0,
-                    "Odd_Real_Betfair": round(float(odd_bf_real), 2) if pd.notna(odd_bf_real) else None,
-                    "Prob_ML": f"{row['Prob_ML']*100:.1f}%",
+                    "Odd": odd_final,
+                    "Prob": f"{row['Prob_ML']*100:.1f}%",
+                    "Resultado": "",
+                    "Lucro": ""
                 })
                 
     if sinais_encontrados:
         df_out = pd.DataFrame(sinais_encontrados)
-        return df_out.sort_values(by=["Horario", "Liga"]).reset_index(drop=True)
+        return df_out.sort_values(by=["Hora", "Liga"]).reset_index(drop=True)
     return pd.DataFrame()
 
 st.title("📜 Sinais Legado - Paper Trading")
@@ -278,7 +282,7 @@ if gerar_btn:
             if df_jogos.empty:
                 st.warning("Nenhum jogo encontrado para esta data ou erro na API.")
             else:
-                df_sinais = gerar_sinais(df_jogos)
+                df_sinais = gerar_sinais(df_jogos, target_date)
                 
                 if df_sinais.empty:
                     st.info("Os modelos rodaram, mas não encontraram nenhum jogo com padrão forte o suficiente para hoje.")
@@ -286,10 +290,15 @@ if gerar_btn:
                     st.success(f"{len(df_sinais)} sinais encontrados!")
                     st.dataframe(df_sinais, use_container_width=True)
                     
-                    csv = df_sinais.to_csv(index=False).encode('utf-8')
+                    # Gerar arquivo Excel em memória
+                    buffer = io.BytesIO()
+                    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                        df_sinais.to_excel(writer, index=False, sheet_name='Sinais')
+                    excel_data = buffer.getvalue()
+                    
                     st.download_button(
-                        label="📥 Baixar Sinais (CSV)",
-                        data=csv,
-                        file_name=f"sinais_legado_{target_date}.csv",
-                        mime="text/csv",
+                        label="📥 Baixar Sinais (Excel)",
+                        data=excel_data,
+                        file_name=f"sinais_legado_{target_date}.xlsx",
+                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     )
