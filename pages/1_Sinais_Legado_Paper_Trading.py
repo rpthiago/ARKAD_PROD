@@ -42,17 +42,38 @@ def get_api_token():
     return token
 
 def fetch_list_events(target_date: str, token: str):
-    url = f"https://api.futpythontrader.com/list_events?token={token}&date={target_date}"
+    headers = {"Authorization": f"Token {token}", "User-Agent": "Mozilla/5.0"}
+    
+    url_b365 = f"https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/{target_date}/"
+    url_bf = f"https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/{target_date}/"
+    
+    frames = []
+    
     try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        data = response.json()
-        if isinstance(data, list):
-            return pd.DataFrame(data)
-        return pd.DataFrame()
+        r_b365 = requests.get(url_b365, headers=headers, timeout=15)
+        if r_b365.status_code == 200:
+            data = r_b365.json()
+            if isinstance(data, dict) and "dados" in data:
+                frames.append(pd.DataFrame(data["dados"]))
+            elif isinstance(data, list):
+                frames.append(pd.DataFrame(data))
     except Exception as e:
-        st.error(f"Erro ao buscar jogos: {e}")
-        return pd.DataFrame()
+        st.error(f"Erro B365: {e}")
+        
+    try:
+        r_bf = requests.get(url_bf, headers=headers, timeout=15)
+        if r_bf.status_code == 200:
+            data = r_bf.json()
+            if isinstance(data, dict) and "dados" in data:
+                frames.append(pd.DataFrame(data["dados"]))
+            elif isinstance(data, list):
+                frames.append(pd.DataFrame(data))
+    except Exception as e:
+        st.error(f"Erro Betfair: {e}")
+        
+    if frames:
+        return pd.concat(frames, ignore_index=True)
+    return pd.DataFrame()
 
 # Construção de features adaptadas para o Vivo (Live)
 def criar_features_b365_live(dataframe):
