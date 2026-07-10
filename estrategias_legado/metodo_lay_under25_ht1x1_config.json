@@ -1,0 +1,61 @@
+{
+  "metodo": "Lay_Under_25_FT_HT_1x1",
+  "mercado": "Lay Under 2.5 FT",
+  "exchange": true,
+  "status": "aprovado",
+  "score_robustez": 96.9,
+  "parametros": {
+    "gatilho_ht": "1x1",
+    "minuto_entrada": 46,
+    "odd_lay_under_estimada": 1.4,
+    "trava_odd_under_pre": {
+      "min": 1.35,
+      "max": 2.8
+    },
+    "stake": 1.0,
+    "comissao": 0.05,
+    "responsabilidade": 0.4,
+    "lucro_green": 0.95,
+    "prejuizo_red": -0.4
+  },
+  "metricas_oos": {
+    "entradas": 4944,
+    "wr_pct": 76.0,
+    "pnl_unidades": 3091.65,
+    "roi_pct": 62.53,
+    "meses_validos": 31,
+    "meses_positivos": 31,
+    "pct_meses_pos": 100.0,
+    "profit_factor": 999.0,
+    "drawdown_max": 0.0
+  },
+  "ligas_recomendadas": [
+    "ITALY 3",
+    "SPAIN 1",
+    "ENGLAND 4",
+    "ENGLAND 2",
+    "ENGLAND 3",
+    "ITALY 2",
+    "GERMANY 3",
+    "SPAIN 2",
+    "USA 1",
+    "ITALY 1",
+    "BRAZIL 1",
+    "BRAZIL 2",
+    "FRANCE 3",
+    "FRANCE 2",
+    "ROMANIA 1"
+  ],
+  "fonte_dados": "Bet365 (Bases_de_Dados_API_FutPythonTrader_Bet365.csv)",
+  "features_ht": [
+    "xG_Total_HT",
+    "xG_Ratio_H_HT",
+    "SOT_Total_HT",
+    "Shots_Total_HT",
+    "Big_Chances_HT",
+    "xG_Excedente_HT",
+    "Ratio_Under_Over",
+    "ImpProb_Under_Pre"
+  ],
+  "data_geracao": "2026-06-14 23:09"
+}

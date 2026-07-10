@@ -1,0 +1,31 @@
+{
+  "name": "⚽ Over 1.5 FT Agressivo",
+  "scope": "Bet365",
+  "status": "quarantine",
+  "odd_col": "Odd_Over15_FT",
+  "odd_min": 1.25,
+  "odd_max": 1.60,
+  "default_prob": 0.55,
+  "is_lay": false,
+  "model": "modelo_Over15_Agressivo.pkl",
+  "scaler": "scaler_Over15_Agressivo.pkl",
+  "features": "features_Over15_Agressivo.pkl",
+  "ligas_file": "ligas_Over15_Agressivo.txt",
+  "download_name": "over15_agressivo",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09",
+  "metrics_oos": {
+    "model": "Logistic Regression",
+    "picks": 246,
+    "roi": 0.1274,
+    "win_rate": 0.8984,
+    "profit_factor": 2.25,
+    "pnl": 31.34,
+    "max_drawdown": -2.00,
+    "robustness_score": 95.56,
+    "t_student": 5.256,
+    "pct_months_positive": 1.00,
+    "pct_leagues_positive": 1.00,
+    "optimized_odd_max": 1.50
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "🚫 Lay Home Features",
+  "scope": "Betfair",
+  "status": "quarantine",
+  "odd_col": "Odd_H_Lay",
+  "odd_min": 1.30,
+  "odd_max": 5.00,
+  "default_prob": 0.75,
+  "is_lay": true,
+  "model": "modelo_Lay_Home_Features.pkl",
+  "scaler": "scaler_Lay_Home_Features.pkl",
+  "features": "features_Lay_Home_Features.pkl",
+  "ligas_file": "ligas_Lay_Home_Features.txt",
+  "download_name": "lay_home_features",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09"
+}

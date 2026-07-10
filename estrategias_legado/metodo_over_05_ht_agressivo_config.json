@@ -1,0 +1,33 @@
+{
+  "name": "⚡ Over 0.5 HT Agressivo",
+  "scope": "Bet365",
+  "status": "quarantine",
+  "odd_col": "Odd_Over05_HT",
+  "odd_min": 1.30,
+  "odd_max": 1.50,
+  "default_prob": 0.60,
+  "is_lay": false,
+  "is_back": true,
+  "is_ht": true,
+  "model": "modelo_Over_05_HT_Agressivo.pkl",
+  "scaler": "scaler_Over_05_HT_Agressivo.pkl",
+  "features": "features_Over_05_HT_Agressivo.pkl",
+  "ligas_file": "ligas_Over_05_HT_Agressivo.txt",
+  "download_name": "over_05_ht_agressivo",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09",
+  "metrics_oos": {
+    "model": "LightGBM",
+    "picks": 69,
+    "roi": 0.2548,
+    "win_rate": 0.9565,
+    "wins": 66,
+    "losses": 3,
+    "pnl": 17.58,
+    "robustness_score": 87.86,
+    "t_student": 7.84,
+    "optimized_threshold": 0.60,
+    "optimized_odd_min": 1.30,
+    "optimized_odd_max": 1.50
+  }
+}

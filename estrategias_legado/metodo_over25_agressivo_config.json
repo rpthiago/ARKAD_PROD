@@ -1,0 +1,17 @@
+{
+  "name": "⚽ Over 2.5 FT Agressivo",
+  "scope": "Bet365",
+  "status": "quarantine",
+  "odd_col": "Odd_Over25_FT",
+  "odd_min": 1.60,
+  "odd_max": 2.30,
+  "default_prob": 0.60,
+  "is_lay": false,
+  "model": "modelo_Over25_Agressivo.pkl",
+  "scaler": "scaler_Over25_Agressivo.pkl",
+  "features": "features_Over25_Agressivo.pkl",
+  "ligas_file": "ligas_Over25_Agressivo.txt",
+  "download_name": "over25_agressivo",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09"
+}

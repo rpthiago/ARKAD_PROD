@@ -1,0 +1,33 @@
+{
+  "name": "📉 Under 1.5 Gols Agressivo",
+  "scope": "Bet365",
+  "status": "quarantine",
+  "odd_col": "Odd_Under15_FT",
+  "odd_min": 2.00,
+  "odd_max": 3.50,
+  "default_prob": 0.60,
+  "is_lay": false,
+  "is_back": true,
+  "is_under": true,
+  "model": "modelo_Under_15_Agressivo.pkl",
+  "scaler": "scaler_Under_15_Agressivo.pkl",
+  "features": "features_Under_15_Agressivo.pkl",
+  "ligas_file": "ligas_Under_15_Agressivo.txt",
+  "download_name": "under_15_agressivo",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09",
+  "metrics_oos": {
+    "model": "LightGBM",
+    "picks": 228,
+    "roi": 0.3451,
+    "win_rate": 0.5132,
+    "wins": 117,
+    "losses": 111,
+    "pnl": 78.68,
+    "robustness_score": 90.79,
+    "t_student": 3.94,
+    "optimized_threshold": 0.60,
+    "optimized_odd_min": 2.00,
+    "optimized_odd_max": 3.50
+  }
+}

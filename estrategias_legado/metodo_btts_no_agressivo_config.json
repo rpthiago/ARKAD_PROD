@@ -1,0 +1,33 @@
+{
+  "name": "🔕 BTTS No Agressivo",
+  "scope": "Bet365",
+  "status": "quarantine",
+  "odd_col": "Odd_BTTS_No",
+  "odd_min": 1.70,
+  "odd_max": 2.00,
+  "default_prob": 0.55,
+  "is_lay": false,
+  "is_back": true,
+  "is_btts_no": true,
+  "model": "modelo_BTTS_No_Agressivo.pkl",
+  "scaler": "scaler_BTTS_No_Agressivo.pkl",
+  "features": "features_BTTS_No_Agressivo.pkl",
+  "ligas_file": "ligas_BTTS_No_Agressivo.txt",
+  "download_name": "btts_no_agressivo",
+  "quarantine_days": 15,
+  "created_at": "2026-06-09",
+  "metrics_oos": {
+    "model": "LightGBM",
+    "picks": 193,
+    "roi": 0.2465,
+    "win_rate": 0.7047,
+    "wins": 136,
+    "losses": 57,
+    "pnl": 47.57,
+    "robustness_score": 93.70,
+    "t_student": 4.22,
+    "optimized_threshold": 0.55,
+    "optimized_odd_min": 1.70,
+    "optimized_odd_max": 2.00
+  }
+}
