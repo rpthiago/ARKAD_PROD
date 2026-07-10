@@ -241,6 +241,7 @@ def gerar_sinais(df_raw, target_date):
                     odd_bf_real = odd_sinal
                     
                 odd_final = round(float(odd_bf_real), 2) if pd.notna(odd_bf_real) else round(float(odd_sinal), 2)
+                tipo_operacao = "Lay" if "Lay" in method["label"] else "Back"
 
                 sinais_encontrados.append({
                     "Data": str(target_date),
@@ -249,6 +250,7 @@ def gerar_sinais(df_raw, target_date):
                     "Home": str(row.get("Home", "")),
                     "Away": str(row.get("Away", "")),
                     "Metodo": method["label"],
+                    "Tipo": tipo_operacao,
                     "Odd": odd_final,
                     "Prob": f"{row['Prob_ML']*100:.1f}%",
                     "Resultado": "",
