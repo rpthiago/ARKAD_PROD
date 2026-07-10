@@ -204,12 +204,28 @@ def gerar_sinais(df_raw, target_date):
         except Exception as e:
             continue
             
+        # Carrega a lista de ligas do método
+        file_prefix = f"{method['prefix']}_b365" if scope == "B365" else method["prefix"]
+        ligas = []
+        for nome in (f"ligas_{file_prefix}.txt", f"ligas_boas_{file_prefix}.txt"):
+            caminho = LEGADO_DIR / nome
+            if caminho.exists():
+                ligas = [item.strip() for item in caminho.read_text(encoding="utf-8").split(",") if item.strip()]
+                break
+            
         df_modelo = df_base.dropna(subset=[odd_col]).copy()
         if df_modelo.empty:
             continue
             
+        if ligas:
+            df_modelo = df_modelo[df_modelo["League"].isin(ligas)]
+            
         df_modelo[odd_col] = pd.to_numeric(df_modelo[odd_col], errors="coerce")
         df_modelo = df_modelo[df_modelo[odd_col].notna()].copy()
+        
+        # Filtro de teto de odd para métodos Lay (padrão do backtest)
+        if "Lay" in method["label"]:
+            df_modelo = df_modelo[df_modelo[odd_col] <= 15.0]
         
         if df_modelo.empty:
             continue
