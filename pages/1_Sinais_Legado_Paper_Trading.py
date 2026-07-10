@@ -44,8 +44,8 @@ def get_api_token():
 def fetch_list_events(target_date: str, token: str):
     headers = {"Authorization": f"Token {token}", "User-Agent": "Mozilla/5.0"}
     
-    url_b365 = f"https://api.futpythontrader.com/api/dados/jogos-do-dia/bet365/{target_date}/"
-    url_bf = f"https://api.futpythontrader.com/api/dados/jogos-do-dia/betfair/{target_date}/"
+    url_b365 = f"https://apicomunidade.futpythontrader.com/api/dados/jogos-do-dia/bet365/{target_date}/"
+    url_bf = f"https://apicomunidade.futpythontrader.com/api/dados/jogos-do-dia/betfair/{target_date}/"
     
     frames = []
     
