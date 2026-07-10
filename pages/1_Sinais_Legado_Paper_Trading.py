@@ -157,19 +157,23 @@ def resolver_arquivos_metodo_live(scope, prefix):
         "features": LEGADO_DIR / f"features_{file_prefix}.pkl"
     }
 
-# Definições simplificadas dos métodos (sem a lógica de Target)
 METHODS = [
+    # B365
     {"scope": "B365", "prefix": "Lay_0x1", "label": "Lay 0x1 B365", "odd_col": "Odd_CS_0x1", "min_prob": 0.80},
     {"scope": "B365", "prefix": "Lay_1x0", "label": "Lay 1x0 B365", "odd_col": "Odd_CS_1x0", "min_prob": 0.80},
     {"scope": "B365", "prefix": "Back_Home", "label": "Back Home B365", "odd_col": "Odd_H_FT", "min_prob": 0.40},
-    {"scope": "B365", "prefix": "Back_Away", "label": "Back Away B365", "odd_col": "Odd_A_FT", "min_prob": 0.30},
-    {"scope": "B365", "prefix": "Over05_FT", "label": "Over 0.5 FT B365", "odd_col": "Odd_Over05_FT", "min_prob": 0.70},
     
+    # Betfair
     {"scope": "Betfair", "prefix": "Lay_Goleada_H", "label": "Lay Goleada Home Betfair", "odd_col": "Odd_CS_Goleada_H_Lay", "min_prob": 0.90},
     {"scope": "Betfair", "prefix": "Lay_Goleada_A", "label": "Lay Goleada Away Betfair", "odd_col": "Odd_CS_Goleada_A_Lay", "min_prob": 0.95},
-    {"scope": "Betfair", "prefix": "Lay_Home", "label": "Lay Home Betfair", "odd_col": "Odd_H_Lay", "min_prob": 0.55},
     {"scope": "Betfair", "prefix": "Lay_Away", "label": "Lay Away Betfair", "odd_col": "Odd_A_Lay", "min_prob": 0.65},
-    {"scope": "Betfair", "prefix": "Over_2.5_FT_CORRIGIDO", "label": "Over 2.5 FT Betfair", "odd_col": "Odd_Over25_FT_Back", "min_prob": 0.65},
+    {"scope": "Betfair", "prefix": "Lay_Goleada_Favorito", "label": "Lay Goleada Favorito Betfair", "odd_col": "Odd_CS_Goleada_Favorito_Lay", "min_prob": 0.90},
+    {"scope": "Betfair", "prefix": "Over15_FT", "label": "Over 1.5 FT Betfair", "odd_col": "Odd_Over15_FT_Back", "min_prob": 0.58},
+    {"scope": "Betfair", "prefix": "Over05_FT_v2", "label": "Over 0.5 FT Betfair", "odd_col": "Odd_Over05_FT_Back", "min_prob": 0.75},
+    {"scope": "Betfair", "prefix": "Lay_Home", "label": "Lay Home Betfair", "odd_col": "Odd_H_Lay", "min_prob": 0.55},
+    {"scope": "Betfair", "prefix": "Back_Away", "label": "Back Away Betfair", "odd_col": "Odd_A_Back", "min_prob": 0.30},
+    {"scope": "Betfair", "prefix": "Under15_FT", "label": "Under 1.5 FT Betfair", "odd_col": "Odd_Under15_FT_Back", "min_prob": 0.55},
+    {"scope": "Betfair", "prefix": "Back_Home", "label": "Back Home Betfair", "odd_col": "Odd_H_Back", "min_prob": 0.40},
 ]
 
 def gerar_sinais(df_raw):
