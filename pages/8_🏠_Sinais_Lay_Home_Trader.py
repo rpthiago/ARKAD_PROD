@@ -48,7 +48,24 @@ Os Greens cobrem os Reds de forma consistente devido à alta taxa de acertos (Wi
 col1, col2 = st.columns([1, 3])
 with col1:
     target_date = st.date_input("Data dos Jogos", value=date.today())
-    gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
+    
+    st.markdown("### ⚙️ Ajustar Conservadorismo")
+    prob_threshold = st.slider(
+        "Probabilidade Mínima da IA (ML)",
+        min_value=0.45,
+        max_value=0.70,
+        value=0.56,
+        step=0.01,
+        help="Valores menores trazem mais jogos, mas reduzem a precisão histórica média."
+    )
+    
+    use_whitelist = st.checkbox(
+        "Apenas Ligas Whitelists",
+        value=True,
+        help="Se desmarcado, avalia jogos de qualquer liga disponível na API Betfair."
+    )
+    
+    gerar_btn = st.button("Pesquisar Oportunidades", type="primary", use_container_width=True)
 
 if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
@@ -57,10 +74,19 @@ if gerar_btn:
         _hist_df()
         
         # Puxa os sinais do motor
+        # Vamos passar os filtros personalizados para a estratégia
+        try:
+            import lay_home_trader_strategy
+            # Atualiza dinamicamente os parâmetros da estratégia na memória para esta execução
+            lay_home_trader_strategy.CUSTOM_PROB_THRESHOLD = prob_threshold
+            lay_home_trader_strategy.CUSTOM_USE_WHITELIST = use_whitelist
+        except Exception:
+            pass
+            
         sinais_brutos = sinais_do_dia(date_str)
         
         if not sinais_brutos:
-            st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada).")
+            st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada) com os filtros atuais.")
         else:
             df = pd.DataFrame(sinais_brutos)
             

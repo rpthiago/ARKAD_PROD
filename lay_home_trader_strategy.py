@@ -47,21 +47,29 @@ def normalize_live_data(live_payload):
     return normalized
 
 
+CUSTOM_PROB_THRESHOLD = 0.56
+CUSTOM_USE_WHITELIST = True
+
+
 def check_entry_conditions(match_state):
     odd_back = match_state.get('Odd_H_FT') or 0.0
     if pd.isna(odd_back) or odd_back < 1.40 or odd_back > 2.50:
         return False, "ODD_FORA_FAIXA"
 
     prob_ml = match_state.get('Prob_ML', 0.0)
-    if prob_ml < 0.56:
+    prob_cutoff = globals().get('CUSTOM_PROB_THRESHOLD', 0.56)
+    use_whitelist = globals().get('CUSTOM_USE_WHITELIST', True)
+
+    if prob_ml < prob_cutoff:
         return False, "PROB_BAIXA"
 
-    league = match_state.get('League', '')
-    if os.path.exists(LIGAS_PATH):
-        with open(LIGAS_PATH, 'r', encoding='utf-8') as f:
-            ligas_whitelisted = [l.strip() for l in f.read().split(',') if l.strip()]
-        if league not in ligas_whitelisted:
-            return False, "LIGA_BLOQUEADA"
+    if use_whitelist:
+        league = match_state.get('League', '')
+        if os.path.exists(LIGAS_PATH):
+            with open(LIGAS_PATH, 'r', encoding='utf-8') as f:
+                ligas_whitelisted = [l.strip() for l in f.read().split(',') if l.strip()]
+            if league not in ligas_whitelisted:
+                return False, "LIGA_BLOQUEADA"
 
     return True, "APROVADO"
 
