@@ -13,16 +13,12 @@ st.set_page_config(
     layout="wide",
 )
 
-# Adiciona o repo do robô ao PATH para rodar os métodos
-REPO_ROBOS = r"c:\Users\thiag\OneDrive\Documentos\GitHub\DASHBOARD_ARKAD-1"
-if REPO_ROBOS not in sys.path:
-    sys.path.append(REPO_ROBOS)
-
 try:
+    import coleta_lay_cs_aovivo
     from coleta_lay_cs_aovivo import sinais_do_dia, _hist_df, MERCADOS
     import b365_data_utils
 except ImportError as e:
-    st.error(f"Erro ao importar robôs (DASHBOARD_ARKAD-1 não encontrado ou incompatível): {e}")
+    st.error(f"Erro ao carregar os módulos locais do Lay 0x1: {e}")
     st.stop()
 
 st.title("🎯 Sinais Lay 0x1 - Sweet Spot")
