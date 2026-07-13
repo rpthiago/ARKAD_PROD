@@ -71,12 +71,15 @@ with col2:
         f"R$ {responsabilidade:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")
     )
     
+    stop_diario = responsabilidade * 0.50
+    
     st.info(f"""
     **Instruções Práticas:**
     1. Vá para a página de **Sinais**.
     2. No software da Betfair (ex: Wagertool, Layback), configure o **Lucro (Back)** para `R$ {lucro_desejado:.2f}`.
     3. Confirme que você tem, no mínimo, `R$ {responsabilidade:.2f}` de saldo livre na corretora para entrar na operação com a Odd média de {odd_media}.
-    4. Programe o **Cashout automático para o minuto 60**. (Risco estimado no Red será em torno de 45% a 60% dessa responsabilidade).
+    4. Programe o **Cashout automático para o minuto 60**. (A perda por cashout varia de 10% a 30% da Responsabilidade).
+    5. 🛑 **Stop Loss Diário:** O seu limite máximo de perda no dia é de **R$ {stop_diario:.2f}** (50% da Responsabilidade). Se a soma dos seus Reds bater esse valor, pare de operar no dia!
     """)
 
 st.divider()
