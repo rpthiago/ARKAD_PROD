@@ -131,6 +131,14 @@ def load_b365_historical() -> pd.DataFrame:
         except Exception:
             pass
 
+    # Tenta usar a base de 2026 se a completa não existir
+    local_path_2026 = Path(__file__).resolve().parent / "Resultados_2026_Full.csv"
+    if local_path_2026.exists():
+        try:
+            return _normalize_b365(pd.read_csv(local_path_2026, low_memory=False))
+        except Exception:
+            pass
+
     # Base ENXUTA committada (para a nuvem, que nao tem a base full de 114MB e nao
     # consegue baixa-la sem timeout/OOM). Colunas suficientes p/ os metodos ativos.
     lean_path = Path(__file__).resolve().parent / "b365_base_lean.csv"

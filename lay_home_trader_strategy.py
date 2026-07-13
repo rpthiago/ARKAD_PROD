@@ -48,12 +48,12 @@ def normalize_live_data(live_payload):
 
 
 def check_entry_conditions(match_state):
-    odd_lay = match_state.get('Odd_H_Lay') or 0.0
-    if pd.isna(odd_lay) or odd_lay < 1.30 or odd_lay > 5.00:
+    odd_back = match_state.get('Odd_H_FT') or 0.0
+    if pd.isna(odd_back) or odd_back < 1.40 or odd_back > 2.50:
         return False, "ODD_FORA_FAIXA"
 
     prob_ml = match_state.get('Prob_ML', 0.0)
-    if prob_ml < 0.70:
+    if prob_ml < 0.56:
         return False, "PROB_BAIXA"
 
     league = match_state.get('League', '')
@@ -83,6 +83,17 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         df_hist = df_hist[df_hist['Date'].dt.date < first_game_date].copy()
 
     df_hist = df_hist.sort_values('Date').reset_index(drop=True)
+
+    # Renomeia as colunas se vierem da base full de 2026
+    rename_map = {
+        'Shots_H': 'Total_Shots_H_FT',
+        'Shots_A': 'Total_Shots_A_FT',
+        'ShotsOnTarget_H': 'Shots_On_Target_H_FT',
+        'ShotsOnTarget_A': 'Shots_On_Target_A_FT',
+        'xG_H': 'xG_H_FT',
+        'xG_A': 'xG_A_FT',
+    }
+    df_hist = df_hist.rename(columns=rename_map)
 
     stats_cols = ['Total_Shots_H_FT', 'Total_Shots_A_FT',
                   'Shots_On_Target_H_FT', 'Shots_On_Target_A_FT',
