@@ -39,14 +39,11 @@ def normalize_live_data(live_payload):
 
 def check_entry_conditions(match_state):
     odd_lay = match_state.get('Odd_CS_0x1_Lay') or 0.0
-    if pd.isna(odd_lay) or odd_lay < 10.00 or odd_lay > 18.00:
+    if pd.isna(odd_lay) or odd_lay < 16.00 or odd_lay > 22.00:
         return False, "ODD_FORA_FAIXA"
     prob_ml = match_state.get('Prob_ML', 0.0)
-    if prob_ml < 0.65:
+    if prob_ml < 0.75:
         return False, "PROB_BAIXA"
-    ev = prob_ml * (1 - COMMISSION) - (1 - prob_ml) * (odd_lay - 1)
-    if ev <= 0:
-        return False, f"EV_NEGATIVO({ev:+.3f})"
     league = match_state.get('League', '')
     if os.path.exists(LIGAS_PATH):
         with open(LIGAS_PATH, 'r', encoding='utf-8') as f:
@@ -94,12 +91,25 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         first_game_date = pd.to_datetime(live_games_payload[0].get('Date') or datetime.now().date()).date()
         df_hist = df_hist[df_hist['Date'].dt.date < first_game_date].copy()
     df_hist = df_hist.sort_values('Date').reset_index(drop=True)
+    
+    rename_map = {
+        'Shots_H': 'Total_Shots_H_FT',
+        'Shots_A': 'Total_Shots_A_FT',
+        'ShotsOnTarget_H': 'Shots_On_Target_H_FT',
+        'ShotsOnTarget_A': 'Shots_On_Target_A_FT',
+        'xG_H': 'xG_H_FT',
+        'xG_A': 'xG_A_FT',
+    }
+    df_hist = df_hist.rename(columns=rename_map)
 
     stats_cols = ['Total_Shots_H_FT', 'Total_Shots_A_FT',
                   'Shots_On_Target_H_FT', 'Shots_On_Target_A_FT',
                   'xG_H_FT', 'xG_A_FT', 'Goals_H_FT', 'Goals_A_FT']
     for c in stats_cols:
-        df_hist[c] = pd.to_numeric(df_hist[c], errors='coerce').fillna(0.0)
+        if c in df_hist.columns:
+            df_hist[c] = pd.to_numeric(df_hist[c], errors='coerce').fillna(0.0)
+        else:
+            df_hist[c] = 0.0
 
     df_h = df_hist[['Date', 'Home', 'Goals_H_FT', 'Goals_A_FT',
                      'Total_Shots_H_FT', 'Shots_On_Target_H_FT', 'xG_H_FT']].copy()

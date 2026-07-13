@@ -30,6 +30,21 @@ def _carregar() -> pd.DataFrame:
             st.warning(f"Erro ao ler {Path(arq).name}: {e}")
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
 
+def _pnl_lay0x1_full_match(row: pd.Series) -> float:
+    status = str(row.get("status", "")).strip().upper()
+    if status != "ENCERRADO":
+        return np.nan
+    placar = str(row.get("Placar_final", "")).strip()
+    odd_entrada = pd.to_numeric(row.get("Odd_lay_entrada"), errors="coerce")
+    if pd.isna(odd_entrada) or odd_entrada <= 1:
+        return np.nan
+    if placar == "0-1":
+        # Perde a responsabilidade/responsabilidade total (Odd - 1)
+        return -round(odd_entrada - 1, 2)
+    else:
+        # Ganha a stake (1 unit) livre de comissão (6.5%)
+        return round(1.0 * (1 - 0.065), 2)
+
 def _pnl_lay0x1_rota60(row: pd.Series) -> float:
     # 1. Se o jogo não está encerrado, NaN
     status = str(row.get("status", "")).strip().upper()
@@ -44,7 +59,6 @@ def _pnl_lay0x1_rota60(row: pd.Series) -> float:
         return np.nan
         
     # Verifica se bateu 0x1
-    # O Momento_gols gerado pela rotina é algo como "Casa: 80 | Fora: 10, 53"
     try:
         gols_timeline = []
         for parte in momento.split("|"):
@@ -71,7 +85,7 @@ def _pnl_lay0x1_rota60(row: pd.Series) -> float:
             
             # Se o Home marcar, ou Away marcar 2 (impossibilita o 0x1) -> Green
             if score_h > 0 or score_a > 1:
-                return 1.0
+                return round(1.0 * (1 - 0.065), 2)
                 
         # Chegou aos 60 minutos sem Green (Placar 0x0 ou 0x1)
         odd_min60_manual = pd.to_numeric(row.get("PREENCHER_odd_min60"), errors="coerce")
@@ -83,14 +97,14 @@ def _pnl_lay0x1_rota60(row: pd.Series) -> float:
                 # Placar 0-0 aos 60 mins -> Decay médio de 55%
                 odd_exit = odd_entrada * 0.45 
             elif score_h == 0 and score_a == 1:
-                # Placar 0-1 aos 60 mins -> Decay gigante (Odds desabam para ~20% do valor)
+                # Placar 0-1 aos 60 mins -> Decay gigante
                 odd_exit = odd_entrada * 0.20
             else:
                 odd_exit = 1.01
                 
         if odd_exit <= 1.01: odd_exit = 1.01
         
-        # Formula Lay PL = 1 - (Odd Entrada / Odd Saida)
+        # Formula Lay PL em Stakes = 1 - (Odd Entrada / Odd Saida)
         return round(1 - (odd_entrada / odd_exit), 2)
 
     except Exception:
@@ -99,19 +113,29 @@ def _pnl_lay0x1_rota60(row: pd.Series) -> float:
 
 # ── App ───────────────────────────────────────────────────────────────────────
 
-st.title("📊 Resultados Lay 0x1 - Rota 60")
-st.markdown("Monitoramento absoluto das suas entradas no Lay 0x1. Jogue as planilhas de *paper trading* na pasta `paper_trading_lay0x1` e a Inteligência calculará o P/L exato baseado no momento dos gols, assumindo o cashout no minuto 60.")
+st.title("📊 Resultados Lay 0x1 (Monitor de Lucros)")
+st.markdown("Acompanhe o desempenho das suas planilhas de *paper trading* do Lay 0x1. Salve os arquivos gerados pela Página 5 na pasta `paper_trading_lay0x1` e acompanhe os gráficos de evolução da banca.")
+
+# Configuração do Tipo de Liquidação no Sidebar
+tipo_liquidacao = st.sidebar.selectbox(
+    "Escolha a Regra de Liquidação",
+    ["Full Match (Segurar até o final)", "Rota 60 (Cash Out aos 60 min)"],
+    index=0,
+    help="O backtest provou que o Full Match é o cenário mais lucrativo a longo prazo."
+)
 
 df = _carregar()
 if df.empty:
-    st.info(f"📂 Nenhuma planilha `.xlsx` encontrada na pasta `{DIR_APOSTAS}`.")
+    st.info(f"📂 Nenhuma planilha `.xlsx` de paper trading encontrada na pasta `{DIR_APOSTAS}`. Gere os sinais na Página 5 e salve-os lá.")
     st.stop()
 
-df["PnL"] = df.apply(_pnl_lay0x1_rota60, axis=1)
+# Aplica a função de PnL correta conforme a seleção do usuário
+if tipo_liquidacao.startswith("Full Match"):
+    df["PnL"] = df.apply(_pnl_lay0x1_full_match, axis=1)
+else:
+    df["PnL"] = df.apply(_pnl_lay0x1_rota60, axis=1)
 
 # Separar apostas reais das Voids
-# Void (PnL == 0.0) significa que a condição de entrada não foi atingida ou foi pós 60 min.
-# Pendentes (PnL isna) significa jogo ainda não disputado.
 pendentes = df[df["PnL"].isna()].copy()
 resolvidas = df[(df["PnL"].notna()) & (df["PnL"] != 0.0)].copy()
 voids = df[(df["PnL"].notna()) & (df["PnL"] == 0.0)].copy()
@@ -122,12 +146,12 @@ lucro  = float(resolvidas["PnL"].sum())
 wr     = greens / (greens + reds) * 100 if (greens + reds) > 0 else 0.0
 
 c1, c2, c3, c4, c5 = st.columns(5)
-c1.metric("Entradas 0x1 Resolvidas", len(resolvidas))
+c1.metric("Entradas Resolvidas", len(resolvidas))
 c2.metric("Win Rate", f"{wr:.1f}%")
 c3.metric("Greens / Reds", f"{greens}G / {reds}R")
 c4.metric("Descartados (Void)", len(voids))
 sinal = "+" if lucro > 0 else ""
-c5.metric("Lucro Líquido (Unidades)", f"{sinal}{lucro:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
+c5.metric("P&L Acumulado (Stakes)", f"{sinal}{lucro:,.2f}".replace(",", "X").replace(".", ",").replace("X", "."))
 
 st.divider()
 
@@ -143,13 +167,13 @@ if not df_ord.empty:
         mode="lines+markers",
         line=dict(color="#27ae60" if lucro >= 0 else "#e74c3c", width=2),
         fill="tozeroy",
-        hovertemplate="Aposta: %{x}<br>Lucro Acumulado: %{y:.2f} U<extra></extra>"
+        hovertemplate="Aposta: %{x}<br>P&L Acumulado: %{y:.2f} Stakes<extra></extra>"
     ))
 fig.add_hline(y=0, line_dash="dash", line_color="gray")
 fig.update_layout(
-    title="Evolução do P&L Acumulado (Saída Travada Minuto 60)",
-    xaxis_title="Nº Aposta Executada (Bateu 0x1)",
-    yaxis_title="Lucro Acumulado (Unidades)",
+    title=f"Evolução da Banca ({tipo_liquidacao})",
+    xaxis_title="Nº Aposta Executada",
+    yaxis_title="Retorno Acumulado (Stakes)",
     height=320,
     margin=dict(l=0, r=0, t=30, b=0),
 )
@@ -160,18 +184,21 @@ st.divider()
 # ── Tabela principal ──────────────────────────────────────────────────────────
 st.subheader("📋 Histórico de Operações (Somente Entradas Confirmadas)")
 
-cols_exibir = ["Date", "Horario", "Liga", "Mandante", "Visitante", "Metodo", "Odd_lay_entrada", "Momento_gols", "PnL"]
+cols_exibir = ["Date", "Horario", "Liga", "Mandante", "Visitante", "Metodo", "Odd_lay_entrada", "Placar_final", "Momento_gols", "PnL"]
 tbl = df_ord[cols_exibir].copy() if not df_ord.empty else pd.DataFrame(columns=cols_exibir)
 
+# Renomeia colunas para ficar elegante
+tbl.columns = ["Data", "Horário", "Liga", "Mandante", "Visitante", "Modelo", "Odd Lay", "Placar Final", "Minuto Gols", "Retorno (Stakes)"]
+
 def _cor(row: pd.Series) -> list:
-    v = row.get("PnL", 0)
+    v = row.get("Retorno (Stakes)", 0)
     if v > 0:
         return ["background-color: #d1fae5; color: #065f46"] * len(row)
     if v < 0:
         return ["background-color: #fee2e2; color: #991b1b"] * len(row)
     return ["color: #6b7280"] * len(row)
 
-fmt = {"PnL": "{:+,.2f} U", "Odd_lay_entrada": "{:.2f}"}
+fmt = {"Retorno (Stakes)": "{:+,.2f} U", "Odd Lay": "{:.2f}"}
 
 if not tbl.empty:
     st.dataframe(

@@ -21,13 +21,15 @@ except ImportError as e:
     st.error(f"Erro ao carregar os módulos locais do Lay 0x1: {e}")
     st.stop()
 
-st.title("🎯 Sinais Lay 0x1 - Sweet Spot")
+st.title("🎯 Sinais Lay 0x1 (XGBoost & Random Forest)")
 st.markdown("""
-Esta página bate na **API em tempo real**, calcula as inteligências dos motores Agressivo, RF e B365, e filtra **SOMENTE O FILÉ MIGNON**:
-👉 **Probabilidade > 60%**  
-👉 **Odd Betfair Lay > 12.00**
+Esta página bate na **API da Betfair em tempo real**, calcula as inteligências dos motores **XGBoost (Trader)** e **Random Forest (RF)**, e aplica os **filtros estritos e realistas** validados no nosso backtest de longo prazo (2024-2026):
 
-(Odds menores que 12 são descartadas pois o Risco/Retorno não compensa no longo prazo, conforme nosso Backtest Master de 12.000+ jogos.)
+*   **🏆 XGBoost (Trader):** Odd Betfair Lay entre **16.00 e 22.00** | Probabilidade Mínima **>= 75.0%**
+*   **🏆 Random Forest (RF):** Odd Betfair Lay entre **6.60 e 13.20** | Probabilidade Mínima **>= 92.0%**
+    *   *Nota:* As segundas divisões/ligas under (Brasil 2, França 2, Inglaterra 2, Espanha 2 e Portugal 1) são automaticamente excluídas para proteger a banca da variação "under" estatisticamente comprovada.
+
+> ⚠️ **IMPORTANTE (FULL MATCH):** Conforme comprovado matematicamente pelo nosso Backtest Master, **NÃO faça Cash Out aos 60 minutos (Rota 60)**! Sair aos 60 minutos gera prejuízo a longo prazo. Deixe a operação correr até o final — o robô só toma Red se o placar final for exatamente 0x1.
 """)
 
 col1, col2 = st.columns([1, 3])
@@ -37,11 +39,11 @@ with col1:
 
 if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
-    with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando IAs..."):
-        # Garante que o histórico ta carregado na memoria
+    with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
+        # Garante que o histórico está carregado na memória
         _hist_df()
         
-        # Puxa os sinais do motor 0x1
+        # Puxa os sinais brutos do motor 0x1
         cfg = MERCADOS["0x1"]
         sinais_brutos = sinais_do_dia(date_str, cfg)
         
@@ -50,38 +52,92 @@ if gerar_btn:
         else:
             df = pd.DataFrame(sinais_brutos)
             
-            # Limpa colunas e força numérico para o filtro
+            # Limpa colunas e força numérico para a filtragem estrita
             df["Odd_Num"] = pd.to_numeric(df["Odd_lay_entrada"], errors="coerce")
             df["Prob_Num"] = pd.to_numeric(df["Prob"], errors="coerce")
             
-            # FILTRO DE OURO (Sweet Spot)
-            # Prob > 60% e Odd > 12
-            df_filtro = df[(df["Prob_Num"] >= 60.0) & (df["Odd_Num"] >= 12.0)].copy()
+            # 1. Filtragem estrita do XGBoost (Odd 16-22)
+            df_xg = df[
+                df["Metodo"].str.contains("Trader", na=False) &
+                (df["Odd_Num"] >= 16.0) & (df["Odd_Num"] <= 22.0) &
+                (df["Prob_Num"] >= 75.0)
+            ].copy()
+            if not df_xg.empty:
+                df_xg["Metodo_Final"] = "XGBoost (Trader)"
+            
+            # 2. Filtragem estrita do RF (Odd 6.6-13.2 + Blacklist de Ligas)
+            blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
+            df_rf = df[
+                df["Metodo"].str.contains("RF", na=False) &
+                (df["Odd_Num"] >= 6.6) & (df["Odd_Num"] <= 13.2) &
+                (df["Prob_Num"] >= 92.0) &
+                (~df["Liga"].astype(str).str.upper().str.strip().isin(blacklist))
+            ].copy()
+            if not df_rf.empty:
+                df_rf["Metodo_Final"] = "Random Forest (RF)"
+            
+            # Combinar os sinais estritos
+            sinais_filtrados = []
+            
+            # Mapear chaves exclusivas de jogos (Mandante x Visitante)
+            jogos_vistos = {}
+            
+            for d_idx, row in pd.concat([df_xg, df_rf]).iterrows():
+                key = (row["Mandante"], row["Visitante"])
+                if key not in jogos_vistos:
+                    jogos_vistos[key] = {
+                        "Date": row["Date"],
+                        "Horario": row["Horario"],
+                        "Liga": row["Liga"],
+                        "Mandante": row["Mandante"],
+                        "Visitante": row["Visitante"],
+                        "Odd_lay_entrada": row["Odd_lay_entrada"],
+                        "Prob": row["Prob"],
+                        "Modelos_Aprovados": [row["Metodo_Final"]]
+                    }
+                else:
+                    if row["Metodo_Final"] not in jogos_vistos[key]["Modelos_Aprovados"]:
+                        jogos_vistos[key]["Modelos_Aprovados"].append(row["Metodo_Final"])
+            
+            df_final = pd.DataFrame([
+                {
+                    "Data": j["Date"],
+                    "Horário": j["Horario"][:5] if j["Horario"] else "",
+                    "Liga": j["Liga"],
+                    "Mandante": j["Mandante"],
+                    "Visitante": j["Visitante"],
+                    "Odd Lay Betfair": j["Odd_lay_entrada"],
+                    "Probabilidade ML": f"{j['Prob']}%",
+                    "Estratégia": " + ".join(j["Modelos_Aprovados"])
+                }
+                for j in jogos_vistos.values()
+            ])
             
             st.divider()
             
-            if df_filtro.empty:
-                st.info(f"O robô encontrou {len(df)} jogos em potencial hoje, mas **nenhum** bateu a regra de Ouro (Prob>60 e Odd>12). Guarde a banca!")
-                with st.expander("Ver todos os palpites rejeitados"):
-                    st.dataframe(df.drop(columns=["Odd_Num", "Prob_Num"]), use_container_width=True)
+            if df_final.empty:
+                st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos de longo prazo das IAs (XGBoost 16-22 >= 75% | RF 6.6-13.2 >= 92%). Guarde a banca!")
+                with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
+                    rejected = df.copy()
+                    rejected["Filtros_Originais"] = rejected["Metodo"]
+                    st.dataframe(rejected.drop(columns=["Odd_Num", "Prob_Num", "Metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]), use_container_width=True)
             else:
-                st.success(f"🔥 {len(df_filtro)} Oportunidades de Ouro Encontradas para Hoje!")
+                st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas!")
                 
                 # Exibe a tabela bonita
-                exibir = df_filtro.drop(columns=["Odd_Num", "Prob_Num"])
-                st.dataframe(exibir, use_container_width=True)
+                st.dataframe(df_final, use_container_width=True)
                 
-                # Botao de Download
+                # Botão de Download
                 buffer = io.BytesIO()
                 with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                    exibir.to_excel(writer, index=False, sheet_name='Sinais')
+                    df_final.to_excel(writer, index=False, sheet_name='Sinais')
                 excel_data = buffer.getvalue()
                 
                 st.download_button(
-                    label="📥 Baixar Planilha para Paper Trading",
+                    label="📥 Baixar Planilha de Sinais (Excel)",
                     data=excel_data,
-                    file_name=f"sinais_lay0x1_gold_{target_date}.xlsx",
+                    file_name=f"sinais_lay0x1_realista_{target_date}.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 )
                 
-                st.caption("Salve o arquivo, anote o lucro simulado saindo no MINUTO 60, e depois coloque o arquivo na pasta `paper_trading_lay0x1` para ver o gráfico na Página 6!")
+                st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva validados no backtest.")

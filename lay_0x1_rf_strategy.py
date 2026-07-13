@@ -108,12 +108,18 @@ def normalize_live_data(live_payload):
 
 def check_entry_conditions(match_state):
     odd_lay = match_state.get("Odd_CS_0x1_Lay") or 0.0
-    if pd.isna(odd_lay) or odd_lay < 6.0 or odd_lay > 12.0:
+    if pd.isna(odd_lay) or odd_lay < 6.6 or odd_lay > 13.2:
         return False, "ODD_FORA_FAIXA"
 
     prob_ml = match_state.get("Prob_ML", 0.0)
     if prob_ml < 0.92:
         return False, "PROB_BAIXA"
+
+    # Blacklist de segundas divisões/ligas under com significância estatística
+    league = str(match_state.get("League", "")).strip().upper()
+    blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
+    if league in blacklist:
+        return False, "LIGA_BLOQUEADA"
 
     return True, "APROVADO"
 
