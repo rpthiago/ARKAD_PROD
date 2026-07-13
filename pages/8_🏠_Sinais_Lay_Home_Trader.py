@@ -23,7 +23,7 @@ except ImportError as e:
 st.title("🏠 Sinais Lay Home Trader (Oportunidades)")
 st.markdown("""
 Esta página bate na **API em tempo real**, calcula as inteligências do motor Lay Home Trader (XGBoost), e filtra **SOMENTE AS OPORTUNIDADES AUDITADAS**:
-👉 **Probabilidade ML > 56%**  
+👉 **Probabilidade ML > 52%** (Ajustável)  
 👉 **Odd Back Home entre 1.40 e 2.50**
 
 ---
@@ -54,14 +54,14 @@ with col1:
         "Probabilidade Mínima da IA (ML)",
         min_value=0.45,
         max_value=0.70,
-        value=0.56,
+        value=0.52,
         step=0.01,
         help="Valores menores trazem mais jogos, mas reduzem a precisão histórica média."
     )
     
     use_whitelist = st.checkbox(
         "Apenas Ligas Whitelists",
-        value=True,
+        value=False,
         help="Se desmarcado, avalia jogos de qualquer liga disponível na API Betfair."
     )
     

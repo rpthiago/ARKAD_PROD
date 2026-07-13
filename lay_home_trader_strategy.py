@@ -47,8 +47,8 @@ def normalize_live_data(live_payload):
     return normalized
 
 
-CUSTOM_PROB_THRESHOLD = 0.56
-CUSTOM_USE_WHITELIST = True
+CUSTOM_PROB_THRESHOLD = 0.52
+CUSTOM_USE_WHITELIST = False
 
 
 def check_entry_conditions(match_state):
