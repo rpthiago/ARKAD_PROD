@@ -23,11 +23,26 @@ except ImportError as e:
 st.title("🏠 Sinais Lay Home Trader (Oportunidades)")
 st.markdown("""
 Esta página bate na **API em tempo real**, calcula as inteligências do motor Lay Home Trader (XGBoost), e filtra **SOMENTE AS OPORTUNIDADES AUDITADAS**:
-👉 **Probabilidade ML > 56% (Média da Planilha)**  
+👉 **Probabilidade ML > 56%**  
 👉 **Odd Back Home entre 1.40 e 2.50**
 
-**Gestão de Banca Sugerida:**
-Utilize uma Stake fixa de **1% da banca**. Como a odd média enfrentada é em torno de 4.30 (no Lay), a perda máxima será de ~3.3% num Red. Os Greens cobrem os Reds de forma consistente devido à alta taxa de acertos (Win Rate de 76%).
+---
+### 📋 REGRAS DE OPERAÇÃO (O MÉTODO)
+
+**1. ENTRADA:**
+- **Quando:** Pré-live ou nos primeiros minutos de jogo.
+- **Como:** Fazer o **LAY ao Mandante** na Betfair (ou apostar dupla chance Empate/Visitante na sua casa de apostas).
+- **Filtro de Odd:** Só entre se a Odd de Back ao Mandante estiver entre **1.40 e 2.50**.
+
+**2. SAÍDAS (CASH OUT):**
+- ❌ **Gol do Mandante:** Cash Out Imediato (Stop Loss). A perda média esperada nesta situação é de **-31%** da responsabilidade.
+- ✅ **Gol do Visitante:** Cash Out Imediato (Take Profit). O lucro médio esperado é de **+56%** da stake investida.
+- ⏱️ **0x0 no Intervalo (HT):** Cash Out no apito do primeiro tempo. O lucro médio com a desvalorização da odd do favorito é de **+21.5%**.
+
+---
+### 💰 GESTÃO DE BANCA
+Utilize uma Stake fixa de **1% da banca**. Como a odd média enfrentada é em torno de 4.30 (no Lay), a perda máxima total (se não conseguir fazer o cash out e o jogo acabar com vitória do mandante) será de ~3.3% num Red. 
+Os Greens cobrem os Reds de forma consistente devido à alta taxa de acertos (Win Rate de 76%).
 """)
 
 col1, col2 = st.columns([1, 3])
