@@ -61,41 +61,37 @@ def _pnl_lay0x1_rota60(row: pd.Series) -> float:
         gols_timeline = sorted(gols_timeline, key=lambda x: x["min"])
         
         score_h, score_a = 0, 0
-        entry_min, win_min = None, None
         
         for g in gols_timeline:
+            if g["min"] > 60:
+                break
+            
             if g["team"] == "H": score_h += 1
             else: score_a += 1
             
-            if score_h == 0 and score_a == 1 and entry_min is None:
-                entry_min = g["min"]
-            elif entry_min is not None and win_min is None:
-                win_min = g["min"]
+            # Se o Home marcar, ou Away marcar 2 (impossibilita o 0x1) -> Green
+            if score_h > 0 or score_a > 1:
+                return 1.0
                 
-        # Se não chegou a 0x1 (ex: casa fez o primeiro gol, ou terminou 0x0)
-        if entry_min is None:
-            return 0.0 # Void (Não entramos)
-            
-        # Avaliando ROTA 60
-        if entry_min < 60:
-            if win_min is not None and win_min <= 60:
-                # Alguém fez gol antes dos 60, saimos com Green
-                return 1.0 
-            else:
-                # Ninguem fez gol, cashout (Red Parcial) aos 60
-                odd_min60_manual = pd.to_numeric(row.get("PREENCHER_odd_min60"), errors="coerce")
-                if pd.notna(odd_min60_manual) and odd_min60_manual > 1:
-                    odd_exit = odd_min60_manual
-                else:
-                    # Decay matemático validado no backtest (cai 55%)
-                    odd_exit = odd_entrada * 0.45 
-                
-                if odd_exit <= 1.01: odd_exit = 1.01
-                
-                # Formula Lay PL = 1 - (Odd Entrada / Odd Saida)
-                return round(1 - (odd_entrada / odd_exit), 2)
+        # Chegou aos 60 minutos sem Green (Placar 0x0 ou 0x1)
+        odd_min60_manual = pd.to_numeric(row.get("PREENCHER_odd_min60"), errors="coerce")
+        
+        if pd.notna(odd_min60_manual) and odd_min60_manual > 1:
+            odd_exit = odd_min60_manual
         else:
-            return 0.0 # 0x1 aconteceu muito tarde (após os 60), Void.
+            if score_h == 0 and score_a == 0:
+                # Placar 0-0 aos 60 mins -> Decay médio de 55%
+                odd_exit = odd_entrada * 0.45 
+            elif score_h == 0 and score_a == 1:
+                # Placar 0-1 aos 60 mins -> Decay gigante (Odds desabam para ~20% do valor)
+                odd_exit = odd_entrada * 0.20
+            else:
+                odd_exit = 1.01
+                
+        if odd_exit <= 1.01: odd_exit = 1.01
+        
+        # Formula Lay PL = 1 - (Odd Entrada / Odd Saida)
+        return round(1 - (odd_entrada / odd_exit), 2)
 
     except Exception:
         # Se der erro no parse, usamos Void
