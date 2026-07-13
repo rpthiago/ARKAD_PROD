@@ -41,7 +41,7 @@ with col1:
     
     if banca_atual < LIMITE_ALAVANCAGEM:
         st.success(f"🔥 Fase 1: ALAVANCAGEM ATIVADA (Banca abaixo de R$ 30k)")
-        stake_percentual = 15.0
+        stake_percentual = 25.0
     else:
         st.warning(f"🛡️ Fase 2: MODO PRESERVAÇÃO. Patrimônio acima de R$ 30k.")
         stake_percentual = st.slider(
