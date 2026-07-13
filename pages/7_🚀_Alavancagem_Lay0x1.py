@@ -50,8 +50,10 @@ with col1:
         )
 
 # ---- CÁLCULOS DO DIA ----
-lucro_desejado = banca_atual * (stake_percentual / 100)
-responsabilidade = lucro_desejado * (odd_media - 1)
+# No Lay, a % de alavancagem dita o RISCO (Liability), não o lucro.
+responsabilidade = banca_atual * (stake_percentual / 100)
+# A Stake (Lucro Desejado) é a responsabilidade dividida pelo risco da odd
+lucro_desejado = responsabilidade / (odd_media - 1)
 
 with col2:
     st.subheader("📋 O Que Você Deve Fazer Hoje (No Software)")
