@@ -88,30 +88,30 @@ st.markdown("Veja como a sua banca se comportará em uma sequência perfeita bas
 num_apostas = st.slider("Simular quantidade de jogos (Entradas 0x1):", 10, 500, 100)
 
 def simular_alavancagem_perfeita(banca_inicial, num_games):
-    # Simulação teórica (determinística) baseada no WR líquido e Perdas
-    # Crescimento esperado por jogo = (WR * Stake) + (LossRate * Perda_Media)
-    # A perda media (Decay cashout) é ~ -1.22 * Stake (quando Odd=13).
-    # Vamos projetar o crescimento medio de um trade (EV puro)
+    # O EV (Valor Esperado) da Rota 60 em unidades de Stake:
+    # Win Rate = 66.8%, Lucro = +1.0, Perda Media (Cashout) = -1.22
     wr = 0.668
     loss_rate = 1 - wr
-    # Ao bater 0x1, ganhamos a Stake. No cashout min60, perdemos ~ 1.22x a Stake
-    ev_multiplier = (wr * 1.0) + (loss_rate * (-1.22)) 
+    ev_stake_units = (wr * 1.0) + (loss_rate * (-1.22)) # Aprox +0.263
     
-    # Retorno percentual medio da banca por aposta (EV * Porcentagem da Stake)
-    # Ex: EV_multiplier = 0.668 - 0.405 = +0.263 unidades por aposta no longo prazo
-    # Crescimento medio % = Stake_Percentual * 0.263
-    crescimento_medio_por_aposta = (stake_percentual / 100) * ev_multiplier
+    # A proporcao entre Stake e Liability é dada pela Odd - 1
+    # Se a Liability (Risco) é 15% da banca, a Stake é (15% / (Odd - 1))
+    fator_risco = odd_media - 1
     
     evolucao = [banca_inicial]
     banca_temp = banca_inicial
     
     for i in range(num_games):
-        # Limite dos 30k
         if banca_temp < 30000:
-            crescimento = (15.0 / 100) * ev_multiplier
+            porcentagem_risco = 15.0 / 100  # Arrisca 15% da banca (Liability)
         else:
-            # Finge que cravou nos 3% pos 30k
-            crescimento = (3.0 / 100) * ev_multiplier
+            porcentagem_risco = 3.0 / 100   # Preservação
+            
+        # A stake apostada como fracao da banca:
+        fracao_stake = porcentagem_risco / fator_risco
+        
+        # Crescimento medio por aposta = fracao_stake * EV
+        crescimento = fracao_stake * ev_stake_units
             
         banca_temp = banca_temp * (1 + crescimento)
         evolucao.append(banca_temp)
