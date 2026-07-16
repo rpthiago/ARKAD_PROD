@@ -98,6 +98,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
     df_hist["_0x0_flag"] = ((df_hist["Goals_H_FT"] + df_hist["Goals_A_FT"]) == 0).astype(float)
 
+    import difflib
     # Vista HOME
     dh = df_hist[["Date","Home","Goals_H_FT","Goals_A_FT","xGOT_H_FT","xGOT_Faced_H_FT",
                   "Goals_Prevented_H_FT","Big_Chances_H_FT","Shots_On_Target_H_FT","Possession_H_FT","_0x0_flag"]].copy()
@@ -135,6 +136,9 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         lambda x: x.shift(1).rolling(100, min_periods=20).mean())
     liga_last = df_lig.groupby("League")["liga_0x0_rate"].last().to_dict()
 
+    unique_homes = home_last["_canon"].dropna().unique()
+    unique_aways = away_last["_canon"].dropna().unique()
+
     evaluated = []
     for g in live_games_payload:
         home   = str(g.get("Home") or g.get("HomeTeam") or "")
@@ -147,6 +151,27 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
         sh = home_last[home_last["_canon"] == hc]
         sa = away_last[away_last["_canon"] == ac]
+        
+        if sh.empty:
+            best_t, best_score = None, 0.0
+            for t in unique_homes:
+                score = difflib.SequenceMatcher(None, hc, t).ratio()
+                if score > best_score:
+                    best_score, best_t = score, t
+                if score > 0.95: break
+            if best_score > 0.70:
+                sh = home_last[home_last["_canon"] == best_t]
+                
+        if sa.empty:
+            best_t, best_score = None, 0.0
+            for t in unique_aways:
+                score = difflib.SequenceMatcher(None, ac, t).ratio()
+                if score > best_score:
+                    best_score, best_t = score, t
+                if score > 0.95: break
+            if best_score > 0.70:
+                sa = away_last[away_last["_canon"] == best_t]
+
         if sh.empty or sa.empty:
             continue
         sh, sa = sh.iloc[0], sa.iloc[0]
