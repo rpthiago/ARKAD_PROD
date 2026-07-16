@@ -1,3 +1,14 @@
 Resultados_2026_Full.csv
 __pycache__/
 *.pyc
+
+# Bases e caches locais grandes
+Bases_de_Dados_API_FutPythonTrader_Bet365.csv
+_betfair_*_cache.csv
+betfair_historical.csv
+betfair_snapshot.csv
+
+# Rascunhos e PKL
+scratch/
+*.pkl
+
