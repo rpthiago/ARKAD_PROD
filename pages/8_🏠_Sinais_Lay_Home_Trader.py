@@ -50,6 +50,9 @@ Os Greens cobrem os Reds de forma consistente devido à alta taxa de acertos (Wi
 
 col1, col2 = st.columns([1, 3])
 with col1:
+    import config
+    if not config.API_TOKEN:
+        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do seu Streamlit Cloud! A coleta ao vivo não funcionará sem ela.")
     target_date = st.date_input("Data dos Jogos", value=date.today())
     
     st.markdown("### ⚙️ Ajustar Conservadorismo")

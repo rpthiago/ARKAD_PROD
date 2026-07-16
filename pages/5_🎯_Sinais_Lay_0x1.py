@@ -35,6 +35,9 @@ Esta página bate na **API da Betfair em tempo real**, calcula as inteligências
 
 col1, col2 = st.columns([1, 3])
 with col1:
+    import config
+    if not config.API_TOKEN:
+        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do seu Streamlit Cloud! A coleta ao vivo não funcionará sem ela.")
     target_date = st.date_input("Data dos Jogos", value=date.today())
     gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
 
