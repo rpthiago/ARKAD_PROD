@@ -17,7 +17,6 @@ import importlib
 try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
-    from coleta_lay_cs_aovivo import sinais_do_dia, _hist_df, MERCADOS
     import b365_data_utils
 except ImportError as e:
     st.error(f"Erro ao carregar os módulos locais do Lay 0x0: {e}")
@@ -44,11 +43,11 @@ if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
     with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
         # Garante que o histórico está carregado na memória
-        _hist_df()
+        coleta_lay_cs_aovivo._hist_df()
         
         # Puxa os sinais brutos do motor 0x0
-        cfg = MERCADOS["0x0"]
-        sinais_brutos = sinais_do_dia(date_str, cfg)
+        cfg = coleta_lay_cs_aovivo.MERCADOS["0x0"]
+        sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg)
         
         if not sinais_brutos:
             st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada).")
