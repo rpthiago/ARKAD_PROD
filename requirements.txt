@@ -10,5 +10,5 @@ gunicorn
 python-dotenv
 joblib
 scikit-learn==1.4.2
-xgboost==3.2.0
+xgboost==2.1.4
 lightgbm
