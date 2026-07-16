@@ -85,11 +85,15 @@ def _hist_df():
         _HISTDF["df"] = df[dt >= corte].reset_index(drop=True)
     return _HISTDF["df"]
 
-def sinais_do_dia(date_str, cfg):
+def sinais_do_dia(date_str, cfg, diag=None):
     """Roda os MODELOS reais do metodo (Trader/RF) sobre os jogos do dia e retorna
-    exatamente os jogos que eles apostariam, marcando qual metodo pegou cada um."""
+    exatamente os jogos que eles apostariam, marcando qual metodo pegou cada um.
+    Se `diag` (dict) for passado, preenche: n_api (jogos que a API trouxe) e
+    errors (falhas por estrategia) — para a UI distinguir 'sem jogos' de 'sem sinal'."""
     from b365_data_utils import fetch_betfair_daily
     bf = fetch_betfair_daily(date_str)
+    if diag is not None:
+        diag["n_api"] = 0 if (bf is None or bf.empty) else len(bf)
     if bf is None or bf.empty: return []
     payload = bf.to_dict("records")
     hist = _hist_df()
@@ -99,6 +103,8 @@ def sinais_do_dia(date_str, cfg):
             mod = __import__(mod_name, fromlist=["predict_and_evaluate_live"])
             res = mod.predict_and_evaluate_live(payload, hist)
         except Exception as e:
+            if diag is not None:
+                diag.setdefault("errors", []).append(f"[{tag}] {mod_name}: {e}")
             print(f"    [{tag}] {mod_name}: ERRO {str(e)[:80]}"); continue
         for g in (res or []):
             if cfg["placar"] == "0-0" and g.get("Decision") != "APOSTA":

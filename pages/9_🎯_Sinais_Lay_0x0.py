@@ -51,16 +51,29 @@ if gerar_btn:
             # Garante que o histórico está carregado na memória
             coleta_lay_cs_aovivo._hist_df()
             
-            # Puxa os sinais brutos do motor 0x0
+            # Puxa os sinais brutos do motor 0x0 (com diagnóstico p/ mensagem correta)
             cfg = coleta_lay_cs_aovivo.MERCADOS["0x0"]
-            sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg)
+            diag = {}
+            sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg, diag)
         except Exception as e:
             st.error("Erro durante a execução do motor de sinais Lay 0x0:")
             st.code(traceback.format_exc())
             st.stop()
-        
+
         if not sinais_brutos:
-            st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada).")
+            n_api = diag.get("n_api", 0)
+            errs = diag.get("errors", [])
+            if errs:
+                st.error("O modelo do Lay 0x0 **falhou ao rodar** — provável dependência/versão faltando no ambiente (ex.: `xgboost` não instalado no Cloud, ou versão do `scikit-learn` incompatível com o `.pkl`). Detalhe do erro:")
+                for e in errs:
+                    st.code(e)
+            elif n_api == 0:
+                if not config.API_TOKEN:
+                    st.error(f"A API Betfair não retornou jogos para **{date_str}** — e o **FUTPYTHON_TOKEN não está nos Secrets** do Streamlit Cloud. Configure o token (Settings → Secrets) e tente de novo.")
+                else:
+                    st.warning(f"A API Betfair não retornou jogos para **{date_str}** (provável fora de temporada / grade vazia no dia).")
+            else:
+                st.info(f"✅ A API trouxe **{n_api} jogos** hoje, mas **nenhum** passou nos filtros estritos do Lay 0x0 (odd Lay ≥ 10, taxa 0x0 da liga < 12% e prob. de mercado < 10%). É normal o 0x0 ser seletivo — **guarde a banca**.")
         else:
             df = pd.DataFrame(sinais_brutos)
             

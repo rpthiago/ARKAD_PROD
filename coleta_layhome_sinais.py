@@ -56,7 +56,8 @@ def sinais_do_dia(date_str):
     return out
 
 if __name__ == "__main__":
-    hoje = datetime.datetime.now().strftime("%Y-%m-%d")
+    import pytz
+    hoje = datetime.datetime.now(pytz.timezone("America/Sao_Paulo")).strftime("%Y-%m-%d")
     sinais = sinais_do_dia(hoje)
     for s in sinais:
         print(f"{s['Date']} {s['Horario']} | {s['Liga']} | {s['Mandante']} x {s['Visitante']} | Prob: {s['Prob_ML']}% | Odd Back: {s['Odd_H_Back']}")
