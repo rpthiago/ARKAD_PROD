@@ -13,14 +13,14 @@ st.set_page_config(
     layout="wide",
 )
 
-import importlib
+import traceback
 try:
     import coleta_layhome_sinais
     importlib.reload(coleta_layhome_sinais)
-    from coleta_layhome_sinais import sinais_do_dia, _hist_df
     import b365_data_utils
-except ImportError as e:
-    st.error(f"Erro ao carregar os módulos locais do Lay Home Trader: {e}")
+except Exception as e:
+    st.error("Erro ao carregar os módulos locais do Lay Home Trader:")
+    st.code(traceback.format_exc())
     st.stop()
 
 st.title("🏠 Sinais Lay Home Trader (Oportunidades)")
@@ -76,20 +76,25 @@ with col1:
 if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
     with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando a IA Lay Home Trader..."):
-        # Garante que o histórico ta carregado na memoria
-        _hist_df()
-        
-        # Puxa os sinais do motor
-        # Vamos passar os filtros personalizados para a estratégia
         try:
-            import lay_home_trader_strategy
-            # Atualiza dinamicamente os parâmetros da estratégia na memória para esta execução
-            lay_home_trader_strategy.CUSTOM_PROB_THRESHOLD = prob_threshold
-            lay_home_trader_strategy.CUSTOM_USE_WHITELIST = use_whitelist
-        except Exception:
-            pass
+            # Garante que o histórico ta carregado na memoria
+            coleta_layhome_sinais._hist_df()
             
-        sinais_brutos = sinais_do_dia(date_str)
+            # Puxa os sinais do motor
+            # Vamos passar os filtros personalizados para a estratégia
+            try:
+                import lay_home_trader_strategy
+                # Atualiza dinamicamente os parâmetros da estratégia na memória para esta execução
+                lay_home_trader_strategy.CUSTOM_PROB_THRESHOLD = prob_threshold
+                lay_home_trader_strategy.CUSTOM_USE_WHITELIST = use_whitelist
+            except Exception:
+                pass
+                
+            sinais_brutos = coleta_layhome_sinais.sinais_do_dia(date_str)
+        except Exception as e:
+            st.error("Erro durante a execução do motor de sinais Lay Home Trader:")
+            st.code(traceback.format_exc())
+            st.stop()
         
         if not sinais_brutos:
             st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada) com os filtros atuais.")

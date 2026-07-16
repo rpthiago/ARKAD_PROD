@@ -13,13 +13,14 @@ st.set_page_config(
     layout="wide",
 )
 
-import importlib
+import traceback
 try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
     import b365_data_utils
-except ImportError as e:
-    st.error(f"Erro ao carregar os módulos locais do Lay 0x1: {e}")
+except Exception as e:
+    st.error("Erro ao carregar os módulos locais do Lay 0x1:")
+    st.code(traceback.format_exc())
     st.stop()
 
 st.title("🎯 Sinais Lay 0x1 (XGBoost & Random Forest)")
@@ -44,12 +45,17 @@ with col1:
 if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
     with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
-        # Garante que o histórico está carregado na memória
-        coleta_lay_cs_aovivo._hist_df()
-        
-        # Puxa os sinais brutos do motor 0x1
-        cfg = coleta_lay_cs_aovivo.MERCADOS["0x1"]
-        sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg)
+        try:
+            # Garante que o histórico está carregado na memória
+            coleta_lay_cs_aovivo._hist_df()
+            
+            # Puxa os sinais brutos do motor 0x1
+            cfg = coleta_lay_cs_aovivo.MERCADOS["0x1"]
+            sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg)
+        except Exception as e:
+            st.error("Erro durante a execução do motor de sinais Lay 0x1:")
+            st.code(traceback.format_exc())
+            st.stop()
         
         if not sinais_brutos:
             st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada).")
