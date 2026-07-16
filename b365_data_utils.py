@@ -125,6 +125,8 @@ def fetch_betfair_daily(date_str: str) -> pd.DataFrame:
 def load_b365_historical() -> pd.DataFrame:
     from pathlib import Path
     local_path = Path(__file__).resolve().parent / "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"
+    if not local_path.exists():
+        local_path = Path(__file__).resolve().parent / "Bases_de_Dados_API_FutPythonTrader_Bet365.zip"
     if local_path.exists():
         try:
             return _normalize_b365(pd.read_csv(local_path, low_memory=False))
