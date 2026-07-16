@@ -132,6 +132,38 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         lambda x: x.shift(1).rolling(5, min_periods=1).mean())
 
     latest_stats = df_teams.groupby('Team').last().reset_index()
+    
+    import re
+    import unicodedata
+    import difflib
+
+    def _clean_name(name):
+        name = str(name).lower()
+        name = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+        return re.sub(r"[^a-z0-9]", "", name)
+
+    latest_stats['Team_clean'] = latest_stats['Team'].map(_clean_name)
+    unique_teams = latest_stats['Team_clean'].dropna().unique()
+
+    def get_best_match_stats(team_name):
+        clean = _clean_name(team_name)
+        # Try exact match first
+        match = latest_stats[latest_stats['Team_clean'] == clean]
+        if not match.empty:
+            return match.iloc[0]
+        
+        # Try fuzzy match against unique teams
+        best_t, best_score = None, 0.0
+        for t in unique_teams:
+            score = difflib.SequenceMatcher(None, clean, t).ratio()
+            if score > best_score:
+                best_score, best_t = score, t
+            if score > 0.95:
+                break
+        
+        if best_score > 0.70:
+            return latest_stats[latest_stats['Team_clean'] == best_t].iloc[0]
+        return None
 
     evaluated_games = []
     for g in live_games_payload:
@@ -143,14 +175,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         home = norm_g['Home']
         away = norm_g['Away']
 
-        stats_h = latest_stats[latest_stats['Team'] == home]
-        stats_a = latest_stats[latest_stats['Team'] == away]
+        sh = get_best_match_stats(home)
+        sa = get_best_match_stats(away)
 
-        if stats_h.empty or stats_a.empty:
+        if sh is None or sa is None:
             continue
-
-        sh = stats_h.iloc[0]
-        sa = stats_a.iloc[0]
 
         norm_g['H_Roll_Goals_5'] = sh['Roll_Goals_5']
         norm_g['H_Roll_Shots_5'] = sh['Roll_Shots_5']
