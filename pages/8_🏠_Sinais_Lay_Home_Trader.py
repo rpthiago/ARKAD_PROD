@@ -14,6 +14,7 @@ st.set_page_config(
 )
 
 import traceback
+import importlib
 try:
     import coleta_layhome_sinais
     importlib.reload(coleta_layhome_sinais)

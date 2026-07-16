@@ -14,6 +14,7 @@ st.set_page_config(
 )
 
 import traceback
+import importlib
 try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
