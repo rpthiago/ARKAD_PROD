@@ -107,8 +107,8 @@
     },
     "filtros_metodo": {
       "Lay_CS_0x1_B365": {
-        "odd_min": 8.0,
-        "odd_max": 11.5,
+        "odd_min": 13.2,
+        "odd_max": 18.0,
         "ligas_permitidas": [
           "AUSTRIA 2",
           "BELGIUM 1",
@@ -842,6 +842,10 @@
     "compound_limit_multiplier": 2.0,
     "step_up_target_multiplier": 4.0,
     "step_down_limit_multiplier": -2.0,
+    "enable_kelly": true,
+    "kelly_fraction": 0.25,
+    "max_liability_pct": 0.025,
+    "allow_probability_fallback": true,
     "ramp_transition": {
       "enabled": true
     }

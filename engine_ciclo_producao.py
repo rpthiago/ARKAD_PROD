@@ -226,15 +226,17 @@ def _ensure_sqlite(conn: sqlite3.Connection, cfg: dict[str, Any]) -> tuple[str, 
     return kpi_table, ops_table
 
 
-def _current_dd(equity: list[float]) -> tuple[float, float]:
+def _current_dd(equity: list[float], initial_bankroll: float = 500.0) -> tuple[float, float]:
     if not equity:
         return 0.0, 0.0
-    s = pd.Series(equity, dtype=float)
+    s = pd.Series(equity, dtype=float) + initial_bankroll
     peak = s.cummax()
     dd = peak - s
     dd_abs = float(dd.max())
-    peak_max = float(peak.max())
-    dd_pct = float(dd_abs / peak_max * 100.0) if peak_max > 0 else 0.0
+    # Element-wise division to find exact peak-relative drawdown percentage
+    # Clip peak to avoid division by zero or negative peaks
+    dd_pct_series = (dd / peak.clip(lower=1e-9)) * 100.0
+    dd_pct = float(dd_pct_series.max())
     return dd_abs, dd_pct
 
 
@@ -319,13 +321,27 @@ def _intraday_multiplier(
     return 1.0 + (anti * max(consecutive_greens, 0))
 
 
-def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: str = "producao") -> tuple[pd.DataFrame, dict[str, Any]]:
+def _run_cycle_core(
+    df: pd.DataFrame,
+    cfg: dict[str, Any],
+    environment: str = "producao",
+    conn: sqlite3.Connection | None = None,
+    kpi_json_path: Path | None = None,
+    run_id: str | None = None,
+    kpi_table: str | None = None,
+    ops_table: str | None = None,
+) -> tuple[pd.DataFrame, dict[str, Any]]:
     col_cfg = cfg["input"]["columns"]
     dt_cfg = cfg["input"]["datetime"]
     cycle = cfg["cycle"]
     guards = cfg["execution_guards"]
 
     date_col = "__date" if "__date" in df.columns else dt_cfg["date_col"]
+
+    # Assert sorting and RangeIndex to prevent silent state bugs (C6 Fix)
+    assert df.index.equals(pd.RangeIndex(len(df))), "DataFrame index must be a clean RangeIndex(0..len-1). Run reset_index(drop=True) first."
+    dts_series = pd.to_datetime(df[date_col], errors="coerce")
+    assert dts_series.is_monotonic_increasing, "DataFrame must be sorted chronologically by date/time."
     odd_signal_col = col_cfg["odd_signal_col"]
     result_col = col_cfg["result_col"]
     method_col = col_cfg.get("method_col", "Metodo")
@@ -358,6 +374,18 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
 
     profile_mode, profile_cfg, profile_fallback_used, profile_fallback_msg = _resolve_stake_profile(cfg)
     last_profile_fallback_msg = profile_fallback_msg
+
+    # Load Circuit Breaker configuration
+    cb_cfg = cfg.get("circuit_breaker") or cycle.get("circuit_breaker") or {}
+    cb_max_dd = float(cb_cfg.get("max_daily_drawdown", -1.5))
+    cb_max_reds = int(cb_cfg.get("max_sequential_reds", 3))
+
+    # Kelly Criterion configuration
+    enable_kelly = bool(cycle.get("enable_kelly", True))
+    kelly_fraction = float(cycle.get("kelly_fraction", 0.25))
+    max_liability_pct = float(cycle.get("max_liability_pct", 0.025))  # Hard ceiling: 2.5% of total bankroll liability per bet
+    ruin_floor = float(cycle.get("ruin_floor", 50.0))  # Banca min to avoid ruin halt
+    allow_probability_fallback = bool(cycle.get("allow_probability_fallback", False))
 
     dts = pd.to_datetime(df[date_col], errors="coerce").dt.date
     day_map: dict[Any, int] = {}
@@ -403,14 +431,26 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     intraday_has_red_day = False
     last_day_key: Any = None
 
+    # Circuit breaker dictionary-based states (sorted chronologically)
+    daily_pnl_dict: dict[Any, float] = {}
+    daily_reds_dict: dict[Any, int] = {}
+
     for idx, row in df.iterrows():
         day_number = day_numbers[idx]
-        stake_mult, stake_phase, _ = _ramp_multiplier(day_number, phase2_profit, ramp_enabled=ramp_enabled)
+        stake_mult, stake_phase, phase2_kpi_positive = _ramp_multiplier(day_number, phase2_profit, ramp_enabled=ramp_enabled)
         day_key = dts.iloc[idx] if idx < len(dts) else None
+        
+        # Reset daily variables on day change (retains rolling indicators)
         if day_key != last_day_key:
             intraday_consecutive_greens = 0
             intraday_has_red_day = False
             last_day_key = day_key
+
+        # Key state variables by actual date to support out-of-order safely
+        row_date = day_key if day_key is not None else "NA"
+        if row_date not in daily_pnl_dict:
+            daily_pnl_dict[row_date] = 0.0
+            daily_reds_dict[row_date] = 0
 
         odd_signal = _to_float(row.get("__odd_signal", row.get(odd_signal_col)))
         odd_exec = _to_float(row.get("__odd_exec")) if "__odd_exec" in df.columns else (_to_float(row.get(odd_exec_col)) if odd_exec_col in df.columns else None)
@@ -447,15 +487,92 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
                         allowed = False
                         reason = f"odd_exec_too_high_{odd_exec}"
 
-        stake_base = current_run * stake_mult
-        mult_metodo = _method_multiplier(metodo, profile_cfg)
-        mult_odd_band = _odd_band_multiplier(odd_signal, profile_cfg)
-        mult_intradia = _intraday_multiplier(profile_cfg, intraday_has_red_day, intraday_consecutive_greens)
-        effective_run = stake_base * mult_metodo * mult_odd_band * mult_intradia
+        # Enforce Ruin Floor Guard
+        if allowed:
+            if current_run <= ruin_floor:
+                allowed = False
+                reason = "bankroll_ruined"
 
+        # Enforce Circuit Breakers (Relative to FIXED initial_base instead of variable current_run)
+        if allowed:
+            if daily_pnl_dict[row_date] <= (cb_max_dd * initial_base):
+                allowed = False
+                reason = "circuit_breaker_daily_drawdown"
+            elif daily_reds_dict[row_date] >= cb_max_reds:
+                allowed = False
+                reason = "circuit_breaker_consecutive_reds"
+
+        # Calculate Stake and Exposure (Kelly vs Rampa standard)
+        mult_metodo = _method_multiplier(metodo, profile_cfg)
+        mult_intradia = _intraday_multiplier(profile_cfg, intraday_has_red_day, intraday_consecutive_greens)
+        
+        f_applied = 0.0
+        effective_run = 0.0
+        mult_odd_band = 1.0
+
+        # Check odd validity early if allowed (C3 Fix)
+        if allowed:
+            odd_use = odd_exec if odd_exec is not None else odd_signal
+            if odd_use is None or odd_use <= 1.0:
+                allowed = False
+                reason = "odd_invalid"
+
+        if allowed:
+            if enable_kelly:
+                # Find probability column dynamically, only breaking if a valid non-NaN float is found
+                prob_val = None
+                for col_name in ["prob", "prob_ml", "probabilidade", "probabilidade rf", "probabilidade xgboost", "probabilidade_rf", "probabilidade_xgboost"]:
+                    val = row.get(col_name)
+                    if val is not None and not pd.isna(val):
+                        prob_val = _to_float(val)
+                        if prob_val is not None:
+                            break
+                    match_col = next((c for c in df.columns if c.lower() == col_name.lower().replace("_", "") or c.lower() == col_name.lower()), None)
+                    if match_col:
+                        val = row.get(match_col)
+                        if val is not None and not pd.isna(val):
+                            prob_val = _to_float(val)
+                            if prob_val is not None:
+                                break
+                
+                if prob_val is not None:
+                    p = prob_val / 100.0 if prob_val > 1.0 else prob_val
+                else:
+                    if allow_probability_fallback:
+                        if "0x1" in metodo:
+                            p = 0.952 if odd_use >= 13.2 else 0.915
+                        elif "1x0" in metodo:
+                            p = 0.880
+                        else:
+                            p = 0.90
+                    else:
+                        p = None
+                        allowed = False
+                        reason = "probability_missing"
+                
+                if p is not None:
+                    # Clip p to prevent 100% or 0% bankroll exposure
+                    p = max(0.01, min(0.99, p))
+
+                    b_odds = (1.0 - commission_rate) / (odd_use - 1.0)
+                    f_star = p - (1.0 - p) / b_odds
+                    f_applied = kelly_fraction * max(0.0, f_star)
+                
+                stake_base = current_run * f_applied
+                effective_run = stake_base * mult_metodo  # Pure Kelly: no stake_mult rampa, no mult_intradia
+                
+                # Apply Hard Ceiling: cap liability to max_liability_pct of bankroll (kelly defense)
+                effective_run = min(effective_run, max_liability_pct * current_run)
+                mult_odd_band = 1.0  # Handled inside Kelly math
+            else:
+                stake_base = current_run * stake_mult
+                mult_odd_band = _odd_band_multiplier(odd_signal, profile_cfg)
+                effective_run = stake_base * mult_metodo * mult_odd_band * mult_intradia
+
+        # Check for Kelly EV <= 0 or invalid staking
         if allowed and effective_run <= 0.0:
             allowed = False
-            reason = "intraday_cut_after_red"
+            reason = "kelly_negative_ev" if enable_kelly else "intraday_cut_after_red"
 
         if allowed and liq_enabled:
             if liquidity is None:
@@ -469,11 +586,6 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
                     reason = "liquidity_insufficient"
 
         pnl = 0.0
-        if allowed:
-            odd_use = odd_exec if odd_exec is not None else odd_signal
-            if odd_use is None or odd_use <= 1.0:
-                allowed = False
-                reason = "odd_invalid"
 
         if allowed:
             if resultado == 1:
@@ -484,34 +596,41 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
                 current_run += net_profit
                 pnl = net_profit
                 wins += 1
-                if current_run >= (compound_limit * current_base):
-                    current_run = current_base
+                if not enable_kelly:
+                    if current_run >= (compound_limit * current_base):
+                        current_run = current_base
             else:
                 total_profit -= effective_run
                 level_profit -= effective_run
                 pnl = -effective_run
-                current_run = current_base
+                if enable_kelly:
+                    current_run -= effective_run
+                else:
+                    current_run = current_base
                 losses += 1
 
             if ramp_enabled and day_number >= 8 and day_number <= 14:
                 phase2_profit += pnl
 
-            if level_profit >= (step_up_mult * current_base):
-                level_profit -= (step_up_mult * current_base)
-                if current_base < teto:
-                    current_base *= 2.0
-                    step_ups += 1
-                else:
-                    current_base = initial_base
-                    level_profit = 0.0
-                    saques_realizados += 1
-                current_run = current_base
+            if not enable_kelly:
+                if level_profit >= (step_up_mult * current_base):
+                    level_profit -= (step_up_mult * current_base)
+                    if current_base < teto:
+                        current_base *= 2.0
+                        step_ups += 1
+                    else:
+                        current_base = initial_base
+                        level_profit = 0.0
+                        saques_realizados += 1
+                    current_run = current_base
 
-            if (level_profit <= (step_down_mult * current_base)) and (current_base > initial_base):
-                current_base /= 2.0
-                level_profit = 0.0
-                current_run = current_base
-                step_downs += 1
+                if (level_profit <= (step_down_mult * current_base)) and (current_base > initial_base):
+                    current_base /= 2.0
+                    level_profit = 0.0
+                    current_run = current_base
+                    step_downs += 1
+            else:
+                current_base = current_run
 
             status = "EXECUTED"
             skip_reason = ""
@@ -524,9 +643,12 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
         if status == "EXECUTED":
             if resultado == 1:
                 intraday_consecutive_greens += 1
+                daily_reds_dict[row_date] = 0
             else:
                 intraday_has_red_day = True
                 intraday_consecutive_greens = 0
+                daily_reds_dict[row_date] += 1
+            daily_pnl_dict[row_date] += pnl
 
         status_list.append(status)
         skip_reason_list.append(skip_reason)
@@ -542,6 +664,79 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
         mult_odd_band_list.append(mult_odd_band)
         mult_intradia_list.append(mult_intradia)
         stake_final_aplicada_list.append(effective_run if status == "EXECUTED" else 0.0)
+
+        # Write monitoring records if connection is available
+        if conn is not None:
+            dd_abs, dd_pct = _current_dd(lucro_list, initial_base)
+            processed_rows = idx + 1
+            win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
+
+            kpi_payload = {
+                "run_id": run_id,
+                "ts": datetime.utcnow().isoformat(),
+                "processed_rows": processed_rows,
+                "executed_rows": executed_rows,
+                "skipped_rows": skipped_rows,
+                "wins": wins,
+                "losses": losses,
+                "win_rate": round(win_rate, 2),
+                "lucro_acumulado": round(total_profit, 2),
+                "drawdown_abs": round(dd_abs, 2),
+                "drawdown_pct": round(dd_pct, 2),
+                "current_base": round(current_base, 2),
+                "current_run": round(current_run, 2),
+                "level_profit": round(level_profit, 2),
+                "step_ups": step_ups,
+                "step_downs": step_downs,
+                "saques_realizados": saques_realizados,
+            }
+
+            if kpi_json_path is not None:
+                kpi_json_path.write_text(json.dumps(kpi_payload, ensure_ascii=True, indent=2), encoding="utf-8")
+
+            conn.execute(
+                f"INSERT INTO {kpi_table} VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (
+                    run_id,
+                    kpi_payload["ts"],
+                    kpi_payload["processed_rows"],
+                    kpi_payload["executed_rows"],
+                    kpi_payload["skipped_rows"],
+                    kpi_payload["wins"],
+                    kpi_payload["losses"],
+                    kpi_payload["win_rate"],
+                    kpi_payload["lucro_acumulado"],
+                    kpi_payload["drawdown_abs"],
+                    kpi_payload["drawdown_pct"],
+                    kpi_payload["current_base"],
+                    kpi_payload["current_run"],
+                    kpi_payload["level_profit"],
+                    kpi_payload["step_ups"],
+                    kpi_payload["step_downs"],
+                    kpi_payload["saques_realizados"],
+                ),
+            )
+
+            conn.execute(
+                f"INSERT INTO {ops_table} VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                (
+                    run_id,
+                    datetime.utcnow().isoformat(),
+                    int(idx),
+                    status,
+                    skip_reason,
+                    odd_signal,
+                    odd_exec,
+                    liquidity,
+                    resultado,
+                    round(pnl, 2),
+                    round(total_profit, 2),
+                    round(current_base, 2),
+                    round(current_run, 2),
+                    round(level_profit, 2),
+                ),
+            )
+            conn.commit()
 
     out = df.copy()
     out["Status_Execucao"] = status_list
@@ -559,7 +754,7 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
     out["Mult_Intradia"] = mult_intradia_list
     out["Stake_Final_Aplicada"] = stake_final_aplicada_list
 
-    dd_abs, dd_pct = _current_dd(lucro_list)
+    dd_abs, dd_pct = _current_dd(lucro_list, initial_base)
     win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
     summary = {
         "Total_Linhas_Filtradas": int(len(out)),
@@ -579,6 +774,10 @@ def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: st
         "Profile_Fallback_Log": last_profile_fallback_msg,
     }
     return out, summary
+
+
+def _run_cycle_no_monitor(df: pd.DataFrame, cfg: dict[str, Any], environment: str = "producao") -> tuple[pd.DataFrame, dict[str, Any]]:
+    return _run_cycle_core(df, cfg, environment=environment)
 
 
 def generate_daily_mini_report(prepared_df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: str, environment: str = "producao") -> Path:
@@ -637,338 +836,25 @@ def generate_daily_mini_report(prepared_df: pd.DataFrame, cfg: dict[str, Any], o
 
 
 def run_engine(df: pd.DataFrame, cfg: dict[str, Any], output_dir: Path, run_id: str, environment: str = "producao") -> tuple[pd.DataFrame, dict[str, Any]]:
-    col_cfg = cfg["input"]["columns"]
-    dt_cfg = cfg["input"]["datetime"]
-    cycle = cfg["cycle"]
-    guards = cfg["execution_guards"]
-    mon = cfg["monitoring"]
-
-    date_col = "__date" if "__date" in df.columns else dt_cfg["date_col"]
-    odd_signal_col = col_cfg["odd_signal_col"]
-    result_col = col_cfg["result_col"]
-    method_col = col_cfg.get("method_col", "Metodo")
-    odd_exec_col = col_cfg.get("odd_exec_col")
-    liquidity_col = col_cfg.get("liquidity_col")
-
-    commission_rate = float(cycle.get("commission_rate", cfg.get("commission_rate", 0.065)))
-    initial_base = float(cycle.get("initial_base", cfg.get("base_stake", 500.0)))
-    teto = float(cycle.get("teto", cfg.get("teto_stake", 2000.0)))
-    compound_limit = float(cycle.get("compound_limit_multiplier", 2.0))
-    step_up_mult = float(cycle.get("step_up_target_multiplier", 4.0))
-    step_down_mult = float(cycle.get("step_down_limit_multiplier", -2.0))
-    ramp_cfg = cycle.get("ramp_transition", {})
-    ramp_enabled = bool(ramp_cfg.get("enabled", cfg.get("enable_rampa", True)))
-
-    sl_cfg = guards.get("slippage", {})
-    sl_enabled = bool(sl_cfg.get("enabled", cfg.get("enable_slippage_protection", True)))
-    sl_tick_size = float(sl_cfg.get("odd_tick_size", 0.1))
-    sl_max_ticks = float(sl_cfg.get("max_slippage_ticks", cfg.get("max_ticks", 0.0)))
-    sl_max_delta = float(sl_cfg.get("max_delta_odd", sl_max_ticks * sl_tick_size))
-    sl_skip_missing_exec = bool(sl_cfg.get("skip_if_exec_odd_missing", cfg.get("skip_if_exec_odd_missing", True)))
-    if str(environment).strip().lower() == "producao":
-        sl_skip_missing_exec = True
-
-    liq_cfg = guards.get("liquidity", {})
-    liq_enabled = bool(liq_cfg.get("enabled", cfg.get("enable_liquidity_filter", True)))
-    liq_min_abs = float(liq_cfg.get("min_matched_liquidity", cfg.get("min_volume", 0.0)))
-    liq_mult = float(liq_cfg.get("required_multiplier_of_run", 1.0))
-    liq_skip_missing = bool(liq_cfg.get("skip_if_liquidity_missing", True))
-
-    profile_mode, profile_cfg, profile_fallback_used, profile_fallback_msg = _resolve_stake_profile(cfg)
-    last_profile_fallback_msg = profile_fallback_msg
-
-    kpi_json_path = output_dir / mon["kpi_json_filename"]
-    sqlite_path = output_dir / mon["sqlite_filename"]
-
+    kpi_json_path = output_dir / cfg["monitoring"]["kpi_json_filename"]
+    sqlite_path = output_dir / cfg["monitoring"]["sqlite_filename"]
     conn = sqlite3.connect(sqlite_path)
     kpi_table, ops_table = _ensure_sqlite(conn, cfg)
 
-    current_base = initial_base
-    current_run = initial_base
-    level_profit = 0.0
-    total_profit = 0.0
-    phase2_profit = 0.0
-
-    wins = 0
-    losses = 0
-    executed_rows = 0
-    skipped_rows = 0
-    step_ups = 0
-    step_downs = 0
-    saques_realizados = 0
-
-    status_list: list[str] = []
-    skip_reason_list: list[str] = []
-    pnl_list: list[float] = []
-    lucro_list: list[float] = []
-    base_list: list[float] = []
-    run_list: list[float] = []
-    level_list: list[float] = []
-    ramp_mult_list: list[float] = []
-    ramp_phase_list: list[str] = []
-    profile_mode_list: list[str] = []
-    mult_metodo_list: list[float] = []
-    mult_odd_band_list: list[float] = []
-    mult_intradia_list: list[float] = []
-    stake_final_aplicada_list: list[float] = []
-
-    dts = pd.to_datetime(df[date_col], errors="coerce").dt.date
-    day_map: dict[Any, int] = {}
-    day_numbers: list[int] = []
-    next_day = 1
-    for d in dts:
-        key = d if pd.notna(d) else "NA"
-        if key not in day_map:
-            day_map[key] = next_day
-            next_day += 1
-        day_numbers.append(day_map[key])
-
-    intraday_consecutive_greens = 0
-    intraday_has_red_day = False
-    last_day_key: Any = None
-
-    for idx, row in df.iterrows():
-        day_number = day_numbers[idx]
-        stake_mult, stake_phase, phase2_kpi_positive = _ramp_multiplier(day_number, phase2_profit, ramp_enabled=ramp_enabled)
-        day_key = dts.iloc[idx] if idx < len(dts) else None
-        if day_key != last_day_key:
-            intraday_consecutive_greens = 0
-            intraday_has_red_day = False
-            last_day_key = day_key
-
-        odd_signal = _to_float(row.get("__odd_signal", row.get(odd_signal_col)))
-        odd_exec = _to_float(row.get("__odd_exec")) if "__odd_exec" in df.columns else (_to_float(row.get(odd_exec_col)) if odd_exec_col in df.columns else None)
-        liquidity = _to_float(row.get("__liquidity")) if "__liquidity" in df.columns else (_to_float(row.get(liquidity_col)) if liquidity_col in df.columns else None)
-        resultado = int(row.get("__result", row[result_col]))
-        metodo = str(row.get(method_col, ""))
-
-        allowed = True
-        reason = ""
-
-        if odd_signal is None:
-            allowed = False
-            reason = "odd_signal_missing"
-
-        if allowed and sl_enabled:
-            if odd_exec is None:
-                if sl_skip_missing_exec:
-                    allowed = False
-                    reason = "odd_exec_missing"
-                else:
-                    odd_exec = odd_signal
-            if allowed and (odd_exec > odd_signal + sl_max_delta):
-                allowed = False
-                reason = "slippage_exceeded"
-
-        stake_base = current_run * stake_mult
-        mult_metodo = _method_multiplier(metodo, profile_cfg)
-        mult_odd_band = _odd_band_multiplier(odd_signal, profile_cfg)
-        mult_intradia = _intraday_multiplier(profile_cfg, intraday_has_red_day, intraday_consecutive_greens)
-        effective_run = stake_base * mult_metodo * mult_odd_band * mult_intradia
-
-        if allowed and effective_run <= 0.0:
-            allowed = False
-            reason = "intraday_cut_after_red"
-
-        if allowed and liq_enabled:
-            if liquidity is None:
-                if liq_skip_missing:
-                    allowed = False
-                    reason = "liquidity_missing"
-            else:
-                required_liquidity = max(effective_run * liq_mult, liq_min_abs)
-                if liquidity < required_liquidity:
-                    allowed = False
-                    reason = "liquidity_insufficient"
-
-        pnl = 0.0
-        if allowed:
-            odd_use = odd_exec if odd_exec is not None else odd_signal
-            if odd_use is None or odd_use <= 1.0:
-                allowed = False
-                reason = "odd_invalid"
-
-        if allowed:
-            if resultado == 1:
-                lay_stake = effective_run / (odd_use - 1.0)
-                net_profit = lay_stake * (1.0 - commission_rate)
-                total_profit += net_profit
-                level_profit += net_profit
-                current_run += net_profit
-                pnl = net_profit
-                wins += 1
-                if current_run >= (compound_limit * current_base):
-                    current_run = current_base
-            else:
-                total_profit -= effective_run
-                level_profit -= effective_run
-                pnl = -effective_run
-                current_run = current_base
-                losses += 1
-
-            if ramp_enabled and day_number >= 8 and day_number <= 14:
-                phase2_profit += pnl
-
-            if level_profit >= (step_up_mult * current_base):
-                level_profit -= (step_up_mult * current_base)
-                if current_base < teto:
-                    current_base *= 2.0
-                    step_ups += 1
-                else:
-                    current_base = initial_base
-                    level_profit = 0.0
-                    saques_realizados += 1
-                current_run = current_base
-
-            if (level_profit <= (step_down_mult * current_base)) and (current_base > initial_base):
-                current_base /= 2.0
-                level_profit = 0.0
-                current_run = current_base
-                step_downs += 1
-
-            status = "EXECUTED"
-            skip_reason = ""
-            executed_rows += 1
-        else:
-            status = "SKIPPED"
-            skip_reason = reason
-            skipped_rows += 1
-
-        if status == "EXECUTED":
-            if resultado == 1:
-                intraday_consecutive_greens += 1
-            else:
-                intraday_has_red_day = True
-                intraday_consecutive_greens = 0
-
-        status_list.append(status)
-        skip_reason_list.append(skip_reason)
-        pnl_list.append(pnl)
-        lucro_list.append(total_profit)
-        base_list.append(current_base)
-        run_list.append(current_run)
-        level_list.append(level_profit)
-        ramp_mult_list.append(stake_mult)
-        ramp_phase_list.append(stake_phase)
-        profile_mode_list.append(profile_mode)
-        mult_metodo_list.append(mult_metodo)
-        mult_odd_band_list.append(mult_odd_band)
-        mult_intradia_list.append(mult_intradia)
-        stake_final_aplicada_list.append(effective_run if status == "EXECUTED" else 0.0)
-
-        dd_abs, dd_pct = _current_dd(lucro_list)
-        processed_rows = idx + 1
-        win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
-
-        kpi_payload = {
-            "run_id": run_id,
-            "ts": datetime.utcnow().isoformat(),
-            "processed_rows": processed_rows,
-            "executed_rows": executed_rows,
-            "skipped_rows": skipped_rows,
-            "wins": wins,
-            "losses": losses,
-            "win_rate": round(win_rate, 2),
-            "lucro_acumulado": round(total_profit, 2),
-            "drawdown_abs": round(dd_abs, 2),
-            "drawdown_pct": round(dd_pct, 2),
-            "current_base": round(current_base, 2),
-            "current_run": round(current_run, 2),
-            "level_profit": round(level_profit, 2),
-            "stake_multiplier": round(stake_mult, 4),
-            "stake_phase": stake_phase,
-            "phase2_kpi_positive": bool(phase2_kpi_positive),
-            "profile_mode": profile_mode,
-            "profile_fallback_used": bool(profile_fallback_used),
-            "profile_fallback_log": last_profile_fallback_msg,
-            "step_ups": step_ups,
-            "step_downs": step_downs,
-            "saques_realizados": saques_realizados,
-        }
-
-        kpi_json_path.write_text(json.dumps(kpi_payload, ensure_ascii=True, indent=2), encoding="utf-8")
-
-        conn.execute(
-            f"INSERT INTO {kpi_table} VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (
-                kpi_payload["run_id"],
-                kpi_payload["ts"],
-                kpi_payload["processed_rows"],
-                kpi_payload["executed_rows"],
-                kpi_payload["skipped_rows"],
-                kpi_payload["wins"],
-                kpi_payload["losses"],
-                kpi_payload["win_rate"],
-                kpi_payload["lucro_acumulado"],
-                kpi_payload["drawdown_abs"],
-                kpi_payload["drawdown_pct"],
-                kpi_payload["current_base"],
-                kpi_payload["current_run"],
-                kpi_payload["level_profit"],
-                kpi_payload["step_ups"],
-                kpi_payload["step_downs"],
-                kpi_payload["saques_realizados"],
-            ),
+    try:
+        out, summary = _run_cycle_core(
+            df,
+            cfg,
+            environment=environment,
+            conn=conn,
+            kpi_json_path=kpi_json_path,
+            run_id=run_id,
+            kpi_table=kpi_table,
+            ops_table=ops_table,
         )
+    finally:
+        conn.close()
 
-        conn.execute(
-            f"INSERT INTO {ops_table} VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-            (
-                run_id,
-                datetime.utcnow().isoformat(),
-                int(idx),
-                status,
-                skip_reason,
-                odd_signal,
-                odd_exec,
-                liquidity,
-                resultado,
-                round(pnl, 2),
-                round(total_profit, 2),
-                round(current_base, 2),
-                round(current_run, 2),
-                round(level_profit, 2),
-            ),
-        )
-        conn.commit()
-
-    conn.close()
-
-    out = df.copy()
-    out["Status_Execucao"] = status_list
-    out["Skip_Reason"] = skip_reason_list
-    out["PnL_Linha"] = pnl_list
-    out["Lucro_Acumulado"] = lucro_list
-    out["Base_Atual"] = base_list
-    out["Run_Atual"] = run_list
-    out["Level_Profit_Atual"] = level_list
-    out["Stake_Multiplier"] = ramp_mult_list
-    out["Stake_Phase"] = ramp_phase_list
-    out["Profile_Mode"] = profile_mode_list
-    out["Mult_Metodo"] = mult_metodo_list
-    out["Mult_Odd_Band"] = mult_odd_band_list
-    out["Mult_Intradia"] = mult_intradia_list
-    out["Stake_Final_Aplicada"] = stake_final_aplicada_list
-
-    dd_abs, dd_pct = _current_dd(lucro_list)
-    win_rate = (wins / executed_rows * 100.0) if executed_rows > 0 else 0.0
-    summary = {
-        "Total_Linhas_Filtradas": int(len(out)),
-        "Entradas_Executadas": executed_rows,
-        "Entradas_Skipadas": skipped_rows,
-        "Win_Rate_Executadas_%": round(win_rate, 2),
-        "Lucro_Final": round(total_profit, 2),
-        "Max_Drawdown_Abs": round(dd_abs, 2),
-        "Max_Drawdown_%": round(dd_pct, 2),
-        "Step_Ups": step_ups,
-        "Saques_Realizados": saques_realizados,
-        "Step_Downs": step_downs,
-        "Fase2_Lucro": round(phase2_profit, 2),
-        "Fase2_KPI_Positivo": bool(phase2_profit > 0.0),
-        "Profile_Mode_Ativo": profile_mode,
-        "Profile_Fallback_Used": bool(profile_fallback_used),
-        "Profile_Fallback_Log": last_profile_fallback_msg,
-    }
     return out, summary
 
 
