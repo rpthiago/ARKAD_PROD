@@ -139,8 +139,12 @@ def _build_h2h(df: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
     return d[["_mid", *out_cols]], out_cols
 
 
-def build_features(df: pd.DataFrame, verbose: bool = True) -> tuple[pd.DataFrame, list[str]]:
-    """Constrói as features do Lay 0x1, leak-free. Retorna (df_com_features, feature_cols).
+def build_features(df: pd.DataFrame, scoreline: tuple[int, int] = (0, 1),
+                   verbose: bool = True) -> tuple[pd.DataFrame, list[str]]:
+    """Features CS leak-free para o LAY do placar `scoreline`=(h,a). Genérico:
+    (0,1) -> Lay 0x1 | (0,0) -> Lay 0x0 | (1,0) -> Lay 1x0, etc.
+    Retorna (df_com_features, feature_cols). As features de forma/mando/h2h são as mesmas
+    (força dos times); só o ALVO e a coluna de odd mudam com o placar.
     df precisa de: Date, Home, Away, Goals_H_FT, Goals_A_FT (+ stats/odds opcionais)."""
     req = ["Date", "Home", "Away", "Goals_H_FT", "Goals_A_FT"]
     missing = [c for c in req if c not in df.columns]
@@ -191,10 +195,13 @@ def build_features(df: pd.DataFrame, verbose: bool = True) -> tuple[pd.DataFrame
     if "xg" in stats:
         feat["xG_ratio_H"] = feat["H_form_xg"] / (feat["A_form_ga"].abs() + 0.10)
         feat["xG_ratio_A"] = feat["A_form_xg"] / (feat["H_form_ga"].abs() + 0.10)
-        feature_cols += ["xG_ratio_H", "xG_ratio_A"]
+        feat["total_form_xg"] = feat["H_form_xg"] + feat["A_form_xg"]   # poder ofensivo combinado (chave 0x0)
+        feature_cols += ["xG_ratio_H", "xG_ratio_A", "total_form_xg"]
     feat["form_gf_diff"] = feat["H_form_gf"] - feat["A_form_ga"]   # ataque casa − defesa fora
     feat["home_dry_signal"] = feat["H_form_fail_score"] * feat["A_form_won"]  # casa seca × fora vencendo
-    feature_cols += ["form_gf_diff", "home_dry_signal"]
+    feat["total_form_gf"] = feat["H_form_gf"] + feat["A_form_gf"]              # gols-acontecem (chave p/ 0x0)
+    feat["total_dry"] = feat["H_form_fail_score"] + feat["A_form_fail_score"]  # ambos secos (0x0)
+    feature_cols += ["form_gf_diff", "home_dry_signal", "total_form_gf", "total_dry"]
 
     # Mercado pré-jogo (leak-free por construção — é odd de abertura, não resultado)
     if _resolve(df, ["Odd_H_FT"]) and _resolve(df, ["Odd_A_FT"]):
@@ -209,16 +216,36 @@ def build_features(df: pd.DataFrame, verbose: bool = True) -> tuple[pd.DataFrame
             feat["mkt_pA"] = (1.0 / oa) / ov
             feature_cols += ["mkt_pH", "mkt_pA"]
 
-    # ── Alvo do LAY 0x1: green (=1) quando o placar NÃO é 0-1 ─────────────────
-    feat["target"] = (~((feat["Goals_H_FT"] == 0) & (feat["Goals_A_FT"] == 1))).astype(int)
+    # ── Alvo do LAY: green (=1) quando o placar NÃO é h-a ─────────────────────
+    h, a = int(scoreline[0]), int(scoreline[1])
+    sc = f"{h}x{a}"
+    is_target_score = ((feat["Goals_H_FT"] == h) & (feat["Goals_A_FT"] == a)).astype(float)
+    feat["target"] = (1 - is_target_score).astype(int)
+
+    # Taxa recente do placar-alvo por LIGA (shift(1) leak-free) — sinal de contexto (0x0)
+    if "League" in feat.columns:
+        lg = feat[["_mid", "Date", "League"]].copy()
+        lg["is_t"] = is_target_score.values
+        lg = lg.sort_values(["League", "Date"], kind="mergesort")
+        lg["liga_target_rate"] = lg.groupby("League")["is_t"].transform(
+            lambda x: x.shift(1).rolling(100, min_periods=20).mean())
+        feat = feat.merge(lg[["_mid", "liga_target_rate"]], on="_mid", how="left")
+        feature_cols.append("liga_target_rate")
+
+    # Prob. implícita do mercado no placar-alvo (odd de back, pré-jogo → leak-free)
+    if _resolve(df, [f"Odd_CS_{sc}"]):
+        odd_t = pd.to_numeric(feat[f"Odd_CS_{sc}"], errors="coerce")
+        feat["mkt_prob_target"] = 1.0 / odd_t.where(odd_t > 1)
+        feature_cols.append("mkt_prob_target")
 
     # Passa adiante a coluna de odd de sinal (a odd lay REAL é casada na Frente B via lay_de())
-    odd_col = _resolve(df, ["Odd_CS_0x1_Lay", "Odd_CS_0x1"])
-    if odd_col and odd_col != "Odd_CS_0x1":
-        feat["Odd_CS_0x1"] = pd.to_numeric(feat[odd_col], errors="coerce")
+    odd_lay, odd_bk = f"Odd_CS_{sc}_Lay", f"Odd_CS_{sc}"
+    odd_col = _resolve(df, [odd_lay, odd_bk])
+    if odd_col and odd_col != odd_bk:
+        feat[odd_bk] = pd.to_numeric(feat[odd_col], errors="coerce")
 
     keep = ["Date", "Home", "Away", "_mid", "target"]
-    for extra in ["League", "Liga", "Metodo", "Odd_CS_0x1", "Odd_CS_0x1_Lay", "Odd_H_FT", "Odd_A_FT"]:
+    for extra in ["League", "Liga", "Metodo", odd_bk, odd_lay, "Odd_H_FT", "Odd_A_FT"]:
         if extra in feat.columns and extra not in keep:
             keep.append(extra)
     feature_cols = [c for i, c in enumerate(feature_cols) if c not in feature_cols[:i]]  # dedup, ordem estável

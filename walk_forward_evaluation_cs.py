@@ -42,6 +42,7 @@ sys.path.insert(0, str(HERE))
 from features_builder_0x1 import build_features  # noqa: E402
 
 LEAN = DASH / "b365_base_lean.csv"
+FULL = DASH / "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"   # base completa (238k jogos)
 SNAPSHOT = HERE / "betfair_snapshot.csv"     # snapshot CONGELADO, versionável
 
 COMM = 0.05
@@ -185,7 +186,7 @@ def report(bets, label):
                 roi=round(roi, 4), ic_lo=round(lo, 4), ic_hi=round(hi, 4), p=round(p, 5), fdr=fdr)
 
 
-def walk_forward(feat, feats, lay_de, bf_min, bf_max):
+def walk_forward(feat, feats, lay_de, bf_min, bf_max, ctx=False):
     from sklearn.preprocessing import StandardScaler
     feat = feat.dropna(subset=feats + ["target"]).copy()
     feat["Date"] = pd.to_datetime(feat["Date"], errors="coerce")
@@ -199,6 +200,13 @@ def walk_forward(feat, feats, lay_de, bf_min, bf_max):
             continue
         te["odd_lay"] = [lay_de(d, h, a) for d, h, a in zip(te["d"], te["Home"], te["Away"])]
         te = te.dropna(subset=["odd_lay"])
+        # Filtros de contexto da produção do 0x0: corta ligas defensivas / mercado caro / odd baixa
+        if ctx:
+            if "liga_0x0_rate" in te.columns:
+                te = te[te["liga_0x0_rate"] < 0.12]
+            if "mkt_prob_0x0" in te.columns:
+                te = te[te["mkt_prob_0x0"] < 0.10]
+            te = te[te["odd_lay"] >= 10.0]
         if len(te) < 5:
             continue
         sc = StandardScaler(); Xtr = sc.fit_transform(tr[feats].fillna(0.0)); Xte = sc.transform(te[feats].fillna(0.0))
@@ -224,14 +232,18 @@ def main():
     ap.add_argument("--skip-audit-abort", action="store_true",
                     help="roda o walk-forward mesmo se a auditoria acusar divergencia (p/ diagnostico)")
     ap.add_argument("--refresh-snapshot", action="store_true", help="re-baixa e re-congela o snapshot")
+    ap.add_argument("--base", default="lean", choices=["lean", "full"], help="base b365: lean (158k) ou full (238k)")
+    ap.add_argument("--context-filters", action="store_true",
+                    help="aplica filtros de produção 0x0: liga_0x0_rate<0.12, mkt_prob_0x0<0.10, odd>=10")
     args = ap.parse_args()
 
     m = re.fullmatch(r"(\d+)x(\d+)", args.scoreline.strip())
     if not m:
         raise SystemExit("--scoreline inválido (use ex: 0x0)")
     scoreline = (int(m.group(1)), int(m.group(2))); sc = f"{scoreline[0]}x{scoreline[1]}"
-    tag = f"{sc}_{args.features}"
-    print(f"=== LAY {sc} | features={args.features} | crivo honesto (snapshot congelado) ===")
+    tag = f"{sc}_{args.features}_{args.base}" + ("_ctx" if args.context_filters else "")
+    print(f"=== LAY {sc} | features={args.features} | base={args.base} | "
+          f"ctx_filters={args.context_filters} | snapshot congelado ===")
 
     # Seleção do builder de features (mesmo harness, isola o efeito das features)
     if args.features == "prod":
@@ -244,7 +256,9 @@ def main():
         def builder(df, verbose=True):
             return build_features(df, scoreline=scoreline, verbose=verbose)
 
-    raw = pd.read_csv(LEAN, low_memory=False)
+    base_path = FULL if args.base == "full" else LEAN
+    print(f"[base] {base_path.name}")
+    raw = pd.read_csv(base_path, low_memory=False)
     feat, feats = builder(raw)
 
     print("\n=== AUDITORIA DE TRUNCAMENTO ===")
@@ -261,7 +275,7 @@ def main():
     print(f"[snapshot] janela de odds: {bf_min}..{bf_max}")
 
     print(f"\n=== WALK-FORWARD (modelo carregado sob demanda; odd lay real {sc}) ===")
-    bets = walk_forward(feat, feats, lay_de, bf_min, bf_max)
+    bets = walk_forward(feat, feats, lay_de, bf_min, bf_max, ctx=args.context_filters)
     print(f"[modelo] classificador usado: {getattr(make_model, 'name', '?')}")
     if bets.empty:
         print("Sem apostas."); return

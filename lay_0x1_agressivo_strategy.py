@@ -39,7 +39,7 @@ def normalize_live_data(live_payload):
 
 def check_entry_conditions(match_state):
     odd_lay = match_state.get('Odd_CS_0x1_Lay') or 0.0
-    if pd.isna(odd_lay) or odd_lay < 16.00 or odd_lay > 22.00:
+    if pd.isna(odd_lay) or odd_lay < 16.00 or odd_lay > 18.00:
         return False, "ODD_FORA_FAIXA"
     prob_ml = match_state.get('Prob_ML', 0.0)
     if prob_ml < 0.75:
@@ -161,6 +161,74 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
     latest_stats = df_teams.groupby('Team').last().reset_index()
 
+    # Fit a post-hoc probability calibrator on the historical data using df_historical
+    calibrated_model = None
+    try:
+        if not df_hist.empty:
+            # Separate df_teams back into home and away stats per match date
+            df_h_stats = df_teams[df_teams['Is_Home'] == 1].copy()
+            df_a_stats = df_teams[df_teams['Is_Home'] == 0].copy()
+            
+            h_cols = {
+                'Team': 'Home',
+                'H_Scored_1plus_5': 'H_Scored_1plus_5',
+                'Over15_Rate_5': 'H_Over15_Rate_5',
+                'Roll_Goals_Scored_5': 'H_Goals_Scored_5',
+                'Roll_Goals_Conceded_5': 'H_Goals_Conceded_5',
+                'Roll_xG_5': 'H_xG_5',
+                'Roll_SoT_5': 'H_SoT_5',
+                'CS_0x1_Rate_5': 'H_CS_0x1_Rate_5'
+            }
+            df_h_stats = df_h_stats.rename(columns=h_cols)
+            
+            a_cols = {
+                'Team': 'Away',
+                'Over15_Rate_5': 'A_Over15_Rate_5',
+                'Roll_Goals_Scored_5': 'A_Goals_Scored_5',
+                'Roll_Goals_Conceded_5': 'A_Goals_Conceded_5',
+                'Roll_xG_5': 'A_xG_5',
+                'Roll_SoT_5': 'A_SoT_5',
+                'CS_0x1_Rate_5': 'A_CS_0x1_Rate_5'
+            }
+            df_a_stats = df_a_stats.rename(columns=a_cols)
+            
+            df_calib = df_hist.merge(df_h_stats[['Home', 'Date'] + [c for c in h_cols.values() if c not in ['Home', 'Team']]], on=['Home', 'Date'], how='inner')
+            df_calib = df_calib.merge(df_a_stats[['Away', 'Date'] + [c for c in a_cols.values() if c not in ['Away', 'Team']]], on=['Away', 'Date'], how='inner')
+            
+            if not df_calib.empty:
+                df_calib['Over15_Sum_5'] = df_calib['H_Over15_Rate_5'] + df_calib['A_Over15_Rate_5']
+                df_calib['Goals_Sum_5'] = df_calib['H_Goals_Scored_5'] + df_calib['A_Goals_Scored_5']
+                df_calib['xG_Sum_5'] = df_calib['H_xG_5'] + df_calib['A_xG_5']
+                df_calib['CS_0x1_Sum_5'] = df_calib['H_CS_0x1_Rate_5'] + df_calib['A_CS_0x1_Rate_5']
+                df_calib['Scored_Over15_Score'] = df_calib['H_Scored_1plus_5'] * df_calib['Over15_Sum_5']
+                df_calib['Home_Aggression'] = df_calib['H_Scored_1plus_5'] * df_calib['H_xG_5']
+                
+                odd_cs_col = 'Odd_CS_0x1_Lay' if 'Odd_CS_0x1_Lay' in df_calib.columns else 'Odd_CS_0x1'
+                odd_h_col = 'Odd_H_Back' if 'Odd_H_Back' in df_calib.columns else 'Odd_H_FT'
+                odd_a_col = 'Odd_A_Back' if 'Odd_A_Back' in df_calib.columns else 'Odd_A_FT'
+                
+                df_calib['Odd_CS_0x1_Lay'] = pd.to_numeric(df_calib[odd_cs_col], errors='coerce').fillna(12.0)
+                df_calib['Odd_H_Back'] = pd.to_numeric(df_calib[odd_h_col], errors='coerce').fillna(2.0)
+                df_calib['Odd_A_Back'] = pd.to_numeric(df_calib[odd_a_col], errors='coerce').fillna(2.0)
+                
+                df_calib['Prob_Odd_CS_0x1_Lay'] = 1 / (df_calib['Odd_CS_0x1_Lay'] + 1e-10)
+                df_calib['Prob_Odd_H_Back'] = 1 / (df_calib['Odd_H_Back'] + 1e-10)
+                df_calib['Prob_Odd_A_Back'] = 1 / (df_calib['Odd_A_Back'] + 1e-10)
+                df_calib['Ratio_HA'] = df_calib['Odd_H_Back'] / (df_calib['Odd_A_Back'] + 1e-10)
+                
+                y_calib = (~((df_calib["Goals_H_FT"] == 0) & (df_calib["Goals_A_FT"] == 1))).astype(int)
+                
+                num_zeros = (y_calib == 0).sum()
+                num_ones = (y_calib == 1).sum()
+                if num_zeros >= 5 and num_ones >= 5:
+                    from sklearn.calibration import CalibratedClassifierCV
+                    X_calib = df_calib[features].fillna(0.0)
+                    X_calib_scaled = scaler.transform(X_calib)
+                    calibrated_model = CalibratedClassifierCV(estimator=model, method='sigmoid', cv='prefit')
+                    calibrated_model.fit(X_calib_scaled, y_calib)
+    except Exception:
+        pass
+
     evaluated_games = []
     for g in live_games_payload:
         norm_g = normalize_live_data(g)
@@ -186,9 +254,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         norm_g['A_CS_0x1_Rate_5'] = sa['CS_0x1_Rate_5']
 
         norm_g['Over15_Sum_5'] = norm_g['H_Over15_Rate_5'] + norm_g['A_Over15_Rate_5']
-        # REMOVED: Goals_Sum_5 — combinacao linear de H_Goals_Scored_5 + A_Goals_Scored_5,
-        # redundante com as features individuais ja presentes. Se o pkl ainda a lista,
-        # ela recebera 0.0 via norm_g.get(col, 0.0), zerando seu sinal no modelo.
+        norm_g['Goals_Sum_5'] = norm_g['H_Goals_Scored_5'] + norm_g['A_Goals_Scored_5']
         norm_g['xG_Sum_5'] = norm_g['H_xG_5'] + norm_g['A_xG_5']
         norm_g['CS_0x1_Sum_5'] = norm_g['H_CS_0x1_Rate_5'] + norm_g['A_CS_0x1_Rate_5']
         norm_g['Scored_Over15_Score'] = norm_g['H_Scored_1plus_5'] * norm_g['Over15_Sum_5']
@@ -201,7 +267,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
         row_mat = pd.DataFrame([{col: norm_g.get(col, 0.0) for col in features}])
         row_mat = row_mat.fillna(0.0)
-        prob_ml = model.predict_proba(scaler.transform(row_mat))[0, 1]
+        row_scaled = scaler.transform(row_mat)
+        if calibrated_model is not None:
+            prob_ml = calibrated_model.predict_proba(row_scaled)[0, 1]
+        else:
+            prob_ml = model.predict_proba(row_scaled)[0, 1]
         norm_g['Prob_ML'] = prob_ml
 
         apostar, reason = check_entry_conditions(norm_g)
