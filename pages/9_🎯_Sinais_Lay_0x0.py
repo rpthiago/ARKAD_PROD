@@ -168,6 +168,8 @@ if st.session_state.sinais_brutos is not None:
                 "Probabilidade ML": f"{j['Prob']}%",
                 "Responsabilidade (R$)": f"R$ {resp_max:.2f}",
                 "Stake Back Betfair (R$)": f"R$ {stake_back:.2f}" if pd.notna(stake_back) else "N/A",
+                "Resultado": "", # Campo vazio para o usuário preencher na planilha
+                "Lucro (R$)": "", # Campo vazio para o usuário preencher na planilha
                 "Estratégia": " + ".join(j["Modelos_Aprovados"])
             })
             
