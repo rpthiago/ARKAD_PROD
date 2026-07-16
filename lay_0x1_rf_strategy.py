@@ -32,6 +32,9 @@ def _merge_footstats_features(live_list, df_fs):
     df_fs["_away_key"] = df_fs["Away"].map(_clean_name)
     df_fs["_date_key"] = df_fs["Date"].dt.strftime("%Y-%m-%d")
 
+    unique_homes = df_fs["_home_key"].dropna().unique()
+    unique_aways = df_fs["_away_key"].dropna().unique()
+
     enriched = []
     for g in live_list:
         home_key = _clean_name(g.get("Home", ""))
@@ -51,15 +54,26 @@ def _merge_footstats_features(live_list, df_fs):
                 (df_fs["_away_key"] == away_key)
             ]
         if match.empty:
-            # Fuzzy fallback
-            best_score = 0
-            for idx, row in df_fs.iterrows():
-                h_score = difflib.SequenceMatcher(None, home_key, row.get("_home_key", "")).ratio()
-                a_score = difflib.SequenceMatcher(None, away_key, row.get("_away_key", "")).ratio()
-                score = (h_score + a_score) / 2
-                if score > best_score and score > 0.75:
-                    best_score = score
-                    match = df_fs.loc[[idx]]
+            # Optimized Fuzzy fallback: find best match among unique team names first
+            best_h, best_h_score = None, 0.0
+            for t in unique_homes:
+                score = difflib.SequenceMatcher(None, home_key, t).ratio()
+                if score > best_h_score:
+                    best_h_score, best_h = score, t
+                if score > 0.95: break
+            
+            best_a, best_a_score = None, 0.0
+            for t in unique_aways:
+                score = difflib.SequenceMatcher(None, away_key, t).ratio()
+                if score > best_a_score:
+                    best_a_score, best_a = score, t
+                if score > 0.95: break
+            
+            if best_h_score > 0.75 and best_a_score > 0.75:
+                match = df_fs[
+                    (df_fs["_home_key"] == best_h) &
+                    (df_fs["_away_key"] == best_a)
+                ]
 
         if not match.empty:
             row = match.iloc[0]
@@ -233,12 +247,32 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     if df_pred.empty or len(df_train) < 100:
         return []
 
-    # Label: Lose if exact score 0x1 happens
+    # Label: Lose if exact score 0x1 happens (i.e., class 1 is "NOT 0x1")
     y_train = (~((df_train["Goals_H_FT"] == 0) & (df_train["Goals_A_FT"] == 1))).astype(int)
-    if y_train.sum() < 10:
+    
+    # Class balance and size checks for calibration safety
+    num_zeros = (y_train == 0).sum()
+    num_ones = (y_train == 1).sum()
+    if num_zeros < 6 or num_ones < 6:
+        # Insufficient samples of minority class (0x1 scoreline) for calibration cv
         return []
 
-    model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42, n_jobs=-1)
+    cv_folds = min(3, num_zeros, num_ones)
+    if cv_folds < 2:
+        return []
+
+    from sklearn.calibration import CalibratedClassifierCV
+
+    base_model = RandomForestClassifier(
+        n_estimators=100, 
+        max_depth=5, 
+        random_state=42, 
+        n_jobs=-1, 
+        class_weight="balanced"
+    )
+    
+    # Calibrate probability predictions using sigmoid method (Platt Scaling)
+    model = CalibratedClassifierCV(estimator=base_model, method="sigmoid", cv=cv_folds)
     model.fit(df_train[features], y_train)
     probs = model.predict_proba(df_pred[features])[:, 1]
 
