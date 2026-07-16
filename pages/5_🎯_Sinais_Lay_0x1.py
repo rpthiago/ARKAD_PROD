@@ -13,8 +13,10 @@ st.set_page_config(
     layout="wide",
 )
 
+import importlib
 try:
     import coleta_lay_cs_aovivo
+    importlib.reload(coleta_lay_cs_aovivo)
     from coleta_lay_cs_aovivo import sinais_do_dia, _hist_df, MERCADOS
     import b365_data_utils
 except ImportError as e:

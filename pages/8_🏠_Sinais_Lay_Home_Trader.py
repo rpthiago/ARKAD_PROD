@@ -13,7 +13,10 @@ st.set_page_config(
     layout="wide",
 )
 
+import importlib
 try:
+    import coleta_layhome_sinais
+    importlib.reload(coleta_layhome_sinais)
     from coleta_layhome_sinais import sinais_do_dia, _hist_df
     import b365_data_utils
 except ImportError as e:
