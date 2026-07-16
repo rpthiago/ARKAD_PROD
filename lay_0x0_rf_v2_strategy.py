@@ -27,19 +27,20 @@ def _ev_lay(prob, odd):
 
 
 def _decay_roll_grouped(df, group_col, val_col, window=6, alpha=0.25, min_g=3):
-    """Média decaída vetorizada — idêntica a shift(1)+rolling(window).apply(pesos),
-    ~40x mais rápida (evita .apply por grupo). Só produz valor com janela completa."""
+    """Média decaída vetorizada leak-free — matematicamente idêntica à do treino."""
     g = df.groupby(group_col)[val_col]
-    numer = np.zeros(len(df)); count = np.zeros(len(df)); wsum = 0.0
+    numer = np.zeros(len(df))
+    wsum = np.zeros(len(df))
+    count = np.zeros(len(df))
     for j in range(window):
         sj = g.shift(1 + j)
         ej = np.exp(-alpha * j)
         m = sj.notna().to_numpy()
         numer += np.where(m, np.nan_to_num(sj.to_numpy()) * ej, 0.0)
+        wsum += np.where(m, ej, 0.0)
         count += m
-        wsum += ej
-    res = numer / wsum
-    res[count < window] = np.nan
+    res = np.where(wsum > 0, numer / wsum, np.nan)
+    res[count < min_g] = np.nan
     return pd.Series(res, index=df.index)
 
 
