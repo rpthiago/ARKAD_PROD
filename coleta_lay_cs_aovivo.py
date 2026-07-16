@@ -19,12 +19,14 @@ COLS = ["Date","Horario","Liga","Mandante","Visitante","Metodo","Prob","Odd_lay_
         "PREENCHER_odd_abertura","PREENCHER_odd_min60","PREENCHER_odd_min75",
         "Placar_final","Momento_gols","status","obs"]
 # Filtro do Top 5 (a pagina ignora o Decision estrito da estrategia e usa este):
-PROB_MIN_TOP5, ODD_MIN_TOP5, ODD_MAX_TOP5 = 0.50, 6.0, 22.0
+PROB_MIN_TOP5, ODD_MIN_TOP5, ODD_MAX_TOP5 = 0.50, 6.0, 99.0
 FILLC = {"PREENCHER_odd_abertura","PREENCHER_odd_min60","PREENCHER_odd_min75","obs"}
 # mercado -> estrategias reais (modelo) que selecionam os jogos + odd lay + arquivo + placar
 # Agora a coleta roda os MODELOS do Top 5 (nao um filtro de odd) para gravar exatamente
 # os jogos que os metodos apostariam, marcando qual metodo pegou cada um.
 MERCADOS = {
+    "0x0": dict(strategies=[("lay_0x0_rf_v2_strategy","RF")],
+                odd_key="Odd_CS_0x0_Lay", ledger="coleta_lay0x0_aovivo.xlsx", placar="0-0"),
     "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_strategy","RF")],
                 odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
     "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
@@ -99,6 +101,8 @@ def sinais_do_dia(date_str, cfg):
         except Exception as e:
             print(f"    [{tag}] {mod_name}: ERRO {str(e)[:80]}"); continue
         for g in (res or []):
+            if cfg["placar"] == "0-0" and g.get("Decision") != "APOSTA":
+                continue
             # MESMO filtro da pagina Top 5 (ignora o Decision estrito da estrategia):
             odd = pd.to_numeric(g.get(cfg["odd_key"]) or np.nan, errors="coerce")
             prob = pd.to_numeric(g.get("Prob_ML") or np.nan, errors="coerce")
