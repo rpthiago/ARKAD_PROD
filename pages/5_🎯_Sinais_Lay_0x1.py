@@ -25,8 +25,8 @@ st.title("🎯 Sinais Lay 0x1 (XGBoost & Random Forest)")
 st.markdown("""
 Esta página bate na **API da Betfair em tempo real**, calcula as inteligências dos motores **XGBoost (Trader)** e **Random Forest (RF)**, e aplica os **filtros estritos e realistas** validados no nosso backtest de longo prazo (2024-2026):
 
-*   **🏆 XGBoost (Trader):** Odd Betfair Lay entre **16.00 e 22.00** | Probabilidade Mínima **>= 75.0%**
-*   **🏆 Random Forest (RF):** Odd Betfair Lay entre **6.60 e 13.20** | Probabilidade Mínima **>= 92.0%**
+*   **🏆 Sweet Spot Unificado (XGBoost & RF):** Odd Betfair Lay entre **13.20 e 18.00**
+    *   *Métrica de Entrada:* Probabilidade Mínima **>= 75.0%** (XGBoost) ou **>= 92.0%** (Random Forest).
     *   *Nota:* As segundas divisões/ligas under (Brasil 2, França 2, Inglaterra 2, Espanha 2 e Portugal 1) são automaticamente excluídas para proteger a banca da variação "under" estatisticamente comprovada.
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** Conforme comprovado matematicamente pelo nosso Backtest Master, **NÃO faça Cash Out aos 60 minutos (Rota 60)**! Sair aos 60 minutos gera prejuízo a longo prazo. Deixe a operação correr até o final — o robô só toma Red se o placar final for exatamente 0x1.
@@ -56,20 +56,20 @@ if gerar_btn:
             df["Odd_Num"] = pd.to_numeric(df["Odd_lay_entrada"], errors="coerce")
             df["Prob_Num"] = pd.to_numeric(df["Prob"], errors="coerce")
             
-            # 1. Filtragem estrita do XGBoost (Odd 16-22)
+            # 1. Filtragem estrita do XGBoost (Odd 13.2-18.0)
             df_xg = df[
                 df["Metodo"].str.contains("Trader", na=False) &
-                (df["Odd_Num"] >= 16.0) & (df["Odd_Num"] <= 22.0) &
+                (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
                 (df["Prob_Num"] >= 75.0)
             ].copy()
             if not df_xg.empty:
                 df_xg["Metodo_Final"] = "XGBoost (Trader)"
             
-            # 2. Filtragem estrita do RF (Odd 6.6-13.2 + Blacklist de Ligas)
+            # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist de Ligas)
             blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
             df_rf = df[
                 df["Metodo"].str.contains("RF", na=False) &
-                (df["Odd_Num"] >= 6.6) & (df["Odd_Num"] <= 13.2) &
+                (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
                 (df["Prob_Num"] >= 92.0) &
                 (~df["Liga"].astype(str).str.upper().str.strip().isin(blacklist))
             ].copy()
@@ -116,7 +116,7 @@ if gerar_btn:
             st.divider()
             
             if df_final.empty:
-                st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos de longo prazo das IAs (XGBoost 16-22 >= 75% | RF 6.6-13.2 >= 92%). Guarde a banca!")
+                st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos de longo prazo das IAs (XGBoost/RF na faixa 13.2-18.0). Guarde a banca!")
                 with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
                     rejected = df.copy()
                     rejected["Filtros_Originais"] = rejected["Metodo"]
