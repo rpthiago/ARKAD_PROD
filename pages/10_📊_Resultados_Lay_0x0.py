@@ -33,8 +33,22 @@ def _carregar() -> pd.DataFrame:
 def _clean_monetary(val):
     if pd.isna(val):
         return np.nan
-    s = str(val).replace("R$", "").replace(" ", "").replace(".", "").replace(",", ".").strip()
+    s = str(val).replace("R$", "").replace(" ", "").strip()
+    if not s:
+        return np.nan
+    
+    # Se contem ponto e virgula (ex: 1.200,50 ou 1,200.50)
+    if "," in s and "." in s:
+        if s.find(".") < s.find(","):
+            s = s.replace(".", "").replace(",", ".")
+        else:
+            s = s.replace(",", "")
+    elif "," in s:
+        s = s.replace(",", ".")
+    # Se so tem ponto (ex: 16.67 ou 10.530000), mantem o ponto intacto
+    
     return pd.to_numeric(s, errors="coerce")
+
 
 def _pnl_lay0x0(row: pd.Series) -> float:
     # 1. Se o usuário preencheu explicitamente "Lucro (R$)", usamos esse valor
