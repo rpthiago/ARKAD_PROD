@@ -166,8 +166,8 @@ if st.session_state.sinais_brutos is not None:
                 "Visitante": j["Visitante"],
                 "Odd Lay Betfair": j["Odd_lay_entrada"],
                 "Probabilidade ML": f"{j['Prob']}%",
-                "Responsabilidade (R$)": f"R$ {resp_max:.2f}",
-                "Stake Back Betfair (R$)": f"R$ {stake_back:.2f}" if pd.notna(stake_back) else "N/A",
+                "Responsabilidade (R$)": round(float(resp_max), 2),
+                "Stake Back Betfair (R$)": round(float(stake_back), 2) if pd.notna(stake_back) else np.nan,
                 "Resultado": "", # Campo vazio para o usuário preencher na planilha
                 "Lucro (R$)": "", # Campo vazio para o usuário preencher na planilha
                 "Estratégia": " + ".join(j["Modelos_Aprovados"])
