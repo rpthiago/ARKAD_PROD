@@ -159,6 +159,109 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
+# ── Análise Estatística Detalhada ─────────────────────────────────────────────
+st.subheader("📊 Estatísticas e Análise de Desempenho")
+
+col_stats1, col_stats2, col_stats3 = st.columns(3)
+
+with col_stats1:
+    st.markdown("#### 🏆 Melhores e Piores Ligas")
+    # Agrupa por liga e calcula PnL acumulado
+    if not df_ord.empty and "Liga" in df_ord.columns:
+        liga_stats = df_ord.groupby("Liga")["PnL"].sum().reset_index()
+        liga_stats = liga_stats.sort_values(by="PnL", ascending=False)
+        
+        # Formata para exibição
+        liga_stats_display = liga_stats.copy()
+        if is_real:
+            liga_stats_display["PnL Acumulado"] = liga_stats_display["PnL"].map(lambda x: f"R$ {x:.2f}")
+        else:
+            liga_stats_display["PnL Acumulado"] = liga_stats_display["PnL"].map(lambda x: f"{x:.2f} U")
+            
+        # Top Melhores
+        st.markdown("**Top 3 Ligas Mais Lucrativas:**")
+        st.dataframe(liga_stats_display.head(3)[["Liga", "PnL Acumulado"]], use_container_width=True, hide_index=True)
+        
+        # Top Piores
+        st.markdown("**Top 3 Ligas Menos Lucrativas (Piores):**")
+        st.dataframe(liga_stats_display.tail(3)[["Liga", "PnL Acumulado"]], use_container_width=True, hide_index=True)
+    else:
+        st.info("Dados de ligas indisponíveis.")
+
+with col_stats2:
+    st.markdown("#### 🎲 Métricas de Odds")
+    if not df_ord.empty:
+        # Identificar a odd
+        odd_col = "Odd Lay Betfair" if "Odd Lay Betfair" in df_ord.columns else "Odd_lay_entrada"
+        if odd_col in df_ord.columns:
+            df_ord["Odd_Float"] = pd.to_numeric(df_ord[odd_col], errors="coerce")
+            
+            # Filtra odds válidas
+            valid_odds = df_ord[df_ord["Odd_Float"].notna() & (df_ord["Odd_Float"] > 1)]
+            
+            if not valid_odds.empty:
+                odd_media = valid_odds["Odd_Float"].mean()
+                odd_max = valid_odds["Odd_Float"].max()
+                odd_min = valid_odds["Odd_Float"].min()
+                
+                # Odds dos Reds
+                reds_df = valid_odds[valid_odds["PnL"] < 0]
+                odd_media_reds = reds_df["Odd_Float"].mean() if not reds_df.empty else np.nan
+                
+                st.markdown(f"""
+                *   **Odd Média das Entradas:** `{odd_media:.2f}`
+                *   **Odd Mínima Registrada:** `{odd_min:.2f}`
+                *   **Odd Máxima Registrada:** `{odd_max:.2f}`
+                *   **Odd Média dos Reds (0x0):** `{f"{odd_media_reds:.2f}" if pd.notna(odd_media_reds) else "N/A"}`
+                """)
+            else:
+                st.info("Sem odds válidas registradas.")
+        else:
+            st.info("Coluna de odds não encontrada.")
+    else:
+        st.info("Sem dados de odds.")
+
+with col_stats3:
+    st.markdown("#### 📈 Sequências e Médias")
+    if not df_ord.empty:
+        # P&L Médio por Entrada
+        pnl_medio = df_ord["PnL"].mean()
+        
+        # Calcular sequências máximas de Greens (PnL > 0)
+        pnl_values = df_ord["PnL"].values
+        max_greens = 0
+        current_greens = 0
+        max_reds = 0
+        current_reds = 0
+        
+        for p in pnl_values:
+            if p > 0:
+                current_greens += 1
+                current_reds = 0
+                if current_greens > max_greens:
+                    max_greens = current_greens
+            elif p < 0:
+                current_reds += 1
+                current_greens = 0
+                if current_reds > max_reds:
+                    max_reds = current_reds
+            else:
+                current_greens = 0
+                current_reds = 0
+                
+        pnl_medio_label = f"R$ {pnl_medio:.2f}" if is_real else f"{pnl_medio:.2f} U"
+        
+        st.markdown(f"""
+        *   **Retorno Médio por Entrada:** `{pnl_medio_label}`
+        *   **Maior Sequência de Greens:** `{max_greens}`
+        *   **Maior Sequência de Reds (0x0):** `{max_reds}`
+        *   **Resultado do Último Jogo:** `{"🟢 GREEN" if pnl_values[-1] > 0 else "🔴 RED"}` (Lucro: {f"R$ {pnl_values[-1]:.2f}" if is_real else f"{pnl_values[-1]:.2f} U"})
+        """)
+    else:
+        st.info("Sem dados de sequências.")
+
+st.divider()
+
 # ── Tabela principal ──────────────────────────────────────────────────────────
 st.subheader("📋 Histórico de Operações (Confirmadas)")
 
