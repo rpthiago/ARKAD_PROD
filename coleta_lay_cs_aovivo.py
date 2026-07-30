@@ -27,11 +27,10 @@ FILLC = {"PREENCHER_odd_abertura","PREENCHER_odd_min60","PREENCHER_odd_min75","o
 MERCADOS = {
     "0x0": dict(strategies=[("lay_0x0_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_0x0_Lay", ledger="coleta_lay0x0_aovivo.xlsx", placar="0-0"),
-    # "0x1" desativado preventivamente (sem edge e com bug de auto-fetch corrigido)
-    # "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_strategy","RF")],
-    #             odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
-    # "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
-    #             odd_key="Odd_CS_1x0_Lay", ledger="coleta_lay1x0_aovivo.xlsx", placar="1-0"),
+    "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_strategy","RF")],
+                odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
+    "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
+                odd_key="Odd_CS_1x0_Lay", ledger="coleta_lay1x0_aovivo.xlsx", placar="1-0"),
 }
 # O "Lay 0x1 RF" treina RandomForest on-the-fly (mais lento) — OK, a rotina roda 1x/dia.
 
