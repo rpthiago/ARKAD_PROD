@@ -29,7 +29,7 @@ st.title("🎯 Sinais Lay 0x0 (XGBoost v2)")
 st.markdown("""
 Esta página bate na **API da Betfair em tempo real**, calcula as inteligências do motor **XGBoost (RF/v2)**, e aplica os **filtros estritos e realistas** validados no nosso backtest de longo prazo (2024-2026):
 
-*   **🏆 Sweet Spot (XGBoost):** Odd Betfair Lay entre **10.00 e 99.00**
+*   **🏆 Sweet Spot (XGBoost):** Odd Betfair Lay entre **10.00 e 20.00**
     *   *Métrica de Entrada:* EV do Lay > 0.02 (calculado dinamicamente usando a probabilidade de ML e as odds live).
     *   *Filtros Contextuais:* Taxa histórica de 0x0 da liga **< 12.0%** e probabilidade de mercado implícita **< 10.0%**.
     *   *Nota:* A auditoria de truncamento temporal deste modelo foi **aprovada com sucesso (PASS)**, garantindo zero vazamento de dados futuros.
@@ -58,17 +58,24 @@ with col1:
     gestao_op = st.selectbox(
         "Perfil de Risco (Juros Compostos)",
         options=[
+            "Kelly 0.25 (Recomendado - Responsabilidade Máx 2.5%)",
             "Agressivo (20% Responsabilidade - Ruína < 15%)",
             "Conservador (11% Responsabilidade - Drawdown < 15%)",
             "Personalizado (%)"
         ]
     )
-    if gestao_op.startswith("Agressivo"):
-        f_risk = 0.20
+    if gestao_op.startswith("Kelly"):
+        use_kelly = True
+        f_risk_fixed = 0.025
+    elif gestao_op.startswith("Agressivo"):
+        use_kelly = False
+        f_risk_fixed = 0.20
     elif gestao_op.startswith("Conservador"):
-        f_risk = 0.11
+        use_kelly = False
+        f_risk_fixed = 0.11
     else:
-        f_risk = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5) / 100.0
+        use_kelly = False
+        f_risk_fixed = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5) / 100.0
         
     gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
 
@@ -116,7 +123,7 @@ if st.session_state.sinais_brutos is not None:
             else:
                 st.warning(f"A API Betfair não retornou jogos para **{date_str}** (provável fora de temporada / grade vazia no dia).")
         else:
-            st.info(f"✅ A API trouxe **{n_api} jogos** hoje, mas **nenhum** passou nos filtros estritos do Lay 0x0 (odd Lay ≥ 10, taxa 0x0 da liga < 12% e prob. de mercado < 10%). É normal o 0x0 ser seletivo — **guarde a banca**.")
+            st.info(f"✅ A API trouxe **{n_api} jogos** hoje, mas **nenhum** passou nos filtros estritos do Lay 0x0 (odd Lay entre 10 e 20, taxa 0x0 da liga < 12% e prob. de mercado < 10%). É normal o 0x0 ser seletivo — **guarde a banca**.")
     else:
         df = pd.DataFrame(sinais_brutos)
         
@@ -124,10 +131,11 @@ if st.session_state.sinais_brutos is not None:
         df["Odd_Num"] = pd.to_numeric(df["Odd_lay_entrada"], errors="coerce")
         df["Prob_Num"] = pd.to_numeric(df["Prob"], errors="coerce")
         
-        # 1. Filtragem estrita final (Odd >= 10.0)
+        # 1. Filtragem estrita final (Odd entre 10.0 e 20.0)
         df_final_sinais = df[
             df["Metodo"].str.contains("RF", na=False) &
-            (df["Odd_Num"] >= 10.0)
+            (df["Odd_Num"] >= 10.0) &
+            (df["Odd_Num"] <= 20.0)
         ].copy()
         
         if not df_final_sinais.empty:
@@ -152,6 +160,18 @@ if st.session_state.sinais_brutos is not None:
         rows_final = []
         for j in jogos_vistos.values():
             odd_val = pd.to_numeric(j["Odd_lay_entrada"], errors="coerce")
+            prob_pct = pd.to_numeric(j["Prob"], errors="coerce")
+            
+            if use_kelly and pd.notna(odd_val) and odd_val > 1.0 and pd.notna(prob_pct):
+                p = prob_pct / 100.0
+                q = 1.0 - p
+                b_net = (1.0 / (odd_val - 1.0)) * 0.95
+                kf = p - q / b_net
+                f_applied = 0.25 * max(0.0, kf)
+                f_risk = min(0.025, f_applied) # Teto de 2.5% de responsabilidade
+            else:
+                f_risk = f_risk_fixed
+                
             resp_max = banca_val * f_risk
             if pd.notna(odd_val) and odd_val > 1.0:
                 stake_back = resp_max / (odd_val - 1.0)
@@ -178,7 +198,7 @@ if st.session_state.sinais_brutos is not None:
         st.divider()
         
         if df_final.empty:
-            st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos da IA (XGBoost na faixa >= 10.0 com filtros contextuais). Guarde a banca!")
+            st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos da IA (XGBoost na faixa [10.0, 20.0] com filtros contextuais). Guarde a banca!")
             with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
                 rejected = df.copy()
                 rejected["Filtros_Originais"] = rejected["Metodo"]
@@ -203,4 +223,7 @@ if st.session_state.sinais_brutos is not None:
             )
             
             st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva validados no backtest.")
-            st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Responsabilidade por jogo: {f_risk*100:.1f}% (R$ {banca_val*f_risk:.2f}). Se a banca aumentar ou diminuir, reajuste o valor do saldo para atualizar as stakes de juros compostos.")
+            if use_kelly:
+                st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Gestão: Kelly 0.25 com teto de 2.5% de Responsabilidade Máxima.")
+            else:
+                st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Responsabilidade por jogo: {f_risk_fixed*100:.1f}% (R$ {banca_val*f_risk_fixed:.2f}). Se a banca aumentar ou diminuir, reajuste o valor do saldo para atualizar as stakes de juros compostos.")

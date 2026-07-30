@@ -11,7 +11,7 @@ FEATURES_PATH = str(ROOT / "features_lay_0x0_rf_v2.pkl")
 COMMISSION       = 0.05
 EV_MIN           = 0.02
 ODD_MIN          = 10.0
-ODD_MAX          = 99.0
+ODD_MAX          = 20.0
 LIGA_0X0_RATE_MAX = 0.12
 MKT_PROB_MAX     = 0.1
 ODD_COL          = "Odd_CS_0x0"
@@ -48,6 +48,12 @@ def check_entry_conditions(ms):
     odd = ms.get("Odd_CS_0x0_Lay") or ms.get("Odd_CS_0x0") or 0.0
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
+    
+    # Exclusão das duas piores ligas (USA 1 e ICELAND 1)
+    league = str(ms.get("League") or ms.get("Liga") or "").upper().strip()
+    if league in ["USA 1", "ICELAND 1"]:
+        return False, f"LIGA_BLOQUEADA({league})"
+        
     prob = ms.get("Prob_ML", 0) or 0.0
     ev = _ev_lay(prob, odd)
     if ev < EV_MIN:
