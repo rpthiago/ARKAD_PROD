@@ -52,9 +52,10 @@ def check_entry_conditions(ms):
     # Exclusão de ligas ruins e altamente defensivas
     league = str(ms.get("League") or ms.get("Liga") or "").upper().strip()
     BLACK_LIST_LEAGUES = [
-        "USA 1", "ICELAND 1", "POLAND 1", "SWEDEN 2", "IRELAND 1", "CZECH 1",
-        "BRAZIL 2", "URUGUAY 1", "ARGENTINA 1", "ARGENTINA 2", "SPAIN 2", 
-        "FRANCE 2", "ROMANIA 2", "COLOMBIA 1", "SCOTLAND 3"
+        "USA 1", "ICELAND 1", "ARGENTINA 1", "BRAZIL 2", "SOUTH AFRICA 1", 
+        "ARGENTINA 2", "URUGUAY 2", "ISRAEL 1", "FRANCE 3", "EGYPT 1", 
+        "ITALY 3", "PERU 2", "GREECE 2", "ECUADOR CUP", "COLOMBIA CUP", 
+        "BRAZIL CUP", "FRANCE CUP"
     ]
     if league in BLACK_LIST_LEAGUES:
         return False, f"LIGA_BLOQUEADA({league})"
