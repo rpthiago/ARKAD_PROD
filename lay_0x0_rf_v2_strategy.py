@@ -49,9 +49,14 @@ def check_entry_conditions(ms):
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
     
-    # Exclusão das duas piores ligas (USA 1 e ICELAND 1)
+    # Exclusão de ligas ruins e altamente defensivas
     league = str(ms.get("League") or ms.get("Liga") or "").upper().strip()
-    if league in ["USA 1", "ICELAND 1"]:
+    BLACK_LIST_LEAGUES = [
+        "USA 1", "ICELAND 1", "POLAND 1", "SWEDEN 2", "IRELAND 1", "CZECH 1",
+        "BRAZIL 2", "URUGUAY 1", "ARGENTINA 1", "ARGENTINA 2", "SPAIN 2", 
+        "FRANCE 2", "ROMANIA 2", "COLOMBIA 1", "SCOTLAND 3"
+    ]
+    if league in BLACK_LIST_LEAGUES:
         return False, f"LIGA_BLOQUEADA({league})"
         
     prob = ms.get("Prob_ML", 0) or 0.0
@@ -143,8 +148,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         lambda x: x.shift(1).rolling(100, min_periods=20).mean())
     liga_last = df_lig.groupby("League")["liga_0x0_rate"].last().to_dict()
 
-    unique_homes = home_last["_canon"].dropna().unique()
-    unique_aways = away_last["_canon"].dropna().unique()
+    # Mapeamento de ligas para times no histórico para evitar cross-matching
+    df_hist["Home_Canon"] = df_hist["Home"].apply(canon_text)
+    df_hist["Away_Canon"] = df_hist["Away"].apply(canon_text)
+    league_homes = df_hist.groupby("League")["Home_Canon"].unique().to_dict()
+    league_aways = df_hist.groupby("League")["Away_Canon"].unique().to_dict()
 
     evaluated = []
     for g in live_games_payload:
@@ -156,12 +164,15 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         hc = canon_text(home)
         ac = canon_text(away)
 
+        allowed_homes = league_homes.get(league, [])
+        allowed_aways = league_aways.get(league, [])
+
         sh = home_last[home_last["_canon"] == hc]
         sa = away_last[away_last["_canon"] == ac]
         
         if sh.empty:
             best_t, best_score = None, 0.0
-            for t in unique_homes:
+            for t in allowed_homes:
                 score = difflib.SequenceMatcher(None, hc, t).ratio()
                 if score > best_score:
                     best_score, best_t = score, t
@@ -171,7 +182,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
                 
         if sa.empty:
             best_t, best_score = None, 0.0
-            for t in unique_aways:
+            for t in allowed_aways:
                 score = difflib.SequenceMatcher(None, ac, t).ratio()
                 if score > best_score:
                     best_score, best_t = score, t
