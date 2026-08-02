@@ -1,0 +1,94 @@
+Date,Liga,Home,Away,Odd,Prob,Metodo,Placar,Status,PnL,Origem
+2026-07-01,WORLD WORLD CUP,Belgium,Senegal,15.0,94.5,XGBoost (Trader) + Random Forest (RF),3-2,GREEN,0.94,Base_Original
+2026-07-02,BRAZIL 2,Cuiaba,America MG,13.5,94.5,XGBoost (Trader),1-0,GREEN,0.94,Base_Original
+2026-07-03,WORLD WORLD CUP,Switzerland,Algeria,14.0,93.8,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Base_Original
+2026-07-03,NORWAY 2,Raufoss,Strommen,15.0,91.6,XGBoost (Trader),1-0,GREEN,0.94,Base_Original
+2026-07-03,IRELAND 1,Shelbourne,Dundalk,17.0,94.0,XGBoost (Trader) + Random Forest (RF),2-1,GREEN,0.94,Base_Original
+2026-07-04,FINLAND 1,Lahti,Gnistan,14.5,93.1,XGBoost (Trader) + Random Forest (RF),1-0,GREEN,0.94,Base_Original
+2026-07-04,FINLAND 1,Jaro,Ilves,13.5,91.3,XGBoost (Trader),2-1,GREEN,0.94,Base_Original
+2026-07-04,NORWAY 2,Hodd,Stromsgodset,18.0,93.4,XGBoost (Trader) + Random Forest (RF),4-3,GREEN,0.94,Base_Original
+2026-07-04,BRAZIL 2,Novorizontino,Atletico GO,15.5,94.3,XGBoost (Trader),3-0,GREEN,0.94,Base_Original
+2026-07-05,CHINA 1,Meizhou Hakka,Changchun Yatai,15.0,92.5,XGBoost (Trader) + Random Forest (RF),1-3,GREEN,0.94,Base_Original
+2026-07-06,BRAZIL 2,Botafogo SP,Avai,16.5,94.2,XGBoost (Trader),3-1,GREEN,0.94,Base_Original
+2026-07-06,WORLD WORLD CUP,USA,Belgium,14.5,96.3,XGBoost (Trader) + Random Forest (RF),1-4,GREEN,0.94,Base_Original
+2026-07-11,SWEDEN 1,Mjallby,AIK,17.0,94.4,XGBoost (Trader) + Random Forest (RF),1-2,GREEN,0.94,Base_Original
+2026-07-11,FINLAND 1,TPS,AC Oulu,13.5,91.9,XGBoost (Trader),3-0,GREEN,0.94,Base_Original
+2026-07-11,SWEDEN 1,Orgryte,Hacken,14.5,91.7,XGBoost (Trader),4-3,GREEN,0.94,Base_Original
+2026-07-11,WORLD WORLD CUP,Argentina,Switzerland,17.0,95.5,XGBoost (Trader) + Random Forest (RF),3-1,GREEN,0.94,Base_Original
+2026-07-12,SWEDEN 1,Vasteras SK,Degerfors,15.0,93.6,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Base_Original
+2026-07-12,SWEDEN 1,GAIS,Elfsborg,17.5,94.9,XGBoost (Trader) + Random Forest (RF),1-0,GREEN,0.94,Base_Original
+2026-07-12,BOLIVIA 1,Real Potosi,Nacional Potosi,13.5,91.9,XGBoost (Trader),1-1,GREEN,0.94,Base_Original
+2026-07-12,BOLIVIA 1,The Strongest,Bolivar,16.0,91.7,XGBoost (Trader),1-1,GREEN,0.94,Base_Original
+2026-07-12,BRAZIL 2,CRB,Goias,14.5,93.9,XGBoost (Trader),2-2,GREEN,0.94,Base_Original
+2026-07-12,BRAZIL 3,Botafogo PB,Confianca,17.5,94.3,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Base_Original
+2026-07-14,WORLD WORLD CUP,France,Spain,14.0,95.7,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Base_Original
+2026-07-16,USA 1,CF Montreal,Toronto FC,16.5,94.2,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.94,Base_Original
+2026-07-17,CHINA 1,Changchun Yatai,Wuxi Wugou,16.0,94.6,XGBoost (Trader) + Random Forest (RF),1-5,GREEN,0.94,Base_Original
+2026-07-17,SERBIA 1,Zeleznicar Pancevo,Radnicki Nis,17.0,93.5,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Železničar Pančevo x Radnički Niš)
+2026-07-17,BRAZIL 2,Sao Bernardo,Avai,13.5,94.0,XGBoost (Trader),1-1,GREEN,0.94,Base_Original
+2026-07-17,BRAZIL 1,Mirassol,Gremio,14.5,94.5,XGBoost (Trader) + Random Forest (RF),2-1,GREEN,0.94,Base_Original
+2026-07-17,ECUADOR 1,Delfin,Macara,17.0,91.2,XGBoost (Trader),2-1,GREEN,0.94,Base_Original
+2026-07-18,FINLAND 1,AC Oulu,Gnistan,14.5,93.0,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Base_Original
+2026-07-18,FINLAND 1,SJK,KuPS,16.5,93.1,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Base_Original
+2026-07-19,SWEDEN 2,Varnamo,Ljungskile,13.5,91.0,XGBoost (Trader),2-3,GREEN,0.94,Base_Original
+2026-07-20,FINLAND 1,TPS,Ilves,15.5,90.8,XGBoost (Trader),1-3,GREEN,0.94,Base_Original
+2026-07-22,NORWAY 1,Lillestrom,Viking,15.5,92.2,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.97 (Lillestrøm x Viking)
+2026-07-22,USA 1,FC Cincinnati,Vancouver Whitecaps,17.5,93.6,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (FC Cincinnati x Vancouver Whitecaps)
+2026-07-22,USA 1,New England Revolution,Toronto FC,17.0,93.8,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (New England Revolution x Toronto)
+2026-07-22,USA 1,Austin FC,Seattle Sounders,13.5,94.0,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Austin x Seattle Sounders)
+2026-07-24,POLAND 1,Radomiak Radom,Wieczysta Krakow,14.0,91.1,XGBoost (Trader),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Radomiak Radom x Wieczysta Kraków)
+2026-07-24,BULGARIA 1,Arda,Slavia Sofia,17.5,95.0,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Arda x Slavia Sofia)
+2026-07-25,CHINA 1,Changchun Yatai,Nanjing City,16.5,93.7,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Changchun Yatai x Nanjing City)
+2026-07-25,CHINA 1,Wuhan Three Towns,Chongqing Tonglianglong,13.5,94.4,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Wuhan Three Towns x Chongqing Tongliang Long)
+2026-07-25,POLAND 1,Gornik Zabrze,Slask Wroclaw,17.5,94.2,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.98 (Górnik Zabrze x Śląsk Wrocław)
+2026-07-25,BRAZIL 3,Ferroviaria,Maranhao,17.0,94.6,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Ferroviária x Maranhão)
+2026-07-25,USA 1,New England Revolution,Atlanta Utd,17.0,94.1,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.93 (New England Revolution x Atlanta United FC)
+2026-07-25,USA 1,New York City,Chicago Fire,15.0,91.6,XGBoost (Trader),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (New York City x Chicago Fire)
+2026-07-25,USA 1,Orlando City,Nashville SC,15.0,93.4,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Orlando City x Nashville SC)
+2026-07-26,NORWAY 2,Asane,Egersund,17.5,91.9,XGBoost (Trader),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Åsane x Egersund)
+2026-07-26,NORWAY 1,KFUM Oslo,Molde,13.5,92.0,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.83 (KFUM x Molde)
+2026-07-26,BULGARIA 1,Cherno More,Spartak Varna,16.0,94.5,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Cherno More x Spartak Varna)
+2026-07-27,SWEDEN 2,Orebro,Oddevold,14.0,91.8,XGBoost (Trader),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Örebro x Oddevold)
+2026-07-29,BRAZIL 1,Mirassol,Remo,17.5,94.3,XGBoost (Trader) + Random Forest (RF),2-1,GREEN,0.935,Footstats_Fuzzy_1.00 (Mirassol x Remo)
+2026-07-04,BRAZIL 3,Ferroviaria,SER Caxias do Sul,13.5,92.0,Random Forest (RF),0-1,RED,-12.5,Footstats_Fuzzy_0.83 (Ferroviária x Caxias)
+2026-07-04,USA 1,San Antonio FC,Monterey Bay FC,15.5,93.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (San Antonio x Monterey Bay)
+2026-07-04,BRAZIL 3,Maringa,Volta Redonda,18.0,93.8,Random Forest (RF),4-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Maringá x Volta Redonda)
+2026-07-05,SWEDEN 1,IFK Goteborg,AIK,17.0,92.3,Random Forest (RF),1-2,GREEN,0.935,Footstats_Fuzzy_1.00 (IFK Göteborg x AIK)
+2026-07-06,BRAZIL 3,Amazonas FC,Itabaiana,13.5,93.3,Random Forest (RF),0-2,GREEN,0.935,Footstats_Fuzzy_1.00 (Amazonas x Itabaiana)
+2026-07-08,USA 1,Hartford Athletic FC,Orange County Blues,17.0,93.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.91 (Hartford Athletic x Orange County SC)
+2026-07-10,IRELAND 2,Wexford F.C,Kerry FC,16.0,93.3,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.94 (Wexford x Kerry)
+2026-07-11,BRAZIL 3,SER Caxias do Sul,Floresta EC,15.0,94.2,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.78 (Caxias x Floresta)
+2026-07-12,NORWAY 1,Sandefjord,Ham-Kam,18.0,93.5,Random Forest (RF),2-2,GREEN,0.94,Base_Original
+2026-07-17,BRAZIL 1,Fluminense,Red Bull Bragantino,18.0,94.7,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.87 (Fluminense x Bragantino)
+2026-07-18,ROMANIA 1,Universitatea Craiova,UTA Arad,16.0,94.0,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.77 (CS U Craiova x UTA Arad)
+2026-07-18,USA 1,Detroit City FC,Indy Eleven,16.5,93.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Detroit City FC x Indy Eleven)
+2026-07-18,CHINA 1,Guangxi Hengchen,Shaanxi Union FC,13.5,92.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Guangxi Hengchen x Shaanxi Union)
+2026-07-18,SWEDEN 2,Ostersunds FK,Landskrona,14.5,92.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Östersunds FK x Landskrona)
+2026-07-18,USA 1,Phoenix Rising FC,Monterey Bay FC,17.0,92.7,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Phoenix Rising x Monterey Bay)
+2026-07-19,SWEDEN 2,United IK Nordic,Orebro,17.5,93.4,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.96 (United Nordic x Örebro)
+2026-07-20,ROMANIA 1,FC Hunedoara,Csikszereda,13.5,93.8,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.85 (Corvinul Hunedoara x Csikszereda)
+2026-07-20,SWEDEN 2,Norrby IF,Sundsvall,15.0,93.1,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.86 (Norrby x GIF Sundsvall)
+2026-07-21,BRAZIL 1,Atletico MG,Bahia,15.0,93.7,Random Forest (RF),1-1,GREEN,0.94,Base_Original
+2026-07-21,ECUADOR 1,Univ Catolica (Ecu),Barcelona (Ecu),15.5,93.8,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.78 (CD Universidad Católica x Barcelona)
+2026-07-22,USA 1,Charlotte FC,Atlanta Utd,15.5,92.2,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.93 (Charlotte x Atlanta United FC)
+2026-07-22,USA 1,LA Galaxy,St Louis City SC,17.0,92.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (LA Galaxy x St. Louis City)
+2026-07-22,USA 1,Columbus,New York City,13.5,92.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.90 (Columbus Crew x New York City)
+2026-07-24,ROMANIA 1,UTA Arad,Otelul Galati,13.5,92.1,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (UTA Arad x Oţelul Galaţi)
+2026-07-24,CZECH 1,Prostejov,Trinec,17.0,93.9,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Prostějov x Třinec)
+2026-07-24,CZECH 1,Vysocina Jihlava,Zizkov,16.5,92.3,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.80 (Vysočina Jihlava x Viktoria Žižkov)
+2026-07-25,BRAZIL 3,Volta Redonda,Anapolis GO,16.0,94.8,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Volta Redonda x Anápolis)
+2026-07-25,BRAZIL 3,Santa Cruz PE,Figueirense,13.5,94.3,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Santa Cruz x Figueirense)
+2026-07-25,USA 1,St Louis City SC,Colorado,17.5,93.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.86 (St. Louis City x Colorado Rapids)
+2026-07-25,ECUADOR 1,Tecnico Universitario,Manta FC,16.0,94.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Técnico Universitario x Manta FC)
+2026-07-25,POLAND 1,Jagiellonia Bialystock,Korona Kielce,16.5,94.1,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.97 (Jagiellonia Białystok x Korona Kielce)
+2026-07-25,CHINA 1,Shaanxi Union FC,Shenzhen Juniors FC,17.0,94.4,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Shaanxi Union x Shenzhen Juniors)
+2026-07-25,CZECH 1,Teplice,Bohemians 1905,13.5,92.7,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_1.00 (Teplice x Bohemians 1905)
+2026-07-26,BOLIVIA 1,Blooming Santa Cruz,The Strongest,18.0,92.1,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.82 (Blooming x The Strongest)
+2026-07-26,BRAZIL 1,Cruzeiro MG,Botafogo FR,18.0,94.3,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.94 (Cruzeiro x Botafogo)
+2026-07-26,BULGARIA 1,Lokomotiv Plovdiv,Septemvri,18.0,94.4,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.89 (Lokomotiv Plovdiv x Septemvri Sofia)
+2026-07-26,POLAND 1,Wisla Krakow,GKS Katowice,16.5,93.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.98 (Wisła Kraków x GKS Katowice)
+2026-07-26,BRAZIL 3,SER Caxias do Sul,Botafogo PB,13.5,93.8,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.83 (Caxias x Botafogo PB)
+2026-07-26,CHINA 1,Dalian Kun City FC,Suzhou Dongwu,16.0,93.4,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.83 (Dalian Huayi x Suzhou Dongwu)
+2026-07-26,CZECH 1,Slavia Praha B,FK Pribram,16.0,92.4,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.92 (Slavia Praha U21 x Příbram)
+2026-07-26,POLAND 1,Widzew Lodz,LKP Motor Lublin,17.0,94.6,Random Forest (RF),0-0,GREEN,0.935,Footstats_Fuzzy_0.91 (Widzew Łódź x Motor Lublin)
+2026-07-29,USA 1,Pittsburgh Riverhounds,Tulsa Roughnecks FC,15.0,93.9,Random Forest (RF),0-1,RED,-14.0,Footstats_Fuzzy_1.00 (Pittsburgh Riverhounds x Tulsa Roughnecks)

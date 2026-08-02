@@ -1,0 +1,132 @@
+Date,Horario,Liga,Home,Away,Odd_Lay,Prob,Metodos_Aprovados,Metodo,Placar_Final,Status,PnL
+2026-07-01,17:00:00,WORLD WORLD CUP,Belgium,Senegal,15.0,94.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),3-2,ENCERRADO,0.94
+2026-07-02,20:00:00,BRAZIL 2,Cuiaba,America MG,13.5,94.5,['XGBoost (Trader)'],XGBoost (Trader),1-0,ENCERRADO,0.94
+2026-07-03,00:00:00,WORLD WORLD CUP,Switzerland,Algeria,14.0,93.8,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),2-0,ENCERRADO,0.94
+2026-07-03,13:00:00,NORWAY 2,Raufoss,Strommen,15.0,91.6,['XGBoost (Trader)'],XGBoost (Trader),1-0,ENCERRADO,0.94
+2026-07-03,15:45:00,IRELAND 1,Shelbourne,Dundalk,17.0,94.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),2-1,ENCERRADO,0.94
+2026-07-04,09:00:00,FINLAND 1,Lahti,Gnistan,14.5,93.1,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-0,ENCERRADO,0.94
+2026-07-04,11:00:00,FINLAND 1,Jaro,Ilves,13.5,91.3,['XGBoost (Trader)'],XGBoost (Trader),2-1,ENCERRADO,0.94
+2026-07-04,11:00:00,NORWAY 2,Hodd,Stromsgodset,18.0,93.4,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),4-3,ENCERRADO,0.94
+2026-07-04,16:00:00,BRAZIL 2,Novorizontino,Atletico GO,15.5,94.3,['XGBoost (Trader)'],XGBoost (Trader),3-0,ENCERRADO,0.94
+2026-07-05,08:30:00,CHINA 1,Meizhou Hakka,Changchun Yatai,15.0,92.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-3,ENCERRADO,0.94
+2026-07-06,19:00:00,BRAZIL 2,Botafogo SP,Avai,16.5,94.2,['XGBoost (Trader)'],XGBoost (Trader),3-1,ENCERRADO,0.94
+2026-07-06,21:00:00,WORLD WORLD CUP,USA,Belgium,14.5,96.3,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-4,ENCERRADO,0.94
+2026-07-11,10:00:00,SWEDEN 1,Mjallby,AIK,17.0,94.4,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-2,ENCERRADO,0.94
+2026-07-11,11:00:00,FINLAND 1,TPS,AC Oulu,13.5,91.9,['XGBoost (Trader)'],XGBoost (Trader),3-0,ENCERRADO,0.94
+2026-07-11,12:30:00,SWEDEN 1,Orgryte,Hacken,14.5,91.7,['XGBoost (Trader)'],XGBoost (Trader),4-3,ENCERRADO,0.94
+2026-07-11,22:00:00,WORLD WORLD CUP,Argentina,Switzerland,17.0,95.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),3-1,ENCERRADO,0.94
+2026-07-12,09:00:00,SWEDEN 1,Vasteras SK,Degerfors,15.0,93.6,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),2-0,ENCERRADO,0.94
+2026-07-12,11:30:00,SWEDEN 1,GAIS,Elfsborg,17.5,94.9,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-0,ENCERRADO,0.94
+2026-07-12,16:00:00,BOLIVIA 1,Real Potosi,Nacional Potosi,13.5,91.9,['XGBoost (Trader)'],XGBoost (Trader),1-1,ENCERRADO,0.94
+2026-07-12,18:15:00,BOLIVIA 1,The Strongest,Bolivar,16.0,91.7,['XGBoost (Trader)'],XGBoost (Trader),1-1,ENCERRADO,0.94
+2026-07-12,19:00:00,BRAZIL 2,CRB,Goias,14.5,93.9,['XGBoost (Trader)'],XGBoost (Trader),2-2,ENCERRADO,0.94
+2026-07-12,19:30:00,BRAZIL 3,Botafogo PB,Confianca,17.5,94.3,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),2-0,ENCERRADO,0.94
+2026-07-14,16:00:00,WORLD WORLD CUP,France,Spain,14.0,95.7,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),0-2,ENCERRADO,0.94
+2026-07-16,20:30:00,USA 1,CF Montreal,Toronto FC,16.5,94.2,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),0-0,ENCERRADO,0.94
+2026-07-16,22:00:00,MEXICO 1,Necaxa,Atlante,17.5,93.9,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-17,08:00:00,CHINA 1,Changchun Yatai,Wuxi Wugou,16.0,94.6,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),1-5,ENCERRADO,0.94
+2026-07-17,15:00:00,SERBIA 1,Zeleznicar Pancevo,Radnicki Nis,17.0,93.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-17,19:00:00,BRAZIL 2,Sao Bernardo,Avai,13.5,94.0,['XGBoost (Trader)'],XGBoost (Trader),1-1,ENCERRADO,0.94
+2026-07-17,20:00:00,BRAZIL 1,Mirassol,Gremio,14.5,94.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),2-1,ENCERRADO,0.94
+2026-07-17,21:00:00,ECUADOR 1,Delfin,Macara,17.0,91.2,['XGBoost (Trader)'],XGBoost (Trader),2-1,ENCERRADO,0.94
+2026-07-18,11:00:00,FINLAND 1,AC Oulu,Gnistan,14.5,93.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),0-2,ENCERRADO,0.94
+2026-07-18,11:00:00,FINLAND 1,SJK,KuPS,16.5,93.1,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),0-2,ENCERRADO,0.94
+2026-07-18,22:07:00,MEXICO 1,Guadalajara,Toluca,17.0,94.1,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-19,10:00:00,SWEDEN 2,Varnamo,Ljungskile,13.5,91.0,['XGBoost (Trader)'],XGBoost (Trader),2-3,ENCERRADO,0.94
+2026-07-20,12:00:00,FINLAND 1,TPS,Ilves,15.5,90.8,['XGBoost (Trader)'],XGBoost (Trader),1-3,ENCERRADO,0.94
+2026-07-22,14:00:00,NORWAY 1,Lillestrom,Viking,15.5,92.2,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-22,20:40:00,USA 1,FC Cincinnati,Vancouver Whitecaps,17.5,93.6,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-22,20:40:00,USA 1,New England Revolution,Toronto FC,17.0,93.8,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-22,22:40:00,USA 1,Austin FC,Seattle Sounders,13.5,94.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-23,21:00:00,ECUADOR 1,Emelec,Mushuc Runa,15.0,94.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-24,13:00:00,FINLAND 1,Jaro,SJK,13.5,93.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-24,13:00:00,POLAND 1,Radomiak Radom,Wieczysta Krakow,14.0,91.1,['XGBoost (Trader)'],XGBoost (Trader),,PENDENTE,
+2026-07-24,15:15:00,BULGARIA 1,Arda,Slavia Sofia,17.5,95.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,08:00:00,CHINA 1,Changchun Yatai,Nanjing City,16.5,93.7,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,09:00:00,CHINA 1,Wuhan Three Towns,Chongqing Tonglianglong,13.5,94.4,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,10:00:00,DENMARK 2,Esbjerg,Kolding IF,18.0,94.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,11:00:00,FINLAND 1,KuPS,VPS,14.5,94.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,12:30:00,POLAND 1,Gornik Zabrze,Slask Wroclaw,17.5,94.2,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,17:00:00,BRAZIL 3,Ferroviaria,Maranhao,17.0,94.6,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,20:30:00,USA 1,New England Revolution,Atlanta Utd,17.0,94.1,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-25,20:30:00,USA 1,New York City,Chicago Fire,15.0,91.6,['XGBoost (Trader)'],XGBoost (Trader),,PENDENTE,
+2026-07-25,20:30:00,USA 1,Orlando City,Nashville SC,15.0,93.4,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-26,09:00:00,FINLAND 1,Ilves,Lahti,13.5,94.1,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-26,12:00:00,NORWAY 2,Asane,Egersund,17.5,91.9,['XGBoost (Trader)'],XGBoost (Trader),,PENDENTE,
+2026-07-26,12:00:00,NORWAY 1,KFUM Oslo,Molde,13.5,92.0,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-26,13:00:00,BULGARIA 1,Cherno More,Spartak Varna,16.0,94.5,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-26,15:15:00,ECUADOR 1,Aucas,Macara,13.5,93.6,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-26,21:00:00,PERU 1,Deportivo Garcilaso,FC Cajamarca,18.0,94.4,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-27,14:00:00,SWEDEN 2,Orebro,Oddevold,14.0,91.8,['XGBoost (Trader)'],XGBoost (Trader),,PENDENTE,
+2026-07-29,19:30:00,BRAZIL 1,Mirassol,Remo,17.5,94.3,"['XGBoost (Trader)', 'Random Forest (RF)']",XGBoost (Trader) + Random Forest (RF),,PENDENTE,
+2026-07-01,23:00:00,USA 1,Spokane Velocity FC,Forward Madison FC,16.0,94.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-04,20:30:00,BRAZIL 3,Ferroviaria,SER Caxias do Sul,13.5,92.0,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-04,22:00:00,USA 1,San Antonio FC,Monterey Bay FC,15.5,93.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-04,19:00:00,BRAZIL 3,Maringa,Volta Redonda,18.0,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-04,07:00:00,CHINA 1,Yanbian Longding,Jiangxi Dingnan United,14.5,93.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-04,08:00:00,CHINA 1,Liaoning Tieren FC,Chongqing Tonglianglong,16.0,93.0,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-05,09:00:00,SWEDEN 1,IFK Goteborg,AIK,17.0,92.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-05,08:30:00,CHINA 1,Nanjing City,Foshan Nanshi FC,17.0,94.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-06,21:00:00,BRAZIL 3,Amazonas FC,Itabaiana,13.5,93.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-08,20:00:00,USA 1,Hartford Athletic FC,Orange County Blues,17.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-08,20:00:00,USA 1,Greenville Triumph SC,Sarasota Paradise,16.5,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-10,15:45:00,IRELAND 2,Wexford F.C,Kerry FC,16.0,93.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-11,18:00:00,URUGUAY 1,Wanderers (Uru),Progreso,13.5,93.2,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-11,18:00:00,BRAZIL 4,XV De Piracicaba,Cianorte PR,17.0,94.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-11,11:00:00,BRAZIL 3,SER Caxias do Sul,Floresta EC,15.0,94.2,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-12,16:00:00,BRAZIL 4,Manaura Esporte Clube,Goiatuba EC,14.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-12,16:00:00,BRAZIL 4,AD Iguatu,Maguary,13.5,92.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-12,17:00:00,BRAZIL 4,Capital Clube de Futebol,Nacional AM,14.5,94.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-12,17:00:00,BRAZIL 4,Treze,CRAC,14.5,94.2,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-12,12:00:00,NORWAY 1,Sandefjord,Ham-Kam,18.0,93.5,['Random Forest (RF)'],Random Forest (RF),2-2,ENCERRADO,0.94
+2026-07-12,12:00:00,URUGUAY 1,Liverpool Montevideo,Cerro,17.0,94.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-17,20:00:00,BRAZIL 1,Fluminense,Red Bull Bragantino,18.0,94.7,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,15:15:00,ROMANIA 1,Universitatea Craiova,UTA Arad,16.0,94.0,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,17:30:00,PERU 1,Atletico Grau,UTC Cajamarca,16.5,94.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,20:00:00,USA 1,Detroit City FC,Indy Eleven,16.5,93.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,08:30:00,CHINA 1,Guangxi Hengchen,Shaanxi Union FC,13.5,92.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,09:00:00,FINLAND 1,HJK Helsinki,VPS,17.0,92.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,10:00:00,SWEDEN 2,Ostersunds FK,Landskrona,14.5,92.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-18,23:30:00,USA 1,Phoenix Rising FC,Monterey Bay FC,17.0,92.7,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-19,13:00:00,PERU 1,CD Los Chankas,Sport Boys (Per),14.0,93.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-19,14:00:00,SERBIA 1,Radnik Surdulica,Mladost Lucani,14.0,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-19,10:00:00,SWEDEN 2,United IK Nordic,Orebro,17.5,93.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-20,17:00:00,URUGUAY 1,Torque,Danubio,15.0,94.7,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-20,16:00:00,ECUADOR 1,Mushuc Runa,Orense Sporting Club,14.5,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-20,12:30:00,ROMANIA 1,FC Hunedoara,Csikszereda,13.5,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-20,14:00:00,SWEDEN 2,Norrby IF,Sundsvall,15.0,93.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-21,19:30:00,BRAZIL 1,Atletico MG,Bahia,15.0,93.7,['Random Forest (RF)'],Random Forest (RF),1-1,ENCERRADO,0.94
+2026-07-21,21:00:00,ECUADOR 1,Univ Catolica (Ecu),Barcelona (Ecu),15.5,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-22,21:25:00,USA 1,Charlotte FC,Atlanta Utd,15.5,92.2,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-22,23:30:00,USA 1,LA Galaxy,St Louis City SC,17.0,92.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-22,20:30:00,USA 1,Columbus,New York City,13.5,92.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-23,18:30:00,ECUADOR 1,CD Leones del Norte,Guayaquil City,14.0,94.9,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-24,19:00:00,URUGUAY 1,Torque,Danubio,15.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-24,12:30:00,ROMANIA 1,UTA Arad,Otelul Galati,13.5,92.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-24,13:00:00,CZECH 1,Prostejov,Trinec,17.0,93.9,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-24,13:00:00,CZECH 1,Vysocina Jihlava,Zizkov,16.5,92.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,18:05:00,COLOMBIA 1,Ind Medellin,Deportivo Pasto,17.0,94.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,19:00:00,BRAZIL 3,Volta Redonda,Anapolis GO,16.0,94.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,17:00:00,BRAZIL 3,Santa Cruz PE,Figueirense,13.5,94.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,21:30:00,USA 1,St Louis City SC,Colorado,17.5,93.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,21:00:00,ECUADOR 1,Tecnico Universitario,Manta FC,16.0,94.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,20:10:00,COLOMBIA 1,Millonarios,Atletico Bucaramanga,16.5,94.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,09:45:00,POLAND 1,Jagiellonia Bialystock,Korona Kielce,16.5,94.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,08:00:00,CHINA 1,Shaanxi Union FC,Shenzhen Juniors FC,17.0,94.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,00:00:00,MEXICO 1,Tijuana,Leon,18.0,93.9,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,22:00:00,USA 1,Spokane Velocity FC,Fort Wayne FC,17.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,15:00:00,PERU 1,Sport Huancayo,Atletico Grau,18.0,94.2,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,12:00:00,CZECH 1,Teplice,Bohemians 1905,13.5,92.7,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-25,22:15:00,COLOMBIA 1,Tolima,Junior FC Barranquilla,14.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,16:00:00,BOLIVIA 1,Blooming Santa Cruz,The Strongest,18.0,92.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,16:00:00,BRAZIL 1,Cruzeiro MG,Botafogo FR,18.0,94.3,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,15:15:00,BULGARIA 1,Lokomotiv Plovdiv,Septemvri,18.0,94.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,15:15:00,POLAND 1,Wisla Krakow,GKS Katowice,16.5,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,16:00:00,PARAGUAY 1,Olimpia,Libertad,15.0,93.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,19:30:00,BRAZIL 1,SE Palmeiras,Atletico MG,18.0,94.5,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,18:30:00,BRAZIL 3,SER Caxias do Sul,Botafogo PB,13.5,93.8,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,09:30:00,CZECH 1,Banik Ostrava B,FC Sellier & Bellot Vlasim,15.5,92.1,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,08:00:00,CHINA 1,Dalian Kun City FC,Suzhou Dongwu,16.0,93.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,05:15:00,CZECH 1,Slavia Praha B,FK Pribram,16.0,92.4,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-26,12:30:00,POLAND 1,Widzew Lodz,LKP Motor Lublin,17.0,94.6,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,
+2026-07-29,20:00:00,USA 1,Pittsburgh Riverhounds,Tulsa Roughnecks FC,15.0,93.9,['Random Forest (RF)'],Random Forest (RF),,PENDENTE,

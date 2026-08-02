@@ -1,0 +1,40 @@
+Date,Liga,Home,Away,Odd_Lay,Prob,Metodo,Placar_Final,Status,PnL,Origem
+2026-07-01,WORLD WORLD CUP,Belgium,Senegal,15.0,94.5,XGBoost (Trader) + Random Forest (RF),3-2,GREEN,0.94,Original_Database
+2026-07-02,BRAZIL 2,Cuiaba,America MG,13.5,94.5,XGBoost (Trader),1-0,GREEN,0.94,Original_Database
+2026-07-03,WORLD WORLD CUP,Switzerland,Algeria,14.0,93.8,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Original_Database
+2026-07-03,NORWAY 2,Raufoss,Strommen,15.0,91.6,XGBoost (Trader),1-0,GREEN,0.94,Original_Database
+2026-07-03,IRELAND 1,Shelbourne,Dundalk,17.0,94.0,XGBoost (Trader) + Random Forest (RF),2-1,GREEN,0.94,Original_Database
+2026-07-04,FINLAND 1,Lahti,Gnistan,14.5,93.1,XGBoost (Trader) + Random Forest (RF),1-0,GREEN,0.94,Original_Database
+2026-07-04,FINLAND 1,Jaro,Ilves,13.5,91.3,XGBoost (Trader),2-1,GREEN,0.94,Original_Database
+2026-07-04,NORWAY 2,Hodd,Stromsgodset,18.0,93.4,XGBoost (Trader) + Random Forest (RF),4-3,GREEN,0.94,Original_Database
+2026-07-04,BRAZIL 2,Novorizontino,Atletico GO,15.5,94.3,XGBoost (Trader),3-0,GREEN,0.94,Original_Database
+2026-07-05,CHINA 1,Meizhou Hakka,Changchun Yatai,15.0,92.5,XGBoost (Trader) + Random Forest (RF),1-3,GREEN,0.94,Original_Database
+2026-07-06,BRAZIL 2,Botafogo SP,Avai,16.5,94.2,XGBoost (Trader),3-1,GREEN,0.94,Original_Database
+2026-07-06,WORLD WORLD CUP,USA,Belgium,14.5,96.3,XGBoost (Trader) + Random Forest (RF),1-4,GREEN,0.94,Original_Database
+2026-07-11,SWEDEN 1,Mjallby,AIK,17.0,94.4,XGBoost (Trader) + Random Forest (RF),1-2,GREEN,0.94,Original_Database
+2026-07-11,FINLAND 1,TPS,AC Oulu,13.5,91.9,XGBoost (Trader),3-0,GREEN,0.94,Original_Database
+2026-07-11,SWEDEN 1,Orgryte,Hacken,14.5,91.7,XGBoost (Trader),4-3,GREEN,0.94,Original_Database
+2026-07-11,WORLD WORLD CUP,Argentina,Switzerland,17.0,95.5,XGBoost (Trader) + Random Forest (RF),3-1,GREEN,0.94,Original_Database
+2026-07-12,SWEDEN 1,Vasteras SK,Degerfors,15.0,93.6,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Original_Database
+2026-07-12,SWEDEN 1,GAIS,Elfsborg,17.5,94.9,XGBoost (Trader) + Random Forest (RF),1-0,GREEN,0.94,Original_Database
+2026-07-12,BOLIVIA 1,Real Potosi,Nacional Potosi,13.5,91.9,XGBoost (Trader),1-1,GREEN,0.94,Original_Database
+2026-07-12,BOLIVIA 1,The Strongest,Bolivar,16.0,91.7,XGBoost (Trader),1-1,GREEN,0.94,Original_Database
+2026-07-12,BRAZIL 2,CRB,Goias,14.5,93.9,XGBoost (Trader),2-2,GREEN,0.94,Original_Database
+2026-07-12,BRAZIL 3,Botafogo PB,Confianca,17.5,94.3,XGBoost (Trader) + Random Forest (RF),2-0,GREEN,0.94,Original_Database
+2026-07-14,WORLD WORLD CUP,France,Spain,14.0,95.7,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Original_Database
+2026-07-16,USA 1,CF Montreal,Toronto FC,16.5,94.2,XGBoost (Trader) + Random Forest (RF),0-0,GREEN,0.94,Original_Database
+2026-07-17,CHINA 1,Changchun Yatai,Wuxi Wugou,16.0,94.6,XGBoost (Trader) + Random Forest (RF),1-5,GREEN,0.94,Original_Database
+2026-07-17,BRAZIL 2,Sao Bernardo,Avai,13.5,94.0,XGBoost (Trader),1-1,GREEN,0.94,Original_Database
+2026-07-17,BRAZIL 1,Mirassol,Gremio,14.5,94.5,XGBoost (Trader) + Random Forest (RF),2-1,GREEN,0.94,Original_Database
+2026-07-17,ECUADOR 1,Delfin,Macara,17.0,91.2,XGBoost (Trader),2-1,GREEN,0.94,Original_Database
+2026-07-18,FINLAND 1,AC Oulu,Gnistan,14.5,93.0,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Original_Database
+2026-07-18,FINLAND 1,SJK,KuPS,16.5,93.1,XGBoost (Trader) + Random Forest (RF),0-2,GREEN,0.94,Original_Database
+2026-07-19,SWEDEN 2,Varnamo,Ljungskile,13.5,91.0,XGBoost (Trader),2-3,GREEN,0.94,Original_Database
+2026-07-20,FINLAND 1,TPS,Ilves,15.5,90.8,XGBoost (Trader),1-3,GREEN,0.94,Original_Database
+2026-07-04,BRAZIL 3,Ferroviaria,SER Caxias do Sul,13.5,92.0,Random Forest (RF),0-1,RED,-12.5,Footstats_Complete_0.83
+2026-07-04,USA 1,San Antonio FC,Monterey Bay FC,15.5,93.5,Random Forest (RF),0-0,GREEN,0.935,Footstats_Complete_1.00
+2026-07-04,BRAZIL 3,Maringa,Volta Redonda,18.0,93.8,Random Forest (RF),4-0,GREEN,0.935,Footstats_Complete_1.00
+2026-07-05,SWEDEN 1,IFK Goteborg,AIK,17.0,92.3,Random Forest (RF),1-2,GREEN,0.935,Footstats_Complete_1.00
+2026-07-06,BRAZIL 3,Amazonas FC,Itabaiana,13.5,93.3,Random Forest (RF),0-2,GREEN,0.935,Footstats_Complete_1.00
+2026-07-12,NORWAY 1,Sandefjord,Ham-Kam,18.0,93.5,Random Forest (RF),2-2,GREEN,0.94,Original_Database
+2026-07-21,BRAZIL 1,Atletico MG,Bahia,15.0,93.7,Random Forest (RF),1-1,GREEN,0.94,Original_Database
