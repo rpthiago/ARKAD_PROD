@@ -71,22 +71,44 @@ if gerar_btn:
                 tab1, tab2 = st.tabs(["🎫 Bilhetes Prontos de Múltiplas", "📋 Tabela Geral de Jogos Aprovados"])
 
                 with tab1:
-                    st.subheader(f"🎫 {num_bilhetes} Bilhete(s) de Múltiplas ({tamanho_multipla} Jogos por Bilhete)")
+                    st.subheader(f"🎫 {num_bilhetes} Bilhete(s) de Múltiplas Over 0.5 FT ({tamanho_multipla} Jogos por Bilhete)")
                     
+                    bilhetes_list = []
                     for i in range(num_bilhetes):
                         chunk = df_aprovados.iloc[i * tamanho_multipla : (i + 1) * tamanho_multipla]
-                        odd_total = chunk['odd_over05'].prod()
+                        odd_total = float(chunk['odd_over05'].prod())
 
                         st.markdown(f"#### 🟡 Bilhete #{i+1} — Odd Total Múltipla: **`{odd_total:.2f}`**")
                         
-                        cols_cards = st.columns(tamanho_multipla)
-                        for idx, (_, row) in enumerate(chunk.iterrows()):
-                            with cols_cards[idx]:
-                                st.success(f"**{row.get('Time', '00:00')} | {row.get('League', 'LIGA')}**\n\n"
-                                           f"**{row.get('Home', 'Home')}** x **{row.get('Away', 'Away')}**\n\n"
-                                           f"Entrada: **Over 0.5 FT** (Odd `{row.get('odd_over05', 1.08):.2f}`)\n\n"
-                                           f"xG Estimado: **{row.get('Total_xG', 2.1):.2f}**")
-                        st.divider()
+                        chunk_display = chunk[['Time', 'League', 'Home', 'Away', 'odd_over05', 'Total_xG']].copy()
+                        chunk_display.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Odd Over 0.5 FT', 'xG Total']
+                        
+                        st.dataframe(chunk_display, use_container_width=True)
+
+                        bilhetes_list.append({
+                            'Bilhete_ID': f"Bilhete Over 0.5 #{i+1}",
+                            'Odd_Final_Combinada': round(odd_total, 2),
+                            'Jogos': " | ".join([f"{r['Home']} x {r['Away']} (Over 0.5 FT)" for _, r in chunk.iterrows()])
+                        })
+
+                    # Download Excel de Múltiplas
+                    try:
+                        import io
+                        df_bilhetes_export = pd.DataFrame(bilhetes_list)
+                        buffer_m = io.BytesIO()
+                        with pd.ExcelWriter(buffer_m, engine='openpyxl') as writer:
+                            df_bilhetes_export.to_excel(writer, index=False, sheet_name='Multiplas_Over05')
+                        excel_data_m = buffer_m.getvalue()
+
+                        st.download_button(
+                            label="📥 Baixar Planilha de Múltiplas Over 0.5 FT (Excel)",
+                            data=excel_data_m,
+                            file_name=f"multiplas_over05_{date_str}.xlsx",
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            key="btn_download_page12_excel"
+                        )
+                    except Exception as ex_m:
+                        st.warning(f"Aviso de download Excel: {ex_m}")
 
                 with tab2:
                     display_cols = [
