@@ -49,6 +49,16 @@ def check_entry_conditions(ms):
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
     
+    # Trava Estrutural Anti-Overfitting 1: Odd do Empate (Odd_D_FT > 3.30)
+    odd_d = ms.get("Odd_D_FT") or ms.get("Odd_D_Back") or 0.0
+    if not pd.isna(odd_d) and odd_d > 0 and odd_d <= 3.30:
+        return False, f"ODD_EMPATE_BAIXA({odd_d:.2f})"
+
+    # Trava Estrutural Anti-Overfitting 2: Expectativa de Gols (xG > 1.90)
+    total_xg = ms.get("total_xG") or ms.get("Total_xG") or 0.0
+    if not pd.isna(total_xg) and 0.0 < total_xg <= 1.90:
+        return False, f"XG_MUITO_BAIXO({total_xg:.2f})"
+
     # Exclusão de ligas ruins e altamente defensivas
     league = str(ms.get("League") or ms.get("Liga") or "").upper().strip()
     BLACK_LIST_LEAGUES = [
