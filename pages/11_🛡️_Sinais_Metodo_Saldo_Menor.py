@@ -117,29 +117,22 @@ if gerar_btn:
                             st.markdown(f"#### 🎫 Bilhete #{i+1} — Odd Final Combinada: **{odd_combinada:.2f}**")
                             
                             chunk_display = chunk[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Total_xG']].copy()
-                            chunk_display.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3 Zebra', 'xG Total']
-                            
-                            st.dataframe(chunk_display, use_container_width=True)
+                    st.subheader(f"🎫 {num_bilhetes} Bilhete(s) de Múltiplas Saldo Menor ({tamanho_multipla} Jogos por Bilhete)")
+                    
+                    for i in range(num_bilhetes):
+                        chunk = df_aprovados.iloc[i * tamanho_multipla : (i + 1) * tamanho_multipla]
+                        odd_total = chunk['eh_zebra_plus3_odd'].prod()
 
-                            bilhetes_list.append({
-                                'Bilhete_ID': f"Bilhete #{i+1}",
-                                'Odd_Final_Combinada': round(odd_combinada, 2),
-                                'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3)" for _, r in chunk.iterrows()])
-                            })
-
-                        # Download Excel de Múltiplas
-                        df_bilhetes_export = pd.DataFrame(bilhetes_list)
-                        buffer_m = io.BytesIO()
-                        with pd.ExcelWriter(buffer_m, engine='openpyxl') as writer:
-                            df_bilhetes_export.to_excel(writer, index=False, sheet_name='Multiplas')
-                        excel_data_m = buffer_m.getvalue()
-
-                        st.download_button(
-                            label="📥 Baixar Planilha de Múltiplas (Excel)",
-                            data=excel_data_m,
-                            file_name=f"multiplas_saldo_menor_{date_str}.xlsx",
-                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        )
+                        st.markdown(f"#### 🟢 Bilhete #{i+1} — Odd Total Múltipla: **`{odd_total:.2f}`**")
+                        
+                        cols_cards = st.columns(tamanho_multipla)
+                        for idx, (_, row) in enumerate(chunk.iterrows()):
+                            with cols_cards[idx]:
+                                st.info(f"**{row.get('Time', '00:00')} | {row.get('League', 'LIGA')}**\n\n"
+                                        f"**{row.get('Home', 'Home')}** x **{row.get('Away', 'Away')}**\n\n"
+                                        f"Aposta: **EH +3 {row.get('zebra_team', 'Zebra')}** (Odd `{row.get('eh_zebra_plus3_odd', 1.06):.2f}`)\n\n"
+                                        f"Análise: **{row.get('Betmines_Previsao', 'EH +3 Aprovado')}**")
+                        st.divider()
 
                 with tab2:
                     display_cols = [
@@ -160,6 +153,33 @@ if gerar_btn:
                     ]
 
                     st.dataframe(df_display, use_container_width=True)
+
+                with tab3:
+                    st.subheader("⚽ Estratégia Complementar: Múltiplas OVER 0.5 FT")
+                    st.caption("Filtra partidas com alta expectativa de gols (xG > 2.0 e Odd Empate > 3.30) | Taxa de 0x0 de apenas 2.57%")
+                    
+                    evaluated_over05 = metodo_over05_strategy.predict_and_evaluate_over05_live(payloads)
+                    df_over05 = pd.DataFrame(evaluated_over05)
+                    aprovados_over05 = df_over05[df_over05['Decision'] == 'APOSTA'].copy()
+                    
+                    if aprovados_over05.empty:
+                        st.info("Nenhuma partida atendeu aos critérios de Over 0.5 FT para esta data.")
+                    else:
+                        num_bilhetes_o05 = len(aprovados_over05) // tamanho_multipla
+                        st.write(f"**Total de Jogos Aprovados em Over 0.5:** {len(aprovados_over05)} | **Bilhetes Criados:** {num_bilhetes_o05}")
+                        
+                        for j in range(num_bilhetes_o05):
+                            chunk_o = aprovados_over05.iloc[j * tamanho_multipla : (j + 1) * tamanho_multipla]
+                            odd_t_o = chunk_o['odd_over05'].prod()
+                            st.markdown(f"##### 🟡 Bilhete Over 0.5 #{j+1} — Odd Total: **`{odd_t_o:.2f}`**")
+                            cols_o = st.columns(tamanho_multipla)
+                            for idx_o, (_, row_o) in enumerate(chunk_o.iterrows()):
+                                with cols_o[idx_o]:
+                                    st.success(f"**{row_o.get('Time', '00:00')} | {row_o.get('League', 'LIGA')}**\n\n"
+                                               f"**{row_o.get('Home', 'Home')}** x **{row_o.get('Away', 'Away')}**\n\n"
+                                               f"Entrada: **Over 0.5 FT** (Odd `{row_o.get('odd_over05', 1.08):.2f}`)\n\n"
+                                               f"xG Estimado: **{row_o.get('Total_xG', 2.1):.2f}**")
+                            st.divider()
 
                     # Download Excel de Sinais Individuais
                     buffer = io.BytesIO()
