@@ -154,6 +154,8 @@ if st.session_state.sinais_brutos is not None:
                     "Visitante": row["Visitante"],
                     "Odd_lay_entrada": row["Odd_lay_entrada"],
                     "Prob": row["Prob"],
+                    "liga_0x0_rate": row.get("liga_0x0_rate", ""),
+                    "mkt_prob_0x0": row.get("mkt_prob_0x0", ""),
                     "Modelos_Aprovados": [row["Metodo_Final"]]
                 }
         
@@ -186,6 +188,8 @@ if st.session_state.sinais_brutos is not None:
                 "Visitante": j["Visitante"],
                 "Odd Lay Betfair": j["Odd_lay_entrada"],
                 "Probabilidade ML": f"{j['Prob']}%",
+                "liga_0x0_rate": j.get("liga_0x0_rate", ""),
+                "mkt_prob_0x0": j.get("mkt_prob_0x0", ""),
                 "Responsabilidade (R$)": round(float(resp_max), 2),
                 "Stake Back Betfair (R$)": round(float(stake_back), 2) if pd.notna(stake_back) else np.nan,
                 "Resultado": "", # Campo vazio para o usuário preencher na planilha

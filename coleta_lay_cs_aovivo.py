@@ -118,7 +118,9 @@ def sinais_do_dia(date_str, cfg, diag=None):
             key = (home, away)
             if key not in picks:
                 picks[key] = dict(Home=home, Away=away, Liga=g.get("League","") or g.get("Liga",""),
-                                  Horario=str(g.get("Time","") or ""), odd=odd, prob=prob, metodos=set())
+                                  Horario=str(g.get("Time","") or ""), odd=odd, prob=prob,
+                                  liga_0x0_rate=g.get("liga_0x0_rate", np.nan),
+                                  mkt_prob_0x0=g.get("mkt_prob_0x0", np.nan), metodos=set())
             picks[key]["metodos"].add(tag)
             if pd.isna(picks[key]["odd"]) and pd.notna(odd): picks[key]["odd"]=odd
             if pd.notna(prob) and prob > picks[key]["prob"]: picks[key]["prob"]=prob
@@ -128,6 +130,8 @@ def sinais_do_dia(date_str, cfg, diag=None):
                         Mandante=p["Home"], Visitante=p["Away"], Metodo="+".join(sorted(p["metodos"])),
                         Prob=round(float(p["prob"])*100,1) if pd.notna(p["prob"]) else "",
                         Odd_lay_entrada=round(float(p["odd"]),2) if pd.notna(p["odd"]) else "",
+                        liga_0x0_rate=round(float(p["liga_0x0_rate"]),4) if pd.notna(p.get("liga_0x0_rate")) else "",
+                        mkt_prob_0x0=round(float(p["mkt_prob_0x0"]),4) if pd.notna(p.get("mkt_prob_0x0")) else "",
                         PREENCHER_odd_abertura="", PREENCHER_odd_min60="", PREENCHER_odd_min75="",
                         Placar_final="", Momento_gols="", status="AGUARDA", obs=""))
     return out
