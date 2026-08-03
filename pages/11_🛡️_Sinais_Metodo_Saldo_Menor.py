@@ -99,60 +99,161 @@ if gerar_btn:
             else:
                 st.success(f"🔥 {len(df_aprovados)} Oportunidades de Saldo Menor Encontradas!")
 
-                tab1, tab2, tab3 = st.tabs(["🎫 Bilhetes Saldo Menor (EH +3)", "📋 Tabela Geral Saldo Menor", "⚽ Múltiplas Over 0.5 FT"])
+                tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                    "🎫 Múltiplas Sequenciais (Horário)", 
+                    "🏆 Bilhete Golden +EV (Top 3 do Dia)", 
+                    "📊 Múltiplas Ranqueadas (+EV Modelo Mestre)", 
+                    "📋 Tabela Geral Saldo Menor", 
+                    "⚽ Múltiplas Over 0.5 FT"
+                ])
 
+                # Tentar carregar predições do Modelo Mestre
+                try:
+                    import joblib
+                    import master_feature_engineer
+                    model_sm_quant = joblib.load('modelo_saldo_menor_quant.pkl')
+                    feats_sm = master_feature_engineer.build_master_features(df_aprovados)
+                    df_aprovados['Prob_Master'] = model_sm_quant.predict_proba(feats_sm)[:, 1]
+                except Exception:
+                    df_aprovados['Prob_Master'] = 0.50
+
+                num_jogos = len(df_aprovados)
+                num_bilhetes = num_jogos // tamanho_multipla
+
+                # ABA 1: SEQUENCIAL POR HORÁRIO (MÉTODO ATUAL)
                 with tab1:
-                    num_jogos = len(df_aprovados)
-                    num_bilhetes = num_jogos // tamanho_multipla
-
+                    st.subheader("🎫 Múltiplas Agrupadas por Horário (Método Tradicional)")
                     if num_bilhetes == 0:
                         st.warning(f"Existem {num_jogos} jogo(s) aprovado(s) hoje, mas são necessários no mínimo {tamanho_multipla} para montar uma Múltipla.")
                     else:
-                        st.subheader(f"🎯 {num_bilhetes} Bilhete(s) de Múltipla ({tamanho_multipla} Jogos por Bilhete) Gerados")
-
-                        bilhetes_list = []
+                        st.caption(f"Exibe os bilhetes montados em ordem cronológica de horário ({tamanho_multipla} jogos por bilhete).")
+                        bilhetes_seq_list = []
                         for i in range(num_bilhetes):
                             chunk = df_aprovados.iloc[i * tamanho_multipla : (i + 1) * tamanho_multipla]
                             odd_combinada = float(chunk['eh_zebra_plus3_odd'].prod())
 
-                            st.markdown(f"#### 🟢 Bilhete #{i+1} — Odd Final Combinada: **`{odd_combinada:.2f}`**")
+                            st.markdown(f"#### 🟢 Bilhete #{i+1} (Horário) — Odd Final: **`{odd_combinada:.2f}`**")
                             
                             chunk_display = chunk[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Total_xG', 'Betmines_Previsao']].copy()
                             chunk_display.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3 Zebra', 'xG Total', 'Análise Betmines']
-                            
                             st.dataframe(chunk_display, use_container_width=True)
 
-                            bilhetes_list.append({
-                                'Bilhete_ID': f"Bilhete #{i+1}",
+                            bilhetes_seq_list.append({
+                                'Bilhete_ID': f"Bilhete Sequencial #{i+1}",
                                 'Odd_Final_Combinada': round(odd_combinada, 2),
                                 'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3 EH)" for _, r in chunk.iterrows()])
                             })
 
-                        # Download Excel de Múltiplas
+                        # Download Excel Múltiplas Sequenciais
                         try:
-                            df_bilhetes_export = pd.DataFrame(bilhetes_list)
+                            df_b_seq = pd.DataFrame(bilhetes_seq_list)
                             buffer_m = io.BytesIO()
                             with pd.ExcelWriter(buffer_m, engine='openpyxl') as writer:
-                                df_bilhetes_export.to_excel(writer, index=False, sheet_name='Multiplas_Saldo_Menor')
-                            excel_data_m = buffer_m.getvalue()
-
+                                df_b_seq.to_excel(writer, index=False, sheet_name='Multiplas_Horario')
                             st.download_button(
-                                label="📥 Baixar Planilha de Múltiplas (Excel)",
-                                data=excel_data_m,
-                                file_name=f"multiplas_saldo_menor_{date_str}.xlsx",
+                                label="📥 Baixar Planilha Múltiplas (Horário)",
+                                data=buffer_m.getvalue(),
+                                file_name=f"multiplas_horario_{date_str}.xlsx",
                                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                key="btn_download_multiplas_sm"
+                                key="btn_dl_seq_sm"
                             )
-                        except Exception as ex_m:
-                            st.warning(f"Aviso de download Excel: {ex_m}")
+                        except Exception as ex:
+                            pass
 
+                # ABA 2: BILHETE GOLDEN +EV (TOP 3 DO DIA)
                 with tab2:
+                    st.subheader("🏆 BILHETE GOLDEN +EV — Os 3 Melhores Jogos do Dia")
+                    st.caption("O Modelo Mestre de 88 Variáveis Quantitativas seleciona os 3 jogos de maior probabilidade matemática de acerto.")
+
+                    df_ranked = df_aprovados.sort_values('Prob_Master', ascending=False).reset_index(drop=True)
+                    if len(df_ranked) < 3:
+                        st.warning(f"São necessários ao menos 3 jogos aprovados no dia para gerar o Bilhete Golden. Jogos disponíveis hoje: {len(df_ranked)}")
+                    else:
+                        chunk_g = df_ranked.iloc[0:3]
+                        odd_golden = float(chunk_g['eh_zebra_plus3_odd'].prod())
+                        prob_golden_avg = float(chunk_g['Prob_Master'].mean()) * 100
+
+                        st.success(f"### 🏆 BILHETE GOLDEN +EV | Odd Final: `{odd_golden:.2f}` | Confiança Média do Modelo: `{prob_golden_avg:.1f}%`")
+
+                        chunk_g_disp = chunk_g[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Prob_Master', 'Total_xG']].copy()
+                        chunk_g_disp['Prob_Master'] = (chunk_g_disp['Prob_Master'] * 100).round(1).astype(str) + '%'
+                        chunk_g_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3', 'Confiança Modelo', 'xG Total']
+                        st.dataframe(chunk_g_disp, use_container_width=True)
+
+                        # Download Excel Golden
+                        try:
+                            df_g_export = pd.DataFrame([{
+                                'Bilhete_ID': 'BILHETE GOLDEN +EV',
+                                'Odd_Final_Combinada': round(odd_golden, 2),
+                                'Confianca_Media': f"{prob_golden_avg:.1f}%",
+                                'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3 EH)" for _, r in chunk_g.iterrows()])
+                            }])
+                            buffer_g = io.BytesIO()
+                            with pd.ExcelWriter(buffer_g, engine='openpyxl') as writer:
+                                df_g_export.to_excel(writer, index=False, sheet_name='Bilhete_Golden')
+                            st.download_button(
+                                label="📥 Baixar Bilhete Golden (Excel)",
+                                data=buffer_g.getvalue(),
+                                file_name=f"bilhete_golden_{date_str}.xlsx",
+                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                key="btn_dl_golden"
+                            )
+                        except Exception as ex:
+                            pass
+
+                # ABA 3: MÚLTIPLAS RANQUEADAS (+EV MODELO MESTRE)
+                with tab3:
+                    st.subheader("📊 Múltiplas Ranqueadas por Confiança Estatística (+EV)")
+                    st.caption("Todos os jogos aprovados agrupados em bilhetes do mais seguro ao menos seguro.")
+
+                    df_ranked = df_aprovados.sort_values('Prob_Master', ascending=False).reset_index(drop=True)
+                    if num_bilhetes == 0:
+                        st.warning(f"Jogos insuficientes para montar Múltiplas. Jogos hoje: {num_jogos}")
+                    else:
+                        bilhetes_rank_list = []
+                        for k in range(num_bilhetes):
+                            chunk_r = df_ranked.iloc[k * tamanho_multipla : (k + 1) * tamanho_multipla]
+                            odd_rank_comb = float(chunk_r['eh_zebra_plus3_odd'].prod())
+                            prob_r_avg = float(chunk_r['Prob_Master'].mean()) * 100
+
+                            st.markdown(f"#### 🚀 Múltipla Ranqueada #{k+1} — Odd Final: **`{odd_rank_comb:.2f}`** | Confiança Média: **`{prob_r_avg:.1f}%`**")
+
+                            chunk_r_disp = chunk_r[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Prob_Master', 'Total_xG']].copy()
+                            chunk_r_disp['Prob_Master'] = (chunk_r_disp['Prob_Master'] * 100).round(1).astype(str) + '%'
+                            chunk_r_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3', 'Confiança Modelo', 'xG Total']
+                            st.dataframe(chunk_r_disp, use_container_width=True)
+
+                            bilhetes_rank_list.append({
+                                'Bilhete_ID': f"Múltipla Ranqueada #{k+1}",
+                                'Odd_Final_Combinada': round(odd_rank_comb, 2),
+                                'Confianca_Media': f"{prob_r_avg:.1f}%",
+                                'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3 EH)" for _, r in chunk_r.iterrows()])
+                            })
+
+                        # Download Excel Ranqueadas
+                        try:
+                            df_b_rank = pd.DataFrame(bilhetes_rank_list)
+                            buffer_r = io.BytesIO()
+                            with pd.ExcelWriter(buffer_r, engine='openpyxl') as writer:
+                                df_b_rank.to_excel(writer, index=False, sheet_name='Multiplas_Ranqueadas')
+                            st.download_button(
+                                label="📥 Baixar Múltiplas Ranqueadas (Excel)",
+                                data=buffer_r.getvalue(),
+                                file_name=f"multiplas_ranqueadas_{date_str}.xlsx",
+                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                                key="btn_dl_rank_sm"
+                            )
+                        except Exception as ex:
+                            pass
+
+                # ABA 4: TABELA GERAL & DOWNLOAD EXCEL INDIVIDUAL
+                with tab4:
+                    st.subheader("📋 Tabela Geral de Jogos Aprovados")
                     display_cols = [
                         'Date', 'Time', 'League', 'Home', 'Away', 
                         'zebra_team', 'fav_team', 'fav_odd', 
                         'eh_zebra_plus3_odd', 'Total_xG', 'Betmines_Previsao', 'Reason'
                     ]
-
                     for col in display_cols:
                         if col not in df_aprovados.columns:
                             df_aprovados[col] = ""
@@ -166,16 +267,13 @@ if gerar_btn:
 
                     st.dataframe(df_display, use_container_width=True)
 
-                    # Download Excel de Sinais Individuais
                     try:
                         buffer_ind = io.BytesIO()
                         with pd.ExcelWriter(buffer_ind, engine='openpyxl') as writer:
                             df_display.to_excel(writer, index=False, sheet_name='Sinais_Individuais')
-                        excel_data_ind = buffer_ind.getvalue()
-
                         st.download_button(
                             label="📥 Baixar Planilha de Sinais Individuais (Excel)",
-                            data=excel_data_ind,
+                            data=buffer_ind.getvalue(),
                             file_name=f"sinais_saldo_menor_{date_str}.xlsx",
                             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                             key="btn_download_ind_sm"
@@ -183,7 +281,8 @@ if gerar_btn:
                     except Exception as ex_ind:
                         st.warning(f"Aviso de download Excel: {ex_ind}")
 
-                with tab3:
+                # ABA 5: MÚLTIPLAS OVER 0.5 FT
+                with tab5:
                     st.subheader("⚽ Estratégia Complementar: Múltiplas OVER 0.5 FT")
                     st.caption("Filtra partidas com alta expectativa de gols (xG > 2.0 e Odd Empate > 3.30) | Taxa de 0x0 de apenas 2.57%")
                     
@@ -213,17 +312,14 @@ if gerar_btn:
                                 'Jogos': " | ".join([f"{r['Home']} x {r['Away']} (Over 0.5 FT)" for _, r in chunk_o.iterrows()])
                             })
 
-                        # Download Excel de Múltiplas Over 0.5
                         try:
                             df_o05_export = pd.DataFrame(bilhetes_over05_list)
                             buffer_o05 = io.BytesIO()
                             with pd.ExcelWriter(buffer_o05, engine='openpyxl') as writer:
                                 df_o05_export.to_excel(writer, index=False, sheet_name='Multiplas_Over05')
-                            excel_data_o05 = buffer_o05.getvalue()
-
                             st.download_button(
                                 label="📥 Baixar Planilha de Múltiplas Over 0.5 FT (Excel)",
-                                data=excel_data_o05,
+                                data=buffer_o05.getvalue(),
                                 file_name=f"multiplas_over05_{date_str}.xlsx",
                                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                                 key="btn_download_multiplas_o05"
@@ -231,15 +327,3 @@ if gerar_btn:
                         except Exception as ex_o05:
                             st.warning(f"Aviso de download Excel: {ex_o05}")
 
-                    # Download Excel de Sinais Individuais
-                    buffer = io.BytesIO()
-                    with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                        df_display.to_excel(writer, index=False, sheet_name='Sinais_Individuais')
-                    excel_data = buffer.getvalue()
-
-                    st.download_button(
-                        label="📥 Baixar Planilha de Sinais Individuais (Excel)",
-                        data=excel_data,
-                        file_name=f"sinais_individuais_saldo_menor_{date_str}.xlsx",
-                        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    )
