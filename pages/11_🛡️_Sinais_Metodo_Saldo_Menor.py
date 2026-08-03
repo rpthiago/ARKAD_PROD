@@ -98,7 +98,7 @@ if gerar_btn:
             else:
                 st.success(f"🔥 {len(df_aprovados)} Oportunidades de Saldo Menor Encontradas!")
 
-                tab1, tab2 = st.tabs(["📋 Bilhetes de Múltiplas Agrupadas", "📊 Todos os Sinais Individuais"])
+                tab1, tab2, tab3 = st.tabs(["🎫 Bilhetes Saldo Menor (EH +3)", "📋 Tabela Geral Saldo Menor", "⚽ Múltiplas Over 0.5 FT"])
 
                 with tab1:
                     num_jogos = len(df_aprovados)
@@ -107,32 +107,22 @@ if gerar_btn:
                     if num_bilhetes == 0:
                         st.warning(f"Existem {num_jogos} jogo(s) aprovado(s) hoje, mas são necessários no mínimo {tamanho_multipla} para montar uma Múltipla.")
                     else:
-                        st.subheader(f"🎯 {num_bilhetes} Bilhete(s) de Múltipla ({tamanho_multipla} Jogos cada) Gerados")
-
-                        bilhetes_list = []
+                        st.subheader(f"🎫 {num_bilhetes} Bilhete(s) de Múltiplas Saldo Menor ({tamanho_multipla} Jogos por Bilhete)")
+                        
                         for i in range(num_bilhetes):
                             chunk = df_aprovados.iloc[i * tamanho_multipla : (i + 1) * tamanho_multipla]
-                            odd_combinada = float(chunk['eh_zebra_plus3_odd'].prod())
+                            odd_total = float(chunk['eh_zebra_plus3_odd'].prod())
 
-                            st.markdown(f"#### 🎫 Bilhete #{i+1} — Odd Final Combinada: **{odd_combinada:.2f}**")
+                            st.markdown(f"#### 🟢 Bilhete #{i+1} — Odd Total Múltipla: **`{odd_total:.2f}`**")
                             
-                            chunk_display = chunk[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Total_xG']].copy()
-                    st.subheader(f"🎫 {num_bilhetes} Bilhete(s) de Múltiplas Saldo Menor ({tamanho_multipla} Jogos por Bilhete)")
-                    
-                    for i in range(num_bilhetes):
-                        chunk = df_aprovados.iloc[i * tamanho_multipla : (i + 1) * tamanho_multipla]
-                        odd_total = chunk['eh_zebra_plus3_odd'].prod()
-
-                        st.markdown(f"#### 🟢 Bilhete #{i+1} — Odd Total Múltipla: **`{odd_total:.2f}`**")
-                        
-                        cols_cards = st.columns(tamanho_multipla)
-                        for idx, (_, row) in enumerate(chunk.iterrows()):
-                            with cols_cards[idx]:
-                                st.info(f"**{row.get('Time', '00:00')} | {row.get('League', 'LIGA')}**\n\n"
-                                        f"**{row.get('Home', 'Home')}** x **{row.get('Away', 'Away')}**\n\n"
-                                        f"Aposta: **EH +3 {row.get('zebra_team', 'Zebra')}** (Odd `{row.get('eh_zebra_plus3_odd', 1.06):.2f}`)\n\n"
-                                        f"Análise: **{row.get('Betmines_Previsao', 'EH +3 Aprovado')}**")
-                        st.divider()
+                            cols_cards = st.columns(tamanho_multipla)
+                            for idx, (_, row) in enumerate(chunk.iterrows()):
+                                with cols_cards[idx]:
+                                    st.info(f"**{row.get('Time', '00:00')} | {row.get('League', 'LIGA')}**\n\n"
+                                            f"**{row.get('Home', 'Home')}** x **{row.get('Away', 'Away')}**\n\n"
+                                            f"Aposta: **EH +3 {row.get('zebra_team', 'Zebra')}** (Odd `{row.get('eh_zebra_plus3_odd', 1.06):.2f}`)\n\n"
+                                            f"Análise: **{row.get('Betmines_Previsao', 'EH +3 Aprovado')}**")
+                            st.divider()
 
                 with tab2:
                     display_cols = [
