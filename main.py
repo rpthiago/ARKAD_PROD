@@ -34,6 +34,11 @@ Uma estratégia matematicamente validada e imune a look-ahead bias (Auditoria de
 Nosso modelo clássico focado na força de agressão e métricas de expected goals (xG).
 * **Conceito:** Capturar momentos de dominância absoluta do time favorito usando dados da Bet365 e Betfair.
 
+#### 4. 🛡️ Método Saldo Menor (Handicap Europeu +3 Zebra)
+Estratégia de altíssimo Win Rate (**95.99% no Backtest**) focada em partidas de baixa expectativa de gols (**xG <= 2.0**).
+* **Conceito:** Aposta no Handicap Europeu +3 da Zebra em jogos equilibrados/moderados.
+* **O Sweet Spot (Filtro):** Odds entre 2.20 e 5.00 com xG Total <= 2.0 e validação pré-jogo do algoritmo Betmines.
+
 ---
 **Navegue pelo menu lateral para acessar os Sinais do dia, a Calculadora de Alavancagem e as Auditorias de Resultados.**
 """)

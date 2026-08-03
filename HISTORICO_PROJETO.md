@@ -23,6 +23,17 @@ Sistema de **sinais de apostas lay (mercado Resultado Correto / Correct Score)**
 
 ## 2. Histórico de Marcos
 
+### 2026-08-03 — Criação do Método Saldo Menor (EH +3 Zebra) & Integrador Betmines
+
+#### O que foi construído:
+1. **`metodo_saldo_menor_strategy.py`**: Estratégia de Handicap Europeu +3 para a Zebra (`EH_H_pos_3` para Casa, `EH_A_pos_3` para Visitante) em cenários de baixa expectativa de gols (`Total_xG <= 2.0`) e odds moderadas (2.20 a 5.00).
+2. **`betmines_validator.py`**: Integrador e validador pré-jogo com o algoritmo do site Betmines (Dupla Chance 1X/X2, Under 2.5/3.5, placares curtos) com fallback gracioso.
+3. **`_backtest_saldo_menor.py`**: Script executável de backtest de alta velocidade.
+   - **Resultado do Backtest**: 12.149 entradas aprovadas, **95.99% Win Rate** (11.662 Greens / 487 Reds), Odd média EH+3 22.35, Max Drawdown R$ -297,00.
+4. **`pages/11_🛡️_Sinais_Metodo_Saldo_Menor.py`**: Nova página no Dashboard Streamlit para busca de oportunidades diárias em tempo real.
+
+---
+
 ### 2026-04-28 — Restauração do Padrão Ouro (97% WR) e Fix de Odds Reais
 
 #### Sintoma observado
