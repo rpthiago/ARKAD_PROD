@@ -51,27 +51,28 @@ def normalize_live_data(live_payload: Dict[str, Any]) -> Dict[str, Any]:
     normalized['EH_A_pos_3'] = pd.to_numeric(
         live_payload.get('EH_A_pos_3') or live_payload.get('EH_Away_Plus3') or np.nan, errors='coerce')
 
+    # Gols da partida (se disponíveis no histórico)
+    if 'Goals_H_FT' in live_payload:
+        normalized['Goals_H_FT'] = pd.to_numeric(live_payload.get('Goals_H_FT'), errors='coerce')
+    if 'Goals_A_FT' in live_payload:
+        normalized['Goals_A_FT'] = pd.to_numeric(live_payload.get('Goals_A_FT'), errors='coerce')
+
     # Expectativa de Gols (xG) com fallback pré-jogo do mercado
     xg_h = pd.to_numeric(live_payload.get('xG_H_FT') or live_payload.get('xG_H_Pre') or live_payload.get('xG_H') or 0.0, errors='coerce') or 0.0
     xg_a = pd.to_numeric(live_payload.get('xG_A_FT') or live_payload.get('xG_A_Pre') or live_payload.get('xG_A') or 0.0, errors='coerce') or 0.0
     total_xg = pd.to_numeric(live_payload.get('Total_xG_Pre') or live_payload.get('Total_xG') or (xg_h + xg_a), errors='coerce') or 0.0
 
-    # Se xG estiver 0.0 na API pré-jogo, estimar via odds de Under/Over 2.5
+    # Se xG estiver 0.0 na API pré-jogo, calcular xG dinâmico contínuo baseado nas odds de Under/Over 2.5
     if total_xg == 0.0:
         odd_u25 = normalized['Odd_Under25_FT']
         odd_o25 = normalized['Odd_Over25_FT']
         if not pd.isna(odd_u25) and odd_u25 > 1.0:
-            if odd_u25 <= 1.95:
-                total_xg = 1.70  # Mercado precifica forte tendência de Under 2.5
-            else:
-                total_xg = 2.45  # Mercado precifica tendência de Over 2.5
+            # Fórmula contínua: Odd Under 2.5 = 1.40 -> xG 1.17 | 1.60 -> 1.52 | 1.85 -> 1.96 | 2.10 -> 2.40
+            total_xg = max(0.80, min(5.50, 1.35 + (odd_u25 - 1.50) * 1.75))
         elif not pd.isna(odd_o25) and odd_o25 > 1.0:
-            if odd_o25 >= 1.90:
-                total_xg = 1.75
-            else:
-                total_xg = 2.40
+            total_xg = max(0.80, min(5.50, 2.50 - (odd_o25 - 1.90) * 1.50))
         else:
-            total_xg = 1.80  # Default conservador para partidas normais
+            total_xg = 1.85  # Default conservador para partidas sem odds de Under/Over
 
     normalized['xG_H_FT'] = xg_h
     normalized['xG_A_FT'] = xg_a
