@@ -12,8 +12,8 @@ COMMISSION       = 0.05
 EV_MIN           = 0.02
 ODD_MIN          = 10.0
 ODD_MAX          = 20.0
-LIGA_0X0_RATE_MAX = 0.12
-MKT_PROB_MAX     = 0.1
+LIGA_0X0_RATE_MAX = 0.08
+MKT_PROB_MAX     = 0.10
 ODD_COL          = "Odd_CS_0x0"
 
 import unicodedata, re
