@@ -127,6 +127,7 @@ def identify_zebra_and_handicap(match_state: Dict[str, Any]) -> Dict[str, Any]:
 def check_entry_conditions(
     match_state: Dict[str, Any],
     max_xg: float = 2.0,
+    max_draw_odd: float = 3.42,
     check_betmines: bool = False
 ) -> Tuple[bool, str]:
     """
@@ -136,11 +137,16 @@ def check_entry_conditions(
     fav_odd = zebra_info['fav_odd']
     zebra_odd = zebra_info['zebra_odd']
     eh_odd = zebra_info['eh_zebra_plus3_odd']
+    draw_odd = match_state.get('Odd_D_FT') or 0.0
 
     # Validação A: Faixa de Odds entre 2.20 e 5.00 (Fav Odd ou Zebra Odd)
     in_odd_range = (2.20 <= fav_odd <= 5.00) or (2.20 <= zebra_odd <= 5.00)
     if not in_odd_range:
         return False, "ODD_FORA_DA_FAIXA_2.2_5.0"
+
+    # Validação A2: Filtro de Odd do Empate (Odd_D_FT <= max_draw_odd)
+    if max_draw_odd > 0 and draw_odd > 0 and draw_odd > max_draw_odd:
+        return False, f"ODD_EMPATE_ALTA_{draw_odd:.2f}_MAIOR_QUE_{max_draw_odd}"
 
     # Validação B: Disponibilidade e Sanitização de Odd do Handicap +3
     if eh_odd <= 1.0 or eh_odd >= zebra_odd:

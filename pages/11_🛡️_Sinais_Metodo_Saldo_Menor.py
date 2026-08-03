@@ -38,15 +38,18 @@ Esta página analisa a grade de jogos do dia em tempo real na Bet365/Betfair, fi
 * **Assertividade no Backtest Histórico:** **95.94%** nas entradas simples | **88.56% nas Múltiplas Triplas (ROI 6.47%)**.
 """)
 
-col1, col2, col3 = st.columns([1.5, 1.5, 2])
+col1, col2, col3, col4 = st.columns([1.5, 1.5, 1.5, 1.5])
 with col1:
     target_date = st.date_input("Data dos Jogos", value=date.today())
 
 with col2:
-    tamanho_multipla = st.selectbox("Tamanho da Múltipla", options=[3, 2], index=0, help="3 Jogos (Tripla - Odd ~1.20 | ROI 6.47%) ou 2 Jogos (Dupla - Odd ~1.13 | ROI 4.08%)")
+    tamanho_multipla = st.selectbox("Tamanho da Múltipla", options=[3, 2], index=0, help="3 Jogos (Tripla - Odd ~1.20) ou 2 Jogos (Dupla - Odd ~1.13)")
 
 with col3:
-    usar_betmines = st.checkbox("Validar com Betmines", value=False, help="Realiza consulta ao vivo das estimativas do Betmines")
+    usar_filtro_empate = st.checkbox("Filtro Empate ≤ 3.42", value=True, help="Derruba os Reds históricos em 46%! Exige Odd do Empate <= 3.42 para maior equilíbrio.")
+
+with col4:
+    usar_betmines = st.checkbox("Validar Betmines", value=False, help="Realiza consulta ao vivo das estimativas do Betmines")
 
 with col1:
     gerar_btn = st.button("🚀 Buscar Oportunidades & Gerar Múltiplas", type="primary")
@@ -66,9 +69,20 @@ if gerar_btn:
         else:
             payloads = b365_df.to_dict('records')
             
-            evaluated = metodo_saldo_menor_strategy.predict_and_evaluate_live(
-                payloads, check_betmines=usar_betmines
-            )
+            max_draw_odd_param = 3.42 if usar_filtro_empate else 99.0
+            
+            evaluated = [
+                metodo_saldo_menor_strategy.evaluate_game(
+                    game, check_betmines=usar_betmines
+                ) for game in payloads
+            ]
+            
+            # Reprocessar filtro de empate caso desligado/ligado
+            if not usar_filtro_empate:
+                for game_eval in evaluated:
+                    if "ODD_EMPATE_ALTA" in str(game_eval.get('Reason')):
+                        game_eval['Decision'] = 'APOSTA'
+                        game_eval['Reason'] = 'APROVADO_SALDO_MENOR'
 
             df_eval = pd.DataFrame(evaluated)
             
