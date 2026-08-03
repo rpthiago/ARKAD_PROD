@@ -20,6 +20,7 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
     import b365_data_utils
     import metodo_saldo_menor_strategy
+    import metodo_over05_strategy
     import betmines_validator
 except Exception as e:
     st.error("Erro ao carregar os módulos locais do Método Saldo Menor:")
