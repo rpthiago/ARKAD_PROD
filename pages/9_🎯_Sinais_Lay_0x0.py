@@ -31,7 +31,7 @@ Esta página bate na **API da Betfair em tempo real**, calcula as inteligências
 
 *   **🏆 Sweet Spot (XGBoost):** Odd Betfair Lay entre **10.00 e 20.00**
     *   *Métrica de Entrada:* EV do Lay > 0.02 (calculado dinamicamente usando a probabilidade de ML e as odds live).
-    *   *Filtros Contextuais:* Taxa histórica de 0x0 da liga **< 12.0%** e probabilidade de mercado implícita **< 10.0%**.
+    *   *Filtros Contextuais:* Taxa histórica de 0x0 da liga **< 8.0%** e probabilidade de mercado implícita **< 10.0%**.
     *   *Nota:* A auditoria de truncamento temporal deste modelo foi **aprovada com sucesso (PASS)**, garantindo zero vazamento de dados futuros.
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** Conforme comprovado matematicamente pelo nosso Backtest Master, essa estratégia opera em **Full Match** (deixando a operação correr até o final do jogo). Não faça Cash Out. O robô só toma Red se o placar final for exatamente 0x0.
@@ -123,7 +123,7 @@ if st.session_state.sinais_brutos is not None:
             else:
                 st.warning(f"A API Betfair não retornou jogos para **{date_str}** (provável fora de temporada / grade vazia no dia).")
         else:
-            st.info(f"✅ A API trouxe **{n_api} jogos** hoje, mas **nenhum** passou nos filtros estritos do Lay 0x0 (odd Lay entre 10 e 20, taxa 0x0 da liga < 12% e prob. de mercado < 10%). É normal o 0x0 ser seletivo — **guarde a banca**.")
+            st.info(f"✅ A API trouxe **{n_api} jogos** hoje, mas **nenhum** passou nos filtros estritos do Lay 0x0 (odd Lay entre 10 e 20, taxa 0x0 da liga < 8% e prob. de mercado < 10%). É normal o 0x0 ser seletivo — **guarde a banca**.")
     else:
         df = pd.DataFrame(sinais_brutos)
         
