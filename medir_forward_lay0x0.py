@@ -6,7 +6,7 @@ Le todas as planilhas 'sinais_lay0x0_gestao_*.xlsx' de paper_traning_lay0x0/, ap
 REGRA CONGELADA (pre-registro 2026-08-02) e cospe ROI / IC95 (bootstrap por mes) vs o
 criterio pre-registrado. NAO re-otimiza nada — so mede.
 
-REGRA CONGELADA:  XGBoost · liga_0x0_rate < 0.08 · mkt_prob_0x0 < 0.10 · odd >= 10 · ev>0.02
+REGRA CONGELADA:  XGBoost · liga_0x0_rate < 0.08 · mkt_prob_0x0 < 0.10 · 10 <= odd <= 20 · ev>0.02
 CRITERIO FORWARD: >= 300 apostas liquidadas (ou >=4 meses) E piso do IC95 > +2%  => APROVA.
 
 Uso:  python medir_forward_lay0x0.py
@@ -24,6 +24,7 @@ COMM = 0.05
 LIGA_MAX = 0.08
 MKT_MAX  = 0.10
 ODD_MIN  = 10.0
+ODD_MAX  = 20.0   # teto revisado 2026-08-03 (era 99); a cauda odd>20 dilui/mata o edge
 FORWARD_START = "2026-08-03"   # so conta jogos a partir daqui (nao contamina com retro)
 N_MIN = 300
 IC_FLOOR = 0.02
@@ -98,14 +99,14 @@ def main():
     total = len(df)
     fwd = df[df["Data"] >= FORWARD_START].copy()
     # aplica a REGRA CONGELADA
-    regra = fwd[(fwd["odd_lay"] >= ODD_MIN) &
+    regra = fwd[(fwd["odd_lay"] >= ODD_MIN) & (fwd["odd_lay"] <= ODD_MAX) &
                 (fwd["liga_0x0_rate"] < LIGA_MAX) &
                 (fwd["mkt_prob_0x0"] < MKT_MAX)].copy()
     liq = regra[regra["res"].isin([0, 1])].copy()   # liquidadas
     pend = int((regra["res"] == -1).sum())
 
     print("=" * 66)
-    print("FORWARD — Lay 0x0 regra congelada (liga<0.08 & mkt<0.10 & odd>=10)")
+    print("FORWARD — Lay 0x0 regra congelada (liga<0.08 & mkt<0.10 & 10<=odd<=20)")
     print("=" * 66)
     print(f"linhas lidas: {total} | forward (>= {FORWARD_START}): {len(fwd)} | "
           f"passam na regra: {len(regra)} | liquidadas: {len(liq)} | pendentes: {pend}")
