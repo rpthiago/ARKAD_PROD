@@ -43,7 +43,7 @@ with col1:
     target_date = st.date_input("Data dos Jogos", value=date.today())
 
 with col2:
-    tamanho_multipla = st.selectbox("Tamanho da Múltipla", options=[3, 2], index=0, help="3 Jogos (Tripla - Odd ~1.20) ou 2 Jogos (Dupla - Odd ~1.13)")
+    tamanho_multipla = st.selectbox("Tamanho da Múltipla", options=[3, 2, 4, 5, 6], index=0, help="Escolha a quantidade de jogos por bilhete: 3 (Tripla - Odd ~1.15 | WR 90.7%), 4 (Quadrupla - Odd ~1.20 | WR 87.5%), 5 (Quintupla - Odd ~1.26 | WR 85.2% | ROI 7.2%)")
 
 with col3:
     usar_filtro_empate = st.checkbox("Filtro Empate ≤ 3.42", value=True, help="Derruba os Reds históricos em 46%! Exige Odd do Empate <= 3.42 para maior equilíbrio.")
