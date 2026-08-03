@@ -131,7 +131,7 @@ if gerar_btn:
                     display_cols = [
                         'Date', 'Time', 'League', 'Home', 'Away', 
                         'zebra_team', 'fav_team', 'fav_odd', 
-                        'eh_zebra_plus3_odd', 'Total_xG', 'Reason'
+                        'eh_zebra_plus3_odd', 'Total_xG', 'Betmines_Previsao', 'Reason'
                     ]
 
                     for col in display_cols:
@@ -142,7 +142,7 @@ if gerar_btn:
                     df_display.columns = [
                         'Data', 'Horário', 'Liga', 'Mandante', 'Visitante', 
                         'Zebra', 'Favorito', 'Odd Favorito', 
-                        'Odd EH +3 Zebra', 'xG Total', 'Status'
+                        'Odd EH +3 Zebra', 'xG Total', 'Análise Betmines', 'Status'
                     ]
 
                     st.dataframe(df_display, use_container_width=True)

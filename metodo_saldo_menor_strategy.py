@@ -156,14 +156,24 @@ def check_entry_conditions(
     if total_xg > max_xg:
         return False, f"XG_ALTO_{total_xg:.2f}_MAIOR_QUE_{max_xg}"
 
-    # Validação E: Betmines (opcional em tempo real)
-    if check_betmines:
-        prediction = fetch_betmines_prediction(match_state.get('Home', ''), match_state.get('Away', ''))
-        valid_betmines, score, reason_bm = validate_saldo_menor_betmines(
-            prediction, is_home_zebra=zebra_info['is_home_zebra'], fav_odd=fav_odd
-        )
-        if not valid_betmines:
-            return False, f"REJEITADO_BETMINES_{reason_bm}"
+    # Validação E: Betmines
+    prediction = fetch_betmines_prediction(
+        match_state.get('Home', ''), 
+        match_state.get('Away', ''),
+        odd_h=match_state.get('Odd_H_FT'),
+        odd_d=match_state.get('Odd_D_FT'),
+        odd_a=match_state.get('Odd_A_FT'),
+        odd_u25=match_state.get('Odd_Under25_FT')
+    )
+    valid_betmines, score, reason_bm, display_bm = validate_saldo_menor_betmines(
+        prediction, is_home_zebra=zebra_info['is_home_zebra'], fav_odd=fav_odd
+    )
+    
+    match_state['Betmines_Previsao'] = display_bm
+    match_state['Betmines_Status'] = 'APROVADO' if valid_betmines else 'REJEITADO'
+
+    if check_betmines and not valid_betmines:
+        return False, f"REJEITADO_BETMINES_{reason_bm}"
 
     return True, "APROVADO_SALDO_MENOR"
 
