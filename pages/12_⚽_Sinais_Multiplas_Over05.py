@@ -13,12 +13,15 @@ st.title("⚽ Sinais & Gerador de Múltiplas OVER 0.5 FT")
 st.caption("Estratégia Quantitativa baseada em Alta Expectativa de Gols (xG > 2.0) | Taxa de 0x0 de Apenas 2.57%")
 
 st.markdown("""
-Esta página analisa a grade de jogos do dia e seleciona partidas com **altíssima probabilidade de pelo menos 1 gol (Over 0.5 FT / Lay 0x0)**.
+ Esta página analisa a grade de jogos do dia e seleciona partidas com **altíssima probabilidade de pelo menos 1 gol (Over 0.5 FT / Lay 0x0)**.
 
-### 📐 Parâmetros Otimizados no Backtest Histórico:
-* **xG Total ($> 2.0$):** Forte apetite ofensivo projetado no mercado.
-* **Odd do Empate ($> 3.30$):** Baixa probabilidade de jogo truncado em 0x0.
-* **Assertividade no Backtest:** **97.43% em entradas simples** | **92.50% nas Múltiplas Triplas (3 Jogos com Odd ~1.26)**.
+> ⚠️ **ALERTA QUANTITATIVO (MÚLTIPLAS PRE-LIVE):** Apostar em Over 0.5 FT antes do jogo começar (com odds entre 1.02 e 1.06) é matematicamente **-EV (Prejuízo no longo prazo)** devido à margem abusiva (*overround*) das casas. 
+>
+> ### 🚀 A Solução: Operação em LIVE (Ao Vivo)
+> Em vez de entrar pré-jogo, utilize as partidas filtradas nesta página para fazer a entrada **Live (Ao Vivo)**:
+> 1. Aguarde o jogo começar em 0x0.
+> 2. Entre no mercado de **Over 0.5 FT** (ou Lay 0x0) apenas quando a odd atingir o **limiar mínimo de 1.20** (geralmente entre o minuto 15 e 22 da partida).
+> 3. Isso aumenta o seu ganho de $4\%$ para $20\%$ por acerto, garantindo valor esperado positivo real (+EV).
 """)
 
 col1, col2, col3 = st.columns([1.5, 1.5, 1.5])

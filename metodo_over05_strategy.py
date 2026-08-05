@@ -17,25 +17,20 @@ def evaluate_game_over05(match_state: Dict[str, Any], min_xg: float = 2.0, min_d
     """
     result = dict(match_state)
     
-    # Extrair estatísticas e odds
-    xg_h = pd.to_numeric(match_state.get('xG_H_FT') or match_state.get('xG_H_Pre') or 0.0, errors='coerce') or 0.0
-    xg_a = pd.to_numeric(match_state.get('xG_A_FT') or match_state.get('xG_A_Pre') or 0.0, errors='coerce') or 0.0
-    total_xg = pd.to_numeric(match_state.get('Total_xG_Pre') or match_state.get('Total_xG') or (xg_h + xg_a), errors='coerce') or 0.0
-    
-    odd_u25 = pd.to_numeric(match_state.get('Odd_Under25_FT'), errors='coerce') or 0.0
-    odd_o25 = pd.to_numeric(match_state.get('Odd_Over25_FT'), errors='coerce') or 0.0
-    odd_d = pd.to_numeric(match_state.get('Odd_D_FT'), errors='coerce') or 0.0
-    odd_h = pd.to_numeric(match_state.get('Odd_H_FT'), errors='coerce') or 0.0
-    odd_a = pd.to_numeric(match_state.get('Odd_A_FT'), errors='coerce') or 0.0
+    # Extrair odds pré-jogo
+    odd_u25 = pd.to_numeric(match_state.get('Odd_Under25_FT') or match_state.get('Odd_Under25_FT_Back') or match_state.get('Odd_Under25'), errors='coerce') or 0.0
+    odd_o25 = pd.to_numeric(match_state.get('Odd_Over25_FT') or match_state.get('Odd_Over25_FT_Back') or match_state.get('Odd_Over25'), errors='coerce') or 0.0
+    odd_d = pd.to_numeric(match_state.get('Odd_D_FT') or match_state.get('Odd_D_Back') or match_state.get('Odd_D'), errors='coerce') or 0.0
+    odd_h = pd.to_numeric(match_state.get('Odd_H_FT') or match_state.get('Odd_H_Back'), errors='coerce') or 0.0
+    odd_a = pd.to_numeric(match_state.get('Odd_A_FT') or match_state.get('Odd_A_Back'), errors='coerce') or 0.0
 
-    # Estimativa contínua de xG caso não disponível
-    if total_xg == 0.0:
-        if odd_u25 > 1.0:
-            total_xg = max(0.80, min(5.50, 1.35 + (odd_u25 - 1.50) * 1.75))
-        elif odd_o25 > 1.0:
-            total_xg = max(0.80, min(5.50, 2.50 - (odd_o25 - 1.90) * 1.50))
-        else:
-            total_xg = 2.10
+    # Estimativa de xG 100% PRÉ-JOGO derivada exclusivamente das odds do mercado (Zero Data Leakage)
+    if odd_u25 > 1.0:
+        total_xg = max(0.80, min(5.50, 1.35 + (odd_u25 - 1.50) * 1.75))
+    elif odd_o25 > 1.0:
+        total_xg = max(0.80, min(5.50, 2.50 - (odd_o25 - 1.90) * 1.50))
+    else:
+        total_xg = 2.10
 
     result['Total_xG'] = round(total_xg, 2)
 
