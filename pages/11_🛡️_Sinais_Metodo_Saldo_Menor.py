@@ -107,20 +107,38 @@ if gerar_btn:
                     "⚽ Múltiplas Over 0.5 FT"
                 ])
 
-                # Tentar carregar predições do Modelo Mestre
+                # Tentar carregar predições do Modelo Mestre & Calcular Score Golden
                 try:
                     import joblib
                     import master_feature_engineer
                     model_sm_quant = joblib.load('modelo_saldo_menor_quant.pkl')
                     feats_sm = master_feature_engineer.build_master_features(df_aprovados)
+                    
+                    if hasattr(model_sm_quant, "feature_names_in_"):
+                        expected_cols = model_sm_quant.feature_names_in_
+                        feats_sm = feats_sm.reindex(columns=expected_cols, fill_value=0.0)
+                        
                     df_aprovados['Prob_Master'] = model_sm_quant.predict_proba(feats_sm)[:, 1]
                 except Exception:
                     df_aprovados['Prob_Master'] = 0.50
 
+                # Bônus de Copa & Score Golden +EV
+                cup_keywords = ["cup", "copa", "taca", "pokal", "trophy", "champions", "europa"]
+                df_aprovados['Is_Cup'] = df_aprovados['League'].astype(str).str.lower().apply(lambda l: any(kw in l for kw in cup_keywords))
+                
+                # Formula de Pontuação de Segurança do Bilhete Golden:
+                # Prob_Master + Bônus de Copa (5%) + Bônus de xG Baixo (3%) + Bônus de Empate (2%)
+                df_aprovados['Score_Golden'] = (
+                    df_aprovados['Prob_Master'] 
+                    + np.where(df_aprovados['Is_Cup'], 0.05, 0.0)
+                    + np.where(df_aprovados['Total_xG'] <= 1.50, 0.03, 0.0)
+                    + np.where(df_aprovados['Odd_D_FT'] <= 3.25, 0.02, 0.0)
+                )
+
                 num_jogos = len(df_aprovados)
                 num_bilhetes = num_jogos // tamanho_multipla
 
-                # ABA 1: SEQUENCIAL POR HORÁRIO (MÉTODO ATUAL)
+                # ABA 1: SEQUENCIAL POR HORÁRIO (MÉTODO TRADICIONAL)
                 with tab1:
                     st.subheader("🎫 Múltiplas Agrupadas por Horário (Método Tradicional)")
                     if num_bilhetes == 0:
@@ -160,46 +178,63 @@ if gerar_btn:
                         except Exception as ex:
                             pass
 
-                # ABA 2: BILHETE GOLDEN +EV (TOP 3 DO DIA)
+                # ABA 2: BILHETE GOLDEN +EV (TOP 4 DO DIA - MULTI-FATORIAL)
                 with tab2:
-                    st.subheader("🏆 BILHETE GOLDEN +EV — Os 3 Melhores Jogos do Dia")
-                    st.caption("O Modelo Mestre de 88 Variáveis Quantitativas seleciona os 3 jogos de maior probabilidade matemática de acerto.")
+                    st.subheader(f"🏆 BILHETE GOLDEN +EV — Os {tamanho_multipla} Melhores Jogos do Dia (Filtro Supremo)")
+                    st.caption("Algoritmo Multi-Fatorial: Pondera o Modelo Mestre (88 variáveis) + Bônus de Copas/Mata-Mata (97.4% WR histórico) + Baixo xG + Equilíbrio.")
 
-                    df_ranked = df_aprovados.sort_values('Prob_Master', ascending=False).reset_index(drop=True)
-                    if len(df_ranked) < 3:
-                        st.warning(f"São necessários ao menos 3 jogos aprovados no dia para gerar o Bilhete Golden. Jogos disponíveis hoje: {len(df_ranked)}")
-                    else:
-                        chunk_g = df_ranked.iloc[0:3]
-                        odd_golden = float(chunk_g['eh_zebra_plus3_odd'].prod())
-                        prob_golden_avg = float(chunk_g['Prob_Master'].mean()) * 100
+                    df_ranked_golden = df_aprovados.sort_values('Score_Golden', ascending=False).reset_index(drop=True)
+                    target_golden_count = tamanho_multipla
 
-                        st.success(f"### 🏆 BILHETE GOLDEN +EV | Odd Final: `{odd_golden:.2f}` | Confiança Média do Modelo: `{prob_golden_avg:.1f}%`")
+                    if len(df_ranked_golden) < target_golden_count:
+                        st.warning(f"Existem apenas {len(df_ranked_golden)} jogo(s) aprovado(s) hoje. São recomendados {target_golden_count} jogos para formar o Bilhete Golden.")
+                    
+                    # Selecionar os top N jogos do dia
+                    chunk_g = df_ranked_golden.iloc[0:min(len(df_ranked_golden), target_golden_count)]
+                    odd_golden = float(chunk_g['eh_zebra_plus3_odd'].prod())
+                    prob_golden_avg = float(chunk_g['Prob_Master'].mean()) * 100
+                    num_copas = int(chunk_g['Is_Cup'].sum())
 
-                        chunk_g_disp = chunk_g[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Prob_Master', 'Total_xG']].copy()
-                        chunk_g_disp['Prob_Master'] = (chunk_g_disp['Prob_Master'] * 100).round(1).astype(str) + '%'
-                        chunk_g_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3', 'Confiança Modelo', 'xG Total']
-                        st.dataframe(chunk_g_disp, use_container_width=True)
+                    st.success(f"### 🏆 BILHETE GOLDEN +EV ({len(chunk_g)} JOGOS) | Odd Final: `{odd_golden:.2f}` | Confiança Média: `{prob_golden_avg:.1f}%` | 👑 Jogos de Copa: `{num_copas}`")
 
-                        # Download Excel Golden
-                        try:
-                            df_g_export = pd.DataFrame([{
-                                'Bilhete_ID': 'BILHETE GOLDEN +EV',
-                                'Odd_Final_Combinada': round(odd_golden, 2),
-                                'Confianca_Media': f"{prob_golden_avg:.1f}%",
-                                'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3 EH)" for _, r in chunk_g.iterrows()])
-                            }])
-                            buffer_g = io.BytesIO()
-                            with pd.ExcelWriter(buffer_g, engine='openpyxl') as writer:
-                                df_g_export.to_excel(writer, index=False, sheet_name='Bilhete_Golden')
-                            st.download_button(
-                                label="📥 Baixar Bilhete Golden (Excel)",
-                                data=buffer_g.getvalue(),
-                                file_name=f"bilhete_golden_{date_str}.xlsx",
-                                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                                key="btn_dl_golden"
-                            )
-                        except Exception as ex:
-                            pass
+                    chunk_g_disp = chunk_g[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus3_odd', 'Prob_Master', 'Total_xG', 'Is_Cup']].copy()
+                    chunk_g_disp['Prob_Master'] = (chunk_g_disp['Prob_Master'] * 100).round(1).astype(str) + '%'
+                    chunk_g_disp['Is_Cup'] = np.where(chunk_g_disp['Is_Cup'], '🏆 Copa / Mata-Mata', '⚽ Liga Nacional')
+                    chunk_g_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+3 EH)', 'Odd EH +3', 'Confiança Modelo', 'xG Total', 'Tipo Torneio']
+                    st.dataframe(chunk_g_disp, use_container_width=True)
+
+                    # Caixa de Texto Rápida para Copiar
+                    texto_bilhete = f"🏆 BILHETE GOLDEN SALDO MENOR ({date_str})\n"
+                    texto_bilhete += f"Odd Final Combinada: {odd_golden:.2f}\n"
+                    texto_bilhete += "-------------------------------------\n"
+                    for idx_g, row_g in chunk_g.iterrows():
+                        copa_badge = " [COPA]" if row_g['Is_Cup'] else ""
+                        texto_bilhete += f"• {row_g['Time']} - {row_g['Home']} x {row_g['Away']} | Entrada: {row_g['zebra_team']} +3 EH @ {row_g['eh_zebra_plus3_odd']:.2f}{copa_badge}\n"
+                    
+                    st.text_area("📋 Texto Pronto para Copiar e Fazer na Betano:", value=texto_bilhete, height=140)
+
+                    # Download Excel Golden
+                    try:
+                        df_g_export = pd.DataFrame([{
+                            'Bilhete_ID': 'BILHETE GOLDEN +EV',
+                            'Data': date_str,
+                            'Odd_Final_Combinada': round(odd_golden, 2),
+                            'Confianca_Media': f"{prob_golden_avg:.1f}%",
+                            'Jogos_Copa': num_copas,
+                            'Jogos': " | ".join([f"{r['Home']} x {r['Away']} ({r['zebra_team']} +3 EH @ {r['eh_zebra_plus3_odd']:.2f})" for _, r in chunk_g.iterrows()])
+                        }])
+                        buffer_g = io.BytesIO()
+                        with pd.ExcelWriter(buffer_g, engine='openpyxl') as writer:
+                            df_g_export.to_excel(writer, index=False, sheet_name='Bilhete_Golden')
+                        st.download_button(
+                            label="📥 Baixar Bilhete Golden (Excel)",
+                            data=buffer_g.getvalue(),
+                            file_name=f"bilhete_golden_{date_str}.xlsx",
+                            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            key="btn_dl_golden"
+                        )
+                    except Exception as ex:
+                        pass
 
                 # ABA 3: MÚLTIPLAS RANQUEADAS (+EV MODELO MESTRE)
                 with tab3:

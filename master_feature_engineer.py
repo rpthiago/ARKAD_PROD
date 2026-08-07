@@ -18,19 +18,19 @@ def build_master_features(df_raw: pd.DataFrame) -> pd.DataFrame:
     df = df_raw.copy()
 
     # 1. Odds Básicas com fallback seguro
-    odd_h = pd.to_numeric(df['Odd_H_Back'] if 'Odd_H_Back' in df.columns else (df['Odd_H_FT'] if 'Odd_H_FT' in df.columns else (df['Odd_H'] if 'Odd_H' in df.columns else 2.0)), errors='coerce').fillna(2.0)
-    odd_d = pd.to_numeric(df['Odd_D_Back'] if 'Odd_D_Back' in df.columns else (df['Odd_D_FT'] if 'Odd_D_FT' in df.columns else (df['Odd_D'] if 'Odd_D' in df.columns else 3.2)), errors='coerce').fillna(3.2)
-    odd_a = pd.to_numeric(df['Odd_A_Back'] if 'Odd_A_Back' in df.columns else (df['Odd_A_FT'] if 'Odd_A_FT' in df.columns else (df['Odd_A'] if 'Odd_A' in df.columns else 2.0)), errors='coerce').fillna(2.0)
+    odd_h = pd.to_numeric(df['Odd_H_Back'] if 'Odd_H_Back' in df.columns else (df['Odd_H_FT'] if 'Odd_H_FT' in df.columns else (df['Odd_H'] if 'Odd_H' in df.columns else pd.Series(2.0, index=df.index))), errors='coerce').fillna(2.0)
+    odd_d = pd.to_numeric(df['Odd_D_Back'] if 'Odd_D_Back' in df.columns else (df['Odd_D_FT'] if 'Odd_D_FT' in df.columns else (df['Odd_D'] if 'Odd_D' in df.columns else pd.Series(3.2, index=df.index))), errors='coerce').fillna(3.2)
+    odd_a = pd.to_numeric(df['Odd_A_Back'] if 'Odd_A_Back' in df.columns else (df['Odd_A_FT'] if 'Odd_A_FT' in df.columns else (df['Odd_A'] if 'Odd_A' in df.columns else pd.Series(2.0, index=df.index))), errors='coerce').fillna(2.0)
 
-    odd_o25 = pd.to_numeric(df['Odd_Over25_FT_Back'] if 'Odd_Over25_FT_Back' in df.columns else (df['Odd_Over25_FT'] if 'Odd_Over25_FT' in df.columns else (df['Odd_Over25'] if 'Odd_Over25' in df.columns else 2.0)), errors='coerce').fillna(2.0)
-    odd_u25 = pd.to_numeric(df['Odd_Under25_FT_Back'] if 'Odd_Under25_FT_Back' in df.columns else (df['Odd_Under25_FT'] if 'Odd_Under25_FT' in df.columns else (df['Odd_Under25'] if 'Odd_Under25' in df.columns else 1.8)), errors='coerce').fillna(1.8)
+    odd_o25 = pd.to_numeric(df['Odd_Over25_FT_Back'] if 'Odd_Over25_FT_Back' in df.columns else (df['Odd_Over25_FT'] if 'Odd_Over25_FT' in df.columns else (df['Odd_Over25'] if 'Odd_Over25' in df.columns else pd.Series(2.0, index=df.index))), errors='coerce').fillna(2.0)
+    odd_u25 = pd.to_numeric(df['Odd_Under25_FT_Back'] if 'Odd_Under25_FT_Back' in df.columns else (df['Odd_Under25_FT'] if 'Odd_Under25_FT' in df.columns else (df['Odd_Under25'] if 'Odd_Under25' in df.columns else pd.Series(1.8, index=df.index))), errors='coerce').fillna(1.8)
 
-    odd_btts_y = pd.to_numeric(df['Odd_BTTS_Yes_Back'] if 'Odd_BTTS_Yes_Back' in df.columns else (df['Odd_BTTS_Yes'] if 'Odd_BTTS_Yes' in df.columns else 1.9), errors='coerce').fillna(1.9)
-    odd_btts_n = pd.to_numeric(df['Odd_BTTS_No_Back'] if 'Odd_BTTS_No_Back' in df.columns else (df['Odd_BTTS_No'] if 'Odd_BTTS_No' in df.columns else 1.9), errors='coerce').fillna(1.9)
+    odd_btts_y = pd.to_numeric(df['Odd_BTTS_Yes_Back'] if 'Odd_BTTS_Yes_Back' in df.columns else (df['Odd_BTTS_Yes'] if 'Odd_BTTS_Yes' in df.columns else pd.Series(1.9, index=df.index)), errors='coerce').fillna(1.9)
+    odd_btts_n = pd.to_numeric(df['Odd_BTTS_No_Back'] if 'Odd_BTTS_No_Back' in df.columns else (df['Odd_BTTS_No'] if 'Odd_BTTS_No' in df.columns else pd.Series(1.9, index=df.index)), errors='coerce').fillna(1.9)
 
-    odd_0x0 = pd.to_numeric(df['Odd_CS_0x0_Lay'] if 'Odd_CS_0x0_Lay' in df.columns else (df['Odd_CS_0x0'] if 'Odd_CS_0x0' in df.columns else (df['Odd_0x0'] if 'Odd_0x0' in df.columns else 12.0)), errors='coerce').fillna(12.0)
-    odd_0x1 = pd.to_numeric(df['Odd_CS_0x1_Lay'] if 'Odd_CS_0x1_Lay' in df.columns else (df['Odd_CS_0x1'] if 'Odd_CS_0x1' in df.columns else (df['Odd_0x1'] if 'Odd_0x1' in df.columns else 9.5)), errors='coerce').fillna(9.5)
-    odd_1x0 = pd.to_numeric(df['Odd_CS_1x0_Lay'] if 'Odd_CS_1x0_Lay' in df.columns else (df['Odd_CS_1x0'] if 'Odd_CS_1x0' in df.columns else (df['Odd_1x0'] if 'Odd_1x0' in df.columns else 7.5)), errors='coerce').fillna(7.5)
+    odd_0x0 = pd.to_numeric(df['Odd_CS_0x0_Lay'] if 'Odd_CS_0x0_Lay' in df.columns else (df['Odd_CS_0x0'] if 'Odd_CS_0x0' in df.columns else (df['Odd_0x0'] if 'Odd_0x0' in df.columns else pd.Series(12.0, index=df.index))), errors='coerce').fillna(12.0)
+    odd_0x1 = pd.to_numeric(df['Odd_CS_0x1_Lay'] if 'Odd_CS_0x1_Lay' in df.columns else (df['Odd_CS_0x1'] if 'Odd_CS_0x1' in df.columns else (df['Odd_0x1'] if 'Odd_0x1' in df.columns else pd.Series(9.5, index=df.index))), errors='coerce').fillna(9.5)
+    odd_1x0 = pd.to_numeric(df['Odd_CS_1x0_Lay'] if 'Odd_CS_1x0_Lay' in df.columns else (df['Odd_CS_1x0'] if 'Odd_CS_1x0' in df.columns else (df['Odd_1x0'] if 'Odd_1x0' in df.columns else pd.Series(7.5, index=df.index))), errors='coerce').fillna(7.5)
 
     # 2. Probabilidades Implícitas Brutas (1/Odd)
     p_h = 1.0 / np.maximum(1.001, odd_h)
