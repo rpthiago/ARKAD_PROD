@@ -288,8 +288,8 @@ if gerar_btn:
                     st.caption("O Backtest histórico provou: Quanto menor o xG, maior o Win Rate no EH +2 (xG ≤ 1.20 entrega 91.6% de acerto e +14.5% de ROI a @1.25 na Betano).")
 
                     df_eh2 = df_aprovados.copy()
-                    eh2_h = pd.to_numeric(df_eh2.get('EH_H_pos_2'), errors='coerce').fillna(0.0)
-                    eh2_a = pd.to_numeric(df_eh2.get('EH_A_pos_2'), errors='coerce').fillna(0.0)
+                    eh2_h = pd.to_numeric(df_eh2['EH_H_pos_2'] if 'EH_H_pos_2' in df_eh2.columns else pd.Series(0.0, index=df_eh2.index), errors='coerce').fillna(0.0)
+                    eh2_a = pd.to_numeric(df_eh2['EH_A_pos_2'] if 'EH_A_pos_2' in df_eh2.columns else pd.Series(0.0, index=df_eh2.index), errors='coerce').fillna(0.0)
                     df_eh2['eh_zebra_plus2_odd'] = eh2_h.where(df_eh2['is_home_zebra'], eh2_a)
 
                     df_eh2['eh_zebra_plus2_odd'] = np.where(
