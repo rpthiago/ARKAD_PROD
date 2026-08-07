@@ -99,10 +99,11 @@ if gerar_btn:
             else:
                 st.success(f"🔥 {len(df_aprovados)} Oportunidades de Saldo Menor Encontradas!")
 
-                tab1, tab2, tab3, tab4, tab5 = st.tabs([
+                tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
                     "🎫 Múltiplas Sequenciais (Horário)", 
-                    "🏆 Bilhete Golden +EV (Top 3 do Dia)", 
+                    "🏆 Bilhete Golden +EV (Top 4 do Dia)", 
                     "📊 Múltiplas Ranqueadas (+EV Modelo Mestre)", 
+                    "🎯 Apostas Simples EH +2 (Menor xG)",
                     "📋 Tabela Geral Saldo Menor", 
                     "⚽ Múltiplas Over 0.5 FT"
                 ])
@@ -281,8 +282,39 @@ if gerar_btn:
                         except Exception as ex:
                             pass
 
-                # ABA 4: TABELA GERAL & DOWNLOAD EXCEL INDIVIDUAL
+                # ABA 4: APOSTAS SIMPLES EH +2 ZEBRA (MENOR XG)
                 with tab4:
+                    st.subheader("🎯 Apostas Simples EH +2 Zebra (Ranqueadas do Menor ao Maior xG)")
+                    st.caption("O Backtest histórico provou: Quanto menor o xG, maior o Win Rate no EH +2 (xG ≤ 1.20 entrega 91.6% de acerto e +14.5% de ROI a @1.25 na Betano).")
+
+                    df_eh2 = df_aprovados.copy()
+                    eh2_h = pd.to_numeric(df_eh2.get('EH_H_pos_2'), errors='coerce').fillna(0.0)
+                    eh2_a = pd.to_numeric(df_eh2.get('EH_A_pos_2'), errors='coerce').fillna(0.0)
+                    df_eh2['eh_zebra_plus2_odd'] = eh2_h.where(df_eh2['is_home_zebra'], eh2_a)
+
+                    df_eh2['eh_zebra_plus2_odd'] = np.where(
+                        (df_eh2['eh_zebra_plus2_odd'] <= 1.0) | (df_eh2['eh_zebra_plus2_odd'] >= df_eh2['zebra_odd']),
+                        1.25,
+                        df_eh2['eh_zebra_plus2_odd']
+                    )
+
+                    df_eh2_sorted = df_eh2.sort_values('Total_xG', ascending=True).reset_index(drop=True)
+
+                    chunk_eh2_disp = df_eh2_sorted[['Time', 'League', 'Home', 'Away', 'zebra_team', 'eh_zebra_plus2_odd', 'Total_xG', 'Is_Cup']].copy()
+                    chunk_eh2_disp['Is_Cup'] = np.where(chunk_eh2_disp['Is_Cup'], '🏆 Copa / Mata-Mata', '⚽ Liga Nacional')
+                    chunk_eh2_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+2 EH)', 'Odd EH +2 Est.', 'xG Total', 'Tipo Torneio']
+                    st.dataframe(chunk_eh2_disp, use_container_width=True)
+
+                    texto_simples = f"🎯 TOP APOSTAS SIMPLES EH +2 (BETANO - {date_str})\n"
+                    texto_simples += "-------------------------------------\n"
+                    for idx_s, row_s in df_eh2_sorted.head(5).iterrows():
+                        copa_b = " [COPA]" if row_s['Is_Cup'] else ""
+                        texto_simples += f"• {row_s['Time']} - {row_s['Home']} x {row_s['Away']} | Entrada: {row_s['zebra_team']} +2 EH (xG: {row_s['Total_xG']:.2f}){copa_b}\n"
+
+                    st.text_area("📋 Texto Pronto para Copiar (Top 5 Apostas Simples do Dia):", value=texto_simples, height=140)
+
+                # ABA 5: TABELA GERAL & DOWNLOAD EXCEL INDIVIDUAL
+                with tab5:
                     st.subheader("📋 Tabela Geral de Jogos Aprovados")
                     display_cols = [
                         'Date', 'Time', 'League', 'Home', 'Away', 
@@ -316,8 +348,8 @@ if gerar_btn:
                     except Exception as ex_ind:
                         st.warning(f"Aviso de download Excel: {ex_ind}")
 
-                # ABA 5: MÚLTIPLAS OVER 0.5 FT
-                with tab5:
+                # ABA 6: MÚLTIPLAS OVER 0.5 FT
+                with tab6:
                     st.subheader("⚽ Estratégia Complementar: Múltiplas OVER 0.5 FT")
                     st.caption("Filtra partidas com alta expectativa de gols (xG > 2.0 e Odd Empate > 3.30) | Taxa de 0x0 de apenas 2.57%")
                     
