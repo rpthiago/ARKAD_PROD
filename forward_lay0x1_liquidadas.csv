@@ -1,0 +1,117 @@
+Data,Mandante,Visitante,odd_lay,Estrategia,Resultado,mes,res,pnl
+2026-07-04,Canada,Morocco,7.0,Trader,GREEN,2026-07,1,0.95
+2026-07-04,Criciuma,Sport Recife,13.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-04,Degerfors,Malmo FF,11.0,Trader,RED,2026-07,0,-10.0
+2026-07-04,Hodd,Stromsgodset,18.0,Trader,GREEN,2026-07,1,0.95
+2026-07-04,Londrina,CRB,10.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-04,Novorizontino,Atletico GO,15.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-04,Paraguay,France,7.6,Trader,RED,2026-07,0,-6.6
+2026-07-04,SJK,TPS,21.0,RF,GREEN,2026-07,1,0.95
+2026-07-05,Delfin,Emelec,8.6,RF,GREEN,2026-07,1,0.95
+2026-07-05,Elfsborg,Hammarby,10.5,Trader,GREEN,2026-07,1,0.95
+2026-07-05,Meizhou Hakka,Changchun Yatai,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-05,Mexico,England,8.0,Trader,GREEN,2026-07,1,0.95
+2026-07-06,Brommapojkarna,GAIS,12.0,RF,GREEN,2026-07,1,0.95
+2026-07-06,Keflavik,Fram,22.0,RF,GREEN,2026-07,1,0.95
+2026-07-06,Portugal,Spain,11.0,RF+Trader,RED,2026-07,0,-10.0
+2026-07-06,USA,Belgium,16.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-07,Athletic Club,Operario PR,12.0,RF,RED,2026-07,0,-11.0
+2026-07-07,Switzerland,Colombia,8.4,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-08,Ponte Preta,Criciuma,6.6,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-01,Belgium,Senegal,15.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-02,Lyn,Asane,22.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-02,Portugal,Croatia,22.0,🎯 Lay 0x1 Trader,GREEN,2026-07,1,0.95
+2026-07-02,Cuiaba,America MG,13.5,🎯 Lay 0x1 Trader,GREEN,2026-07,1,0.95
+2026-07-03,Australia,Egypt,7.4,🎯 Lay 0x1 Trader,GREEN,2026-07,1,0.95
+2026-07-03,Cobh Ramblers,Cork City,9.2,🌲 Lay 0x1 RF,RED,2026-07,0,-8.2
+2026-07-03,Drogheda,Bohemians,9.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-03,Raufoss,Strommen,15.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-03,Shelbourne,Dundalk,17.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-03,Sligo Rovers,Shamrock Rovers,8.6,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-03,Switzerland,Algeria,14.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-03,Yunnan Yukun,Henan Songshan Longmen,21.0,🌲 Lay 0x1 RF,GREEN,2026-07,1,0.95
+2026-07-09,France,Morocco,20.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-10,VPS,SJK,22.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-10,Spain,Belgium,22.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-10,Waterford,St Patricks,9.4,RF,GREEN,2026-07,1,0.95
+2026-07-10,Finn Harps,Treaty United,13.5,RF,RED,2026-07,0,-12.5
+2026-07-10,Sport Recife,Botafogo SP,13.0,RF,GREEN,2026-07,1,0.95
+2026-07-11,Yanbian Longding,Suzhou Dongwu,22.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,Mjallby,AIK,16.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,Tromso,Valerenga,19.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,Norway,England,12.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,Guayaquil City,Delfin,11.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,Argentina,Switzerland,16.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-11,TPS,AC Oulu,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-11,Orgryte,Hacken,14.5,RF,GREEN,2026-07,1,0.95
+2026-07-11,Fredrikstad,Lillestrom,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-12,GAIS,Elfsborg,17.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-12,Sao Bernardo,Cuiaba,8.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-12,Ituano,Ferroviaria,10.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-12,Hafnarfjordur,Valur,21.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,The Strongest,Bolivar,17.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,CRB,Goias,14.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,Botafogo PB,Confianca,16.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,Real Potosi,Nacional Potosi,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-12,Vasteras SK,Degerfors,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,Kfum Oslo,Bodo Glimt,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-12,Operario PR,Novorizontino,9.6,RF,GREEN,2026-07,1,0.95
+2026-07-12,Brommapojkarna,Sirius,13.0,RF,GREEN,2026-07,1,0.95
+2026-07-12,Sandefjord,Ham-Kam,18.0,RF,GREEN,2026-07,1,0.95
+2026-07-13,America MG,Londrina,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-13,Figueirense,Volta Redonda,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-14,France,Spain,13.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-14,Macara,Mushuc Runa,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-15,England,Argentina,9.6,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-15,Miami FC,Indy Eleven,12.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-16,CF Montreal,Toronto FC,21.0,RF,GREEN,2026-07,1,0.95
+2026-07-17,Changchun Yatai,Wuxi Wugou,16.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Mjallby,Vasteras SK,19.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Juventude,Cuiaba,10.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Mirassol,Gremio,13.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Londrina,Botafogo SP,9.6,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Delfin,Macara,8.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-17,Sao Bernardo,Avai,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-18,SJK,KuPS,15.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-18,Ham-Kam,Tromso,9.8,RF,GREEN,2026-07,1,0.95
+2026-07-18,AIK,GAIS,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-18,AC Oulu,Gnistan,15.5,RF,GREEN,2026-07,1,0.95
+2026-07-18,Start,Rosenborg,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-19,Sao Luiz,CSA,8.6,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-19,Spain,Argentina,11.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-19,America RN,Gama,14.0,RF,GREEN,2026-07,1,0.95
+2026-07-19,Elfsborg,Sirius,13.0,RF,GREEN,2026-07,1,0.95
+2026-07-19,Varnamo,Ljungskile,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-20,TPS,Ilves,14.5,RF,GREEN,2026-07,1,0.95
+2026-07-21,Avai,America MG,11.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-21,Novorizontino,Criciuma,11.0,RF+Trader,RED,2026-07,0,-10.0
+2026-07-21,Atletico MG,Bahia,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-22,Goias,Sport Recife,12.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-22,FC Cincinnati,Vancouver Whitecaps,18.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-22,Sao Paulo,Athletico-PR,13.0,RF,GREEN,2026-07,1,0.95
+2026-07-22,Austin FC,Seattle Sounders,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-22,Portland Timbers,FC Dallas,20.0,RF,GREEN,2026-07,1,0.95
+2026-07-22,Lillestrom,Viking,15.5,RF,GREEN,2026-07,1,0.95
+2026-07-22,New England Revolution,Toronto FC,17.0,RF,GREEN,2026-07,1,0.95
+2026-07-23,Belgrano,Rosario Central,8.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-23,Cuiaba,Atletico GO,13.5,RF+Trader,RED,2026-07,0,-12.5
+2026-07-23,Emelec,Mushuc Runa,15.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-23,Botafogo SP,Juventude,9.8,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-23,Athletic Club,Sao Bernardo,13.0,RF,GREEN,2026-07,1,0.95
+2026-07-23,Defensa y Justicia,Aldosivi,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-24,Velez Sarsfield,Instituto,11.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-24,Cerro Porteno,Sportivo Trinidense,15.0,RF,GREEN,2026-07,1,0.95
+2026-07-24,Jaro,SJK,13.5,RF,GREEN,2026-07,1,0.95
+2026-07-27,Rosenborg,Fredrikstad,21.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-27,Sport Recife,Cuiaba,12.5,RF,GREEN,2026-07,1,0.95
+2026-07-27,Atletico GO,Operario PR,12.0,RF,GREEN,2026-07,1,0.95
+2026-07-27,Orebro,Oddevold,14.0,RF,GREEN,2026-07,1,0.95
+2026-07-28,Landskrona,Norrkoping,12.0,RF+Trader,RED,2026-07,0,-11.0
+2026-07-28,San Lorenzo,Gimnasia Mendoza,11.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-28,Juventude,Avai,19.0,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-28,Ponte Preta,Athletic Club,8.4,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-28,Rosario Central,Racing Club,10.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-29,Barracas Central,Aldosivi,9.4,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-29,Fluminense,Bahia,19.5,RF+Trader,GREEN,2026-07,1,0.95
+2026-07-29,Mirassol,Remo,20.0,RF,GREEN,2026-07,1,0.95
+2026-07-30,Corinthians,Athletico-PR,12.5,RF,GREEN,2026-07,1,0.95

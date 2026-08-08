@@ -1,0 +1,756 @@
+League,Line,N1,N2,N3,consenso
+ARGENTINA 1,0.5,Under,Over,Over,
+ARGENTINA 2,0.5,Under,Over,Over,
+ARGENTINA 3,0.5,Over,Under,Over,
+ARGENTINA CUP,0.5,Over,Over,Over,Over
+AUSTRALIA 1,0.5,Over,Over,Under,
+AUSTRIA 1,0.5,Under,Over,Under,
+AUSTRIA 2,0.5,Over,Over,Over,Over
+BELGIUM 1,0.5,Over,Over,Over,Over
+BELGIUM 2,0.5,Over,Over,Under,
+BOLIVIA 1,0.5,Over,Over,Over,Over
+BOLIVIA CUP,0.5,Over,Under,Under,
+BOSNIA 1,0.5,Over,Under,Over,
+BOSNIA 2,0.5,Over,Over,Under,
+BRAZIL 1,0.5,Over,Over,Under,
+BRAZIL 2,0.5,Over,Over,Under,
+BRAZIL 3,0.5,Under,Over,Over,
+BRAZIL 4,0.5,Under,Over,Over,
+BRAZIL CUP,0.5,Over,Over,Over,Over
+BULGARIA 1,0.5,Over,Over,Under,
+BULGARIA 2,0.5,Over,Over,Over,Over
+CHILE 1,0.5,Over,Over,Over,Over
+CHILE 2,0.5,Over,Over,Over,Over
+CHILE CUP,0.5,Under,Over,Over,
+CHINA 1,0.5,Over,Over,Over,Over
+CHINA 2,0.5,Under,Under,Over,
+COLOMBIA 1,0.5,Over,Over,Over,Over
+COLOMBIA 2,0.5,Over,Over,Over,Over
+COPA LIBERTADORES,0.5,Over,Over,Over,Over
+COPA SUDAMERICANA,0.5,Over,Under,Under,
+CROATIA 1,0.5,Over,Over,Under,
+CROATIA 2,0.5,Over,Over,Over,Over
+CYPRUS 1,0.5,Over,Over,Under,
+CYPRUS 2,0.5,Under,Over,Under,
+CZECH 1,0.5,Over,Over,Under,
+CZECH 2,0.5,Over,Under,Over,
+DENMARK 1,0.5,Over,Over,Under,
+DENMARK 2,0.5,Over,Over,Over,Over
+ECUADOR 1,0.5,Over,Over,Over,Over
+ECUADOR 2,0.5,Over,Over,Over,Over
+ECUADOR CUP,0.5,Under,Over,Over,
+EGYPT 1,0.5,Over,Under,Over,
+EGYPT 2,0.5,Over,Over,Under,
+ENGLAND 1,0.5,Over,Over,Over,Over
+ENGLAND 2,0.5,Under,Over,Under,
+ENGLAND 3,0.5,Over,Over,Over,Over
+ENGLAND 4,0.5,Over,Over,Over,Over
+ENGLAND 5,0.5,Over,Over,Over,Over
+ENGLAND CUP,0.5,Over,Over,Over,Over
+ESTONIA 1,0.5,Over,Under,Over,
+ESTONIA 2,0.5,Over,Under,Under,
+EUROPA CHAMPIONS LEAGUE,0.5,Over,Over,Under,
+EUROPA CONFERENCE LEAGUE,0.5,Over,Over,Over,Over
+EUROPA LEAGUE,0.5,Over,Over,Over,Over
+FINLAND 1,0.5,Over,Over,Over,Over
+FINLAND 2,0.5,Over,Over,Over,Over
+FRANCE 1,0.5,Over,Over,Over,Over
+FRANCE 2,0.5,Over,Under,Over,
+FRANCE 3,0.5,Over,Over,Over,Over
+FRANCE 4,0.5,Over,Over,Over,Over
+FRANCE CUP,0.5,Over,Over,Under,
+GERMANY 1,0.5,Over,Over,Under,
+GERMANY 2,0.5,Over,Under,Over,
+GERMANY 3,0.5,Over,Over,Over,Over
+GERMANY CUP,0.5,Over,Over,Over,Over
+GREECE 1,0.5,Over,Under,Over,
+GREECE 2,0.5,Over,Under,Under,
+ICELAND 1,0.5,Over,Over,Over,Over
+ICELAND 2,0.5,Over,Over,Over,Over
+IRELAND 1,0.5,Over,Over,Over,Over
+IRELAND 2,0.5,Over,Over,Over,Over
+ISRAEL 1,0.5,Over,Over,Under,
+ISRAEL 2,0.5,Over,Under,Under,
+ITALY 1,0.5,Over,Over,Over,Over
+ITALY 2,0.5,Over,Over,Under,
+ITALY 3,0.5,Under,Over,Under,
+ITALY 4,0.5,Over,Over,Over,Over
+ITALY CUP,0.5,Under,Over,Over,
+JAPAN 1,0.5,Over,Over,Under,
+JAPAN 2,0.5,Over,Over,Over,Over
+JAPAN 3,0.5,Over,Over,Under,
+MEXICO 1,0.5,Over,Over,Over,Over
+MEXICO 2,0.5,Under,Over,Over,
+NETHERLANDS 1,0.5,Over,Over,Over,Over
+NETHERLANDS 2,0.5,Over,Over,Over,Over
+NETHERLANDS CUP,0.5,Over,Over,Over,Over
+NORTHERN IRELAND 1,0.5,Over,Over,Over,Over
+NORTHERN IRELAND 2,0.5,Over,Over,Under,
+NORWAY 1,0.5,Under,Over,Over,
+NORWAY 2,0.5,Over,Over,Over,Over
+PARAGUAY 1,0.5,Over,Over,Over,Over
+PARAGUAY 2,0.5,Under,Under,Under,Under
+PERU 1,0.5,Under,Over,Over,
+PERU 2,0.5,Over,Over,Over,Over
+POLAND 1,0.5,Over,Over,Over,Over
+POLAND 2,0.5,Over,Over,Over,Over
+PORTUGAL 1,0.5,Over,Over,Over,Over
+PORTUGAL 2,0.5,Over,Over,Over,Over
+PORTUGAL 3,0.5,Over,Over,Over,Over
+PORTUGAL CUP,0.5,Over,Over,Over,Over
+ROMANIA 1,0.5,Over,Under,Over,
+ROMANIA 2,0.5,Under,Under,Under,Under
+SAUDI ARABIA 1,0.5,Over,Over,Over,Over
+SAUDI ARABIA 2,0.5,Over,Over,Over,Over
+SCOTLAND 1,0.5,Under,Over,Over,
+SCOTLAND 2,0.5,Over,Over,Under,
+SCOTLAND 3,0.5,Over,Over,Over,Over
+SCOTLAND 4,0.5,Over,Over,Under,
+SCOTLAND CUP,0.5,Over,Over,Under,
+SERBIA 1,0.5,Over,Over,Over,Over
+SERBIA 2,0.5,Over,Under,Under,
+SLOVAKIA 1,0.5,Over,Over,Over,Over
+SLOVAKIA 2,0.5,Over,Over,Over,Over
+SLOVENIA 1,0.5,Over,Over,Over,Over
+SLOVENIA 2,0.5,Over,Over,Under,
+SOUTH AFRICA 1,0.5,Over,Over,Over,Over
+SOUTH AFRICA 2,0.5,Over,Over,Over,Over
+SOUTH KOREA 1,0.5,Over,Over,Over,Over
+SOUTH KOREA 2,0.5,Under,Over,Over,
+SPAIN 1,0.5,Over,Over,Over,Over
+SPAIN 2,0.5,Over,Over,Over,Over
+SPAIN 3,0.5,Over,Over,Over,Over
+SPAIN 4,0.5,Over,Over,Over,Over
+SPAIN CUP,0.5,Over,Over,Over,Over
+SWEDEN 1,0.5,Over,Over,Over,Over
+SWEDEN 2,0.5,Over,Over,Over,Over
+SWITZERLAND 1,0.5,Over,Over,Over,Over
+SWITZERLAND 2,0.5,Under,Over,Over,
+TURKEY 1,0.5,Over,Over,Over,Over
+TURKEY 2,0.5,Over,Under,Over,
+TURKEY CUP,0.5,Over,Under,Over,
+UKRAINE 1,0.5,Under,Under,Over,
+UKRAINE 2,0.5,Over,Over,Over,Over
+URUGUAY 1,0.5,Over,Under,Over,
+URUGUAY 2,0.5,Over,Over,Over,Over
+USA 1,0.5,Over,Over,Over,Over
+USA 2,0.5,Over,Over,Under,
+VENEZUELA 1,0.5,Over,Over,Under,
+VENEZUELA 2,0.5,Over,Under,Over,
+WALES 1,0.5,Over,Under,Over,
+WALES CUP,0.5,Over,Over,Over,Over
+WOM BRAZIL 1,0.5,Over,Under,Under,
+WOM ENGLAND 1,0.5,Under,Over,Over,
+WOM FRANCE 1,0.5,Over,Over,Under,
+WOM GERMANY 1,0.5,Over,Over,Over,Over
+WOM ITALY 1,0.5,Over,Over,Over,Over
+WOM SPAIN 1,0.5,Over,Under,Over,
+WOM USA 1,0.5,Over,Over,Over,Over
+WORLD AMERICA CUP,0.5,Over,Over,Over,Over
+WORLD EUROCUP,0.5,Over,Over,Under,
+WORLD UEFA NATIONS LEAGUE,0.5,Over,Over,Over,Over
+WORLD WORLD CUP,0.5,Over,Over,Over,Over
+ARGENTINA 1,1.5,Over,Over,Over,Over
+ARGENTINA 2,1.5,Under,Over,Under,
+ARGENTINA 3,1.5,Over,Under,Under,
+ARGENTINA CUP,1.5,Over,Over,Over,Over
+AUSTRALIA 1,1.5,Under,Under,Over,
+AUSTRIA 1,1.5,Over,Over,Under,
+AUSTRIA 2,1.5,Over,Over,Over,Over
+BELGIUM 1,1.5,Over,Over,Under,
+BELGIUM 2,1.5,Under,Over,Over,
+BOLIVIA 1,1.5,Over,Under,Over,
+BOLIVIA CUP,1.5,Over,Over,Over,Over
+BOSNIA 1,1.5,Over,Over,Over,Over
+BOSNIA 2,1.5,Under,Under,Over,
+BRAZIL 1,1.5,Over,Over,Over,Over
+BRAZIL 2,1.5,Over,Over,Under,
+BRAZIL 3,1.5,Over,Under,Under,
+BRAZIL 4,1.5,Under,Under,Under,Under
+BRAZIL CUP,1.5,Over,Over,Over,Over
+BULGARIA 1,1.5,Under,Under,Under,Under
+BULGARIA 2,1.5,Over,Under,Over,
+CHILE 1,1.5,Over,Over,Under,
+CHILE 2,1.5,Under,Over,Over,
+CHILE CUP,1.5,Over,Over,Over,Over
+CHINA 1,1.5,Over,Under,Over,
+CHINA 2,1.5,Over,Under,Over,
+COLOMBIA 1,1.5,Over,Under,Over,
+COLOMBIA 2,1.5,Under,Over,Under,
+COPA LIBERTADORES,1.5,Under,Over,Under,
+COPA SUDAMERICANA,1.5,Under,Over,Over,
+CROATIA 1,1.5,Over,Over,Over,Over
+CROATIA 2,1.5,Over,Over,Over,Over
+CYPRUS 1,1.5,Over,Under,Over,
+CYPRUS 2,1.5,Under,Over,Under,
+CZECH 1,1.5,Under,Over,Over,
+CZECH 2,1.5,Over,Over,Under,
+DENMARK 1,1.5,Over,Under,Over,
+DENMARK 2,1.5,Over,Under,Under,
+ECUADOR 1,1.5,Under,Over,Over,
+ECUADOR 2,1.5,Over,Under,Under,
+ECUADOR CUP,1.5,Over,Under,Under,
+EGYPT 1,1.5,Over,Over,Over,Over
+EGYPT 2,1.5,Over,Under,Under,
+ENGLAND 1,1.5,Under,Under,Over,
+ENGLAND 2,1.5,Under,Over,Under,
+ENGLAND 3,1.5,Over,Over,Over,Over
+ENGLAND 4,1.5,Over,Over,Over,Over
+ENGLAND 5,1.5,Over,Over,Under,
+ENGLAND CUP,1.5,Under,Under,Over,
+ESTONIA 1,1.5,Under,Over,Over,
+ESTONIA 2,1.5,Under,Under,Under,Under
+EUROPA CHAMPIONS LEAGUE,1.5,Over,Over,Over,Over
+EUROPA CONFERENCE LEAGUE,1.5,Under,Over,Under,
+EUROPA LEAGUE,1.5,Over,Under,Under,
+FINLAND 1,1.5,Over,Under,Over,
+FINLAND 2,1.5,Over,Over,Over,Over
+FRANCE 1,1.5,Under,Over,Over,
+FRANCE 2,1.5,Under,Over,Over,
+FRANCE 3,1.5,Under,Under,Over,
+FRANCE 4,1.5,Over,Over,Under,
+FRANCE CUP,1.5,Over,Over,Under,
+GERMANY 1,1.5,Over,Under,Over,
+GERMANY 2,1.5,Under,Over,Under,
+GERMANY 3,1.5,Over,Under,Over,
+GERMANY CUP,1.5,Over,Under,Over,
+GREECE 1,1.5,Over,Over,Over,Over
+GREECE 2,1.5,Over,Under,Under,
+ICELAND 1,1.5,Under,Under,Over,
+ICELAND 2,1.5,Over,Under,Under,
+IRELAND 1,1.5,Under,Over,Over,
+IRELAND 2,1.5,Over,Over,Over,Over
+ISRAEL 1,1.5,Over,Over,Over,Over
+ISRAEL 2,1.5,Over,Over,Over,Over
+ITALY 1,1.5,Over,Under,Under,
+ITALY 2,1.5,Over,Over,Over,Over
+ITALY 3,1.5,Over,Over,Over,Over
+ITALY 4,1.5,Over,Over,Under,
+ITALY CUP,1.5,Over,Over,Under,
+JAPAN 1,1.5,Under,Under,Under,Under
+JAPAN 2,1.5,Over,Under,Over,
+JAPAN 3,1.5,Over,Under,Over,
+MEXICO 1,1.5,Over,Under,Over,
+MEXICO 2,1.5,Over,Over,Under,
+NETHERLANDS 1,1.5,Over,Over,Over,Over
+NETHERLANDS 2,1.5,Over,Under,Over,
+NETHERLANDS CUP,1.5,Over,Over,Over,Over
+NORTHERN IRELAND 1,1.5,Under,Over,Over,
+NORTHERN IRELAND 2,1.5,Under,Under,Over,
+NORWAY 1,1.5,Under,Over,Under,
+NORWAY 2,1.5,Over,Over,Over,Over
+PARAGUAY 1,1.5,Under,Under,Under,Under
+PARAGUAY 2,1.5,Under,Under,Over,
+PERU 1,1.5,Under,Under,Over,
+PERU 2,1.5,Under,Under,Under,Under
+POLAND 1,1.5,Over,Over,Over,Over
+POLAND 2,1.5,Over,Over,Over,Over
+PORTUGAL 1,1.5,Over,Over,Over,Over
+PORTUGAL 2,1.5,Over,Over,Over,Over
+PORTUGAL 3,1.5,Over,Under,Over,
+PORTUGAL CUP,1.5,Over,Over,Over,Over
+ROMANIA 1,1.5,Over,Under,Under,
+ROMANIA 2,1.5,Over,Over,Under,
+SAUDI ARABIA 1,1.5,Under,Over,Under,
+SAUDI ARABIA 2,1.5,Over,Under,Over,
+SCOTLAND 1,1.5,Under,Over,Under,
+SCOTLAND 2,1.5,Over,Under,Under,
+SCOTLAND 3,1.5,Under,Under,Over,
+SCOTLAND 4,1.5,Over,Over,Over,Over
+SCOTLAND CUP,1.5,Over,Over,Under,
+SERBIA 1,1.5,Under,Under,Under,Under
+SERBIA 2,1.5,Over,Over,Under,
+SLOVAKIA 1,1.5,Under,Over,Over,
+SLOVAKIA 2,1.5,Over,Over,Under,
+SLOVENIA 1,1.5,Under,Under,Over,
+SLOVENIA 2,1.5,Over,Over,Over,Over
+SOUTH AFRICA 1,1.5,Over,Under,Under,
+SOUTH AFRICA 2,1.5,Under,Over,Over,
+SOUTH KOREA 1,1.5,Under,Under,Over,
+SOUTH KOREA 2,1.5,Under,Over,Over,
+SPAIN 1,1.5,Over,Over,Under,
+SPAIN 2,1.5,Under,Over,Over,
+SPAIN 3,1.5,Over,Over,Under,
+SPAIN 4,1.5,Over,Under,Over,
+SPAIN CUP,1.5,Under,Under,Over,
+SWEDEN 1,1.5,Under,Under,Over,
+SWEDEN 2,1.5,Over,Under,Over,
+SWITZERLAND 1,1.5,Over,Under,Under,
+SWITZERLAND 2,1.5,Over,Over,Over,Over
+TURKEY 1,1.5,Under,Under,Over,
+TURKEY 2,1.5,Over,Under,Over,
+TURKEY CUP,1.5,Under,Over,Over,
+UKRAINE 1,1.5,Over,Under,Over,
+UKRAINE 2,1.5,Over,Over,Over,Over
+URUGUAY 1,1.5,Under,Over,Under,
+URUGUAY 2,1.5,Over,Over,Under,
+USA 1,1.5,Under,Over,Under,
+USA 2,1.5,Over,Under,Over,
+VENEZUELA 1,1.5,Over,Over,Under,
+VENEZUELA 2,1.5,Over,Over,Over,Over
+WALES 1,1.5,Over,Under,Under,
+WALES CUP,1.5,Over,Over,Under,
+WOM BRAZIL 1,1.5,Over,Under,Over,
+WOM ENGLAND 1,1.5,Over,Under,Over,
+WOM FRANCE 1,1.5,Over,Under,Over,
+WOM GERMANY 1,1.5,Under,Over,Over,
+WOM ITALY 1,1.5,Under,Over,Over,
+WOM SPAIN 1,1.5,Under,Under,Under,Under
+WOM USA 1,1.5,Over,Under,Over,
+WORLD AMERICA CUP,1.5,Under,Over,Under,
+WORLD EUROCUP,1.5,Over,Over,Under,
+WORLD UEFA NATIONS LEAGUE,1.5,Over,Over,Under,
+WORLD WORLD CUP,1.5,Under,Over,Under,
+ARGENTINA 1,2.5,Over,Under,Over,
+ARGENTINA 2,2.5,Over,Under,Under,
+ARGENTINA 3,2.5,Over,Over,Under,
+ARGENTINA CUP,2.5,Over,Under,Under,
+AUSTRALIA 1,2.5,Over,Under,Over,
+AUSTRIA 1,2.5,Over,Over,Under,
+AUSTRIA 2,2.5,Under,Over,Over,
+BELGIUM 1,2.5,Under,Over,Over,
+BELGIUM 2,2.5,Under,Over,Under,
+BOLIVIA 1,2.5,Over,Under,Over,
+BOLIVIA CUP,2.5,Over,Under,Over,
+BOSNIA 1,2.5,Under,Under,Under,Under
+BOSNIA 2,2.5,Under,Under,Over,
+BRAZIL 1,2.5,Under,Under,Over,
+BRAZIL 2,2.5,Over,Under,Under,
+BRAZIL 3,2.5,Under,Under,Under,Under
+BRAZIL 4,2.5,Under,Over,Under,
+BRAZIL CUP,2.5,Under,Under,Under,Under
+BULGARIA 1,2.5,Over,Under,Under,
+BULGARIA 2,2.5,Over,Over,Over,Over
+CHILE 1,2.5,Under,Under,Over,
+CHILE 2,2.5,Over,Under,Over,
+CHILE CUP,2.5,Over,Over,Under,
+CHINA 1,2.5,Over,Under,Over,
+CHINA 2,2.5,Under,Under,Over,
+COLOMBIA 1,2.5,Under,Over,Over,
+COLOMBIA 2,2.5,Under,Under,Over,
+COPA LIBERTADORES,2.5,Under,Under,Under,Under
+COPA SUDAMERICANA,2.5,Under,Under,Under,Under
+CROATIA 1,2.5,Over,Under,Under,
+CROATIA 2,2.5,Under,Over,Over,
+CYPRUS 1,2.5,Over,Over,Over,Over
+CYPRUS 2,2.5,Under,Under,Over,
+CZECH 1,2.5,Over,Under,Under,
+CZECH 2,2.5,Under,Over,Under,
+DENMARK 1,2.5,Over,Over,Over,Over
+DENMARK 2,2.5,Under,Over,Over,
+ECUADOR 1,2.5,Under,Under,Over,
+ECUADOR 2,2.5,Under,Over,Under,
+ECUADOR CUP,2.5,Under,Under,Over,
+EGYPT 1,2.5,Over,Over,Under,
+EGYPT 2,2.5,Under,Under,Over,
+ENGLAND 1,2.5,Over,Under,Under,
+ENGLAND 2,2.5,Under,Over,Over,
+ENGLAND 3,2.5,Over,Under,Under,
+ENGLAND 4,2.5,Over,Over,Over,Over
+ENGLAND 5,2.5,Over,Over,Under,
+ENGLAND CUP,2.5,Over,Under,Under,
+ESTONIA 1,2.5,Under,Over,Over,
+ESTONIA 2,2.5,Under,Over,Over,
+EUROPA CHAMPIONS LEAGUE,2.5,Over,Over,Over,Over
+EUROPA CONFERENCE LEAGUE,2.5,Over,Under,Under,
+EUROPA LEAGUE,2.5,Over,Under,Over,
+FINLAND 1,2.5,Under,Under,Over,
+FINLAND 2,2.5,Under,Under,Over,
+FRANCE 1,2.5,Over,Over,Over,Over
+FRANCE 2,2.5,Under,Over,Under,
+FRANCE 3,2.5,Over,Under,Over,
+FRANCE 4,2.5,Over,Under,Over,
+FRANCE CUP,2.5,Over,Over,Over,Over
+GERMANY 1,2.5,Under,Under,Over,
+GERMANY 2,2.5,Under,Over,Under,
+GERMANY 3,2.5,Under,Over,Over,
+GERMANY CUP,2.5,Over,Under,Over,
+GREECE 1,2.5,Over,Under,Over,
+GREECE 2,2.5,Over,Under,Over,
+ICELAND 1,2.5,Under,Over,Over,
+ICELAND 2,2.5,Over,Under,Over,
+IRELAND 1,2.5,Over,Under,Under,
+IRELAND 2,2.5,Over,Under,Over,
+ISRAEL 1,2.5,Over,Over,Over,Over
+ISRAEL 2,2.5,Under,Under,Over,
+ITALY 1,2.5,Under,Under,Under,Under
+ITALY 2,2.5,Under,Over,Under,
+ITALY 3,2.5,Over,Under,Over,
+ITALY 4,2.5,Over,Over,Under,
+ITALY CUP,2.5,Under,Over,Over,
+JAPAN 1,2.5,Over,Under,Under,
+JAPAN 2,2.5,Over,Over,Over,Over
+JAPAN 3,2.5,Under,Over,Over,
+MEXICO 1,2.5,Over,Under,Under,
+MEXICO 2,2.5,Under,Under,Under,Under
+NETHERLANDS 1,2.5,Over,Over,Under,
+NETHERLANDS 2,2.5,Over,Over,Over,Over
+NETHERLANDS CUP,2.5,Under,Over,Over,
+NORTHERN IRELAND 1,2.5,Over,Under,Over,
+NORTHERN IRELAND 2,2.5,Over,Under,Under,
+NORWAY 1,2.5,Over,Over,Under,
+NORWAY 2,2.5,Over,Under,Over,
+PARAGUAY 1,2.5,Under,Over,Over,
+PARAGUAY 2,2.5,Over,Over,Under,
+PERU 1,2.5,Under,Over,Over,
+PERU 2,2.5,Over,Over,Under,
+POLAND 1,2.5,Under,Under,Under,Under
+POLAND 2,2.5,Over,Over,Under,
+PORTUGAL 1,2.5,Over,Under,Under,
+PORTUGAL 2,2.5,Over,Under,Under,
+PORTUGAL 3,2.5,Over,Under,Over,
+PORTUGAL CUP,2.5,Over,Over,Over,Over
+ROMANIA 1,2.5,Over,Under,Under,
+ROMANIA 2,2.5,Under,Over,Under,
+SAUDI ARABIA 1,2.5,Under,Under,Under,Under
+SAUDI ARABIA 2,2.5,Over,Under,Over,
+SCOTLAND 1,2.5,Under,Over,Under,
+SCOTLAND 2,2.5,Under,Over,Under,
+SCOTLAND 3,2.5,Under,Under,Over,
+SCOTLAND 4,2.5,Over,Over,Under,
+SCOTLAND CUP,2.5,Over,Under,Over,
+SERBIA 1,2.5,Under,Over,Under,
+SERBIA 2,2.5,Over,Under,Under,
+SLOVAKIA 1,2.5,Under,Under,Under,Under
+SLOVAKIA 2,2.5,Under,Over,Under,
+SLOVENIA 1,2.5,Under,Over,Under,
+SLOVENIA 2,2.5,Over,Over,Under,
+SOUTH AFRICA 1,2.5,Under,Under,Under,Under
+SOUTH AFRICA 2,2.5,Over,Over,Over,Over
+SOUTH KOREA 1,2.5,Over,Under,Under,
+SOUTH KOREA 2,2.5,Over,Over,Under,
+SPAIN 1,2.5,Over,Over,Over,Over
+SPAIN 2,2.5,Under,Under,Over,
+SPAIN 3,2.5,Under,Over,Over,
+SPAIN 4,2.5,Under,Over,Under,
+SPAIN CUP,2.5,Under,Under,Over,
+SWEDEN 1,2.5,Under,Under,Over,
+SWEDEN 2,2.5,Over,Under,Under,
+SWITZERLAND 1,2.5,Under,Under,Under,Under
+SWITZERLAND 2,2.5,Under,Over,Over,
+TURKEY 1,2.5,Under,Over,Over,
+TURKEY 2,2.5,Over,Under,Over,
+TURKEY CUP,2.5,Over,Under,Under,
+UKRAINE 1,2.5,Over,Over,Over,Over
+UKRAINE 2,2.5,Over,Under,Under,
+URUGUAY 1,2.5,Over,Under,Under,
+URUGUAY 2,2.5,Over,Under,Over,
+USA 1,2.5,Over,Under,Under,
+USA 2,2.5,Over,Under,Over,
+VENEZUELA 1,2.5,Over,Over,Under,
+VENEZUELA 2,2.5,Under,Under,Under,Under
+WALES 1,2.5,Over,Under,Under,
+WALES CUP,2.5,Over,Over,Under,
+WOM BRAZIL 1,2.5,Under,Under,Over,
+WOM ENGLAND 1,2.5,Under,Under,Over,
+WOM FRANCE 1,2.5,Under,Over,Under,
+WOM GERMANY 1,2.5,Over,Over,Over,Over
+WOM ITALY 1,2.5,Over,Over,Under,
+WOM SPAIN 1,2.5,Over,Under,Under,
+WOM USA 1,2.5,Under,Over,Under,
+WORLD AMERICA CUP,2.5,Under,Under,Over,
+WORLD EUROCUP,2.5,Over,Over,Over,Over
+WORLD UEFA NATIONS LEAGUE,2.5,Over,Under,Over,
+WORLD WORLD CUP,2.5,Over,Over,Over,Over
+ARGENTINA 1,3.5,Under,Over,Under,
+ARGENTINA 2,3.5,Over,Under,Under,
+ARGENTINA 3,3.5,Under,Under,Over,
+ARGENTINA CUP,3.5,Under,Under,Over,
+AUSTRALIA 1,3.5,Under,Over,Under,
+AUSTRIA 1,3.5,Over,Over,Over,Over
+AUSTRIA 2,3.5,Under,Under,Under,Under
+BELGIUM 1,3.5,Under,Under,Under,Under
+BELGIUM 2,3.5,Over,Under,Under,
+BOLIVIA 1,3.5,Under,Over,Over,
+BOLIVIA CUP,3.5,Over,Under,Over,
+BOSNIA 1,3.5,Over,Under,Over,
+BOSNIA 2,3.5,Under,Under,Over,
+BRAZIL 1,3.5,Under,Under,Under,Under
+BRAZIL 2,3.5,Under,Under,Under,Under
+BRAZIL 3,3.5,Under,Over,Over,
+BRAZIL 4,3.5,Over,Under,Under,
+BRAZIL CUP,3.5,Under,Over,Under,
+BULGARIA 1,3.5,Over,Under,Under,
+BULGARIA 2,3.5,Under,Over,Under,
+CHILE 1,3.5,Under,Over,Over,
+CHILE 2,3.5,Under,Under,Over,
+CHILE CUP,3.5,Under,Over,Over,
+CHINA 1,3.5,Over,Over,Over,Over
+CHINA 2,3.5,Over,Under,Under,
+COLOMBIA 1,3.5,Under,Under,Over,
+COLOMBIA 2,3.5,Under,Under,Over,
+COPA LIBERTADORES,3.5,Over,Under,Under,
+COPA SUDAMERICANA,3.5,Over,Under,Under,
+CROATIA 1,3.5,Over,Over,Under,
+CROATIA 2,3.5,Under,Over,Under,
+CYPRUS 1,3.5,Under,Under,Over,
+CYPRUS 2,3.5,Under,Under,Under,Under
+CZECH 1,3.5,Over,Under,Over,
+CZECH 2,3.5,Under,Over,Under,
+DENMARK 1,3.5,Over,Under,Under,
+DENMARK 2,3.5,Over,Over,Under,
+ECUADOR 1,3.5,Under,Under,Under,Under
+ECUADOR 2,3.5,Under,Under,Over,
+ECUADOR CUP,3.5,Over,Under,Over,
+EGYPT 1,3.5,Over,Under,Over,
+EGYPT 2,3.5,Over,Over,Under,
+ENGLAND 1,3.5,Over,Under,Under,
+ENGLAND 2,3.5,Under,Under,Over,
+ENGLAND 3,3.5,Over,Under,Over,
+ENGLAND 4,3.5,Under,Over,Over,
+ENGLAND 5,3.5,Over,Over,Under,
+ENGLAND CUP,3.5,Under,Over,Under,
+ESTONIA 1,3.5,Under,Under,Over,
+ESTONIA 2,3.5,Under,Over,Under,
+EUROPA CHAMPIONS LEAGUE,3.5,Over,Over,Under,
+EUROPA CONFERENCE LEAGUE,3.5,Under,Under,Over,
+EUROPA LEAGUE,3.5,Over,Under,Over,
+FINLAND 1,3.5,Over,Over,Under,
+FINLAND 2,3.5,Over,Under,Over,
+FRANCE 1,3.5,Under,Over,Over,
+FRANCE 2,3.5,Under,Under,Under,Under
+FRANCE 3,3.5,Over,Over,Over,Over
+FRANCE 4,3.5,Over,Under,Over,
+FRANCE CUP,3.5,Under,Over,Under,
+GERMANY 1,3.5,Under,Under,Under,Under
+GERMANY 2,3.5,Over,Over,Over,Over
+GERMANY 3,3.5,Over,Under,Over,
+GERMANY CUP,3.5,Under,Under,Over,
+GREECE 1,3.5,Over,Under,Over,
+GREECE 2,3.5,Over,Under,Under,
+ICELAND 1,3.5,Under,Over,Under,
+ICELAND 2,3.5,Over,Under,Under,
+IRELAND 1,3.5,Over,Under,Under,
+IRELAND 2,3.5,Under,Under,Over,
+ISRAEL 1,3.5,Over,Over,Over,Over
+ISRAEL 2,3.5,Over,Over,Over,Over
+ITALY 1,3.5,Under,Over,Under,
+ITALY 2,3.5,Over,Under,Under,
+ITALY 3,3.5,Over,Under,Under,
+ITALY 4,3.5,Over,Under,Over,
+ITALY CUP,3.5,Under,Over,Under,
+JAPAN 1,3.5,Under,Over,Under,
+JAPAN 2,3.5,Over,Over,Under,
+JAPAN 3,3.5,Over,Under,Over,
+MEXICO 1,3.5,Over,Under,Under,
+MEXICO 2,3.5,Over,Under,Over,
+NETHERLANDS 1,3.5,Over,Under,Under,
+NETHERLANDS 2,3.5,Under,Over,Under,
+NETHERLANDS CUP,3.5,Under,Under,Under,Under
+NORTHERN IRELAND 1,3.5,Under,Over,Under,
+NORTHERN IRELAND 2,3.5,Over,Under,Over,
+NORWAY 1,3.5,Under,Under,Over,
+NORWAY 2,3.5,Under,Under,Under,Under
+PARAGUAY 1,3.5,Under,Over,Over,
+PARAGUAY 2,3.5,Under,Over,Over,
+PERU 1,3.5,Over,Under,Under,
+PERU 2,3.5,Over,Over,Under,
+POLAND 1,3.5,Under,Under,Under,Under
+POLAND 2,3.5,Under,Over,Over,
+PORTUGAL 1,3.5,Under,Under,Under,Under
+PORTUGAL 2,3.5,Under,Under,Under,Under
+PORTUGAL 3,3.5,Under,Under,Under,Under
+PORTUGAL CUP,3.5,Over,Under,Under,
+ROMANIA 1,3.5,Over,Over,Over,Over
+ROMANIA 2,3.5,Over,Under,Under,
+SAUDI ARABIA 1,3.5,Under,Over,Over,
+SAUDI ARABIA 2,3.5,Under,Under,Under,Under
+SCOTLAND 1,3.5,Under,Under,Under,Under
+SCOTLAND 2,3.5,Under,Over,Under,
+SCOTLAND 3,3.5,Over,Over,Over,Over
+SCOTLAND 4,3.5,Over,Under,Over,
+SCOTLAND CUP,3.5,Over,Over,Under,
+SERBIA 1,3.5,Under,Under,Under,Under
+SERBIA 2,3.5,Under,Over,Under,
+SLOVAKIA 1,3.5,Over,Over,Under,
+SLOVAKIA 2,3.5,Under,Under,Over,
+SLOVENIA 1,3.5,Under,Under,Under,Under
+SLOVENIA 2,3.5,Under,Under,Under,Under
+SOUTH AFRICA 1,3.5,Under,Under,Under,Under
+SOUTH AFRICA 2,3.5,Under,Over,Under,
+SOUTH KOREA 1,3.5,Over,Under,Under,
+SOUTH KOREA 2,3.5,Under,Over,Under,
+SPAIN 1,3.5,Over,Under,Over,
+SPAIN 2,3.5,Under,Under,Over,
+SPAIN 3,3.5,Under,Over,Over,
+SPAIN 4,3.5,Under,Over,Under,
+SPAIN CUP,3.5,Over,Under,Under,
+SWEDEN 1,3.5,Under,Under,Under,Under
+SWEDEN 2,3.5,Over,Over,Over,Over
+SWITZERLAND 1,3.5,Under,Under,Under,Under
+SWITZERLAND 2,3.5,Over,Under,Under,
+TURKEY 1,3.5,Over,Under,Under,
+TURKEY 2,3.5,Under,Under,Under,Under
+TURKEY CUP,3.5,Under,Under,Over,
+UKRAINE 1,3.5,Under,Over,Over,
+UKRAINE 2,3.5,Over,Under,Over,
+URUGUAY 1,3.5,Under,Over,Under,
+URUGUAY 2,3.5,Under,Over,Under,
+USA 1,3.5,Under,Over,Under,
+USA 2,3.5,Under,Under,Under,Under
+VENEZUELA 1,3.5,Under,Over,Over,
+VENEZUELA 2,3.5,Under,Over,Under,
+WALES 1,3.5,Under,Over,Over,
+WALES CUP,3.5,Under,Under,Under,Under
+WOM BRAZIL 1,3.5,Under,Under,Under,Under
+WOM ENGLAND 1,3.5,Under,Over,Under,
+WOM FRANCE 1,3.5,Over,Over,Under,
+WOM GERMANY 1,3.5,Over,Under,Under,
+WOM ITALY 1,3.5,Under,Under,Under,Under
+WOM SPAIN 1,3.5,Under,Under,Under,Under
+WOM USA 1,3.5,Over,Over,Over,Over
+WORLD AMERICA CUP,3.5,Under,Over,Under,
+WORLD EUROCUP,3.5,Under,Under,Under,Under
+WORLD UEFA NATIONS LEAGUE,3.5,Under,Under,Under,Under
+WORLD WORLD CUP,3.5,Over,Over,Under,
+ARGENTINA 1,4.5,Under,Over,Under,
+ARGENTINA 2,4.5,Under,Under,Under,Under
+ARGENTINA 3,4.5,Under,Under,Under,Under
+ARGENTINA CUP,4.5,Under,Under,Under,Under
+AUSTRALIA 1,4.5,Under,Under,Over,
+AUSTRIA 1,4.5,Over,Over,Under,
+AUSTRIA 2,4.5,Under,Under,Under,Under
+BELGIUM 1,4.5,Under,Over,Over,
+BELGIUM 2,4.5,Under,Over,Under,
+BOLIVIA 1,4.5,Under,Over,Under,
+BOLIVIA CUP,4.5,Under,Over,Under,
+BOSNIA 1,4.5,Under,Under,Under,Under
+BOSNIA 2,4.5,Under,Over,Under,
+BRAZIL 1,4.5,Under,Over,Under,
+BRAZIL 2,4.5,Under,Under,Under,Under
+BRAZIL 3,4.5,Under,Under,Under,Under
+BRAZIL 4,4.5,Under,Under,Under,Under
+BRAZIL CUP,4.5,Under,Under,Under,Under
+BULGARIA 1,4.5,Under,Under,Under,Under
+BULGARIA 2,4.5,Over,Over,Under,
+CHILE 1,4.5,Under,Under,Under,Under
+CHILE 2,4.5,Under,Under,Under,Under
+CHILE CUP,4.5,Under,Under,Under,Under
+CHINA 1,4.5,Over,Under,Under,
+CHINA 2,4.5,Over,Under,Under,
+COLOMBIA 1,4.5,Under,Under,Under,Under
+COLOMBIA 2,4.5,Under,Under,Under,Under
+COPA LIBERTADORES,4.5,Over,Under,Over,
+COPA SUDAMERICANA,4.5,Over,Under,Under,
+CROATIA 1,4.5,Under,Under,Over,
+CROATIA 2,4.5,Over,Under,Under,
+CYPRUS 1,4.5,Under,Under,Under,Under
+CYPRUS 2,4.5,Under,Under,Under,Under
+CZECH 1,4.5,Under,Under,Under,Under
+CZECH 2,4.5,Under,Under,Under,Under
+DENMARK 1,4.5,Under,Under,Under,Under
+DENMARK 2,4.5,Under,Under,Under,Under
+ECUADOR 1,4.5,Under,Under,Under,Under
+ECUADOR 2,4.5,Under,Under,Under,Under
+ECUADOR CUP,4.5,Under,Over,Under,
+EGYPT 1,4.5,Under,Under,Under,Under
+EGYPT 2,4.5,Over,Under,Under,
+ENGLAND 1,4.5,Over,Under,Under,
+ENGLAND 2,4.5,Under,Under,Under,Under
+ENGLAND 3,4.5,Over,Under,Under,
+ENGLAND 4,4.5,Under,Over,Over,
+ENGLAND 5,4.5,Under,Over,Under,
+ENGLAND CUP,4.5,Under,Under,Under,Under
+ESTONIA 1,4.5,Over,Over,Under,
+ESTONIA 2,4.5,Over,Under,Under,
+EUROPA CHAMPIONS LEAGUE,4.5,Under,Under,Under,Under
+EUROPA CONFERENCE LEAGUE,4.5,Under,Over,Under,
+EUROPA LEAGUE,4.5,Under,Under,Under,Under
+FINLAND 1,4.5,Under,Under,Over,
+FINLAND 2,4.5,Over,Under,Under,
+FRANCE 1,4.5,Over,Over,Under,
+FRANCE 2,4.5,Under,Over,Under,
+FRANCE 3,4.5,Under,Over,Under,
+FRANCE 4,4.5,Over,Under,Over,
+FRANCE CUP,4.5,Under,Under,Under,Under
+GERMANY 1,4.5,Under,Under,Under,Under
+GERMANY 2,4.5,Over,Under,Under,
+GERMANY 3,4.5,Under,Under,Under,Under
+GERMANY CUP,4.5,Under,Over,Under,
+GREECE 1,4.5,Over,Under,Under,
+GREECE 2,4.5,Under,Under,Under,Under
+ICELAND 1,4.5,Over,Over,Over,Over
+ICELAND 2,4.5,Under,Over,Over,
+IRELAND 1,4.5,Under,Over,Under,
+IRELAND 2,4.5,Under,Under,Under,Under
+ISRAEL 1,4.5,Over,Under,Over,
+ISRAEL 2,4.5,Under,Under,Under,Under
+ITALY 1,4.5,Over,Over,Over,Over
+ITALY 2,4.5,Under,Under,Under,Under
+ITALY 3,4.5,Under,Under,Over,
+ITALY 4,4.5,Under,Under,Under,Under
+ITALY CUP,4.5,Under,Under,Under,Under
+JAPAN 1,4.5,Under,Under,Over,
+JAPAN 2,4.5,Under,Under,Under,Under
+JAPAN 3,4.5,Over,Under,Over,
+MEXICO 1,4.5,Under,Under,Under,Under
+MEXICO 2,4.5,Over,Under,Under,
+NETHERLANDS 1,4.5,Under,Under,Under,Under
+NETHERLANDS 2,4.5,Under,Under,Under,Under
+NETHERLANDS CUP,4.5,Over,Under,Under,
+NORTHERN IRELAND 1,4.5,Over,Over,Under,
+NORTHERN IRELAND 2,4.5,Under,Over,Under,
+NORWAY 1,4.5,Over,Under,Over,
+NORWAY 2,4.5,Over,Under,Under,
+PARAGUAY 1,4.5,Under,Under,Under,Under
+PARAGUAY 2,4.5,Under,Over,Under,
+PERU 1,4.5,Over,Under,Under,
+PERU 2,4.5,Under,Under,Under,Under
+POLAND 1,4.5,Under,Under,Over,
+POLAND 2,4.5,Under,Under,Over,
+PORTUGAL 1,4.5,Under,Under,Under,Under
+PORTUGAL 2,4.5,Under,Under,Under,Under
+PORTUGAL 3,4.5,Under,Over,Over,
+PORTUGAL CUP,4.5,Over,Under,Under,
+ROMANIA 1,4.5,Under,Under,Under,Under
+ROMANIA 2,4.5,Under,Under,Under,Under
+SAUDI ARABIA 1,4.5,Over,Over,Under,
+SAUDI ARABIA 2,4.5,Under,Over,Under,
+SCOTLAND 1,4.5,Under,Under,Over,
+SCOTLAND 2,4.5,Under,Under,Under,Under
+SCOTLAND 3,4.5,Under,Under,Over,
+SCOTLAND 4,4.5,Under,Over,Under,
+SCOTLAND CUP,4.5,Under,Over,Over,
+SERBIA 1,4.5,Under,Under,Under,Under
+SERBIA 2,4.5,Under,Under,Over,
+SLOVAKIA 1,4.5,Under,Under,Under,Under
+SLOVAKIA 2,4.5,Over,Under,Under,
+SLOVENIA 1,4.5,Under,Over,Under,
+SLOVENIA 2,4.5,Under,Over,Under,
+SOUTH AFRICA 1,4.5,Under,Under,Under,Under
+SOUTH AFRICA 2,4.5,Under,Under,Over,
+SOUTH KOREA 1,4.5,Over,Over,Under,
+SOUTH KOREA 2,4.5,Under,Over,Under,
+SPAIN 1,4.5,Over,Over,Under,
+SPAIN 2,4.5,Over,Over,Under,
+SPAIN 3,4.5,Under,Over,Under,
+SPAIN 4,4.5,Under,Under,Under,Under
+SPAIN CUP,4.5,Under,Under,Over,
+SWEDEN 1,4.5,Under,Under,Under,Under
+SWEDEN 2,4.5,Under,Over,Under,
+SWITZERLAND 1,4.5,Under,Under,Under,Under
+SWITZERLAND 2,4.5,Under,Over,Under,
+TURKEY 1,4.5,Under,Under,Under,Under
+TURKEY 2,4.5,Over,Over,Under,
+TURKEY CUP,4.5,Under,Under,Under,Under
+UKRAINE 1,4.5,Under,Under,Under,Under
+UKRAINE 2,4.5,Under,Over,Under,
+URUGUAY 1,4.5,Under,Under,Under,Under
+URUGUAY 2,4.5,Under,Under,Under,Under
+USA 1,4.5,Over,Under,Under,
+USA 2,4.5,Under,Under,Under,Under
+VENEZUELA 1,4.5,Under,Under,Under,Under
+VENEZUELA 2,4.5,Under,Over,Under,
+WALES 1,4.5,Under,Under,Under,Under
+WALES CUP,4.5,Over,Under,Under,
+WOM BRAZIL 1,4.5,Under,Over,Under,
+WOM ENGLAND 1,4.5,Under,Over,Over,
+WOM FRANCE 1,4.5,Under,Over,Under,
+WOM GERMANY 1,4.5,Over,Under,Under,
+WOM ITALY 1,4.5,Over,Over,Under,
+WOM SPAIN 1,4.5,Under,Over,Under,
+WOM USA 1,4.5,Under,Over,Over,
+WORLD AMERICA CUP,4.5,Under,Under,Under,Under
+WORLD EUROCUP,4.5,Under,Under,Under,Under
+WORLD UEFA NATIONS LEAGUE,4.5,Under,Under,Under,Under
+WORLD WORLD CUP,4.5,Over,Over,Over,Over
