@@ -177,13 +177,33 @@ def check_entry_conditions(
     return True, "APROVADO_SALDO_MENOR"
 
 
-def evaluate_game(game_payload: Dict[str, Any], check_betmines: bool = False) -> Dict[str, Any]:
-    """Avalia uma partida e anexa as métricas do Método Saldo Menor."""
+def evaluate_game(game_payload: Dict[str, Any], check_betmines: bool = False, min_confidence: float = 0.94) -> Dict[str, Any]:
+    """Avalia uma partida e anexa as métricas do Método Saldo Menor, incluindo filtro de confiança quant >= 94%."""
     norm_game = normalize_live_data(game_payload)
     zebra_info = identify_zebra_and_handicap(norm_game)
 
     norm_game.update(zebra_info)
     is_approved, reason = check_entry_conditions(norm_game, check_betmines=check_betmines)
+
+    # Predição de Confiança pelo Modelo Mestre Quantitativo se disponível
+    try:
+        import joblib
+        import master_feature_engineer
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'modelo_saldo_menor_quant.pkl')
+        if os.path.exists(model_path):
+            model_sm = joblib.load(model_path)
+            df_temp = pd.DataFrame([norm_game])
+            feats = master_feature_engineer.build_master_features(df_temp)
+            if hasattr(model_sm, "feature_names_in_"):
+                feats = feats.reindex(columns=model_sm.feature_names_in_, fill_value=0.0)
+            prob_val = float(model_sm.predict_proba(feats)[:, 1][0])
+            norm_game['Prob_Master'] = prob_val
+            
+            if is_approved and min_confidence > 0 and prob_val < min_confidence:
+                is_approved = False
+                reason = f"CONFIANCA_BAIXA_{prob_val*100:.1f}%_MENOR_QUE_{min_confidence*100:.0f}%"
+    except Exception:
+        pass
 
     norm_game['Metodo'] = 'METODO_SALDO_MENOR'
     norm_game['Decision'] = 'APOSTA' if is_approved else 'SKIP'
@@ -192,10 +212,11 @@ def evaluate_game(game_payload: Dict[str, Any], check_betmines: bool = False) ->
     return norm_game
 
 
-def predict_and_evaluate_live(live_games_payload: List[Dict[str, Any]], check_betmines: bool = False) -> List[Dict[str, Any]]:
-    """Processa uma lista de partidas pré-jogo da API diária."""
+def predict_and_evaluate_live(live_games_payload: List[Dict[str, Any]], check_betmines: bool = False, min_confidence: float = 0.94) -> List[Dict[str, Any]]:
+    """Processa uma lista de partidas pré-jogo da API diária com filtro de confiança >= 94%."""
     results = []
     for game in live_games_payload:
-        evaluated = evaluate_game(game, check_betmines=check_betmines)
+        evaluated = evaluate_game(game, check_betmines=check_betmines, min_confidence=min_confidence)
         results.append(evaluated)
     return results
+

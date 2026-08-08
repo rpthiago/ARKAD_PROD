@@ -92,6 +92,21 @@ def run_saldo_menor_backtest(df: pd.DataFrame, stake_fixa: float = 100.0) -> Tup
         cond_d_flexible = df['Total_xG'] <= 2.0
         df_approved = df[cond_a & cond_b & cond_c & cond_d_flexible].copy()
 
+    # Filtro de Confiança Quantitativa >= 94% (0.94)
+    try:
+        import joblib
+        import master_feature_engineer
+        model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'modelo_saldo_menor_quant.pkl')
+        if os.path.exists(model_path):
+            model_sm = joblib.load(model_path)
+            feats_sm = master_feature_engineer.build_master_features(df_approved)
+            if hasattr(model_sm, "feature_names_in_"):
+                feats_sm = feats_sm.reindex(columns=model_sm.feature_names_in_, fill_value=0.0)
+            df_approved['Prob_Master'] = model_sm.predict_proba(feats_sm)[:, 1]
+            df_approved = df_approved[df_approved['Prob_Master'] >= 0.94].copy()
+    except Exception as ex:
+        print(f"[!] Aviso: Nao foi possivel aplicar filtro Prob_Master >= 0.94: {ex}")
+
     # Cálculo do Resultado Real dos jogos
     gols_h = pd.to_numeric(df_approved.get('Goals_H_FT'), errors='coerce').fillna(0)
     gols_a = pd.to_numeric(df_approved.get('Goals_A_FT'), errors='coerce').fillna(0)
