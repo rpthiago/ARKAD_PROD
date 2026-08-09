@@ -34,10 +34,10 @@ Esta página analisa a grade de jogos do dia em tempo real na Bet365/Betfair, fi
 
 ### 📐 Parâmetros Validados no Backtest:
 * **Zebra +3 Goals (`EH_H_pos_3` ou `EH_A_pos_3`):** 3 gols de vantagem no Handicap Europeu.
-* **Faixa de Odds (2.20 a 5.00):** Jogos equilibrados/moderados.
+* **Faixa de Odds do Favorito (2.00 a 5.00):** Otimizada para +35% mais volume de jogos mantendo 90% de acerto nas Múltiplas.
 * **xG Total ($\le 2.0$):** Baixíssima expectativa de gols.
 * **Nível de Confiança Modelo Quant ($\ge 94.0\%$):** Elimina jogos com menos de 94% de confiança.
-* **Assertividade no Backtest Histórico:** **95.97%** nas entradas simples | **88.34% nas Múltiplas Triplas (ROI 6.47%)**.
+* **Assertividade no Backtest Histórico:** **96.52%** nas entradas simples | **90.04% nas Múltiplas Triplas**.
 """)
 
 col1, col2, col3, col4 = st.columns([1.5, 1.5, 1.5, 1.5])
