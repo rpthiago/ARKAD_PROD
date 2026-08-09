@@ -132,10 +132,10 @@ def check_entry_conditions(
     eh_odd = zebra_info['eh_zebra_plus3_odd']
     draw_odd = match_state.get('Odd_D_FT') or 0.0
 
-    # Validação A: Faixa de Odds entre 2.20 e 5.00 (Fav Odd ou Zebra Odd)
-    in_odd_range = (2.20 <= fav_odd <= 5.00) or (2.20 <= zebra_odd <= 5.00)
+    # Validação A: Faixa de Odds do Favorito estritamente entre 2.20 e 5.00 (Fav Odd >= 2.20 para alta assertividade nas Múltiplas)
+    in_odd_range = (2.20 <= fav_odd <= 5.00)
     if not in_odd_range:
-        return False, "ODD_FORA_DA_FAIXA_2.2_5.0"
+        return False, f"ODD_FAVORITO_FORA_DA_FAIXA_{fav_odd:.2f}_FORA_DE_2.2_5.0"
 
     # Validação A2: Filtro de Odd do Empate (Odd_D_FT <= max_draw_odd)
     if max_draw_odd > 0 and draw_odd > 0 and draw_odd > max_draw_odd:
