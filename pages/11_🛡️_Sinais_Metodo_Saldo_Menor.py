@@ -56,20 +56,21 @@ with col4:
 with col1:
     gerar_btn = st.button("🚀 Buscar Oportunidades & Gerar Múltiplas", type="primary")
 
-if gerar_btn:
-    date_str = target_date.strftime("%Y-%m-%d")
-    with st.spinner(f"Baixando grade de {date_str} via API Bet365 e montando Múltiplas Triplas..."):
-        try:
-            b365_df = b365_data_utils.fetch_b365_daily(date_str)
-        except Exception as e:
-            st.error("Erro ao buscar grade diária de jogos:")
-            st.code(traceback.format_exc())
-            st.stop()
+# Carregar automaticamente na abertura da página ou ao clicar no botão
+date_str = target_date.strftime("%Y-%m-%d")
+with st.spinner(f"Baixando grade de {date_str} via API Bet365 e montando Múltiplas Triplas..."):
+    try:
+        b365_df = b365_data_utils.fetch_b365_daily(date_str)
+    except Exception as e:
+        st.error("Erro ao buscar grade diária de jogos:")
+        st.code(traceback.format_exc())
+        st.stop()
 
-        if b365_df.empty:
-            st.warning(f"Nenhum jogo encontrado para a data {date_str} na API Bet365.")
-        else:
-            payloads = b365_df.to_dict('records')
+    if b365_df.empty:
+        st.warning(f"Nenhum jogo encontrado para a data {date_str} na API Bet365. Verifique a conexão com a API.")
+    else:
+        payloads = b365_df.to_dict('records')
+
             
             max_draw_odd_param = 3.42 if usar_filtro_empate else 99.0
             

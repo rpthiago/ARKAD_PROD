@@ -36,20 +36,21 @@ with col3:
     st.write("")
     gerar_btn = st.button("🚀 Buscar Jogos & Gerar Múltiplas Over 0.5", type="primary", use_container_width=True)
 
-if gerar_btn:
-    date_str = target_date.strftime("%Y-%m-%d")
-    with st.spinner(f"Baixando grade de {date_str} via API Bet365 e gerando Múltiplas Over 0.5 FT..."):
-        try:
-            b365_df = b365_data_utils.fetch_b365_daily(date_str)
-        except Exception as e:
-            st.error("Erro ao buscar grade diária de jogos:")
-            st.code(traceback.format_exc())
-            st.stop()
+# Carregar automaticamente na abertura da página
+date_str = target_date.strftime("%Y-%m-%d")
+with st.spinner(f"Baixando grade de {date_str} via API Bet365 e gerando Múltiplas Over 0.5 FT..."):
+    try:
+        b365_df = b365_data_utils.fetch_b365_daily(date_str)
+    except Exception as e:
+        st.error("Erro ao buscar grade diária de jogos:")
+        st.code(traceback.format_exc())
+        st.stop()
 
-        if b365_df.empty:
-            st.warning(f"Nenhum jogo encontrado para a data {date_str} na API Bet365.")
-        else:
-            payloads = b365_df.to_dict('records')
+    if b365_df.empty:
+        st.warning(f"Nenhum jogo encontrado para a data {date_str} na API Bet365.")
+    else:
+        payloads = b365_df.to_dict('records')
+
             evaluated = metodo_over05_strategy.predict_and_evaluate_over05_live(payloads)
             df_eval = pd.DataFrame(evaluated)
             
