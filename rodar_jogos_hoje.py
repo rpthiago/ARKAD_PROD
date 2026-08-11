@@ -22,14 +22,14 @@ def fetch_today_games(target_date_str=None):
     if not target_date_str:
         target_date_str = datetime.now().strftime("%Y-%m-%d")
         
-    print(f"[BUSCA] Buscando jogos para a data: {target_date_str}...", flush=True)
+    print(f"[BUSCA] Buscando jogos estritamente para a data: {target_date_str}...", flush=True)
     
     # 1. Tentar carregar da API FutPythonTrader se token estiver presente
     try:
         from futpythontrader_client import get_jogos_do_dia
         df_api = get_jogos_do_dia(source="betfair", date_str=target_date_str)
         if df_api is not None and not df_api.empty:
-            print(f"[API] {len(df_api)} jogos baixados da API Betfair em tempo real!", flush=True)
+            print(f"[API] {len(df_api)} jogos baixados da API Betfair em tempo real para {target_date_str}!", flush=True)
             return df_api, target_date_str
     except Exception as e:
         print(f"[INFO] API em tempo real nao disponivel ({e}). Buscando bases locais...", flush=True)
@@ -42,7 +42,7 @@ def fetch_today_games(target_date_str=None):
         print(f"[XLSX] {len(df_xlsx)} jogos carregados da planilha local {xlsx_path.name}!", flush=True)
         return df_xlsx, target_date_str
 
-    # 3. Fallback para base FRESH local
+    # 3. Fallback para base FRESH local FILTRADA APENAS PELA DATA EXATA
     fresh_path = ROOT / "Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv"
     if not fresh_path.exists():
         fresh_path = ROOT / "scratch" / "dataset_leak_free_features.parquet"
@@ -58,20 +58,17 @@ def fetch_today_games(target_date_str=None):
         sub = df_fresh[df_fresh['Date'].dt.date == tgt_dt].copy()
         
         if not sub.empty:
-            print(f"[BASE LOCAL] {len(sub)} jogos filtrados da base local para {target_date_str}!", flush=True)
+            print(f"[BASE LOCAL] {len(sub)} jogos filtrados da base local para a data {target_date_str}!", flush=True)
             return sub, target_date_str
-        else:
-            print(f"[INFO] Nenhum jogo na data exata {target_date_str}. Carregando jogos recentes...", flush=True)
-            recent = df_fresh[df_fresh['Date'] >= '2026-08-01'].copy()
-            return recent, "2026-08-11"
 
-    print("[ERRO] Nenhuma base de dados encontrada.", flush=True)
+    print(f"[INFO] Nenhum jogo encontrado na base de dados para a data {target_date_str}.", flush=True)
     return pd.DataFrame(), target_date_str
 
 def process_today_signals(df_games, date_str):
+    if df_games.empty:
+        return pd.DataFrame()
+        
     signals = []
-    
-    # Determina se os jogos pertencem ao dia de hoje ou futuro (devem iniciar como Pendente)
     today_str = datetime.now().strftime("%Y-%m-%d")
     is_today_or_future = (date_str >= today_str)
     
@@ -161,7 +158,7 @@ def main():
 
     df_games, date_str = fetch_today_games(args.data)
     if df_games.empty:
-        print("[AVISO] Nenhum jogo encontrado para processar.", flush=True)
+        print(f"[INFO] Nenhum jogo encontrado para a data {date_str}.", flush=True)
         return
 
     df_today = process_today_signals(df_games, date_str)
@@ -170,19 +167,19 @@ def main():
     print(f" PALPITES DE PAPER TRADING — JOGOS DE {date_str}", flush=True)
     print("=======================================================", flush=True)
     if df_today.empty:
-        print("Nenhum palpite gerado que atenda aos criterios de odds e liquidez hoje.", flush=True)
+        print(f"Nenhum palpite gerado que atenda aos criterios de odds e liquidez para {date_str}.", flush=True)
     else:
         print(df_today[['liga', 'jogo', 'metodo', 'lado', 'odd_execucao', 'status', 'resultado']].to_string(), flush=True)
         
         # Atualizar planilha acumulada de Paper Trading
         if FORWARD_LOG_PATH.exists():
             df_hist = pd.read_csv(FORWARD_LOG_PATH)
+            # Remove entradas falsas/mistas da mesma data antes de concatenar
+            df_hist = df_hist[df_hist['data'] != date_str].copy()
             df_combined = pd.concat([df_hist, df_today], ignore_index=True)
-            df_combined = df_combined.drop_duplicates(subset=['data', 'jogo', 'metodo'], keep='last')
         else:
             df_combined = df_today
             
-        # Garantir preenchimento de pnl_unidades
         df_combined['pnl_unidades'] = df_combined['pnl_unidades'].fillna(df_combined['pnl_dolar'] / 100.0)
         
         df_combined.to_csv(FORWARD_LOG_PATH, index=False)
