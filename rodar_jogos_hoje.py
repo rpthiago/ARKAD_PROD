@@ -71,6 +71,10 @@ def fetch_today_games(target_date_str=None):
 def process_today_signals(df_games, date_str):
     signals = []
     
+    # Determina se os jogos pertencem ao dia de hoje ou futuro (devem iniciar como Pendente)
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    is_today_or_future = (date_str >= today_str)
+    
     for idx, row in df_games.iterrows():
         league = str(row.get('League') or row.get('Liga') or 'Geral')
         home = str(row.get('Home_Team') or row.get('Home') or row.get('Mandante') or 'Mandante')
@@ -85,10 +89,10 @@ def process_today_signals(df_games, date_str):
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
         
-        # Resultados se já finalizado
+        # Resultados se já finalizado no passado
         gh = row.get('Goals_H_FT')
         ga = row.get('Goals_A_FT')
-        is_finished = (gh is not None and ga is not None and not pd.isna(gh) and not pd.isna(ga) and gh >= 0 and ga >= 0)
+        is_finished = (not is_today_or_future) and (gh is not None and ga is not None and not pd.isna(gh) and not pd.isna(ga) and gh >= 0 and ga >= 0)
         
         is_draw = (gh == ga) if is_finished else None
         is_away_win = (ga > gh) if is_finished else None
