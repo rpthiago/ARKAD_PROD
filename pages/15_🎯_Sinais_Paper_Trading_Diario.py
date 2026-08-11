@@ -26,7 +26,7 @@ Esta página bate na **API da Betfair e Bases em tempo real**, calcula os palpit
 *   **🔄 BTTS Lay Quant:** Odd Lay Betfair entre **2.20 e 3.20**
 *   **🚀 Lay Zebra Visitante:** Odd Lay Betfair entre **3.50 e 5.00**
 
-> ⚠️ **IMPORTANTE:** Mantenha a disciplina de gestão de banca e opere estritamente dentro da responsabilidade calculada. Não faça Cash Out prematuro sem sinal de valor.
+> ⚠️ **NOTA SOBRE FONTES DE DADOS:** A base local estática possui partidas históricas salvas de **16/03/2024 até 06/08/2026**. Para datas a partir de **07/08/2026** (incluindo o dia de hoje), o sistema se conecta à **API da Betfair em tempo real** utilizando a chave `FUTPYTHON_TOKEN`.
 """)
 
 # Inicializa o estado de sessão
@@ -39,8 +39,10 @@ col1, col2 = st.columns([1, 3])
 
 with col1:
     import config
-    if not getattr(config, "API_TOKEN", None):
-        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do seu Streamlit Cloud! A coleta ao vivo usará as bases locais.")
+    token_configurado = bool(getattr(config, "API_TOKEN", None) or os.getenv("FUTPYTHON_TOKEN") or os.getenv("API_TOKEN"))
+    
+    if not token_configurado:
+        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do Streamlit Cloud! Para buscar jogos de hoje ou datas pós 06/08/2026 ao vivo na Betfair, configure a chave nos Secrets.")
     
     target_date = st.date_input("Data dos Jogos", value=date.today())
     
@@ -78,10 +80,8 @@ if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
     with st.spinner(f"Baixando grade de {date_str}, montando modelos e aplicando filtros estritos..."):
         try:
-            # Executa a varredura do script de produção rodar_jogos_hoje.py
             subprocess.run([sys.executable, "rodar_jogos_hoje.py", "--data", date_str], check=True)
             
-            # Carrega a planilha gerada
             csv_path = "paper_trading_forward_setembro_2026.csv"
             if os.path.exists(csv_path):
                 df_all = pd.read_csv(csv_path)
@@ -114,11 +114,14 @@ with col2:
         date_str = target_date.strftime("%Y-%m-%d")
         
         if not sinais_brutos:
-            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou nos filtros do Arsenal de Modelos. É normal os modelos serem seletivos — **guarde a banca**.")
+            dt_obj = pd.to_datetime(date_str).date()
+            if dt_obj > date(2026, 8, 6) and not token_configurado:
+                st.warning(f"ℹ️ A data selecionada (**{date_str}**) é posterior a 06/08/2026 (limite da base estática local). Para consultar jogos desta data ao vivo na Betfair, certifique-se de configurar o **`FUTPYTHON_TOKEN`** nos Secrets do Streamlit Cloud.")
+            else:
+                st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou nos filtros do Arsenal de Modelos. É normal os modelos serem seletivos — **guarde a banca**.")
         else:
             df = pd.DataFrame(sinais_brutos)
             
-            # Formatar tabela de saída com a calculadora de gestão de banca
             rows_final = []
             for d_idx, row in df.iterrows():
                 odd_val = pd.to_numeric(row.get("odd_execucao"), errors="coerce")
@@ -129,14 +132,13 @@ with col2:
                 mandante = parts[0] if len(parts) > 0 else "Mandante"
                 visitante = parts[1] if len(parts) > 1 else "Visitante"
                 
-                # Cálculo de Responsabilidade e Stake
                 if use_kelly and pd.notna(odd_val) and odd_val > 1.0:
                     p = 0.55 if "Lay" in metodo else 0.48
                     q = 1.0 - p
                     b_net = (1.0 / (odd_val - 1.0)) * 0.95 if lado == "lay" else (odd_val - 1.0)
                     kf = p - q / b_net
                     f_applied = 0.25 * max(0.0, kf)
-                    f_risk = min(0.025, f_applied) # Teto de 2.5% de responsabilidade
+                    f_risk = min(0.025, f_applied)
                 else:
                     f_risk = f_risk_fixed
                     
@@ -159,7 +161,7 @@ with col2:
                     "Lado": lado.upper(),
                     "Odd Betfair": odd_val,
                     "Responsabilidade (R$)": round(float(resp_max), 2),
-                    "Stake Betfair (R$)": round(float(stake_betfair), 2) if pd.notna(stake_betfair) else np.nan,
+                    "Stake Betfair (R$)": round(float(stake_betfair), 2) if pd.notna(stake_back) else np.nan,
                     "Status": row.get("status", "Pendente"),
                     "Resultado": row.get("resultado", ""),
                     "Lucro (R$)": row.get("pnl_dolar", "")
@@ -169,10 +171,8 @@ with col2:
             
             st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas em {date_str}!")
             
-            # Exibe a tabela formatada e responsiva
             st.dataframe(df_final, use_container_width=True)
             
-            # Botão de Download Excel estilo Sinais Lay 0x0
             buffer = io.BytesIO()
             with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
                 df_final.to_excel(writer, index=False, sheet_name='Sinais_Paper_Trading')
