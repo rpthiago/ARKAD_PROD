@@ -105,7 +105,8 @@ def process_today_signals(df_games, date_str):
                 'data': date_str, 'liga': league, 'jogo': match_name,
                 'metodo': 'Lay 0x0 Protegido', 'mercado': 'CS_0x0', 'lado': 'lay',
                 'odd_execucao': odd_cs00_lay, 'stake': 100.0,
-                'status': status, 'resultado': res, 'pnl_dolar': pnl * 100.0
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
         # 2. LAY DRAW ESTRUTURAL (Odd Lay <= 4.50)
@@ -117,7 +118,8 @@ def process_today_signals(df_games, date_str):
                 'data': date_str, 'liga': league, 'jogo': match_name,
                 'metodo': 'Lay Draw Estrutural', 'mercado': '1X2_D', 'lado': 'lay',
                 'odd_execucao': odd_d_lay, 'stake': 100.0,
-                'status': status, 'resultado': res, 'pnl_dolar': pnl * 100.0
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
         # 3. OVER 2.5 BACK VALOR (Odd Back 1.80 - 2.60)
@@ -129,7 +131,8 @@ def process_today_signals(df_games, date_str):
                 'data': date_str, 'liga': league, 'jogo': match_name,
                 'metodo': 'Over 2.5 Back Valor', 'mercado': 'O25', 'lado': 'back',
                 'odd_execucao': odd_o25_back, 'stake': 100.0,
-                'status': status, 'resultado': res, 'pnl_dolar': pnl * 100.0
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
         # 4. BTTS LAY QUANT (Odd Lay 2.20 - 3.20)
@@ -141,7 +144,8 @@ def process_today_signals(df_games, date_str):
                 'data': date_str, 'liga': league, 'jogo': match_name,
                 'metodo': 'BTTS Lay Quant', 'mercado': 'BTTS_Y', 'lado': 'lay',
                 'odd_execucao': odd_btts_lay, 'stake': 100.0,
-                'status': status, 'resultado': res, 'pnl_dolar': pnl * 100.0
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
 
     return pd.DataFrame(signals)
@@ -174,6 +178,9 @@ def main():
         else:
             df_combined = df_today
             
+        # Garantir preenchimento de pnl_unidades
+        df_combined['pnl_unidades'] = df_combined['pnl_unidades'].fillna(df_combined['pnl_dolar'] / 100.0)
+        
         df_combined.to_csv(FORWARD_LOG_PATH, index=False)
         try:
             df_combined.to_excel(FORWARD_LOG_EXCEL, index=False)
