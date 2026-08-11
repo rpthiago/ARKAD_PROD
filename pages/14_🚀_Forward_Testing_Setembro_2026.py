@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import sys
 import subprocess
 import plotly.express as px
 import plotly.graph_objects as go
@@ -70,11 +71,15 @@ st.sidebar.markdown("### ⚡ Ações Rápidas")
 if st.sidebar.button("🔄 Executar Varredura dos Jogos de Hoje", use_container_width=True):
     with st.spinner("Executando varredura dos jogos de hoje via Betfair Exchange..."):
         try:
-            res = subprocess.run(["python", "rodar_jogos_hoje.py"], capture_output=True, text=True, check=True)
+            # Usa sys.executable para garantir que roda no mesmo ambiente Python do Streamlit
+            res = subprocess.run([sys.executable, "rodar_jogos_hoje.py"], capture_output=True, text=True, check=True)
             st.sidebar.success("✅ Jogos de hoje processados e planilha atualizada!")
             st.cache_data.clear()
+        except subprocess.CalledProcessError as e:
+            err_msg = e.stderr if e.stderr else str(e)
+            st.sidebar.error(f"Erro ao executar varredura: {err_msg}")
         except Exception as e:
-            st.sidebar.error(f"Erro ao executar varredura: {e}")
+            st.sidebar.error(f"Erro inesperado: {e}")
 
 @st.cache_data(ttl=60)
 def load_forward_data():
@@ -190,7 +195,6 @@ if not df_filtro.empty:
     summary_df['roi%'] = (summary_df['lucro_dolar'] / (summary_df['apostas'] * stake_fixa)) * 100.0
     summary_df = summary_df.sort_values('lucro_dolar', ascending=False).reset_index(drop=True)
     
-    # Formatação limpa
     summary_df['win_rate'] = summary_df['win_rate'].map('{:.1f}%'.format)
     summary_df['roi%'] = summary_df['roi%'].map('{:.2f}%'.format)
     summary_df['lucro_dolar'] = summary_df['lucro_dolar'].map('${:,.2f}'.format)
