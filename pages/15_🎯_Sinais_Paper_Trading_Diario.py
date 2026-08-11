@@ -1,242 +1,192 @@
-import streamlit as st
-import pandas as pd
-import numpy as np
 import os
 import sys
+import io
+import time
 import subprocess
-from datetime import datetime, date, timedelta
+import traceback
+from datetime import datetime, date
+import pandas as pd
+import numpy as np
+import streamlit as st
 
-# Configuração da página Streamlit
+# Configura a página do Streamlit
 st.set_page_config(
-    page_title="Sinais por Dia — Paper Trading ARKAD",
+    page_title="Sinais Paper Trading - Ao Vivo",
     page_icon="🎯",
     layout="wide",
-    initial_sidebar_state="expanded"
 )
 
-# Estilização CSS (Dark Mode Premium)
+st.title("🎯 Sinais Paper Trading — Arsenal Completo")
 st.markdown("""
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-    html, body, [class*="css"] {
-        font-family: 'Inter', sans-serif;
-    }
-    .stApp {
-        background-color: #0d1117;
-        color: #c9d1d9;
-    }
-    .kpi-card {
-        background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
-        border: 1px solid #30363d;
-        border-radius: 12px;
-        padding: 18px;
-        text-align: center;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.4);
-    }
-    .kpi-title {
-        font-size: 0.8rem;
-        color: #8b949e;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 6px;
-    }
-    .kpi-green { font-size: 1.7rem; font-weight: 700; color: #3fb950; }
-    .kpi-red { font-size: 1.7rem; font-weight: 700; color: #f85149; }
-    .kpi-blue { font-size: 1.7rem; font-weight: 700; color: #58a6ff; }
-    .kpi-yellow { font-size: 1.7rem; font-weight: 700; color: #d29922; }
-    
-    .banner-sinais {
-        background: linear-gradient(90deg, #1f6feb 0%, #388bfd 50%, #8957e5 100%);
-        padding: 22px;
-        border-radius: 14px;
-        color: white;
-        margin-bottom: 25px;
-    }
-    .game-card {
-        background-color: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 8px;
-        padding: 12px 16px;
-        margin-bottom: 10px;
-    }
-</style>
-""", unsafe_allow_html=True)
+Esta página bate na **API da Betfair e Bases em tempo real**, calcula os palpites do **Arsenal de Modelos ARKAD** (Lay 0x0 Protegido, Lay Draw, Over 2.5 Back Valor, BTTS Lay Quant e Lay Zebra Visitante), e aplica a **Calculadora Dinâmica de Gestão de Banca**:
 
-# Banner Principal
-st.markdown("""
-<div class="banner-sinais">
-    <h1 style="margin:0; font-size: 2.1rem; font-weight:700;">🎯 Navegador de Jogos & Sinais por Dia</h1>
-    <p style="margin:4px 0 0 0; opacity: 0.95; font-size: 1.05rem;">
-        Consulte facilmente os jogos, palpites e resultados de qualquer data do Paper Trading.
-    </p>
-</div>
-""", unsafe_allow_html=True)
+*   **🛡️ Lay 0x0 Protegido:** Odd Lay Betfair entre **8.00 e 12.00** ($\text{total\_xG} > 1.90$)
+*   **⚖️ Lay Draw Estrutural:** Odd Lay Betfair entre **3.30 e 4.50**
+*   **⚽ Over 2.5 Back Valor:** Odd Back Betfair entre **1.80 e 2.60**
+*   **🔄 BTTS Lay Quant:** Odd Lay Betfair entre **2.20 e 3.20**
+*   **🚀 Lay Zebra Visitante:** Odd Lay Betfair entre **3.50 e 5.00**
 
-# Função de Carregamento de Dados de Sinais
-@st.cache_data(ttl=30)
-def load_all_signals():
-    csv_path = "paper_trading_forward_setembro_2026.csv"
-    if os.path.exists(csv_path):
-        df = pd.read_csv(csv_path)
-        df['data_dt'] = pd.to_datetime(df['data'], errors='coerce')
-        df['data_str'] = df['data_dt'].dt.strftime('%Y-%m-%d')
-        return df
-    return pd.DataFrame()
+> ⚠️ **IMPORTANTE:** Mantenha a disciplina de gestão de banca e opere estritamente dentro da responsabilidade calculada. Não faça Cash Out prematuro sem sinal de valor.
+""")
 
-df_all = load_all_signals()
+# Inicializa o estado de sessão
+if "sinais_brutos" not in st.session_state:
+    st.session_state.sinais_brutos = None
+if "sinais_date" not in st.session_state:
+    st.session_state.sinais_date = None
 
-# Lista de Datas Disponíveis no Histórico
-if not df_all.empty:
-    datas_disponiveis = sorted(df_all['data_str'].dropna().unique().tolist(), reverse=True)
-else:
-    datas_disponiveis = [datetime.now().strftime('%Y-%m-%d')]
-
-# Sidebar - Seleção de Data e Ação
-st.sidebar.header("🗓️ Navegação de Datas")
-
-# Seletor Rápido de Datas com Jogos Registrados
-data_rapida = st.sidebar.selectbox("Lista de Datas com Jogos", datas_disponiveis, index=0)
-
-# Date Input Manual
-data_manual = st.sidebar.date_input("Ou Escolha uma Data no Calendário", value=pd.to_datetime(data_rapida).date())
-data_str = data_manual.strftime("%Y-%m-%d")
-
-st.sidebar.markdown("---")
-st.sidebar.header("⚡ Ações da Data")
-
-if st.sidebar.button("🔄 Executar Varredura nesta Data", use_container_width=True, type="primary"):
-    with st.spinner(f"Buscando jogos e gerando palpites para {data_str}..."):
-        try:
-            res = subprocess.run(
-                [sys.executable, "rodar_jogos_hoje.py", "--data", data_str],
-                capture_output=True, text=True, check=True
-            )
-            st.sidebar.success(f"✅ Sinais de {data_str} gerados!")
-            st.cache_data.clear()
-            df_all = load_all_signals()
-        except subprocess.CalledProcessError as e:
-            err_msg = e.stderr if e.stderr else str(e)
-            st.sidebar.error(f"Erro ao gerar sinais: {err_msg}")
-        except Exception as e:
-            st.sidebar.error(f"Erro inesperado: {e}")
-
-# Botões de Navegação Dia Anterior / Dia Seguinte no Corpo da Página
-c_nav1, c_nav2, c_nav3 = st.columns([1, 2, 1])
-
-with c_nav1:
-    if st.button("◀️ Dia Anterior"):
-        prev_dt = pd.to_datetime(data_str) - timedelta(days=1)
-        st.session_state['selected_date'] = prev_dt.strftime('%Y-%m-%d')
-        st.rerun()
-
-with c_nav2:
-    st.markdown(f"<h3 style='text-align:center; margin:0;'>📅 Jogos e Palpites de: <span style='color:#58a6ff;'>{data_str}</span></h3>", unsafe_allow_html=True)
-
-with c_nav3:
-    if st.button("Dia Seguinte ▶️"):
-        next_dt = pd.to_datetime(data_str) + timedelta(days=1)
-        st.session_state['selected_date'] = next_dt.strftime('%Y-%m-%d')
-        st.rerun()
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Filtrar Sinais pela Data Selecionada
-if not df_all.empty:
-    df_day = df_all[df_all['data_str'] == data_str].copy()
-else:
-    df_day = pd.DataFrame()
-
-# Sidebar - Filtros de Exibição
-st.sidebar.markdown("---")
-st.sidebar.header("🔍 Filtros de Exibição")
-
-if not df_day.empty:
-    metodos_disponiveis = sorted(df_day['metodo'].unique().tolist())
-    metodos_sel = st.sidebar.multiselect("Filtrar por Método", metodos_disponiveis, default=metodos_disponiveis)
-
-    status_disponiveis = sorted(df_day['status'].unique().tolist())
-    status_sel = st.sidebar.multiselect("Filtrar por Status", status_disponiveis, default=status_disponiveis)
-
-    if metodos_sel:
-        df_day = df_day[df_day['metodo'].isin(metodos_sel)]
-    if status_sel:
-        df_day = df_day[df_day['status'].isin(status_sel)]
-
-# KPIs da Data
-col1, col2, col3, col4, col5 = st.columns(5)
-
-tot_sinais = len(df_day)
-tot_pendentes = (df_day['status'] == 'Pendente').sum() if 'status' in df_day.columns and not df_day.empty else 0
-tot_greens = (df_day['resultado'] == 'GREEN').sum() if 'resultado' in df_day.columns and not df_day.empty else 0
-tot_reds = (df_day['resultado'] == 'RED').sum() if 'resultado' in df_day.columns and not df_day.empty else 0
-lucro_dia = df_day['pnl_dolar'].sum() if 'pnl_dolar' in df_day.columns and not df_day.empty else 0.0
+col1, col2 = st.columns([1, 3])
 
 with col1:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title">Total de Palpites</div>
-        <div class="kpi-blue">{tot_sinais}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    import config
+    if not getattr(config, "API_TOKEN", None):
+        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do seu Streamlit Cloud! A coleta ao vivo usará as bases locais.")
+    
+    target_date = st.date_input("Data dos Jogos", value=date.today())
+    
+    st.markdown("### 💰 Calculadora de Gestão de Banca")
+    banca_val = st.number_input("Saldo da Banca (R$)", min_value=10.0, value=1000.0, step=100.0)
+    gestao_op = st.selectbox(
+        "Perfil de Risco (Juros Compostos)",
+        options=[
+            "Kelly 0.25 (Recomendado - Responsabilidade Máx 2.5%)",
+            "Agressivo (20% Responsabilidade - Ruína < 15%)",
+            "Conservador (11% Responsabilidade - Drawdown < 15%)",
+            "Personalizado (%)"
+        ]
+    )
+    if gestao_op.startswith("Kelly"):
+        use_kelly = True
+        f_risk_fixed = 0.025
+    elif gestao_op.startswith("Agressivo"):
+        use_kelly = False
+        f_risk_fixed = 0.20
+    elif gestao_op.startswith("Conservador"):
+        use_kelly = False
+        f_risk_fixed = 0.11
+    else:
+        use_kelly = False
+        f_risk_fixed = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5) / 100.0
+        
+    gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
 
+# Se mudou a data, limpa o cache de sinais brutos
+if st.session_state.sinais_date != target_date:
+    st.session_state.sinais_brutos = None
+
+if gerar_btn:
+    date_str = target_date.strftime("%Y-%m-%d")
+    with st.spinner(f"Baixando grade de {date_str}, montando modelos e aplicando filtros estritos..."):
+        try:
+            # Executa a varredura do script de produção rodar_jogos_hoje.py
+            subprocess.run([sys.executable, "rodar_jogos_hoje.py", "--data", date_str], check=True)
+            
+            # Carrega a planilha gerada
+            csv_path = "paper_trading_forward_setembro_2026.csv"
+            if os.path.exists(csv_path):
+                df_all = pd.read_csv(csv_path)
+                df_day = df_all[df_all['data'] == date_str].to_dict(orient='records')
+                st.session_state.sinais_brutos = df_day
+            else:
+                st.session_state.sinais_brutos = []
+                
+            st.session_state.sinais_date = target_date
+        except Exception as e:
+            st.error("Erro durante a execução do motor de sinais do Arsenal:")
+            st.code(traceback.format_exc())
+            st.stop()
+
+# Carregamento dos dados salvos se não houver clique no botão
+if st.session_state.sinais_brutos is None:
+    csv_path = "paper_trading_forward_setembro_2026.csv"
+    if os.path.exists(csv_path):
+        df_all = pd.read_csv(csv_path)
+        date_str = target_date.strftime("%Y-%m-%d")
+        df_day = df_all[df_all['data'] == date_str].to_dict(orient='records')
+        if df_day:
+            st.session_state.sinais_brutos = df_day
+            st.session_state.sinais_date = target_date
+
+# Processamento e exibição dos resultados no painel principal (col2)
 with col2:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title">Pendentes</div>
-        <div class="kpi-yellow">{tot_pendentes}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col3:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title">Greens</div>
-        <div class="kpi-green">{tot_greens}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col4:
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title">Reds</div>
-        <div class="kpi-red">{tot_reds}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with col5:
-    color = "kpi-green" if lucro_dia >= 0 else "kpi-red"
-    st.markdown(f"""
-    <div class="kpi-card">
-        <div class="kpi-title">Resultado do Dia ($)</div>
-        <div class="{color}">${lucro_dia:,.2f}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-
-# Tabela Detalhada dos Jogos do Dia
-if not df_day.empty:
-    st.markdown(f"### 📋 Lista de Jogos e Palpites do Dia ({len(df_day)} palpites)")
-    
-    disp_cols = ['liga', 'jogo', 'metodo', 'mercado', 'lado', 'odd_execucao', 'stake', 'status', 'resultado', 'pnl_unidades', 'pnl_dolar']
-    cols_ok = [c for c in disp_cols if c in df_day.columns]
-    
-    st.dataframe(
-        df_day[cols_ok].style.highlight_max(subset=['pnl_dolar'], color='#238636'),
-        use_container_width=True,
-        height=500
-    )
-    
-    # Download dos Sinais do Dia Selecionado
-    csv_bytes = df_day[cols_ok].to_csv(index=False).encode('utf-8')
-    st.download_button(
-        label=f"📥 Baixar Palpites de {data_str} (CSV)",
-        data=csv_bytes,
-        file_name=f"jogos_sinais_{data_str}.csv",
-        mime="text/csv"
-    )
-else:
-    st.info(f"ℹ️ Nenhum sinal registrado na planilha para a data **{data_str}**. Clique no botão **`🔄 Executar Varredura nesta Data`** na barra lateral para gerar os palpites deste dia.")
-
-st.markdown("---")
-st.caption("ARKAD Day-by-Day Match Browser — Varredura Diária de Jogos & Odds Betfair Exchange")
+    if st.session_state.sinais_brutos is not None:
+        sinais_brutos = st.session_state.sinais_brutos
+        date_str = target_date.strftime("%Y-%m-%d")
+        
+        if not sinais_brutos:
+            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou nos filtros do Arsenal de Modelos. É normal os modelos serem seletivos — **guarde a banca**.")
+        else:
+            df = pd.DataFrame(sinais_brutos)
+            
+            # Formatar tabela de saída com a calculadora de gestão de banca
+            rows_final = []
+            for d_idx, row in df.iterrows():
+                odd_val = pd.to_numeric(row.get("odd_execucao"), errors="coerce")
+                metodo = row.get("metodo", "")
+                lado = row.get("lado", "lay").lower()
+                jogo = row.get("jogo", "Mandante x Visitante")
+                parts = jogo.split(" x ")
+                mandante = parts[0] if len(parts) > 0 else "Mandante"
+                visitante = parts[1] if len(parts) > 1 else "Visitante"
+                
+                # Cálculo de Responsabilidade e Stake
+                if use_kelly and pd.notna(odd_val) and odd_val > 1.0:
+                    p = 0.55 if "Lay" in metodo else 0.48
+                    q = 1.0 - p
+                    b_net = (1.0 / (odd_val - 1.0)) * 0.95 if lado == "lay" else (odd_val - 1.0)
+                    kf = p - q / b_net
+                    f_applied = 0.25 * max(0.0, kf)
+                    f_risk = min(0.025, f_applied) # Teto de 2.5% de responsabilidade
+                else:
+                    f_risk = f_risk_fixed
+                    
+                resp_max = banca_val * f_risk
+                if pd.notna(odd_val) and odd_val > 1.0:
+                    if lado == "lay":
+                        stake_betfair = resp_max / (odd_val - 1.0)
+                    else:
+                        stake_betfair = resp_max
+                else:
+                    stake_betfair = np.nan
+                
+                rows_final.append({
+                    "Data": row.get("data", date_str),
+                    "Liga": row.get("liga", ""),
+                    "Mandante": mandante,
+                    "Visitante": visitante,
+                    "Método": metodo,
+                    "Mercado": row.get("mercado", ""),
+                    "Lado": lado.upper(),
+                    "Odd Betfair": odd_val,
+                    "Responsabilidade (R$)": round(float(resp_max), 2),
+                    "Stake Betfair (R$)": round(float(stake_betfair), 2) if pd.notna(stake_betfair) else np.nan,
+                    "Status": row.get("status", "Pendente"),
+                    "Resultado": row.get("resultado", ""),
+                    "Lucro (R$)": row.get("pnl_dolar", "")
+                })
+                
+            df_final = pd.DataFrame(rows_final)
+            
+            st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas em {date_str}!")
+            
+            # Exibe a tabela formatada e responsiva
+            st.dataframe(df_final, use_container_width=True)
+            
+            # Botão de Download Excel estilo Sinais Lay 0x0
+            buffer = io.BytesIO()
+            with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                df_final.to_excel(writer, index=False, sheet_name='Sinais_Paper_Trading')
+            excel_data = buffer.getvalue()
+            
+            st.download_button(
+                label="📥 Baixar Planilha de Sinais com Gestão (Excel)",
+                data=excel_data,
+                file_name=f"sinais_paper_trading_{date_str}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            )
+            
+            st.caption("Opere essas entradas respeitando o teto de responsabilidade calculado para manter a expectativa matemática positiva.")
+            if use_kelly:
+                st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Gestão: Kelly 0.25 com teto de 2.5% de Responsabilidade Máxima.")
+            else:
+                st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Responsabilidade por jogo: {f_risk_fixed*100:.1f}% (R$ {banca_val*f_risk_fixed:.2f}). Se a banca aumentar ou diminuir, reajuste o valor do saldo para atualizar as stakes de juros compostos.")
