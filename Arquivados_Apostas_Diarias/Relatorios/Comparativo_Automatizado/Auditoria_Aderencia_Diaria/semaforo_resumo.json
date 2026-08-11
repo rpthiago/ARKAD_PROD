@@ -1,0 +1,14 @@
+{
+  "periodo": {
+    "start": "2026-04-01",
+    "end": "2026-04-13"
+  },
+  "datas_em_comum": 10,
+  "live_exec_total": 149,
+  "backtest_exec_ref_total": 16,
+  "matches_total": 3,
+  "match_pct_total": 2.01,
+  "coverage_pct_total": 18.75,
+  "semaforo_geral": "vermelho",
+  "rodos_ativos": 32
+}
