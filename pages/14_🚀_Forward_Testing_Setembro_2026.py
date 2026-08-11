@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import os
+import subprocess
 import plotly.express as px
 import plotly.graph_objects as go
 
@@ -64,6 +65,17 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# Botão para Executar a Varredura dos Jogos de Hoje diretamente no App
+st.sidebar.markdown("### ⚡ Ações Rápidas")
+if st.sidebar.button("🔄 Executar Varredura dos Jogos de Hoje", use_container_width=True):
+    with st.spinner("Executando varredura dos jogos de hoje via Betfair Exchange..."):
+        try:
+            res = subprocess.run(["python", "rodar_jogos_hoje.py"], capture_output=True, text=True, check=True)
+            st.sidebar.success("✅ Jogos de hoje processados e planilha atualizada!")
+            st.cache_data.clear()
+        except Exception as e:
+            st.sidebar.error(f"Erro ao executar varredura: {e}")
+
 @st.cache_data(ttl=60)
 def load_forward_data():
     csv_path = "paper_trading_forward_setembro_2026.csv"
@@ -76,7 +88,7 @@ def load_forward_data():
 df_forward = load_forward_data()
 
 if df_forward.empty:
-    st.warning("⚠️ Nenhum sinal de Forward Testing encontrado. Execute 'python gerar_sinais_forward_diario.py' para compilar as entradas.")
+    st.warning("⚠️ Nenhum sinal de Forward Testing encontrado. Clique no botão na barra lateral ou execute 'python rodar_jogos_hoje.py'.")
     st.stop()
 
 # Sidebar - Filtros do Forward Test
