@@ -1,0 +1,313 @@
+mercado,lado,modelo,filtro,spread%,liquido,val_n,val_wr%,odd_real,val_roi%,val_ic95,val_p,passa_FDR,conf_n,conf_roi%,robusto_entre_modelos,APROVADO,motivo_reprovacao
+CS_0x0,back,poisson_lasso,EV>0.05,30.2%,Nao,32,31.2%,9.35,144.22%,"[6.4%, 300.8%]",0.0185,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,back,rf,EV>0.05,19.3%,Nao,4163,12.6%,11.4,44.75%,"[33.1%, 56.2%]",0.0,True,62,-28.23%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,back,lr,EV>0.05,19.3%,Nao,4510,13.1%,10.94,44.27%,"[33.5%, 55.8%]",0.0,True,60,-40.33%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,poisson_en,EV>0.05,30.2%,Nao,68,22.1%,8.44,44.19%,"[-24.9%, 124.7%]",0.1155,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,back,lda,EV>0.05,19.3%,Nao,4479,12.8%,11.08,42.04%,"[30.9%, 53.5%]",0.0,True,62,-72.90%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,back,lightgbm,EV>0.05,19.3%,Nao,4511,12.2%,11.39,39.58%,"[28.4%, 50.9%]",0.0,True,70,-14.00%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,back,gbc,EV>0.05,19.3%,Nao,4372,12.0%,11.54,39.42%,"[28.7%, 51.1%]",0.0,True,64,-55.47%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,back,dt,EV>0.05,19.3%,Nao,4387,12.1%,11.51,39.23%,"[27.8%, 50.3%]",0.0,True,109,-10.55%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,back,et,EV>0.05,19.3%,Nao,4733,11.8%,11.56,37.00%,"[26.3%, 48.4%]",0.0,True,136,6.69%,Sim,False,Mercado Ilíquido (Spread > 15%)
+CS_1x1,back,xgboost,EV>0.05,19.3%,Nao,4884,12.2%,10.88,35.12%,"[24.7%, 45.7%]",0.0,True,85,-17.88%,Sim,False,Mercado Ilíquido (Spread > 15%) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,lda,EV>0.05,6.8%,Sim,57,68.4%,2.7,30.23%,"[2.1%, 55.1%]",0.0155,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,lay,et,EV>0.05,19.3%,Nao,628,90.6%,7.98,22.86%,"[4.8%, 39.4%]",0.009,False,11,37.27%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_1x1,lay,gbc,EV>0.05,19.3%,Nao,748,91.0%,8.36,21.95%,"[4.3%, 39.1%]",0.0065,False,6,-10.83%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,poisson_gbr,EV>0.05,30.2%,Nao,116,8.6%,13.89,20.69%,"[-48.3%, 97.4%]",0.3345,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,lr,EV>0.05,6.8%,Sim,85,67.1%,2.76,19.61%,"[-6.0%, 43.7%]",0.0635,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,poisson_et,EV>0.05,30.2%,Nao,254,8.3%,14.09,17.72%,"[-27.4%, 65.0%]",0.2515,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,lay,rf,EV>0.05,19.3%,Nao,1035,91.2%,9.37,17.58%,"[1.2%, 33.1%]",0.019,False,23,31.96%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_1x1,lay,lr,EV>0.05,19.3%,Nao,1301,91.2%,9.56,14.44%,"[-0.5%, 28.2%]",0.03,False,39,-21.54%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,lay,lightgbm,EV>0.05,19.3%,Nao,835,90.7%,9.02,14.04%,"[-5.1%, 31.8%]",0.0705,False,12,42.08%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x0,back,poisson_lr,EV>0.05,30.2%,Nao,149,11.4%,10.38,12.89%,"[-36.3%, 64.7%]",0.32,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_lasso,EV>0.05,30.2%,Nao,287,90.9%,9.73,12.39%,"[-18.9%, 40.9%]",0.21,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,poisson_dt,EV>0.05,30.2%,Nao,1119,9.4%,12.02,10.82%,"[-9.6%, 31.5%]",0.151,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,lay,lda,EV>0.05,19.3%,Nao,1349,90.3%,8.91,9.87%,"[-4.3%, 23.7%]",0.0845,False,32,-17.19%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,poisson_en,EV>0.05,4.8%,Sim,37,48.6%,2.32,9.78%,"[-26.1%, 48.7%]",0.312,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,poisson_xgboost,EV>0.05,6.4%,Sim,592,57.4%,3.92,9.77%,"[-0.3%, 19.5%]",0.0305,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,back,lda,EV>0.05,27.8%,Nao,1497,11.9%,9.7,9.10%,"[-6.4%, 25.2%]",0.1285,False,44,-20.91%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x1,back,et,EV>0.05,27.8%,Nao,1681,8.0%,13.49,8.98%,"[-9.3%, 26.7%]",0.174,False,51,-100.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,poisson_en,EV>0.05,4.8%,Sim,95,69.5%,3.71,6.85%,"[-24.8%, 37.0%]",0.3495,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,lay,dt,EV>0.05,27.8%,Nao,2008,92.9%,13.8,6.41%,"[-9.6%, 21.0%]",0.2025,False,173,17.54%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_1x1,lay,dt,EV>0.05,19.3%,Nao,1341,90.1%,9.65,6.35%,"[-8.5%, 21.3%]",0.225,False,29,95.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_1x1,back,nb,EV>0.05,19.3%,Nao,13233,13.0%,8.16,6.30%,"[1.2%, 11.1%]",0.009,False,611,-18.85%,Sim,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,lay,lr,EV>0.05,21.9%,Nao,494,92.7%,14.08,5.99%,"[-26.4%, 34.7%]",0.3275,False,10,-89.50%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x1,lay,lda,EV>0.05,27.8%,Nao,860,93.7%,14.44,5.81%,"[-18.3%, 29.3%]",0.2985,False,72,-21.46%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,poisson_lasso,EV>0.05,4.8%,Sim,152,44.1%,2.06,5.67%,"[-9.6%, 20.4%]",0.226,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,poisson_xgboost,EV>0.05,30.2%,Nao,1584,92.7%,14.69,5.50%,"[-11.9%, 21.7%]",0.2565,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,back,gbc,EV>0.05,6.8%,Sim,1492,45.0%,2.42,5.28%,"[-0.8%, 11.4%]",0.041,False,85,-8.41%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,poisson_lightgbm,EV>0.05,30.2%,Nao,1586,89.2%,9.47,5.15%,"[-7.8%, 17.5%]",0.2265,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_gbr,EV>0.05,30.2%,Nao,1668,89.3%,9.79,4.89%,"[-8.7%, 18.7%]",0.2295,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,rf,EV>0.05,6.4%,Sim,487,79.9%,5.76,4.56%,"[-14.4%, 22.1%]",0.309,False,19,95.00%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x1,back,rf,EV>0.05,27.8%,Nao,1959,9.2%,11.63,4.49%,"[-9.3%, 19.5%]",0.2755,False,46,-50.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,poisson_ridge,EV>0.05,30.2%,Nao,155,11.6%,9.78,4.39%,"[-41.1%, 55.7%]",0.437,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x1,back,lr,EV>0.05,27.8%,Nao,1966,10.4%,10.68,4.19%,"[-9.4%, 18.1%]",0.273,False,40,40.75%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_D,back,lr,EV>0.05,6.4%,Sim,2084,28.0%,3.82,3.92%,"[-3.5%, 11.5%]",0.153,False,44,-21.80%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,lr,EV>0.05,6.4%,Sim,1620,80.2%,7.62,3.90%,"[-7.8%, 14.8%]",0.265,False,39,-45.77%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,poisson_dt,EV>0.05,30.2%,Nao,2861,91.9%,13.52,3.64%,"[-8.9%, 15.6%]",0.275,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,back,lightgbm,EV>0.05,6.8%,Sim,1477,44.1%,2.42,3.43%,"[-2.3%, 9.4%]",0.1315,False,78,-9.14%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_lasso,EV>0.05,6.8%,Sim,330,47.3%,2.25,3.25%,"[-8.2%, 15.4%]",0.2935,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x1,lay,xgboost,EV>0.05,19.3%,Nao,1869,89.8%,9.82,2.82%,"[-10.1%, 15.7%]",0.3355,False,61,15.49%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x0,back,poisson_xgboost,EV>0.05,30.2%,Nao,626,10.1%,11.11,2.32%,"[-20.6%, 27.0%]",0.4275,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,poisson_rf,EV>0.05,4.8%,Sim,1854,40.9%,2.68,2.23%,"[-3.6%, 8.1%]",0.2115,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,lr,EV>0.05,6.8%,Sim,763,47.8%,2.23,2.11%,"[-5.7%, 10.3%]",0.303,False,45,-8.38%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,poisson_rf,EV>0.05,30.2%,Nao,1432,89.8%,11.37,1.90%,"[-14.6%, 16.1%]",0.4185,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,back,lda,EV>0.05,6.8%,Sim,744,47.3%,2.24,1.85%,"[-6.5%, 10.0%]",0.334,False,42,-9.43%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,xgboost,EV>0.05,6.8%,Sim,2727,52.3%,2.04,1.72%,"[-2.0%, 5.4%]",0.172,False,76,-2.74%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_dt,EV>0.05,6.8%,Sim,875,46.1%,2.3,1.01%,"[-5.9%, 8.6%]",0.388,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,xgboost,EV>0.05,4.8%,Sim,2660,48.8%,2.22,0.94%,"[-3.2%, 5.2%]",0.345,False,47,26.83%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_A,back,dt,EV>0.05,6.4%,Sim,4083,33.6%,3.8,0.87%,"[-4.1%, 6.0%]",0.362,False,176,-3.73%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,lay,xgboost,EV>0.05,27.8%,Nao,2198,92.7%,14.28,0.78%,"[-14.4%, 15.6%]",0.451,False,77,-13.83%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,lightgbm,EV>0.05,6.4%,Sim,1050,49.4%,3.36,0.72%,"[-7.8%, 9.3%]",0.429,False,35,3.97%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x0,lay,lightgbm,EV>0.05,30.2%,Nao,1021,92.1%,14.05,0.48%,"[-21.4%, 21.9%]",0.472,False,30,46.83%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x1,back,lightgbm,EV>0.05,27.8%,Nao,1696,9.1%,11.46,0.45%,"[-14.7%, 15.9%]",0.4815,False,34,-69.12%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,poisson_huber,EV>0.05,6.4%,Sim,640,63.3%,5.82,0.42%,"[-14.5%, 14.8%]",0.4655,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,back,gbc,EV>0.05,27.8%,Nao,1615,9.4%,11.36,0.27%,"[-15.3%, 16.5%]",0.496,False,32,-67.19%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,lightgbm,EV>0.05,4.8%,Sim,1216,34.0%,3.04,0.26%,"[-7.5%, 8.1%]",0.4355,False,90,31.08%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,poisson_dt,EV>0.05,4.8%,Sim,3232,45.6%,2.32,0.26%,"[-3.7%, 4.2%]",0.45,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,poisson_ridge,EV>0.05,4.0%,Sim,328,54.3%,2.88,0.21%,"[-13.2%, 12.6%]",0.482,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,poisson_et,EV>0.05,4.0%,Sim,170,38.8%,1.73,0.19%,"[-11.6%, 12.0%]",0.498,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,poisson_lightgbm,EV>0.05,6.4%,Sim,993,38.2%,1.69,0.09%,"[-5.1%, 5.0%]",0.4835,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,gbc,EV>0.05,6.4%,Sim,893,43.3%,2.43,0.02%,"[-7.1%, 7.0%]",0.4865,False,32,7.94%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_A,lay,poisson_en,EV>0.05,6.4%,Sim,1197,42.8%,2.33,0.02%,"[-6.0%, 5.6%]",0.5015,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,lay,rf,EV>0.05,27.8%,Nao,618,90.5%,13.11,-0.04%,"[-26.8%, 25.7%]",0.4755,False,51,36.47%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x0,back,gbc,EV>0.05,30.2%,Nao,516,11.0%,9.78,-0.12%,"[-25.1%, 26.6%]",0.515,False,17,-17.65%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,back,xgboost,EV>0.05,4.0%,Sim,2473,40.5%,3.49,-0.18%,"[-5.9%, 5.8%]",0.5355,False,87,-7.62%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,dt,EV>0.05,4.0%,Sim,5308,43.2%,2.82,-0.31%,"[-4.0%, 3.3%]",0.569,False,114,9.92%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,poisson_gbr,EV>0.05,4.8%,Sim,2140,37.9%,2.74,-0.32%,"[-6.0%, 5.2%]",0.5585,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,dt,EV>0.05,6.8%,Sim,2629,49.8%,2.09,-0.33%,"[-4.1%, 3.7%]",0.5745,False,106,-9.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,et,EV>0.05,6.8%,Sim,3495,43.7%,2.31,-0.42%,"[-4.0%, 3.3%]",0.604,False,207,2.05%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x0,lay,lr,EV>0.05,30.2%,Nao,1121,93.3%,15.61,-0.49%,"[-23.0%, 20.1%]",0.494,False,22,29.32%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_A,back,rf,EV>0.05,6.4%,Sim,1545,22.9%,5.31,-0.61%,"[-10.6%, 10.2%]",0.5405,False,63,3.00%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_H,lay,poisson_lasso,EV>0.05,4.0%,Sim,1324,41.0%,1.74,-0.88%,"[-5.2%, 3.8%]",0.6525,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,dt,EV>0.05,4.0%,Sim,3013,60.9%,3.22,-0.95%,"[-6.5%, 3.9%]",0.6555,False,54,-7.96%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,nb,EV>0.05,4.8%,Sim,6330,61.8%,1.63,-1.02%,"[-2.9%, 0.9%]",0.851,False,277,-2.29%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,nb,EV>0.05,6.8%,Sim,15355,55.6%,1.79,-1.06%,"[-2.5%, 0.3%]",0.939,False,626,-2.19%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,nb,EV>0.05,4.0%,Sim,8242,58.5%,1.74,-1.09%,"[-2.9%, 0.8%]",0.879,False,405,8.63%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_A,lay,poisson_et,EV>0.05,6.4%,Sim,374,35.6%,1.68,-1.11%,"[-8.9%, 6.4%]",0.6165,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,poisson_rf,EV>0.05,4.0%,Sim,3695,28.0%,4.27,-1.14%,"[-6.7%, 4.5%]",0.6765,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,poisson_et,EV>0.05,4.0%,Sim,3943,26.7%,4.41,-1.23%,"[-7.0%, 4.4%]",0.655,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,poisson_lightgbm,EV>0.05,4.8%,Sim,2175,37.6%,2.75,-1.25%,"[-6.7%, 4.2%]",0.6445,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,poisson_en,EV>0.05,4.0%,Sim,892,43.6%,1.85,-1.43%,"[-7.5%, 4.4%]",0.6785,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,lightgbm,EV>0.05,6.8%,Sim,198,35.4%,1.58,-1.49%,"[-11.1%, 9.1%]",0.6105,False,25,-17.36%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,xgboost,EV>0.05,6.4%,Sim,2549,78.3%,7.28,-1.51%,"[-10.8%, 7.5%]",0.64,False,104,-28.66%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,poisson_xgboost,EV>0.05,4.0%,Sim,3211,30.6%,4.06,-1.54%,"[-7.3%, 4.3%]",0.694,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_et,EV>0.05,6.8%,Sim,1250,39.4%,2.55,-1.65%,"[-8.4%, 5.1%]",0.6705,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,lay,lightgbm,EV>0.05,27.8%,Nao,670,89.6%,10.64,-1.66%,"[-25.4%, 20.5%]",0.5405,False,41,-18.05%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,gbc,EV>0.05,4.8%,Sim,1205,33.6%,3.03,-1.66%,"[-9.5%, 6.1%]",0.6745,False,89,37.40%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,et,EV>0.05,4.8%,Sim,4654,38.0%,2.64,-1.69%,"[-5.4%, 2.0%]",0.817,False,258,17.25%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x1,lay,gbc,EV>0.05,27.8%,Nao,678,89.5%,9.86,-1.79%,"[-23.9%, 19.8%]",0.5615,False,59,50.17%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,lay,poisson_ridge,EV>0.05,4.8%,Sim,110,50.0%,2.66,-1.82%,"[-23.8%, 18.7%]",0.5555,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,lightgbm,EV>0.05,6.4%,Sim,329,70.5%,4.41,-1.84%,"[-20.7%, 16.2%]",0.5635,False,14,36.64%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,poisson_et,EV>0.05,4.8%,Sim,2700,37.0%,2.75,-1.90%,"[-6.7%, 3.0%]",0.768,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,poisson_dt,EV>0.05,4.0%,Sim,2923,55.6%,2.93,-1.92%,"[-6.5%, 2.7%]",0.801,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,poisson_xgboost,EV>0.05,4.8%,Sim,1695,46.2%,2.29,-1.93%,"[-7.3%, 3.5%]",0.761,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,xgboost,EV>0.05,6.8%,Sim,500,49.2%,2.05,-2.00%,"[-10.8%, 6.9%]",0.6495,False,26,5.38%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_A,back,nb,EV>0.05,6.4%,Sim,8146,44.7%,2.32,-2.01%,"[-4.5%, 0.4%]",0.9495,False,246,-8.73%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_et,EV>0.05,6.8%,Sim,1444,37.9%,1.62,-2.03%,"[-6.1%, 1.8%]",0.8265,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,xgboost,EV>0.05,21.9%,Nao,4117,10.9%,9.53,-2.04%,"[-10.2%, 6.7%]",0.6755,False,116,20.17%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_H,back,poisson_dt,EV>0.05,4.0%,Sim,5359,34.4%,3.49,-2.11%,"[-6.3%, 2.2%]",0.834,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,back,lr,EV>0.05,6.4%,Sim,2562,36.2%,3.16,-2.14%,"[-7.4%, 3.5%]",0.7575,False,66,-37.24%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,lightgbm,EV>0.05,6.4%,Sim,2276,20.2%,5.31,-2.17%,"[-10.9%, 6.5%]",0.688,False,44,42.05%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_H,back,poisson_gbr,EV>0.05,4.0%,Sim,5461,26.7%,4.27,-2.20%,"[-6.7%, 2.7%]",0.8205,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,lr,EV>0.05,4.8%,Sim,420,48.3%,2.13,-2.28%,"[-11.6%, 7.5%]",0.6785,False,9,49.00%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_D,back,lda,EV>0.05,6.4%,Sim,2507,23.8%,4.9,-2.33%,"[-10.2%, 5.1%]",0.713,False,72,-30.90%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,dt,EV>0.05,6.4%,Sim,1993,77.5%,5.22,-2.34%,"[-11.8%, 6.6%]",0.7045,False,46,63.39%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,lay,poisson_xgboost,EV>0.05,4.8%,Sim,1351,45.2%,1.98,-2.35%,"[-7.2%, 2.5%]",0.8315,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,lda,EV>0.05,21.9%,Nao,2514,11.3%,9.55,-2.35%,"[-12.8%, 8.6%]",0.668,False,62,-16.45%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,back,xgboost,EV>0.05,6.4%,Sim,2948,23.8%,4.34,-2.36%,"[-8.9%, 4.4%]",0.776,False,73,-1.11%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,poisson_gbr,EV>0.05,6.4%,Sim,989,35.7%,1.65,-2.38%,"[-7.4%, 2.1%]",0.84,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,rf,EV>0.05,6.4%,Sim,1142,83.1%,8.83,-2.43%,"[-18.1%, 12.8%]",0.619,False,36,11.25%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_H,back,gbc,EV>0.05,4.0%,Sim,3429,24.6%,4.8,-2.47%,"[-9.0%, 3.9%]",0.775,False,140,0.39%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_H,back,poisson_lightgbm,EV>0.05,4.0%,Sim,5522,26.6%,4.27,-2.49%,"[-6.8%, 1.9%]",0.855,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,poisson_lr,EV>0.05,4.0%,Sim,342,54.4%,2.9,-2.50%,"[-16.1%, 10.0%]",0.6745,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,back,rf,EV>0.05,6.8%,Sim,904,39.9%,2.53,-2.56%,"[-10.4%, 5.3%]",0.7365,False,47,-15.66%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,lightgbm,EV>0.05,4.0%,Sim,287,35.2%,1.67,-2.60%,"[-11.7%, 6.7%]",0.7145,False,2,95.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_A,lay,poisson_lasso,EV>0.05,6.4%,Sim,1745,42.1%,2.07,-2.70%,"[-7.6%, 2.0%]",0.864,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,lr,EV>0.05,4.0%,Sim,1072,64.3%,3.18,-2.74%,"[-11.2%, 5.8%]",0.728,False,3,-121.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+U25,lay,gbc,EV>0.05,4.9%,Sim,449,33.6%,1.58,-2.78%,"[-9.6%, 4.1%]",0.796,False,15,34.13%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,back,rf,EV>0.05,4.8%,Sim,1052,38.6%,2.79,-2.98%,"[-10.8%, 4.9%]",0.753,False,72,27.38%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_H,back,lightgbm,EV>0.05,4.0%,Sim,3631,25.2%,4.66,-3.08%,"[-9.3%, 3.2%]",0.844,False,140,-0.03%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,back,lda,EV>0.05,6.4%,Sim,3623,43.8%,3.95,-3.10%,"[-8.6%, 2.0%]",0.873,False,141,-8.33%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,lr,EV>0.05,21.9%,Nao,3009,10.9%,9.33,-3.11%,"[-12.9%, 7.6%]",0.7205,False,55,-88.73%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,rf,EV>0.05,30.2%,Nao,703,10.5%,9.58,-3.17%,"[-24.5%, 19.0%]",0.6275,False,37,-42.70%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+U25,lay,xgboost,EV>0.05,4.9%,Sim,1501,54.2%,2.34,-3.18%,"[-8.9%, 2.8%]",0.8465,False,23,57.43%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_A,back,xgboost,EV>0.05,6.4%,Sim,3786,33.0%,3.61,-3.25%,"[-8.1%, 1.6%]",0.9035,False,126,-25.05%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,lay,et,EV>0.05,4.9%,Sim,2841,35.2%,1.57,-3.32%,"[-6.1%, -0.6%]",0.991,False,202,9.57%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_A,lay,et,EV>0.05,6.4%,Sim,5360,50.4%,2.12,-3.38%,"[-6.2%, -0.6%]",0.9895,False,188,2.62%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x1,lay,nb,EV>0.05,27.8%,Nao,3566,94.8%,19.66,-3.39%,"[-17.4%, 9.9%]",0.6925,False,167,24.22%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_D,back,nb,EV>0.05,6.4%,Sim,16551,28.1%,3.48,-3.43%,"[-5.9%, -1.0%]",0.997,False,615,-11.28%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+U25,lay,lightgbm,EV>0.05,4.9%,Sim,377,32.6%,1.56,-3.44%,"[-11.0%, 3.6%]",0.8305,False,17,32.29%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_A,back,poisson_huber,EV>0.05,6.4%,Sim,4402,23.5%,4.76,-3.44%,"[-9.5%, 2.4%]",0.8785,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,back,poisson_xgboost,EV>0.05,6.4%,Sim,8613,25.3%,4.56,-3.46%,"[-7.3%, 0.5%]",0.957,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,back,dt,EV>0.05,4.9%,Sim,2620,41.6%,2.51,-3.55%,"[-8.2%, 1.0%]",0.9285,False,64,-3.14%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_lr,EV>0.05,6.4%,Sim,7793,24.9%,4.8,-3.59%,"[-7.8%, 0.6%]",0.956,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,xgboost,EV>0.05,4.0%,Sim,1873,64.7%,3.33,-3.60%,"[-10.7%, 3.0%]",0.8505,False,42,-15.10%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_rf,EV>0.05,6.4%,Sim,7820,23.3%,4.9,-3.67%,"[-8.0%, 0.6%]",0.956,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,dt,EV>0.05,4.8%,Sim,2879,48.6%,2.13,-3.74%,"[-7.8%, 0.1%]",0.972,False,83,29.59%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_A,back,poisson_dt,EV>0.05,6.4%,Sim,9001,26.7%,4.43,-3.74%,"[-7.5%, -0.0%]",0.975,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,et,EV>0.05,4.0%,Sim,4345,36.5%,1.65,-3.77%,"[-5.9%, -1.5%]",0.998,False,241,-9.59%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_ridge,EV>0.05,6.4%,Sim,7709,24.7%,4.81,-3.80%,"[-8.1%, 0.7%]",0.9555,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_lightgbm,EV>0.05,6.8%,Sim,1238,39.5%,2.5,-3.83%,"[-10.5%, 2.9%]",0.871,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,poisson_et,EV>0.05,4.8%,Sim,2129,35.6%,1.6,-3.84%,"[-7.0%, -0.6%]",0.992,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,lay,rf,EV>0.05,21.9%,Nao,547,86.5%,9.04,-3.88%,"[-27.1%, 18.8%]",0.621,False,24,-70.42%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_en,EV>0.05,30.2%,Nao,144,90.3%,10.64,-3.89%,"[-58.0%, 45.7%]",0.54,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,back,et,EV>0.05,4.0%,Sim,6690,26.1%,4.18,-3.91%,"[-8.2%, 0.3%]",0.966,False,251,0.70%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,lay,et,EV>0.05,4.8%,Sim,2274,31.8%,1.51,-4.01%,"[-6.8%, -1.4%]",0.9975,False,184,3.20%,Sim,False,Reprovado FDR (p > FDR_thresh)
+BTTS_Y,lay,poisson_xgboost,EV>0.05,6.8%,Sim,1362,48.6%,2.02,-4.04%,"[-9.6%, 1.3%]",0.9345,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,lightgbm,EV>0.05,4.8%,Sim,413,25.7%,1.39,-4.05%,"[-9.8%, 2.0%]",0.9145,False,26,-5.50%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,back,lr,EV>0.05,4.9%,Sim,360,35.6%,2.85,-4.07%,"[-17.9%, 10.3%]",0.7195,False,1,150.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x1,back,dt,EV>0.05,27.8%,Nao,2466,10.1%,10.11,-4.10%,"[-15.3%, 8.0%]",0.7545,False,79,-25.82%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,rf,EV>0.05,30.2%,Nao,1331,93.5%,16.33,-4.11%,"[-25.6%, 17.0%]",0.645,False,23,38.70%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,lay,xgboost,EV>0.05,4.8%,Sim,597,39.0%,1.75,-4.14%,"[-10.5%, 2.5%]",0.886,False,35,-3.97%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,et,EV>0.05,30.2%,Nao,1585,87.8%,8.55,-4.16%,"[-17.3%, 8.6%]",0.7205,False,147,34.97%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+U25,back,nb,EV>0.05,4.9%,Sim,14878,53.6%,1.82,-4.17%,"[-5.7%, -2.8%]",1.0,False,540,-6.09%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,rf,EV>0.05,4.8%,Sim,269,24.9%,1.38,-4.50%,"[-11.4%, 2.9%]",0.8955,False,16,-14.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,lay,dt,EV>0.05,21.9%,Nao,2365,90.5%,12.17,-4.53%,"[-18.2%, 9.0%]",0.7345,False,92,32.12%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_H,back,poisson_en,EV>0.05,4.0%,Sim,4534,24.9%,4.52,-4.53%,"[-9.8%, 0.7%]",0.9575,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,gbc,EV>0.05,6.4%,Sim,2350,19.7%,5.44,-4.56%,"[-12.6%, 3.8%]",0.862,False,51,1.37%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_H,back,poisson_huber,EV>0.05,4.0%,Sim,1795,24.8%,4.75,-4.61%,"[-13.1%, 5.0%]",0.842,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_lightgbm,EV>0.05,6.8%,Sim,464,34.7%,1.59,-4.63%,"[-11.2%, 2.3%]",0.9115,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,xgboost,EV>0.05,6.4%,Sim,1526,76.9%,5.27,-4.78%,"[-14.4%, 5.0%]",0.822,False,53,-8.53%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,xgboost,EV>0.05,30.2%,Nao,2799,92.8%,15.17,-4.81%,"[-18.8%, 9.3%]",0.758,False,75,-5.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,gbc,EV>0.05,30.2%,Nao,1046,92.3%,14.25,-4.85%,"[-27.4%, 16.7%]",0.6515,False,24,-16.88%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_en,EV>0.05,6.4%,Sim,9448,21.7%,5.1,-4.87%,"[-8.7%, -0.9%]",0.9935,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,poisson_dt,EV>0.05,4.8%,Sim,3006,41.5%,1.82,-4.90%,"[-8.0%, -1.8%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,poisson_lightgbm,EV>0.05,4.8%,Sim,1146,33.1%,1.55,-4.90%,"[-9.1%, -0.7%]",0.989,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,lda,EV>0.05,30.2%,Nao,2026,92.9%,14.75,-4.93%,"[-21.3%, 11.1%]",0.7185,False,56,42.50%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+U25,back,rf,EV>0.05,4.9%,Sim,1049,31.2%,3.24,-4.98%,"[-13.8%, 4.1%]",0.867,False,65,-2.32%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,back,poisson_lasso,EV>0.05,4.0%,Sim,5209,25.0%,4.41,-4.99%,"[-9.5%, 0.0%]",0.9745,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_gbr,EV>0.05,6.8%,Sim,573,35.1%,1.61,-5.06%,"[-10.9%, 1.6%]",0.947,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,lda,EV>0.05,30.2%,Nao,1670,13.2%,7.64,-5.06%,"[-17.2%, 7.5%]",0.8045,False,114,-32.19%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,back,poisson_gbr,EV>0.05,6.8%,Sim,1257,39.1%,2.49,-5.08%,"[-12.0%, 1.1%]",0.942,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,lda,EV>0.05,4.0%,Sim,1671,64.0%,3.02,-5.12%,"[-11.7%, 1.6%]",0.934,False,17,-7.47%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,back,rf,EV>0.05,4.0%,Sim,2094,26.9%,4.73,-5.26%,"[-13.0%, 2.6%]",0.917,False,74,-16.08%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,lay,lda,EV>0.05,4.9%,Sim,176,55.1%,2.97,-5.38%,"[-25.0%, 12.6%]",0.7065,False,3,-73.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,poisson_gbr,EV>0.05,4.0%,Sim,851,31.1%,1.59,-5.42%,"[-10.1%, -0.7%]",0.9865,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,poisson_lightgbm,EV>0.05,4.0%,Sim,839,30.6%,1.57,-5.49%,"[-10.2%, -0.9%]",0.989,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_lasso,EV>0.05,6.4%,Sim,9847,20.7%,5.26,-5.52%,"[-9.5%, -1.5%]",0.997,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,gbc,EV>0.05,4.8%,Sim,450,24.7%,1.39,-5.53%,"[-10.8%, -0.2%]",0.977,False,29,-3.55%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,gbc,EV>0.05,6.4%,Sim,375,66.1%,3.15,-5.53%,"[-20.7%, 8.6%]",0.786,False,3,5.33%,Sim,False,Reprovado FDR (p > FDR_thresh)
+U25,lay,nb,EV>0.05,4.9%,Sim,6347,62.0%,2.87,-5.61%,"[-9.1%, -2.2%]",0.9995,False,279,-7.27%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,lr,EV>0.05,30.2%,Nao,1569,10.5%,9.97,-5.62%,"[-19.5%, 9.1%]",0.7665,False,42,66.90%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+U25,lay,lr,EV>0.05,4.9%,Sim,198,59.6%,3.54,-5.70%,"[-25.6%, 13.5%]",0.7145,False,7,-13.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,gbc,EV>0.05,4.0%,Sim,336,30.7%,1.59,-5.71%,"[-13.8%, 2.9%]",0.9205,False,2,33.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+U25,lay,rf,EV>0.05,4.9%,Sim,597,42.7%,2.12,-5.77%,"[-14.0%, 2.2%]",0.9205,False,19,25.79%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_D,back,dt,EV>0.05,6.4%,Sim,3392,23.1%,4.33,-5.80%,"[-11.8%, 0.5%]",0.965,False,108,-3.56%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x1,lay,nb,EV>0.05,19.3%,Nao,3329,91.4%,12.13,-5.80%,"[-17.3%, 5.7%]",0.8345,False,201,-22.46%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,poisson_huber,EV>0.05,4.0%,Sim,554,52.9%,2.8,-5.82%,"[-17.3%, 4.5%]",0.858,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_lightgbm,EV>0.05,6.4%,Sim,9161,19.9%,5.49,-6.01%,"[-10.1%, -1.8%]",0.997,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,back,et,EV>0.05,4.9%,Sim,4552,34.8%,2.8,-6.11%,"[-9.8%, -2.2%]",0.9985,False,280,6.55%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_1x0,back,et,EV>0.05,21.9%,Nao,3702,7.7%,12.44,-6.12%,"[-16.1%, 4.5%]",0.8725,False,205,49.46%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,lay,poisson_huber,EV>0.05,4.8%,Sim,18105,50.1%,2.15,-6.18%,"[-7.8%, -4.7%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,lda,EV>0.05,6.4%,Sim,3266,73.5%,4.17,-6.21%,"[-12.7%, -0.3%]",0.98,False,144,0.37%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x1,lay,et,EV>0.05,27.8%,Nao,2021,87.2%,8.11,-6.24%,"[-17.2%, 5.6%]",0.845,False,105,17.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_H,lay,rf,EV>0.05,4.0%,Sim,345,60.3%,3.51,-6.30%,"[-22.6%, 9.9%]",0.7695,False,13,13.38%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+BTTS_Y,back,poisson_rf,EV>0.05,6.8%,Sim,593,37.4%,2.62,-6.31%,"[-16.3%, 3.3%]",0.905,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_en,EV>0.05,6.8%,Sim,208,42.3%,2.33,-6.45%,"[-21.4%, 8.8%]",0.789,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,back,et,EV>0.05,6.4%,Sim,8675,18.5%,5.76,-6.46%,"[-10.8%, -2.2%]",0.9975,False,405,-1.77%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,back,poisson_gbr,EV>0.05,6.4%,Sim,9195,20.0%,5.47,-6.47%,"[-10.5%, -2.3%]",0.9985,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,et,EV>0.05,6.8%,Sim,1145,32.4%,1.56,-6.56%,"[-10.7%, -2.3%]",0.9985,False,122,-3.48%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,back,xgboost,EV>0.05,4.9%,Sim,1545,36.7%,2.79,-6.67%,"[-13.2%, 0.3%]",0.9725,False,82,-8.34%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,poisson_rf,EV>0.05,4.8%,Sim,1370,34.8%,1.64,-6.73%,"[-10.9%, -2.8%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,et,EV>0.05,6.4%,Sim,3047,17.2%,5.85,-6.83%,"[-14.4%, 0.6%]",0.9645,False,154,-3.70%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x0,back,nb,EV>0.05,21.9%,Nao,13707,12.1%,8.12,-6.84%,"[-11.2%, -2.4%]",0.9995,False,571,19.95%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,lay,poisson_gbr,EV>0.05,4.8%,Sim,1307,31.7%,1.55,-6.88%,"[-10.7%, -3.0%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,lightgbm,EV>0.05,21.9%,Nao,2622,8.8%,10.91,-6.89%,"[-18.9%, 4.7%]",0.8785,False,82,-10.73%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,dt,EV>0.05,4.8%,Sim,1116,43.9%,2.03,-7.04%,"[-13.1%, -1.1%]",0.994,False,37,-0.32%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,lda,EV>0.05,4.8%,Sim,460,43.5%,2.35,-7.06%,"[-17.6%, 4.0%]",0.881,False,8,55.25%,Sim,False,Reprovado FDR (p > FDR_thresh)
+BTTS_Y,lay,gbc,EV>0.05,6.8%,Sim,235,34.0%,1.66,-7.14%,"[-17.6%, 2.5%]",0.926,False,28,-23.14%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_huber,EV>0.05,6.8%,Sim,14734,48.1%,2.05,-7.14%,"[-8.8%, -5.5%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_ridge,EV>0.05,6.8%,Sim,187,39.0%,2.47,-7.25%,"[-23.0%, 9.9%]",0.803,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,lr,EV>0.05,4.0%,Sim,1537,34.3%,4.01,-7.26%,"[-15.3%, 1.0%]",0.956,False,17,-29.88%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_dt,EV>0.05,6.4%,Sim,768,15.6%,6.78,-7.34%,"[-23.0%, 8.5%]",0.8245,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,nb,EV>0.05,4.0%,Sim,12265,67.1%,3.72,-7.35%,"[-10.2%, -4.6%]",1.0,False,392,-14.19%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,lay,poisson_rf,EV>0.05,4.0%,Sim,440,49.3%,2.38,-7.35%,"[-18.2%, 3.5%]",0.9065,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x1,back,xgboost,EV>0.05,27.8%,Nao,2955,9.7%,10.16,-7.42%,"[-17.4%, 3.6%]",0.9225,False,70,-71.29%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,poisson_lr,EV>0.05,6.4%,Sim,174,44.3%,3.4,-7.48%,"[-25.9%, 8.5%]",0.803,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,poisson_ridge,EV>0.05,6.4%,Sim,173,43.4%,3.38,-7.53%,"[-24.4%, 9.9%]",0.8095,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,poisson_huber,EV>0.05,30.2%,Nao,10072,9.0%,10.82,-7.56%,"[-13.5%, -1.4%]",0.9925,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,poisson_et,EV>0.05,6.4%,Sim,7660,20.2%,5.25,-7.60%,"[-12.0%, -2.9%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_rf,EV>0.05,6.4%,Sim,546,13.4%,7.79,-7.62%,"[-28.0%, 14.2%]",0.773,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,nb,EV>0.05,6.8%,Sim,3338,56.2%,2.47,-7.71%,"[-11.7%, -3.5%]",1.0,False,177,-13.21%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,poisson_dt,EV>0.05,6.4%,Sim,4215,70.6%,3.76,-7.84%,"[-12.8%, -3.0%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,dt,EV>0.05,6.4%,Sim,3065,77.3%,6.56,-7.85%,"[-16.9%, 0.3%]",0.967,False,120,-18.72%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,rf,EV>0.05,6.8%,Sim,151,30.5%,1.57,-7.88%,"[-19.5%, 2.6%]",0.9235,False,34,-11.82%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,nb,EV>0.05,6.4%,Sim,12154,79.1%,5.98,-7.95%,"[-11.9%, -4.1%]",1.0,False,559,-3.95%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,nb,EV>0.05,6.4%,Sim,4711,81.0%,5.97,-8.03%,"[-15.0%, -1.8%]",0.996,False,209,5.48%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,poisson_huber,EV>0.05,4.8%,Sim,17,52.9%,2.16,-8.18%,"[-53.4%, 36.1%]",0.6345,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_huber,EV>0.05,6.8%,Sim,56,39.3%,2.61,-8.38%,"[-38.7%, 22.6%]",0.6805,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,rf,EV>0.05,21.9%,Nao,1769,9.4%,10.19,-8.47%,"[-21.3%, 4.7%]",0.8815,False,75,1.60%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x0,back,xgboost,EV>0.05,30.2%,Nao,1711,9.6%,10.16,-8.50%,"[-22.3%, 5.3%]",0.892,False,94,-35.53%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+U25,back,lightgbm,EV>0.05,4.9%,Sim,1606,30.7%,3.16,-8.50%,"[-15.4%, -1.2%]",0.992,False,86,-22.09%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,poisson_dt,EV>0.05,6.8%,Sim,2834,42.9%,1.9,-8.51%,"[-12.0%, -5.1%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+U25,back,gbc,EV>0.05,4.9%,Sim,1557,29.9%,3.21,-8.54%,"[-15.9%, -1.3%]",0.9875,False,92,-13.46%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,gbc,EV>0.05,6.4%,Sim,3026,15.7%,6.82,-8.56%,"[-16.6%, -0.4%]",0.981,False,173,8.75%,Sim,False,Reprovado FDR (p > FDR_thresh)
+BTTS_Y,back,poisson_xgboost,EV>0.05,6.8%,Sim,498,40.6%,2.43,-8.65%,"[-18.4%, 1.8%]",0.9475,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,lay,poisson_xgboost,EV>0.05,4.0%,Sim,1206,51.8%,2.73,-8.70%,"[-16.6%, -2.0%]",0.993,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_H,back,lda,EV>0.05,4.0%,Sim,1893,32.4%,4.82,-8.71%,"[-16.9%, -0.6%]",0.9815,False,41,5.49%,Sim,False,Reprovado FDR (p > FDR_thresh)
+U25,back,lda,EV>0.05,4.9%,Sim,468,29.9%,3.39,-8.77%,"[-22.4%, 4.9%]",0.8825,False,26,-16.54%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_gbr,EV>0.05,6.4%,Sim,2576,66.7%,3.2,-8.84%,"[-14.4%, -3.3%]",0.999,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_rf,EV>0.05,6.8%,Sim,1151,37.6%,1.74,-8.89%,"[-13.7%, -4.1%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,poisson_et,EV>0.05,6.4%,Sim,2925,66.7%,3.2,-8.94%,"[-13.9%, -3.8%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,dt,EV>0.05,21.9%,Nao,4240,9.9%,9.97,-8.96%,"[-17.9%, -0.3%]",0.9775,False,136,-3.68%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,back,poisson_gbr,EV>0.05,6.4%,Sim,1269,14.3%,7.05,-8.97%,"[-21.8%, 3.6%]",0.907,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x0,lay,lightgbm,EV>0.05,21.9%,Nao,976,86.5%,8.97,-8.99%,"[-27.3%, 7.4%]",0.842,False,31,-15.81%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_rf,EV>0.05,6.4%,Sim,2389,67.5%,3.32,-9.17%,"[-15.4%, -3.1%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,dt,EV>0.05,6.8%,Sim,727,48.3%,2.12,-9.21%,"[-16.6%, -1.3%]",0.9915,False,23,-29.74%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,back,poisson_lasso,EV>0.05,4.8%,Sim,161,36.6%,2.52,-9.27%,"[-28.4%, 10.8%]",0.818,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_lightgbm,EV>0.05,6.4%,Sim,1262,14.0%,7.08,-9.29%,"[-21.9%, 3.9%]",0.9225,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,back,poisson_lr,EV>0.05,6.4%,Sim,303,12.9%,8.09,-9.37%,"[-36.2%, 19.8%]",0.7595,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+U25,lay,dt,EV>0.05,4.9%,Sim,1914,50.7%,2.36,-9.57%,"[-14.8%, -4.6%]",0.999,False,24,14.62%,Nao,False,Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+O25,lay,poisson_lr,EV>0.05,4.8%,Sim,84,40.5%,2.15,-9.65%,"[-30.6%, 11.4%]",0.8285,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,poisson_lightgbm,EV>0.05,6.4%,Sim,2587,66.4%,3.2,-9.71%,"[-15.3%, -4.1%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,dt,EV>0.05,30.2%,Nao,2156,8.9%,10.51,-9.72%,"[-22.0%, 3.7%]",0.9315,False,101,-43.27%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,back,lightgbm,EV>0.05,6.4%,Sim,2962,15.5%,6.59,-9.76%,"[-17.5%, -1.7%]",0.991,False,187,0.43%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_1x0,lay,nb,EV>0.05,21.9%,Nao,4086,93.0%,16.16,-9.80%,"[-21.9%, 2.3%]",0.939,False,174,-24.57%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_ridge,EV>0.05,6.4%,Sim,2293,68.7%,3.5,-9.87%,"[-16.6%, -3.9%]",0.999,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,back,poisson_lr,EV>0.05,6.8%,Sim,183,37.7%,2.48,-9.92%,"[-27.9%, 7.4%]",0.863,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_H,back,poisson_ridge,EV>0.05,4.0%,Sim,1887,26.6%,4.5,-9.96%,"[-17.7%, -1.8%]",0.9935,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,poisson_lr,EV>0.05,6.4%,Sim,2296,68.6%,3.49,-9.97%,"[-16.4%, -3.7%]",0.9995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,rf,EV>0.05,6.4%,Sim,1402,21.6%,4.75,-10.01%,"[-19.0%, -0.4%]",0.977,False,54,-14.81%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,poisson_lr,EV>0.05,6.8%,Sim,666,52.9%,2.35,-10.09%,"[-18.6%, -1.0%]",0.9865,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_huber,EV>0.05,6.4%,Sim,875,16.8%,5.76,-10.34%,"[-23.3%, 4.3%]",0.9315,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,poisson_ridge,EV>0.05,6.8%,Sim,702,53.4%,2.39,-10.51%,"[-19.1%, -1.3%]",0.988,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,lr,EV>0.05,6.4%,Sim,924,76.5%,6.05,-10.52%,"[-25.2%, 4.1%]",0.917,False,30,32.00%,Sim,False,Reprovado FDR (p > FDR_thresh)
+1X2_H,back,poisson_lr,EV>0.05,4.0%,Sim,1882,26.3%,4.47,-10.54%,"[-18.7%, -2.2%]",0.995,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_A,lay,poisson_rf,EV>0.05,6.4%,Sim,341,33.1%,2.01,-10.89%,"[-22.2%, 0.0%]",0.9745,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,back,gbc,EV>0.05,21.9%,Nao,2470,8.5%,10.96,-10.97%,"[-22.6%, 1.3%]",0.956,False,68,0.29%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_D,back,poisson_ridge,EV>0.05,6.4%,Sim,301,13.0%,8.05,-11.03%,"[-35.9%, 17.2%]",0.793,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_xgboost,EV>0.05,6.4%,Sim,2820,70.1%,3.77,-11.13%,"[-17.3%, -4.5%]",0.999,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,lr,EV>0.05,4.8%,Sim,111,40.5%,2.31,-11.14%,"[-29.8%, 7.2%]",0.8875,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,lay,gbc,EV>0.05,21.9%,Nao,984,85.9%,8.39,-11.18%,"[-27.9%, 5.3%]",0.9025,False,31,-63.23%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_en,EV>0.05,6.4%,Sim,2268,67.7%,3.67,-11.61%,"[-18.5%, -5.2%]",0.999,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+O25,lay,nb,EV>0.05,4.8%,Sim,14811,53.7%,2.43,-12.03%,"[-14.2%, -10.0%]",1.0,False,536,-11.80%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,poisson_rf,EV>0.05,30.2%,Nao,318,6.6%,13.16,-12.42%,"[-45.4%, 24.4%]",0.752,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_lasso,EV>0.05,6.4%,Sim,2362,67.3%,3.67,-12.76%,"[-19.5%, -5.9%]",1.0,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,lay,poisson_et,EV>0.05,30.2%,Nao,2048,87.0%,9.07,-12.78%,"[-25.3%, -0.5%]",0.9795,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_A,lay,poisson_dt,EV>0.05,6.4%,Sim,1564,56.9%,3.64,-13.30%,"[-21.9%, -4.8%]",0.999,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_et,EV>0.05,6.4%,Sim,690,12.6%,7.77,-13.46%,"[-31.1%, 5.0%]",0.9235,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,nb,EV>0.05,30.2%,Nao,11471,9.5%,9.7,-14.10%,"[-19.2%, -9.1%]",1.0,False,422,-11.56%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,back,lightgbm,EV>0.05,30.2%,Nao,565,8.8%,10.8,-14.19%,"[-37.6%, 10.1%]",0.891,False,21,16.67%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+1X2_D,lay,et,EV>0.05,6.4%,Sim,644,62.4%,2.98,-14.39%,"[-25.3%, -3.0%]",0.9955,False,51,27.37%,Sim,False,Reprovado FDR (p > FDR_thresh)
+CS_0x0,lay,dt,EV>0.05,30.2%,Nao,2099,92.9%,17.47,-14.97%,"[-32.5%, 3.9%]",0.9415,False,91,46.21%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Instabilidade entre Modelos
+CS_0x0,back,et,EV>0.05,30.2%,Nao,850,6.0%,14.26,-15.21%,"[-36.5%, 7.6%]",0.9115,False,28,-51.79%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,nb,EV>0.05,30.2%,Nao,3399,94.1%,19.35,-15.36%,"[-31.3%, -1.1%]",0.979,False,125,-49.48%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x0,lay,et,EV>0.05,21.9%,Nao,1735,83.3%,6.77,-15.53%,"[-27.5%, -4.2%]",0.9955,False,144,-23.09%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+BTTS_Y,lay,poisson_en,EV>0.05,6.8%,Sim,364,56.3%,2.73,-15.73%,"[-29.3%, -1.9%]",0.988,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+BTTS_Y,lay,poisson_lasso,EV>0.05,6.8%,Sim,237,55.3%,2.76,-15.86%,"[-33.0%, 0.1%]",0.9735,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_1x0,lay,xgboost,EV>0.05,21.9%,Nao,2279,89.3%,11.71,-16.48%,"[-31.7%, -2.3%]",0.989,False,76,-108.88%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,back,poisson_lasso,EV>0.05,6.4%,Sim,872,14.7%,6.05,-16.49%,"[-29.6%, -2.6%]",0.993,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x1,back,nb,EV>0.05,27.8%,Nao,12131,9.3%,9.45,-16.64%,"[-21.2%, -11.8%]",1.0,False,474,-15.65%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,lay,lda,EV>0.05,4.8%,Sim,110,28.2%,1.68,-18.55%,"[-34.4%, -4.3%]",0.996,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,back,poisson_xgboost,EV>0.05,6.4%,Sim,537,12.3%,7.31,-18.61%,"[-37.9%, 0.3%]",0.9735,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,back,poisson_en,EV>0.05,6.4%,Sim,629,14.1%,6.35,-18.91%,"[-35.4%, -2.8%]",0.9865,False,0,0.00%,Nao,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+O25,back,poisson_lr,EV>0.05,4.8%,Sim,79,31.6%,2.74,-19.56%,"[-46.7%, 9.7%]",0.9185,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+1X2_D,lay,lda,EV>0.05,6.4%,Sim,783,70.0%,3.95,-19.62%,"[-31.8%, -8.0%]",0.9995,False,16,11.56%,Sim,False,Reprovado FDR (p > FDR_thresh)
+O25,back,poisson_ridge,EV>0.05,4.8%,Sim,75,33.3%,2.55,-20.41%,"[-46.7%, 6.8%]",0.9275,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x1,lay,lr,EV>0.05,27.8%,Nao,573,92.5%,16.79,-24.05%,"[-62.3%, 8.7%]",0.916,False,45,-36.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+1X2_D,lay,poisson_huber,EV>0.05,6.4%,Sim,202,66.8%,5.83,-26.12%,"[-60.6%, 1.7%]",0.9655,False,0,0.00%,Sim,False,Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%)
+CS_0x0,back,poisson_lightgbm,EV>0.05,30.2%,Nao,127,4.7%,13.83,-34.65%,"[-79.1%, 20.9%]",0.904,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_1x0,lay,lda,EV>0.05,21.9%,Nao,307,88.6%,11.24,-34.89%,"[-77.7%, 3.7%]",0.956,False,9,-158.33%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_lr,EV>0.05,30.2%,Nao,177,89.8%,15.52,-36.30%,"[-104.2%, 20.5%]",0.8675,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_ridge,EV>0.05,30.2%,Nao,177,89.8%,15.28,-40.25%,"[-107.7%, 21.0%]",0.8915,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos
+CS_0x0,lay,poisson_huber,EV>0.05,30.2%,Nao,13,76.9%,11.25,-96.92%,"[-100.0%, +100.0%]",1.0,False,0,0.00%,Nao,False,Mercado Ilíquido (Spread > 15%) | Reprovado FDR (p > FDR_thresh) | Colapso OOS (ROI Confirmação <= 0%) | Instabilidade entre Modelos

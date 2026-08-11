@@ -79,15 +79,24 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Carregamento de Dados
+# Carregamento de Dados com múltiplos caminhos de fallback (Robusto contra Cloud / Local)
 @st.cache_data
 def load_data():
-    csv_path = "scratch/tabela_consolidada_todos_metodos_arkad.csv"
-    if os.path.exists(csv_path):
-        df = pd.read_csv(csv_path)
-    else:
-        df = pd.read_csv("scratch/resultado_busca_edge_arkad.csv")
-    return df
+    candidate_paths = [
+        "tabela_consolidada_todos_metodos_arkad.csv",
+        "scratch/tabela_consolidada_todos_metodos_arkad.csv",
+        "scratch/resultado_busca_edge_arkad.csv"
+    ]
+    
+    for path in candidate_paths:
+        if os.path.exists(path):
+            try:
+                return pd.read_csv(path)
+            except Exception:
+                continue
+                
+    st.error("ERRO: Tabela de métodos não encontrada. Por favor, execute a auditoria para gerar o arquivo.")
+    st.stop()
 
 df_methods = load_data()
 
