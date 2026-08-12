@@ -55,6 +55,7 @@ def generate_forward_signals(df_games):
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
         odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
+        xg_a_r5 = float(row.get('A_xGF_r5', row.get('Media_Gols_Pro_Visitante', 1.0)) or 1.0)
         
         # Sinais de Resultados Reais (se o jogo já tiver finalizado)
         gh = row.get('Goals_H_FT')
@@ -119,14 +120,14 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
 
-        # 5. LAY 0x3 VISITANTE UNDER 2.5 (Odd Under <= 1.85 e Odd Lay 15.0 a 35.0 Reais) [ROI +20.53%]
-        if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0):
+        # 5. LAY 0x3 VISITANTE UNDER 2.5 + xG PROTECTED (Odd Under <= 1.85, Odd Lay 15-35, xG Visitante <= 1.10) [ROI +23.34%]
+        if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0) and (xg_a_r5 <= 1.10):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
             signals.append({
                 'data': game_date, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay 0x3 Visitante Under 2.5', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'metodo': 'Lay 0x3 Visitante Under 2.5 (xG Protected)', 'mercado': 'CS_0x3', 'lado': 'lay',
                 'odd_execucao': odd_cs03_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
@@ -136,7 +137,7 @@ def generate_forward_signals(df_games):
     return df_signals
 
 def run_forward_campaign():
-    print("=== GERAÇÃO DE SINAIS PAPER TRADING (ODDS REAIS BETFAIR LAY 15-35) ===", flush=True)
+    print("=== GERAÇÃO DE SINAIS PAPER TRADING (LAY 0x3 xG PROTECTED ROI +23.34%) ===", flush=True)
     df_games = load_upcoming_games()
     df_signals = generate_forward_signals(df_games)
     
@@ -146,7 +147,7 @@ def run_forward_campaign():
             df_signals.to_excel(FORWARD_LOG_EXCEL, index=False)
         except Exception:
             pass
-        print(f"[OK] {len(df_signals)} palpites gerados e alinhados com odds reais Betfair!", flush=True)
+        print(f"[OK] {len(df_signals)} palpites gerados e alinhados com filtro de Proteção de Banca xG!", flush=True)
 
 if __name__ == "__main__":
     run_forward_campaign()

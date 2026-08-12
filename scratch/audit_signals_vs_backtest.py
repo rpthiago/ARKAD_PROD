@@ -66,6 +66,7 @@ def run_audit():
             odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
             odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
             odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
+            xg_a_r5 = float(row.get('A_xGF_r5', row.get('Media_Gols_Pro_Visitante', 1.0)) or 1.0)
             
             if 8.0 <= odd_cs00_lay <= 12.0:
                 backtest_picks.append({'jogo': match_name, 'metodo': 'Lay 0x0 Protegido', 'odd': odd_cs00_lay})
@@ -75,8 +76,8 @@ def run_audit():
                 backtest_picks.append({'jogo': match_name, 'metodo': 'Over 2.5 Back Valor', 'odd': odd_o25_back})
             if 2.20 <= odd_btts_lay <= 3.20:
                 backtest_picks.append({'jogo': match_name, 'metodo': 'BTTS Lay Quant', 'odd': odd_btts_lay})
-            if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0):
-                backtest_picks.append({'jogo': match_name, 'metodo': 'Lay 0x3 Visitante Under 2.5', 'odd': odd_cs03_lay})
+            if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0) and (xg_a_r5 <= 1.10):
+                backtest_picks.append({'jogo': match_name, 'metodo': 'Lay 0x3 Visitante Under 2.5 (xG Protected)', 'odd': odd_cs03_lay})
                 
         df_bt = pd.DataFrame(backtest_picks)
         
