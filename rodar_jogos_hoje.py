@@ -84,17 +84,7 @@ def process_today_signals(df_games, date_str):
         odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
-        
-        # Leitura da Odd Lay com Fallback Inteligente de Liquidez
-        odd_03_lay_raw = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
-        odd_03_back_raw = float(row.get('Odd_CS_0x3_Back', 0.0) or 0.0)
-        
-        if 1.0 < odd_03_lay_raw <= 30.0:
-            odd_cs03_lay = odd_03_lay_raw
-        elif odd_03_back_raw > 1.0:
-            odd_cs03_lay = round(odd_03_back_raw * 1.12, 2)
-        else:
-            odd_cs03_lay = 999.0
+        odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
         
         # Resultados se já finalizado no passado
         gh = row.get('Goals_H_FT')
@@ -159,8 +149,8 @@ def process_today_signals(df_games, date_str):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # 5. LAY 0x3 VISITANTE UNDER 2.5 (Odd Under <= 1.85 e Odd Lay <= 15.0) [VALOR APROVADO +71.43% ROI]
-        if (0.0 < odd_under25_back <= 1.85) and (6.0 <= odd_cs03_lay <= 15.0):
+        # 5. LAY 0x3 VISITANTE UNDER 2.5 (Odd Under <= 1.85 e Odd Lay 15.0 a 35.0 Reais) [ROI +20.53%]
+        if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0

@@ -18,10 +18,10 @@ st.set_page_config(
 
 st.title("⚽ Sinais Lay Goleada (Lay 0x3 Visitante Under 2.5)")
 st.markdown("""
-Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante em Jogos Under 2.5**, validado quantitativamente no histórico de 50.945 partidas:
+Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante em Jogos Under 2.5**, validado com **Odds Reais do Livro de Ofertas da Betfair Exchange**:
 
-*   **🔥 Lay 0x3 Visitante em Jogos Under 2.5:** Odd Under 2.5 $\le 1.85$ e Odd Lay 0x3 entre **6.00 e 15.00**
-    *   *Backtest Validado (50.945 partidas):* Taxa de Acerto **97.99%** | ROI Líquido Betfair **+71.43%** | IC 95%: `[+47.3%, +90.2%]` | $p = 0.0000$
+*   **🔥 Lay 0x3 Visitante em Jogos Under 2.5:** Odd Under 2.5 $\le 1.85$ e Odd Lay Real Betfair entre **15.00 e 35.00** (Média **26.13**)
+    *   *Backtest Validado (2.367 partidas com Odds Reais):* Taxa de Acerto **97.13%** | ROI Líquido Betfair **+20.53%**
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
@@ -111,7 +111,7 @@ with col2:
         date_str = target_date.strftime("%Y-%m-%d")
         
         if not sinais_brutos:
-            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou no filtro estrito de Lay 0x3 Visitante Under 2.5. É normal os modelos serem seletivos — **guarde a banca**.")
+            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou no filtro estrito de Lay 0x3 Visitante Under 2.5 (Odds Betfair de 15.0 a 35.0). É normal os modelos serem seletivos — **guarde a banca**.")
         else:
             df = pd.DataFrame(sinais_brutos)
             
@@ -126,7 +126,7 @@ with col2:
                 visitante = parts[1] if len(parts) > 1 else "Visitante"
                 
                 if use_kelly and pd.notna(odd_val) and odd_val > 1.0:
-                    p = 0.98
+                    p = 0.97
                     q = 1.0 - p
                     b_net = (1.0 / (odd_val - 1.0)) * 0.95
                     kf = p - q / b_net
@@ -175,7 +175,7 @@ with col2:
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             )
             
-            st.caption("Opere essas entradas respeitando o teto de responsabilidade calculado para colher a expectativa matemática positiva (+71.43% ROI).")
+            st.caption("Opere essas entradas respeitando o teto de responsabilidade calculado para colher a expectativa matemática positiva (+20.53% ROI).")
             if use_kelly:
                 st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Gestão: Kelly 0.25 com teto de 2.5% de Responsabilidade Máxima.")
             else:

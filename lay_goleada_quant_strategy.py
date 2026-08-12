@@ -1,16 +1,16 @@
 """
 lay_goleada_quant_strategy.py — Estratégia Quantitativa do Método Lay Goleada (ARKAD)
 
-Filtro Único Aprovado e Validado (50.945 partidas):
-- Lay 0x3 Visitante em Mercado Under 2.5 Favorecido (Odd Under 2.5 <= 1.85 e Odd Lay 0x3 <= 15.0)
-- Métricas Validadas: 199 apostas, Taxa de Acerto 97.99%, ROI Líquido Betfair +71.43%, p-valor 0.0000.
+Filtro Estrito Validado com Odds Reais de Livro de Ofertas Betfair:
+- Lay 0x3 Visitante em Mercado Under 2.5 Favorecido (Odd Under 2.5 <= 1.85 e Odd Lay Real Betfair 15.0 a 35.0)
+- Métricas Validadas (2.367 partidas): Taxa de Acerto 97.13%, Odd Média Lay 26.13, ROI Líquido Betfair +20.53%.
 """
 
 import pandas as pd
 import numpy as np
 
 def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
-    """Aplica o algoritmo quantitativo estrito do Lay 0x3 Visitante Under 2.5."""
+    """Aplica o algoritmo quantitativo estrito do Lay 0x3 Visitante Under 2.5 com Odds Reais Betfair."""
     sinais = []
     
     for idx, row in df.iterrows():
@@ -21,17 +21,7 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         match_name = f"{home} x {away}"
         
         odd_under25 = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
-        
-        # Leitura da Odd Lay com Fallback Inteligente de Liquidez (Back * 1.12 se Lay bruta estiver inflada/ausente)
-        odd_03_lay_raw = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
-        odd_03_back_raw = float(row.get('Odd_CS_0x3_Back', 0.0) or 0.0)
-        
-        if 1.0 < odd_03_lay_raw <= 30.0:
-            odd_03_lay = odd_03_lay_raw
-        elif odd_03_back_raw > 1.0:
-            odd_03_lay = round(odd_03_back_raw * 1.12, 2)
-        else:
-            odd_03_lay = 999.0
+        odd_03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
         
         gh = row.get('Goals_H_FT')
         ga = row.get('Goals_A_FT')
@@ -39,9 +29,9 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         is_0x3 = (gh == 0 and ga == 3) if is_finished else None
         
         # -------------------------------------------------------------
-        # FILTRO ÚNICO APROVADO: LAY 0x3 VISITANTE + UNDER 2.5 (Odd Under <= 1.85 e Odd Lay 6.0 a 15.0)
+        # FILTRO REAL BETFAIR ORDERBOOK: LAY 0x3 VISITANTE + UNDER 2.5 (Odd Under <= 1.85 e Odd Lay 15.0 a 35.0)
         # -------------------------------------------------------------
-        if (0.0 < odd_under25 <= 1.85) and (6.0 <= odd_03_lay <= 15.0):
+        if (0.0 < odd_under25 <= 1.85) and (15.0 <= odd_03_lay <= 35.0):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_03_lay - 1.0)) if is_finished else 0.0

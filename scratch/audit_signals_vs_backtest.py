@@ -19,7 +19,6 @@ def run_audit():
     print(" [AUDITORIA] CONSISTENCIA DE REGRAS: SINAIS DIARIOS VS BACKTEST MASTER", flush=True)
     print("=========================================================================\n", flush=True)
     
-    # 1. Carregar os Sinais Gerados pelo Motor Diário (forward testing sheet)
     forward_csv = ROOT / "paper_trading_forward_setembro_2026.csv"
     if not forward_csv.exists():
         print(f"[ERRO] Arquivo de sinais {forward_csv.name} nao encontrado.")
@@ -28,7 +27,6 @@ def run_audit():
     df_signals = pd.read_csv(forward_csv)
     print(f"[OK] Sinais do Motor Diario carregados: {len(df_signals)} entradas no historico acumulado.", flush=True)
     
-    # 2. Carregar a Base de Dados de Backtest (FRESH)
     fresh_csv = ROOT / "Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv"
     if not fresh_csv.exists():
         fresh_csv = ROOT / "scratch" / "dataset_leak_free_features.parquet"
@@ -41,7 +39,6 @@ def run_audit():
     df_fresh['Date'] = pd.to_datetime(df_fresh['Date']).dt.strftime('%Y-%m-%d')
     print(f"[OK] Base de Backtest carregada: {len(df_fresh)} partidas registradas de {df_fresh['Date'].min()} ate {df_fresh['Date'].max()}.\n", flush=True)
     
-    # 3. Filtrar as datas comuns de teste (01/08/2026 a 06/08/2026)
     datas_teste = sorted(df_signals['data'].unique())
     print(f"[DATAS ANALISADAS]: {datas_teste}\n", flush=True)
     
@@ -66,9 +63,10 @@ def run_audit():
             odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
             odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
             odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
+            odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
             odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
+            odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
             
-            # Regras idênticas do Backtest
             if 8.0 <= odd_cs00_lay <= 12.0:
                 backtest_picks.append({'jogo': match_name, 'metodo': 'Lay 0x0 Protegido', 'odd': odd_cs00_lay})
             if 3.30 <= odd_d_lay <= 4.50:
@@ -77,10 +75,11 @@ def run_audit():
                 backtest_picks.append({'jogo': match_name, 'metodo': 'Over 2.5 Back Valor', 'odd': odd_o25_back})
             if 2.20 <= odd_btts_lay <= 3.20:
                 backtest_picks.append({'jogo': match_name, 'metodo': 'BTTS Lay Quant', 'odd': odd_btts_lay})
+            if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0):
+                backtest_picks.append({'jogo': match_name, 'metodo': 'Lay 0x3 Visitante Under 2.5', 'odd': odd_cs03_lay})
                 
         df_bt = pd.DataFrame(backtest_picks)
         
-        # Comparar conjunto de pares (jogo, metodo)
         if not df_bt.empty and not signals_date.empty:
             set_bt = set(zip(df_bt['jogo'], df_bt['metodo']))
             set_sig = set(zip(signals_date['jogo'], signals_date['metodo']))
