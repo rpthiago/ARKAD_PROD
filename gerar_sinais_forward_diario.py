@@ -53,6 +53,8 @@ def generate_forward_signals(df_games):
         odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
+        odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', row.get('Odd_CS_0x3_Back', 18.0) * 1.12) or 18.0)
+        odd_cs33_lay = float(row.get('Odd_CS_3x3_Lay', row.get('Odd_CS_3x3_Back', 35.0) * 1.15) or 35.0)
         
         # Sinais de Resultados Reais (se o jogo já tiver finalizado)
         gh = row.get('Goals_H_FT')
@@ -63,10 +65,10 @@ def generate_forward_signals(df_games):
         is_over25 = ((gh + ga) > 2.5) if is_finished else None
         is_btts = (gh > 0 and ga > 0) if is_finished else None
         is_0x0 = (gh == 0 and ga == 0) if is_finished else None
+        is_0x3 = (gh == 0 and ga == 3) if is_finished else None
+        is_3x3 = (gh == 3 and ga == 3) if is_finished else None
         
-        # -------------------------------------------------------------
-        # MÉTODO 1: LAY 0x0 PROTEGIDO (Odd Lay <= 12.0)
-        # -------------------------------------------------------------
+        # 1. LAY 0x0 PROTEGIDO (Odd Lay <= 12.0)
         if 8.0 <= odd_cs00_lay <= 12.0:
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x0 else 'RED') if is_finished else 'Pendente'
@@ -79,9 +81,7 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # -------------------------------------------------------------
-        # MÉTODO 2: LAY DRAW ESTRUTURAL (Odd Lay <= 4.50)
-        # -------------------------------------------------------------
+        # 2. LAY DRAW ESTRUTURAL (Odd Lay <= 4.50)
         if 3.30 <= odd_d_lay <= 4.50:
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_draw else 'RED') if is_finished else 'Pendente'
@@ -94,9 +94,7 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # -------------------------------------------------------------
-        # MÉTODO 3: OVER 2.5 BACK VALOR (Odd Back 1.80 - 2.60)
-        # -------------------------------------------------------------
+        # 3. OVER 2.5 BACK VALOR (Odd Back 1.80 - 2.60)
         if 1.80 <= odd_o25_back <= 2.60:
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if is_over25 else 'RED') if is_finished else 'Pendente'
@@ -109,9 +107,7 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # -------------------------------------------------------------
-        # MÉTODO 4: BTTS LAY QUANT (Odd Lay 2.20 - 3.20)
-        # -------------------------------------------------------------
+        # 4. BTTS LAY QUANT (Odd Lay 2.20 - 3.20)
         if 2.20 <= odd_btts_lay <= 3.20:
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_btts else 'RED') if is_finished else 'Pendente'
@@ -124,11 +120,37 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
 
+        # 5. LAY GOLEADA 0x3 (Odd Lay 10.0 - 18.0)
+        if 10.0 <= odd_cs03_lay <= 18.0:
+            status = 'Finalizado' if is_finished else 'Pendente'
+            res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
+            pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
+            signals.append({
+                'data': game_date, 'liga': league, 'jogo': match_name,
+                'metodo': 'Lay Goleada 0x3', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'odd_execucao': odd_cs03_lay, 'stake': 100.0,
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
+            })
+            
+        # 6. LAY GOLEADA 3x3 (Odd Lay 15.0 - 30.0)
+        if 15.0 <= odd_cs33_lay <= 30.0:
+            status = 'Finalizado' if is_finished else 'Pendente'
+            res = ('GREEN' if not is_3x3 else 'RED') if is_finished else 'Pendente'
+            pnl = (0.95 if not is_3x3 else -(odd_cs33_lay - 1.0)) if is_finished else 0.0
+            signals.append({
+                'data': game_date, 'liga': league, 'jogo': match_name,
+                'metodo': 'Lay Goleada 3x3', 'mercado': 'CS_3x3', 'lado': 'lay',
+                'odd_execucao': odd_cs33_lay, 'stake': 100.0,
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
+            })
+
     df_signals = pd.DataFrame(signals)
     return df_signals
 
 def run_forward_campaign():
-    print("=== GERAÇÃO DE SINAIS PAPER TRADING (ALINHAMENTO BACKTEST MASTER) ===", flush=True)
+    print("=== GERAÇÃO DE SINAIS PAPER TRADING (INCLUINDO LAY GOLEADA) ===", flush=True)
     df_games = load_upcoming_games()
     df_signals = generate_forward_signals(df_games)
     
@@ -138,7 +160,7 @@ def run_forward_campaign():
             df_signals.to_excel(FORWARD_LOG_EXCEL, index=False)
         except Exception:
             pass
-        print(f"[OK] {len(df_signals)} palpites gerados e 100% alinhados com o Backtest Master!", flush=True)
+        print(f"[OK] {len(df_signals)} palpites gerados e alinhados!", flush=True)
 
 if __name__ == "__main__":
     run_forward_campaign()

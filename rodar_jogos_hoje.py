@@ -26,8 +26,8 @@ def fetch_today_games(target_date_str=None):
     
     # 1. Tentar carregar da API FutPythonTrader se token estiver presente
     try:
-        from futpythontrader_client import get_jogos_do_dia
-        df_api = get_jogos_do_dia(source="betfair", date_str=target_date_str)
+        from futpythontrader_client import get_daily_dataframe
+        df_api = get_daily_dataframe(source="betfair", date_str=target_date_str)
         if df_api is not None and not df_api.empty:
             print(f"[API] {len(df_api)} jogos baixados da API Betfair em tempo real para {target_date_str}!", flush=True)
             return df_api, target_date_str
@@ -79,12 +79,12 @@ def process_today_signals(df_games, date_str):
         match_name = f"{home} x {away}"
         
         # Odds
-        odd_h_lay = float(row.get('Odd_H_Lay', 0.0) or 0.0)
         odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
-        odd_a_lay = float(row.get('Odd_A_Lay', 0.0) or 0.0)
         odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
+        odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', row.get('Odd_CS_0x3_Back', 18.0) * 1.12) or 18.0)
+        odd_cs33_lay = float(row.get('Odd_CS_3x3_Lay', row.get('Odd_CS_3x3_Back', 35.0) * 1.15) or 35.0)
         
         # Resultados se já finalizado no passado
         gh = row.get('Goals_H_FT')
@@ -92,10 +92,11 @@ def process_today_signals(df_games, date_str):
         is_finished = (not is_today_or_future) and (gh is not None and ga is not None and not pd.isna(gh) and not pd.isna(ga) and gh >= 0 and ga >= 0)
         
         is_draw = (gh == ga) if is_finished else None
-        is_away_win = (ga > gh) if is_finished else None
         is_over25 = ((gh + ga) > 2.5) if is_finished else None
         is_btts = (gh > 0 and ga > 0) if is_finished else None
         is_0x0 = (gh == 0 and ga == 0) if is_finished else None
+        is_0x3 = (gh == 0 and ga == 3) if is_finished else None
+        is_3x3 = (gh == 3 and ga == 3) if is_finished else None
         
         # 1. LAY 0x0 PROTEGIDO (Odd Lay <= 12.0)
         if 8.0 <= odd_cs00_lay <= 12.0:
@@ -148,6 +149,32 @@ def process_today_signals(df_games, date_str):
                 'status': status, 'resultado': res,
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
+            
+        # 5. LAY GOLEADA 0x3 (Odd Lay 10.0 - 18.0)
+        if 10.0 <= odd_cs03_lay <= 18.0:
+            status = 'Finalizado' if is_finished else 'Pendente'
+            res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
+            pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
+            signals.append({
+                'data': date_str, 'liga': league, 'jogo': match_name,
+                'metodo': 'Lay Goleada 0x3', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'odd_execucao': odd_cs03_lay, 'stake': 100.0,
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
+            })
+            
+        # 6. LAY GOLEADA 3x3 (Odd Lay 15.0 - 30.0)
+        if 15.0 <= odd_cs33_lay <= 30.0:
+            status = 'Finalizado' if is_finished else 'Pendente'
+            res = ('GREEN' if not is_3x3 else 'RED') if is_finished else 'Pendente'
+            pnl = (0.95 if not is_3x3 else -(odd_cs33_lay - 1.0)) if is_finished else 0.0
+            signals.append({
+                'data': date_str, 'liga': league, 'jogo': match_name,
+                'metodo': 'Lay Goleada 3x3', 'mercado': 'CS_3x3', 'lado': 'lay',
+                'odd_execucao': odd_cs33_lay, 'stake': 100.0,
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
+            })
 
     return pd.DataFrame(signals)
 
@@ -174,7 +201,6 @@ def main():
         # Atualizar planilha acumulada de Paper Trading
         if FORWARD_LOG_PATH.exists():
             df_hist = pd.read_csv(FORWARD_LOG_PATH)
-            # Remove entradas falsas/mistas da mesma data antes de concatenar
             df_hist = df_hist[df_hist['data'] != date_str].copy()
             df_combined = pd.concat([df_hist, df_today], ignore_index=True)
         else:
