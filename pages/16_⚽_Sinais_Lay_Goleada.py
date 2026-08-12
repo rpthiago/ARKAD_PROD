@@ -16,16 +16,14 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("⚽ Sinais Lay Goleada (Placares 0x3 / 3x3)")
+st.title("⚽ Sinais Lay Goleada (Lay 0x3 Visitante Under 2.5)")
 st.markdown("""
-Esta página monitora em **tempo real** as oportunidades do método **Lay Goleada**, operando contra placares elásticos de alta odd na Betfair Exchange:
+Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante em Jogos Under 2.5**, validado quantitativamente no histórico de 50.945 partidas:
 
-*   **🔥 Lay 0x3 Visitante:** Odd Lay Betfair entre **10.00 e 18.00**
-    *   *Backtest Validado (50.945 partidas):* Taxa de Acerto **96.17%** | ROI Líquido Betfair **+41.34%**
-*   **🎯 Lay 3x3 Empate Goleada:** Odd Lay Betfair entre **15.00 e 30.00**
-    *   *Backtest Validado (50.945 partidas):* Taxa de Acerto **98.72%** | ROI Líquido Betfair **+64.95%**
+*   **🔥 Lay 0x3 Visitante em Jogos Under 2.5:** Odd Under 2.5 $\le 1.85$ e Odd Lay 0x3 entre **6.00 e 15.00**
+    *   *Backtest Validado (50.945 partidas):* Taxa de Acerto **97.99%** | ROI Líquido Betfair **+71.43%** | IC 95%: `[+47.3%, +90.2%]` | $p = 0.0000$
 
-> ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente a goleada indicada.
+> ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
 
 # Inicializa o estado de sessão
@@ -84,8 +82,7 @@ if gerar_btn:
             csv_path = "paper_trading_forward_setembro_2026.csv"
             if os.path.exists(csv_path):
                 df_all = pd.read_csv(csv_path)
-                # Filtrar apenas os métodos do Lay Goleada
-                df_day = df_all[(df_all['data'] == date_str) & (df_all['metodo'].str.contains("Goleada", na=False))].to_dict(orient='records')
+                df_day = df_all[(df_all['data'] == date_str) & (df_all['metodo'].str.contains("Lay 0x3", na=False))].to_dict(orient='records')
                 st.session_state.sinais_brutos = df_day
             else:
                 st.session_state.sinais_brutos = []
@@ -102,7 +99,7 @@ if st.session_state.sinais_brutos is None:
     if os.path.exists(csv_path):
         df_all = pd.read_csv(csv_path)
         date_str = target_date.strftime("%Y-%m-%d")
-        df_day = df_all[(df_all['data'] == date_str) & (df_all['metodo'].str.contains("Goleada", na=False))].to_dict(orient='records')
+        df_day = df_all[(df_all['data'] == date_str) & (df_all['metodo'].str.contains("Lay 0x3", na=False))].to_dict(orient='records')
         if df_day:
             st.session_state.sinais_brutos = df_day
             st.session_state.sinais_date = target_date
@@ -114,7 +111,7 @@ with col2:
         date_str = target_date.strftime("%Y-%m-%d")
         
         if not sinais_brutos:
-            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou nos filtros do Lay Goleada (odds Lay entre 10.0 e 30.0). É normal os modelos serem seletivos — **guarde a banca**.")
+            st.info(f"✅ A varredura analisou a grade de **{date_str}**, mas **nenhum** palpite passou no filtro estrito de Lay 0x3 Visitante Under 2.5. É normal os modelos serem seletivos — **guarde a banca**.")
         else:
             df = pd.DataFrame(sinais_brutos)
             
@@ -129,7 +126,7 @@ with col2:
                 visitante = parts[1] if len(parts) > 1 else "Visitante"
                 
                 if use_kelly and pd.notna(odd_val) and odd_val > 1.0:
-                    p = 0.96 if "0x3" in metodo else 0.98
+                    p = 0.98
                     q = 1.0 - p
                     b_net = (1.0 / (odd_val - 1.0)) * 0.95
                     kf = p - q / b_net
@@ -162,23 +159,23 @@ with col2:
                 
             df_final = pd.DataFrame(rows_final)
             
-            st.success(f"🔥 {len(df_final)} Oportunidades de Lay Goleada Encontradas em {date_str}!")
+            st.success(f"🔥 {len(df_final)} Oportunidades Validadas de Lay 0x3 Under 2.5 Encontradas em {date_str}!")
             
             st.dataframe(df_final, use_container_width=True)
             
             buffer = io.BytesIO()
             with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                df_final.to_excel(writer, index=False, sheet_name='Sinais_Lay_Goleada')
+                df_final.to_excel(writer, index=False, sheet_name='Sinais_Lay_0x3_Under25')
             excel_data = buffer.getvalue()
             
             st.download_button(
-                label="📥 Baixar Planilha de Sinais Lay Goleada (Excel)",
+                label="📥 Baixar Planilha de Sinais Lay 0x3 Under 2.5 (Excel)",
                 data=excel_data,
-                file_name=f"sinais_lay_goleada_{date_str}.xlsx",
+                file_name=f"sinais_lay0x3_under25_{date_str}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             )
             
-            st.caption("Opere essas entradas respeitando o teto de responsabilidade calculado para manter a expectativa matemática positiva.")
+            st.caption("Opere essas entradas respeitando o teto de responsabilidade calculado para colher a expectativa matemática positiva (+71.43% ROI).")
             if use_kelly:
                 st.info(f"ℹ️ **Configuração de banca aplicada:** R$ {banca_val:.2f} | Gestão: Kelly 0.25 com teto de 2.5% de Responsabilidade Máxima.")
             else:

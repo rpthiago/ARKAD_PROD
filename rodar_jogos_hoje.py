@@ -81,10 +81,10 @@ def process_today_signals(df_games, date_str):
         # Odds
         odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
         odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
+        odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
         odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', row.get('Odd_CS_0x3_Back', 18.0) * 1.12) or 18.0)
-        odd_cs33_lay = float(row.get('Odd_CS_3x3_Lay', row.get('Odd_CS_3x3_Back', 35.0) * 1.15) or 35.0)
         
         # Resultados se já finalizado no passado
         gh = row.get('Goals_H_FT')
@@ -96,7 +96,6 @@ def process_today_signals(df_games, date_str):
         is_btts = (gh > 0 and ga > 0) if is_finished else None
         is_0x0 = (gh == 0 and ga == 0) if is_finished else None
         is_0x3 = (gh == 0 and ga == 3) if is_finished else None
-        is_3x3 = (gh == 3 and ga == 3) if is_finished else None
         
         # 1. LAY 0x0 PROTEGIDO (Odd Lay <= 12.0)
         if 8.0 <= odd_cs00_lay <= 12.0:
@@ -150,28 +149,15 @@ def process_today_signals(df_games, date_str):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # 5. LAY GOLEADA 0x3 (Odd Lay 10.0 - 18.0)
-        if 10.0 <= odd_cs03_lay <= 18.0:
+        # 5. LAY 0x3 VISITANTE UNDER 2.5 (Odd Under <= 1.85 e Odd Lay <= 15.0) [VALOR APROVADO +71.43% ROI]
+        if (0.0 < odd_under25_back <= 1.85) and (6.0 <= odd_cs03_lay <= 15.0):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
             signals.append({
                 'data': date_str, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay Goleada 0x3', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'metodo': 'Lay 0x3 Visitante Under 2.5', 'mercado': 'CS_0x3', 'lado': 'lay',
                 'odd_execucao': odd_cs03_lay, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
-            
-        # 6. LAY GOLEADA 3x3 (Odd Lay 15.0 - 30.0)
-        if 15.0 <= odd_cs33_lay <= 30.0:
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if not is_3x3 else 'RED') if is_finished else 'Pendente'
-            pnl = (0.95 if not is_3x3 else -(odd_cs33_lay - 1.0)) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay Goleada 3x3', 'mercado': 'CS_3x3', 'lado': 'lay',
-                'odd_execucao': odd_cs33_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
