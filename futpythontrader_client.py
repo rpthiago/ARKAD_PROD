@@ -35,7 +35,6 @@ def _request_with_retry(
     retries = _env_int("FUTPYTHON_RETRIES", 4)
     backoff_base = float(os.getenv("FUTPYTHON_RETRY_BACKOFF", "1.5") or 1.5)
 
-    # Usa timeout em tupla (connect, read) para evitar queda por read timeout curto.
     connect_timeout = float(_env_int("FUTPYTHON_CONNECT_TIMEOUT", 20))
     read_timeout = float(_env_int("FUTPYTHON_READ_TIMEOUT", timeout))
     timeout_tuple = (connect_timeout, read_timeout)
@@ -72,7 +71,6 @@ def _get_api_token() -> str:
         if value:
             return value
 
-    # Streamlit Cloud costuma usar secrets em vez de variaveis de ambiente.
     try:
         import streamlit as st  # type: ignore
 
@@ -171,7 +169,6 @@ def _daily_url(source: str, date_str: str) -> str:
 
 def get_dataframe(source: str, params: Optional[dict] = None, timeout: int = 60) -> pd.DataFrame:
     """Baixa o CSV historico da fonte e devolve DataFrame."""
-    # Fallback local para bet365 para evitar download lento de 54MB
     if str(source).strip().lower() == "bet365":
         local_file = "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"
         if os.path.exists(local_file):
@@ -209,7 +206,6 @@ def get_daily_dataframe(source: str, date_str: str, timeout: int = 20) -> pd.Dat
         records = _extract_records(payload)
         df = pd.DataFrame(records)
     except Exception:
-        # Fallback resiliente: quando jogos-do-dia estiver instavel, tenta historico filtrado por data.
         df_hist = get_dataframe_safe(source=source, timeout=max(timeout, 60))
         df = _day_from_historical(df_hist, date_str)
 
@@ -229,3 +225,7 @@ def get_dataframe_safe(source: str, params: Optional[dict] = None, timeout: int 
         return get_dataframe(source=source, params=params, timeout=timeout)
     except Exception:
         return pd.DataFrame()
+
+
+# Aliases para compatibilidade retroativa
+get_jogos_do_dia = get_daily_dataframe
