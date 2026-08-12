@@ -54,7 +54,17 @@ def generate_forward_signals(df_games):
         odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
-        odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', row.get('Odd_CS_0x3_Back', 18.0) * 1.12) or 18.0)
+        
+        # Leitura da Odd Lay com Fallback Inteligente de Liquidez
+        odd_03_lay_raw = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
+        odd_03_back_raw = float(row.get('Odd_CS_0x3_Back', 0.0) or 0.0)
+        
+        if 1.0 < odd_03_lay_raw <= 30.0:
+            odd_cs03_lay = odd_03_lay_raw
+        elif odd_03_back_raw > 1.0:
+            odd_cs03_lay = round(odd_03_back_raw * 1.12, 2)
+        else:
+            odd_cs03_lay = 999.0
         
         # Sinais de Resultados Reais (se o jogo já tiver finalizado)
         gh = row.get('Goals_H_FT')
@@ -136,7 +146,7 @@ def generate_forward_signals(df_games):
     return df_signals
 
 def run_forward_campaign():
-    print("=== GERAÇÃO DE SINAIS PAPER TRADING (LAY 0x3 UNDER 2.5 VALIDADAS) ===", flush=True)
+    print("=== GERAÇÃO DE SINAIS PAPER TRADING (INCLUINDO LAY 0x3 UNDER 2.5) ===", flush=True)
     df_games = load_upcoming_games()
     df_signals = generate_forward_signals(df_games)
     
@@ -146,7 +156,7 @@ def run_forward_campaign():
             df_signals.to_excel(FORWARD_LOG_EXCEL, index=False)
         except Exception:
             pass
-        print(f"[OK] {len(df_signals)} palpites gerados e alinhados com filtro validado!", flush=True)
+        print(f"[OK] {len(df_signals)} palpites gerados e alinhados com o filtro de liquidez!", flush=True)
 
 if __name__ == "__main__":
     run_forward_campaign()
