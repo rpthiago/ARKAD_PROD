@@ -11,12 +11,12 @@ import streamlit as st
 
 # Configura a página do Streamlit
 st.set_page_config(
-    page_title="Sinais Lay Goleada - Ao Vivo",
+    page_title="Sinais Lay 0x3 - Ao Vivo",
     page_icon="⚽",
     layout="wide",
 )
 
-st.title("⚽ Sinais Lay Goleada (Lay 0x3 Visitante xG Protected)")
+st.title("⚽ Sinais Lay 0x3 (Lay 0x3 Visitante xG Protected)")
 st.markdown("""
 Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante Under 2.5 (com Filtro de Proteção de Banca xG)**:
 
@@ -75,7 +75,7 @@ if st.session_state.sinais_date != target_date:
 
 if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
-    with st.spinner(f"Baixando grade de {date_str}, filtrando placares de Lay Goleada..."):
+    with st.spinner(f"Baixando grade de {date_str}, filtrando placares de Lay 0x3..."):
         try:
             subprocess.run([sys.executable, "rodar_jogos_hoje.py", "--data", date_str], check=True)
             
@@ -89,7 +89,7 @@ if gerar_btn:
                 
             st.session_state.sinais_date = target_date
         except Exception as e:
-            st.error("Erro durante a execução do motor de sinais Lay Goleada:")
+            st.error("Erro durante a execução do motor de sinais Lay 0x3:")
             st.code(traceback.format_exc())
             st.stop()
 
