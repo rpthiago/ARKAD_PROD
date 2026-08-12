@@ -161,7 +161,7 @@ with col2:
                     "Lado": lado.upper(),
                     "Odd Betfair": odd_val,
                     "Responsabilidade (R$)": round(float(resp_max), 2),
-                    "Stake Betfair (R$)": round(float(stake_betfair), 2) if pd.notna(stake_back) else np.nan,
+                    "Stake Betfair (R$)": round(float(stake_betfair), 2) if pd.notna(stake_betfair) else np.nan,
                     "Status": row.get("status", "Pendente"),
                     "Resultado": row.get("resultado", ""),
                     "Lucro (R$)": row.get("pnl_dolar", "")
