@@ -2,78 +2,65 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-01,CHINA 2,Yanbian Longding x Nanjing City,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHINA 2,Yanbian Longding x Nanjing City,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Finalizado,RED,-2.5,-250.0
 2026-08-01,CHINA 2,Yanbian Longding x Nanjing City,Over 2.5 Back Valor,O25,back,2.3,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,CHINA 2,Yanbian Longding x Nanjing City,Lay Zebra Visitante,1X2_A,lay,4.8,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,SOUTH KOREA 1,Gangwon x Bucheon FC 1995,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SOUTH KOREA 1,Gangwon x Bucheon FC 1995,Over 2.5 Back Valor,O25,back,2.06,100.0,Finalizado,GREEN,1.06,106.0
+2026-08-01,SOUTH KOREA 1,Gangwon x Bucheon FC 1995,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SOUTH KOREA 1,Jeonbuk x Seoul,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,RED,-2.4,-240.0
 2026-08-01,SOUTH KOREA 1,Jeonbuk x Seoul,Over 2.5 Back Valor,O25,back,1.99,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-01,SOUTH KOREA 1,Pohang x Gimcheon Sangmu,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SOUTH KOREA 1,Pohang x Gimcheon Sangmu,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SOUTH KOREA 1,Pohang x Gimcheon Sangmu,Over 2.5 Back Valor,O25,back,2.32,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,SOUTH KOREA 1,Pohang x Gimcheon Sangmu,Lay Zebra Visitante,1X2_A,lay,3.55,100.0,Finalizado,RED,-2.55,-255.0
 2026-08-01,SOUTH KOREA 2,Asan x Seongnam,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SOUTH KOREA 2,Asan x Seongnam,Over 2.5 Back Valor,O25,back,2.12,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-01,SOUTH KOREA 2,Cheongju x Suwon Bluewings,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Finalizado,RED,-3.4000000000000004,-340.00000000000006
-2026-08-01,SOUTH KOREA 2,Cheongju x Suwon Bluewings,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.93,93.0
+2026-08-01,SOUTH KOREA 2,Cheongju x Suwon Bluewings,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.9299999999999999,93.0
 2026-08-01,CHINA 2,Ningbo Professional x Guangxi Hengchen,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHINA 2,Ningbo Professional x Guangxi Hengchen,Over 2.5 Back Valor,O25,back,1.87,100.0,Finalizado,GREEN,0.8700000000000001,87.00000000000001
 2026-08-01,CHINA 1,Tianjin Jinmen Tiger x Yunnan Yukun,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,CHINA 1,Shanghai Port x Shandong Taishan,Lay Zebra Visitante,1X2_A,lay,3.8,100.0,Finalizado,RED,-2.8,-280.0
 2026-08-01,SWEDEN 2,Varberg x Falkenberg,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,SWEDEN 2,Varberg x Falkenberg,Lay Zebra Visitante,1X2_A,lay,3.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ICELAND 1,Vestmannaeyjar x Fram,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,NORWAY 1,Fredrikstad x Sandefjord,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,NORWAY 1,Fredrikstad x Sandefjord,Over 2.5 Back Valor,O25,back,1.83,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-01,NORWAY 2,Bryne x Stromsgodset,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,SWEDEN 2,Brage x Landskrona,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,URUGUAY 1,Albion x Danubio,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,URUGUAY 1,Albion x Danubio,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Finalizado,RED,-2.3,-230.0
-2026-08-01,URUGUAY 1,Albion x Danubio,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,RED,-1.2000000000000002,-120.0
+2026-08-01,URUGUAY 1,Albion x Danubio,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Finalizado,RED,-2.3,-229.99999999999997
 2026-08-01,URUGUAY 1,Albion x Danubio,Over 2.5 Back Valor,O25,back,2.54,100.0,Finalizado,GREEN,1.54,154.0
-2026-08-01,URUGUAY 1,Albion x Danubio,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-01,URUGUAY 1,Albion x Danubio,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,RED,-1.2000000000000002,-120.00000000000001
 2026-08-01,FINLAND 1,Gnistan x KuPS,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHILE 1,Cobresal x Union La Calera,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,CHILE 1,Cobresal x Union La Calera,Over 2.5 Back Valor,O25,back,2.18,100.0,Finalizado,GREEN,1.1800000000000002,118.0
+2026-08-01,CHILE 1,Cobresal x Union La Calera,Over 2.5 Back Valor,O25,back,2.18,100.0,Finalizado,GREEN,1.1800000000000002,118.00000000000001
 2026-08-01,ARGENTINA 2,Nueva Chicago x San Martin T.,BTTS Lay Quant,BTTS_Y,lay,2.72,100.0,Finalizado,RED,-1.7200000000000002,-172.00000000000003
 2026-08-01,ARGENTINA 2,Almagro x Midland,BTTS Lay Quant,BTTS_Y,lay,2.68,100.0,Finalizado,RED,-1.6800000000000002,-168.00000000000003
 2026-08-01,ARGENTINA 2,Colegiales x Gimnasia Jujuy,Lay 0x0 Protegido,CS_0x0,lay,8.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 2,Colegiales x Gimnasia Jujuy,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Finalizado,RED,-1.42,-142.0
-2026-08-01,ARGENTINA 2,Colegiales x Gimnasia Jujuy,Lay Zebra Visitante,1X2_A,lay,4.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 2,Ferro x Godoy Cruz,BTTS Lay Quant,BTTS_Y,lay,2.68,100.0,Finalizado,RED,-1.6800000000000002,-168.00000000000003
 2026-08-01,PERU 1,FC Cajamarca x Sport Huancayo,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,PERU 1,FC Cajamarca x Sport Huancayo,Over 2.5 Back Valor,O25,back,1.94,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-01,URUGUAY 1,Maldonado x Juventud,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Finalizado,RED,-3.0,-300.0
 2026-08-01,URUGUAY 1,Maldonado x Juventud,Over 2.5 Back Valor,O25,back,2.08,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,URUGUAY 1,Maldonado x Juventud,Lay Zebra Visitante,1X2_A,lay,4.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 2,Patronato x Quilmes,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Finalizado,RED,-1.5,-150.0
-2026-08-01,ARGENTINA 2,Patronato x Quilmes,Lay Zebra Visitante,1X2_A,lay,4.1,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Estudiantes Rio Cuarto x Banfield,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Gimnasia Mendoza x Union de Santa Fe,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Gimnasia Mendoza x Union de Santa Fe,Over 2.5 Back Valor,O25,back,2.48,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,BOLIVIA 1,Real Oruro x Independiente,Lay Zebra Visitante,1X2_A,lay,4.8,100.0,Finalizado,RED,-3.8,-380.0
 2026-08-01,CHILE 1,Everton x Colo Colo,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHILE 1,Everton x Colo Colo,Over 2.5 Back Valor,O25,back,1.9,100.0,Finalizado,GREEN,0.8999999999999999,89.99999999999999
 2026-08-01,COLOMBIA 1,Dep. Pasto x Aguilas,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,COLOMBIA 1,Dep. Pasto x Aguilas,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,COLOMBIA 1,Dep. Pasto x Aguilas,Over 2.5 Back Valor,O25,back,2.36,100.0,Finalizado,GREEN,1.36,136.0
-2026-08-01,COLOMBIA 1,Dep. Pasto x Aguilas,Lay Zebra Visitante,1X2_A,lay,4.5,100.0,Finalizado,RED,-3.5,-350.0
+2026-08-01,COLOMBIA 1,Dep. Pasto x Aguilas,Over 2.5 Back Valor,O25,back,2.36,100.0,Finalizado,GREEN,1.3599999999999999,136.0
 2026-08-01,ECUADOR 1,Manta x Mushuc Runa,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ECUADOR 1,Manta x Mushuc Runa,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ECUADOR 1,Manta x Mushuc Runa,Over 2.5 Back Valor,O25,back,2.48,100.0,Finalizado,GREEN,1.48,148.0
 2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,RED,-2.4,-240.0
-2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,RED,-1.2000000000000002,-120.0
 2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,Over 2.5 Back Valor,O25,back,2.46,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-01,PARAGUAY 1,Ameliano x 2 de Mayo,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,RED,-1.2000000000000002,-120.00000000000001
 2026-08-01,PERU 1,Grau x Sport Boys,Lay 0x0 Protegido,CS_0x0,lay,9.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,PERU 1,Grau x Sport Boys,Over 2.5 Back Valor,O25,back,2.54,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,PERU 1,Grau x Sport Boys,Lay Zebra Visitante,1X2_A,lay,3.8,100.0,Finalizado,RED,-2.8,-280.0
 2026-08-01,ARGENTINA 1,Belgrano x Argentinos Jrs,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,ARGENTINA 1,Belgrano x Argentinos Jrs,Lay Zebra Visitante,1X2_A,lay,3.75,100.0,Finalizado,RED,-2.75,-275.0
 2026-08-01,ARGENTINA 1,Estudiantes L.P. x Defensa y Justicia,Lay 0x0 Protegido,CS_0x0,lay,9.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Estudiantes L.P. x Defensa y Justicia,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,ARGENTINA 1,Estudiantes L.P. x Defensa y Justicia,BTTS Lay Quant,BTTS_Y,lay,2.54,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Estudiantes L.P. x Defensa y Justicia,Over 2.5 Back Valor,O25,back,2.6,100.0,Finalizado,GREEN,1.6,160.0
+2026-08-01,ARGENTINA 1,Estudiantes L.P. x Defensa y Justicia,BTTS Lay Quant,BTTS_Y,lay,2.54,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,VENEZUELA 1,Monagas x La Guaira,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,VENEZUELA 1,Monagas x La Guaira,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,VENEZUELA 1,Monagas x La Guaira,Over 2.5 Back Valor,O25,back,2.3,100.0,Finalizado,GREEN,1.2999999999999998,129.99999999999997
@@ -84,65 +71,51 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-01,BOLIVIA 1,SA Bulo Bulo x Blooming,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHILE 1,Palestino x Coquimbo,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,CHILE 1,Palestino x Coquimbo,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,CHILE 1,Palestino x Coquimbo,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,128.0
-2026-08-01,ECUADOR 1,U. Catolica x Tecnico U.,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.93,93.0
+2026-08-01,CHILE 1,Palestino x Coquimbo,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,127.99999999999999
+2026-08-01,ECUADOR 1,U. Catolica x Tecnico U.,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.9299999999999999,93.0
 2026-08-01,PARAGUAY 1,Cerro Porteno x Sp. Luqueno,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-01,PARAGUAY 1,Cerro Porteno x Sp. Luqueno,Over 2.5 Back Valor,O25,back,2.16,100.0,Finalizado,GREEN,1.1600000000000001,116.00000000000001
 2026-08-01,PARAGUAY 1,Cerro Porteno x Sp. Luqueno,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,PARAGUAY 1,Cerro Porteno x Sp. Luqueno,Over 2.5 Back Valor,O25,back,2.16,100.0,Finalizado,GREEN,1.16,116.0
 2026-08-01,URUGUAY 1,Penarol x Cerro Largo,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-01,URUGUAY 1,Penarol x Cerro Largo,Over 2.5 Back Valor,O25,back,2.24,100.0,Finalizado,GREEN,1.2400000000000002,124.00000000000003
 2026-08-01,URUGUAY 1,Penarol x Cerro Largo,BTTS Lay Quant,BTTS_Y,lay,2.4,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,URUGUAY 1,Penarol x Cerro Largo,Over 2.5 Back Valor,O25,back,2.24,100.0,Finalizado,GREEN,1.2400000000000002,124.00000000000004
 2026-08-01,USA 2,Miami FC x Detroit,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,RED,-2.9,-290.0
 2026-08-01,USA 2,Miami FC x Detroit,Over 2.5 Back Valor,O25,back,1.9,100.0,Finalizado,GREEN,0.8999999999999999,89.99999999999999
 2026-08-01,COLOMBIA 1,Ind. Medellin x Dep. Cali,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,COLOMBIA 1,Ind. Medellin x Dep. Cali,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,COLOMBIA 1,Ind. Medellin x Dep. Cali,Over 2.5 Back Valor,O25,back,2.34,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,COLOMBIA 1,Ind. Medellin x Dep. Cali,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ARGENTINA 1,Racing Club x Tigre,BTTS Lay Quant,BTTS_Y,lay,2.44,100.0,Finalizado,RED,-1.44,-144.0
-2026-08-01,ARGENTINA 1,Racing Club x Tigre,Lay Zebra Visitante,1X2_A,lay,4.7,100.0,Finalizado,RED,-3.7,-370.0
 2026-08-01,USA 1,CF Montreal x New England Revolution,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,RED,-2.85,-285.0
-2026-08-01,USA 1,CF Montreal x New England Revolution,Lay Zebra Visitante,1X2_A,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,DC United x Nashville SC,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Finalizado,RED,-2.65,-265.0
 2026-08-01,USA 1,DC United x Nashville SC,Over 2.5 Back Valor,O25,back,1.95,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,New York Red Bulls x Orlando City,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,Philadelphia Union x Atlanta Utd,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,Vancouver Whitecaps x Los Angeles FC,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Finalizado,RED,-3.4000000000000004,-340.00000000000006
-2026-08-01,USA 1,Vancouver Whitecaps x Los Angeles FC,Lay Zebra Visitante,1X2_A,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,BRAZIL CUP,Santos x Remo,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,RED,-3.3,-330.0
-2026-08-01,BRAZIL CUP,Santos x Remo,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,BRAZIL CUP,Santos x Remo,Over 2.5 Back Valor,O25,back,2.1,100.0,Finalizado,RED,-1.0,-100.0
+2026-08-01,BRAZIL CUP,Santos x Remo,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ECUADOR 1,Emelec x Aucas,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ECUADOR 1,Emelec x Aucas,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,ECUADOR 1,Emelec x Aucas,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,ECUADOR 1,Emelec x Aucas,Over 2.5 Back Valor,O25,back,2.46,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,ECUADOR 1,Emelec x Aucas,Lay Zebra Visitante,1X2_A,lay,4.0,100.0,Finalizado,RED,-3.0,-300.0
+2026-08-01,ECUADOR 1,Emelec x Aucas,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 2,Tampa Bay x Louisville City,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,USA 2,Tampa Bay x Louisville City,Lay Zebra Visitante,1X2_A,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,Minnesota United x San Diego FC,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,RED,-3.2,-320.0
-2026-08-01,USA 1,Minnesota United x San Diego FC,Lay Zebra Visitante,1X2_A,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,Sporting Kansas City x Houston Dynamo,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,St. Louis City x Real Salt Lake,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,RED,-3.2,-320.0
-2026-08-01,USA 1,St. Louis City x Real Salt Lake,Lay Zebra Visitante,1X2_A,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,COLOMBIA 1,Junior x Millonarios,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,COLOMBIA 1,Junior x Millonarios,Over 2.5 Back Valor,O25,back,1.98,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-01,COLOMBIA 1,Junior x Millonarios,Lay Zebra Visitante,1X2_A,lay,3.6,100.0,Finalizado,RED,-2.6,-260.0
 2026-08-01,USA 1,Colorado Rapids x Austin FC,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,USA 1,Colorado Rapids x Austin FC,Lay Zebra Visitante,1X2_A,lay,4.8,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-01,USA 1,FC Cincinnati x San Jose Earthquakes,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-01,USA 1,Los Angeles Galaxy x FC Dallas,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,RED,-2.9,-290.0
 2026-08-01,USA 1,Portland Timbers x Seattle Sounders,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHINA 1,Qingdao West Coast x Qingdao Hainiu,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SOUTH KOREA 1,Daejeon x Gwangju FC,Over 2.5 Back Valor,O25,back,1.87,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,SOUTH KOREA 1,Ulsan HD x Anyang,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,SOUTH KOREA 1,Ulsan HD x Anyang,Lay Zebra Visitante,1X2_A,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SOUTH KOREA 2,Busan x Seoul E-Land,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SOUTH KOREA 2,Gimpo FC x Gyeongnam,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SOUTH KOREA 2,Gimpo FC x Gyeongnam,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Finalizado,RED,-2.6,-260.0
 2026-08-02,SOUTH KOREA 2,Gimpo FC x Gyeongnam,Over 2.5 Back Valor,O25,back,2.32,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,SOUTH KOREA 2,Gimpo FC x Gyeongnam,Lay Zebra Visitante,1X2_A,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHINA 2,Suzhou Dongwu x Meizhou Hakka,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHINA 2,Suzhou Dongwu x Meizhou Hakka,Over 2.5 Back Valor,O25,back,2.1,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,CHINA 2,Suzhou Dongwu x Meizhou Hakka,Lay Zebra Visitante,1X2_A,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHINA 1,Shenzhen Xinpengcheng x Chongqing Tonglianglong,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHINA 1,Shenzhen Xinpengcheng x Chongqing Tonglianglong,Over 2.5 Back Valor,O25,back,2.02,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,FINLAND 1,VPS x Inter Turku,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Finalizado,GREEN,0.95,95.0
@@ -150,32 +123,25 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-02,SWEDEN 1,Brommapojkarna x Malmo FF,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SWEDEN 1,Goteborg x Degerfors,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,SWEDEN 1,Goteborg x Degerfors,Over 2.5 Back Valor,O25,back,1.87,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,SWEDEN 1,Goteborg x Degerfors,Lay Zebra Visitante,1X2_A,lay,5.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,FINLAND 1,AC Oulu x Ilves,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,FINLAND 1,AC Oulu x Ilves,Over 2.5 Back Valor,O25,back,1.94,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,IRELAND 1,Waterford x Shelbourne,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,NORWAY 1,KFUM Oslo x Kristiansund,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,NORWAY 1,KFUM Oslo x Kristiansund,Lay Zebra Visitante,1X2_A,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,NORWAY 2,Hodd x Moss,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,NORWAY 2,Lyn x Sogndal,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,URUGUAY 1,Racing Montevideo x Boston River,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,URUGUAY 1,Racing Montevideo x Boston River,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,URUGUAY 1,Racing Montevideo x Boston River,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,URUGUAY 1,Racing Montevideo x Boston River,Over 2.5 Back Valor,O25,back,2.3,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,ESTONIA 1,Flora x Harju JK Laagri,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,IRELAND 1,St. Patricks x Derry City,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,RED,-3.1,-309.99999999999994
+2026-08-02,URUGUAY 1,Racing Montevideo x Boston River,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-02,IRELAND 1,St. Patricks x Derry City,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,RED,-3.0999999999999996,-309.99999999999994
 2026-08-02,IRELAND 1,St. Patricks x Derry City,Over 2.5 Back Valor,O25,back,2.1,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,CHILE 1,D. Concepcion x U. Catolica,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHILE 1,D. Concepcion x U. Catolica,Over 2.5 Back Valor,O25,back,1.97,100.0,Finalizado,GREEN,0.97,97.0
 2026-08-02,NORWAY 1,Brann x Rosenborg,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,NORWAY 1,Brann x Rosenborg,Lay Zebra Visitante,1X2_A,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 1,Aldosivi x Gimnasia L.P.,BTTS Lay Quant,BTTS_Y,lay,2.62,100.0,Finalizado,RED,-1.62,-162.0
 2026-08-02,ARGENTINA 1,Dep. Riestra x Barracas Central,BTTS Lay Quant,BTTS_Y,lay,3.05,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 1,Dep. Riestra x Barracas Central,Lay Zebra Visitante,1X2_A,lay,4.7,100.0,Finalizado,RED,-3.7,-370.0
-2026-08-02,ARGENTINA 2,Chacarita Juniors x Agropecuario,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.64,-164.0
-2026-08-02,ARGENTINA 2,Chacarita Juniors x Agropecuario,Lay Zebra Visitante,1X2_A,lay,4.4,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-02,ARGENTINA 2,Chacarita Juniors x Agropecuario,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.6400000000000001,-164.0
 2026-08-02,ARGENTINA 2,Ciudad Bolivar x CA Mitre,BTTS Lay Quant,BTTS_Y,lay,2.76,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 2,Ciudad Bolivar x CA Mitre,Lay Zebra Visitante,1X2_A,lay,4.4,100.0,Finalizado,RED,-3.4000000000000004,-340.00000000000006
 2026-08-02,ARGENTINA 2,San Telmo x San Miguel,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ECUADOR 1,Ind. del Valle x Dep. Cuenca,BTTS Lay Quant,BTTS_Y,lay,2.38,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,URUGUAY 1,Central Esp. x Liverpool M.,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Finalizado,RED,-11.0,-1100.0
@@ -183,86 +149,71 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-02,URUGUAY 1,Central Esp. x Liverpool M.,Over 2.5 Back Valor,O25,back,2.4,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,PERU 1,AD Tarma x Deportivo Garcilaso,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PERU 1,AD Tarma x Deportivo Garcilaso,Over 2.5 Back Valor,O25,back,2.12,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,PERU 1,AD Tarma x Deportivo Garcilaso,Lay Zebra Visitante,1X2_A,lay,3.7,100.0,Finalizado,RED,-2.7,-270.0
 2026-08-02,ARGENTINA 2,Deportivo Maipu x Atletico Atlanta,BTTS Lay Quant,BTTS_Y,lay,2.4,100.0,Finalizado,RED,-1.4,-140.0
-2026-08-02,ARGENTINA 2,Deportivo Maipu x Atletico Atlanta,Lay Zebra Visitante,1X2_A,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 2,Temperley x Gimnasia y Tiro,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.64,-164.0
-2026-08-02,ARGENTINA 2,Temperley x Gimnasia y Tiro,Lay Zebra Visitante,1X2_A,lay,5.0,100.0,Finalizado,RED,-4.0,-400.0
+2026-08-02,ARGENTINA 2,Temperley x Gimnasia y Tiro,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.6400000000000001,-164.0
 2026-08-02,ARGENTINA 3,Biblioteca Atenas x Villa Mitre,BTTS Lay Quant,BTTS_Y,lay,2.78,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 3,Biblioteca Atenas x Villa Mitre,Lay Zebra Visitante,1X2_A,lay,3.75,100.0,Finalizado,RED,-2.75,-275.0
 2026-08-02,ARGENTINA 2,Chaco For Ever x Deportivo Moron,BTTS Lay Quant,BTTS_Y,lay,2.6,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 2,Chaco For Ever x Deportivo Moron,Lay Zebra Visitante,1X2_A,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 2,Deportivo Madryn x All Boys,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 2,Deportivo Madryn x All Boys,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 2,Deportivo Madryn x All Boys,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,BOLIVIA 1,Real Potosi x GV San Jose,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Finalizado,RED,-3.4000000000000004,-340.00000000000006
-2026-08-02,BOLIVIA 1,Real Potosi x GV San Jose,Lay Zebra Visitante,1X2_A,lay,4.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHILE 1,La Serena x O'Higgins,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,CHILE 1,La Serena x O'Higgins,Over 2.5 Back Valor,O25,back,1.87,100.0,Finalizado,GREEN,0.8700000000000001,87.00000000000001
 2026-08-02,PARAGUAY 1,Olimpia Asuncion x Rubio Nu,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PARAGUAY 1,Olimpia Asuncion x Rubio Nu,Over 2.5 Back Valor,O25,back,1.96,100.0,Finalizado,GREEN,0.96,96.0
-2026-08-02,ARGENTINA 2,Central Norte x Los Andes,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 3,San Martin Mendoza x Costa Brava,BTTS Lay Quant,BTTS_Y,lay,2.68,100.0,Finalizado,RED,-1.6800000000000002,-168.00000000000003
-2026-08-02,ARGENTINA 3,San Martin Mendoza x Costa Brava,Lay Zebra Visitante,1X2_A,lay,4.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 1,Newells Old Boys x Boca Juniors,Lay 0x0 Protegido,CS_0x0,lay,8.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 1,Newells Old Boys x Boca Juniors,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,RED,-2.35,-235.0
 2026-08-02,ARGENTINA 1,Newells Old Boys x Boca Juniors,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Finalizado,RED,-1.42,-142.0
 2026-08-02,ECUADOR 1,Macara x Guayaquil City,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ECUADOR 1,Macara x Guayaquil City,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ECUADOR 1,Macara x Guayaquil City,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.64,-164.0
 2026-08-02,ECUADOR 1,Macara x Guayaquil City,Over 2.5 Back Valor,O25,back,2.32,100.0,Finalizado,GREEN,1.3199999999999998,131.99999999999997
+2026-08-02,ECUADOR 1,Macara x Guayaquil City,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Finalizado,RED,-1.6400000000000001,-164.0
 2026-08-02,COLOMBIA 1,Jaguares de Cordoba x Atl. Nacional,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,COLOMBIA 1,Jaguares de Cordoba x Atl. Nacional,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,GREEN,0.92,92.0
+2026-08-02,COLOMBIA 1,Jaguares de Cordoba x Atl. Nacional,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,GREEN,0.9199999999999999,92.0
 2026-08-02,BRAZIL CUP,Mirassol x Gremio,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,BRAZIL CUP,Mirassol x Gremio,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Finalizado,RED,-2.65,-265.0
 2026-08-02,BRAZIL CUP,Mirassol x Gremio,Over 2.5 Back Valor,O25,back,2.48,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-02,BRAZIL CUP,Mirassol x Gremio,Lay Zebra Visitante,1X2_A,lay,4.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,VENEZUELA 1,Zamora x Rayo Zuliano,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,VENEZUELA 1,Zamora x Rayo Zuliano,Over 2.5 Back Valor,O25,back,2.12,100.0,Finalizado,GREEN,1.12,112.0
+2026-08-02,VENEZUELA 1,Zamora x Rayo Zuliano,Over 2.5 Back Valor,O25,back,2.12,100.0,Finalizado,GREEN,1.12,112.00000000000001
 2026-08-02,BOLIVIA 1,Always Ready x Bolivar,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PARAGUAY 1,Guarani x Libertad Asuncion,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PARAGUAY 1,Guarani x Libertad Asuncion,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,PARAGUAY 1,Guarani x Libertad Asuncion,Over 2.5 Back Valor,O25,back,2.34,100.0,Finalizado,GREEN,1.34,134.0
-2026-08-02,URUGUAY 1,Nacional x Progreso,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Finalizado,RED,-1.2799999999999998,-128.0
-2026-08-02,URUGUAY 1,Nacional x Progreso,Over 2.5 Back Valor,O25,back,1.91,100.0,Finalizado,GREEN,0.91,91.0
+2026-08-02,PARAGUAY 1,Guarani x Libertad Asuncion,Over 2.5 Back Valor,O25,back,2.34,100.0,Finalizado,GREEN,1.3399999999999999,134.0
+2026-08-02,URUGUAY 1,Nacional x Progreso,Over 2.5 Back Valor,O25,back,1.91,100.0,Finalizado,GREEN,0.9099999999999999,90.99999999999999
+2026-08-02,URUGUAY 1,Nacional x Progreso,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Finalizado,RED,-1.2799999999999998,-127.99999999999999
 2026-08-02,ARGENTINA 1,River Plate x Rosario Central,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 1,River Plate x Rosario Central,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,ARGENTINA 1,River Plate x Rosario Central,BTTS Lay Quant,BTTS_Y,lay,2.46,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,BRAZIL CUP,Internacional x Corinthians,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,BRAZIL CUP,Internacional x Corinthians,Lay Zebra Visitante,1X2_A,lay,4.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,VENEZUELA 1,Metropolitanos x Puerto Cabello,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,VENEZUELA 1,Metropolitanos x Puerto Cabello,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,VENEZUELA 1,Metropolitanos x Puerto Cabello,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Finalizado,RED,-1.3199999999999998,-131.99999999999997
 2026-08-02,VENEZUELA 1,Metropolitanos x Puerto Cabello,Over 2.5 Back Valor,O25,back,2.56,100.0,Finalizado,GREEN,1.56,156.0
-2026-08-02,COLOMBIA 1,America De Cali x Chico,BTTS Lay Quant,BTTS_Y,lay,2.76,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-02,VENEZUELA 1,Metropolitanos x Puerto Cabello,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Finalizado,RED,-1.3199999999999998,-131.99999999999997
 2026-08-02,COLOMBIA 1,America De Cali x Chico,Over 2.5 Back Valor,O25,back,2.02,100.0,Finalizado,GREEN,1.02,102.0
+2026-08-02,COLOMBIA 1,America De Cali x Chico,BTTS Lay Quant,BTTS_Y,lay,2.76,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,BOLIVIA 1,Oriente Petrolero x Nacional Potosi,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,BOLIVIA 1,Oriente Petrolero x Nacional Potosi,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PERU 1,Cienciano x U. de Deportes,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,PERU 1,Cienciano x U. de Deportes,Over 2.5 Back Valor,O25,back,2.04,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-02,ARGENTINA 1,Lanus x Instituto,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-02,ARGENTINA 1,Lanus x Instituto,Lay Zebra Visitante,1X2_A,lay,4.5,100.0,Finalizado,RED,-3.5,-350.0
 2026-08-02,COLOMBIA 1,Santa Fe x Once Caldas,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,COLOMBIA 1,Santa Fe x Once Caldas,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,RED,-2.4,-240.0
-2026-08-02,COLOMBIA 1,Santa Fe x Once Caldas,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,128.0
-2026-08-02,COLOMBIA 1,Santa Fe x Once Caldas,Lay Zebra Visitante,1X2_A,lay,3.75,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-02,COLOMBIA 1,Santa Fe x Once Caldas,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,127.99999999999999
 2026-08-03,FINLAND 1,SJK x HJK,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,IRELAND 2,Kerry x Cobh Ramblers,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,IRELAND 2,Kerry x Cobh Ramblers,Over 2.5 Back Valor,O25,back,1.97,100.0,Finalizado,GREEN,0.97,97.0
-2026-08-03,IRELAND 2,Kerry x Cobh Ramblers,Lay Zebra Visitante,1X2_A,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,IRELAND 2,Longford x Finn Harps,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,IRELAND 2,Longford x Finn Harps,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.93,93.0
+2026-08-03,IRELAND 2,Longford x Finn Harps,Over 2.5 Back Valor,O25,back,1.93,100.0,Finalizado,GREEN,0.9299999999999999,93.0
 2026-08-03,IRELAND 2,UC Dublin x Treaty United,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,IRELAND 2,Wexford x Bray,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,SWEDEN 2,Orebro x Varnamo,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,SWEDEN 2,Orebro x Varnamo,Over 2.5 Back Valor,O25,back,1.85,100.0,Finalizado,GREEN,0.8500000000000001,85.00000000000001
 2026-08-03,ARGENTINA 2,Club A. Guemes x Tristan Suarez,Lay 0x0 Protegido,CS_0x0,lay,9.0,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,ARGENTINA 2,Club A. Guemes x Tristan Suarez,Lay Zebra Visitante,1X2_A,lay,3.8,100.0,Finalizado,RED,-2.8,-280.0
 2026-08-03,PARAGUAY 1,Sportivo Trinidense x San Lorenzo,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-03,PARAGUAY 1,Sportivo Trinidense x San Lorenzo,Over 2.5 Back Valor,O25,back,2.18,100.0,Finalizado,GREEN,1.1800000000000002,118.00000000000001
 2026-08-03,PARAGUAY 1,Sportivo Trinidense x San Lorenzo,BTTS Lay Quant,BTTS_Y,lay,2.34,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,PARAGUAY 1,Sportivo Trinidense x San Lorenzo,Over 2.5 Back Valor,O25,back,2.18,100.0,Finalizado,GREEN,1.1800000000000002,118.0
 2026-08-03,ARGENTINA 1,Sarmiento Junin x Ind. Rivadavia,Lay 0x0 Protegido,CS_0x0,lay,8.6,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,ARGENTINA 1,Sarmiento Junin x Ind. Rivadavia,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999996
+2026-08-03,ARGENTINA 1,Sarmiento Junin x Ind. Rivadavia,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999997
 2026-08-03,PARAGUAY 1,Recoleta x Nacional Asuncion,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,PARAGUAY 1,Recoleta x Nacional Asuncion,Over 2.5 Back Valor,O25,back,2.4,100.0,Finalizado,GREEN,1.4,140.0
 2026-08-03,ARGENTINA 1,Platense x Talleres Cordoba,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Finalizado,GREEN,0.95,95.0
@@ -270,44 +221,37 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-03,ARGENTINA 1,Velez Sarsfield x Independiente,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,URUGUAY 1,Defensor Sp. x CA Cerro,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,URUGUAY 1,Defensor Sp. x CA Cerro,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,URUGUAY 1,Defensor Sp. x CA Cerro,BTTS Lay Quant,BTTS_Y,lay,2.52,100.0,Finalizado,RED,-1.52,-152.0
 2026-08-03,URUGUAY 1,Defensor Sp. x CA Cerro,Over 2.5 Back Valor,O25,back,2.6,100.0,Finalizado,GREEN,1.6,160.0
+2026-08-03,URUGUAY 1,Defensor Sp. x CA Cerro,BTTS Lay Quant,BTTS_Y,lay,2.52,100.0,Finalizado,RED,-1.52,-152.0
 2026-08-03,VENEZUELA 1,Caracas x Estudiantes Merida,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Finalizado,RED,-2.6,-260.0
-2026-08-03,VENEZUELA 1,Caracas x Estudiantes Merida,Over 2.5 Back Valor,O25,back,2.14,100.0,Finalizado,GREEN,1.14,114.0
-2026-08-03,VENEZUELA 1,Caracas x Estudiantes Merida,Lay Zebra Visitante,1X2_A,lay,5.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-03,VENEZUELA 1,Caracas x Estudiantes Merida,Over 2.5 Back Valor,O25,back,2.14,100.0,Finalizado,GREEN,1.1400000000000001,114.00000000000001
+2026-08-03,ECUADOR 1,LDU Quito x Delfin,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,GREEN,0.9199999999999999,92.0
 2026-08-03,ECUADOR 1,LDU Quito x Delfin,BTTS Lay Quant,BTTS_Y,lay,2.7,100.0,Finalizado,RED,-1.7000000000000002,-170.00000000000003
-2026-08-03,ECUADOR 1,LDU Quito x Delfin,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,GREEN,0.92,92.0
 2026-08-03,ARGENTINA 1,Central Cordoba x San Lorenzo,BTTS Lay Quant,BTTS_Y,lay,2.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,ARGENTINA 1,Huracan x Atl. Tucuman,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,ARGENTINA 1,Huracan x Atl. Tucuman,Lay Zebra Visitante,1X2_A,lay,4.7,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-03,COLOMBIA 1,Bucaramanga x Cucuta,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,RED,-3.1,-309.99999999999994
-2026-08-03,COLOMBIA 1,Bucaramanga x Cucuta,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999996
+2026-08-03,COLOMBIA 1,Bucaramanga x Cucuta,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Finalizado,RED,-3.0999999999999996,-309.99999999999994
 2026-08-03,COLOMBIA 1,Bucaramanga x Cucuta,Over 2.5 Back Valor,O25,back,2.22,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-04,BOLIVIA 1,Academia del Balompie x Real Oruro,Lay Zebra Visitante,1X2_A,lay,3.75,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-04,VENEZUELA 1,Carabobo x Trujillanos,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-03,COLOMBIA 1,Bucaramanga x Cucuta,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999997
 2026-08-04,VENEZUELA 1,Carabobo x Trujillanos,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,RED,-1.0,-100.0
+2026-08-04,VENEZUELA 1,Carabobo x Trujillanos,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,COLOMBIA 1,Llaneros x Fortaleza,Lay 0x0 Protegido,CS_0x0,lay,9.2,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-04,COLOMBIA 1,Llaneros x Fortaleza,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Finalizado,RED,-1.2200000000000002,-122.0
-2026-08-04,COLOMBIA 1,Llaneros x Fortaleza,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-04,COLOMBIA 1,Llaneros x Fortaleza,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Finalizado,RED,-1.2200000000000002,-122.00000000000001
 2026-08-04,BOLIVIA 1,Independiente x Aurora,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Finalizado,RED,-2.95,-295.0
 2026-08-04,VENEZUELA 1,Universidad Central x Monagas,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,VENEZUELA 1,Universidad Central x Monagas,Over 2.5 Back Valor,O25,back,1.85,100.0,Finalizado,GREEN,0.8500000000000001,85.00000000000001
-2026-08-04,VENEZUELA 1,Universidad Central x Monagas,Lay Zebra Visitante,1X2_A,lay,4.1,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,VENEZUELA 1,Dep. Tachira x Portuguesa,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-04,VENEZUELA 1,Dep. Tachira x Portuguesa,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,VENEZUELA 1,Dep. Tachira x Portuguesa,Over 2.5 Back Valor,O25,back,2.02,100.0,Finalizado,RED,-1.0,-100.0
+2026-08-04,VENEZUELA 1,Dep. Tachira x Portuguesa,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,COLOMBIA 1,Deportes Tolima x Ind. Medellin,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,COLOMBIA 1,Deportes Tolima x Ind. Medellin,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-04,COLOMBIA 1,Deportes Tolima x Ind. Medellin,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,128.0
-2026-08-04,COLOMBIA 1,Deportes Tolima x Ind. Medellin,Lay Zebra Visitante,1X2_A,lay,4.5,100.0,Finalizado,RED,-3.5,-350.0
+2026-08-04,COLOMBIA 1,Deportes Tolima x Ind. Medellin,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,GREEN,1.2799999999999998,127.99999999999999
 2026-08-04,BRAZIL CUP,Remo x Santos,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,BRAZIL CUP,Remo x Santos,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,BRAZIL CUP,Remo x Santos,Over 2.5 Back Valor,O25,back,2.28,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-04,COLOMBIA 1,Millonarios x Dep. Pasto,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-04,COLOMBIA 1,Millonarios x Dep. Pasto,Over 2.5 Back Valor,O25,back,1.92,100.0,Finalizado,RED,-1.0,-100.0
+2026-08-04,COLOMBIA 1,Millonarios x Dep. Pasto,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 2,Almagro x Gimnasia y Tiro,Lay 0x0 Protegido,CS_0x0,lay,9.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 2,Almagro x Gimnasia y Tiro,BTTS Lay Quant,BTTS_Y,lay,2.56,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,ICELAND 1,Keflavik x KA Akureyri,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 1,Boca Juniors x Estudiantes L.P.,Lay 0x0 Protegido,CS_0x0,lay,8.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 1,Boca Juniors x Estudiantes L.P.,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 1,Boca Juniors x Estudiantes L.P.,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Finalizado,GREEN,0.95,95.0
@@ -315,58 +259,41 @@ data,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,pnl_unida
 2026-08-05,BRAZIL CUP,Gremio x Mirassol,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,BRAZIL CUP,Gremio x Mirassol,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,BRAZIL CUP,Gremio x Mirassol,Over 2.5 Back Valor,O25,back,2.38,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-05,BRAZIL CUP,Gremio x Mirassol,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,VENEZUELA 1,La Guaira x Metropolitanos,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,VENEZUELA 1,La Guaira x Metropolitanos,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,VENEZUELA 1,La Guaira x Metropolitanos,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Finalizado,RED,-1.2400000000000002,-124.00000000000004
 2026-08-05,VENEZUELA 1,La Guaira x Metropolitanos,Over 2.5 Back Valor,O25,back,2.42,100.0,Finalizado,GREEN,1.42,142.0
+2026-08-05,VENEZUELA 1,La Guaira x Metropolitanos,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Finalizado,RED,-1.2400000000000002,-124.00000000000003
 2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,Over 2.5 Back Valor,O25,back,2.56,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,Lay Zebra Visitante,1X2_A,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-05,ARGENTINA 2,Quilmes x Gimnasia Jujuy,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,URUGUAY 1,Penarol x Wanderers,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,URUGUAY 1,Penarol x Wanderers,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,URUGUAY 1,Penarol x Wanderers,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999996
-2026-08-05,URUGUAY 1,Penarol x Wanderers,Over 2.5 Back Valor,O25,back,2.36,100.0,Finalizado,GREEN,1.36,136.0
+2026-08-05,URUGUAY 1,Penarol x Wanderers,Over 2.5 Back Valor,O25,back,2.36,100.0,Finalizado,GREEN,1.3599999999999999,136.0
+2026-08-05,URUGUAY 1,Penarol x Wanderers,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Finalizado,RED,-1.2599999999999998,-125.99999999999997
 2026-08-05,COLOMBIA 1,Inter Bogotá x Jaguares de Cordoba,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,COLOMBIA 1,Inter Bogotá x Jaguares de Cordoba,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,COLOMBIA 1,Inter Bogotá x Jaguares de Cordoba,Over 2.5 Back Valor,O25,back,2.16,100.0,Finalizado,RED,-1.0,-100.0
+2026-08-05,COLOMBIA 1,Inter Bogotá x Jaguares de Cordoba,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,ARGENTINA 1,Tigre x Belgrano,BTTS Lay Quant,BTTS_Y,lay,2.82,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,ARGENTINA 1,Tigre x Belgrano,Lay Zebra Visitante,1X2_A,lay,3.9,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,USA 2,FC Tulsa x Sacramento Republic,Lay 0x0 Protegido,CS_0x0,lay,9.4,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,USA 2,FC Tulsa x Sacramento Republic,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,USA 2,El Paso x Monterey Bay,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-05,USA 2,El Paso x Monterey Bay,Lay Zebra Visitante,1X2_A,lay,4.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,COLOMBIA 1,Once Caldas x America De Cali,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,COLOMBIA 1,Once Caldas x America De Cali,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-05,COLOMBIA 1,Once Caldas x America De Cali,Over 2.5 Back Valor,O25,back,2.22,100.0,Finalizado,RED,-1.0,-100.0
-2026-08-05,COLOMBIA 1,Once Caldas x America De Cali,Lay Zebra Visitante,1X2_A,lay,3.75,100.0,Finalizado,RED,-2.75,-275.0
 2026-08-05,USA 2,Las Vegas Lights x Oakland Roots,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Finalizado,RED,-3.2,-320.0
 2026-08-06,BOLIVIA 1,Universitario de Vinto x Real Potosi,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-06,BOLIVIA 1,Universitario de Vinto x Real Potosi,Lay Zebra Visitante,1X2_A,lay,4.2,100.0,Finalizado,RED,-3.2,-320.0
 2026-08-06,VENEZUELA 1,Rayo Zuliano x Anzoategui FC,Over 2.5 Back Valor,O25,back,2.12,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-06,VENEZUELA 1,Estudiantes Merida x Zamora,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-06,VENEZUELA 1,Estudiantes Merida x Zamora,Over 2.5 Back Valor,O25,back,2.02,100.0,Finalizado,RED,-1.0,-100.0
 2026-08-06,ARGENTINA 1,Union de Santa Fe x Lanus,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-06,ARGENTINA 1,Union de Santa Fe x Lanus,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Finalizado,RED,-1.2999999999999998,-129.99999999999997
-2026-08-06,ARGENTINA 1,Union de Santa Fe x Lanus,Lay Zebra Visitante,1X2_A,lay,3.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-06,VENEZUELA 1,Puerto Cabello x Caracas,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-06,VENEZUELA 1,Puerto Cabello x Caracas,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-06,VENEZUELA 1,Puerto Cabello x Caracas,Over 2.5 Back Valor,O25,back,2.24,100.0,Finalizado,GREEN,1.2400000000000002,124.00000000000003
 2026-08-06,VENEZUELA 1,Puerto Cabello x Caracas,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Finalizado,RED,-1.3199999999999998,-131.99999999999997
-2026-08-06,VENEZUELA 1,Puerto Cabello x Caracas,Over 2.5 Back Valor,O25,back,2.24,100.0,Finalizado,GREEN,1.2400000000000002,124.00000000000004
 2026-08-06,BRAZIL CUP,Corinthians x Internacional,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-06,BRAZIL CUP,Corinthians x Internacional,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-06,BRAZIL CUP,Corinthians x Internacional,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Finalizado,RED,-1.3199999999999998,-131.99999999999997
 2026-08-06,BRAZIL CUP,Corinthians x Internacional,Over 2.5 Back Valor,O25,back,2.48,100.0,Finalizado,GREEN,1.48,148.0
+2026-08-06,BRAZIL CUP,Corinthians x Internacional,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Finalizado,RED,-1.3199999999999998,-131.99999999999997
 2026-08-06,BOLIVIA 1,Blooming x Always Ready,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Finalizado,RED,-2.95,-295.0
-2026-08-11,SWEDEN 2,Helsingborgs x Varnamo,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Aguilas Doradas x Llaneros FC,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Aguilas Doradas x Llaneros FC,Over 2.5 Back Valor,O25,back,2.24,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,BRAZIL 2,Avai x CRB,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,BRAZIL 2,Avai x CRB,Over 2.5 Back Valor,O25,back,2.36,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Ind Medellin x Millonarios,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Ind Medellin x Millonarios,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Ind Medellin x Millonarios,Over 2.5 Back Valor,O25,back,2.24,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,ARGENTINA 1,Talleres x Lanus,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,COLOMBIA 1,Junior FC Barranquilla x Deportivo Pereira,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Pendente,Pendente,0.0,0.0
