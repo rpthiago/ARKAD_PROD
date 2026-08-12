@@ -18,6 +18,37 @@ ROOT = Path(__file__).resolve().parent
 FORWARD_LOG_PATH = ROOT / "paper_trading_forward_setembro_2026.csv"
 FORWARD_LOG_EXCEL = ROOT / "paper_trading_forward_setembro_2026.xlsx"
 
+# Cache global de xG das equipes baseado no histórico
+_TEAM_XG_CACHE = {}
+
+def _get_team_xg_cache():
+    global _TEAM_XG_CACHE
+    if _TEAM_XG_CACHE:
+        return _TEAM_XG_CACHE
+        
+    fresh_path = ROOT / "Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv"
+    if not fresh_path.exists():
+        fresh_path = ROOT / "scratch" / "dataset_leak_free_features.parquet"
+        
+    if fresh_path.exists():
+        try:
+            if str(fresh_path).endswith('.csv'):
+                df = pd.read_csv(fresh_path)
+            else:
+                df = pd.read_parquet(fresh_path)
+                
+            away_col = 'Away' if 'Away' in df.columns else 'Away_Team'
+            xg_col = 'A_xGF_r5' if 'A_xGF_r5' in df.columns else ('Media_Gols_Pro_Visitante' if 'Media_Gols_Pro_Visitante' in df.columns else None)
+            
+            if xg_col and away_col in df.columns:
+                df[xg_col] = pd.to_numeric(df[xg_col], errors='coerce')
+                # Pegar a média recente por time visitante
+                _TEAM_XG_CACHE = df.groupby(away_col)[xg_col].last().dropna().to_dict()
+        except Exception:
+            _TEAM_XG_CACHE = {}
+            
+    return _TEAM_XG_CACHE
+
 def fetch_today_games(target_date_str=None):
     if not target_date_str:
         target_date_str = datetime.now().strftime("%Y-%m-%d")
@@ -71,6 +102,7 @@ def process_today_signals(df_games, date_str):
     signals = []
     today_str = datetime.now().strftime("%Y-%m-%d")
     is_today_or_future = (date_str >= today_str)
+    team_xg_cache = _get_team_xg_cache()
     
     for idx, row in df_games.iterrows():
         league = str(row.get('League') or row.get('Liga') or 'Geral')
@@ -85,8 +117,16 @@ def process_today_signals(df_games, date_str):
         odd_btts_lay = float(row.get('Odd_BTTS_Yes_Lay', 0.0) or 0.0)
         odd_cs00_lay = float(row.get('Odd_CS_0x0_Lay', 0.0) or 0.0)
         odd_cs03_lay = float(row.get('Odd_CS_0x3_Lay', 0.0) or 0.0)
-        xg_a_r5 = float(row.get('A_xGF_r5', row.get('Media_Gols_Pro_Visitante', 1.0)) or 1.0)
         
+        # Resolução de xG do Visitante (Live API / Daily XLSX / Cache Histórico de Desempenho do Time)
+        raw_xg = row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_Visitante')
+        if raw_xg is not None and not pd.isna(raw_xg):
+            xg_a_r5 = float(raw_xg)
+        elif away in team_xg_cache:
+            xg_a_r5 = float(team_xg_cache[away])
+        else:
+            xg_a_r5 = 1.0  # Conservador
+            
         # Resultados se já finalizado no passado
         gh = row.get('Goals_H_FT')
         ga = row.get('Goals_A_FT')
