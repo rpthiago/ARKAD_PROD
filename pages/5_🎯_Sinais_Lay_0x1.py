@@ -64,50 +64,64 @@ if gerar_btn:
             df = pd.DataFrame(sinais_brutos)
             
             # Limpa colunas e força numérico para a filtragem estrita
-            df["Odd_Num"] = pd.to_numeric(df["Odd_lay_entrada"], errors="coerce")
-            df["Prob_Num"] = pd.to_numeric(df["Prob"], errors="coerce")
+            col_odd = next((c for c in ["Odd_lay_entrada", "odd_lay_entrada", "odd_execucao", "Odd_Lay", "odd"] if c in df.columns), None)
+            col_prob = next((c for c in ["Prob", "prob", "Prob_ML", "prob_ml"] if c in df.columns), None)
+            col_metodo = next((c for c in ["Metodo", "metodo"] if c in df.columns), None)
+            col_liga = next((c for c in ["Liga", "liga", "League", "league"] if c in df.columns), None)
+
+            df["Odd_Num"] = pd.to_numeric(df[col_odd], errors="coerce") if col_odd else np.nan
+            df["Prob_Num"] = pd.to_numeric(df[col_prob], errors="coerce") if col_prob else np.nan
             
-            # 1. Filtragem estrita do XGBoost (Odd 13.2-18.0)
-            df_xg = df[
-                df["Metodo"].str.contains("Trader", na=False) &
-                (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
-                (df["Prob_Num"] >= 75.0)
-            ].copy()
-            if not df_xg.empty:
-                df_xg["Metodo_Final"] = "XGBoost (Trader)"
-            
-            # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist de Ligas)
-            blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
-            df_rf = df[
-                df["Metodo"].str.contains("RF", na=False) &
-                (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
-                (df["Prob_Num"] >= 92.0) &
-                (~df["Liga"].astype(str).str.upper().str.strip().isin(blacklist))
-            ].copy()
-            if not df_rf.empty:
-                df_rf["Metodo_Final"] = "Random Forest (RF)"
+            if col_metodo:
+                # 1. Filtragem estrita do XGBoost (Odd 13.2-18.0)
+                df_xg = df[
+                    df[col_metodo].astype(str).str.contains("Trader", na=False) &
+                    (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
+                    (df["Prob_Num"] >= 75.0)
+                ].copy()
+                if not df_xg.empty:
+                    df_xg["Metodo_Final"] = "XGBoost (Trader)"
+                
+                # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist de Ligas)
+                blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
+                liga_series = df[col_liga].astype(str).str.upper().str.strip() if col_liga else pd.Series([""] * len(df))
+                df_rf = df[
+                    df[col_metodo].astype(str).str.contains("RF", na=False) &
+                    (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
+                    (df["Prob_Num"] >= 92.0) &
+                    (~liga_series.isin(blacklist))
+                ].copy()
+                if not df_rf.empty:
+                    df_rf["Metodo_Final"] = "Random Forest (RF)"
+            else:
+                df_xg = pd.DataFrame()
+                df_rf = pd.DataFrame()
             
             # Combinar os sinais estritos
-            sinais_filtrados = []
-            
-            # Mapear chaves exclusivas de jogos (Mandante x Visitante)
             jogos_vistos = {}
             
             for d_idx, row in pd.concat([df_xg, df_rf]).iterrows():
-                key = (row["Mandante"], row["Visitante"])
+                mandante = row.get("Mandante") or row.get("Home") or "Mandante"
+                visitante = row.get("Visitante") or row.get("Away") or "Visitante"
+                key = (mandante, visitante)
                 if key not in jogos_vistos:
+                    odd_lay_val = row.get("Odd_lay_entrada") or row.get("odd_execucao") or row.get("odd") or ""
+                    prob_val = row.get("Prob") or row.get("prob") or ""
+                    raw_horario = row.get("Horario") or row.get("horario") or row.get("Time") or row.get("Hora") or ""
+                    game_time = str(raw_horario).strip()[:5] if (pd.notna(raw_horario) and str(raw_horario).strip().lower() != "nan") else ""
+
                     jogos_vistos[key] = {
-                        "Date": row["Date"],
-                        "Horario": row["Horario"],
-                        "Liga": row["Liga"],
-                        "Mandante": row["Mandante"],
-                        "Visitante": row["Visitante"],
-                        "Odd_lay_entrada": row["Odd_lay_entrada"],
-                        "Prob": row["Prob"],
-                        "Modelos_Aprovados": [row["Metodo_Final"]]
+                        "Date": row.get("Date") or row.get("data") or date_str,
+                        "Horario": game_time,
+                        "Liga": row.get("Liga") or row.get("liga") or "",
+                        "Mandante": mandante,
+                        "Visitante": visitante,
+                        "Odd_lay_entrada": odd_lay_val,
+                        "Prob": prob_val,
+                        "Modelos_Aprovados": [row.get("Metodo_Final", "IA")]
                     }
                 else:
-                    if row["Metodo_Final"] not in jogos_vistos[key]["Modelos_Aprovados"]:
+                    if row.get("Metodo_Final") and row["Metodo_Final"] not in jogos_vistos[key]["Modelos_Aprovados"]:
                         jogos_vistos[key]["Modelos_Aprovados"].append(row["Metodo_Final"])
             
             df_final = pd.DataFrame([
@@ -130,8 +144,10 @@ if gerar_btn:
                 st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos de longo prazo das IAs (XGBoost/RF na faixa 13.2-18.0). Guarde a banca!")
                 with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
                     rejected = df.copy()
-                    rejected["Filtros_Originais"] = rejected["Metodo"]
-                    st.dataframe(rejected.drop(columns=["Odd_Num", "Prob_Num", "Metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]), use_container_width=True)
+                    if "Metodo" in rejected.columns:
+                        rejected["Filtros_Originais"] = rejected["Metodo"]
+                    cols_drop = ["Odd_Num", "Prob_Num", "Metodo", "metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]
+                    st.dataframe(rejected.drop(columns=cols_drop, errors="ignore"), use_container_width=True)
             else:
                 st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas!")
                 

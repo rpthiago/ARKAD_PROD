@@ -128,15 +128,22 @@ if st.session_state.sinais_brutos is not None:
         df = pd.DataFrame(sinais_brutos)
         
         # Limpa colunas e força numérico para a filtragem estrita
-        df["Odd_Num"] = pd.to_numeric(df["Odd_lay_entrada"], errors="coerce")
-        df["Prob_Num"] = pd.to_numeric(df["Prob"], errors="coerce")
+        col_odd = next((c for c in ["Odd_lay_entrada", "odd_lay_entrada", "odd_execucao", "Odd_Lay", "odd"] if c in df.columns), None)
+        col_prob = next((c for c in ["Prob", "prob", "Prob_ML", "prob_ml"] if c in df.columns), None)
+        col_metodo = next((c for c in ["Metodo", "metodo"] if c in df.columns), None)
+        
+        df["Odd_Num"] = pd.to_numeric(df[col_odd], errors="coerce") if col_odd else np.nan
+        df["Prob_Num"] = pd.to_numeric(df[col_prob], errors="coerce") if col_prob else np.nan
         
         # 1. Filtragem estrita final (Odd entre 10.0 e 20.0)
-        df_final_sinais = df[
-            df["Metodo"].str.contains("RF", na=False) &
-            (df["Odd_Num"] >= 10.0) &
-            (df["Odd_Num"] <= 20.0)
-        ].copy()
+        if col_metodo:
+            df_final_sinais = df[
+                df[col_metodo].astype(str).str.contains("RF", na=False) &
+                (df["Odd_Num"] >= 10.0) &
+                (df["Odd_Num"] <= 20.0)
+            ].copy()
+        else:
+            df_final_sinais = pd.DataFrame()
         
         if not df_final_sinais.empty:
             df_final_sinais["Metodo_Final"] = "XGBoost (Lay 0x0)"
@@ -144,19 +151,26 @@ if st.session_state.sinais_brutos is not None:
         # Formatar tabela de saída com a calculadora de gestão de banca
         jogos_vistos = {}
         for d_idx, row in df_final_sinais.iterrows():
-            key = (row["Mandante"], row["Visitante"])
+            mandante = row.get("Mandante") or row.get("Home") or "Mandante"
+            visitante = row.get("Visitante") or row.get("Away") or "Visitante"
+            key = (mandante, visitante)
             if key not in jogos_vistos:
+                odd_lay_val = row.get("Odd_lay_entrada") or row.get("odd_execucao") or row.get("odd") or ""
+                prob_val = row.get("Prob") or row.get("prob") or ""
+                raw_horario = row.get("Horario") or row.get("horario") or row.get("Time") or row.get("Hora") or ""
+                game_time = str(raw_horario).strip()[:5] if (pd.notna(raw_horario) and str(raw_horario).strip().lower() != "nan") else ""
+
                 jogos_vistos[key] = {
-                    "Date": row["Date"],
-                    "Horario": row["Horario"],
-                    "Liga": row["Liga"],
-                    "Mandante": row["Mandante"],
-                    "Visitante": row["Visitante"],
-                    "Odd_lay_entrada": row["Odd_lay_entrada"],
-                    "Prob": row["Prob"],
+                    "Date": row.get("Date") or row.get("data") or date_str,
+                    "Horario": game_time,
+                    "Liga": row.get("Liga") or row.get("liga") or "",
+                    "Mandante": mandante,
+                    "Visitante": visitante,
+                    "Odd_lay_entrada": odd_lay_val,
+                    "Prob": prob_val,
                     "liga_0x0_rate": row.get("liga_0x0_rate", ""),
                     "mkt_prob_0x0": row.get("mkt_prob_0x0", ""),
-                    "Modelos_Aprovados": [row["Metodo_Final"]]
+                    "Modelos_Aprovados": [row.get("Metodo_Final", "XGBoost (Lay 0x0)")]
                 }
         
         rows_final = []
@@ -205,8 +219,10 @@ if st.session_state.sinais_brutos is not None:
             st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos da IA (XGBoost na faixa [10.0, 20.0] com filtros contextuais). Guarde a banca!")
             with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
                 rejected = df.copy()
-                rejected["Filtros_Originais"] = rejected["Metodo"]
-                st.dataframe(rejected.drop(columns=["Odd_Num", "Prob_Num", "Metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]), use_container_width=True)
+                if "Metodo" in rejected.columns:
+                    rejected["Filtros_Originais"] = rejected["Metodo"]
+                cols_drop = ["Odd_Num", "Prob_Num", "Metodo", "metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]
+                st.dataframe(rejected.drop(columns=cols_drop, errors="ignore"), use_container_width=True)
         else:
             st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas!")
             
