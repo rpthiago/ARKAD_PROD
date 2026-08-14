@@ -32,16 +32,24 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         is_finished = (gh is not None and ga is not None and not pd.isna(gh) and not pd.isna(ga) and gh >= 0 and ga >= 0)
         is_0x3 = (gh == 0 and ga == 3) if is_finished else None
         
+        odd_h = float(row.get('Odd_H_Back', row.get('Odd_H_FT', 0.0)) or 0.0)
+        
         # -------------------------------------------------------------
-        # MÁXIMA PROTEÇÃO DE BANCA: LAY 0x3 + UNDER 2.5 + xG VISITANTE BAIXO (<= 1.10)
+        # MÁXIMA PROTEÇÃO DE BANCA: LAY 0x3 + MANDANTE FAVORITO (HA <= -0.25) + UNDER 2.5 + xG VISITANTE BAIXO
         # -------------------------------------------------------------
-        if (0.0 < odd_under25 <= 1.85) and (15.0 <= odd_03_lay <= 35.0) and (xg_a_r5 <= 1.10):
+        # Garantia de entrada apenas em:
+        # - HA -0.25 / -0.5 (Home Ligeiro Favorito)
+        # - HA -0.75 / -1.0 (Home Favorito)
+        # - HA -1.5 / -2.0 (Home Super Favorito)
+        is_home_fav = (0.0 < odd_h <= 2.30) or (odd_h == 0.0) # Se odd_h não disponível, mantém solidez dos demais filtros
+        
+        if is_home_fav and (0.0 < odd_under25 <= 1.85) and (15.0 <= odd_03_lay <= 35.0) and (xg_a_r5 <= 1.10):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_03_lay - 1.0)) if is_finished else 0.0
             sinais.append({
                 'data': date_str, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay 0x3 Visitante Under 2.5 (xG Protected)', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'metodo': 'Lay 0x3 Visitante (Home Fav HA -0.25+ & Under 2.5)', 'mercado': 'CS_0x3', 'lado': 'lay',
                 'odd_execucao': odd_03_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0

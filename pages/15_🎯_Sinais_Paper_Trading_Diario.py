@@ -151,8 +151,12 @@ with col2:
                 else:
                     stake_betfair = np.nan
                 
+                raw_time = row.get("horario") or row.get("Horario") or row.get("Hora") or row.get("Time") or ""
+                game_time = str(raw_time).strip()[:5] if (pd.notna(raw_time) and str(raw_time).strip().lower() != "nan") else ""
+
                 rows_final.append({
                     "Data": row.get("data", date_str),
+                    "Horário": game_time,
                     "Liga": row.get("liga", ""),
                     "Mandante": mandante,
                     "Visitante": visitante,

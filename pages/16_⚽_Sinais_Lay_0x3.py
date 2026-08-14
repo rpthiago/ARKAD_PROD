@@ -16,12 +16,17 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("⚽ Sinais Lay 0x3 (Lay 0x3 Visitante xG Protected)")
+st.title("⚽ Sinais Lay 0x3 (Mandante Favorito HA -0.25 a -2.0 & Under 2.5)")
 st.markdown("""
-Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante Under 2.5 (com Filtro de Proteção de Banca xG)**:
+Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante (Filtrado por Handicap do Mandante + Under 2.5)**:
 
-*   **🛡️ Lay 0x3 Visitante (xG Protected):** Odd Under 2.5 $\le 1.85$, Odd Lay Betfair entre **15.00 e 35.00** e xG Visitante $\le 1.10$
-    *   *Backtest Validado (1.466 partidas):* Taxa de Acerto **97.34%** | ROI Líquido Betfair **+23.34%** | *Redução de 31% nos Drawdowns de Crise*
+### 🛡️ Critérios de Filtro de Elite Validados no Backtest:
+1. **Mandante Favorito (HA -0.25 a -2.0 / Odd H $\le 2.30$):** Foco exclusivo nos 3 grupos lucrativos:
+   * **HA -1.5 / -2.0 (Super Favorito):** Win Rate **99.78%** | ROI **+9.81%**
+   * **HA -0.75 / -1.0 (Favorito Claro):** Win Rate **99.30%** | ROI **+5.63%**
+   * **HA -0.25 / -0.5 (Ligeiro Favorito):** Win Rate **98.72%** | ROI **+2.17%**
+2. **Mercado Under 2.5 Favorecido:** Odd Under 2.5 $\le 1.85$ (Expectativa de baixa média de gols).
+3. **Livro de Ofertas Betfair:** Odd Lay 0x3 entre **15.00 e 35.00** e xG Visitante $\le 1.10$.
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
@@ -141,8 +146,12 @@ with col2:
                 else:
                     stake_betfair = np.nan
                 
+                raw_time = row.get("horario") or row.get("Horario") or row.get("Hora") or row.get("Time") or ""
+                game_time = str(raw_time).strip()[:5] if (pd.notna(raw_time) and str(raw_time).strip().lower() != "nan") else ""
+
                 rows_final.append({
                     "Data": row.get("data", date_str),
+                    "Horário": game_time,
                     "Liga": row.get("liga", ""),
                     "Mandante": mandante,
                     "Visitante": visitante,

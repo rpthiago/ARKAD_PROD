@@ -110,6 +110,10 @@ def process_today_signals(df_games, date_str):
         away = str(row.get('Away_Team') or row.get('Away') or row.get('Visitante') or 'Visitante')
         match_name = f"{home} x {away}"
         
+        # Horario do jogo
+        raw_time = row.get('Time') or row.get('Horario') or row.get('Hora') or row.get('Horario_Entrada') or row.get('time') or row.get('horario') or ''
+        game_time = str(raw_time).strip()[:5] if (pd.notna(raw_time) and str(raw_time).strip().lower() != 'nan') else ''
+        
         # Odds
         odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
         odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
@@ -144,7 +148,7 @@ def process_today_signals(df_games, date_str):
             res = ('GREEN' if not is_0x0 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x0 else -(odd_cs00_lay - 1.0)) if is_finished else 0.0
             signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
+                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
                 'metodo': 'Lay 0x0 Protegido', 'mercado': 'CS_0x0', 'lado': 'lay',
                 'odd_execucao': odd_cs00_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
@@ -157,7 +161,7 @@ def process_today_signals(df_games, date_str):
             res = ('GREEN' if not is_draw else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_draw else -(odd_d_lay - 1.0)) if is_finished else 0.0
             signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
+                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
                 'metodo': 'Lay Draw Estrutural', 'mercado': '1X2_D', 'lado': 'lay',
                 'odd_execucao': odd_d_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
@@ -170,7 +174,7 @@ def process_today_signals(df_games, date_str):
             res = ('GREEN' if is_over25 else 'RED') if is_finished else 'Pendente'
             pnl = ((odd_o25_back - 1.0) if is_over25 else -1.0) if is_finished else 0.0
             signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
+                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
                 'metodo': 'Over 2.5 Back Valor', 'mercado': 'O25', 'lado': 'back',
                 'odd_execucao': odd_o25_back, 'stake': 100.0,
                 'status': status, 'resultado': res,
@@ -183,7 +187,7 @@ def process_today_signals(df_games, date_str):
             res = ('GREEN' if not is_btts else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_btts else -(odd_btts_lay - 1.0)) if is_finished else 0.0
             signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
+                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
                 'metodo': 'BTTS Lay Quant', 'mercado': 'BTTS_Y', 'lado': 'lay',
                 'odd_execucao': odd_btts_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
@@ -196,7 +200,7 @@ def process_today_signals(df_games, date_str):
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
             signals.append({
-                'data': date_str, 'liga': league, 'jogo': match_name,
+                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
                 'metodo': 'Lay 0x3 Visitante Under 2.5 (xG Protected)', 'mercado': 'CS_0x3', 'lado': 'lay',
                 'odd_execucao': odd_cs03_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
