@@ -110,6 +110,15 @@ if st.session_state.sinais_brutos is None:
             st.session_state.sinais_date = target_date
 
 # Processamento e exibição dos resultados no painel principal (col2)
+def extract_horario(row_obj):
+    for key in ["horario", "Horario", "Hora", "Time", "time"]:
+        val = row_obj.get(key) if hasattr(row_obj, "get") else getattr(row_obj, key, None)
+        if val is not None and pd.notna(val):
+            val_str = str(val).strip()
+            if val_str and val_str.lower() not in ("nan", "none", "null", ""):
+                return val_str[:5]
+    return ""
+
 with col2:
     if st.session_state.sinais_brutos is not None:
         sinais_brutos = st.session_state.sinais_brutos
@@ -146,8 +155,7 @@ with col2:
                 else:
                     stake_betfair = np.nan
                 
-                raw_time = row.get("horario") or row.get("Horario") or row.get("Hora") or row.get("Time") or ""
-                game_time = str(raw_time).strip()[:5] if (pd.notna(raw_time) and str(raw_time).strip().lower() != "nan") else ""
+                game_time = extract_horario(row)
 
                 rows_final.append({
                     "Data": row.get("data", date_str),

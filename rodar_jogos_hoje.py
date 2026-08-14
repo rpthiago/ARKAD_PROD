@@ -95,6 +95,15 @@ def fetch_today_games(target_date_str=None):
     print(f"[INFO] Nenhum jogo encontrado na base de dados para a data {target_date_str}.", flush=True)
     return pd.DataFrame(), target_date_str
 
+def _extract_horario(row_obj):
+    for key in ['horario', 'Horario', 'Hora', 'Time', 'time', 'Horario_Entrada']:
+        val = row_obj.get(key) if hasattr(row_obj, 'get') else getattr(row_obj, key, None)
+        if val is not None and pd.notna(val):
+            val_str = str(val).strip()
+            if val_str and val_str.lower() not in ('nan', 'none', 'null', ''):
+                return val_str[:5]
+    return ''
+
 def process_today_signals(df_games, date_str):
     if df_games.empty:
         return pd.DataFrame()
@@ -111,8 +120,7 @@ def process_today_signals(df_games, date_str):
         match_name = f"{home} x {away}"
         
         # Horario do jogo
-        raw_time = row.get('Time') or row.get('Horario') or row.get('Hora') or row.get('Horario_Entrada') or row.get('time') or row.get('horario') or ''
-        game_time = str(raw_time).strip()[:5] if (pd.notna(raw_time) and str(raw_time).strip().lower() != 'nan') else ''
+        game_time = _extract_horario(row)
         
         # Odds
         odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
