@@ -42,34 +42,15 @@ def get_api_token():
     return token
 
 def fetch_list_events(target_date: str, token: str):
-    headers = {"Authorization": f"Token {token}", "User-Agent": "Mozilla/5.0"}
-    
-    url_b365 = f"https://apicomunidade.futpythontrader.com/api/dados/jogos-do-dia/bet365/{target_date}/"
-    url_bf = f"https://apicomunidade.futpythontrader.com/api/dados/jogos-do-dia/betfair/{target_date}/"
+    from futpythontrader_client import get_daily_dataframe
+    df_b365 = get_daily_dataframe("bet365", target_date)
+    df_bf = get_daily_dataframe("betfair", target_date)
     
     frames = []
-    
-    try:
-        r_b365 = requests.get(url_b365, headers=headers, timeout=15)
-        if r_b365.status_code == 200:
-            data = r_b365.json()
-            if isinstance(data, dict) and "dados" in data:
-                frames.append(pd.DataFrame(data["dados"]))
-            elif isinstance(data, list):
-                frames.append(pd.DataFrame(data))
-    except Exception as e:
-        st.error(f"Erro B365: {e}")
-        
-    try:
-        r_bf = requests.get(url_bf, headers=headers, timeout=15)
-        if r_bf.status_code == 200:
-            data = r_bf.json()
-            if isinstance(data, dict) and "dados" in data:
-                frames.append(pd.DataFrame(data["dados"]))
-            elif isinstance(data, list):
-                frames.append(pd.DataFrame(data))
-    except Exception as e:
-        st.error(f"Erro Betfair: {e}")
+    if not df_b365.empty:
+        frames.append(df_b365)
+    if not df_bf.empty:
+        frames.append(df_bf)
         
     if frames:
         return pd.concat(frames, ignore_index=True)

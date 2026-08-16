@@ -4,6 +4,7 @@ import io
 import time
 from datetime import datetime, date
 import pandas as pd
+import numpy as np
 import streamlit as st
 
 # Configura a página do Streamlit
