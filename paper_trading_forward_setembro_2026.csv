@@ -1093,3 +1093,717 @@ data,horario,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,p
 2026-08-13,21:30,COPA SUDAMERICANA,Cienciano x Botafogo FR,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
 2026-08-13,22:00,MEXICO 2,Alebrijes De Oaxaca x CD Tepatitlan De Morelos,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
 2026-08-13,22:00,MEXICO 2,Alebrijes De Oaxaca x CD Tepatitlan De Morelos,Over 2.5 Back Valor,O25,back,1.81,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,00:00,MEXICO 2,Club Atletico La Paz x Piratas FC,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,00:00,MEXICO 2,Club Atletico La Paz x Piratas FC,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,ACS Dumbravita x Gloria Popesti-Leordeni,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,ACS Dumbravita x Gloria Popesti-Leordeni,Over 2.5 Back Valor,O25,back,2.46,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,ACS Dumbravita x Gloria Popesti-Leordeni,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,ACSM Cetatea 1932 Suceava x CSM Satu Mare,Over 2.5 Back Valor,O25,back,1.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Bihor Oradea x ASA Targu Mures,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Bihor Oradea x ASA Targu Mures,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,CS Gloria 2018 x Conc. Chiajna,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,CS Gloria 2018 x Conc. Chiajna,Over 2.5 Back Valor,O25,back,2.16,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,CSM Scolar Resita x CSL Stefanestii de Jos,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,FC Metaloglobus Bucuresti x CSC 1599 Selimbar,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,FC Metaloglobus Bucuresti x CSC 1599 Selimbar,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Politehnica Timisoara x Unirea Slobozia,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Politehnica Timisoara x Unirea Slobozia,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Ramnicu-Valcea x CSM Slatina,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,05:00,ROMANIA 2,Ramnicu-Valcea x CSM Slatina,Over 2.5 Back Valor,O25,back,1.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 1,Kashima x Nagoya,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 1,Kashima x Nagoya,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 1,Mito x G-Osaka,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 1,Mito x G-Osaka,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 1,Mito x G-Osaka,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 2,Blaublitz Akita x Toyama,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 2,Blaublitz Akita x Toyama,Over 2.5 Back Valor,O25,back,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 2,Tochigi Uva FC x Vanraure Hachinohe,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 2,Tochigi Uva FC x Vanraure Hachinohe,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:00,JAPAN 2,Tochigi Uva FC x Vanraure Hachinohe,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 1,Shimizu x Yokohama FM,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 1,Shimizu x Yokohama FM,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 2,Fujieda Myfc x Iwaki SC,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 2,Fujieda Myfc x Iwaki SC,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 2,Fujieda Myfc x Iwaki SC,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:30,JAPAN 2,Fujieda Myfc x Iwaki SC,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:55,JAPAN 1,Okayama x Nagasaki,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,06:55,JAPAN 1,Okayama x Nagasaki,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,CHINA 1,Yanbian Longding x Dalian Kun City FC,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,CHINA 1,Yanbian Longding x Dalian Kun City FC,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,CHINA 1,Yanbian Longding x Dalian Kun City FC,Over 2.5 Back Valor,O25,back,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Fukuoka x Cerezo Osaka,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Fukuoka x Cerezo Osaka,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Jef Utd Chiba x FC Machida,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Jef Utd Chiba x FC Machida,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Jef Utd Chiba x FC Machida,Over 2.5 Back Valor,O25,back,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Jef Utd Chiba x FC Machida,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Jef Utd Chiba x FC Machida,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,20.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Kawasaki x Kyoto,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Kawasaki x Kyoto,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Kobe x FC Tokyo,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Kobe x FC Tokyo,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Kobe x FC Tokyo,Over 2.5 Back Valor,O25,back,2.24,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Urawa x Hiroshima,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 1,Urawa x Hiroshima,Over 2.5 Back Valor,O25,back,1.92,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Albirex Niigata x Sapporo,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Albirex Niigata x Sapporo,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Albirex Niigata x Sapporo,Over 2.5 Back Valor,O25,back,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,FC Imabari x Omiya,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,FC Imabari x Omiya,Over 2.5 Back Valor,O25,back,1.93,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Kofu x Tegevajaro Miyazaki,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Kofu x Tegevajaro Miyazaki,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Kofu x Tegevajaro Miyazaki,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Sendai x Oita,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Sendai x Oita,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Sendai x Oita,Over 2.5 Back Valor,O25,back,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Sendai x Oita,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Shonan x Yamagata,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Shonan x Yamagata,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:00,JAPAN 2,Shonan x Yamagata,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,FC Seoul x Daejeon Citizen,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,FC Seoul x Daejeon Citizen,Over 2.5 Back Valor,O25,back,1.98,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Gwangju FC x Pohang Steelers,Lay 0x0 Protegido,CS_0x0,lay,9.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Gwangju FC x Pohang Steelers,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Gwangju FC x Pohang Steelers,Over 2.5 Back Valor,O25,back,2.58,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Gwangju FC x Pohang Steelers,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,30.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Jeju Utd x FC Anyang,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 1,Jeju Utd x FC Anyang,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Busan IPark x Hwaseong FC,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Busan IPark x Hwaseong FC,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Cheongju FC x Jeonnam Dragons,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Cheongju FC x Jeonnam Dragons,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Gimhae City x Gyeongnam,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Gimhae City x Gyeongnam,Over 2.5 Back Valor,O25,back,2.18,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Gimhae City x Gyeongnam,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,07:30,SOUTH KOREA 2,Suwon Bluewings x Suwon FC,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,CHINA 1,Wuxi Wugou x Guangdong GZ-Power FC,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,CHINA 1,Wuxi Wugou x Guangdong GZ-Power FC,Over 2.5 Back Valor,O25,back,1.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,CHINA 1,Liaoning Tieren FC x Shenzhen Peng City,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,DENMARK 2,Hillerod Fodbold x Aarhus Fremad,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,GERMANY 2,Greuther Furth x Nurnberg,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,GERMANY 2,Hertha Berlin x FC Heidenheim,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,GERMANY 2,VfL Osnabruck x FC Magdeburg,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:00,SWEDEN 2,Ljungskile x Osters,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 2,Bolton x Preston,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 2,Bolton x Preston,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Notts Co x Leicester,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Notts Co x Leicester,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Oxford Utd x MK Dons,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Oxford Utd x MK Dons,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Oxford Utd x MK Dons,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Reading x Luton,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 3,Reading x Luton,Over 2.5 Back Valor,O25,back,1.93,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 4,Newport County x Rochdale,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 4,Newport County x Rochdale,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 4,Oldham x Port Vale,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 4,Oldham x Port Vale,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,ENGLAND 4,Oldham x Port Vale,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,WALES 1,Barry Town Utd x Cardiff Metropolitan,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:30,WALES 1,Barry Town Utd x Cardiff Metropolitan,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:35,CHINA 1,Tianjin Jinmen Tiger FC x Beijing Guoan,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,08:35,CHINA 1,Zhejiang Greentown x Chengdu Rongcheng,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,CHINA 1,Shanghai Shenhua x Henan Songshan Longmen,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,DENMARK 2,Esbjerg x Hobro,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,GERMANY 3,Fortuna Koln x Alemannia Aachen,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,GERMANY 3,Preussen Munster x Ingolstadt,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,GERMANY 3,SV Meppen x SG Sonnenhof,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:00,GERMANY 3,SV Meppen x SG Sonnenhof,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:30,UKRAINE 1,FK Kudrivka x Obolon-Brovar Kiev,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:30,UKRAINE 1,FK Kudrivka x Obolon-Brovar Kiev,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:30,UKRAINE 1,FK Kudrivka x Obolon-Brovar Kiev,BTTS Lay Quant,BTTS_Y,lay,2.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:45,POLAND 1,Zaglebie Lubin x Slask Wroclaw,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,09:45,POLAND 1,Zaglebie Lubin x Slask Wroclaw,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,PORTUGAL 2,Leiria x Benfica B,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,PORTUGAL 2,Leiria x Benfica B,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Amazulu x Siwelele FC,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Amazulu x Siwelele FC,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Kaizer Chiefs x Mamelodi Sundowns,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Kaizer Chiefs x Mamelodi Sundowns,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Kaizer Chiefs x Mamelodi Sundowns,Over 2.5 Back Valor,O25,back,2.56,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Kaizer Chiefs x Mamelodi Sundowns,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SOUTH AFRICA 1,Kaizer Chiefs x Mamelodi Sundowns,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,28.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SWEDEN 1,Mjallby x Sirius,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SWEDEN 2,Sundsvall x Helsingborgs,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,SWEDEN 2,United IK Nordic x Varbergs BoIS,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,URUGUAY 1,Cerro x Albion FC,Lay 0x0 Protegido,CS_0x0,lay,8.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:00,URUGUAY 1,Cerro x Albion FC,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Chrobry Glogow x Podbeskidzie B-B,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Chrobry Glogow x Podbeskidzie B-B,Over 2.5 Back Valor,O25,back,1.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Odra Opole x Warta Poznan,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Odra Opole x Warta Poznan,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Pogon Siedlce x Polonia Warszawa,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,POLAND 2,Pogon Siedlce x Polonia Warszawa,Over 2.5 Back Valor,O25,back,1.82,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,ROMANIA 2,CS Afumati x Chindia Targoviste,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,ROMANIA 2,CS Afumati x Chindia Targoviste,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,10:30,ROMANIA 2,CS Afumati x Chindia Targoviste,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,CZECH 1,Arsenal Ceska Lipa x MFK Karvina,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,DENMARK 2,HB Koge x Hvidovre,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Aldershot x Hartlepool,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Barrow x Hornchurch,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Barrow x Hornchurch,Over 2.5 Back Valor,O25,back,1.98,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,FC Halifax Town x Boreham Wood,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Gateshead x Woking,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Gateshead x Woking,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Kidderminster x Eastleigh,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Solihull Moors x Boston Utd,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Solihull Moors x Boston Utd,Over 2.5 Back Valor,O25,back,1.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Southend x Scunthorpe,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Sutton Utd x Altrincham,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Tamworth FC x AFC Fylde,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Wealdstone x Harrogate Town,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Wealdstone x Harrogate Town,Over 2.5 Back Valor,O25,back,1.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Worthing x Forest Green,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Yeovil x Carlisle,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 5,Yeovil x Carlisle,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Bristol City x Millwall,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Bristol City x Millwall,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Charlton x Derby,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Charlton x Derby,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Charlton x Derby,Over 2.5 Back Valor,O25,back,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Middlesbrough x Lincoln,Over 2.5 Back Valor,O25,back,1.81,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Norwich x West Brom,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Norwich x West Brom,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Portsmouth x QPR,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Portsmouth x QPR,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Portsmouth x QPR,Over 2.5 Back Valor,O25,back,2.24,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Stoke x Swansea,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 2,Stoke x Swansea,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Barnsley x Bromley,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Barnsley x Bromley,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Blackpool x Wycombe,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Blackpool x Wycombe,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Bradford x Peterborough,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Burton Albion x Stevenage,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Burton Albion x Stevenage,Over 2.5 Back Valor,O25,back,2.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Cambridge Utd x Wigan,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Cambridge Utd x Wigan,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Cambridge Utd x Wigan,Over 2.5 Back Valor,O25,back,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Huddersfield x AFC Wimbledon,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Huddersfield x AFC Wimbledon,Over 2.5 Back Valor,O25,back,1.82,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Leyton Orient x Sheff Wed,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Leyton Orient x Sheff Wed,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Mansfield x Doncaster,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Mansfield x Doncaster,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Plymouth x Stockport,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 3,Plymouth x Stockport,Over 2.5 Back Valor,O25,back,1.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Accrington x Colchester,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Accrington x Colchester,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Accrington x Colchester,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Barnet x Salford City,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Barnet x Salford City,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Cheltenham x Rotherham,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Cheltenham x Rotherham,Over 2.5 Back Valor,O25,back,2.16,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Chesterfield x Fleetwood Town,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Chesterfield x Fleetwood Town,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Crawley Town x Crewe,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Crawley Town x Crewe,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Gillingham x Walsall,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Gillingham x Walsall,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Gillingham x Walsall,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Grimsby x Exeter,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Grimsby x Exeter,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Northampton x Swindon,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Northampton x Swindon,Over 2.5 Back Valor,O25,back,1.99,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Tranmere x Shrewsbury,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Tranmere x Shrewsbury,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,Tranmere x Shrewsbury,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,York City x Bristol Rovers,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,ENGLAND 4,York City x Bristol Rovers,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,NORWAY 2,Lyn x Odds BK,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,NORWAY 1,KFUM Oslo x Lillestrom,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Alloa x Montrose,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Alloa x Montrose,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Hamilton x Airdrieonians,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Hamilton x Airdrieonians,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Peterhead x East Fife,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 3,Peterhead x East Fife,Over 2.5 Back Valor,O25,back,1.88,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Annan x Clyde,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Dumbarton x Edinburgh City,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Dumbarton x Edinburgh City,Over 2.5 Back Valor,O25,back,1.81,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Elgin City FC x Kelty Hearts,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Forfar x Stirling,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Forfar x Stirling,Over 2.5 Back Valor,O25,back,1.84,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:00,SCOTLAND 4,Stranraer x Spartans,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,GERMANY 3,Verl x Duisburg,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,PORTUGAL 1,Alverca x Club Football Estrela,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,PORTUGAL 1,Alverca x Club Football Estrela,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,PORTUGAL 1,Alverca x Club Football Estrela,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,PORTUGAL 2,Sporting Lisbon B x Chaves,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,11:30,PORTUGAL 2,Sporting Lisbon B x Chaves,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,AUSTRIA 1,SC Austria Lustenau x RZ Pellets WAC,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,AUSTRIA 1,SC Austria Lustenau x RZ Pellets WAC,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,CZECH 1,Pardubice x Mlada Boleslav,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,CZECH 1,Slovacko x Sigma Olomouc,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,CZECH 1,Slovacko x Sigma Olomouc,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,CZECH 1,FK Pribram x Prostejov,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,CZECH 1,FK Pribram x Prostejov,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,SPAIN 2,FC Andorra x AD Ceuta FC,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,SPAIN 2,FC Andorra x AD Ceuta FC,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,SWEDEN 2,Falkenbergs x Norrby IF,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,SWEDEN 2,Sandvikens IF x Norrkoping,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,UKRAINE 1,Karpaty x FC Bukovyna,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:00,UKRAINE 1,Karpaty x FC Bukovyna,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,POLAND 1,Piast Gliwice x Wieczysta Krakow,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,ROMANIA 1,Csikszereda x ACS Sepsi OSK,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,ROMANIA 1,Csikszereda x ACS Sepsi OSK,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,ROMANIA 1,Csikszereda x ACS Sepsi OSK,Over 2.5 Back Valor,O25,back,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,ROMANIA 1,Csikszereda x ACS Sepsi OSK,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,12:30,SOUTH AFRICA 1,Sekhukhune United x Polokwane City,BTTS Lay Quant,BTTS_Y,lay,2.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,CZECH 1,H Slavia Kromeriz x Vysocina Jihlava,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,CZECH 1,H Slavia Kromeriz x Vysocina Jihlava,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,CZECH 1,MAS Taborsko x SFC Opava,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,CZECH 1,MAS Taborsko x SFC Opava,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,SLOVAKIA 1,Dukla Banska Bystrica x Zilina,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,SLOVAKIA 1,MFk Skalica x FC Kosice,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,SLOVENIA 1,Nafta Lendava x NK Celje,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 2,Fatih Karagumruk Istanbul x Umraniyespor,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 2,Fatih Karagumruk Istanbul x Umraniyespor,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 2,Fatih Karagumruk Istanbul x Umraniyespor,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 2,Istanbulspor x Bodrum Belediyesi Bodrumspor,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 2,Istanbulspor x Bodrum Belediyesi Bodrumspor,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 1,Kasimpasa x Trabzonspor,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 1,Kasimpasa x Trabzonspor,Over 2.5 Back Valor,O25,back,1.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 1,Konyaspor x Rizespor,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,TURKEY 1,Konyaspor x Rizespor,Over 2.5 Back Valor,O25,back,1.92,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,URUGUAY 1,Juventud De Las Piedras x Torque,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:00,URUGUAY 1,Juventud De Las Piedras x Torque,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,BELGIUM 1,Kortrijk x Antwerp,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,BELGIUM 1,Kortrijk x Antwerp,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,SAUDI ARABIA 1,Al-Taawoun Buraidah x Al-Khaleej Saihat,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,SAUDI ARABIA 1,Al-Taawoun Buraidah x Al-Khaleej Saihat,Over 2.5 Back Valor,O25,back,1.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,WALES 1,Caernarfon Town x Colwyn Bay,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:15,WALES 1,Caernarfon Town x Colwyn Bay,Over 2.5 Back Valor,O25,back,1.82,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:30,CROATIA 1,NK Istra x Slaven Belupo,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:30,ENGLAND 2,Sheff Utd x Birmingham,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:30,ENGLAND 2,Sheff Utd x Birmingham,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,13:45,NETHERLANDS 1,FC Utrecht x Az Alkmaar,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,PORTUGAL 1,Academico de Viseu x Santa Clara,Lay 0x0 Protegido,CS_0x0,lay,8.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,PORTUGAL 2,Torreense x Penafiel,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,PORTUGAL 2,Torreense x Penafiel,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SERBIA 1,Radnik Surdulica x Macva Sabac,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SERBIA 1,Radnik Surdulica x Macva Sabac,Over 2.5 Back Valor,O25,back,2.16,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SERBIA 1,Radnik Surdulica x Macva Sabac,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SPAIN 2,Cadiz x Celta Vigo B,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SPAIN 2,Cadiz x Celta Vigo B,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SPAIN 2,Oviedo x Granada,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SPAIN 2,Oviedo x Granada,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:00,SPAIN 2,Oviedo x Granada,Over 2.5 Back Valor,O25,back,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:30,ARGENTINA 1,Aldosivi x Tigre,BTTS Lay Quant,BTTS_Y,lay,2.58,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:30,ARGENTINA 1,San Lorenzo x Union Santa Fe,Lay 0x0 Protegido,CS_0x0,lay,8.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:30,AUSTRIA 1,Sturm Graz x SCR Altach,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,14:30,SPAIN 1,Alaves x Getafe,BTTS Lay Quant,BTTS_Y,lay,2.62,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,Agropecuario x Ciudad de Bolivar,BTTS Lay Quant,BTTS_Y,lay,2.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,CA San Miguel x CA Colegiales,BTTS Lay Quant,BTTS_Y,lay,2.82,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,Deportivo Moron x Almagro BA,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,Deportivo Moron x Almagro BA,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,Deportivo Moron x Almagro BA,BTTS Lay Quant,BTTS_Y,lay,2.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,ARGENTINA 2,Ferro Carril Oeste x CA Atlanta,BTTS Lay Quant,BTTS_Y,lay,2.74,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,CZECH 1,Plzen x Zlin,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,MEXICO 2,Cruz Azul Hidalgo x Club Atletico Morelia,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,PERU 1,Asociacion Deportiva Tarma x Alianza Atletico,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,PERU 1,Asociacion Deportiva Tarma x Alianza Atletico,Over 2.5 Back Valor,O25,back,1.97,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,SAUDI ARABIA 1,Al-Ittihad x Al-Kholood Club,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,SOUTH AFRICA 1,Durban City x Richards Bay FC,BTTS Lay Quant,BTTS_Y,lay,2.68,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:00,SOUTH AFRICA 1,Milford x Kruger United FC,BTTS Lay Quant,BTTS_Y,lay,2.44,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,BULGARIA 1,Ludogorets x Botev Plovdiv,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,POLAND 1,Widzew Lodz x Korona Kielce,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,POLAND 1,Widzew Lodz x Korona Kielce,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,POLAND 1,Widzew Lodz x Korona Kielce,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,SLOVENIA 1,Olimpija x NK Maribor,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,SLOVENIA 1,Olimpija x NK Maribor,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,SLOVENIA 1,Olimpija x NK Maribor,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:15,SLOVENIA 1,Olimpija x NK Maribor,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,GERMANY 2,Kaiserslautern x Karlsruhe,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,ROMANIA 1,Rapid Bucharest x Dinamo Bucharest,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,ROMANIA 1,Rapid Bucharest x Dinamo Bucharest,Over 2.5 Back Valor,O25,back,2.14,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 2,Bursaspor x 76 Igdir Belediyespor,Over 2.5 Back Valor,O25,back,1.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 2,Manisa FK x Van Buyuksehir Belediyespor,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 2,Manisa FK x Van Buyuksehir Belediyespor,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 1,Gaziantep FK x Alanyaspor,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 1,Gaziantep FK x Alanyaspor,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 1,Genclerbirligi x Fenerbahce,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,15:30,TURKEY 1,Genclerbirligi x Fenerbahce,Over 2.5 Back Valor,O25,back,1.88,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,ARGENTINA 2,Club Atletico Mitre x CA Guemes,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,ARGENTINA 2,Club Atletico Mitre x CA Guemes,BTTS Lay Quant,BTTS_Y,lay,2.74,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Atletico GO x Vila Nova,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Atletico GO x Vila Nova,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Atletico GO x Vila Nova,Over 2.5 Back Valor,O25,back,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Atletico GO x Vila Nova,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Ceara SC Fortaleza x Cuiaba,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Criciuma x Goias,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Criciuma x Goias,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,BRAZIL 2,Criciuma x Goias,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,CHILE 2,CSD Rangers x Magallanes,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,CHILE 2,CSD Rangers x Magallanes,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,CROATIA 1,Osijek x Lokomotiva,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,CROATIA 1,Osijek x Lokomotiva,Over 2.5 Back Valor,O25,back,1.88,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,ECUADOR 1,Manta FC x CD Leones del Norte,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,ECUADOR 1,Manta FC x CD Leones del Norte,BTTS Lay Quant,BTTS_Y,lay,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,PARAGUAY 1,Guarani (Par) x Rubio Nu,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,PARAGUAY 1,Guarani (Par) x Rubio Nu,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,PARAGUAY 1,Guarani (Par) x Rubio Nu,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:00,SERBIA 1,Cukaricki x OFK Beograd,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,ARGENTINA 2,Colon x Patronato,Lay 0x0 Protegido,CS_0x0,lay,8.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,ARGENTINA 2,Colon x Patronato,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,ARGENTINA 2,Colon x Patronato,BTTS Lay Quant,BTTS_Y,lay,2.74,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,BRAZIL 1,Fluminense x SE Palmeiras,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,BRAZIL 1,Fluminense x SE Palmeiras,Over 2.5 Back Valor,O25,back,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,PORTUGAL 1,Rio Ave x Porto,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,PORTUGAL 1,Rio Ave x Porto,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,SPAIN 1,Sevilla x Rayo Vallecano,Lay 0x0 Protegido,CS_0x0,lay,8.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,SPAIN 2,Mallorca x Valladolid,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,SPAIN 2,Mallorca x Valladolid,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,URUGUAY 1,Racing Club (Uru) x Nacional (Uru),Lay 0x0 Protegido,CS_0x0,lay,9.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:30,URUGUAY 1,Racing Club (Uru) x Nacional (Uru),Over 2.5 Back Valor,O25,back,2.46,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,16:45,ARGENTINA 1,Estudiantes x Gimnasia La Plata,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,BRAZIL 3,Amazonas FC x Botafogo PB,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,BRAZIL 3,Amazonas FC x Botafogo PB,Over 2.5 Back Valor,O25,back,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,BRAZIL 3,Volta Redonda x Ituano,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,BRAZIL 3,Volta Redonda x Ituano,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,BRAZIL 3,Volta Redonda x Ituano,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,VENEZUELA 1,Estudiantes de Merida x Academia Anzoategui FC,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:00,VENEZUELA 1,Estudiantes de Merida x Academia Anzoategui FC,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:30,PERU 1,CD Los Chankas x Melgar,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,17:30,PERU 1,CD Los Chankas x Melgar,Over 2.5 Back Valor,O25,back,1.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:00,ARGENTINA 2,Godoy Cruz x CD Maipu,Lay 0x0 Protegido,CS_0x0,lay,9.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:00,ARGENTINA 2,Godoy Cruz x CD Maipu,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:00,ARGENTINA 2,Godoy Cruz x CD Maipu,BTTS Lay Quant,BTTS_Y,lay,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:15,BOLIVIA 1,Guabira x The Strongest,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,BRAZIL 1,Athletico-PR x Red Bull Bragantino,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,BRAZIL 1,Athletico-PR x Red Bull Bragantino,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,BRAZIL 1,Athletico-PR x Red Bull Bragantino,Over 2.5 Back Valor,O25,back,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,BRAZIL 2,Juventude x Fortaleza EC,Lay 0x0 Protegido,CS_0x0,lay,8.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,BRAZIL 2,Juventude x Fortaleza EC,BTTS Lay Quant,BTTS_Y,lay,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,CHILE 1,Deportes Limache x Universidad de Chile,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,ECUADOR 1,Guayaquil City x Libertad FC,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,ECUADOR 1,Guayaquil City x Libertad FC,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,PARAGUAY 1,Sportivo Trinidense x Nacional (Par),Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,PARAGUAY 1,Sportivo Trinidense x Nacional (Par),Over 2.5 Back Valor,O25,back,2.44,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,VENEZUELA 1,Universidad de Venezuela x Caracas,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,18:30,VENEZUELA 1,Universidad de Venezuela x Caracas,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 1,Belgrano x Independiente Rivadavia,Lay 0x0 Protegido,CS_0x0,lay,8.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 1,Belgrano x Independiente Rivadavia,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 1,Belgrano x Independiente Rivadavia,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 1,Newells x Deportivo Riestra,BTTS Lay Quant,BTTS_Y,lay,2.62,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 2,Estudiantes de Caseros x Chacarita,BTTS Lay Quant,BTTS_Y,lay,2.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 2,Quilmes x San Telmo,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 2,Quilmes x San Telmo,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 2,Quilmes x San Telmo,Over 2.5 Back Valor,O25,back,2.48,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:00,ARGENTINA 2,Quilmes x San Telmo,BTTS Lay Quant,BTTS_Y,lay,2.54,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Brusque FC x Inter Limeira,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Brusque FC x Inter Limeira,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Brusque FC x Inter Limeira,Over 2.5 Back Valor,O25,back,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Brusque FC x Inter Limeira,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Santa Cruz PE x Maranhao,Lay 0x0 Protegido,CS_0x0,lay,9.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,BRAZIL 3,Santa Cruz PE x Maranhao,BTTS Lay Quant,BTTS_Y,lay,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,URUGUAY 1,Wanderers (Uru) x Cerro Largo FC,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,URUGUAY 1,Wanderers (Uru) x Cerro Largo FC,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,URUGUAY 1,Wanderers (Uru) x Cerro Largo FC,Over 2.5 Back Valor,O25,back,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,19:30,URUGUAY 1,Wanderers (Uru) x Cerro Largo FC,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:00,VENEZUELA 1,Portuguesa FC x Trujillanos,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:00,VENEZUELA 1,Portuguesa FC x Trujillanos,Over 2.5 Back Valor,O25,back,2.18,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:00,VENEZUELA 1,Portuguesa FC x Trujillanos,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:05,COLOMBIA 1,Atletico Nacional Medellin x Santa Fe,Over 2.5 Back Valor,O25,back,1.91,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,BOLIVIA 1,Blooming Santa Cruz x Aurora,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,USA 1,Atlanta Utd x New York Red Bulls,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,USA 1,CF Montreal x DC Utd,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,USA 1,Charlotte FC x Columbus,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,USA 1,Orlando City x FC Cincinnati,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,USA 1,Toronto FC x New England Revolution,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,VENEZUELA 1,Puerto Cabello x Rayo Zuliano,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,20:30,VENEZUELA 1,Puerto Cabello x Rayo Zuliano,BTTS Lay Quant,BTTS_Y,lay,2.54,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,BRAZIL 1,Sao Paulo x Coritiba,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,BRAZIL 1,Sao Paulo x Coritiba,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,CHILE 1,Everton De Vina x Audax Italiano,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,CHILE 1,Everton De Vina x Audax Italiano,Over 2.5 Back Valor,O25,back,1.99,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,ECUADOR 1,Mushuc Runa x Barcelona (Ecu),Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:00,ECUADOR 1,Mushuc Runa x Barcelona (Ecu),Over 2.5 Back Valor,O25,back,2.16,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:15,ARGENTINA 1,CA Platense x Boca Juniors,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:15,ARGENTINA 1,CA Platense x Boca Juniors,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,27.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:30,PERU 1,Alianza Lima x UTC Cajamarca,BTTS Lay Quant,BTTS_Y,lay,2.56,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:30,USA 1,Houston Dynamo x LA Galaxy,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,21:30,USA 1,Nashville SC x Inter Miami CF,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,22:10,COLOMBIA 1,Boyaca Chico x Junior FC Barranquilla,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,22:30,USA 1,Real Salt Lake x Minnesota Utd,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-15,23:40,USA 1,San Jose Earthquakes x St Louis City SC,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,00:10,MEXICO 1,Atlas x Tigres,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,00:10,MEXICO 1,Atlas x Tigres,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,00:10,MEXICO 1,Atlas x Tigres,Over 2.5 Back Valor,O25,back,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,00:10,MEXICO 1,Atlas x Tigres,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,05:15,CZECH 1,Zizkov x Banik Ostrava B,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,06:00,JAPAN 2,Yokohama FC x Iwata,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,06:00,JAPAN 2,Yokohama FC x Iwata,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,JAPAN 2,Tokushima x Tosu,Lay 0x0 Protegido,CS_0x0,lay,9.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,JAPAN 2,Tokushima x Tosu,BTTS Lay Quant,BTTS_Y,lay,2.24,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,PORTUGAL 2,Portimonense x Vizela,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,PORTUGAL 2,Portimonense x Vizela,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,PORTUGAL 2,Portimonense x Vizela,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,UKRAINE 1,LNZ-Lebedyn x Chernomorets Odesa,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:00,UKRAINE 1,LNZ-Lebedyn x Chernomorets Odesa,BTTS Lay Quant,BTTS_Y,lay,2.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:15,NETHERLANDS 1,ADO Den Haag x FC Groningen,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Bucheon FC 1995 x Jeonbuk Motors,Lay Draw Estrutural,1X2_D,lay,4.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Bucheon FC 1995 x Jeonbuk Motors,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Incheon Utd x Gimcheon Sangmu,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Incheon Utd x Gimcheon Sangmu,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Incheon Utd x Gimcheon Sangmu,Over 2.5 Back Valor,O25,back,2.34,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Ulsan Hyundai Horang-i x Gangwon,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Ulsan Hyundai Horang-i x Gangwon,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 1,Ulsan Hyundai Horang-i x Gangwon,Over 2.5 Back Valor,O25,back,2.18,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 2,Daegu Fc x Chungnam Asan,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 2,Gimpo Citizen x Cheonan City,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 2,Gimpo Citizen x Cheonan City,Over 2.5 Back Valor,O25,back,1.86,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 2,Paju Citizen x Seongnam FC,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,07:30,SOUTH KOREA 2,Paju Citizen x Seongnam FC,Over 2.5 Back Valor,O25,back,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,CHINA 1,Shenzhen Juniors FC x Ningbo Professional,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,CHINA 1,Shenzhen Juniors FC x Ningbo Professional,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,CHINA 1,Suzhou Dongwu x Nantong Zhiyun F.C,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,CHINA 1,Suzhou Dongwu x Nantong Zhiyun F.C,Over 2.5 Back Valor,O25,back,2.54,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,CHINA 1,Suzhou Dongwu x Nantong Zhiyun F.C,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,SWEDEN 2,Varnamo x Ostersunds FK,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:00,SWEDEN 2,Varnamo x Ostersunds FK,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,BELGIUM 1,Waasland-Beveren x Anderlecht,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,CHINA 1,Foshan Nanshi FC x Shijiazhuang Gongfu FC,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,CHINA 1,Foshan Nanshi FC x Shijiazhuang Gongfu FC,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,CHINA 1,Foshan Nanshi FC x Shijiazhuang Gongfu FC,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,CHINA 1,Nanjing City x Jiangxi Dingnan United,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,CHINA 1,Nanjing City x Jiangxi Dingnan United,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,GERMANY 2,Arminia Bielefeld x Cottbus,Lay Draw Estrutural,1X2_D,lay,4.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,GERMANY 2,Dynamo Dresden x SV Darmstadt,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,08:30,GERMANY 2,Hannover x Wolfsburg,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,DENMARK 2,Vendsyssel FF x AB,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,DENMARK 1,OB x AC Horsens,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,DENMARK 1,OB x AC Horsens,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,SWEDEN 1,Brommapojkarna x Orgryte,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,SWEDEN 1,Degerfors x IFK Goteborg,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:00,SWEDEN 1,Degerfors x IFK Goteborg,Over 2.5 Back Valor,O25,back,1.92,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,ENGLAND 2,Watford x Southampton,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,NORWAY 1,Aalesunds x Valerenga,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,POLAND 2,LKS Lodz x Nieciecza,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,POLAND 2,LKS Lodz x Nieciecza,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,UKRAINE 1,FC Kharkiv x Shakhtar,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,UKRAINE 1,FC Kharkiv x Shakhtar,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,UKRAINE 1,FC Kharkiv x Shakhtar,Over 2.5 Back Valor,O25,back,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,UKRAINE 1,FC Kharkiv x Shakhtar,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:30,UKRAINE 1,FC Kharkiv x Shakhtar,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,15.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,09:45,POLAND 1,LKP Motor Lublin x GKS Katowice,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,10:00,PARAGUAY 1,Cerro Porteno x Sportivo San Lorenzo,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,10:00,PARAGUAY 1,Cerro Porteno x Sportivo San Lorenzo,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,10:00,PORTUGAL 2,Amarante x Lusitania Futebol Clube,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,10:00,PORTUGAL 2,Amarante x Lusitania Futebol Clube,Over 2.5 Back Valor,O25,back,2.42,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BELGIUM 1,RAAL La Louviere x Gent,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BELGIUM 1,RAAL La Louviere x Gent,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BELGIUM 1,RAAL La Louviere x Gent,Over 2.5 Back Valor,O25,back,2.32,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BRAZIL 1,Chapecoense x Bahia,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BRAZIL 1,Chapecoense x Bahia,Over 2.5 Back Valor,O25,back,1.98,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BRAZIL 2,Operario PR x Avai,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BRAZIL 2,Operario PR x Avai,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,BRAZIL 2,Operario PR x Avai,Over 2.5 Back Valor,O25,back,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,DENMARK 1,Lyngby x Midtjylland,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,ESTONIA 1,Trans Narva x Paide Linnameeskond,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,FINLAND 1,AC Oulu x FC Inter Turku,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,FINLAND 1,AC Oulu x FC Inter Turku,Over 2.5 Back Valor,O25,back,2.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,FINLAND 1,Lahti x KuPS,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,FINLAND 1,Lahti x KuPS,Over 2.5 Back Valor,O25,back,1.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,URUGUAY 1,Progreso x Deportivo Maldonado,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,URUGUAY 1,Progreso x Deportivo Maldonado,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,URUGUAY 1,Progreso x Deportivo Maldonado,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:00,URUGUAY 1,Progreso x Deportivo Maldonado,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,27.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,GERMANY 3,Jahn Regensburg x Saarbrucken,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,PORTUGAL 1,CD Nacional Funchal x Estoril Praia,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,PORTUGAL 1,CD Nacional Funchal x Estoril Praia,Over 2.5 Back Valor,O25,back,2.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,PORTUGAL 2,Leixoes x Tondela,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,SWEDEN 1,GAIS x Malmo FF,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,11:30,SWEDEN 1,Kalmar FF x Hammarby,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,AUSTRIA 1,Hartberg x Austria Wien,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,AUSTRIA 1,Hartberg x Austria Wien,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,BOSNIA 1,FK BSK Banja Luka x Fk Velez Mostar,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,BOSNIA 1,FK BSK Banja Luka x Fk Velez Mostar,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,ENGLAND 2,Burnley x West Ham,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,ENGLAND 2,Burnley x West Ham,Over 2.5 Back Valor,O25,back,1.84,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,NORWAY 2,Egersund x Stabaek,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,NORWAY 2,Hodd x Strommen,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,NORWAY 2,Raufoss x Asane,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,NORWAY 1,Molde x Tromso,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,NORWAY 1,Sarpsborg x Sandefjord,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,POLAND 2,Stal Mielec x Polonia Bytom,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,SLOVAKIA 1,Spartak Trnava x Zemplin,Over 2.5 Back Valor,O25,back,1.81,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,SPAIN 1,Racing Santander x Villarreal,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,SPAIN 2,Eibar x Tenerife,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,SPAIN 2,Eibar x Tenerife,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,SPAIN 2,Eibar x Tenerife,Over 2.5 Back Valor,O25,back,2.46,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,UKRAINE 1,Dynamo Kiev x Kolos Kovalyovka,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:00,UKRAINE 1,Dynamo Kiev x Kolos Kovalyovka,Over 2.5 Back Valor,O25,back,1.91,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,POLAND 1,Cracovia Krakow x Rakow Czestochowa,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,POLAND 1,Cracovia Krakow x Rakow Czestochowa,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,POLAND 1,Cracovia Krakow x Rakow Czestochowa,Over 2.5 Back Valor,O25,back,2.24,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,ROMANIA 1,Otelul Galati x Universitatea Craiova,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,ROMANIA 1,Otelul Galati x Universitatea Craiova,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,SLOVENIA 1,NK Radomlje x NK Aluminij,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,SOUTH AFRICA 1,TS Galaxy FC x Golden Arrows,Lay 0x0 Protegido,CS_0x0,lay,8.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,12:30,SOUTH AFRICA 1,TS Galaxy FC x Golden Arrows,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,BULGARIA 1,CSKA Sofia x Botev Vratsa,Over 2.5 Back Valor,O25,back,1.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,BULGARIA 1,CSKA Sofia x Botev Vratsa,BTTS Lay Quant,BTTS_Y,lay,2.74,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,DENMARK 1,Randers x FC Copenhagen,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,PERU 1,Sporting Cristal x Sport Huancayo,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 2,Kayserispor x Sivasspor,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 2,Kayserispor x Sivasspor,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 2,Keciorengucu x Pendikspor,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 2,Keciorengucu x Pendikspor,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 1,Basaksehir x Kocaelispor,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:00,TURKEY 1,Basaksehir x Kocaelispor,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,BELGIUM 1,Yellow-Red Mechelen x Standard,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,BELGIUM 1,Yellow-Red Mechelen x Standard,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,BELGIUM 1,Yellow-Red Mechelen x Standard,Over 2.5 Back Valor,O25,back,2.18,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,CHILE 1,Nublense x Union La Calera,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,CHILE 1,Nublense x Union La Calera,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,CHILE 1,Nublense x Union La Calera,Over 2.5 Back Valor,O25,back,2.14,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,CROATIA 1,Varazdin x Rijeka,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,13:30,CROATIA 1,Varazdin x Rijeka,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,AUSTRIA 1,Rapid Vienna x Grazer AK,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,AUSTRIA 1,Rapid Vienna x Grazer AK,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,BOSNIA 1,Sloga Doboj x Borac Banja Luka,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,BOSNIA 1,Sloga Doboj x Borac Banja Luka,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,BOSNIA 1,Sloga Doboj x Borac Banja Luka,BTTS Lay Quant,BTTS_Y,lay,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,BOSNIA 1,Sloga Doboj x Borac Banja Luka,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,20.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 1,Arouca x Moreirense,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 1,Arouca x Moreirense,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 1,Arouca x Moreirense,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 2,Porto B x Farense,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 2,Porto B x Farense,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,PORTUGAL 2,Porto B x Farense,Over 2.5 Back Valor,O25,back,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SERBIA 1,FK IMT Novi Beograd x Radnicki Nis,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SERBIA 1,FK IMT Novi Beograd x Radnicki Nis,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SLOVAKIA 1,KFC Komarno x Dunajska Streda,Lay Draw Estrutural,1X2_D,lay,3.55,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SLOVAKIA 1,KFC Komarno x Dunajska Streda,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 1,Espanyol x Levante,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 1,Espanyol x Levante,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 1,Espanyol x Levante,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 2,Burgos x Cordoba,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 2,Burgos x Cordoba,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 2,Burgos x Cordoba,Over 2.5 Back Valor,O25,back,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 2,Girona x Leganes,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:00,SPAIN 2,Girona x Leganes,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:15,BELGIUM 1,Lommel x Charleroi,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:15,NORWAY 1,Fredrikstad x Kristiansund,Lay Draw Estrutural,1X2_D,lay,4.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:30,GERMANY 3,Stuttgart II x Viktoria Koln,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,14:30,POLAND 2,Unia Skierniewice x Miedz Legnica,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,ARGENTINA 1,Sarmiento de Junin x CA Huracan,BTTS Lay Quant,BTTS_Y,lay,2.48,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,ARGENTINA 2,Tristan Suarez x Almirante Brown,BTTS Lay Quant,BTTS_Y,lay,3.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,CZECH 1,Slovan Liberec x Slavia Prague,Lay Draw Estrutural,1X2_D,lay,4.1,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,CZECH 1,Slovan Liberec x Slavia Prague,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,ICELAND 1,IBV x IA Akranes,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,MEXICO 1,Pumas UNAM x Queretaro,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,MEXICO 1,Pumas UNAM x Queretaro,Over 2.5 Back Valor,O25,back,1.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,URUGUAY 1,Defensor Sporting x Liverpool Montevideo,Lay 0x0 Protegido,CS_0x0,lay,9.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:00,URUGUAY 1,Defensor Sporting x Liverpool Montevideo,Over 2.5 Back Valor,O25,back,2.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,BULGARIA 1,Lokomotiv Plovdiv x Dunav Ruse,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,BULGARIA 1,Lokomotiv Plovdiv x Dunav Ruse,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,BULGARIA 1,Lokomotiv Plovdiv x Dunav Ruse,Over 2.5 Back Valor,O25,back,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,BULGARIA 1,Lokomotiv Plovdiv x Dunav Ruse,BTTS Lay Quant,BTTS_Y,lay,2.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,PERU 1,Cesar Vallejo Moquegua x Sport Boys (Per),Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,PERU 1,Cesar Vallejo Moquegua x Sport Boys (Per),Over 2.5 Back Valor,O25,back,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:15,POLAND 1,Gornik Zabrze x Wisla Krakow,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,ROMANIA 1,FC Hunedoara x CFR Cluj,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,ROMANIA 1,FC Hunedoara x CFR Cluj,Over 2.5 Back Valor,O25,back,2.06,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 2,Mardin Buyuksehir Belediyespor x Antalyaspor,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 2,Mardin Buyuksehir Belediyespor x Antalyaspor,Over 2.5 Back Valor,O25,back,2.18,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 2,Mardin Buyuksehir Belediyespor x Antalyaspor,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 2,Muglaspor x Bandirmaspor,Lay 0x0 Protegido,CS_0x0,lay,9.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 2,Muglaspor x Bandirmaspor,Over 2.5 Back Valor,O25,back,2.56,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 1,Amed Sportif Faaliyetler x Erzurum BB,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,15:30,TURKEY 1,Amed Sportif Faaliyetler x Erzurum BB,Over 2.5 Back Valor,O25,back,1.93,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ARGENTINA 2,Gimnasia Jujuy x Chaco For Ever,Lay 0x0 Protegido,CS_0x0,lay,8.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ARGENTINA 2,Gimnasia Jujuy x Chaco For Ever,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ARGENTINA 2,Gimnasia Jujuy x Chaco For Ever,BTTS Lay Quant,BTTS_Y,lay,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BOSNIA 1,Radnik Bijeljina x Zrinjski,Lay 0x0 Protegido,CS_0x0,lay,9.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BOSNIA 1,Radnik Bijeljina x Zrinjski,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BOSNIA 1,Radnik Bijeljina x Zrinjski,Over 2.5 Back Valor,O25,back,2.58,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BOSNIA 1,Radnik Bijeljina x Zrinjski,BTTS Lay Quant,BTTS_Y,lay,2.46,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BOSNIA 1,Radnik Bijeljina x Zrinjski,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,27.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 1,Atletico MG x Gremio,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 1,Atletico MG x Gremio,Over 2.5 Back Valor,O25,back,2.14,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 1,Vasco da Gama x Santos,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 1,Vasco da Gama x Santos,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 3,Floresta EC x Anapolis GO,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 3,SER Caxias do Sul x Figueirense,Lay 0x0 Protegido,CS_0x0,lay,10.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 3,SER Caxias do Sul x Figueirense,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 3,SER Caxias do Sul x Figueirense,Over 2.5 Back Valor,O25,back,2.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,BRAZIL 3,SER Caxias do Sul x Figueirense,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 2,Union San Felipe x Cobreloa Calama,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 2,Union San Felipe x Cobreloa Calama,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 2,Union San Felipe x Cobreloa Calama,Over 2.5 Back Valor,O25,back,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 2,Union San Felipe x Cobreloa Calama,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 1,Cobresal x Deportes Concepcion,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CHILE 1,Cobresal x Deportes Concepcion,Over 2.5 Back Valor,O25,back,1.89,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CROATIA 1,HNK Gorica x Hajduk Split,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,CROATIA 1,HNK Gorica x Hajduk Split,Over 2.5 Back Valor,O25,back,1.83,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ECUADOR 1,Orense Sporting Club x Deportivo Cuenca,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ECUADOR 1,Orense Sporting Club x Deportivo Cuenca,Lay Draw Estrutural,1X2_D,lay,3.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,ECUADOR 1,Orense Sporting Club x Deportivo Cuenca,Over 2.5 Back Valor,O25,back,2.38,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,PARAGUAY 1,Sportivo Luqueno x Libertad,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,PARAGUAY 1,Sportivo Luqueno x Libertad,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,SERBIA 1,Zemun x Mladost Lucani,Lay 0x0 Protegido,CS_0x0,lay,10.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,SERBIA 1,Zemun x Mladost Lucani,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:00,SERBIA 1,Zemun x Mladost Lucani,Over 2.5 Back Valor,O25,back,2.34,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,PORTUGAL 1,Braga x Gil Vicente,Lay Draw Estrutural,1X2_D,lay,4.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,PORTUGAL 1,Braga x Gil Vicente,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,PORTUGAL 1,Famalicao x Maritimo,Lay 0x0 Protegido,CS_0x0,lay,12.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,PORTUGAL 1,Famalicao x Maritimo,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,PORTUGAL 1,Famalicao x Maritimo,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,SPAIN 2,Las Palmas x Albacete,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,16:30,SPAIN 2,Las Palmas x Albacete,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:00,ARGENTINA 2,CA Central Norte x Club Gimnasia y Tiro,BTTS Lay Quant,BTTS_Y,lay,2.64,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:00,ARGENTINA 2,Club Atletico Racing de x San Martin De San Juan,BTTS Lay Quant,BTTS_Y,lay,2.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:00,ARGENTINA 2,San Martin de Tucuman x Deportivo Madryn,BTTS Lay Quant,BTTS_Y,lay,2.72,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:30,PERU 1,FC Cajamarca x Universitario de Deportes,Lay Draw Estrutural,1X2_D,lay,3.8,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:30,PERU 1,FC Cajamarca x Universitario de Deportes,Over 2.5 Back Valor,O25,back,2.12,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,17:30,PERU 1,FC Cajamarca x Universitario de Deportes,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,19.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,ARGENTINA 1,River Plate x Argentinos Juniors,Lay 0x0 Protegido,CS_0x0,lay,9.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,ARGENTINA 1,River Plate x Argentinos Juniors,Lay Draw Estrutural,1X2_D,lay,3.45,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,ARGENTINA 1,River Plate x Argentinos Juniors,BTTS Lay Quant,BTTS_Y,lay,2.36,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,ARGENTINA 2,CA Temperley x Los Andes,BTTS Lay Quant,BTTS_Y,lay,2.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,VENEZUELA 1,Deportivo Tachira x Monagas,Over 2.5 Back Valor,O25,back,1.96,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:00,VENEZUELA 1,Deportivo Tachira x Monagas,BTTS Lay Quant,BTTS_Y,lay,2.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:15,ECUADOR 1,Emelec x Tecnico Universitario,Lay 0x0 Protegido,CS_0x0,lay,11.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:15,ECUADOR 1,Emelec x Tecnico Universitario,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:15,ECUADOR 1,Emelec x Tecnico Universitario,BTTS Lay Quant,BTTS_Y,lay,2.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 1,EC Vitoria Salvador x Botafogo FR,Lay Draw Estrutural,1X2_D,lay,3.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 1,EC Vitoria Salvador x Botafogo FR,Over 2.5 Back Valor,O25,back,2.08,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 1,Mirassol x Flamengo,Lay Draw Estrutural,1X2_D,lay,3.7,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 1,Mirassol x Flamengo,Over 2.5 Back Valor,O25,back,2.04,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 2,America MG x Athletic Club,Lay 0x0 Protegido,CS_0x0,lay,9.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 2,America MG x Athletic Club,BTTS Lay Quant,BTTS_Y,lay,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 2,CRB x Novorizontino,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 2,CRB x Novorizontino,Over 2.5 Back Valor,O25,back,2.14,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Barra FC x Itabaiana,Lay Draw Estrutural,1X2_D,lay,3.3,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Barra FC x Itabaiana,BTTS Lay Quant,BTTS_Y,lay,2.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Confianca x Maringa,Lay 0x0 Protegido,CS_0x0,lay,9.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Confianca x Maringa,Lay Draw Estrutural,1X2_D,lay,3.35,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Confianca x Maringa,Over 2.5 Back Valor,O25,back,2.52,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,BRAZIL 3,Confianca x Maringa,BTTS Lay Quant,BTTS_Y,lay,2.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,PARAGUAY 1,Olimpia x Club Sportivo Ameliano,Lay Draw Estrutural,1X2_D,lay,3.75,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,PARAGUAY 1,Olimpia x Club Sportivo Ameliano,Over 2.5 Back Valor,O25,back,2.26,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,URUGUAY 1,Penarol x Central Espanol,Over 2.5 Back Valor,O25,back,2.16,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,18:30,URUGUAY 1,Penarol x Central Espanol,BTTS Lay Quant,BTTS_Y,lay,2.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:00,USA 1,New York City x Philadelphia,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:30,BRAZIL 1,Corinthians x Cruzeiro MG,Lay 0x0 Protegido,CS_0x0,lay,8.6,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:30,BRAZIL 1,Corinthians x Cruzeiro MG,BTTS Lay Quant,BTTS_Y,lay,2.22,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:30,VENEZUELA 1,Deportivo La Guaira x Zamora FC,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:30,VENEZUELA 1,Deportivo La Guaira x Zamora FC,Over 2.5 Back Valor,O25,back,2.44,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,19:30,VENEZUELA 1,Deportivo La Guaira x Zamora FC,BTTS Lay Quant,BTTS_Y,lay,2.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:00,VENEZUELA 1,Carabobo FC x Metropolitanos,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:00,VENEZUELA 1,Carabobo FC x Metropolitanos,Over 2.5 Back Valor,O25,back,1.94,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:15,ARGENTINA 1,Barracas Central x Rosario Central,BTTS Lay Quant,BTTS_Y,lay,2.46,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:15,ARGENTINA 1,Central Cordoba (SdE) x Instituto,Lay 0x0 Protegido,CS_0x0,lay,8.2,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:15,ARGENTINA 1,Central Cordoba (SdE) x Instituto,BTTS Lay Quant,BTTS_Y,lay,2.34,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:15,ARGENTINA 1,Central Cordoba (SdE) x Instituto,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:30,BOLIVIA 1,Club Independiente Petr x CD Gualberto Villarroel,Lay Draw Estrutural,1X2_D,lay,4.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:30,PERU 1,Cienciano x Deportivo Garcilaso,Lay Draw Estrutural,1X2_D,lay,3.65,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,20:30,PERU 1,Cienciano x Deportivo Garcilaso,Over 2.5 Back Valor,O25,back,2.02,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:00,CHILE 2,Deportes Iquique x Antofagasta,Lay Draw Estrutural,1X2_D,lay,3.95,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:00,CHILE 2,Deportes Iquique x Antofagasta,Over 2.5 Back Valor,O25,back,1.87,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:00,ECUADOR 1,Aucas x LDU,Lay 0x0 Protegido,CS_0x0,lay,11.5,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:00,ECUADOR 1,Aucas x LDU,Lay Draw Estrutural,1X2_D,lay,3.4,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:00,ECUADOR 1,Aucas x LDU,Over 2.5 Back Valor,O25,back,2.28,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,21:30,USA 1,Austin FC x FC Dallas,Lay Draw Estrutural,1X2_D,lay,3.85,100.0,Pendente,Pendente,0.0,0.0
+2026-08-16,23:30,USA 1,Seattle Sounders x Vancouver Whitecaps,Lay Draw Estrutural,1X2_D,lay,3.9,100.0,Pendente,Pendente,0.0,0.0

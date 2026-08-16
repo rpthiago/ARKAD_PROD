@@ -191,19 +191,41 @@ def get_dataframe(source: str, params: Optional[dict] = None, timeout: int = 60)
 
 
 def get_daily_dataframe(source: str, date_str: str, timeout: int = 20) -> pd.DataFrame:
-    """Baixa os jogos do dia (JSON) da fonte e devolve DataFrame."""
+    """Baixa os jogos do dia (JSON) da fonte e devolve DataFrame completo (sem limite de paginacao)."""
     token = _ensure_token()
     url = _daily_url(source, date_str)
     try:
+        params = {"limit": 1000, "offset": 0}
         response = _request_with_retry(
             "GET",
             url,
             headers=_build_headers(token),
+            params=params,
             timeout=timeout,
         )
         _raise_for_status_with_context(response)
         payload = response.json()
         records = _extract_records(payload)
+        
+        # Paginacao automatica se houver mais registros que o limite retornado
+        if isinstance(payload, dict):
+            total = payload.get("total", 0)
+            while isinstance(total, int) and total > len(records):
+                params["offset"] = len(records)
+                resp_next = _request_with_retry(
+                    "GET",
+                    url,
+                    headers=_build_headers(token),
+                    params=params,
+                    timeout=timeout,
+                )
+                if resp_next.status_code != 200:
+                    break
+                new_records = _extract_records(resp_next.json())
+                if not new_records:
+                    break
+                records.extend(new_records)
+
         df = pd.DataFrame(records)
     except Exception:
         df_hist = get_dataframe_safe(source=source, timeout=max(timeout, 60))
