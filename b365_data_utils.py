@@ -90,34 +90,18 @@ def _fallback_day_from_historical(source: str, date_str: str) -> pd.DataFrame:
 
 
 def fetch_b365_daily(date_str: str) -> pd.DataFrame:
-    try:
-        response = _get_http_session().get(
-            f"{API_B365_DAILY}{date_str}/",
-            headers=API_HEADERS,
-            timeout=(CONNECT_TIMEOUT_SEC, READ_TIMEOUT_SEC),
-        )
-        if response.status_code == 200:
-            records = extract_api_records(response.json())
-            if records:
-                return _normalize_b365(pd.DataFrame(records))
-    except Exception:
-        pass
+    from futpythontrader_client import get_daily_dataframe
+    df = get_daily_dataframe("bet365", date_str)
+    if not df.empty:
+        return _normalize_b365(df)
     return _fallback_day_from_historical("bet365", date_str)
 
 
 def fetch_betfair_daily(date_str: str) -> pd.DataFrame:
-    try:
-        response = _get_http_session().get(
-            API_DIA_URL.format(data=date_str),
-            headers=API_HEADERS,
-            timeout=(CONNECT_TIMEOUT_SEC, READ_TIMEOUT_SEC),
-        )
-        if response.status_code == 200:
-            records = extract_api_records(response.json())
-            if records:
-                return _normalize_b365(pd.DataFrame(records))
-    except Exception:
-        pass
+    from futpythontrader_client import get_daily_dataframe
+    df = get_daily_dataframe("betfair", date_str)
+    if not df.empty:
+        return _normalize_b365(df)
     return _fallback_day_from_historical("betfair", date_str)
 
 
