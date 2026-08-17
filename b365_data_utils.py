@@ -92,8 +92,17 @@ def _fallback_day_from_historical(source: str, date_str: str) -> pd.DataFrame:
 def fetch_b365_daily(date_str: str) -> pd.DataFrame:
     from futpythontrader_client import get_daily_dataframe
     df = get_daily_dataframe("bet365", date_str)
+    if not df.empty and len(df) >= 20:
+        return _normalize_b365(df)
+        
+    # Se a API da Bet365 retornar dados incompletos (< 20 jogos), usa o feed da Betfair
+    df_bf = get_daily_dataframe("betfair", date_str)
+    if not df_bf.empty and len(df_bf) > len(df):
+        return _normalize_b365(df_bf)
+        
     if not df.empty:
         return _normalize_b365(df)
+        
     return _fallback_day_from_historical("bet365", date_str)
 
 
