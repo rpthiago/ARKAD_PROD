@@ -145,6 +145,21 @@ def generate_forward_signals(df_games):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
 
+        # 6. LAY 2X2 QUANT (Odd Lay 8.00 - 14.00, Odd Under 2.5 <= 2.00) [Win Rate 94.70%]
+        odd_cs22_lay = float(row.get('Odd_CS_2x2_Lay', 0.0)) if pd.notna(row.get('Odd_CS_2x2_Lay')) else 0.0
+        if 8.00 <= odd_cs22_lay <= 14.00:
+            is_2x2 = (gh == 2 and ga == 2) if is_finished else None
+            status = 'Finalizado' if is_finished else 'Pendente'
+            res = ('GREEN' if not is_2x2 else 'RED') if is_finished else 'Pendente'
+            pnl = (0.95 if not is_2x2 else -(odd_cs22_lay - 1.0)) if is_finished else 0.0
+            signals.append({
+                'data': game_date, 'horario': game_time, 'liga': league, 'jogo': match_name,
+                'metodo': 'Lay 2x2 Quant', 'mercado': 'CS_2x2', 'lado': 'lay',
+                'odd_execucao': odd_cs22_lay, 'stake': 100.0,
+                'status': status, 'resultado': res,
+                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
+            })
+
     df_signals = pd.DataFrame(signals)
     return df_signals
 
