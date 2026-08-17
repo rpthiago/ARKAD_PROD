@@ -173,6 +173,72 @@ st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
+# ── Desempenho Mensal (Lucro por Mês) ─────────────────────────────────────────
+st.subheader("📅 Desempenho Mensal (Lucro por Mês)")
+
+if not df_ord.empty and data_col in df_ord.columns:
+    df_mes = df_ord.copy()
+    df_mes["_data_dt"] = pd.to_datetime(df_mes[data_col], errors="coerce")
+    df_mes = df_mes[df_mes["_data_dt"].notna()].copy()
+    
+    if not df_mes.empty:
+        df_mes["AnoMes"] = df_mes["_data_dt"].dt.strftime("%Y-%m")
+        
+        meses_pt = {
+            "01": "Janeiro", "02": "Fevereiro", "03": "Março",
+            "04": "Abril", "05": "Maio", "06": "Junho",
+            "07": "Julho", "08": "Agosto", "09": "Setembro",
+            "10": "Outubro", "11": "Novembro", "12": "Dezembro"
+        }
+        
+        monthly_stats = []
+        for anomes, group in df_mes.groupby("AnoMes"):
+            ano, mes_num = anomes.split("-")
+            nome_mes = f"{meses_pt.get(mes_num, mes_num)}/{ano}"
+            
+            n_entradas = len(group)
+            g_count = int((group["PnL"] > 0).sum())
+            r_count = int((group["PnL"] < 0).sum())
+            wr_month = (g_count / n_entradas * 100) if n_entradas > 0 else 0.0
+            pnl_month = float(group["PnL"].sum())
+            
+            monthly_stats.append({
+                "Mês / Ano": nome_mes,
+                "Entradas": n_entradas,
+                "Greens": g_count,
+                "Reds": r_count,
+                "Win Rate": f"{wr_month:.1f}%",
+                "Lucro Líquido": f"R$ {pnl_month:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".") if is_real else f"{pnl_month:+.2f} U",
+                "_pnl_raw": pnl_month,
+                "_anomes": anomes
+            })
+            
+        df_monthly_out = pd.DataFrame(monthly_stats)
+        
+        col_m1, col_m2 = st.columns([1, 2])
+        
+        with col_m1:
+            st.markdown("#### 🏆 Métricas por Mês")
+            for m in monthly_stats:
+                badge = "🟢" if m["_pnl_raw"] >= 0 else "🔴"
+                st.metric(
+                    label=f"{badge} {m['Mês / Ano']}",
+                    value=m["Lucro Líquido"],
+                    delta=f"{m['Win Rate']} Win Rate ({m['Greens']}G / {m['Reds']}R)"
+                )
+                
+        with col_m2:
+            st.markdown("#### 📊 Tabela Consolidada Mensal")
+            st.dataframe(
+                df_monthly_out.drop(columns=["_pnl_raw", "_anomes"]),
+                use_container_width=True,
+                hide_index=True
+            )
+    else:
+        st.info("Sem datas válidas para agrupamento mensal.")
+
+st.divider()
+
 # ── Análise Estatística Detalhada ─────────────────────────────────────────────
 st.subheader("📊 Estatísticas e Análise de Desempenho")
 
