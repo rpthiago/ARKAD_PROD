@@ -24,26 +24,20 @@ print("     PROCESSANDO BACKTEST DO MÉTODO LAY 2X2 - MÊS DE AGOSTO DE 2026")
 print("==========================================================================\n")
 
 STAKE_UNIDADE = 100.0
-RESPONSABILIDADE_FIXA = 200.0
 COMISSAO_BETFAIR = 0.05
 
-# 1. Carregar base de dados de Agosto
+# 1. Carregar base de dados Betfair Fresh
 df_bf = pd.read_csv("Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv", low_memory=False)
-df_b365 = pd.read_csv("Bases_de_Dados_API_FutPythonTrader_Bet365.csv", low_memory=False)
-
 df_bf["d_str"] = pd.to_datetime(df_bf["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
-df_b365["d_str"] = pd.to_datetime(df_b365["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
 
-# Seleciona registros de Agosto de 2026
-df_aug_bf = df_bf[(df_bf["d_str"] >= "2026-08-01") & (df_bf["d_str"] <= "2026-08-17")].copy()
+df_aug = df_bf[(df_bf["d_str"] >= "2026-08-01") & (df_bf["d_str"] <= "2026-08-17")].copy()
 
-# Garante colunas numéricas
-df_aug_bf["Odd_CS_2x2_Lay"] = pd.to_numeric(df_aug_bf["Odd_CS_2x2_Lay"], errors="coerce")
-df_aug_bf["Odd_Under25"] = pd.to_numeric(df_aug_bf.get("Odd_Under25_FT_Back", df_aug_bf.get("Odd_Under25")), errors="coerce")
-df_aug_bf["Odd_H"] = pd.to_numeric(df_aug_bf.get("Odd_H_FT_Back", df_aug_bf.get("Odd_H")), errors="coerce")
-df_aug_bf["Odd_A"] = pd.to_numeric(df_aug_bf.get("Odd_A_FT_Back", df_aug_bf.get("Odd_A")), errors="coerce")
-df_aug_bf["gh"] = pd.to_numeric(df_aug_bf["Goals_H_FT"], errors="coerce")
-df_aug_bf["ga"] = pd.to_numeric(df_aug_bf["Goals_A_FT"], errors="coerce")
+df_aug["Odd_CS_2x2_Lay"] = pd.to_numeric(df_aug["Odd_CS_2x2_Lay"], errors="coerce")
+df_aug["Odd_Under25"] = pd.to_numeric(df_aug.get("Odd_Under25_FT_Back", df_aug.get("Odd_Under25")), errors="coerce")
+df_aug["Odd_H"] = pd.to_numeric(df_aug.get("Odd_H_FT_Back", df_aug.get("Odd_H")), errors="coerce")
+df_aug["Odd_A"] = pd.to_numeric(df_aug.get("Odd_A_FT_Back", df_aug.get("Odd_A")), errors="coerce")
+df_aug["gh"] = pd.to_numeric(df_aug["Goals_H_FT"], errors="coerce")
+df_aug["ga"] = pd.to_numeric(df_aug["Goals_A_FT"], errors="coerce")
 
 rows_out = []
 greens_count = 0
@@ -51,21 +45,13 @@ reds_count = 0
 pnl_stake100_total = 0.0
 pnl_liab200_total = 0.0
 
-for idx, r in df_aug_bf.iterrows():
+for idx, r in df_aug.iterrows():
     odd_lay_2x2 = r["Odd_CS_2x2_Lay"]
     odd_u25 = r["Odd_Under25"]
     odd_h = r["Odd_H"]
     odd_a = r["Odd_A"]
     
-    # Aplica validação estrita da estratégia Lay 2x2
-    ok, motivo = validar_entrada_lay2x2(
-        odd_lay_2x2=odd_lay_2x2,
-        odd_under25=odd_u25,
-        odd_h=odd_h,
-        odd_a=odd_a
-    )
-    
-    if ok:
+    if pd.notna(odd_lay_2x2) and 8.0 <= odd_lay_2x2 <= 18.0:
         dt = str(r["d_str"])
         time_str = str(r.get("Time", "15:00"))[:5] if pd.notna(r.get("Time")) else "15:00"
         liga = str(r.get("League", r.get("Div", "Desconhecida")))
@@ -111,12 +97,12 @@ for idx, r in df_aug_bf.iterrows():
                 "Resultado (GREEN/RED)": res_str,
                 "Lucro/Prejuízo (Stake R$100)": pnl_stk,
                 "Lucro/Prejuízo (Liab R$200)": pnl_liab,
-                "Critério de Validação": motivo
+                "Justificativa": f"Odd Lay 2x2 ({odd_lay_2x2:.2f}) aprovada na faixa de risco 8.0 - 18.0"
             })
 
 df_out = pd.DataFrame(rows_out)
 
-print(f"Total de jogos de Agosto analisados: {len(df_aug_bf)}")
+print(f"Total de jogos de Agosto analisados: {len(df_aug)}")
 print(f"Total de oportunidades aprovadas no Lay 2x2: {len(df_out)}")
 print(f"Greens: {greens_count} | Reds: {reds_count} | Win Rate: {(greens_count/len(df_out)*100 if len(df_out)>0 else 0):.2f}%")
 print(f"Lucro Acumulado (Stake Fixa R$ 100): R$ {pnl_stake100_total:,.2f}")
