@@ -103,17 +103,22 @@ if gerar_btn:
             
             sinais = []
             if not df_day.empty:
-                # Normaliza colunas
-                odd_2x2_col = [c for c in df_day.columns if '2x2' in c.lower() and 'lay' in c.lower()]
-                odd_u25_col = [c for c in df_day.columns if 'under25' in c.lower() or 'under 2.5' in c.lower()]
-                odd_h_col = [c for c in df.columns if 'odd_h' in c.lower() or 'home' in c.lower()]
-                odd_a_col = [c for c in df.columns if 'odd_a' in c.lower() or 'away' in c.lower()]
+                # Normaliza colunas de Odds sem confundir com colunas de texto (Home, Away)
+                odd_2x2_col = [c for c in df_day.columns if '2x2' in str(c).lower() and 'lay' in str(c).lower()]
+                odd_u25_col = [c for c in df_day.columns if 'under25' in str(c).lower() or 'under 2.5' in str(c).lower()]
+                odd_h_col = [c for c in df_day.columns if str(c).lower() in ['odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
+                odd_a_col = [c for c in df_day.columns if str(c).lower() in ['odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
                 
                 for _, r in df_day.iterrows():
-                    o_2x2 = float(r[odd_2x2_col[0]]) if odd_2x2_col and pd.notna(r[odd_2x2_col[0]]) else 0.0
-                    o_u25 = float(r[odd_u25_col[0]]) if odd_u25_col and pd.notna(r[odd_u25_col[0]]) else None
-                    o_h = float(r[odd_h_col[0]]) if odd_h_col and pd.notna(r[odd_h_col[0]]) else None
-                    o_a = float(r[odd_a_col[0]]) if odd_a_col and pd.notna(r[odd_a_col[0]]) else None
+                    o_2x2 = pd.to_numeric(r.get(odd_2x2_col[0]), errors='coerce') if odd_2x2_col else 0.0
+                    o_u25 = pd.to_numeric(r.get(odd_u25_col[0]), errors='coerce') if odd_u25_col else None
+                    o_h = pd.to_numeric(r.get(odd_h_col[0]), errors='coerce') if odd_h_col else None
+                    o_a = pd.to_numeric(r.get(odd_a_col[0]), errors='coerce') if odd_a_col else None
+                    
+                    o_2x2 = float(o_2x2) if pd.notna(o_2x2) else 0.0
+                    o_u25 = float(o_u25) if pd.notna(o_u25) else None
+                    o_h = float(o_h) if pd.notna(o_h) else None
+                    o_a = float(o_a) if pd.notna(o_a) else None
                     
                     ok, motivo = validar_entrada_lay2x2(
                         odd_lay_2x2=o_2x2,
