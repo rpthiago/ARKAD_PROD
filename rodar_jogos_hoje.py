@@ -123,6 +123,8 @@ def process_today_signals(df_games, date_str):
         game_time = _extract_horario(row)
         
         # Odds
+        odd_h_back = float(row.get('Odd_H_Back', 0.0) or row.get('Odd_H_FT', 0.0) or row.get('Odd_H', 0.0) or 0.0)
+        odd_a_back = float(row.get('Odd_A_Back', 0.0) or row.get('Odd_A_FT', 0.0) or row.get('Odd_A', 0.0) or 0.0)
         odd_d_lay = float(row.get('Odd_D_Lay', 0.0) or 0.0)
         odd_o25_back = float(row.get('Odd_Over25_FT_Back', 0.0) or 0.0)
         odd_under25_back = float(row.get('Odd_Under25_FT_Back', 0.0) or 0.0)
@@ -202,14 +204,14 @@ def process_today_signals(df_games, date_str):
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
             })
             
-        # 5. LAY 0x3 VISITANTE UNDER 2.5 + xG PROTECTED (Odd Under <= 1.85, Odd Lay 15-35, xG Visitante <= 1.10) [ROI +23.34%]
-        if (0.0 < odd_under25_back <= 1.85) and (15.0 <= odd_cs03_lay <= 35.0) and (xg_a_r5 <= 1.10):
+        # 5. LAY 0x3 VISITANTE (MANDANTE FAVORITO Odd H <= 2.20 + UNDER 2.5 + xG PROTECTED) [ROI +78.55%]
+        if (0.0 < odd_h_back <= 2.20) and (odd_h_back < odd_a_back) and (0.0 < odd_under25_back <= 2.10) and (14.0 <= odd_cs03_lay <= 35.0) and (xg_a_r5 <= 1.10):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
             signals.append({
                 'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay 0x3 Visitante Under 2.5 (xG Protected)', 'mercado': 'CS_0x3', 'lado': 'lay',
+                'metodo': 'Lay 0x3 Visitante Under 2.5 (Mandante Fav)', 'mercado': 'CS_0x3', 'lado': 'lay',
                 'odd_execucao': odd_cs03_lay, 'stake': 100.0,
                 'status': status, 'resultado': res,
                 'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0

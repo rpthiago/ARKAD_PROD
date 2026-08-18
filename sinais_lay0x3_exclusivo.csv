@@ -2,22 +2,22 @@ data,horario,liga,jogo,metodo,mercado,lado,odd_execucao,stake,status,resultado,p
 2026-08-01,18:00,VENEZUELA 1,Trujillanos x Universidad Central,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-02,17:00,ARGENTINA 1,Newells Old Boys x Boca Juniors,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,25.0,100.0,Finalizado,GREEN,0.95,95.0
 2026-08-03,16:45,ARGENTINA 1,Sarmiento Junin x Ind. Rivadavia,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Finalizado,GREEN,0.95,95.0
-2026-08-07,07:25,JAPAN 1,Yokohama FM x Kashima,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,05:00,ROMANIA 2,CSC 1599 Selimbar x Politehnica Timisoara,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,05:00,ROMANIA 2,CSM Satu Mare x CSM Scolar Resita,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,25.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,06:30,JAPAN 2,Fujieda Myfc x Sendai,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,07:00,JAPAN 1,Fukuoka x Kobe,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,07:00,UKRAINE 1,Chernomorets Odesa x Kolos Kovalyovka,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,08:30,CHINA 1,Nanjing City x Nantong Zhiyun F.C,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-08,11:00,ENGLAND CUP,Burton Albion x Blackburn,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-09,13:00,BULGARIA 1,Cherno More x Ludogorets,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,19.5,100.0,Pendente,Pendente,0.0,0.0
-2026-08-09,13:00,IRELAND 1,Shelbourne x St Patricks,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-10,20:00,BRAZIL 3,Anapolis GO x Guarani,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,29.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-11,21:45,COLOMBIA 2,Boca Juniors de Cali x Union Magdalena,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-12,14:30,SOUTH AFRICA 1,AmaZulu x Orlando Pirates (SA),Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,15.5,100.0,Pendente,Pendente,0.0,0.0
-2026-08-12,19:15,ARGENTINA CUP,Atl Tucuman x CA Independiente,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,27.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-13,13:00,EUROPA CONFERENCE LEAGUE,Ilves x Rijeka,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-14,07:00,JAPAN 1,Tokyo-V x Kashiwa,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,25.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-14,15:45,FRANCE 2,Grenoble x Metz,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,30.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-14,15:45,FRANCE 2,Laval x Nantes,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Pendente,Pendente,0.0,0.0
-2026-08-14,19:30,BRAZIL 2,Ponte Preta x Nautico PE,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Pendente,Pendente,0.0,0.0
+2026-08-07,07:25,JAPAN 1,Yokohama FM x Kashima,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,05:00,ROMANIA 2,CSC 1599 Selimbar x Politehnica Timisoara,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,05:00,ROMANIA 2,CSM Satu Mare x CSM Scolar Resita,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,25.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,06:30,JAPAN 2,Fujieda Myfc x Sendai,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,07:00,JAPAN 1,Fukuoka x Kobe,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,07:00,UKRAINE 1,Chernomorets Odesa x Kolos Kovalyovka,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,08:30,CHINA 1,Nanjing City x Nantong Zhiyun F.C,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-08,11:00,ENGLAND CUP,Burton Albion x Blackburn,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,34.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-09,13:00,BULGARIA 1,Cherno More x Ludogorets,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,19.5,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-09,13:00,IRELAND 1,Shelbourne x St Patricks,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-10,20:00,BRAZIL 3,Anapolis GO x Guarani,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,29.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-11,21:45,COLOMBIA 2,Boca Juniors de Cali x Union Magdalena,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,32.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-12,14:30,SOUTH AFRICA 1,AmaZulu x Orlando Pirates (SA),Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,15.5,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-12,19:15,ARGENTINA CUP,Atl Tucuman x CA Independiente,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,27.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-13,13:00,EUROPA CONFERENCE LEAGUE,Ilves x Rijeka,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-14,07:00,JAPAN 1,Tokyo-V x Kashiwa,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,25.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-14,15:45,FRANCE 2,Grenoble x Metz,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,30.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-14,15:45,FRANCE 2,Laval x Nantes,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,24.0,100.0,Finalizado,GREEN,0.95,95.0
+2026-08-14,19:30,BRAZIL 2,Ponte Preta x Nautico PE,Lay 0x3 Visitante Under 2.5 (xG Protected),CS_0x3,lay,26.0,100.0,Finalizado,GREEN,0.95,95.0
