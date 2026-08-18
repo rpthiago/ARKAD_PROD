@@ -133,9 +133,11 @@ for idx, r in df_full_aug.iterrows():
     odd_lay_2x2 = r["Odd_CS_2x2_Lay"]
     odd_u25 = r["Odd_Under25"]
     odd_h = r["Odd_H"]
-    odd_a = r["Odd_A"]
+    # Aplica o Filtro Duplo de Elite: Odd Lay 2x2 <= 14.00 e Odd Under 2.5 <= 2.00
+    cond_odd_lay = pd.notna(odd_lay_2x2) and 8.0 <= odd_lay_2x2 <= 14.0
+    cond_under = pd.isna(odd_u25) or odd_u25 <= 2.00
     
-    if pd.notna(odd_lay_2x2) and 8.0 <= odd_lay_2x2 <= 18.0:
+    if cond_odd_lay and cond_under:
         dt = str(r["d_str"])
         time_str = str(r.get("Time", r.get("horario", "15:00")))[:5] if pd.notna(r.get("Time", r.get("horario"))) else "15:00"
         liga = str(r.get("League", r.get("Div", r.get("liga", "Desconhecida"))))
