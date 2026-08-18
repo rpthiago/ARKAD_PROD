@@ -178,7 +178,10 @@ with col2:
                 })
                 
             df_show = pd.DataFrame(df_disp)
-            st.dataframe(df_show, use_container_width=True)
+            try:
+                st.dataframe(df_show, use_container_width=True)
+            except Exception:
+                st.dataframe(df_show)
             
             st.markdown("### 📊 Resumo de Exposição Financeira")
             tot_stk = df_show["Stake Recomendada (R$)"].sum()
