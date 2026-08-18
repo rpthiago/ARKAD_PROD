@@ -31,7 +31,7 @@ Esta página bate na **API da Betfair em tempo real**, calcula as inteligências
 
 *   **🏆 Sweet Spot Unificado (XGBoost & RF):** Odd Betfair Lay entre **13.20 e 18.00**
     *   *Métrica de Entrada:* Probabilidade Mínima **>= 75.0%** (XGBoost) ou **>= 92.0%** (Random Forest).
-    *   *Nota:* As segundas divisões/ligas under (Brasil 2, França 2, Inglaterra 2, Espanha 2 e Portugal 1) são automaticamente excluídas para proteger a banca da variação "under" estatisticamente comprovada.
+    *   *Nota:* A Blacklist de ligas under (Brasil 2, França 2, Inglaterra 2, Espanha 2, Portugal 1) é **condicional à Odd Lay** (aplicada apenas para Odds <= 13.00). Na faixa Sweet Spot (13.20 - 18.00), estas ligas são totalmente liberadas após validação de 100% de aproveitamento em 2026.
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** Conforme comprovado matematicamente pelo nosso Backtest Master, **NÃO faça Cash Out aos 60 minutos (Rota 60)**! Sair aos 60 minutos gera prejuízo a longo prazo. Deixe a operação correr até o final — o robô só toma Red se o placar final for exatamente 0x1.
 """)
@@ -83,14 +83,15 @@ if gerar_btn:
                 if not df_xg.empty:
                     df_xg["Metodo_Final"] = "XGBoost (Trader)"
                 
-                # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist de Ligas)
+                # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist Condicional à Odd)
                 blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
                 liga_series = df[col_liga].astype(str).str.upper().str.strip() if col_liga else pd.Series([""] * len(df))
+                is_blacklisted = liga_series.isin(blacklist) & (df["Odd_Num"] <= 13.0)
                 df_rf = df[
                     df[col_metodo].astype(str).str.contains("RF", na=False) &
                     (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
                     (df["Prob_Num"] >= 92.0) &
-                    (~liga_series.isin(blacklist))
+                    (~is_blacklisted)
                 ].copy()
                 if not df_rf.empty:
                     df_rf["Metodo_Final"] = "Random Forest (RF)"

@@ -129,10 +129,10 @@ def check_entry_conditions(match_state):
     if prob_ml < 0.92:
         return False, "PROB_BAIXA"
 
-    # Blacklist de segundas divisões/ligas under com significância estatística
+    # Blacklist condicional: só bloqueia ligas under quando Odd Lay <= 13.0 (em odds > 13.0 as ligas são liberadas)
     league = str(match_state.get("League", "")).strip().upper()
     blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
-    if league in blacklist:
+    if odd_lay <= 13.0 and league in blacklist:
         return False, "LIGA_BLOQUEADA"
 
     return True, "APROVADO"
