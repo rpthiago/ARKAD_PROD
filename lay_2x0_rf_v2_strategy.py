@@ -1,5 +1,6 @@
-"""lay_2x0_rf_v2_strategy.py — Lay 2x0 v2 | ROI OOS +24.4% | 80552 picks | ROI>0 4/4"""
+"""lay_2x0_rf_v2_strategy.py — Lay 2x0 v2 | ROI OOS +10.5% | 57507 picks | ROI>0 4/4"""
 import os, pandas as pd, numpy as np, joblib
+import unicodedata, re
 from datetime import datetime
 from pathlib import Path
 
@@ -16,32 +17,36 @@ LIGA_2X0_RATE_MAX = 0.2
 MKT_PROB_MAX     = 0.15
 ODD_COL          = "Odd_CS_2x0"
 
+BLACKLIST_LIGAS = [
+    "UKRAINE 1", "CZECH 1", "SWEDEN 1", "IRELAND 1",
+    "EUROPA CHAMPIONS LEAGUE", "MEXICO 2", "USA 2"
+]
+
+
+def _canon(s):
+    s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", s)
+
 
 def _ev_lay(prob, odd):
     return prob * (1 - COMMISSION) - (1 - prob) * (odd - 1)
 
 
-def _decay_roll_grouped(df, group_col, val_col, window=6, alpha=0.25, min_g=3):
-    """Média decaída vetorizada — idêntica a shift(1)+rolling(window).apply(pesos),
-    ~40x mais rápida (evita .apply por grupo). Só produz valor com janela completa."""
+def _decay_roll_grouped_unshifted(df, group_col, val_col, window=6, alpha=0.25):
+    """Média decaída vetorizada sem shift — adequada para o live onde
+    o jogo atual não está no histórico e precisamos do rolling incluindo o último jogo."""
     g = df.groupby(group_col)[val_col]
     numer = np.zeros(len(df)); count = np.zeros(len(df)); wsum = 0.0
     for j in range(window):
-        sj = g.shift(1 + j)
+        sj = g.shift(j)
         ej = np.exp(-alpha * j)
         m = sj.notna().to_numpy()
         numer += np.where(m, np.nan_to_num(sj.to_numpy()) * ej, 0.0)
         count += m
         wsum += ej
     res = numer / wsum
-    res[count < window] = np.nan
+    res[count < 3] = np.nan
     return pd.Series(res, index=df.index)
-
-
-BLACKLIST_LIGAS = [
-    "UKRAINE 1", "CZECH 1", "SWEDEN 1", "IRELAND 1",
-    "EUROPA CHAMPIONS LEAGUE", "MEXICO 2", "USA 2"
-]
 
 
 def check_entry_conditions(ms):
@@ -115,7 +120,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
                     ("xGOT_Faced_H_FT","h_xGOT_faced"),("Goals_Prevented_H_FT","h_GP"),
                     ("Big_Chances_H_FT","h_BC"),("Shots_On_Target_H_FT","h_SoT"),
                     ("Possession_H_FT","h_Poss"),("won","h_WR"),("_2x0_flag","h_2x0_rate")]:
-        dh[nm] = _decay_roll_grouped(dh, "Team", col)
+        dh[nm] = _decay_roll_grouped_unshifted(dh, "Team", col)
     h_feats = ["h_Gf","h_Gc","h_xGOT","h_xGOT_faced","h_GP","h_BC","h_SoT","h_Poss","h_WR","h_2x0_rate"]
     home_last = dh.groupby("Team")[h_feats].last().reset_index()
 
@@ -129,7 +134,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
                     ("xGOT_Faced_A_FT","a_xGOT_faced"),("Goals_Prevented_A_FT","a_GP"),
                     ("Big_Chances_A_FT","a_BC"),("Shots_On_Target_A_FT","a_SoT"),
                     ("Possession_A_FT","a_Poss"),("won","a_WR"),("_2x0_flag","a_2x0_rate")]:
-        da[nm] = _decay_roll_grouped(da, "Team", col)
+        da[nm] = _decay_roll_grouped_unshifted(da, "Team", col)
     a_feats = ["a_Gf","a_Gc","a_xGOT","a_xGOT_faced","a_GP","a_BC","a_SoT","a_Poss","a_WR","a_2x0_rate"]
     away_last = da.groupby("Team")[a_feats].last().reset_index()
 
@@ -147,8 +152,8 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         league = str(g.get("League") or g.get("Liga") or "")
         date_v = pd.to_datetime(g.get("Date") or datetime.now().date())
 
-        sh = home_last[home_last["Team"] == home]
-        sa = away_last[away_last["Team"] == away]
+        sh = home_last[home_last["Team"].map(_canon) == _canon(home)]
+        sa = away_last[away_last["Team"].map(_canon) == _canon(away)]
         if sh.empty or sa.empty:
             continue
         sh, sa = sh.iloc[0], sa.iloc[0]
@@ -193,7 +198,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         ms["liga_2x0_rate"] = liga_last.get(league, np.nan)
         ms["h2h_2x0_rate"]  = np.nan
 
-        row_mat = pd.DataFrame([{col: ms.get(col, 0.0) or 0.0 for col in features}]).fillna(0.0)
+        row_dict = {col: ms.get(col, np.nan) for col in features}
+        if any(pd.isna(v) for v in row_dict.values()):
+            continue
+        row_mat = pd.DataFrame([row_dict])
+        
         ms["Prob_ML"] = float(model.predict_proba(scaler.transform(row_mat))[0, 1])
         ms["ev_lay"]  = _ev_lay(ms["Prob_ML"], odd_val)
 
