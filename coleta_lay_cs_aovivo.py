@@ -29,7 +29,7 @@ MERCADOS = {
                 odd_key="Odd_CS_0x0_Lay", ledger="coleta_lay0x0_aovivo.xlsx", placar="0-0"),
     "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
-    "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
+    "1x0": dict(strategies=[("lay_1x0_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_1x0_Lay", ledger="coleta_lay1x0_aovivo.xlsx", placar="1-0"),
     "2x0": dict(strategies=[("lay_2x0_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_2x0_Lay", ledger="coleta_lay2x0_aovivo.xlsx", placar="2-0"),
