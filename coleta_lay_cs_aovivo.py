@@ -27,7 +27,7 @@ FILLC = {"PREENCHER_odd_abertura","PREENCHER_odd_min60","PREENCHER_odd_min75","o
 MERCADOS = {
     "0x0": dict(strategies=[("lay_0x0_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_0x0_Lay", ledger="coleta_lay0x0_aovivo.xlsx", placar="0-0"),
-    "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_strategy","RF")],
+    "0x1": dict(strategies=[("lay_0x1_agressivo_strategy","Trader"),("lay_0x1_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
     "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
                 odd_key="Odd_CS_1x0_Lay", ledger="coleta_lay1x0_aovivo.xlsx", placar="1-0"),
@@ -36,7 +36,7 @@ MERCADOS = {
     "0x2": dict(strategies=[("lay_0x2_rf_v2_strategy","RF")],
                 odd_key="Odd_CS_0x2_Lay", ledger="coleta_lay0x2_aovivo.xlsx", placar="0-2"),
 }
-# O "Lay 0x1 RF" treina RandomForest on-the-fly (mais lento) — OK, a rotina roda 1x/dia.
+# O "Lay 0x1 RF" agora usa o modelo v2 estático (lay_0x1_rf_v2_strategy) — muito mais rápido e robusto!
 
 def _canon(s):
     s = unicodedata.normalize("NFKD", str(s)).encode("ascii","ignore").decode().lower()
@@ -76,17 +76,24 @@ def salvar_xlsx(df, ledger):
             time.sleep(2)
     return False
 
-_HISTDF = {}
+_HISTDF = {"df": None, "ts": 0.0}
 def _hist_df():
-    """Historico recente (ultimos ~450 dias) — a forma rolante so precisa dos jogos
-    recentes de cada time, e trimar acelera MUITO o feature-building das estrategias.
-    OK para coleta ao vivo (hoje/amanha); nao usar para backtest de data antiga."""
-    if "df" not in _HISTDF:
-        from b365_data_utils import load_b365_historical
-        df = load_b365_historical().copy()
-        dt = pd.to_datetime(df["Date"], errors="coerce")
-        corte = dt.max() - pd.Timedelta(days=450)
-        _HISTDF["df"] = df[dt >= corte].reset_index(drop=True)
+    """Carrega e faz cache dos dados históricos do Footstats para agilizar coletas repetidas."""
+    global _HISTDF
+    now = time.time()
+    if _HISTDF["df"] is not None and (now - _HISTDF["ts"]) < 1800:
+        return _HISTDF["df"]
+    
+    csv_path = "Resultados_2026_Full.csv"
+    if not os.path.exists(csv_path):
+        csv_path = "Resultados_2024_2026.csv"
+    if not os.path.exists(csv_path):
+        print("    [WARN] resultados históricos não encontrados. Histórico vazio.")
+        return pd.DataFrame()
+        
+    df = pd.read_csv(csv_path, low_memory=False)
+    _HISTDF["df"] = df
+    _HISTDF["ts"] = now
     return _HISTDF["df"]
 
 def sinais_do_dia(date_str, cfg, diag=None):
@@ -111,7 +118,7 @@ def sinais_do_dia(date_str, cfg, diag=None):
                 diag.setdefault("errors", []).append(f"[{tag}] {mod_name}: {e}")
             print(f"    [{tag}] {mod_name}: ERRO {str(e)[:80]}"); continue
         for g in (res or []):
-            if cfg["placar"] in ["0-0", "2-0", "0-2"] and g.get("Decision") != "APOSTA":
+            if g.get("Decision") != "APOSTA":
                 continue
             # MESMO filtro da pagina Top 5 (ignora o Decision estrito da estrategia):
             odd = pd.to_numeric(g.get(cfg["odd_key"]) or np.nan, errors="coerce")

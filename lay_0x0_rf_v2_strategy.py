@@ -1,5 +1,6 @@
-"""lay_0x0_rf_v2_strategy.py — Lay 0x0 v2 | ROI OOS +30.6% | 15893 picks | ROI>0 4/4"""
+"""lay_0x0_rf_v2_strategy.py — Lay 0x0 v2 | ROI OOS +35.7% | 27980 picks | ROI>0 3/4"""
 import os, pandas as pd, numpy as np, joblib
+import unicodedata, re
 from datetime import datetime
 from pathlib import Path
 
@@ -10,37 +11,36 @@ FEATURES_PATH = str(ROOT / "features_lay_0x0_rf_v2.pkl")
 
 COMMISSION       = 0.05
 EV_MIN           = 0.02
-ODD_MIN          = 10.0
-ODD_MAX          = 20.0
-LIGA_0X0_RATE_MAX = 0.08
-MKT_PROB_MAX     = 0.10
+ODD_MIN          = 6.0
+ODD_MAX          = 16.0
+LIGA_0X0_RATE_MAX = 0.12
+MKT_PROB_MAX     = 0.1
 ODD_COL          = "Odd_CS_0x0"
 
-import unicodedata, re
-def canon_text(value):
-    normalized = unicodedata.normalize("NFKD", str(value)).encode("ascii", "ignore").decode()
-    return re.sub(r"[^a-z0-9]+", "", normalized.lower())
+
+def _canon(s):
+    s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", s)
 
 
 def _ev_lay(prob, odd):
     return prob * (1 - COMMISSION) - (1 - prob) * (odd - 1)
 
 
-def _decay_roll_grouped(df, group_col, val_col, window=6, alpha=0.25, min_g=3):
-    """Média decaída vetorizada leak-free — matematicamente idêntica à do treino."""
+def _decay_roll_grouped_unshifted(df, group_col, val_col, window=6, alpha=0.25):
+    """Média decaída vetorizada sem shift — adequada para o live onde
+    o jogo atual não está no histórico e precisamos do rolling incluindo o último jogo."""
     g = df.groupby(group_col)[val_col]
-    numer = np.zeros(len(df))
-    wsum = np.zeros(len(df))
-    count = np.zeros(len(df))
+    numer = np.zeros(len(df)); count = np.zeros(len(df)); wsum = 0.0
     for j in range(window):
-        sj = g.shift(1 + j)
+        sj = g.shift(j)
         ej = np.exp(-alpha * j)
         m = sj.notna().to_numpy()
         numer += np.where(m, np.nan_to_num(sj.to_numpy()) * ej, 0.0)
-        wsum += np.where(m, ej, 0.0)
         count += m
-    res = np.where(wsum > 0, numer / wsum, np.nan)
-    res[count < min_g] = np.nan
+        wsum += ej
+    res = numer / wsum
+    res[count < 3] = np.nan
     return pd.Series(res, index=df.index)
 
 
@@ -48,34 +48,15 @@ def check_entry_conditions(ms):
     odd = ms.get("Odd_CS_0x0_Lay") or ms.get("Odd_CS_0x0") or 0.0
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
-    
-    # Trava Estrutural Anti-Overfitting 1: Odd do Empate (Odd_D_FT > 3.30)
-    odd_d = ms.get("Odd_D_FT") or ms.get("Odd_D_Back") or 0.0
-    if not pd.isna(odd_d) and odd_d > 0 and odd_d <= 3.30:
-        return False, f"ODD_EMPATE_BAIXA({odd_d:.2f})"
-
-    # Trava Estrutural Anti-Overfitting 2: Expectativa de Gols (xG > 1.90)
-    total_xg = ms.get("total_xG") or ms.get("Total_xG") or 0.0
-    if not pd.isna(total_xg) and 0.0 < total_xg <= 1.90:
-        return False, f"XG_MUITO_BAIXO({total_xg:.2f})"
-
-    # Exclusão de ligas ruins e altamente defensivas
-    league = str(ms.get("League") or ms.get("Liga") or "").upper().strip()
-    BLACK_LIST_LEAGUES = [
-        "USA 1", "ICELAND 1", "ARGENTINA 1", "BRAZIL 2", "SOUTH AFRICA 1", 
-        "ARGENTINA 2", "URUGUAY 2", "ISRAEL 1", "FRANCE 3", "EGYPT 1", 
-        "ITALY 3", "PERU 2", "GREECE 2", "ECUADOR CUP", "COLOMBIA CUP", 
-        "BRAZIL CUP", "FRANCE CUP"
-    ]
-    if league in BLACK_LIST_LEAGUES:
-        return False, f"LIGA_BLOQUEADA({league})"
-        
     prob = ms.get("Prob_ML", 0) or 0.0
     ev = _ev_lay(prob, odd)
     if ev < EV_MIN:
         return False, f"EV_BAIXO({ev:+.3f})"
     liga_rate = ms.get("liga_0x0_rate", None)
-    if liga_rate is not None and LIGA_0X0_RATE_MAX > 0 and liga_rate >= LIGA_0X0_RATE_MAX:
+    # Liga fora da base historica (rate NaN/None) => fora do universo validado; skip.
+    if liga_rate is None or pd.isna(liga_rate):
+        return False, "LIGA_FORA_UNIVERSO"
+    if LIGA_0X0_RATE_MAX > 0 and liga_rate >= LIGA_0X0_RATE_MAX:
         return False, f"LIGA_DEFENSIVA({liga_rate:.2f})"
     mkt_prob = ms.get("mkt_prob_0x0", None)
     if mkt_prob is not None and MKT_PROB_MAX > 0 and mkt_prob >= MKT_PROB_MAX:
@@ -104,7 +85,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
     df_hist = df_hist.dropna(subset=["Goals_H_FT","Goals_A_FT","Date","Home","Away"]).copy()
-    df_hist = df_hist.sort_values("Date").reset_index(drop=True)
+    df_hist = df_hist.sort_values("Date", kind="mergesort").reset_index(drop=True)
 
     if live_games_payload:
         first_date = pd.to_datetime(live_games_payload[0].get("Date") or datetime.now().date()).date()
@@ -119,51 +100,42 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     for c in stat_cols:
         df_hist[c] = pd.to_numeric(df_hist.get(c, 0), errors="coerce").fillna(0.0) if c in df_hist.columns else 0.0
 
-    df_hist["_0x0_flag"] = ((df_hist["Goals_H_FT"] + df_hist["Goals_A_FT"]) == 0).astype(float)
+    df_hist["_0x0_flag"] = ((df_hist["Goals_H_FT"] == 0) & (df_hist["Goals_A_FT"] == 0)).astype(float)
 
-    import difflib
     # Vista HOME
     dh = df_hist[["Date","Home","Goals_H_FT","Goals_A_FT","xGOT_H_FT","xGOT_Faced_H_FT",
                   "Goals_Prevented_H_FT","Big_Chances_H_FT","Shots_On_Target_H_FT","Possession_H_FT","_0x0_flag"]].copy()
     dh["won"] = (dh["Goals_H_FT"] > dh["Goals_A_FT"]).astype(float)
     dh = dh.rename(columns={"Home":"Team"})
-    dh = dh.sort_values(["Team","Date"]).reset_index(drop=True)
+    dh = dh.sort_values(["Team","Date"], kind="mergesort").reset_index(drop=True)
     for col, nm in [("Goals_H_FT","h_Gf"),("Goals_A_FT","h_Gc"),("xGOT_H_FT","h_xGOT"),
                     ("xGOT_Faced_H_FT","h_xGOT_faced"),("Goals_Prevented_H_FT","h_GP"),
                     ("Big_Chances_H_FT","h_BC"),("Shots_On_Target_H_FT","h_SoT"),
                     ("Possession_H_FT","h_Poss"),("won","h_WR"),("_0x0_flag","h_0x0_rate")]:
-        dh[nm] = _decay_roll_grouped(dh, "Team", col)
+        dh[nm] = _decay_roll_grouped_unshifted(dh, "Team", col)
     h_feats = ["h_Gf","h_Gc","h_xGOT","h_xGOT_faced","h_GP","h_BC","h_SoT","h_Poss","h_WR","h_0x0_rate"]
     home_last = dh.groupby("Team")[h_feats].last().reset_index()
-    home_last["_canon"] = home_last["Team"].apply(canon_text)
 
     # Vista AWAY
     da = df_hist[["Date","Away","Goals_A_FT","Goals_H_FT","xGOT_A_FT","xGOT_Faced_A_FT",
                   "Goals_Prevented_A_FT","Big_Chances_A_FT","Shots_On_Target_A_FT","Possession_A_FT","_0x0_flag"]].copy()
     da["won"] = (da["Goals_A_FT"] > da["Goals_H_FT"]).astype(float)
     da = da.rename(columns={"Away":"Team"})
-    da = da.sort_values(["Team","Date"]).reset_index(drop=True)
+    da = da.sort_values(["Team","Date"], kind="mergesort").reset_index(drop=True)
     for col, nm in [("Goals_A_FT","a_Gf"),("Goals_H_FT","a_Gc"),("xGOT_A_FT","a_xGOT"),
                     ("xGOT_Faced_A_FT","a_xGOT_faced"),("Goals_Prevented_A_FT","a_GP"),
                     ("Big_Chances_A_FT","a_BC"),("Shots_On_Target_A_FT","a_SoT"),
                     ("Possession_A_FT","a_Poss"),("won","a_WR"),("_0x0_flag","a_0x0_rate")]:
-        da[nm] = _decay_roll_grouped(da, "Team", col)
+        da[nm] = _decay_roll_grouped_unshifted(da, "Team", col)
     a_feats = ["a_Gf","a_Gc","a_xGOT","a_xGOT_faced","a_GP","a_BC","a_SoT","a_Poss","a_WR","a_0x0_rate"]
     away_last = da.groupby("Team")[a_feats].last().reset_index()
-    away_last["_canon"] = away_last["Team"].apply(canon_text)
 
     # Liga 0x0 rate
     df_hist["_tgt"] = ((df_hist["Goals_H_FT"] + df_hist["Goals_A_FT"]) > 0).astype(float)
-    df_lig = df_hist[["Date","League","_0x0_flag"]].sort_values(["League","Date"]).reset_index(drop=True)
+    df_lig = df_hist[["Date","League","_0x0_flag"]].sort_values(["League","Date"], kind="mergesort").reset_index(drop=True)
     df_lig["liga_0x0_rate"] = df_lig.groupby("League")["_0x0_flag"].transform(
         lambda x: x.shift(1).rolling(100, min_periods=20).mean())
     liga_last = df_lig.groupby("League")["liga_0x0_rate"].last().to_dict()
-
-    # Mapeamento de ligas para times no histórico para evitar cross-matching
-    df_hist["Home_Canon"] = df_hist["Home"].apply(canon_text)
-    df_hist["Away_Canon"] = df_hist["Away"].apply(canon_text)
-    league_homes = df_hist.groupby("League")["Home_Canon"].unique().to_dict()
-    league_aways = df_hist.groupby("League")["Away_Canon"].unique().to_dict()
 
     evaluated = []
     for g in live_games_payload:
@@ -172,35 +144,8 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         league = str(g.get("League") or g.get("Liga") or "")
         date_v = pd.to_datetime(g.get("Date") or datetime.now().date())
 
-        hc = canon_text(home)
-        ac = canon_text(away)
-
-        allowed_homes = league_homes.get(league, [])
-        allowed_aways = league_aways.get(league, [])
-
-        sh = home_last[home_last["_canon"] == hc]
-        sa = away_last[away_last["_canon"] == ac]
-        
-        if sh.empty:
-            best_t, best_score = None, 0.0
-            for t in allowed_homes:
-                score = difflib.SequenceMatcher(None, hc, t).ratio()
-                if score > best_score:
-                    best_score, best_t = score, t
-                if score > 0.95: break
-            if best_score > 0.70:
-                sh = home_last[home_last["_canon"] == best_t]
-                
-        if sa.empty:
-            best_t, best_score = None, 0.0
-            for t in allowed_aways:
-                score = difflib.SequenceMatcher(None, ac, t).ratio()
-                if score > best_score:
-                    best_score, best_t = score, t
-                if score > 0.95: break
-            if best_score > 0.70:
-                sa = away_last[away_last["_canon"] == best_t]
-
+        sh = home_last[home_last["Team"].map(_canon) == _canon(home)]
+        sa = away_last[away_last["Team"].map(_canon) == _canon(away)]
         if sh.empty or sa.empty:
             continue
         sh, sa = sh.iloc[0], sa.iloc[0]
@@ -245,7 +190,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         ms["liga_0x0_rate"] = liga_last.get(league, np.nan)
         ms["h2h_0x0_rate"]  = np.nan
 
-        row_mat = pd.DataFrame([{col: ms.get(col, 0.0) or 0.0 for col in features}]).fillna(0.0)
+        row_dict = {col: ms.get(col, np.nan) for col in features}
+        if any(pd.isna(v) for v in row_dict.values()):
+            continue
+        row_mat = pd.DataFrame([row_dict])
+        
         ms["Prob_ML"] = float(model.predict_proba(scaler.transform(row_mat))[0, 1])
         ms["ev_lay"]  = _ev_lay(ms["Prob_ML"], odd_val)
 

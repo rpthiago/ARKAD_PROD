@@ -100,12 +100,9 @@ def identify_zebra_and_handicap(match_state: Dict[str, Any]) -> Dict[str, Any]:
     eh_pos3 = match_state.get('EH_H_pos_3') if is_home_zebra else match_state.get('EH_A_pos_3')
     eh_zebra_plus3_odd = pd.to_numeric(eh_pos3, errors='coerce')
 
-    # Fallback/Sanitização inteligente: se a odd EH+3 estiver missing, anômala ou maior que Zebra_Odd
+    # Fallback/Sanitização inteligente: se a odd EH+3 estiver missing, anômala ou maior que Zebra_Odd, não estima (retorna nan para rejeitar de forma idêntica ao backtest)
     if pd.isna(eh_zebra_plus3_odd) or eh_zebra_plus3_odd <= 1.0 or eh_zebra_plus3_odd >= zebra_odd or eh_zebra_plus3_odd > 2.50:
-        # Estima uma odd EH +3 realista para a Zebra com base na odd do favorito
-        # Para Fav Odd entre 2.20 e 5.00, a odd EH+3 da Zebra varia de 1.05 a 1.15
-        base_eh = 1.05 + max(0.0, (fav_odd - 2.20)) * 0.02
-        eh_zebra_plus3_odd = round(min(base_eh, 1.25), 2)
+        eh_zebra_plus3_odd = np.nan
 
     return {
         'is_home_zebra': is_home_zebra,
@@ -113,7 +110,7 @@ def identify_zebra_and_handicap(match_state: Dict[str, Any]) -> Dict[str, Any]:
         'fav_team': fav_team,
         'zebra_odd': zebra_odd,
         'fav_odd': fav_odd,
-        'eh_zebra_plus3_odd': float(eh_zebra_plus3_odd)
+        'eh_zebra_plus3_odd': float(eh_zebra_plus3_odd) if pd.notna(eh_zebra_plus3_odd) else np.nan
     }
 
 
@@ -142,7 +139,7 @@ def check_entry_conditions(
         return False, f"ODD_EMPATE_ALTA_{draw_odd:.2f}_MAIOR_QUE_{max_draw_odd}"
 
     # Validação B: Disponibilidade e Sanitização de Odd do Handicap +3
-    if eh_odd <= 1.0 or eh_odd >= zebra_odd:
+    if pd.isna(eh_odd) or eh_odd <= 1.0 or eh_odd >= zebra_odd:
         return False, "ODD_HANDICAP_PLUS3_INVALIDA"
 
     # Validação C: Probabilidade Implícita da Zebra (1 / Zebra_Odd) <= 45%

@@ -58,13 +58,9 @@ def validar_entrada_lay2x2(
             passou_filtro_tendencia = True
             motivo_filtro = f"Favorito Claro (Odd Mandante: {odd_h:.2f} | Visitante: {odd_a:.2f})"
 
-    # Se não houver informação de xG ou Under 2.5, valida apenas pela faixa de Odd Lay 2x2 <= 14.0
+    # Se não houver informação de xG ou Under 2.5, rejeita
     if not passou_filtro_tendencia:
-        if odd_lay_2x2 <= 12.50:
-            passou_filtro_tendencia = True
-            motivo_filtro = f"Odd Lay 2x2 muito favorável ({odd_lay_2x2:.2f})"
-        else:
-            return False, f"Não atende aos critérios de tendência Under 2.5 ou Favoritismo."
+        return False, f"Não atende aos critérios de tendência Under 2.5 ou Favoritismo."
 
     return True, f"Aprovado para Lay 2x2! ({motivo_filtro})"
 
@@ -120,11 +116,20 @@ def filtrar_grade_lay2x2(df_jogos: pd.DataFrame) -> pd.DataFrame:
     aprovados = []
     
     for idx, row in df_jogos.iterrows():
-        odd_lay_2x2 = float(row.get("Odd_CS_2x2_Lay", row.get("Odd_2x2_Lay", 0.0)))
-        odd_under25 = float(row.get("Odd_Under25_FT_Back", row.get("Odd_Under25", 0.0)))
-        total_xg = float(row.get("total_xg", row.get("Total_xG", 0.0)))
-        odd_h = float(row.get("Odd_H_FT_Back", row.get("Odd_H", 0.0)))
-        odd_a = float(row.get("Odd_A_FT_Back", row.get("Odd_A", 0.0)))
+        odd_lay_2x2_val = row.get("Odd_CS_2x2_Lay") or row.get("Odd_2x2_Lay")
+        odd_lay_2x2 = float(odd_lay_2x2_val) if pd.notna(odd_lay_2x2_val) else np.nan
+
+        odd_under25_val = row.get("Odd_Under25_FT_Back") or row.get("Odd_Under25")
+        odd_under25 = float(odd_under25_val) if pd.notna(odd_under25_val) else np.nan
+
+        total_xg_val = row.get("total_xg") or row.get("Total_xG")
+        total_xg = float(total_xg_val) if pd.notna(total_xg_val) else np.nan
+
+        odd_h_val = row.get("Odd_H_FT_Back") or row.get("Odd_H")
+        odd_h = float(odd_h_val) if pd.notna(odd_h_val) else np.nan
+
+        odd_a_val = row.get("Odd_A_FT_Back") or row.get("Odd_A")
+        odd_a = float(odd_a_val) if pd.notna(odd_a_val) else np.nan
         
         ok, motivo = validar_entrada_lay2x2(
             odd_lay_2x2=odd_lay_2x2,
