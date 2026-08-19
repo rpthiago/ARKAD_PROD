@@ -31,6 +31,10 @@ MERCADOS = {
                 odd_key="Odd_CS_0x1_Lay", ledger="coleta_lay0x1_aovivo.xlsx", placar="0-1"),
     "1x0": dict(strategies=[("lay_1x0_agressivo_strategy","Trader")],
                 odd_key="Odd_CS_1x0_Lay", ledger="coleta_lay1x0_aovivo.xlsx", placar="1-0"),
+    "2x0": dict(strategies=[("lay_2x0_rf_v2_strategy","RF")],
+                odd_key="Odd_CS_2x0_Lay", ledger="coleta_lay2x0_aovivo.xlsx", placar="2-0"),
+    "0x2": dict(strategies=[("lay_0x2_rf_v2_strategy","RF")],
+                odd_key="Odd_CS_0x2_Lay", ledger="coleta_lay0x2_aovivo.xlsx", placar="0-2"),
 }
 # O "Lay 0x1 RF" treina RandomForest on-the-fly (mais lento) — OK, a rotina roda 1x/dia.
 
@@ -107,7 +111,7 @@ def sinais_do_dia(date_str, cfg, diag=None):
                 diag.setdefault("errors", []).append(f"[{tag}] {mod_name}: {e}")
             print(f"    [{tag}] {mod_name}: ERRO {str(e)[:80]}"); continue
         for g in (res or []):
-            if cfg["placar"] == "0-0" and g.get("Decision") != "APOSTA":
+            if cfg["placar"] in ["0-0", "2-0", "0-2"] and g.get("Decision") != "APOSTA":
                 continue
             # MESMO filtro da pagina Top 5 (ignora o Decision estrito da estrategia):
             odd = pd.to_numeric(g.get(cfg["odd_key"]) or np.nan, errors="coerce")
