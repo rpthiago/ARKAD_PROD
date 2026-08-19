@@ -86,7 +86,7 @@ if gerar_btn:
             
             # Rodar a predição real
             mod = __import__("lay_2x0_rf_v2_strategy", fromlist=["predict_and_evaluate_live"])
-            bf = coleta_lay_cs_aovivo.fetch_betfair_daily(date_str)
+            bf = b365_data_utils.fetch_betfair_daily(date_str)
             if bf is not None and not bf.empty:
                 payload = bf.to_dict("records")
                 hist = coleta_lay_cs_aovivo._hist_df()
