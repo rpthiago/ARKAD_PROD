@@ -85,6 +85,8 @@ def log_paper_trade(ms):
 def predict_and_evaluate_live(live_games_payload, df_historical):
     if not (os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH) and os.path.exists(FEATURES_PATH)):
         return []
+    if df_historical is None or not isinstance(df_historical, pd.DataFrame) or df_historical.empty or "Date" not in df_historical.columns:
+        return []
 
     model    = joblib.load(MODEL_PATH)
     scaler   = joblib.load(SCALER_PATH)

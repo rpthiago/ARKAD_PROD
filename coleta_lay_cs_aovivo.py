@@ -81,20 +81,32 @@ def _hist_df():
     """Carrega e faz cache dos dados históricos do Footstats para agilizar coletas repetidas."""
     global _HISTDF
     now = time.time()
-    if _HISTDF["df"] is not None and (now - _HISTDF["ts"]) < 1800:
+    if _HISTDF["df"] is not None and not _HISTDF["df"].empty and (now - _HISTDF["ts"]) < 1800:
         return _HISTDF["df"]
     
-    csv_path = "Resultados_2026_Full.csv"
-    if not os.path.exists(csv_path):
-        csv_path = "Resultados_2024_2026.csv"
-    if not os.path.exists(csv_path):
-        print("    [WARN] resultados históricos não encontrados. Histórico vazio.")
-        return pd.DataFrame()
-        
-    df = pd.read_csv(csv_path, low_memory=False)
-    _HISTDF["df"] = df
-    _HISTDF["ts"] = now
-    return _HISTDF["df"]
+    for csv_path in ["Resultados_2026_Full.csv", "Resultados_2024_2026.csv", "Bases_de_Dados_API_FutPythonTrader_Bet365.csv", "b365_base_lean.csv"]:
+        if os.path.exists(csv_path):
+            try:
+                df = pd.read_csv(csv_path, low_memory=False)
+                if not df.empty and "Date" in df.columns:
+                    _HISTDF["df"] = df
+                    _HISTDF["ts"] = now
+                    return df
+            except Exception:
+                pass
+
+    try:
+        from b365_data_utils import load_b365_historical
+        df = load_b365_historical()
+        if not df.empty and "Date" in df.columns:
+            _HISTDF["df"] = df
+            _HISTDF["ts"] = now
+            return df
+    except Exception:
+        pass
+
+    print("    [WARN] resultados históricos não encontrados. Histórico vazio.")
+    return pd.DataFrame()
 
 def sinais_do_dia(date_str, cfg, diag=None):
     """Roda os MODELOS reais do metodo (Trader/RF) sobre os jogos do dia e retorna
