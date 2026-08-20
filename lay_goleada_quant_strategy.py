@@ -23,7 +23,7 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         away = str(row.get('Away_Team') or row.get('Away') or row.get('Visitante') or 'Away')
         match_name = f"{home} x {away}"
         
-        odd_under25_val = row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25')
+        odd_under25_val = row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25_FT') or row.get('Odd_Under25')
         odd_under25 = float(odd_under25_val) if pd.notna(odd_under25_val) else np.nan
 
         odd_03_lay_val = row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3')
