@@ -40,10 +40,11 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         odd_h_val = row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H')
         odd_h = float(odd_h_val) if pd.notna(odd_h_val) else np.nan
         
-        # -------------------------------------------------------------
-        # MÁXIMA PROTEÇÃO DE BANCA: LAY 0x3 + MANDANTE FAVORITO (HA <= -0.25) + UNDER 2.5 + xG VISITANTE BAIXO
-        # -------------------------------------------------------------
-        if (0.0 < odd_under25 <= 2.10) and (14.0 <= odd_03_lay <= 35.0) and (xg_a_r5 <= 1.10):
+        odd_a_val = row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A')
+        odd_a = float(odd_a_val) if pd.notna(odd_a_val) else 0.0
+        
+        # Trava de Segurança: Visitante NÃO pode ser super favorito (Odd A >= 1.85)
+        if (0.0 < odd_under25 <= 2.10) and (14.0 <= odd_03_lay <= 35.0) and (odd_a >= 1.85 or odd_a == 0.0) and (xg_a_r5 <= 1.10):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_03_lay - 1.0)) if is_finished else 0.0

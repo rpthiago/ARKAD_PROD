@@ -91,7 +91,7 @@ if gerar_btn:
                     odd_0x3 = float(row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3') or 0.0)
                     xg_a = float(row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_A_FT') or 1.0)
                     
-                    if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and xg_a <= 1.10:
+                    if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and (odd_a >= 1.85 or odd_a == 0.0) and xg_a <= 1.10:
                         home = str(row.get("Home", row.get("Home_Team", "")))
                         away = str(row.get("Away", row.get("Away_Team", "")))
                         liga = str(row.get("League", row.get("Div", "Liga Externa")))
