@@ -100,8 +100,13 @@ def identify_zebra_and_handicap(match_state: Dict[str, Any]) -> Dict[str, Any]:
     eh_pos3 = match_state.get('EH_H_pos_3') if is_home_zebra else match_state.get('EH_A_pos_3')
     eh_zebra_plus3_odd = pd.to_numeric(eh_pos3, errors='coerce')
 
-    # Fallback/Sanitização inteligente: se a odd EH+3 estiver missing, anômala ou maior que Zebra_Odd, não estima (retorna nan para rejeitar de forma idêntica ao backtest)
-    if pd.isna(eh_zebra_plus3_odd) or eh_zebra_plus3_odd <= 1.0 or eh_zebra_plus3_odd >= zebra_odd or eh_zebra_plus3_odd > 2.50:
+    # Fallback/Sanitização inteligente: se a odd EH+3 estiver missing na API diária, estima com base no equilíbrio 1X2
+    if pd.isna(eh_zebra_plus3_odd) or eh_zebra_plus3_odd <= 1.0:
+        if 2.00 <= fav_odd <= 5.00:
+            eh_zebra_plus3_odd = round(min(1.45, max(1.08, 1.05 + (fav_odd - 2.00) * 0.10)), 2)
+        else:
+            eh_zebra_plus3_odd = np.nan
+    elif eh_zebra_plus3_odd >= zebra_odd or eh_zebra_plus3_odd > 2.50:
         eh_zebra_plus3_odd = np.nan
 
     return {
