@@ -104,11 +104,8 @@ if gerar_btn:
             sinais = []
             if not df_day.empty:
                 # Normaliza colunas de Odds sem confundir com colunas de texto (Home, Away)
-                # Normaliza colunas de Odds garantindo o foco em FT (Full-Time)
                 odd_2x2_col = [c for c in df_day.columns if '2x2' in str(c).lower() and 'lay' in str(c).lower()]
-                odd_u25_col = [c for c in df_day.columns if ('under25_ft_back' in str(c).lower() or 'under25_ft' in str(c).lower() or 'under 2.5 ft' in str(c).lower()) and 'ht' not in str(c).lower()]
-                if not odd_u25_col:
-                    odd_u25_col = [c for c in df_day.columns if 'under25' in str(c).lower() and 'ht' not in str(c).lower()]
+                odd_u25_col = [c for c in df_day.columns if 'under25' in str(c).lower() or 'under 2.5' in str(c).lower()]
                 odd_h_col = [c for c in df_day.columns if str(c).lower() in ['odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
                 odd_a_col = [c for c in df_day.columns if str(c).lower() in ['odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
                 

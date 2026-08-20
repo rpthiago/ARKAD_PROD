@@ -92,17 +92,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     scaler   = joblib.load(SCALER_PATH)
     features = joblib.load(FEATURES_PATH)
 
-    df_hist = df_historical
-    if live_games_payload:
-        teams = set()
-        for g in live_games_payload:
-            teams.add(str(g.get("Home") or g.get("HomeTeam") or ""))
-            teams.add(str(g.get("Away") or g.get("AwayTeam") or ""))
-        teams = {t for t in teams if t}
-        if teams and "Home" in df_hist.columns and "Away" in df_hist.columns:
-            df_hist = df_hist[df_hist["Home"].isin(teams) | df_hist["Away"].isin(teams)]
-
-    df_hist = df_hist.copy()
+    df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
     df_hist = df_hist.dropna(subset=["Goals_H_FT","Goals_A_FT","Date","Home","Away"]).copy()
     df_hist = df_hist.sort_values("Date", kind="mergesort").reset_index(drop=True)
@@ -127,7 +117,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
                   "Goals_Prevented_H_FT","Big_Chances_H_FT","Shots_On_Target_H_FT","Possession_H_FT","_2x0_flag"]].copy()
     dh["won"] = (dh["Goals_H_FT"] > dh["Goals_A_FT"]).astype(float)
     dh = dh.rename(columns={"Home":"Team"})
-    dh = dh.sort_values(["Team","Date"], kind="mergesort").groupby("Team").tail(6).reset_index(drop=True)
+    dh = dh.sort_values(["Team","Date"], kind="mergesort").reset_index(drop=True)
     for col, nm in [("Goals_H_FT","h_Gf"),("Goals_A_FT","h_Gc"),("xGOT_H_FT","h_xGOT"),
                     ("xGOT_Faced_H_FT","h_xGOT_faced"),("Goals_Prevented_H_FT","h_GP"),
                     ("Big_Chances_H_FT","h_BC"),("Shots_On_Target_H_FT","h_SoT"),
@@ -141,7 +131,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
                   "Goals_Prevented_A_FT","Big_Chances_A_FT","Shots_On_Target_A_FT","Possession_A_FT","_2x0_flag"]].copy()
     da["won"] = (da["Goals_A_FT"] > da["Goals_H_FT"]).astype(float)
     da = da.rename(columns={"Away":"Team"})
-    da = da.sort_values(["Team","Date"], kind="mergesort").groupby("Team").tail(6).reset_index(drop=True)
+    da = da.sort_values(["Team","Date"], kind="mergesort").reset_index(drop=True)
     for col, nm in [("Goals_A_FT","a_Gf"),("Goals_H_FT","a_Gc"),("xGOT_A_FT","a_xGOT"),
                     ("xGOT_Faced_A_FT","a_xGOT_faced"),("Goals_Prevented_A_FT","a_GP"),
                     ("Big_Chances_A_FT","a_BC"),("Shots_On_Target_A_FT","a_SoT"),
@@ -153,12 +143,9 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     # Liga 2x0 rate
     df_hist["_tgt"] = (~((df_hist["Goals_H_FT"] == 2) & (df_hist["Goals_A_FT"] == 0))).astype(float)
     df_lig = df_hist[["Date","League","_2x0_flag"]].sort_values(["League","Date"], kind="mergesort").reset_index(drop=True)
-    df_lig["_shift"] = df_lig.groupby("League")["_2x0_flag"].shift(1)
-    liga_last = (
-        df_lig.groupby("League")["_shift"]
-        .apply(lambda x: x.tail(100).mean() if len(x.dropna()) >= 20 else np.nan)
-        .to_dict()
-    )
+    df_lig["liga_2x0_rate"] = df_lig.groupby("League")["_2x0_flag"].transform(
+        lambda x: x.shift(1).rolling(100, min_periods=20).mean())
+    liga_last = df_lig.groupby("League")["liga_2x0_rate"].last().to_dict()
 
     evaluated = []
     for g in live_games_payload:

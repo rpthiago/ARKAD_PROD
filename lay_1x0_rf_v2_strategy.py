@@ -88,17 +88,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     scaler   = joblib.load(SCALER_PATH)
     features = joblib.load(FEATURES_PATH)
 
-    df_hist = df_historical
-    if live_games_payload:
-        teams = set()
-        for g in live_games_payload:
-            teams.add(str(g.get("Home") or g.get("HomeTeam") or ""))
-            teams.add(str(g.get("Away") or g.get("AwayTeam") or ""))
-        teams = {t for t in teams if t}
-        if teams and "Home" in df_hist.columns and "Away" in df_hist.columns:
-            df_hist = df_hist[df_hist["Home"].isin(teams) | df_hist["Away"].isin(teams)]
-
-    df_hist = df_hist.copy()
+    df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
     df_hist = df_hist.dropna(subset=["Goals_H_FT","Goals_A_FT","Date","Home","Away"]).copy()
 
