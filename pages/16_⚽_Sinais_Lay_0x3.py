@@ -85,13 +85,13 @@ if gerar_btn:
             
             if not df_day.empty:
                 for idx, row in df_day.iterrows():
-                    odd_h = float(row.get('Odd_H_FT_Back', 0.0) or row.get('Odd_H_FT', 0.0) or row.get('Odd_H', 0.0) or 0.0)
-                    odd_a = float(row.get('Odd_A_FT_Back', 0.0) or row.get('Odd_A_FT', 0.0) or row.get('Odd_A', 0.0) or 0.0)
-                    odd_u25 = float(row.get('Odd_Under25_FT_Back', 0.0) or row.get('Odd_Under25_FT', 0.0) or row.get('Odd_Under25', 0.0) or 0.0)
-                    odd_0x3 = float(row.get('Odd_CS_0x3_Lay', 0.0) or row.get('Odd_CS_0x3', 0.0) or 0.0)
-                    xg_a = float(row.get('A_xGF_r5', 0.0) or row.get('Media_Gols_Pro_Visitante', 0.0) or row.get('xG_A_FT', 1.0) or 1.0)
+                    odd_h = float(row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H') or 0.0)
+                    odd_a = float(row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A') or 0.0)
+                    odd_u25 = float(row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25_FT') or row.get('Odd_Under25') or 0.0)
+                    odd_0x3 = float(row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3') or 0.0)
+                    xg_a = float(row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_A_FT') or 1.0)
                     
-                    if 0.0 < odd_h <= 2.20 and odd_h < odd_a and 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and xg_a <= 1.10:
+                    if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and xg_a <= 1.10:
                         home = str(row.get("Home", row.get("Home_Team", "")))
                         away = str(row.get("Away", row.get("Away_Team", "")))
                         liga = str(row.get("League", row.get("Div", "Liga Externa")))

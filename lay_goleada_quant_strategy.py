@@ -29,27 +29,21 @@ def aplicar_lay_goleada(df: pd.DataFrame) -> pd.DataFrame:
         odd_03_lay_val = row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3')
         odd_03_lay = float(odd_03_lay_val) if pd.notna(odd_03_lay_val) else np.nan
 
-        xg_a_val = row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante')
-        xg_a_r5 = float(xg_a_val) if pd.notna(xg_a_val) else np.nan
+        xg_a_val = row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_A_FT') or row.get('xg_a')
+        xg_a_r5 = float(xg_a_val) if pd.notna(xg_a_val) else 1.0
         
         gh = row.get('Goals_H_FT')
         ga = row.get('Goals_A_FT')
         is_finished = (gh is not None and ga is not None and not pd.isna(gh) and not pd.isna(ga) and gh >= 0 and ga >= 0)
         is_0x3 = (gh == 0 and ga == 3) if is_finished else None
         
-        odd_h_val = row.get('Odd_H_Back') or row.get('Odd_H_FT') or row.get('Odd_H')
+        odd_h_val = row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H')
         odd_h = float(odd_h_val) if pd.notna(odd_h_val) else np.nan
         
         # -------------------------------------------------------------
         # MÁXIMA PROTEÇÃO DE BANCA: LAY 0x3 + MANDANTE FAVORITO (HA <= -0.25) + UNDER 2.5 + xG VISITANTE BAIXO
         # -------------------------------------------------------------
-        # Garantia de entrada apenas em:
-        # - HA -0.25 / -0.5 (Home Ligeiro Favorito)
-        # - HA -0.75 / -1.0 (Home Favorito)
-        # - HA -1.5 / -2.0 (Home Super Favorito)
-        is_home_fav = (0.0 < odd_h <= 2.30)
-        
-        if is_home_fav and (0.0 < odd_under25 <= 1.85) and (15.0 <= odd_03_lay <= 35.0) and (xg_a_r5 <= 1.10):
+        if (0.0 < odd_under25 <= 2.10) and (14.0 <= odd_03_lay <= 35.0) and (xg_a_r5 <= 1.10):
             status = 'Finalizado' if is_finished else 'Pendente'
             res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
             pnl = (0.95 if not is_0x3 else -(odd_03_lay - 1.0)) if is_finished else 0.0
