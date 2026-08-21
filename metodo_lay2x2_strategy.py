@@ -53,10 +53,6 @@ def validar_entrada_lay2x2(
     elif total_xg is not None and pd.notna(total_xg) and total_xg <= 2.40:
         passou_filtro_tendencia = True
         motivo_filtro = f"Total xG ({total_xg:.2f}) <= 2.40"
-    elif odd_h is not None and odd_a is not None and pd.notna(odd_h) and pd.notna(odd_a):
-        if odd_h <= 1.75 or odd_a <= 1.75:
-            passou_filtro_tendencia = True
-            motivo_filtro = f"Favorito Claro (Odd Mandante: {odd_h:.2f} | Visitante: {odd_a:.2f})"
 
     # Se não houver informação de xG ou Under 2.5, rejeita
     if not passou_filtro_tendencia:
