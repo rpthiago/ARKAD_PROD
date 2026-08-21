@@ -75,7 +75,7 @@ with col1:
         
     gerar_btn = st.button("Pesquisar Oportunidades Lay Empate", type="primary", key="btn_draw")
 
-if st.session_state.sinais_date_draw != target_date:
+if st.session_state.get("sinais_date_draw") != target_date:
     st.session_state.sinais_brutos_draw = None
 
 if gerar_btn:
