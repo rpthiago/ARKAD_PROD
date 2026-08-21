@@ -1,4 +1,4 @@
-"""lay_draw_rf_v2_strategy.py — Lay Draw v2 (Auditado & Consolidado em Alta Fidelidade) | ARKAD PROD"""
+"""lay_draw_rf_v2_strategy.py — Lay Draw v2 (100% Alinhado ao Trainer, Mando de Campo e Sem Fallbacks) | ARKAD PROD"""
 import os
 import re
 import unicodedata
@@ -38,6 +38,7 @@ def _decay_roll_grouped_unshifted(df, group_col, val_col, window=6, alpha=0.25):
     """
     Decaimento exponencial ponderado para séries temporais passadas.
     Calculado estritamente sobre partidas anteriores à data do evento.
+    Exige no mínimo 3 partidas passadas para validar a forma do time.
     """
     g = df.groupby(group_col)[val_col]
     numer = np.zeros(len(df))
@@ -51,7 +52,7 @@ def _decay_roll_grouped_unshifted(df, group_col, val_col, window=6, alpha=0.25):
         count += m
         wsum += ej
     res = numer / wsum
-    res[count < 2] = np.nan
+    res[count < 3] = np.nan
     return pd.Series(res, index=df.index)
 
 
@@ -76,7 +77,9 @@ def check_entry_conditions(ms):
         return False, f"EV_BAIXO({ev:+.3f})"
 
     liga_rate = ms.get("liga_draw_rate", None)
-    if liga_rate is not None and pd.notna(liga_rate) and LIGA_DRAW_RATE_MAX > 0 and liga_rate > LIGA_DRAW_RATE_MAX:
+    if liga_rate is None or pd.isna(liga_rate):
+        return False, "LIGA_SEM_HISTORICO"
+    if LIGA_DRAW_RATE_MAX > 0 and liga_rate > LIGA_DRAW_RATE_MAX:
         return False, f"LIGA_EMPATADORA({liga_rate:.2f})"
 
     return True, "APROVADO"
@@ -84,10 +87,12 @@ def check_entry_conditions(ms):
 
 def predict_and_evaluate_live(live_games_payload, df_historical):
     """
-    Avalia sinais diários com paridade 100% estrita ao modelo e base de treino:
-    - Todas as 34 features ricas calculadas (xGOT, Posse, Finalizações, H2H, Ligas).
-    - Cutoff dinâmico por data (sem datas hardcoded).
-    - Descarte rigoroso de partidas com features ausentes (sem números fabricados).
+    Avalia sinais diários com paridade 100% estrita ao modelo de treino:
+    - Features por Mando: Mandante em Casa (dh) e Visitante Fora (da).
+    - H2H real (par ordenado, min 2) sem fallbacks inventados (NaN -> SKIP).
+    - Liga Draw Rate real (rolling 100, min 20) sem fallbacks inventados (NaN -> SKIP).
+    - Cutoff dinâmico por data (ref_date).
+    - Zero tolerância a NaNs: dropna estrito idêntico ao treinamento.
     """
     if not (os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH) and os.path.exists(FEATURES_PATH)):
         return []
@@ -98,13 +103,12 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     scaler   = joblib.load(SCALER_PATH)
     features = joblib.load(FEATURES_PATH)
 
-    # Identificar data de referência dos jogos ao vivo para cutoff dinâmico
+    # Cutoff dinâmico
     dates_live = [pd.to_datetime(g.get("Date")) for g in live_games_payload if g.get("Date")]
     ref_date = min(dates_live) if dates_live else pd.to_datetime(datetime.now().date())
 
     df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
-    # Cutoff dinâmico: usa estritamente histórico anterior aos jogos a avaliar
     df_hist = df_hist[df_hist["Date"] < ref_date].copy()
     df_hist = df_hist.dropna(subset=["Goals_H_FT", "Goals_A_FT", "Date", "Home", "Away"]).copy()
     df_hist = df_hist.sort_values("Date", kind="mergesort").reset_index(drop=True)
@@ -124,34 +128,41 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     df_hist["c_Home"] = df_hist["Home"].map(_canon)
     df_hist["c_Away"] = df_hist["Away"].map(_canon)
 
-    # Construir visão consolidada de cada time (jogos em casa E fora)
-    home_records = df_hist[["Date", "c_Home", "Goals_H_FT", "Goals_A_FT", "xGOT_H_FT", "xGOT_Faced_H_FT", "Goals_Prevented_H_FT", "Big_Chances_H_FT", "Shots_On_Target_H_FT", "Possession_H_FT"]].copy()
-    home_records.columns = ["Date", "Team", "Gf", "Gc", "xGOT", "xGOT_faced", "GP", "BC", "SoT", "Poss"]
-    home_records["won"] = (home_records["Gf"] > home_records["Gc"]).astype(float)
-    home_records["draw"] = (home_records["Gf"] == home_records["Gc"]).astype(float)
+    # 1. Vista HOME (Mandante jogando em Casa — estritamente por mando)
+    dh = df_hist[["Date", "c_Home", "Goals_H_FT", "Goals_A_FT", "xGOT_H_FT", "xGOT_Faced_H_FT",
+                  "Goals_Prevented_H_FT", "Big_Chances_H_FT", "Shots_On_Target_H_FT", "Possession_H_FT", "_draw_flag"]].copy()
+    dh["won"] = (dh["Goals_H_FT"] > dh["Goals_A_FT"]).astype(float)
+    dh = dh.rename(columns={"c_Home": "Team"})
+    dh = dh.sort_values(["Team", "Date"], kind="mergesort").reset_index(drop=True)
+    for col, nm in [("Goals_H_FT", "h_Gf"), ("Goals_A_FT", "h_Gc"), ("xGOT_H_FT", "h_xGOT"),
+                    ("xGOT_Faced_H_FT", "h_xGOT_faced"), ("Goals_Prevented_H_FT", "h_GP"),
+                    ("Big_Chances_H_FT", "h_BC"), ("Shots_On_Target_H_FT", "h_SoT"),
+                    ("Possession_H_FT", "h_Poss"), ("won", "h_WR"), ("_draw_flag", "h_draw_rate")]:
+        dh[nm] = _decay_roll_grouped_unshifted(dh, "Team", col)
+    h_feats = ["h_Gf", "h_Gc", "h_xGOT", "h_xGOT_faced", "h_GP", "h_BC", "h_SoT", "h_Poss", "h_WR", "h_draw_rate"]
+    home_last = dh.groupby("Team")[h_feats].last().reset_index()
 
-    away_records = df_hist[["Date", "c_Away", "Goals_A_FT", "Goals_H_FT", "xGOT_A_FT", "xGOT_Faced_A_FT", "Goals_Prevented_A_FT", "Big_Chances_A_FT", "Shots_On_Target_A_FT", "Possession_A_FT"]].copy()
-    away_records.columns = ["Date", "Team", "Gf", "Gc", "xGOT", "xGOT_faced", "GP", "BC", "SoT", "Poss"]
-    away_records["won"] = (away_records["Gf"] > away_records["Gc"]).astype(float)
-    away_records["draw"] = (away_records["Gf"] == away_records["Gc"]).astype(float)
+    # 2. Vista AWAY (Visitante jogando Fora — estritamente por mando)
+    da = df_hist[["Date", "c_Away", "Goals_A_FT", "Goals_H_FT", "xGOT_A_FT", "xGOT_Faced_A_FT",
+                  "Goals_Prevented_A_FT", "Big_Chances_A_FT", "Shots_On_Target_A_FT", "Possession_A_FT", "_draw_flag"]].copy()
+    da["won"] = (da["Goals_A_FT"] > da["Goals_H_FT"]).astype(float)
+    da = da.rename(columns={"c_Away": "Team"})
+    da = da.sort_values(["Team", "Date"], kind="mergesort").reset_index(drop=True)
+    for col, nm in [("Goals_A_FT", "a_Gf"), ("Goals_H_FT", "a_Gc"), ("xGOT_A_FT", "a_xGOT"),
+                    ("xGOT_Faced_A_FT", "a_xGOT_faced"), ("Goals_Prevented_A_FT", "a_GP"),
+                    ("Big_Chances_A_FT", "a_BC"), ("Shots_On_Target_A_FT", "a_SoT"),
+                    ("Possession_A_FT", "a_Poss"), ("won", "a_WR"), ("_draw_flag", "a_draw_rate")]:
+        da[nm] = _decay_roll_grouped_unshifted(da, "Team", col)
+    a_feats = ["a_Gf", "a_Gc", "a_xGOT", "a_xGOT_faced", "a_GP", "a_BC", "a_SoT", "a_Poss", "a_WR", "a_draw_rate"]
+    away_last = da.groupby("Team")[a_feats].last().reset_index()
 
-    all_team_matches = pd.concat([home_records, away_records], ignore_index=True)
-    all_team_matches = all_team_matches.sort_values(["Team", "Date"], kind="mergesort").reset_index(drop=True)
-
-    base_cols = ["Gf", "Gc", "xGOT", "xGOT_faced", "GP", "BC", "SoT", "Poss", "won", "draw"]
-    for col in base_cols:
-        all_team_matches[col + "_roll"] = _decay_roll_grouped_unshifted(all_team_matches, "Team", col)
-
-    roll_feats = [c + "_roll" for c in base_cols]
-    team_last = all_team_matches.groupby("Team")[roll_feats].last().reset_index()
-
-    # 3. Liga Draw Rate (Histórico da Liga)
+    # 3. Liga Draw Rate (Histórico da Liga — rolling 100, min_periods=20, sem fallback)
     df_lig = df_hist[["Date", "League", "_draw_flag"]].sort_values(["League", "Date"], kind="mergesort").reset_index(drop=True)
     df_lig["liga_draw_rate"] = df_lig.groupby("League")["_draw_flag"].transform(
-        lambda x: x.shift(1).rolling(100, min_periods=10).mean())
-    liga_last = df_lig.groupby("League")["liga_draw_rate"].last().to_dict()
+        lambda x: x.shift(1).rolling(100, min_periods=20).mean())
+    liga_last = df_lig.dropna(subset=["liga_draw_rate"]).groupby("League")["liga_draw_rate"].last().to_dict()
 
-    # 4. H2H Draw Rate Real (Histórico de Confrontos Diretos)
+    # 4. H2H Draw Rate Real (Histórico de Confrontos Diretos — rolling 8, min_periods=2, sem fallback)
     df_hist["h2h_pair"] = [tuple(sorted(x)) for x in zip(df_hist["c_Home"], df_hist["c_Away"])]
     df_h2h = df_hist[["Date", "h2h_pair", "_draw_flag"]].sort_values(["h2h_pair", "Date"], kind="mergesort").reset_index(drop=True)
     df_h2h["h2h_draw_rate"] = df_h2h.groupby("h2h_pair")["_draw_flag"].transform(
@@ -168,9 +179,10 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         c_h = _canon(home)
         c_a = _canon(away)
 
-        sh_df = team_last[team_last["Team"] == c_h]
-        sa_df = team_last[team_last["Team"] == c_a]
+        sh_df = home_last[home_last["Team"] == c_h]
+        sa_df = away_last[away_last["Team"] == c_a]
 
+        # Odd de Lay oficial da Betfair Exchange
         odd_d = pd.to_numeric(g.get("Odd_D_Lay") or g.get("Odd_D_FT") or g.get("Odd_D_Back") or g.get("Odd_D_FT_Back") or g.get("Odd_D") or np.nan, errors="coerce")
         odd_h = pd.to_numeric(g.get("Odd_H_FT") or g.get("Odd_H_Back") or g.get("Odd_H_Lay") or g.get("Odd_H") or np.nan, errors="coerce")
         odd_a = pd.to_numeric(g.get("Odd_A_FT") or g.get("Odd_A_Back") or g.get("Odd_A_Lay") or g.get("Odd_A") or np.nan, errors="coerce")
@@ -184,10 +196,10 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
             "Odd_H_FT": odd_h, "Odd_A_FT": odd_a
         }
 
-        # Se time não existe no histórico -> descarta (igual ao dropna do treino)
+        # Se time não tem histórico no respectivo mando -> SKIP (idêntico ao dropna)
         if sh_df.empty or sa_df.empty:
             ms["Decision"] = "SKIP"
-            ms["Reason"]   = "TIME_SEM_HISTORICO"
+            ms["Reason"]   = "TIME_SEM_HISTORICO_MANDO"
             ms["Prob_ML"]  = np.nan
             ms["ev_lay"]   = np.nan
             evaluated.append(ms)
@@ -196,31 +208,20 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         sh = sh_df.iloc[0]
         sa = sa_df.iloc[0]
 
-        h_feat_map = {
-            "H_h_Gf": "Gf_roll", "H_h_Gc": "Gc_roll", "H_h_xGOT": "xGOT_roll", "H_h_xGOT_faced": "xGOT_faced_roll",
-            "H_h_GP": "GP_roll", "H_h_BC": "BC_roll", "H_h_SoT": "SoT_roll", "H_h_Poss": "Poss_roll",
-            "H_h_WR": "won_roll", "H_h_draw_rate": "draw_roll"
-        }
-        for target, src in h_feat_map.items():
-            ms[target] = sh.get(src, np.nan)
-
-        a_feat_map = {
-            "A_a_Gf": "Gf_roll", "A_a_Gc": "Gc_roll", "A_a_xGOT": "xGOT_roll", "A_a_xGOT_faced": "xGOT_faced_roll",
-            "A_a_GP": "GP_roll", "A_a_BC": "BC_roll", "A_a_SoT": "SoT_roll", "A_a_Poss": "Poss_roll",
-            "A_a_WR": "won_roll", "A_a_draw_rate": "draw_roll"
-        }
-        for target, src in a_feat_map.items():
-            ms[target] = sa.get(src, np.nan)
+        for col in h_feats:
+            ms["H_" + col] = sh.get(col, np.nan)
+        for col in a_feats:
+            ms["A_" + col] = sa.get(col, np.nan)
 
         h_wr = ms.get("H_h_WR", np.nan)
         a_wr = ms.get("A_a_WR", np.nan)
         h_dr = ms.get("H_h_draw_rate", np.nan)
         a_dr = ms.get("A_a_draw_rate", np.nan)
 
-        # Se features básicas do time estão ausentes -> descarta
+        # Se forma-casa ou forma-fora têm menos de 3 jogos -> SKIP (idêntico ao dropna)
         if pd.isna(h_wr) or pd.isna(a_wr) or pd.isna(h_dr) or pd.isna(a_dr):
             ms["Decision"] = "SKIP"
-            ms["Reason"]   = "FEATURES_INSUFICIENTES"
+            ms["Reason"]   = "FORMA_MANDO_INSUFICIENTE"
             ms["Prob_ML"]  = np.nan
             ms["ev_lay"]   = np.nan
             evaluated.append(ms)
@@ -230,10 +231,10 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         ms["wr_diff"]         = abs(h_wr - a_wr)
         ms["draw_rate_prod"]  = h_dr * a_dr
         ms["draw_rate_mean"]  = (h_dr + a_dr) / 2
-        ms["total_xGOT"]      = (ms.get("H_h_xGOT", 0) or 0) + (ms.get("A_a_xGOT", 0) or 0)
-        ms["xGOT_diff"]       = abs((ms.get("H_h_xGOT", 0) or 0) - (ms.get("A_a_xGOT", 0) or 0))
-        ms["total_Gf"]        = (ms.get("H_h_Gf", 0) or 0) + (ms.get("A_a_Gf", 0) or 0)
-        ms["gf_diff"]         = abs((ms.get("H_h_Gf", 0) or 0) - (ms.get("A_a_Gf", 0) or 0))
+        ms["total_xGOT"]      = ms.get("H_h_xGOT", np.nan) + ms.get("A_a_xGOT", np.nan)
+        ms["xGOT_diff"]       = abs(ms.get("H_h_xGOT", np.nan) - ms.get("A_a_xGOT", np.nan))
+        ms["total_Gf"]        = ms.get("H_h_Gf", np.nan) + ms.get("A_a_Gf", np.nan)
+        ms["gf_diff"]         = abs(ms.get("H_h_Gf", np.nan) - ms.get("A_a_Gf", np.nan))
         ms["decisive_score"]  = ms["total_WR"] * ms["wr_diff"]
 
         ms["mkt_prob_draw"]     = 1.0 / odd_d if odd_d > 0 else np.nan
@@ -244,12 +245,12 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         ms["mkt_overvalue_draw"] = (ms["mkt_prob_draw"] - ms["draw_rate_mean"]
                                     if pd.notna(ms["mkt_prob_draw"]) else np.nan)
 
-        ms["liga_draw_rate"] = liga_last.get(league, 0.26)
+        ms["liga_draw_rate"] = liga_last.get(league, np.nan)
         
         pair = tuple(sorted([c_h, c_a]))
-        ms["h2h_draw_rate"]  = h2h_last.get(pair, ms["draw_rate_mean"])
+        ms["h2h_draw_rate"]  = h2h_last.get(pair, np.nan)
 
-        # Montar vetor exato das 34 features
+        # Montar vetor das 34 features COM DROPNA ESTRITO (sem fallbacks artificiais)
         has_all_features = True
         row_dict = {}
         for col in features:
@@ -261,7 +262,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
         if not has_all_features:
             ms["Decision"] = "SKIP"
-            ms["Reason"]   = "METRICAS_AUSENTES"
+            ms["Reason"]   = "METRICAS_AUSENTES_OU_PRIMEIRO_ENCONTRO"
             ms["Prob_ML"]  = np.nan
             ms["ev_lay"]   = np.nan
             evaluated.append(ms)
