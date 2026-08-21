@@ -11,9 +11,10 @@ FEATURES_PATH = str(ROOT / "features_lay_draw_rf_v2.pkl")
 
 COMMISSION        = 0.05
 EV_MIN            = 0.03
-PROB_MIN          = 0.85        # Opção 1: Probabilidade mínima de 85% de não-empate
-ODD_MIN           = 3.00
-ODD_MAX           = 4.50        # Opção 1: Teto de odd 4.50 para controle de risco
+PROB_MIN          = 0.88        # Padrão Oficial Sniper ARKAD: Probabilidade mínima 88.0%
+ODD_MIN           = 3.20        # Padrão Oficial: Faixa Sweet Spot de Odds (3.20 a 4.20)
+ODD_MAX           = 4.20        # Padrão Oficial: Teto 4.20 para responsabilidade baixa
+FAV_ODD_MAX       = 2.10        # Padrão Oficial: Exige favorito claro (Mandante ou Visitante <= 2.10)
 LIGA_DRAW_RATE_MAX = 0.36   # Filtro anti-ligas hiper-empatadoras (ex: >36% empates)
 
 
@@ -48,6 +49,15 @@ def check_entry_conditions(ms):
     prob = ms.get("Prob_ML", 0) or 0.0
     if prob < PROB_MIN:
         return False, f"PROB_BAIXA({prob*100:.1f}%)"
+    
+    # Filtro de Favorito Claro
+    odd_h = ms.get("Odd_H_FT", np.nan)
+    odd_a = ms.get("Odd_A_FT", np.nan)
+    if FAV_ODD_MAX is not None:
+        tem_favorito = (pd.notna(odd_h) and 0 < odd_h <= FAV_ODD_MAX) or (pd.notna(odd_a) and 0 < odd_a <= FAV_ODD_MAX)
+        if not tem_favorito:
+            return False, "SEM_FAVORITO_CLARO"
+
     ev = _ev_lay(prob, odd)
     if ev < EV_MIN:
         return False, f"EV_BAIXO({ev:+.3f})"
