@@ -79,6 +79,8 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
 
     df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
+    # Limpar placeholders de jogos futuros
+    df_hist = df_hist[df_hist["Date"] < "2026-08-01"].copy()
     df_hist = df_hist.dropna(subset=["Goals_H_FT","Goals_A_FT","Date","Home","Away"]).copy()
     df_hist = df_hist.sort_values("Date", kind="mergesort").reset_index(drop=True)
 
@@ -134,11 +136,11 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         league = str(g.get("League") or g.get("Liga") or "")
         date_v = pd.to_datetime(g.get("Date") or datetime.now().date())
 
-        sh = home_last[home_last["Team"].map(_canon) == _canon(home)]
-        sa = away_last[away_last["Team"].map(_canon) == _canon(away)]
-        if sh.empty or sa.empty:
-            continue
-        sh, sa = sh.iloc[0], sa.iloc[0]
+        sh_df = home_last[home_last["Team"].map(_canon) == _canon(home)]
+        sa_df = away_last[away_last["Team"].map(_canon) == _canon(away)]
+        
+        sh = sh_df.iloc[0] if not sh_df.empty else pd.Series(dtype=float)
+        sa = sa_df.iloc[0] if not sa_df.empty else pd.Series(dtype=float)
 
         odd_d = pd.to_numeric(g.get("Odd_D_Lay") or g.get("Odd_D_FT") or g.get("Odd_D_Back") or g.get("Odd_D_FT_Back") or g.get("Odd_D") or np.nan, errors="coerce")
         odd_h = pd.to_numeric(g.get("Odd_H_FT") or g.get("Odd_H_Back") or g.get("Odd_H_Lay") or g.get("Odd_H") or np.nan, errors="coerce")
@@ -152,14 +154,14 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
               "Odd_H_FT": odd_h, "Odd_A_FT": odd_a}
 
         for col in h_feats:
-            ms["H_" + col] = sh.get(col, np.nan)
+            ms["H_" + col] = sh.get(col, np.nan) if not sh.empty else np.nan
         for col in a_feats:
-            ms["A_" + col] = sa.get(col, np.nan)
+            ms["A_" + col] = sa.get(col, np.nan) if not sa.empty else np.nan
 
-        h_wr = ms.get("H_h_WR", 0) or 0
-        a_wr = ms.get("A_a_WR", 0) or 0
-        h_dr = ms.get("H_h_draw_rate", 0) or 0
-        a_dr = ms.get("A_a_draw_rate", 0) or 0
+        h_wr = ms.get("H_h_WR", 0) if pd.notna(ms.get("H_h_WR")) else 0.35
+        a_wr = ms.get("A_a_WR", 0) if pd.notna(ms.get("A_a_WR")) else 0.25
+        h_dr = ms.get("H_h_draw_rate", 0) if pd.notna(ms.get("H_h_draw_rate")) else 0.28
+        a_dr = ms.get("A_a_draw_rate", 0) if pd.notna(ms.get("A_a_draw_rate")) else 0.28
 
         ms["total_WR"]        = h_wr + a_wr
         ms["wr_diff"]         = abs(h_wr - a_wr)
