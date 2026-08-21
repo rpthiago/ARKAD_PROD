@@ -22,6 +22,8 @@ try:
     importlib.reload(b365_data_utils)
     import lay_draw_rf_v2_strategy
     importlib.reload(lay_draw_rf_v2_strategy)
+    import hist_rf_loader
+    importlib.reload(hist_rf_loader)
 except Exception as e:
     st.error("Erro ao carregar os módulos locais do Lay Draw:")
     st.code(traceback.format_exc())
@@ -97,7 +99,9 @@ if gerar_btn:
             bf = b365_data_utils.fetch_betfair_daily(date_str)
             if bf is not None and not bf.empty:
                 payload = bf.to_dict("records")
-                hist = coleta_lay_cs_aovivo._hist_df()
+                # base COM features ricas (Bet365), independente do _hist_df compartilhado
+                # (que carregava Resultados_2026_Full, SEM xGOT/BigChances/Possession).
+                hist = hist_rf_loader.load_hist_rf()
                 res = mod.predict_and_evaluate_live(payload, hist)
                 sinais_aprovados = [g for g in (res or []) if g.get("Decision") == "APOSTA"]
                 st.session_state.sinais_brutos_draw = sinais_aprovados
