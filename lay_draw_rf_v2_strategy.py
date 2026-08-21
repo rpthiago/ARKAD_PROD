@@ -13,7 +13,7 @@ COMMISSION        = 0.05
 EV_MIN            = 0.02
 ODD_MIN           = 3.0
 ODD_MAX           = 5.5
-LIGA_DRAW_RATE_MAX = 0.23   # regra VALIDADA (pre-registro 2026-08-10): liga decisiva.
+LIGA_DRAW_RATE_MAX = 0.36   # Filtro anti-ligas hiper-empatadoras (ex: >36% empates)
 
 
 def _canon(s):
