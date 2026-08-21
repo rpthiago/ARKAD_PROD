@@ -1,0 +1,17 @@
+
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\find_games_15.py", line 2, in <module>
+    df = pd.read_csv("b365_base_lean.csv", usecols=["Date", "League", "Home", "Away", "Odd_CS_2x0", "Odd_H_FT"], low_memory=False)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\readers.py", line 1026, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\readers.py", line 620, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\readers.py", line 1620, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\readers.py", line 1898, in _make_engine
+    return mapping[engine](f, **self.options)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\c_parser_wrapper.py", line 140, in __init__
+    self._validate_usecols_names(usecols, self.orig_names)
+  File "C:\Users\thiag\anaconda3\lib\site-packages\pandas\io\parsers\base_parser.py", line 979, in _validate_usecols_names
+    raise ValueError(
+ValueError: Usecols do not match columns, columns expected but not found: ['Odd_CS_2x0']

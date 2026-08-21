@@ -28,8 +28,8 @@ def _canon(s):
     return re.sub(r"[^a-z0-9]", "", s)
 
 
-def _ev_lay(prob, odd):
-    return prob * (1 - COMMISSION) - (1 - prob) * (odd - 1)
+def _ev_lay(prob_not_score, odd):
+    return prob_not_score * (1 - COMMISSION) - (1 - prob_not_score) * (odd - 1)
 
 
 def _decay_roll_grouped_unshifted(df, group_col, val_col, window=6, alpha=0.25):
@@ -206,9 +206,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         ms["liga_0x2_rate"] = liga_last.get(league, np.nan)
         ms["h2h_0x2_rate"]  = np.nan
 
-        row_dict = {col: ms.get(col, np.nan) for col in features}
-        if any(pd.isna(v) for v in row_dict.values()):
-            continue
+        row_dict = {col: (0.0 if pd.isna(ms.get(col)) else ms.get(col)) for col in features}
         row_mat = pd.DataFrame([row_dict])
         
         ms["Prob_ML"] = float(model.predict_proba(scaler.transform(row_mat))[0, 1])
