@@ -19,6 +19,9 @@ try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
     import b365_data_utils
+    importlib.reload(b365_data_utils)
+    import lay_draw_rf_v2_strategy
+    importlib.reload(lay_draw_rf_v2_strategy)
 except Exception as e:
     st.error("Erro ao carregar os módulos locais do Lay Draw:")
     st.code(traceback.format_exc())
