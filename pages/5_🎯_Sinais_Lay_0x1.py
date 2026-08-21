@@ -74,23 +74,23 @@ if gerar_btn:
             df["Prob_Num"] = pd.to_numeric(df[col_prob], errors="coerce") if col_prob else np.nan
             
             if col_metodo:
-                # 1. Filtragem estrita do XGBoost (Odd 13.2-18.0)
+                # 1. Filtragem do Trader (XGBoost) (Odd 10.0-18.0)
                 df_xg = df[
                     df[col_metodo].astype(str).str.contains("Trader", na=False) &
-                    (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
+                    (df["Odd_Num"] >= 10.0) & (df["Odd_Num"] <= 18.0) &
                     (df["Prob_Num"] >= 75.0)
                 ].copy()
                 if not df_xg.empty:
                     df_xg["Metodo_Final"] = "XGBoost (Trader)"
                 
-                # 2. Filtragem estrita do RF (Odd 13.2-18.0 + Blacklist Condicional à Odd)
+                # 2. Filtragem do Random Forest RF v2 (Odd 6.0-9.5)
                 blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
                 liga_series = df[col_liga].astype(str).str.upper().str.strip() if col_liga else pd.Series([""] * len(df))
                 is_blacklisted = liga_series.isin(blacklist) & (df["Odd_Num"] <= 13.0)
                 df_rf = df[
                     df[col_metodo].astype(str).str.contains("RF", na=False) &
-                    (df["Odd_Num"] >= 13.2) & (df["Odd_Num"] <= 18.0) &
-                    (df["Prob_Num"] >= 92.0) &
+                    (df["Odd_Num"] >= 6.0) & (df["Odd_Num"] <= 9.5) &
+                    (df["Prob_Num"] >= 88.0) &
                     (~is_blacklisted)
                 ].copy()
                 if not df_rf.empty:
