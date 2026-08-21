@@ -76,6 +76,10 @@ with col1:
         use_kelly = False
         f_risk_fixed = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5, key="pct_draw") / 100.0
         
+    st.markdown("### 🎯 Filtro de Convicção IA (Opção 1)")
+    prob_min_user = st.slider("Probabilidade Mínima IA (%)", min_value=75, max_value=95, value=85, step=1, key="prob_slider_draw") / 100.0
+    odd_max_user = st.slider("Odd Lay Máxima", min_value=3.20, max_value=5.50, value=4.50, step=0.10, key="odd_slider_draw")
+        
     gerar_btn = st.button("Pesquisar Oportunidades Lay Empate", type="primary", key="btn_draw")
 
 if st.session_state.get("sinais_date_draw") != target_date:
@@ -86,6 +90,8 @@ if gerar_btn:
     with st.spinner(f"Consultando grade de {date_str} na Betfair e executando Random Forest Lay Draw..."):
         try:
             mod = __import__("lay_draw_rf_v2_strategy", fromlist=["predict_and_evaluate_live"])
+            mod.PROB_MIN = prob_min_user
+            mod.ODD_MAX = odd_max_user
             bf = b365_data_utils.fetch_betfair_daily(date_str)
             if bf is not None and not bf.empty:
                 payload = bf.to_dict("records")

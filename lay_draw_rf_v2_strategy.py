@@ -10,9 +10,10 @@ SCALER_PATH   = str(ROOT / "scaler_lay_draw_rf_v2.pkl")
 FEATURES_PATH = str(ROOT / "features_lay_draw_rf_v2.pkl")
 
 COMMISSION        = 0.05
-EV_MIN            = 0.02
-ODD_MIN           = 3.0
-ODD_MAX           = 5.5
+EV_MIN            = 0.03
+PROB_MIN          = 0.85        # Opção 1: Probabilidade mínima de 85% de não-empate
+ODD_MIN           = 3.00
+ODD_MAX           = 4.50        # Opção 1: Teto de odd 4.50 para controle de risco
 LIGA_DRAW_RATE_MAX = 0.36   # Filtro anti-ligas hiper-empatadoras (ex: >36% empates)
 
 
@@ -45,6 +46,8 @@ def check_entry_conditions(ms):
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
     prob = ms.get("Prob_ML", 0) or 0.0
+    if prob < PROB_MIN:
+        return False, f"PROB_BAIXA({prob*100:.1f}%)"
     ev = _ev_lay(prob, odd)
     if ev < EV_MIN:
         return False, f"EV_BAIXO({ev:+.3f})"
