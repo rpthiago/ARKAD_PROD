@@ -1,82 +1,53 @@
-"""
-lay_1x0_rf_v2_strategy.py — Lay 1x0 RF v2 (faixa 6.0–9.5)
-Complementa lay_1x0_agressivo_strategy.py (faixa 9.0–11.5).
-AUTO-GERADO por treinar_lay_1x0_rf_v2.py — nao editar manualmente.
-"""
-import os, joblib
-import pandas as pd
-import numpy as np
+"""lay_1x0_rf_v2_strategy.py — Lay 1x0 v2 (Refatorado & 100% Alinhado ao GEMINI.md) | ARKAD PROD"""
+import os, re, unicodedata, joblib
+import numpy as np, pandas as pd
 from datetime import datetime
+from pathlib import Path
 
-MODEL_PATH    = "modelo_lay_1x0_rf_v2.pkl"
-SCALER_PATH   = "scaler_lay_1x0_rf_v2.pkl"
-FEATURES_PATH = "features_lay_1x0_rf_v2.pkl"
+ROOT = Path(__file__).resolve().parent
+MODEL_PATH    = str(ROOT / "modelo_lay_1x0_rf_v2.pkl")
+SCALER_PATH   = str(ROOT / "scaler_lay_1x0_rf_v2.pkl")
+FEATURES_PATH = str(ROOT / "features_lay_1x0_rf_v2.pkl")
 
 COMMISSION  = 0.05
-ODD_MIN     = 6.0
-ODD_MAX     = 9.5
 EV_MIN      = 0.03
-WINDOW      = 8
-DECAY_ALPHA = 0.2
-MIN_GAMES   = 4
+PROB_MIN    = 0.85
+ODD_MIN     = 6.00
+ODD_MAX     = 16.00
 
+def _canon(s):
+    if pd.isna(s) or not s: return ""
+    s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", s)
 
-def normalize_live_data(live_payload):
-    n = {}
-    n["Home"]           = live_payload.get("Home") or live_payload.get("HomeTeam") or ""
-    n["Away"]           = live_payload.get("Away") or live_payload.get("AwayTeam") or ""
-    n["League"]         = live_payload.get("League") or live_payload.get("Liga") or ""
-    n["Time"]           = live_payload.get("Time") or ""
-    date_val            = live_payload.get("Date") or live_payload.get("Data_Jogo") or datetime.now().date()
-    n["Date"]           = pd.to_datetime(date_val)
-    n["Odd_CS_1x0_Lay"] = pd.to_numeric(
-        live_payload.get("Odd_CS_1x0_Lay") or live_payload.get("Odd_CS_1x0") or np.nan, errors="coerce")
-    n["Odd_H_FT"] = pd.to_numeric(live_payload.get("Odd_H_FT") or live_payload.get("Odd_H_Back") or np.nan, errors="coerce")
-    n["Odd_A_FT"] = pd.to_numeric(live_payload.get("Odd_A_FT") or live_payload.get("Odd_A_Back") or np.nan, errors="coerce")
-    return n
+def _ev_lay(prob, odd):
+    return prob * (1 - COMMISSION) - (1 - prob) * (odd - 1)
 
+def _decay_roll_grouped(df, group_col, val_col, window=6, alpha=0.25):
+    g = df.groupby(group_col)[val_col]
+    numer = np.zeros(len(df)); count = np.zeros(len(df)); wsum = 0.0
+    for j in range(window):
+        sj = g.shift(j)
+        ej = np.exp(-alpha * j)
+        m = sj.notna().to_numpy()
+        numer += np.where(m, np.nan_to_num(sj.to_numpy()) * ej, 0.0)
+        count += m
+        wsum += ej
+    res = numer / wsum
+    res[count < 3] = np.nan
+    return pd.Series(res, index=df.index)
 
-def check_entry_conditions(match_state):
-    odd = match_state.get("Odd_CS_1x0_Lay") or 0.0
+def check_entry_conditions(ms):
+    odd = ms.get("Odd_1x0_Lay") or ms.get("Odd_1x0_FT") or 0.0
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
-    ev = match_state.get("ev_lay", 0.0)
+    prob = ms.get("Prob_ML", 0) or 0.0
+    if pd.isna(prob) or prob < PROB_MIN:
+        return False, f"PROB_BAIXA({prob*100:.1f}%)"
+    ev = ms.get("ev_lay", 0) or 0.0
     if ev < EV_MIN:
-        return False, "EV_INSUFICIENTE"
+        return False, f"EV_BAIXO({ev:+.3f})"
     return True, "APROVADO"
-
-
-def log_paper_trade(match_state):
-    log_file = "paper_trading_log_lay_1x0_rf_v2.csv"
-    row = {
-        "Date": str(match_state.get("Date", "")),
-        "League": match_state.get("League", ""),
-        "Home": match_state.get("Home", ""),
-        "Away": match_state.get("Away", ""),
-        "Odd_CS_1x0_Lay": match_state.get("Odd_CS_1x0_Lay", 0.0),
-        "Prob_ML": match_state.get("Prob_ML", 0.0),
-        "EV_LAY": match_state.get("ev_lay", 0.0),
-        "Decision": match_state.get("Decision", ""),
-        "Reason": match_state.get("Reason", ""),
-        "Timestamp": datetime.now().isoformat()
-    }
-    df_r = pd.DataFrame([row])
-    if not os.path.exists(log_file):
-        df_r.to_csv(log_file, index=False)
-    else:
-        df_r.to_csv(log_file, mode="a", header=False, index=False)
-
-
-def _decay_roll(series):
-    weights = np.exp(-DECAY_ALPHA * np.arange(WINDOW)[::-1])
-    def _wm(arr):
-        n = len(arr)
-        if n < MIN_GAMES:
-            return np.nan
-        w = weights[-n:]
-        return np.dot(arr, w) / w.sum()
-    return series.shift(1).rolling(WINDOW, min_periods=MIN_GAMES).apply(_wm, raw=True)
-
 
 def predict_and_evaluate_live(live_games_payload, df_historical):
     if not (os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH) and os.path.exists(FEATURES_PATH)):
@@ -88,91 +59,101 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
     scaler   = joblib.load(SCALER_PATH)
     features = joblib.load(FEATURES_PATH)
 
+    dates_live = [pd.to_datetime(g.get("Date")) for g in live_games_payload if g.get("Date")]
+    ref_date = min(dates_live) if dates_live else pd.to_datetime(datetime.now().date())
+
     df_hist = df_historical.copy()
     df_hist["Date"] = pd.to_datetime(df_hist["Date"], errors="coerce")
-    df_hist = df_hist.dropna(subset=["Goals_H_FT","Goals_A_FT","Date","Home","Away"]).copy()
+    df_hist = df_hist[df_hist["Date"] < ref_date].copy()
+    df_hist = df_hist.dropna(subset=["Goals_H_FT", "Goals_A_FT", "Date", "Home", "Away"]).copy()
+    df_hist = df_hist.sort_values("Date", kind="mergesort").reset_index(drop=True)
 
-    if live_games_payload:
-        first_date = pd.to_datetime(live_games_payload[0].get("Date") or datetime.now().date()).date()
-        df_hist = df_hist[df_hist["Date"].dt.date < first_date].copy()
+    df_hist["won_H"] = (df_hist["Goals_H_FT"] > df_hist["Goals_A_FT"]).astype(float)
+    df_hist["won_A"] = (df_hist["Goals_A_FT"] > df_hist["Goals_H_FT"]).astype(float)
+    df_hist["score10_H"] = ((df_hist["Goals_H_FT"] == 1) & (df_hist["Goals_A_FT"] == 0)).astype(float)
+    df_hist["multi_H"] = (df_hist["Goals_H_FT"] >= 2).astype(float)
+    df_hist["concede0_A"] = (df_hist["Goals_H_FT"] == 0).astype(float)
 
-    df_hist = df_hist.sort_values("Date").reset_index(drop=True)
-    for c in ["Goals_H_FT","Goals_A_FT"]:
-        df_hist[c] = pd.to_numeric(df_hist[c], errors="coerce").fillna(0.0)
+    df_hist["c_Home"] = df_hist["Home"].map(_canon)
+    df_hist["c_Away"] = df_hist["Away"].map(_canon)
 
-    # Contexto mandante (casa)
-    df_h = df_hist[["Date","Home","Goals_H_FT","Goals_A_FT"]].copy().rename(columns={"Home":"Team"})
-    df_h["won"]        = (df_h["Goals_H_FT"] > df_h["Goals_A_FT"]).astype(float)
-    df_h["goals_sc"]   = df_h["Goals_H_FT"]
-    df_h["score_1x0"]  = ((df_h["Goals_H_FT"] == 1) & (df_h["Goals_A_FT"] == 0)).astype(float)
-    df_h["multi_goal"] = (df_h["Goals_H_FT"] >= 2).astype(float)
-    df_h = df_h.sort_values(["Team","Date"]).reset_index(drop=True)
-    df_h["H_h_WR"]           = df_h.groupby("Team")["won"].transform(_decay_roll)
-    df_h["H_h_goals_rate"]   = df_h.groupby("Team")["goals_sc"].transform(_decay_roll)
-    df_h["H_h_score10_rate"] = df_h.groupby("Team")["score_1x0"].transform(_decay_roll)
-    df_h["H_h_multi_goal"]   = df_h.groupby("Team")["multi_goal"].transform(_decay_roll)
-    home_last = df_h.groupby("Team")[["H_h_WR","H_h_goals_rate","H_h_score10_rate","H_h_multi_goal"]].last().reset_index()
+    # 1. Vista HOME
+    dh = df_hist[["Date", "c_Home", "Goals_H_FT", "won_H", "score10_H", "multi_H"]].copy().rename(columns={"c_Home": "Team"})
+    dh = dh.sort_values(["Team", "Date"], kind="mergesort").reset_index(drop=True)
+    dh["H_h_WR"] = _decay_roll_grouped(dh, "Team", "won_H")
+    dh["H_h_goals_rate"] = _decay_roll_grouped(dh, "Team", "Goals_H_FT")
+    dh["H_h_score10_rate"] = _decay_roll_grouped(dh, "Team", "score10_H")
+    dh["H_h_multi_goal"] = _decay_roll_grouped(dh, "Team", "multi_H")
+    home_last = dh.groupby("Team")[["H_h_WR", "H_h_goals_rate", "H_h_score10_rate", "H_h_multi_goal"]].last().reset_index()
 
-    # Contexto visitante (fora)
-    df_a = df_hist[["Date","Away","Goals_A_FT","Goals_H_FT"]].copy().rename(columns={"Away":"Team"})
-    df_a["won"]       = (df_a["Goals_A_FT"] > df_a["Goals_H_FT"]).astype(float)
-    df_a["goals_sc"]  = df_a["Goals_A_FT"]
-    df_a["concede0"]  = (df_a["Goals_H_FT"] == 0).astype(float)
-    df_a = df_a.sort_values(["Team","Date"]).reset_index(drop=True)
-    df_a["A_a_WR"]         = df_a.groupby("Team")["won"].transform(_decay_roll)
-    df_a["A_a_goals_rate"] = df_a.groupby("Team")["goals_sc"].transform(_decay_roll)
-    df_a["A_a_concede0"]   = df_a.groupby("Team")["concede0"].transform(_decay_roll)
-    away_last = df_a.groupby("Team")[["A_a_WR","A_a_goals_rate","A_a_concede0"]].last().reset_index()
+    # 2. Vista AWAY
+    da = df_hist[["Date", "c_Away", "Goals_A_FT", "won_A", "concede0_A"]].copy().rename(columns={"c_Away": "Team"})
+    da = da.sort_values(["Team", "Date"], kind="mergesort").reset_index(drop=True)
+    da["A_a_WR"] = _decay_roll_grouped(da, "Team", "won_A")
+    da["A_a_goals_rate"] = _decay_roll_grouped(da, "Team", "Goals_A_FT")
+    da["A_a_concede0"] = _decay_roll_grouped(da, "Team", "concede0_A")
+    away_last = da.groupby("Team")[["A_a_WR", "A_a_goals_rate", "A_a_concede0"]].last().reset_index()
 
     evaluated = []
     for g in live_games_payload:
-        norm_g = normalize_live_data(g)
-        home, away = norm_g["Home"], norm_g["Away"]
+        home   = str(g.get("Home") or g.get("HomeTeam") or "")
+        away   = str(g.get("Away") or g.get("AwayTeam") or "")
+        league = str(g.get("League") or g.get("Liga") or "")
+        date_v = pd.to_datetime(g.get("Date") or datetime.now().date())
 
-        sh = home_last[home_last["Team"] == home]
-        sa = away_last[away_last["Team"] == away]
-        if sh.empty or sa.empty:
-            continue
-        sh, sa = sh.iloc[0], sa.iloc[0]
+        c_h = _canon(home); c_a = _canon(away)
+        sh_df = home_last[home_last["Team"] == c_h]
+        sa_df = away_last[away_last["Team"] == c_a]
 
-        odd = norm_g.get("Odd_CS_1x0_Lay") or np.nan
-        if pd.isna(odd):
-            continue
+        odd_1x0 = pd.to_numeric(g.get("Odd_1x0_Lay") or g.get("Odd_1x0_FT") or g.get("Odd_1x0_Back") or g.get("Odd_1x0") or np.nan, errors="coerce")
+        odd_h = pd.to_numeric(g.get("Odd_H_FT") or g.get("Odd_H_Back") or g.get("Odd_H") or np.nan, errors="coerce")
+        odd_a = pd.to_numeric(g.get("Odd_A_FT") or g.get("Odd_A_Back") or g.get("Odd_A") or np.nan, errors="coerce")
 
-        odd_h = norm_g.get("Odd_H_FT") or 2.0
-        odd_a = norm_g.get("Odd_A_FT") or 2.0
+        if pd.isna(odd_1x0) or odd_1x0 <= 0: continue
 
-        h_goals = sh.get("H_h_goals_rate", 1.2)
-        a_goals = sa.get("A_a_goals_rate", 0.8)
-        h_score10 = sh.get("H_h_score10_rate", 0.08)
+        ms = {"Home": home, "Away": away, "League": league, "Date": date_v, "Time": g.get("Time", ""),
+              "Odd_1x0_FT": odd_1x0, "Odd_1x0_Lay": odd_1x0, "Odd_H_FT": odd_h, "Odd_A_FT": odd_a}
 
-        feat_vals = {
-            "H_h_WR":           sh.get("H_h_WR", 0.5),
-            "H_h_goals_rate":   h_goals,
-            "H_h_score10_rate": h_score10,
-            "H_h_multi_goal":   sh.get("H_h_multi_goal", 0.45),
-            "A_a_WR":           sa.get("A_a_WR", 0.28),
-            "A_a_goals_rate":   a_goals,
-            "A_a_concede0":     sa.get("A_a_concede0", 0.30),
-            "spread_forca":     (1.0/(odd_h+1e-9)) - (1.0/(odd_a+1e-9)),
-            "mkt_prob_1x0":     1.0/(odd+1e-9),
-            "mkt_edge_signal":  (1.0/(odd+1e-9)) - h_score10,
-            "total_goals_proxy": h_goals * a_goals,
-        }
+        if sh_df.empty or sa_df.empty:
+            ms["Decision"] = "SKIP"; ms["Reason"] = "TIME_SEM_HISTORICO_MANDO"; ms["Prob_ML"] = np.nan; ms["ev_lay"] = np.nan
+            evaluated.append(ms); continue
 
-        row_mat = pd.DataFrame([{col: feat_vals.get(col, 0.0) for col in features}]).fillna(0.0)
-        prob_ml = float(model.predict_proba(scaler.transform(row_mat))[0, 1])
+        sh = sh_df.iloc[0]; sa = sa_df.iloc[0]
+        ms["H_h_WR"] = sh.get("H_h_WR", np.nan)
+        ms["H_h_goals_rate"] = sh.get("H_h_goals_rate", np.nan)
+        ms["H_h_score10_rate"] = sh.get("H_h_score10_rate", np.nan)
+        ms["H_h_multi_goal"] = sh.get("H_h_multi_goal", np.nan)
+        ms["A_a_WR"] = sa.get("A_a_WR", np.nan)
+        ms["A_a_goals_rate"] = sa.get("A_a_goals_rate", np.nan)
+        ms["A_a_concede0"] = sa.get("A_a_concede0", np.nan)
 
-        ev_lay = prob_ml * (1 - COMMISSION) - (1 - prob_ml) * (odd - 1)
+        if pd.isna(ms.get("H_h_WR")) or pd.isna(ms.get("A_a_WR")):
+            ms["Decision"] = "SKIP"; ms["Reason"] = "FORMA_MANDO_INSUFICIENTE"; ms["Prob_ML"] = np.nan; ms["ev_lay"] = np.nan
+            evaluated.append(ms); continue
 
-        norm_g["Prob_ML"] = prob_ml
-        norm_g["ev_lay"]  = ev_lay
+        ms["spread_forca"] = ms["H_h_WR"] - ms["A_a_WR"]
+        ms["total_goals_proxy"] = ms["H_h_goals_rate"] + ms["A_a_goals_rate"]
+        ms["mkt_prob_1x0"] = 1.0 / odd_1x0 if odd_1x0 > 0 else np.nan
+        ms["mkt_edge_signal"] = (1.0 / odd_h if pd.notna(odd_h) and odd_h>0 else 0.5) - ms["mkt_prob_1x0"]
 
-        apostar, reason = check_entry_conditions(norm_g)
-        norm_g["Decision"] = "APOSTA" if apostar else "SKIP"
-        norm_g["Reason"]   = reason
-        # paper trail agora e CENTRAL (paper_log_real, pos odd lay real). O log daqui
-        # gravava a odd b365 (nao executavel) -> inflava o P&L de CS. Removido.
-        evaluated.append(norm_g)
+        has_all = True
+        row_dict = {}
+        for col in features:
+            val = ms.get(col)
+            if val is None or pd.isna(val): has_all = False; break
+            row_dict[col] = float(val)
+
+        if not has_all:
+            ms["Decision"] = "SKIP"; ms["Reason"] = "METRICAS_AUSENTES"; ms["Prob_ML"] = np.nan; ms["ev_lay"] = np.nan
+            evaluated.append(ms); continue
+
+        row_mat = pd.DataFrame([row_dict])[features]
+        ms["Prob_ML"] = float(model.predict_proba(scaler.transform(row_mat))[0, 1])
+        ms["ev_lay"]  = _ev_lay(ms["Prob_ML"], odd_1x0)
+
+        apostar, reason = check_entry_conditions(ms)
+        ms["Decision"] = "APOSTA" if apostar else "SKIP"
+        ms["Reason"]   = reason
+        evaluated.append(ms)
 
     return evaluated

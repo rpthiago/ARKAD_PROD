@@ -88,7 +88,7 @@ if gerar_btn:
             bf = b365_data_utils.fetch_betfair_daily(date_str)
             if bf is not None and not bf.empty:
                 payload = bf.to_dict("records")
-                hist = coleta_lay_cs_aovivo._hist_df()
+                hist = hist_rf_loader.load_hist_rf()
                 res = mod.predict_and_evaluate_live(payload, hist)
                 sinais_aprovados = [g for g in (res or []) if g.get("Decision") == "APOSTA"]
                 st.session_state.sinais_brutos_1x0 = sinais_aprovados

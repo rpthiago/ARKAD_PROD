@@ -81,7 +81,7 @@ if gerar_btn:
     date_str = target_date.strftime("%Y-%m-%d")
     with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
         try:
-            coleta_lay_cs_aovivo._hist_df()
+            hist_rf_loader.load_hist_rf()
             cfg = coleta_lay_cs_aovivo.MERCADOS["2x0"]
             
             # Rodar a predição real
@@ -89,7 +89,7 @@ if gerar_btn:
             bf = b365_data_utils.fetch_betfair_daily(date_str)
             if bf is not None and not bf.empty:
                 payload = bf.to_dict("records")
-                hist = coleta_lay_cs_aovivo._hist_df()
+                hist = hist_rf_loader.load_hist_rf()
                 res = mod.predict_and_evaluate_live(payload, hist)
                 # Filtrar somente os que a estratégia deu APOSTA
                 sinais_aprovados = [g for g in (res or []) if g.get("Decision") == "APOSTA"]

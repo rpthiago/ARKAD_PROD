@@ -49,7 +49,7 @@ if gerar_btn:
     with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
         try:
             # Garante que o histórico está carregado na memória
-            coleta_lay_cs_aovivo._hist_df()
+            hist_rf_loader.load_hist_rf()
             
             # Puxa os sinais brutos do motor 0x1
             cfg = coleta_lay_cs_aovivo.MERCADOS["0x1"]
