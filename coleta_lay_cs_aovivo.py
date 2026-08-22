@@ -119,7 +119,8 @@ def sinais_do_dia(date_str, cfg, diag=None):
         diag["n_api"] = 0 if (bf is None or bf.empty) else len(bf)
     if bf is None or bf.empty: return []
     payload = bf.to_dict("records")
-    hist = _hist_df()
+    import hist_rf_loader
+    hist = hist_rf_loader.load_hist_rf()
     picks = {}   # (Home,Away) -> {dados + set de metodos}
     for mod_name, tag in cfg["strategies"]:
         try:
