@@ -17,7 +17,8 @@ Na **odd executável** (a real da Betfair), o quadro é:
 | Lay 0x1 / 1x0 / 2x0 / 0x2 | **negativos** | WR abaixo do break-even no paper de agosto |
 | Lay 2x2 | **break-even (variância)** | WR 95% ≈ BE 95%; agosto ~zero; 28 meses walk-forward −8% |
 | Lay 0x3 | **FRAUDE do prompt guru** | "31/31 = 100% +R$2.945" era mentira: real 40 jogos, 9 reds, 77,5% WR, **−R$22.205**; break-even 96,7% |
-| Lay Draw | **+2%, reprova FDR** | 0 sinais em ago (seletivo). Backtest do Gemini de +R$79k era **IN-SAMPLE** (modelo treinado em TODOS os dados, incl. 2026). OOS real = +3,5% na odd de back → **−2% na odd de lay** |
+| Lay Draw | **+2%, reprova FDR** | 0 sinais em ago (seletivo, rígido). Backtest do Gemini de +R$79k era **IN-SAMPLE** (modelo treinado em TODOS os dados, incl. 2026). OOS real = +3,5% na odd de back → **−2% na odd de lay** |
+| Lay Draw + filtro **xGOT≥2,20** (estudo Gemini) | **REPROVADO — in-sample + overfit** | Estudo alegava +45,55% ROI / 87% WR / p<0.00001. Mas era **in-sample** (modelo viu 2025-2026). Testado OOS de verdade (modelo treinado só `<2026`, filtro idêntico odd 3-4,5/prob≥80%/EV≥0,02/xGOT≥2,20): **+1,3% na odd de back, NEGATIVO na lay** (WR 76,9% < break-even 77,1%), Fev −50%, **Ago −21%**. O `xGOT≥2,20` foi garimpado em "centenas de combos" sem FDR = overfit. **NÃO usar como filtro de produção.** |
 | Saldo Menor, Over 2.5, EH+3 múltiplas, escanteios, Over 1.5 ML, HT scans | **mortos** | negativos/circular na odd real |
 
 **Candidato/observação IN-PLAY** (com o coletor Betfair): **Under-no-limite** (pré-registrado,
