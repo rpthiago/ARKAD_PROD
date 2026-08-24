@@ -32,6 +32,12 @@ ML = [
     ("Lay Draw", "lay_draw_rf_v2_strategy", "Odd_D_FT"),
 ]
 
+# overrides por metodo (alinhado aos filtros da pagina Streamlit). Lay Draw afrouxado:
+# prob>=75%, odd ate 4.80, sem exigir favorito (igual pagina 19).
+OVERRIDES = {
+    "Lay Draw": {"PROB_MIN": 0.75, "ODD_MAX": 4.80, "FAV_ODD_MAX": None},
+}
+
 
 def _row(metodo, liga, mand, vis, odd):
     odd = pd.to_numeric(odd, errors="coerce")
@@ -65,6 +71,8 @@ def gerar(date_str):
             print("  %-10s pulado (sem payload/hist)" % nome); continue
         try:
             mod = __import__(modname, fromlist=["predict_and_evaluate_live"])
+            for _k, _v in OVERRIDES.get(nome, {}).items():
+                setattr(mod, _k, _v)
             res = mod.predict_and_evaluate_live(payload, hist)
             ap = [g for g in (res or []) if g.get("Decision") == "APOSTA"]
             for g in ap:
