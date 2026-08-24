@@ -13,4 +13,8 @@ echo. >> consolidar_log.txt
 echo ===== %date% %time% ===== >> consolidar_log.txt
 ".venv\Scripts\python.exe" gerar_sinais_local.py >> consolidar_log.txt 2>&1
 ".venv\Scripts\python.exe" consolidar_sinais.py --dias 5 >> consolidar_log.txt 2>&1
+REM sincroniza o CSV com o Git p/ o Streamlit Cloud ficar em dia (nada a commitar = ignora)
+git add paper_consolidado.csv >> consolidar_log.txt 2>&1
+git commit -m "update: paper_consolidado %date%" >> consolidar_log.txt 2>&1
+git push origin main >> consolidar_log.txt 2>&1
 echo (fim) >> consolidar_log.txt
