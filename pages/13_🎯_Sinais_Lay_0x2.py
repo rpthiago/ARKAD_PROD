@@ -19,6 +19,7 @@ try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
     import b365_data_utils
+    import hist_rf_loader
 except Exception as e:
     st.error("Erro ao carregar os módulos locais do Lay 0x2:")
     st.code(traceback.format_exc())

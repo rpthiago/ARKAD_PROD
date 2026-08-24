@@ -19,6 +19,7 @@ try:
     import coleta_lay_cs_aovivo
     importlib.reload(coleta_lay_cs_aovivo)
     import b365_data_utils
+    import hist_rf_loader
     importlib.reload(b365_data_utils)
     import lay_1x0_rf_v2_strategy
     importlib.reload(lay_1x0_rf_v2_strategy)
