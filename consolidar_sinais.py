@@ -76,7 +76,8 @@ def normalizar(path):
             mand, vis = str(r.get(c_mand, "")), str(r.get(c_vis, ""))
         if not str(mand).strip() or not str(vis).strip():
             continue
-        metodo = str(r[c_met]) if (c_met and pd.notna(r.get(c_met)) and str(r[c_met]).strip()) else _metodo_do_nome(fname)
+        _raw = str(r[c_met]) if (c_met and pd.notna(r.get(c_met)) and str(r[c_met]).strip()) else fname
+        metodo = _metodo_do_nome(_raw)   # limpa SEMPRE ("XGBoost (Lay 0x0)"->"Lay 0x0", etc.)
         out.append({
             "Data": (str(r[c_data])[:10] if c_data and pd.notna(r.get(c_data)) else data_file),
             "Metodo": metodo, "Liga": str(r.get(c_liga, "")) if c_liga else "",
