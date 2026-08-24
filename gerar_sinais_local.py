@@ -35,7 +35,7 @@ ML = [
 # overrides por metodo (alinhado aos filtros da pagina Streamlit). Lay Draw afrouxado:
 # prob>=75%, odd ate 4.80, sem exigir favorito (igual pagina 19).
 OVERRIDES = {
-    "Lay Draw": {"PROB_MIN": 0.75, "ODD_MAX": 4.80, "FAV_ODD_MAX": None},
+    "Lay Draw": {"PROB_MIN": 0.80, "ODD_MAX": 4.50, "FAV_ODD_MAX": None},  # + xGOT>=2.20 (na estrategia)
 }
 
 

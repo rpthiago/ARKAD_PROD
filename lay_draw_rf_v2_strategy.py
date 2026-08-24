@@ -15,11 +15,12 @@ FEATURES_PATH = str(ROOT / "features_lay_draw_rf_v2.pkl")
 
 COMMISSION         = 0.05
 EV_MIN             = 0.02
-PROB_MIN           = 0.75        # Padrão: Probabilidade mínima 75.0%
-ODD_MIN            = 3.00        # Faixa Sweet Spot de Odds (3.00 a 5.00)
-ODD_MAX            = 5.00        # Teto 5.00
-FAV_ODD_MAX        = None        # Opcional (não restritivo por padrão)
+PROB_MIN           = 0.80        # config estudo xGOT: convicção IA >= 80%
+ODD_MIN            = 3.00        # faixa de odd 3,00-4,50
+ODD_MAX            = 4.50        # teto 4,50 (evita odds altas que encarecem a responsabilidade)
+FAV_ODD_MAX        = None        # config estudo: nao exige favorito
 LIGA_DRAW_RATE_MAX = 0.36        # Filtro anti-ligas hiper-empatadoras (máx 36% empates)
+TOTAL_XGOT_MIN     = 2.20        # config estudo: soma do xGOT (rolling) dos times >= 2,20 (jogo aberto)
 
 
 def _canon(s):
@@ -75,6 +76,11 @@ def check_entry_conditions(ms):
     ev = ms.get("ev_lay", 0) or 0.0
     if ev < EV_MIN:
         return False, f"EV_BAIXO({ev:+.3f})"
+
+    # config estudo: exige poder ofensivo (soma do xGOT rolling dos times) >= 2,20
+    total_xgot = ms.get("total_xGOT", None)
+    if TOTAL_XGOT_MIN > 0 and (total_xgot is None or pd.isna(total_xgot) or total_xgot < TOTAL_XGOT_MIN):
+        return False, f"XGOT_BAIXO({(total_xgot or 0):.2f})"
 
     liga_rate = ms.get("liga_draw_rate", None)
     if liga_rate is None or pd.isna(liga_rate):
