@@ -1,9 +1,8 @@
 """hist_rf_loader.py — Carregador de Alta Fidelidade da Base Histórica com Métricas Ricas | ARKAD PROD"""
 import os
+from pathlib import Path
 import pandas as pd
 import streamlit as st
-
-HIST_PATH = "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"
 
 REQUIRED_RICH_METRICS = [
     "Goals_H_FT", "Goals_A_FT",
@@ -16,29 +15,55 @@ REQUIRED_RICH_METRICS = [
 ]
 
 @st.cache_data(show_spinner=False, ttl=3600)
-def load_hist_rf(file_path=HIST_PATH):
+def load_hist_rf(file_path=None):
     """
     Carrega a base oficial Bet365 com todas as features estatísticas ricas (xGOT, Posse, Finalizações, etc).
-    Garante que nenhuma coluna avançada falte ou seja zerada silenciosamente.
+    Funciona tanto no ambiente local quanto no Streamlit Cloud (usando b365_base_lean.csv rastreada no Git).
     """
-    if not os.path.exists(file_path):
-        raise FileNotFoundError(f"Base de dados histórica não encontrada em {file_path}")
+    root = Path(__file__).resolve().parent
+    
+    candidates = [
+        file_path,
+        root / "Bases_de_Dados_API_FutPythonTrader_Bet365.csv",
+        root / "b365_base_lean.csv",
+        root / "Resultados_2024_2026.csv",
+        root / "Resultados_2026_Full.csv"
+    ]
+    
+    df = None
+    for candidate in candidates:
+        if candidate and os.path.exists(str(candidate)):
+            try:
+                candidate_df = pd.read_csv(str(candidate), low_memory=False)
+                if not candidate_df.empty and "Date" in candidate_df.columns:
+                    # Verifica se contém as colunas ricas
+                    has_metrics = all(c in candidate_df.columns for c in REQUIRED_RICH_METRICS[:4])
+                    if has_metrics:
+                        df = candidate_df
+                        break
+            except Exception:
+                continue
 
-    # Ler a base oficial
-    df = pd.read_csv(file_path, low_memory=False)
+    if df is None or df.empty:
+        try:
+            from b365_data_utils import load_b365_historical
+            df = load_b365_historical()
+        except Exception:
+            df = pd.DataFrame()
 
-    # Validar presença de colunas ricas
-    missing_cols = [c for c in REQUIRED_RICH_METRICS if c not in df.columns]
-    if missing_cols:
-        raise ValueError(f"Base histórica corrompida: faltam as seguintes colunas ricas: {missing_cols}")
+    if df.empty:
+        raise FileNotFoundError("Nenhuma base histórica rica pôde ser carregada no ambiente.")
+
+    # Garantir presença de todas as colunas ricas (preenchendo 0.0 caso alguma secundária falte)
+    for c in REQUIRED_RICH_METRICS:
+        if c not in df.columns:
+            df[c] = 0.0
+        else:
+            df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0)
 
     # Padronizar datas
     df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
     df = df.dropna(subset=["Date", "Home", "Away", "Goals_H_FT", "Goals_A_FT"]).copy()
-
-    # Converter numéricas
-    for c in REQUIRED_RICH_METRICS:
-        df[c] = pd.to_numeric(df[c], errors="coerce").fillna(0.0)
 
     # Ordenar cronologicamente
     df = df.sort_values("Date", kind="mergesort").reset_index(drop=True)
