@@ -117,11 +117,49 @@ def main():
     print("\nPuxando placares do coletor Betfair (VPS)...")
     cs = PP.puxar_coletor(min_date)
     ft = PP.settle_ft(cs) if cs is not None and not cs.empty else None
+    # placares MANUAIS: voce preenche o EXCEL placares_manuais.xlsx (cols Gols_M/Gols_V) p/ os
+    # jogos que o coletor nao casa. O sistema LE esse excel (nunca apaga o que voce digitou).
+    manuais = {}
+    FMAN = os.path.join(ROOT, "placares_manuais.xlsx")
+    if os.path.exists(FMAN):
+        try:
+            for _, mr in pd.read_excel(FMAN).iterrows():
+                k = str(mr["Data"])[:10] + "|" + PP._canon(mr["Mandante"]) + "|" + PP._canon(mr["Visitante"])
+                manuais[k] = (pd.to_numeric(mr.get("Gols_M"), errors="coerce"), pd.to_numeric(mr.get("Gols_V"), errors="coerce"))
+            print("  placares manuais preenchidos: %d" % sum(1 for v in manuais.values() if pd.notna(v[0]) and pd.notna(v[1])))
+        except Exception as e:
+            print("  [aviso] placares_manuais.xlsx (aberto no Excel?):", str(e)[:50])
+
+    # base historica Bet365: tem o placar de julho+ (o coletor so tem ~ago/9+). Match exato+prefixo.
+    base_df = None
+    for bp in ["Bases_de_Dados_API_FutPythonTrader_Bet365.csv", "b365_base_lean.csv"]:
+        p = os.path.join(ROOT, bp)
+        if os.path.exists(p):
+            try:
+                b = pd.read_csv(p, usecols=lambda c: c in ("Date", "Home", "Away", "Goals_H_FT", "Goals_A_FT"), low_memory=False)
+                b = b.dropna(subset=["Goals_H_FT", "Goals_A_FT"])
+                base_df = pd.DataFrame({
+                    "d": pd.to_datetime(b["Date"], errors="coerce").dt.strftime("%Y-%m-%d"),
+                    "ch": b["Home"].map(PP._canon), "ca": b["Away"].map(PP._canon),
+                    "gh": pd.to_numeric(b["Goals_H_FT"], errors="coerce"),
+                    "ga": pd.to_numeric(b["Goals_A_FT"], errors="coerce")})
+                print("  base historica (%s): %d jogos com placar" % (bp, len(base_df)))
+                break
+            except Exception as e:
+                print("  [aviso] base historica:", str(e)[:50])
+
     gm, gv, res, pnl = [], [], [], []
     for _, r in cons.iterrows():
         gh = ga = None
-        if ft is not None:
+        key = str(r["Data"])[:10] + "|" + PP._canon(r["Mandante"]) + "|" + PP._canon(r["Visitante"])
+        if base_df is not None:               # 1) base historica (exato+prefixo, cobre julho+)
+            gh, ga = PP.achar_placar(base_df, str(r["Data"])[:10], PP._canon(r["Mandante"]), PP._canon(r["Visitante"]))
+        if gh is None and ft is not None:     # 2) coletor (recente, ~ago/9+)
             gh, ga = PP.achar_placar(ft, str(r["Data"])[:10], PP._canon(r["Mandante"]), PP._canon(r["Visitante"]))
+        if gh is None:                        # 3) placar digitado a mao (Excel)
+            mv = manuais.get(key)
+            if mv and pd.notna(mv[0]) and pd.notna(mv[1]):
+                gh, ga = int(mv[0]), int(mv[1])
         if gh is None:
             gm.append(""); gv.append(""); res.append("SEM_PLACAR"); pnl.append(np.nan); continue
         gfn, _ = PP._green_rule(r["Metodo"].lower().replace(" ", "").replace("lay", "lay"))
@@ -149,8 +187,26 @@ def main():
         print(g[["sinais", "WR%", "lucro"]].to_string())
         print("LUCRO REAL TOTAL: R$ %+.0f" % r["Lucro_Real_R"].sum())
     faltam = cons[cons["Resultado"] == "SEM_PLACAR"]
+    # exporta os pendentes p/ o EXCEL que voce preenche a mao (preserva o que ja esta la)
     if len(faltam):
-        print("\nsem placar (conferir): %d" % len(faltam))
+        pend_x = faltam[["Data", "Metodo", "Liga", "Mandante", "Visitante", "Odd"]].copy()
+        pend_x["Gols_M"] = pd.NA; pend_x["Gols_V"] = pd.NA
+        try:
+            pend_x["_k"] = pend_x["Data"].astype(str).str[:10] + "|" + pend_x["Mandante"].map(PP._canon) + "|" + pend_x["Visitante"].map(PP._canon)
+            if os.path.exists(FMAN):
+                ex = pd.read_excel(FMAN)
+                ex["_k"] = ex["Data"].astype(str).str[:10] + "|" + ex["Mandante"].map(PP._canon) + "|" + ex["Visitante"].map(PP._canon)
+                filled = ex[pd.to_numeric(ex.get("Gols_M"), errors="coerce").notna()]   # preserva o que voce ja digitou
+                novos = pend_x[~pend_x["_k"].isin(set(filled["_k"]))]                     # pendentes de verdade agora
+                final = pd.concat([filled, novos], ignore_index=True)
+            else:
+                novos = pend_x; final = pend_x
+            final.drop(columns=[c for c in ["_k"] if c in final.columns]).to_excel(FMAN, index=False)
+            print("\nsem placar: %d | placares_manuais.xlsx: %d p/ preencher a mao (cols Gols_M/Gols_V)"
+                  % (len(faltam), len(novos)))
+        except Exception as e:
+            print("\nsem placar: %d | [aviso] nao atualizei placares_manuais.xlsx (aberto?): %s"
+                  % (len(faltam), str(e)[:50]))
 
 
 if __name__ == "__main__":

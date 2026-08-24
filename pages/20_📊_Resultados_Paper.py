@@ -130,6 +130,9 @@ if n:
 # ── pendentes (conferir) ──
 if len(pend):
     st.subheader(f"Pendentes / sem placar ({len(pend)})")
-    st.caption("Jogos futuros (serão preenchidos no próximo run) ou nomes que o coletor não casou.")
+    st.caption("Jogos futuros (preenchem no próximo run) ou que a **base histórica** e o **coletor** "
+               "não casaram. Para preencher à mão: abra **`placares_manuais.xlsx`** (pasta ARKAD_PROD), "
+               "digite `Gols_M` e `Gols_V` dos que já jogaram, salve e rode 🔄 Atualizar agora. "
+               "O consolidador exporta os pendentes pra esse Excel automaticamente.")
     cols = [c for c in ["Data", "Metodo", "Liga", "Mandante", "Visitante", "Odd", "Resultado"] if c in pend.columns]
     st.dataframe(pend[cols].sort_values("Data"), use_container_width=True, hide_index=True)
