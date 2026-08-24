@@ -136,15 +136,18 @@ if st.session_state.get("sinais_brutos") is not None:
         df["Odd_Num"] = pd.to_numeric(df[col_odd], errors="coerce") if col_odd else np.nan
         df["Prob_Num"] = pd.to_numeric(df[col_prob], errors="coerce") if col_prob else np.nan
         
-        # 1. Filtragem estrita final (Odd entre 10.0 e 20.0)
+        # 1. Filtragem estrita final (Odd entre 6.0 e 16.0)
         if col_metodo:
             df_final_sinais = df[
                 df[col_metodo].astype(str).str.contains("RF", na=False) &
-                (df["Odd_Num"] >= 10.0) &
-                (df["Odd_Num"] <= 20.0)
+                (df["Odd_Num"] >= 6.0) &
+                (df["Odd_Num"] <= 16.0)
             ].copy()
         else:
-            df_final_sinais = pd.DataFrame()
+            df_final_sinais = df[
+                (df["Odd_Num"] >= 6.0) &
+                (df["Odd_Num"] <= 16.0)
+            ].copy()
         
         if not df_final_sinais.empty:
             df_final_sinais["Metodo_Final"] = "XGBoost (Lay 0x0)"

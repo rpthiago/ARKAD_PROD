@@ -38,7 +38,7 @@ def _decay_roll_grouped(df, group_col, val_col, window=6, alpha=0.25):
     return pd.Series(res, index=df.index)
 
 def check_entry_conditions(ms):
-    odd = ms.get("Odd_0x1_Lay") or ms.get("Odd_0x1_FT") or 0.0
+    odd = ms.get("Odd_CS_0x1_Lay") or ms.get("Odd_0x1_Lay") or ms.get("Odd_CS_0x1") or ms.get("Odd_0x1_FT") or 0.0
     if pd.isna(odd) or odd < ODD_MIN or odd > ODD_MAX:
         return False, "ODD_FORA_FAIXA"
     prob = ms.get("Prob_ML", 0) or 0.0
@@ -103,7 +103,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         sh_df = home_last[home_last["Team"] == c_h]
         sa_df = away_last[away_last["Team"] == c_a]
 
-        odd_0x1 = pd.to_numeric(g.get("Odd_0x1_Lay") or g.get("Odd_0x1_FT") or g.get("Odd_0x1_Back") or g.get("Odd_0x1") or np.nan, errors="coerce")
+        odd_0x1 = pd.to_numeric(g.get("Odd_CS_0x1_Lay") or g.get("Odd_0x1_Lay") or g.get("Odd_CS_0x1") or g.get("Odd_0x1_FT") or g.get("Odd_0x1_FT") or g.get("Odd_0x1_Back") or g.get("Odd_0x1") or np.nan, errors="coerce")
         odd_h = pd.to_numeric(g.get("Odd_H_FT") or g.get("Odd_H_Back") or g.get("Odd_H") or np.nan, errors="coerce")
         odd_a = pd.to_numeric(g.get("Odd_A_FT") or g.get("Odd_A_Back") or g.get("Odd_A") or np.nan, errors="coerce")
 
