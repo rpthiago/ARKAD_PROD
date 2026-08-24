@@ -30,7 +30,9 @@ SCHEMA = ["Data", "Metodo", "Liga", "Mandante", "Visitante", "Odd",
 IGNORAR = ("_gold", "_migrado", "_realista", "_legado", "_consolidado",
            "_PREENCHIDO", "Arsenal_Completo", "Preencher_Placares", "Exclusivo",
            "saldo",   # Saldo Menor = back no handicap EH+3, nao e CS -> coletor nao liquida (fora por ora)
-           "over05")  # Over 0.5 tambem nao e CS lay
+           "over05",  # Over 0.5 tambem nao e CS lay
+           # planilhas LEGADAS por-metodo: agora TUDO vem do gerador (sinais_gerados_*), fonte unica
+           "gestao", "xg_protected", "lay2x2", "lay_draw")
 
 
 def _find(cols, *keys):
