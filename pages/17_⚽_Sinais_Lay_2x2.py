@@ -8,9 +8,18 @@ from datetime import datetime, date
 import pandas as pd
 import numpy as np
 import streamlit as st
-
-from metodo_lay2x2_strategy import validar_entrada_lay2x2, calcular_resultado_lay2x2, ODD_LAY_2X2_MIN, ODD_LAY_2X2_MAX, ODD_UNDER25_MAX
-from futpythontrader_client import get_daily_dataframe
+import importlib
+try:
+    import metodo_lay2x2_strategy
+    importlib.reload(metodo_lay2x2_strategy)
+    from metodo_lay2x2_strategy import validar_entrada_lay2x2, calcular_resultado_lay2x2, ODD_LAY_2X2_MIN, ODD_LAY_2X2_MAX, ODD_UNDER25_MAX
+    import futpythontrader_client
+    importlib.reload(futpythontrader_client)
+    from futpythontrader_client import get_daily_dataframe
+except Exception as e:
+    st.error("Erro ao carregar os módulos locais do Lay 2x2:")
+    st.code(traceback.format_exc())
+    st.stop()
 
 # Configura a página do Streamlit
 st.set_page_config(
@@ -92,7 +101,7 @@ with col1:
     gerar_btn = st.button("Pesquisar Oportunidades Lay 2x2", type="primary", key="btn_2x2")
 
 # Se mudou a data, limpa o cache
-if st.session_state.sinais_date_2x2 != target_date:
+if st.session_state.get("sinais_date_2x2") != target_date:
     st.session_state.sinais_lay2x2 = None
 
 if gerar_btn:
@@ -154,7 +163,7 @@ if gerar_btn:
 
 # Exibição dos Resultados
 with col2:
-    if st.session_state.sinais_lay2x2 is not None:
+    if st.session_state.get("sinais_lay2x2") is not None:
         sinais = st.session_state.sinais_lay2x2
         st.subheader(f"📋 Oportunidades Encontradas ({len(sinais)}) — {target_date.strftime('%d/%m/%Y')}")
         

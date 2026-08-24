@@ -73,7 +73,7 @@ with col1:
         
     gerar_btn = st.button("Pesquisar Oportunidades", type="primary", key="btn_0x3")
 
-if st.session_state.sinais_date_0x3 != target_date:
+if st.session_state.get("sinais_date_0x3") != target_date:
     st.session_state.sinais_lay0x3 = None
 
 if gerar_btn:
@@ -117,7 +117,7 @@ if gerar_btn:
 
 # Processamento e exibição dos resultados
 with col2:
-    if st.session_state.sinais_lay0x3 is not None:
+    if st.session_state.get("sinais_lay0x3") is not None:
         sinais = st.session_state.sinais_lay0x3
         date_str = target_date.strftime("%Y-%m-%d")
         

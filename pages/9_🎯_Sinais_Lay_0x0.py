@@ -80,7 +80,7 @@ with col1:
     gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
 
 # Se mudou a data, limpa os sinais antigos
-if st.session_state.sinais_date != target_date:
+if st.session_state.get("sinais_date") != target_date:
     st.session_state.sinais_brutos = None
     st.session_state.diag_brutos = {}
 
@@ -105,7 +105,7 @@ if gerar_btn:
             st.stop()
 
 # Processamento e exibição dos resultados (se existirem na sessão)
-if st.session_state.sinais_brutos is not None:
+if st.session_state.get("sinais_brutos") is not None:
     sinais_brutos = st.session_state.sinais_brutos
     diag = st.session_state.diag_brutos
     date_str = target_date.strftime("%Y-%m-%d")

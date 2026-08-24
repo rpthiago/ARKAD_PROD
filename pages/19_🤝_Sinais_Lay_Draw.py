@@ -113,7 +113,7 @@ if gerar_btn:
             st.code(traceback.format_exc())
             st.stop()
 
-if st.session_state.sinais_brutos_draw is not None:
+if st.session_state.get("sinais_brutos_draw") is not None:
     sinais = st.session_state.sinais_brutos_draw
     date_str = target_date.strftime("%Y-%m-%d")
     
