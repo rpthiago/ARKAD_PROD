@@ -2,24 +2,19 @@ import os
 import sys
 import io
 import time
-import subprocess
 import traceback
 from datetime import datetime, date
 import pandas as pd
 import numpy as np
 import streamlit as st
-import importlib
-try:
-    import metodo_lay2x2_strategy
-    importlib.reload(metodo_lay2x2_strategy)
-    from metodo_lay2x2_strategy import validar_entrada_lay2x2, calcular_resultado_lay2x2, ODD_LAY_2X2_MIN, ODD_LAY_2X2_MAX, ODD_UNDER25_MAX
-    import futpythontrader_client
-    importlib.reload(futpythontrader_client)
-    from futpythontrader_client import get_daily_dataframe
-except Exception as e:
-    st.error("Erro ao carregar os módulos locais do Lay 2x2:")
-    st.code(traceback.format_exc())
-    st.stop()
+
+# Garante path da raiz para o Streamlit Cloud
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+
+from metodo_lay2x2_strategy import validar_entrada_lay2x2, calcular_resultado_lay2x2, ODD_LAY_2X2_MIN, ODD_LAY_2X2_MAX, ODD_UNDER25_MAX
+from futpythontrader_client import get_daily_dataframe
 
 # Configura a página do Streamlit
 st.set_page_config(
