@@ -149,3 +149,18 @@ if st.session_state.sinais_brutos_1x0 is not None:
                 use_container_width=True,
                 hide_index=True
             )
+            
+            buffer = io.BytesIO()
+            with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                df_out.to_excel(writer, index=False, sheet_name='Sinais_Lay_1x0')
+            excel_data = buffer.getvalue()
+            
+            st.download_button(
+                label="📥 Baixar Planilha de Sinais Lay 1x0 (Excel)",
+                data=excel_data,
+                file_name=f"sinais_lay1x0_{date_str}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="btn_dl_1x0"
+            )
+            
+            st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva.")

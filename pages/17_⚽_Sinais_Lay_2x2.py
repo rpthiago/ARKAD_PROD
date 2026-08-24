@@ -197,5 +197,20 @@ with col2:
                 st.metric("Responsabilidade Total Exposta", f"R$ {tot_liab:,.2f}")
             with c_c:
                 st.metric("Lucro Estimado em Caso de Green", f"R$ {tot_lucro:,.2f}")
+                
+            buffer = io.BytesIO()
+            with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
+                df_show.to_excel(writer, index=False, sheet_name='Sinais_Lay_2x2')
+            excel_data = buffer.getvalue()
+            
+            st.download_button(
+                label="📥 Baixar Planilha de Sinais Lay 2x2 (Excel)",
+                data=excel_data,
+                file_name=f"sinais_lay2x2_{target_date.strftime('%Y-%m-%d')}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                key="btn_dl_2x2"
+            )
+            
+            st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva.")
     else:
-        st.info("👈 Selecione a data e clique em **Pesquisar Oportunidades Lay 2x2** para carregar os jogos ao vivo.")
+        st.info("👈 Selecione a data e clique em **Pesquisar Oportunidades** para carregar os jogos ao vivo.")
