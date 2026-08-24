@@ -111,7 +111,12 @@ def main():
             print("  ! %s ERRO %s" % (os.path.basename(p), str(e)[:50]))
     cons = pd.DataFrame(linhas, columns=[c for c in SCHEMA if c not in ("Gols_M","Gols_V","Resultado","Lucro_Real_R")])
     cons = cons.drop_duplicates(subset=["Data", "Metodo", "Mandante", "Visitante"]).reset_index(drop=True)
-    print("\nTotal sinais uniformizados: %d | metodos: %s" % (len(cons), sorted(cons["Metodo"].unique())))
+    # paper trading SO a partir do inicio da coleta Betfair (o passado nao interessa)
+    INICIO_COLETA = "2026-08-09"
+    antes = len(cons)
+    cons = cons[cons["Data"].astype(str) >= INICIO_COLETA].reset_index(drop=True)
+    print("\nCorte inicio-da-coleta (%s): %d -> %d sinais" % (INICIO_COLETA, antes, len(cons)))
+    print("Total sinais uniformizados: %d | metodos: %s" % (len(cons), sorted(cons["Metodo"].unique())))
 
     # ── placar do coletor ──
     print("\nPuxando placares do coletor Betfair (VPS)...")

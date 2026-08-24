@@ -58,8 +58,11 @@ if df.empty:
 # ── filtros ──
 with st.sidebar:
     st.header("Filtros")
-    dmin, dmax = df["Data"].min(), df["Data"].max()
-    periodo = st.date_input("Período", value=(dmin, dmax) if pd.notna(dmin) else None)
+    import datetime as _dt
+    INICIO_COLETA = _dt.date(2026, 8, 9)   # coleta Betfair comecou aqui; antes nao interessa
+    _dmin = max(df["Data"].min().date(), INICIO_COLETA) if pd.notna(df["Data"].min()) else INICIO_COLETA
+    _dmax = df["Data"].max().date() if pd.notna(df["Data"].max()) else INICIO_COLETA
+    periodo = st.date_input("Período", value=(_dmin, _dmax))
     metodos = sorted(df["Metodo"].dropna().unique())
     sel = st.multiselect("Métodos", metodos, default=metodos)
 
@@ -86,6 +89,15 @@ k2.metric("P&L real", f"R$ {pnl:,.0f}")
 k3.metric("Win rate", f"{wr:.1f}%")
 k4.metric("ROI s/ stake", f"{roi:+.1f}%")
 k5.metric("Pendentes", f"{len(pend)}")
+
+# ── download Excel (conferir os jogos) ──
+import io
+_buf = io.BytesIO()
+with pd.ExcelWriter(_buf, engine="openpyxl") as _w:
+    f.sort_values(["Data", "Metodo"]).to_excel(_w, index=False, sheet_name="paper")
+st.download_button("⬇️ Baixar Excel (conferir jogos)", _buf.getvalue(),
+                   file_name="paper_resultados.xlsx",
+                   mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 # ── por metodo ──
 st.subheader("Por método")
