@@ -134,7 +134,7 @@ def predict_and_evaluate_live(live_games_payload, df_historical):
         if pd.isna(odd_0x2) or odd_0x2 <= 0: continue
 
         ms = {"Home": home, "Away": away, "League": league, "Date": date_v, "Time": g.get("Time", ""),
-              "Odd_0x2_FT": odd_0x2, "Odd_0x2_Lay": odd_0x2, "Odd_H_FT": odd_h, "Odd_A_FT": odd_a}
+              "Odd_0x2_FT": odd_0x2, "Odd_0x2_Lay": odd_0x2, "Odd_CS_0x2_Lay": odd_0x2, "Odd_H_FT": odd_h, "Odd_A_FT": odd_a}
 
         if sh_df.empty or sa_df.empty:
             ms["Decision"] = "SKIP"; ms["Reason"] = "TIME_SEM_HISTORICO_MANDO"; ms["Prob_ML"] = np.nan; ms["ev_lay"] = np.nan

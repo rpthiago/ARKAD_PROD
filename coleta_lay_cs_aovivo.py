@@ -134,7 +134,7 @@ def sinais_do_dia(date_str, cfg, diag=None):
             if g.get("Decision") != "APOSTA":
                 continue
             # MESMO filtro da pagina Top 5 (ignora o Decision estrito da estrategia):
-            odd = pd.to_numeric(g.get(cfg["odd_key"]) or np.nan, errors="coerce")
+            odd = pd.to_numeric(g.get(cfg["odd_key"]) or g.get(f"Odd_{cfg['placar'].replace('-', 'x')}_Lay") or g.get(f"Odd_{cfg['placar'].replace('-', 'x')}_FT") or np.nan, errors="coerce")
             prob = pd.to_numeric(g.get("Prob_ML") or np.nan, errors="coerce")
             if pd.isna(odd) or odd < ODD_MIN_TOP5 or odd > ODD_MAX_TOP5: continue
             if pd.isna(prob) or prob < PROB_MIN_TOP5: continue
