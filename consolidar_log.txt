@@ -1,0 +1,129 @@
+ 
+===== 23/08/2026 22:49:24,33 ===== 
+2026-08-23 22:49:25.828 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-23 22:49:25.830 No runtime found, using MemoryCacheStorageManager
+2026-08-23 22:49:26.406 No runtime found, using MemoryCacheStorageManager
+Gerando sinais locais p/ 2026-08-23 ...
+  Lay 0x0    7 sinais
+  Lay 0x1    21 sinais
+  Lay 1x0    17 sinais
+  Lay 2x0    13 sinais
+  Lay 0x2    11 sinais
+  Lay Draw   0 sinais
+  Lay 0x3    10 sinais
+  Lay 2x2    29 sinais
+
+108 sinais salvos: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\sinais_gerados\sinais_gerados_2026-08-23.xlsx
+Metodo
+Lay 0x0     7
+Lay 0x1    21
+Lay 0x2    11
+Lay 0x3    10
+Lay 1x0    17
+Lay 2x0    13
+Lay 2x2    29
+Consolidando 4 planilhas (desde 2026-08-18)...
+  + sinais_lay2x2_2026-08-22.xlsx                  56 sinais
+  + sinais_lay2x2_2026-08-23.xlsx                  29 sinais
+  + sinais_gerados_2026-08-23.xlsx                108 sinais
+  + sinais_gerados_2026-08-24.xlsx                 26 sinais
+
+Total sinais uniformizados: 190 | metodos: ['Lay 0x0', 'Lay 0x1', 'Lay 0x2', 'Lay 0x3', 'Lay 1x0', 'Lay 2x0', 'Lay 2x2']
+
+Puxando placares do coletor Betfair (VPS)...
+  placares manuais preenchidos: 0
+  base historica (Bases_de_Dados_API_FutPythonTrader_Bet365.csv): 241280 jogos com placar
+
+=== RESUMO ===
+consolidado: 190 sinais | com placar: 157 (83%) | salvo: paper_consolidado.csv
+         sinais    WR%    lucro
+Metodo                         
+Lay 0x0       7  100.0   665.00
+Lay 0x1      20   85.0 -1065.00
+Lay 0x2      11   64.0 -2995.00
+Lay 0x3      10  100.0   950.00
+Lay 1x0      17   71.0 -2280.00
+Lay 2x0      12   75.0 -2425.00
+Lay 2x2      80   95.0    33.43
+LUCRO REAL TOTAL: R$ -7117
+
+sem placar: 33 | placares_manuais.xlsx tem 411 p/ preencher (cols Gols_M/Gols_V)
+(fim) 
+ 
+===== 23/08/2026 23:11:53,32 ===== 
+2026-08-23 23:11:54.731 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-23 23:11:54.731 No runtime found, using MemoryCacheStorageManager
+2026-08-23 23:11:55.304 No runtime found, using MemoryCacheStorageManager
+Gerando sinais locais p/ 2026-08-23 ...
+  Lay 0x0    7 sinais
+  Lay 0x1    21 sinais
+  Lay 1x0    17 sinais
+  Lay 2x0    13 sinais
+  Lay 0x2    11 sinais
+  Lay Draw   0 sinais
+  Lay 0x3    10 sinais
+  Lay 2x2    29 sinais
+
+108 sinais salvos: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\sinais_gerados\sinais_gerados_2026-08-23.xlsx
+Metodo
+Lay 0x0     7
+Lay 0x1    21
+Lay 0x2    11
+Lay 0x3    10
+Lay 1x0    17
+Lay 2x0    13
+Lay 2x2    29
+Consolidando 4 planilhas (desde 2026-08-18)...
+  + sinais_lay2x2_2026-08-22.xlsx                  56 sinais
+  + sinais_lay2x2_2026-08-23.xlsx                  29 sinais
+  + sinais_gerados_2026-08-23.xlsx                108 sinais
+  + sinais_gerados_2026-08-24.xlsx                 26 sinais
+
+Corte inicio-da-coleta (2026-08-09): 190 -> 190 sinais
+Total sinais uniformizados: 190 | metodos: ['Lay 0x0', 'Lay 0x1', 'Lay 0x2', 'Lay 0x3', 'Lay 1x0', 'Lay 2x0', 'Lay 2x2']
+
+Puxando placares do coletor Betfair (VPS)...
+  [aviso] placares_manuais.xlsx (aberto no Excel?): [Errno 13] Permission denied: 'C:\\Users\\thiag\\O
+  base historica (Bases_de_Dados_API_FutPythonTrader_Bet365.csv): 241280 jogos com placar
+
+=== RESUMO ===
+consolidado: 190 sinais | com placar: 157 (83%) | salvo: paper_consolidado.csv
+         sinais    WR%    lucro
+Metodo                         
+Lay 0x0       7  100.0   665.00
+Lay 0x1      20   85.0 -1065.00
+Lay 0x2      11   64.0 -2995.00
+Lay 0x3      10  100.0   950.00
+Lay 1x0      17   71.0 -2280.00
+Lay 2x0      12   75.0 -2425.00
+Lay 2x2      80   95.0    33.43
+LUCRO REAL TOTAL: R$ -7117
+
+sem placar: 33 | [aviso] nao atualizei placares_manuais.xlsx (aberto?): [Errno 13] Permission denied: 'C:\\Users\\thiag\\O
+[main 5443750] update: paper_consolidado 23/08/2026
+ 1 file changed, 122 deletions(-)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   a4f9efe..5443750  main -> main
+(fim) 

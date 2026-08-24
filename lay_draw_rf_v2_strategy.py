@@ -14,11 +14,11 @@ SCALER_PATH   = str(ROOT / "scaler_lay_draw_rf_v2.pkl")
 FEATURES_PATH = str(ROOT / "features_lay_draw_rf_v2.pkl")
 
 COMMISSION         = 0.05
-EV_MIN             = 0.03
-PROB_MIN           = 0.85        # Padrão de Alta Convicção: Probabilidade mínima 85.0%
-ODD_MIN            = 3.20        # Faixa Sweet Spot de Odds (3.20 a 4.20)
-ODD_MAX            = 4.20        # Teto 4.20 para responsabilidade financeira baixa
-FAV_ODD_MAX        = 2.10        # Exige favorito claro (Mandante ou Visitante <= 2.10)
+EV_MIN             = 0.02
+PROB_MIN           = 0.75        # Padrão: Probabilidade mínima 75.0%
+ODD_MIN            = 3.00        # Faixa Sweet Spot de Odds (3.00 a 5.00)
+ODD_MAX            = 5.00        # Teto 5.00
+FAV_ODD_MAX        = None        # Opcional (não restritivo por padrão)
 LIGA_DRAW_RATE_MAX = 0.36        # Filtro anti-ligas hiper-empatadoras (máx 36% empates)
 
 

@@ -79,9 +79,9 @@ with col1:
         f_risk_fixed = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5, key="pct_draw") / 100.0
         
     st.markdown("### 🎯 Filtro de Convicção IA (Sniper ARKAD)")
-    prob_min_user = st.slider("Probabilidade Mínima IA (%)", min_value=75, max_value=95, value=88, step=1, key="prob_slider_draw") / 100.0
-    odd_max_user = st.slider("Odd Lay Máxima", min_value=3.20, max_value=5.50, value=4.20, step=0.05, key="odd_slider_draw")
-    fav_only = st.checkbox("Exigir Favorito Claro (Odd <= 2.10)", value=True, key="fav_check_draw")
+    prob_min_user = st.slider("Probabilidade Mínima IA (%)", min_value=70, max_value=90, value=75, step=1, key="prob_slider_draw") / 100.0
+    odd_max_user = st.slider("Odd Lay Máxima", min_value=3.00, max_value=6.00, value=4.80, step=0.05, key="odd_slider_draw")
+    fav_only = st.checkbox("Exigir Favorito Claro (Odd <= 2.20)", value=False, key="fav_check_draw")
         
     gerar_btn = st.button("Pesquisar Oportunidades Lay Empate", type="primary", key="btn_draw")
 
