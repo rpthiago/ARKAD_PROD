@@ -54,6 +54,9 @@
 | Capturar coluna **HT** achando que é FT | Sempre `Odd_*_FT_*`; no resolver, `'ht' not in col.lower()` |
 | Consertar a estratégia **gerada**, mas o `_gen_strategy` do trainer reverte no próximo treino | Colocar o fix **no template do `_gen_strategy`** (no `treinar_*.py`) |
 | "100% corrigido" / "reflete 74,89%" sem prova | **Medir**. Nada de overselling |
+| **Stake-zero de mentira** (`stake: 100.0` em log de observação simulando financeiro real) | Observação usa **`stake: 0.0`** e flag explícita `OBSERVACAO_STAKE_ZERO`. P&L é puramente de papel |
+| **Re-injetar métodos zumbis** (manter Lay 0x3, Lay 2x2, Lay Draw mortos no gerador de sinais) | **Expurgar 100%** dos métodos reprovados de todo gerador de sinais. Só roda o que está aprovado |
+| **Backtest fantasiado de Forward** (ler base com gols FT preenchidos e liquidar no mesmo loop) | **Desacoplamento estrito:** (1) Pré-jogo gera `PENDENTE` sem ler gols; (2) Settlement pós-jogo separado |
 
 ---
 
@@ -80,6 +83,8 @@ de verdade — não tem miragem de odd nem leak de base.
 7. **Mecanismo plausível** (por que o mercado erraria ali?).
 8. Aprova só se TUDO acima. Passa quase tudo → **watchlist stake-zero** (segue observando).
    Falha → registra **morto** e não re-testa.
+9. **Ciclo de Vida Forward Desacoplado:** O gerador diário SÓ gera sinais com status `PENDENTE` antes da bola rolar sem inspecionar gols FT. A liquidação ocorre em rotina separada pós-jogo. Proibido rodar loop em dados já finalizados chamando de "forward".
+10. **Stake-Zero Genuíno:** Métodos em observação gravam `stake: 0.0` e flag `tipo_registro: 'OBSERVACAO_STAKE_ZERO'`. Jamais gravar `stake: 100.0` em watchlist.
 
 **Backtest histórico:** serve SÓ pra **descarte rápido** de ideia obviamente ruim e pra estimar
 volume — e mesmo assim **na odd de lay real, nunca de back**. **NUNCA aprova nada.** Quem aprova
@@ -151,8 +156,17 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, sem confirmação),
   Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay Draw (+2%, reprova FDR), Over 2.5,
   Saldo Menor, EH+3 múltiplas, escanteios, Over 1.5 ML, HT scans.
-- **Observação / candidato (stake-zero):** **Under-no-limite in-play** (pré-registrado; ~2 fins
-  de semana; o estado 0-0 já oscilou de +32% pra −6% → instável, acompanhar), **Back BTTS No**.
+- **Observação / candidato (stake-zero):** 
+  - **Lay Under 1.5 FT (XGBoost EV ≥ 5%):** ✅ CONFIRMADO independentemente (Claude, ago/2026):
+    split leak-free (treino `<2026`, teste 2026), sem leak de feature (todas as VAR `|corr|<0,17`),
+    N=225, WR 73,3% vs BE 68,4% (margem +4,9%), **7/8 meses positivos**, **bootstrap IC95
+    [+4,3%, +34,2%] exclui zero**. Observação via **`observar_under15_forward.py`** (stake-ZERO,
+    *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
+    Falta p/ produção: FDR formal + confirmação forward real (single-split, não walk-forward).
+    ⚠️ **NÃO usar `gerar_sinais_forward_diario.py`** (DEPRECADO/arquivado em `_arquivo_backtest_gemini/`):
+    violava a própria regra de stake-zero (`stake:100`), empacotava as miragens já mortas
+    (0x3/2x2/BTTS/Lay Draw universo) e re-pontuava a base histórica chamando de "forward".
+  - **Under-no-limite in-play** (pré-registrado; ~2 fins de semana; o estado 0-0 já oscilou de +32% pra −6% → instável, acompanhar).
 - O endpoint `fetch_betfair_daily` **já entrega a odd de lay real** (validado 1,00x vs API direta
   da Betfair). A inflação estava só na **base b365 histórica / paper logs**.
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
@@ -160,5 +174,5 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
 
 ---
 
-*Mantido por: auditoria ARKAD (Claude), ago/2026. Atualize a seção 6 quando um método mudar de
+*Mantido por: auditoria ARKAD (Claude / Antigravity), ago/2026. Atualize a seção 6 quando um método mudar de
 status. As regras 0-5 são estáveis — só mude com evidência.*
