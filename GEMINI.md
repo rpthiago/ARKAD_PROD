@@ -61,6 +61,7 @@
 | **Modelos Lineares sem Scaler** (LR crua com features 0–50 vs 0–1 gerando "edge" falso) | **`StandardScaler` obrigatório** em LR/SVM. Se o edge evapora com normalização, era ruído de condicionamento |
 | **Miragem de Denominador em Lay** (Reportar ROI de Lay sobre 1u nominal escondendo liability 3u) | **Reportar ROI sobre Capital em Risco** ($\text{liability} = \text{odd}-1$) e yield juntos |
 | **Esticar Janela OOS Ad-Hoc** (Adicionar jogos além da base congelada para inflar número) | **Respeitar o Cutoff Pré-Registrado** da base congelada. Novos dados = Paper Forward |
+| **Instabilidade de Threshold / Especificação** (EV>=5% dá verde mas EV>=3% dá vermelho) | **Testar thresholds vizinhos e seeds**: se o edge oscila de sinal, é ruído e não edge |
 
 ---
 
@@ -91,6 +92,7 @@ de verdade — não tem miragem de odd nem leak de base.
 10. **Stake-Zero Genuíno:** Métodos em observação gravam `stake: 0.0` e flag `tipo_registro: 'OBSERVACAO_STAKE_ZERO'`. Jamais gravar `stake: 100.0` em watchlist.
 11. **ROI de LAY sobre Capital em Risco:** Métricas de Lay devem sempre explicitar o ROI sobre a *liability real* ($\text{odd}-1$) junto ao yield por aposta, para que o risco de ruína e a assimetria fiquem transparentes.
 12. **Janela OOS Estritamente Congelada:** Nunca estender a janela de Out-of-Sample além do cutoff pré-registrado da base. Dúvidas sobre dados posteriores são resolvidas exclusivamente no Paper Forward ao vivo.
+13. **Robustez à Especificação & Thresholds Vizinhos:** Testar com/sem scaler, thresholds vizinhos (ex.: EV 3% vs 5%) e seeds. Se o edge evapora ou inverte o sinal em threshold vizinho, trata-se de ruído estatístico, não de edge explorável.
 
 **Backtest histórico:** serve SÓ pra **descarte rápido** de ideia obviamente ruim e pra estimar
 volume — e mesmo assim **na odd de lay real, nunca de back**. **NUNCA aprova nada.** Quem aprova
@@ -163,6 +165,8 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
   ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%), Lay Draw (+2%, reprova FDR),
   Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
+  DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
+  Dupla Chance 1X / Lay Away (XGBoost EV>=5%: N=438, ROI -5,04%/aposta, -2,27% s/ capital, IC95 [-18,7%, +10,1%]; já morto pela assimetria de liability),
   Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
   StandardScaler; IC95 cruza zero, p=0,13; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
   escanteios, Over 1.5 ML, HT scans.
