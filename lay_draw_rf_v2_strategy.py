@@ -9,18 +9,18 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
-MODEL_PATH    = str(ROOT / "modelo_lay_draw_rf_v2.pkl")
-SCALER_PATH   = str(ROOT / "scaler_lay_draw_rf_v2.pkl")
-FEATURES_PATH = str(ROOT / "features_lay_draw_rf_v2.pkl")
+MODEL_PATH    = str(ROOT / "modelo_lay_draw_campeao_et.pkl") if (ROOT / "modelo_lay_draw_campeao_et.pkl").exists() else str(ROOT / "modelo_lay_draw_rf_v2.pkl")
+SCALER_PATH   = str(ROOT / "scaler_lay_draw_arena.pkl") if (ROOT / "scaler_lay_draw_arena.pkl").exists() else str(ROOT / "scaler_lay_draw_rf_v2.pkl")
+FEATURES_PATH = str(ROOT / "features_lay_draw_arena.pkl") if (ROOT / "features_lay_draw_arena.pkl").exists() else str(ROOT / "features_lay_draw_rf_v2.pkl")
 
-COMMISSION         = 0.05
+COMMISSION         = 0.045       # Taxa Betfair 4.5%
 EV_MIN             = 0.02
-PROB_MIN           = 0.80        # config estudo xGOT: convicção IA >= 80%
-ODD_MIN            = 3.00        # faixa de odd 3,00-4,50
-ODD_MAX            = 4.50        # teto 4,50 (evita odds altas que encarecem a responsabilidade)
-FAV_ODD_MAX        = None        # config estudo: nao exige favorito
+PROB_MIN           = 0.75        # Convicção calibrada do modelo Campeão Extra Trees >= 75%
+ODD_MIN            = 3.00        # Faixa de odd 3.00-4.50
+ODD_MAX            = 4.50        # Teto 4.50 (controla responsabilidade)
+FAV_ODD_MAX        = None        # Sem trava de favorito
 LIGA_DRAW_RATE_MAX = 0.36        # Filtro anti-ligas hiper-empatadoras (máx 36% empates)
-TOTAL_XGOT_MIN     = 2.20        # config estudo: soma do xGOT (rolling) dos times >= 2,20 (jogo aberto)
+TOTAL_XGOT_MIN     = 2.20        # Poder ofensivo: soma do xGOT rolling dos times >= 2.20 (jogo aberto)
 
 
 def _canon(s):

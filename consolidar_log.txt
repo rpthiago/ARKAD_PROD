@@ -127,3 +127,146 @@ sem placar: 33 | [aviso] nao atualizei placares_manuais.xlsx (aberto?): [Errno 1
 To https://github.com/rpthiago/ARKAD_PROD.git
    a4f9efe..5443750  main -> main
 (fim) 
+ 
+===== 24/08/2026  9:00:01,90 ===== 
+2026-08-24 09:00:03.891 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-24 09:00:03.893 No runtime found, using MemoryCacheStorageManager
+2026-08-24 09:00:04.664 No runtime found, using MemoryCacheStorageManager
+Gerando sinais locais p/ 2026-08-24 ...
+  Lay 0x0    3 sinais
+  Lay 0x1    5 sinais
+  Lay 1x0    5 sinais
+  Lay 2x0    4 sinais
+  Lay 0x2    0 sinais
+  Lay Draw   0 sinais
+  Lay 0x3    4 sinais
+  Lay 2x2    4 sinais
+
+25 sinais salvos: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\sinais_gerados\sinais_gerados_2026-08-24.xlsx
+Metodo
+Lay 0x0    3
+Lay 0x1    5
+Lay 0x3    4
+Lay 1x0    5
+Lay 2x0    4
+Lay 2x2    4
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\consolidar_sinais.py:209: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  final = pd.concat([filled, novos], ignore_index=True)
+Consolidando 6 planilhas (desde 2026-08-19)...
+  + sinais_gerados_2026-08-19.xlsx                 18 sinais
+  + sinais_gerados_2026-08-20.xlsx                 34 sinais
+  + sinais_gerados_2026-08-21.xlsx                 45 sinais
+  + sinais_gerados_2026-08-22.xlsx                174 sinais
+  + sinais_gerados_2026-08-23.xlsx                112 sinais
+  + sinais_gerados_2026-08-24.xlsx                 25 sinais
+
+Corte inicio-da-coleta (2026-08-09): 408 -> 408 sinais
+Total sinais uniformizados: 408 | metodos: ['Lay 0x0', 'Lay 0x1', 'Lay 0x2', 'Lay 0x3', 'Lay 1x0', 'Lay 2x0', 'Lay 2x2', 'Lay Draw']
+
+Puxando placares do coletor Betfair (VPS)...
+  placares manuais preenchidos: 174
+  base historica (Bases_de_Dados_API_FutPythonTrader_Bet365.csv): 242177 jogos com placar
+
+=== RESUMO ===
+consolidado: 408 sinais | com placar: 383 (94%) | salvo: paper_consolidado.csv
+          sinais    WR%   lucro
+Metodo                         
+Lay 0x0       22   91.0   280.0
+Lay 0x1       88   89.0 -1570.0
+Lay 0x2       20   80.0 -2140.0
+Lay 0x3       42   95.0 -1300.0
+Lay 1x0       66   80.0 -3565.0
+Lay 2x0       33   88.0 -1825.0
+Lay 2x2      111   95.0  -575.0
+Lay Draw       1  100.0    95.0
+LUCRO REAL TOTAL: R$ -10600
+
+sem placar: 25 | placares_manuais.xlsx: 25 p/ preencher a mao (cols Gols_M/Gols_V)
+[main 5a3e688] update: paper_consolidado 24/08/2026
+ 1 file changed, 440 deletions(-)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   252f783..5a3e688  main -> main
+(fim) 
+ 
+===== 25/08/2026  9:00:02,08 ===== 
+2026-08-25 09:00:06.524 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-25 09:00:06.526 No runtime found, using MemoryCacheStorageManager
+2026-08-25 09:00:07.147 No runtime found, using MemoryCacheStorageManager
+Gerando sinais locais p/ 2026-08-25 ...
+  Lay 0x0    2 sinais
+  Lay 0x1    9 sinais
+  Lay 1x0    4 sinais
+  Lay 2x0    1 sinais
+  Lay 0x2    4 sinais
+  Lay Draw   0 sinais
+  Lay 0x3    4 sinais
+  Lay 2x2    11 sinais
+
+35 sinais salvos: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\sinais_gerados\sinais_gerados_2026-08-25.xlsx
+Metodo
+Lay 0x0     2
+Lay 0x1     9
+Lay 0x2     4
+Lay 0x3     4
+Lay 1x0     4
+Lay 2x0     1
+Lay 2x2    11
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\consolidar_sinais.py:209: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  final = pd.concat([filled, novos], ignore_index=True)
+Consolidando 6 planilhas (desde 2026-08-20)...
+  + sinais_gerados_2026-08-20.xlsx                 34 sinais
+  + sinais_gerados_2026-08-21.xlsx                 45 sinais
+  + sinais_gerados_2026-08-22.xlsx                174 sinais
+  + sinais_gerados_2026-08-23.xlsx                112 sinais
+  + sinais_gerados_2026-08-24.xlsx                 25 sinais
+  + sinais_gerados_2026-08-25.xlsx                 35 sinais
+
+Corte inicio-da-coleta (2026-08-09): 425 -> 425 sinais
+Total sinais uniformizados: 425 | metodos: ['Lay 0x0', 'Lay 0x1', 'Lay 0x2', 'Lay 0x3', 'Lay 1x0', 'Lay 2x0', 'Lay 2x2', 'Lay Draw']
+
+Puxando placares do coletor Betfair (VPS)...
+  placares manuais preenchidos: 174
+  base historica (Bases_de_Dados_API_FutPythonTrader_Bet365.csv): 242177 jogos com placar
+
+=== RESUMO ===
+consolidado: 425 sinais | com placar: 390 (92%) | salvo: paper_consolidado.csv
+          sinais    WR%   lucro
+Metodo                         
+Lay 0x0       23   87.0  -870.0
+Lay 0x1       87   87.0 -3210.0
+Lay 0x2       20   80.0 -2140.0
+Lay 0x3       43   95.0 -1205.0
+Lay 1x0       68   84.0 -1805.0
+Lay 2x0       34   85.0 -2825.0
+Lay 2x2      114   95.0  -290.0
+Lay Draw       1  100.0    95.0
+LUCRO REAL TOTAL: R$ -12250
+
+sem placar: 35 | placares_manuais.xlsx: 35 p/ preencher a mao (cols Gols_M/Gols_V)
+[main e4dab7e] update: paper_consolidado 25/08/2026
+ 1 file changed, 58 insertions(+), 41 deletions(-)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   894e302..e4dab7e  main -> main
+(fim) 

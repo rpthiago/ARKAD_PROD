@@ -1,0 +1,72 @@
+ 
+===== 24/08/2026  8:00:01,54 ===== 
+2026-08-24 08:00:04.021 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 242177 linhas | data max 2026-08-21 | 229 MB
+b365_base_lean.csv sincronizada: 242177 linhas | data max 2026-08-21 | 65 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   _placares_coletor_cache.csv
+	modified:   lay_draw_rf_v2_strategy.py
+	modified:   "pages/19_\360\237\244\235_Sinais_Lay_Draw.py"
+	modified:   sinais_gerados/sinais_gerados_2026-08-23.xlsx
+	modified:   sinais_gerados/sinais_gerados_2026-08-24.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Backtest_Lay_Draw_2026_Sniper.xlsx
+	Extra_Trees_Lay_Draw_Agosto_2026.xlsx
+	analise_grid_filtros_lay_draw.py
+	analise_mensal_e_bootstrap_lay_draw.py
+	auditar_extra_trees_2026.py
+	avaliar_extra_trees_agosto_2026.py
+	avaliar_extra_trees_agosto_2026_real.py
+	avaliar_extra_trees_agosto_2026_vetorizado.py
+	backtest_lay_draw_2026_detalhado.py
+	backtest_lay_draw_2026_odd_lay_real_betfair.py
+	base_log.txt
+	comparar_gestao_banca_paper.py
+	df_eval_lay_draw.feather
+	diagnostico_lay_1x0_paper.py
+	estudo_aprofundado_lay_draw.py
+	estudo_filtros_lay_draw_completo.xlsx
+	estudo_historico_ligas_lay_1x0.py
+	inspect_prob_distributions_arena.py
+	lay2x2/paper_resultados.xlsx
+	sinais_gerados/sinais_gerados_2026-08-09.xlsx
+	sinais_gerados/sinais_gerados_2026-08-10.xlsx
+	sinais_gerados/sinais_gerados_2026-08-11.xlsx
+	sinais_gerados/sinais_gerados_2026-08-12.xlsx
+	sinais_gerados/sinais_gerados_2026-08-13.xlsx
+	sinais_gerados/sinais_gerados_2026-08-14.xlsx
+	sinais_gerados/sinais_gerados_2026-08-15.xlsx
+	sinais_gerados/sinais_gerados_2026-08-16.xlsx
+	sinais_gerados/sinais_gerados_2026-08-17.xlsx
+	sinais_gerados/sinais_gerados_2026-08-18.xlsx
+	sinais_gerados/sinais_gerados_2026-08-19.xlsx
+	sinais_gerados/sinais_gerados_2026-08-20.xlsx
+	sinais_gerados/sinais_gerados_2026-08-21.xlsx
+	sinais_gerados/sinais_gerados_2026-08-22.xlsx
+	treinar_arena_modelos_lay_draw.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

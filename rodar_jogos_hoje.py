@@ -152,70 +152,32 @@ def process_today_signals(df_games, date_str):
         is_0x0 = (gh == 0 and ga == 0) if is_finished else None
         is_0x3 = (gh == 0 and ga == 3) if is_finished else None
         
-        # 1. LAY 0x0 PROTEGIDO (Odd Lay <= 12.0)
-        if 8.0 <= odd_cs00_lay <= 12.0:
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if not is_0x0 else 'RED') if is_finished else 'Pendente'
-            pnl = (0.95 if not is_0x0 else -(odd_cs00_lay - 1.0)) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay 0x0 Protegido', 'mercado': 'CS_0x0', 'lado': 'lay',
-                'odd_execucao': odd_cs00_lay, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
-            
-        # 2. LAY DRAW ESTRUTURAL (Odd Lay <= 4.50)
-        if 3.30 <= odd_d_lay <= 4.50:
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if not is_draw else 'RED') if is_finished else 'Pendente'
-            pnl = (0.95 if not is_draw else -(odd_d_lay - 1.0)) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay Draw Estrutural', 'mercado': '1X2_D', 'lado': 'lay',
-                'odd_execucao': odd_d_lay, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
-            
-        # 3. OVER 2.5 BACK VALOR (Odd Back 1.80 - 2.60)
-        if 1.80 <= odd_o25_back <= 2.60:
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if is_over25 else 'RED') if is_finished else 'Pendente'
-            pnl = ((odd_o25_back - 1.0) if is_over25 else -1.0) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'Over 2.5 Back Valor', 'mercado': 'O25', 'lado': 'back',
-                'odd_execucao': odd_o25_back, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
-            
-        # 4. BTTS LAY QUANT (Odd Lay 2.20 - 3.20)
-        if 2.20 <= odd_btts_lay <= 3.20:
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if not is_btts else 'RED') if is_finished else 'Pendente'
-            pnl = (0.95 if not is_btts else -(odd_btts_lay - 1.0)) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'BTTS Lay Quant', 'mercado': 'BTTS_Y', 'lado': 'lay',
-                'odd_execucao': odd_btts_lay, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
-            
-        # 5. LAY 0x3 VISITANTE (MANDANTE FAVORITO Odd H <= 2.20 + UNDER 2.5 + xG PROTECTED) [ROI +78.55%]
-        if (0.0 < odd_h_back <= 2.20) and (odd_h_back < odd_a_back) and (0.0 < odd_under25_back <= 2.10) and (14.0 <= odd_cs03_lay <= 35.0) and (xg_a_r5 <= 1.10):
-            status = 'Finalizado' if is_finished else 'Pendente'
-            res = ('GREEN' if not is_0x3 else 'RED') if is_finished else 'Pendente'
-            pnl = (0.95 if not is_0x3 else -(odd_cs03_lay - 1.0)) if is_finished else 0.0
-            signals.append({
-                'data': date_str, 'horario': game_time, 'liga': league, 'jogo': match_name,
-                'metodo': 'Lay 0x3 Visitante Under 2.5 (Mandante Fav)', 'mercado': 'CS_0x3', 'lado': 'lay',
-                'odd_execucao': odd_cs03_lay, 'stake': 100.0,
-                'status': status, 'resultado': res,
-                'pnl_unidades': pnl, 'pnl_dolar': pnl * 100.0
-            })
+        # 1. LAY UNDER 1.5 FT (XGBoost EV >= 5%) [Oficial ARKAD Forward / Stake-Zero]
+        try:
+            from estrategia_lay_under15 import avaliar_jogo_lay_under15
+            eval_u15 = avaliar_jogo_lay_under15(row.to_dict(), ev_threshold=0.05)
+            if eval_u15.get('aplica'):
+                odd_u15_lay = eval_u15['odd_lay']
+                signals.append({
+                    'data': date_str,
+                    'horario': game_time,
+                    'liga': league,
+                    'jogo': match_name,
+                    'metodo': 'Lay Under 1.5 FT (XGBoost)',
+                    'mercado': 'Under15_FT',
+                    'lado': 'lay',
+                    'odd_execucao': odd_u15_lay,
+                    'prob_estimada': round(eval_u15['prob_estimada'], 4),
+                    'ev': round(eval_u15['ev'], 4),
+                    'stake_planejada': 0.0,
+                    'tipo_registro': 'OBSERVACAO_STAKE_ZERO',
+                    'status': 'PENDENTE',
+                    'resultado': None,
+                    'pnl_unidades': 0.0,
+                    'pnl_dolar': 0.0
+                })
+        except Exception:
+            pass
 
     return pd.DataFrame(signals)
 

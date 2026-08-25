@@ -78,11 +78,11 @@ with col1:
         use_kelly = False
         f_risk_fixed = st.number_input("Responsabilidade (%)", min_value=0.5, max_value=50.0, value=5.0, step=0.5, key="pct_draw") / 100.0
         
-    st.markdown("### 🎯 Filtro de Convicção IA (Sniper ARKAD)")
-    prob_min_user = st.slider("Probabilidade Mínima IA (%)", min_value=70, max_value=90, value=80, step=1, key="prob_slider_draw") / 100.0
+    st.markdown("### 🎯 Filtro de Convicção IA (Extra Trees Champion)")
+    prob_min_user = st.slider("Probabilidade Mínima IA (%)", min_value=70, max_value=90, value=75, step=1, key="prob_slider_draw") / 100.0
     odd_max_user = st.slider("Odd Lay Máxima", min_value=3.00, max_value=6.00, value=4.50, step=0.05, key="odd_slider_draw")
     fav_only = st.checkbox("Exigir Favorito Claro (Odd <= 2.20)", value=False, key="fav_check_draw")
-    st.caption("Filtro xGOT >= 2,20 (poder ofensivo) sempre ativo no motor (config estudo).")
+    st.caption("Modelo Extra Trees + Filtro xGOT >= 2,20 (poder ofensivo) ativos no motor.")
         
     gerar_btn = st.button("Pesquisar Oportunidades Lay Empate", type="primary", key="btn_draw")
 
