@@ -59,6 +59,8 @@
 | **Backtest fantasiado de Forward** (ler base com gols FT preenchidos e liquidar no mesmo loop) | **Desacoplamento estrito:** (1) Pré-jogo gera `PENDENTE` sem ler gols; (2) Settlement pós-jogo separado |
 | **Miragem de Correct Score (CS)** (Lay 1x1: Jan–Abr parecia verde, mas colapsou em Mai–Jul para ROI 0,1%) | **Expurgar classe CS inteira:** cauda gorda destrói o edge quando reds agrupam. Auditar meses recentes |
 | **Modelos Lineares sem Scaler** (LR crua com features 0–50 vs 0–1 gerando "edge" falso) | **`StandardScaler` obrigatório** em LR/SVM. Se o edge evapora com normalização, era ruído de condicionamento |
+| **Miragem de Denominador em Lay** (Reportar ROI de Lay sobre 1u nominal escondendo liability 3u) | **Reportar ROI sobre Capital em Risco** ($\text{liability} = \text{odd}-1$) e yield juntos |
+| **Esticar Janela OOS Ad-Hoc** (Adicionar jogos além da base congelada para inflar número) | **Respeitar o Cutoff Pré-Registrado** da base congelada. Novos dados = Paper Forward |
 
 ---
 
@@ -87,6 +89,8 @@ de verdade — não tem miragem de odd nem leak de base.
    Falha → registra **morto** e não re-testa.
 9. **Ciclo de Vida Forward Desacoplado:** O gerador diário SÓ gera sinais com status `PENDENTE` antes da bola rolar sem inspecionar gols FT. A liquidação ocorre em rotina separada pós-jogo. Proibido rodar loop em dados já finalizados chamando de "forward".
 10. **Stake-Zero Genuíno:** Métodos em observação gravam `stake: 0.0` e flag `tipo_registro: 'OBSERVACAO_STAKE_ZERO'`. Jamais gravar `stake: 100.0` em watchlist.
+11. **ROI de LAY sobre Capital em Risco:** Métricas de Lay devem sempre explicitar o ROI sobre a *liability real* ($\text{odd}-1$) junto ao yield por aposta, para que o risco de ruína e a assimetria fiquem transparentes.
+12. **Janela OOS Estritamente Congelada:** Nunca estender a janela de Out-of-Sample além do cutoff pré-registrado da base. Dúvidas sobre dados posteriores são resolvidas exclusivamente no Paper Forward ao vivo.
 
 **Backtest histórico:** serve SÓ pra **descarte rápido** de ideia obviamente ruim e pra estimar
 volume — e mesmo assim **na odd de lay real, nunca de back**. **NUNCA aprova nada.** Quem aprova
@@ -158,6 +162,7 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, sem confirmação),
   Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
   ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%), Lay Draw (+2%, reprova FDR),
+  Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
   Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
   StandardScaler; IC95 cruza zero, p=0,13; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
   escanteios, Over 1.5 ML, HT scans.
