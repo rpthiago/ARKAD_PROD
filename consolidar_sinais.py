@@ -160,14 +160,13 @@ def main():
     for _, r in cons.iterrows():
         gh = ga = None
         key = str(r["Data"])[:10] + "|" + PP._canon(r["Mandante"]) + "|" + PP._canon(r["Visitante"])
-        if base_df is not None:               # 1) base historica (exato+prefixo, cobre julho+)
+        mv = manuais.get(key)                 # 1) MANUAL vence tudo: correcao humana verificada
+        if mv and pd.notna(mv[0]) and pd.notna(mv[1]):   # (o coletor pode perder gol no acrescimo)
+            gh, ga = int(mv[0]), int(mv[1])
+        if gh is None and base_df is not None:  # 2) base historica (exato+prefixo, cobre julho+)
             gh, ga = PP.achar_placar(base_df, str(r["Data"])[:10], PP._canon(r["Mandante"]), PP._canon(r["Visitante"]))
-        if gh is None and ft is not None:     # 2) coletor (recente, ~ago/9+)
+        if gh is None and ft is not None:     # 3) coletor (recente, ~ago/9+)
             gh, ga = PP.achar_placar(ft, str(r["Data"])[:10], PP._canon(r["Mandante"]), PP._canon(r["Visitante"]))
-        if gh is None:                        # 3) placar digitado a mao (Excel)
-            mv = manuais.get(key)
-            if mv and pd.notna(mv[0]) and pd.notna(mv[1]):
-                gh, ga = int(mv[0]), int(mv[1])
         if gh is None:
             gm.append(""); gv.append(""); res.append("SEM_PLACAR"); pnl.append(np.nan); continue
         gfn, _ = PP._green_rule(r["Metodo"].lower().replace(" ", "").replace("lay", "lay"))

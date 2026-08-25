@@ -1,4 +1,28 @@
 ﻿Data,Metodo,Liga,Mandante,Visitante,Odd,Stake_R,Resp_R,Lucro_Est_R,Gols_M,Gols_V,Resultado,Lucro_Real_R
+2026-08-18,Lay 0x0,BRAZIL 2,Goias,Juventude,8.2,27.78,,,0,1,GREEN,95.0
+2026-08-18,Lay 0x1,BRAZIL 2,Londrina,Atletico GO,11.0,20.0,,,0,0,GREEN,95.0
+2026-08-18,Lay 0x1,BRAZIL 2,Goias,Juventude,9.8,22.73,,,0,1,RED,-880.0
+2026-08-18,Lay 1x0,COPA SUDAMERICANA,Sao Paulo,Bolivar,10.0,22.22,,,3,1,GREEN,95.0
+2026-08-18,Lay 1x0,BRAZIL 2,Goias,Juventude,7.4,31.25,,,0,1,GREEN,95.0
+2026-08-18,Lay 2x2,EUROPA CHAMPIONS LEAGUE,PFC Levski Sofia,AEK Athens,19.5,10.81,,,0,0,GREEN,95.0
+2026-08-19,Lay 0x0,ARGENTINA CUP,Racing Club,Belgrano,8.6,26.32,,,1,0,GREEN,95.0
+2026-08-19,Lay 0x0,BRAZIL 2,Cuiaba,Operario PR,8.2,27.78,,,1,0,GREEN,95.0
+2026-08-19,Lay 0x1,ARGENTINA CUP,Racing Club,Belgrano,8.8,25.64,,,1,0,GREEN,95.0
+2026-08-19,Lay 0x1,BRAZIL 2,Avai,Sport Recife,11.0,20.0,,,2,1,GREEN,95.0
+2026-08-19,Lay 0x1,BRAZIL 2,Cuiaba,Operario PR,11.5,19.05,,,1,0,GREEN,95.0
+2026-08-19,Lay 0x1,BRAZIL 2,Botafogo SP,Criciuma,9.4,23.81,,,1,1,GREEN,95.0
+2026-08-19,Lay 0x1,COPA SUDAMERICANA,Santa Fe,River Plate,7.2,32.26,,,0,0,GREEN,95.0
+2026-08-19,Lay 1x0,ARGENTINA CUP,Racing Club,Belgrano,8.6,26.32,,,1,0,RED,-760.0
+2026-08-19,Lay 1x0,BRAZIL 2,Cuiaba,Operario PR,7.2,32.26,,,1,0,RED,-620.0
+2026-08-19,Lay 1x0,BRAZIL 2,Botafogo SP,Criciuma,7.6,30.3,,,1,1,GREEN,95.0
+2026-08-19,Lay 2x0,USA 1,Real Salt Lake,FC Dallas,15.5,13.79,,,3,4,GREEN,95.0
+2026-08-19,Lay 2x0,USA 1,Seattle Sounders,Austin FC,13.0,16.67,,,1,2,GREEN,95.0
+2026-08-19,Lay 2x0,USA 1,Vancouver Whitecaps,Houston Dynamo,10.5,21.05,,,0,1,GREEN,95.0
+2026-08-19,Lay 0x3,SERBIA 2,FK Bor 1919,Vozdovac,34.0,6.06,,,2,1,GREEN,95.0
+2026-08-19,Lay 0x3,SERBIA 2,FK Teleoptik Zemun,FK Napredak,34.0,6.06,,,0,1,GREEN,95.0
+2026-08-19,Lay 0x3,COPA LIBERTADORES,Cerro Porteno,SE Palmeiras,21.0,10.0,,,0,1,GREEN,95.0
+2026-08-19,Lay 2x2,SERBIA 2,FK Teleoptik Zemun,FK Napredak,20.0,10.53,,,0,1,GREEN,95.0
+2026-08-19,Lay 2x2,BRAZIL 2,Avai,Sport Recife,20.0,10.53,,,2,1,GREEN,95.0
 2026-08-20,Lay 0x0,SPAIN 1,Rayo Vallecano,Alaves,9.4,23.81,,,1,1,GREEN,95.0
 2026-08-20,Lay 0x1,EUROPA LEAGUE,Kairat Almaty,Anderlecht,8.0,28.57,,,0,3,GREEN,95.0
 2026-08-20,Lay 0x1,EUROPA CONFERENCE LEAGUE,Tromso,Brighton,10.5,21.05,,,0,0,GREEN,95.0
@@ -113,7 +137,7 @@
 2026-08-22,Lay 0x1,SCOTLAND 3,East Fife,Hamilton,11.0,20.0,,,0,0,GREEN,95.0
 2026-08-22,Lay 0x1,ITALY 1,Udinese,Como,7.8,29.41,,,1,1,GREEN,95.0
 2026-08-22,Lay 0x1,EGYPT 1,Al-Masry,Smouha,10.0,22.22,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x1,GREECE 1,Kalamata,Aris,8.2,27.78,,,2,2,GREEN,95.0
+2026-08-22,Lay 0x1,GREECE 1,Kalamata,Aris,8.2,27.78,,,2,3,GREEN,95.0
 2026-08-22,Lay 0x1,SPAIN 1,Valencia,Celta Vigo,10.0,22.22,,,0,0,GREEN,95.0
 2026-08-22,Lay 0x1,BELGIUM 1,Antwerp,Genk,11.0,20.0,,,1,3,GREEN,95.0
 2026-08-22,Lay 0x1,BOSNIA 1,Siroki Brijeg,Radnik Bijeljina,11.5,19.05,,,2,1,GREEN,95.0
@@ -189,7 +213,7 @@
 2026-08-22,Lay 0x3,SLOVENIA 1,Mura,Koper,32.0,6.45,,,0,1,GREEN,95.0
 2026-08-22,Lay 0x3,ITALY 1,Udinese,Como,19.5,10.81,,,1,1,GREEN,95.0
 2026-08-22,Lay 0x3,SERBIA 1,Macva Sabac,Radnicki Nis,32.0,6.45,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x3,GREECE 1,Kalamata,Aris,32.0,6.45,,,2,2,GREEN,95.0
+2026-08-22,Lay 0x3,GREECE 1,Kalamata,Aris,32.0,6.45,,,2,3,GREEN,95.0
 2026-08-22,Lay 0x3,POLAND 1,Slask Wroclaw,Widzew Lodz,32.0,6.45,,,3,3,GREEN,95.0
 2026-08-22,Lay 0x3,ITALY 1,Genoa,Napoli,27.0,7.69,,,0,1,GREEN,95.0
 2026-08-22,Lay 0x3,VENEZUELA 1,Estudiantes de Merida,Puerto Cabello,28.0,7.41,,,1,1,GREEN,95.0
@@ -226,7 +250,7 @@
 2026-08-22,Lay 2x2,AUSTRIA 1,SCR Altach,Hartberg,19.5,10.81,,,1,1,GREEN,95.0
 2026-08-22,Lay 2x2,TURKEY 1,Corum Belediyespor,Kasimpasa,19.5,10.81,,,0,1,GREEN,95.0
 2026-08-22,Lay 2x2,CHILE 2,Deportes Recoleta,Deportes Copiapo,18.0,11.76,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,GREECE 1,Kalamata,Aris,20.0,10.53,,,2,2,RED,-1900.0
+2026-08-22,Lay 2x2,GREECE 1,Kalamata,Aris,20.0,10.53,,,2,3,GREEN,95.0
 2026-08-22,Lay 2x2,ISRAEL 1,Ironi Tiberias,Hapoel Petach Tikva,18.5,11.43,,,1,0,GREEN,95.0
 2026-08-22,Lay 2x2,ISRAEL 1,Maccabi Petach Tikva,Hapoel Kiryat Shmona,17.0,12.5,,,2,1,GREEN,95.0
 2026-08-22,Lay 2x2,ITALY 2,Carrarese,Mantova,17.5,12.12,,,1,2,GREEN,95.0
