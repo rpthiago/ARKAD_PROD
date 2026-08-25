@@ -4,10 +4,11 @@ observar_under15_forward.py — Observacao STAKE-ZERO do Lay Under 1.5 FT (XGBoo
 Candidato em watchlist (nao aposta). Forward HONESTO:
 
 - **stake = 0** (observacao pura; nunca R$ real).
-- **So conta jogo visto ANTES de ser jogado** (registrado como Pendente). Um sinal que aparece
-  JA FINALIZADO na 1a vez = historico re-pontuado -> IGNORADO (nao e forward). Isso torna
-  impossivel o log virar backtest disfarcado (o erro do gerar_sinais_forward_diario do Gemini).
-- Liquida os pendentes quando o placar chega (GREEN se sair >=2 gols; comissao 4,5%).
+- **So registra jogo cuja data ainda NAO chegou** (`Date >= hoje`). O feed diario nao traz placar,
+  entao a DATA e o unico guard confiavel contra logar jogo ja jogado como se fosse pendente
+  (foi o furo do gerar_sinais_forward_diario do Gemini, que re-pontuava historico como "forward").
+- Liquida os pendentes lendo a BASE DE RESULTADOS (FRESH), nao o feed do dia — porque o feed
+  diario so tem os jogos daquele dia (sem placar). GREEN se sair >=2 gols; comissao 4,5%.
 - SO o Lay Under 1.5 (EV>=5%), isolado das miragens (0x3/2x2/BTTS ficam de fora).
 
 Dependencia: precisa de um FEED com jogos FUTUROS + odd Betfair + as features do modelo
@@ -16,7 +17,7 @@ tiver historico, o observador loga 0 (correto — nada forward ainda).
 
 Uso: python observar_under15_forward.py [--feed CAMINHO]
 """
-import sys, argparse
+import sys, re, unicodedata, argparse
 from datetime import date
 from pathlib import Path
 import numpy as np
@@ -27,10 +28,42 @@ except Exception: pass
 ROOT = Path(__file__).resolve().parent
 LOG = ROOT / "observacao_under15_forward.csv"
 FEED_DEFAULT = ROOT / "scratch" / "dataset_leak_free_features.parquet"
+RESULTS_BASE = ROOT / "Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv"  # fonte de placar p/ liquidar
 COMM = 0.045
 EV_MIN = 0.05
 
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
+
+
+def _canon(s):
+    s = unicodedata.normalize("NFKD", str(s)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", s)
+
+
+def settle_pendentes(log):
+    """Liquida os pendentes cujo placar ja existe na base de resultados (nao no feed do dia)."""
+    pend = log[log["status"] == "Pendente"]
+    if len(pend) == 0 or not RESULTS_BASE.exists():
+        return log, 0
+    rb = pd.read_csv(RESULTS_BASE, low_memory=False,
+                     usecols=lambda c: c in ["Date", "Home", "Away", "Goals_H_FT", "Goals_A_FT"])
+    rb["Date"] = pd.to_datetime(rb["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
+    rb = rb.dropna(subset=["Goals_H_FT", "Goals_A_FT"])
+    res = {}
+    for _, r in rb.iterrows():
+        res[(r["Date"], _canon(r["Home"]), _canon(r["Away"]))] = (r["Goals_H_FT"], r["Goals_A_FT"])
+    n = 0
+    for i in pend.index:
+        d = str(log.loc[i, "data"]); h, a = str(log.loc[i, "jogo"]).split(" x ", 1) if " x " in str(log.loc[i, "jogo"]) else ("", "")
+        hit = res.get((d, _canon(h), _canon(a)))
+        if hit is None:
+            continue
+        gh, ga = hit; ol = float(log.loc[i, "odd_lay"]); green = (gh + ga) >= 2
+        log.loc[i, "status"] = "Finalizado"
+        log.loc[i, "resultado"] = "GREEN" if green else "RED"
+        log.loc[i, "pnl_unidades"] = round((1 - COMM) if green else -(ol - 1), 4)
+        n += 1
+    return log, n
 
 
 def _col(row, *names, default=None):
@@ -63,30 +96,22 @@ def main():
                  "primeiro_visto", "status", "resultado", "pnl_unidades"])
     vistos = set(log["jogo"] + "|" + log["data"].astype(str)) if len(log) else set()
 
-    novos, liquidados, ignorados_hist = 0, 0, 0
+    novos, ignorados_passado = 0, 0
     for _, row in df.iterrows():
         d = row["Date"].strftime("%Y-%m-%d")
         home = str(_col(row, "Home_Team", "Home", "Mandante", default="?"))
         away = str(_col(row, "Away_Team", "Away", "Visitante", default="?"))
         jogo = f"{home} x {away}"; key = f"{jogo}|{d}"
-        gh, ga = row.get("Goals_H_FT"), row.get("Goals_A_FT")
-        finished = pd.notna(gh) and pd.notna(ga)
-
-        if key in vistos:  # ja no log -> so liquida se pendente e agora terminou
-            i = log.index[(log["jogo"] == jogo) & (log["data"].astype(str) == d)]
-            if len(i) and log.loc[i[0], "status"] == "Pendente" and finished:
-                ol = float(log.loc[i[0], "odd_lay"]); green = (gh + ga) >= 2
-                log.loc[i[0], "status"] = "Finalizado"
-                log.loc[i[0], "resultado"] = "GREEN" if green else "RED"
-                log.loc[i[0], "pnl_unidades"] = round((1 - COMM) if green else -(ol - 1), 4)
-                liquidados += 1
+        if key in vistos:                       # ja registrado -> liquidacao e feita a parte
             continue
-
+        # GUARD FORWARD: so registra jogo que ainda NAO comecou (data >= hoje).
+        # O feed diario nao traz placar, entao "data no passado" e o unico guard confiavel
+        # contra logar jogo ja jogado como se fosse pendente.
+        if row["Date"].date() < hoje:
+            ignorados_passado += 1; continue
         ev = avaliar_jogo_lay_under15(row.to_dict(), ev_threshold=EV_MIN)
         if not ev.get("aplica"):
             continue
-        if finished:  # 1a vez ja finalizado = historico re-pontuado, NAO e forward
-            ignorados_hist += 1; continue
         log = pd.concat([log, pd.DataFrame([{
             "data": d, "jogo": jogo, "liga": str(_col(row, "League", "Liga", default="?")),
             "odd_lay": round(ev["odd_lay"], 2), "prob_ml": round(ev["prob_estimada"], 4),
@@ -94,9 +119,12 @@ def main():
             "status": "Pendente", "resultado": "Pendente", "pnl_unidades": 0.0}])], ignore_index=True)
         novos += 1
 
+    # liquida pendentes cujo placar ja saiu (da base de resultados, NAO do feed do dia)
+    log, liquidados = settle_pendentes(log)
+
     log.to_csv(LOG, index=False, encoding="utf-8-sig")
     print(f"novos pendentes (forward): {novos} | liquidados hoje: {liquidados} | "
-          f"ignorados (historico re-pontuado, NAO forward): {ignorados_hist}")
+          f"ignorados (jogo no passado, NAO forward): {ignorados_passado}")
 
     fin = log[log["status"] == "Finalizado"]
     print(f"\n=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===")

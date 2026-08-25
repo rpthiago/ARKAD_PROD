@@ -9,7 +9,8 @@ REM ============================================================================
 cd /d "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD"
 echo. >> observar_under15_log.txt
 echo ===== %date% %time% ===== >> observar_under15_log.txt
-"..\DASHBOARD_ARKAD-1\.venv\Scripts\python.exe" observar_under15_forward.py >> observar_under15_log.txt 2>&1
+REM pipeline completo: baixa fixtures do dia -> constroi features -> alimenta o observador (que loga pendentes + liquida)
+"..\DASHBOARD_ARKAD-1\.venv\Scripts\python.exe" atualizar_feed_forward_diario.py >> observar_under15_log.txt 2>&1
 git add observacao_under15_forward.csv >> observar_under15_log.txt 2>&1
 git commit -m "update: observacao under15 forward %date%" >> observar_under15_log.txt 2>&1
 git push origin main >> observar_under15_log.txt 2>&1
