@@ -98,7 +98,9 @@ else:
 
 st.sidebar.info(f"💰 **Stake Base:** R$ {stake_base:.2f}")
 
-# ── Carregar Coletor In-Play de Placares ──
+st.sidebar.markdown("---")
+st.sidebar.markdown("### 🎛️ Filtros de Exibição")
+filtro_1_por_hora = st.sidebar.checkbox("Limitar a 1 Jogo por Horário (Menor Liability)", value=False, help="Se marcado, seleciona apenas o jogo de menor risco por bloco de horário.")
 @st.cache_data(ttl=60, show_spinner=False)
 def carregar_placares_coletor():
     cache_file = ROOT / "_placares_coletor_cache.csv"
@@ -142,7 +144,7 @@ def carregar_placares_coletor():
 
 # ── Carregar Dados da Betfair e Avaliar ──
 @st.cache_data(ttl=120, show_spinner=False)
-def processar_grade_do_dia(data_str_param):
+def processar_grade_do_dia(data_str_param, limitar_1_hora=False):
     try:
         df_bf = get_daily_dataframe(source="betfair", date_str=data_str_param)
     except Exception:
@@ -157,8 +159,6 @@ def processar_grade_do_dia(data_str_param):
     if df_bf.empty:
         return pd.DataFrame()
         
-    df_hist = load_hist_rf()
-    
     jogos_qualificados = []
     
     # 1. Avaliar Lay Under 1.5 FT (XGBoost)
@@ -189,9 +189,9 @@ def processar_grade_do_dia(data_str_param):
         except Exception:
             pass
             
-    # 2. Avaliar Lay 2x2 Correct Score (1 por Horário - Menor Liability)
+    # 2. Avaliar Lay 2x2 Correct Score
     try:
-        sinais_2x2 = avaliar_jogos_lay_2x2_grade(df_bf)
+        sinais_2x2 = avaliar_jogos_lay_2x2_grade(df_bf, selecionar_1_por_horario=limitar_1_hora)
         for s in sinais_2x2:
             jogos_qualificados.append({
                 'Data': data_str_param,
@@ -212,9 +212,9 @@ def processar_grade_do_dia(data_str_param):
     except Exception:
         pass
         
-    # 3. Avaliar Lay 0x3 Correct Score (1 por Horário - Menor Liability)
+    # 3. Avaliar Lay 0x3 Correct Score
     try:
-        sinais_0x3 = avaliar_jogos_lay_0x3_grade(df_bf)
+        sinais_0x3 = avaliar_jogos_lay_0x3_grade(df_bf, selecionar_1_por_horario=limitar_1_hora)
         for s in sinais_0x3:
             jogos_qualificados.append({
                 'Data': data_str_param,
@@ -246,7 +246,7 @@ if atualizar_btn:
     st.cache_data.clear()
 
 with st.spinner(f"Consultando grade de {data_str} na Betfair Exchange e aplicando modelos de IA..."):
-    df_jogos = processar_grade_do_dia(data_str)
+    df_jogos = processar_grade_do_dia(data_str, limitar_1_hora=filtro_1_por_hora)
     mapa_inplay = carregar_placares_coletor()
 
 def _canon(s):
