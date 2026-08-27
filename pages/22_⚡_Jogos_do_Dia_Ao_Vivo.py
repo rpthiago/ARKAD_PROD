@@ -27,8 +27,9 @@ sys.path.insert(0, str(ROOT))
 import b365_data_utils
 from futpythontrader_client import get_daily_dataframe
 from hist_rf_loader import load_hist_rf
-import lay_draw_rf_v2_strategy as LD
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
+from estrategia_back_mandante import avaliar_jogo_back_mandante
+from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
 from inplay_telemetry_engine import InPlayTelemetryEngine
 
 telemetry_engine = InPlayTelemetryEngine()
@@ -158,54 +159,15 @@ def processar_grade_do_dia(data_str_param):
         
     df_hist = load_hist_rf()
     
-    # 1. Avaliar Lay Draw
-    payload = df_bf.to_dict('records')
-    LD.PROB_MIN = 0.70
-    LD.TOTAL_XGOT_MIN = 0.0
-    LD.ODD_MAX = 4.80
-    
-    res_ld = LD.predict_and_evaluate_live(payload, df_hist)
-    df_eval_ld = pd.DataFrame(res_ld) if res_ld else pd.DataFrame()
-    
     jogos_qualificados = []
     
-    # Processar Lay Draw
-    if not df_eval_ld.empty:
-        aprov_ld = df_eval_ld[df_eval_ld['Decision'] == 'APOSTA']
-        for _, row in aprov_ld.iterrows():
-            odd_lay = float(row.get('Odd_D_FT', row.get('Odd_D_Lay', 3.50)))
-            prob = float(row.get('Prob_ML', 0.0))
-            ev = float(row.get('ev_lay', 0.0))
-            odd_1x1 = float(row.get('Odd_CS_1x1_Back', 7.50) or 7.50)
-            
-            # Cobertura 1x1
-            st_cob = (odd_lay - 1.0) / ((odd_1x1 - 1.0) * 0.955) if odd_1x1 > 1.0 else 0.0
-            
-            jogos_qualificados.append({
-                'Data': data_str_param,
-                'Horário': str(row.get('Time', row.get('Hora', '15:00'))),
-                'Jogo': f"{row['Home']} x {row['Away']}",
-                'Home': row['Home'],
-                'Away': row['Away'],
-                'Liga': str(row.get('League', 'N/A')),
-                'Método': 'Lay Draw (+ Hedge 1x1)',
-                'Mercado': 'Match Odds (Draw)',
-                'Odd_Lay': odd_lay,
-                'Odd_Hedge': odd_1x1,
-                'Prob_IA': prob,
-                'EV': ev,
-                'Break_Even': (odd_lay - 1.0) / (odd_lay - 0.045),
-                'Stake_Hedge_Ratio': st_cob,
-                'Tipo': 'Lay Draw'
-            })
-            
-    # Processar Lay Under 1.5
+    # 1. Avaliar Lay Under 1.5 FT (XGBoost)
     for _, row in df_bf.iterrows():
         try:
             res_u15 = avaliar_jogo_lay_under15(row.to_dict(), ev_threshold=0.05)
             if res_u15.get('aplica'):
                 odd_lay = float(res_u15.get('odd_lay', 3.20))
-                prob = float(res_u15.get('prob_ia', 0.75))
+                prob = float(res_u15.get('prob_estimada', 0.75))
                 ev = float(res_u15.get('ev', 0.08))
                 
                 jogos_qualificados.append({
@@ -217,16 +179,66 @@ def processar_grade_do_dia(data_str_param):
                     'Liga': str(row.get('League', 'N/A')),
                     'Método': 'Lay Under 1.5 FT (XGBoost)',
                     'Mercado': 'Under 1.5 FT',
-                    'Odd_Lay': odd_lay,
-                    'Odd_Hedge': 0.0,
+                    'Lado': 'LAY',
+                    'Odd_Entrada': odd_lay,
                     'Prob_IA': prob,
                     'EV': ev,
                     'Break_Even': (odd_lay - 1.0) / (odd_lay - 0.045),
-                    'Stake_Hedge_Ratio': 0.0,
                     'Tipo': 'Lay Under 1.5'
                 })
         except Exception:
             pass
+            
+    # 2. Avaliar Back Mandante Favorito (XGBoost)
+    for _, row in df_bf.iterrows():
+        try:
+            res_bm = avaliar_jogo_back_mandante(row.to_dict(), ev_threshold=0.03)
+            if res_bm.get('aplica'):
+                odd_back = float(res_bm.get('odd_back', 1.80))
+                prob = float(res_bm.get('prob_estimada', 0.65))
+                ev = float(res_bm.get('ev', 0.05))
+                
+                jogos_qualificados.append({
+                    'Data': data_str_param,
+                    'Horário': str(row.get('Time', row.get('Hora', '15:00'))),
+                    'Jogo': f"{row['Home']} x {row['Away']}",
+                    'Home': row['Home'],
+                    'Away': row['Away'],
+                    'Liga': str(row.get('League', 'N/A')),
+                    'Método': 'Back Mandante Favorito (XGBoost)',
+                    'Mercado': 'Match Odds (Home)',
+                    'Lado': 'BACK',
+                    'Odd_Entrada': odd_back,
+                    'Prob_IA': prob,
+                    'EV': ev,
+                    'Break_Even': 1.0 / (odd_back * (1 - 0.045)),
+                    'Tipo': 'Back Mandante'
+                })
+        except Exception:
+            pass
+            
+    # 3. Avaliar Lay 2x2 Correct Score (1 por Horário - Menor Liability)
+    try:
+        sinais_2x2 = avaliar_jogos_lay_2x2_grade(df_bf)
+        for s in sinais_2x2:
+            jogos_qualificados.append({
+                'Data': data_str_param,
+                'Horário': s['hora'],
+                'Jogo': f"{s['home']} x {s['away']}",
+                'Home': s['home'],
+                'Away': s['away'],
+                'Liga': s['league'],
+                'Método': s['metodo'],
+                'Mercado': s['mercado'],
+                'Lado': 'LAY',
+                'Odd_Entrada': s['odd_lay'],
+                'Prob_IA': s['prob_estimada'],
+                'EV': s['ev'],
+                'Break_Even': s['break_even_wr'],
+                'Tipo': 'Lay 2x2'
+            })
+    except Exception:
+        pass
             
     return pd.DataFrame(jogos_qualificados)
 
@@ -254,7 +266,7 @@ m1, m2, m3, m4 = st.columns(4)
 m1.metric("📅 Data Selecionada", data_str)
 m2.metric("🎯 Jogos Qualificados", f"{n_total}")
 m3.metric("💰 Stake Base Sugerida", f"R$ {stake_base:.2f}")
-m4.metric("🛡️ Proteção Ativa", "Comissão 4.5% + Hedge 1x1")
+m4.metric("🛡️ Proteção Ativa", "Comissão 4.5% + Stop Loss 75'")
 
 if df_jogos.empty:
     st.info(f"Nenhum jogo qualificado com EV+ para a data **{data_str}**. Os modelos mantêm critérios rígidos de valor esperado para proteger sua banca.")
@@ -267,27 +279,23 @@ else:
             data_str, r['Home'], r['Away'], r['Método']
         )
         
-        odd_lay = r['Odd_Lay']
+        odd_ent = r['Odd_Entrada']
+        lado = r['Lado']
         prob = r['Prob_IA']
         ev = r['EV']
         be_wr = r['Break_Even']
         
-        # Dimensionamento financeiro
+        # Dimensionamento financeiro honesto
         stake_real = stake_base
-        resp_max = stake_real * (odd_lay - 1.0)
-        
-        # Hedge se for Lay Draw
-        st_hedge_txt = "-"
-        if r['Tipo'] == 'Lay Draw' and r['Odd_Hedge'] > 1.0:
-            st_h_val = stake_real * r['Stake_Hedge_Ratio']
-            st_hedge_txt = f"R$ {st_h_val:.2f} (Back 1x1 @ {r['Odd_Hedge']:.2f})"
+        resp_max = stake_real * (odd_ent - 1.0) if lado == 'LAY' else stake_real
             
         tabela_display.append({
             'Horário': r['Horário'],
             'Partida': r['Jogo'],
             'Liga': r['Liga'],
             'Método': r['Método'],
-            'Odd Lay': f"{odd_lay:.2f}",
+            'Lado': lado,
+            'Odd Entrada': f"{odd_ent:.2f}",
             'Prob IA': f"{prob*100:.1f}%",
             'EV': f"{ev*100:+.1f}%",
             'Stake Entrada': f"R$ {stake_real:.2f}",
@@ -298,7 +306,7 @@ else:
         
     df_tab = pd.DataFrame(tabela_display)
     
-    st.subheader(f"📋 Partidas Selecionadas & Telemetria Ao Vivo ({len(df_tab)} jogos)")
+    st.subheader(f"📋 Portfólio Unificado & Telemetria Ao Vivo ({len(df_tab)} jogos)")
     st.dataframe(
         df_tab,
         use_container_width=True,
@@ -311,15 +319,16 @@ else:
         diag_live = telemetry_engine.avaliar_situacao_inplay(
             data_str, r['Home'], r['Away'], r['Método']
         )
-        odd_lay = r['Odd_Lay']
-        resp_max = stake_base * (odd_lay - 1.0)
+        odd_ent = r['Odd_Entrada']
+        lado = r['Lado']
+        resp_max = stake_base * (odd_ent - 1.0) if lado == 'LAY' else stake_base
         
-        with st.expander(f"{diag_live['badge']} | {r['Jogo']} — {r['Método']} ({diag_live['minuto']} | {diag_live['placar']})", expanded=True):
+        with st.expander(f"{diag_live['badge']} | {r['Jogo']} — [{lado}] {r['Método']} ({diag_live['minuto']} | {diag_live['placar']})", expanded=True):
             c1, c2, c3 = st.columns([2, 2, 2])
             with c1:
                 st.markdown(f"**Liga:** {r['Liga']}")
                 st.markdown(f"**Mercado:** `{r['Mercado']}`")
-                st.markdown(f"**Odd de Entrada:** `{odd_lay:.2f}`")
+                st.markdown(f"**Odd de Entrada ({lado}):** `{odd_ent:.2f}`")
             with c2:
                 st.markdown(f"**Probabilidade IA:** `{r['Prob_IA']*100:.1f}%`")
                 st.markdown(f"**Valor Esperado (EV):** `{r['EV']*100:+.1f}%`")
