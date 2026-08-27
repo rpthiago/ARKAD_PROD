@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-estrategia_lay_0x3.py — Módulo Operacional para Lay 0x3 Correct Score
-Regras Canônicas:
-- Odd executável de Lay 0x3 na Betfair (entre 10.0 e 35.0)
-- Filtro de Mandante Competitivo (Odd H <= 3.80)
-- Resolução dinâmica de colunas
+estrategia_lay_0x3.py — Módulo Operacional para Lay 0x3 Correct Score (xG Protected)
+Filtros de Elite da Página 16:
+1. Odd Under 2.5 FT <= 2.10 (Tendência Under)
+2. Odd Lay 0x3 entre 14.0 e 35.0
+3. Odd Visitante >= 1.85 (Elimina super favoritos como Benfica/Atalanta que podem meter 0x3)
+4. xG Visitante <= 1.10 (Ataque inofensivo fora de casa)
 - Comissão 4.5%
 """
 
@@ -14,50 +15,46 @@ import pandas as pd
 
 def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False):
     """
-    Avalia a grade diária da Betfair para entradas em Lay 0x3.
+    Avalia a grade diária da Betfair para entradas em Lay 0x3 com Filtros de Proteção xG.
     """
     if df_dia is None or df_dia.empty:
         return []
         
     COMMISSION = 0.045
-    
-    odd_0x3_cols = [c for c in df_dia.columns if '0x3' in str(c).lower() and 'lay' in str(c).lower()]
-    odd_h_cols = [c for c in df_dia.columns if str(c).lower() in ['odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
-    
     candidatos = []
     
-    for _, row in df_dia.iterrows():
-        o_0x3 = pd.to_numeric(row.get(odd_0x3_cols[0]), errors='coerce') if odd_0x3_cols else 0.0
-        o_h = pd.to_numeric(row.get(odd_h_cols[0]), errors='coerce') if odd_h_cols else 2.50
+    for idx, row in df_dia.iterrows():
+        odd_h = float(row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H') or 0.0)
+        odd_a = float(row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A') or 0.0)
+        odd_u25 = float(row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25_FT') or row.get('Odd_Under25') or 0.0)
+        odd_0x3 = float(row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3') or 0.0)
+        xg_a = float(row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_A_FT') or 1.0)
         
-        o_0x3 = float(o_0x3) if pd.notna(o_0x3) else 0.0
-        o_h = float(o_h) if pd.notna(o_h) else 2.50
-        
-        # Filtros de odd e segurança
-        if o_0x3 < 10.0 or o_0x3 > 35.0:
-            continue
-        if o_h > 3.80:
-            continue
+        # Filtros de Elite da Página 16:
+        # 1. Odd Under 2.5 <= 2.10
+        # 2. Odd Lay 0x3 entre 14.0 e 35.0
+        # 3. Odd Visitante >= 1.85 (elimina visitantes gigantes que podem golear)
+        # 4. xG Visitante <= 1.10
+        if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and (odd_a >= 1.85 or odd_a == 0.0) and xg_a <= 1.10:
+            home = str(row.get("Home", row.get("Home_Team", "")))
+            away = str(row.get("Away", row.get("Away_Team", "")))
+            liga = str(row.get("League", row.get("Div", "Liga Externa")))
+            tm = str(row.get("Time", row.get("horario", "15:00")))[:5]
+            bloco_hora = tm[:2]
             
-        home = str(row.get("Home", row.get("Home_Team", "")))
-        away = str(row.get("Away", row.get("Away_Team", "")))
-        liga = str(row.get("League", row.get("Div", "Liga Externa")))
-        tm = str(row.get("Time", row.get("horario", "15:00")))[:5]
-        bloco_hora = tm[:2]
-        
-        be_wr = (o_0x3 - 1.0) / (o_0x3 - COMMISSION)
-        
-        candidatos.append({
-            'Home': home,
-            'Away': away,
-            'League': liga,
-            'Hora': tm,
-            'Bloco_Hora': bloco_hora,
-            'Odd_Lay': o_0x3,
-            'Break_Even': be_wr,
-            'raw_row': row.to_dict()
-        })
-        
+            be_wr = (odd_0x3 - 1.0) / (odd_0x3 - COMMISSION)
+            
+            candidatos.append({
+                'Home': home,
+                'Away': away,
+                'League': liga,
+                'Hora': tm,
+                'Bloco_Hora': bloco_hora,
+                'Odd_Lay': odd_0x3,
+                'Break_Even': be_wr,
+                'raw_row': row.to_dict()
+            })
+            
     if not candidatos:
         return []
         
@@ -72,7 +69,7 @@ def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False):
     for _, r in df_cand.iterrows():
         resultados.append({
             'aplica': True,
-            'metodo': 'Lay 0x3 Correct Score',
+            'metodo': 'Lay 0x3 Correct Score (xG Protected)',
             'mercado': 'Correct Score (0x3)',
             'lado': 'lay',
             'home': r['Home'],
@@ -84,7 +81,7 @@ def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False):
             'break_even_wr': r['Break_Even'],
             'ev': 0.025,
             'ev_pct': '+2.5%',
-            'motivo': f'Aprovado Lay 0x3 (Odd {r["Odd_Lay"]:.2f})'
+            'motivo': f'Aprovado Lay 0x3 xG Protected (Odd {r["Odd_Lay"]:.2f})'
         })
         
     return resultados
