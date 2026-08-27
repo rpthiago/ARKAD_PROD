@@ -126,32 +126,70 @@ class InPlayTelemetryEngine:
                     'recomendacao_live': f'Jogo aos {m}\' ({placar}). Operação correndo normalmente.'
                 }
         
-        # Para Lay Draw
-        elif 'Lay Draw' in metodo_pre:
-            if diff > 0 and m >= 90:
+        # Para Lay 2x2
+        elif '2x2' in metodo_pre:
+            gh, ga = tele.get('gh', -1), tele.get('ga', -1)
+            if (gh > 2 or ga > 2) and gh >= 0 and ga >= 0:
                 return {
                     'status': 'GREEN_CONFIRMADO',
                     'badge': '🟢 GREEN GANHO',
                     'placar': placar,
-                    'minuto': "FT",
-                    'recomendacao_live': 'Operação ganha! Houve vencedor.'
+                    'minuto': f"{m}'" if m < 90 else "FT",
+                    'recomendacao_live': f'Placar {placar}: 2x2 se tornou impossível. Operação ganha!'
                 }
-            elif diff == 0 and m >= 90:
-                if placar == '1 - 1':
+            elif m >= 90:
+                if placar == '2 - 2':
                     return {
-                        'status': 'COBERTURA_1X1',
-                        'badge': '🛡️ COBERTO 1X1',
+                        'status': 'RED',
+                        'badge': '🔴 RED (2x2)',
                         'placar': placar,
                         'minuto': "FT",
-                        'recomendacao_live': 'Jogo terminou 1x1: Risco zerado pelo Back 1x1!'
+                        'recomendacao_live': 'Terminou em 2x2.'
                     }
                 else:
                     return {
-                        'status': 'RED',
-                        'badge': '🔴 RED',
+                        'status': 'GREEN_CONFIRMADO',
+                        'badge': '🟢 GREEN GANHO',
                         'placar': placar,
                         'minuto': "FT",
-                        'recomendacao_live': f'Terminou empatado em {placar}.'
+                        'recomendacao_live': f'Terminou em {placar}. Operação ganha!'
+                    }
+            elif m > 0:
+                return {
+                    'status': 'EM_ANDAMENTO',
+                    'badge': '⚽ AO VIVO',
+                    'placar': placar,
+                    'minuto': f"{m}'",
+                    'recomendacao_live': f'Jogo aos {m}\' ({placar}).'
+                }
+                
+        # Para Lay 0x3
+        elif '0x3' in metodo_pre:
+            gh, ga = tele.get('gh', -1), tele.get('ga', -1)
+            if (gh >= 1 or ga >= 4) and gh >= 0 and ga >= 0:
+                return {
+                    'status': 'GREEN_CONFIRMADO',
+                    'badge': '🟢 GREEN GANHO',
+                    'placar': placar,
+                    'minuto': f"{m}'" if m < 90 else "FT",
+                    'recomendacao_live': f'Placar {placar}: 0x3 se tornou impossível. Operação ganha!'
+                }
+            elif m >= 90:
+                if placar == '0 - 3':
+                    return {
+                        'status': 'RED',
+                        'badge': '🔴 RED (0x3)',
+                        'placar': placar,
+                        'minuto': "FT",
+                        'recomendacao_live': 'Terminou em 0x3.'
+                    }
+                else:
+                    return {
+                        'status': 'GREEN_CONFIRMADO',
+                        'badge': '🟢 GREEN GANHO',
+                        'placar': placar,
+                        'minuto': "FT",
+                        'recomendacao_live': f'Terminou em {placar}. Operação ganha!'
                     }
             elif m > 0:
                 return {

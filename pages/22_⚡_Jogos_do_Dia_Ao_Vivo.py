@@ -29,6 +29,7 @@ from futpythontrader_client import get_daily_dataframe
 from hist_rf_loader import load_hist_rf
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
 from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
+from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
 from inplay_telemetry_engine import InPlayTelemetryEngine
 
 telemetry_engine = InPlayTelemetryEngine()
@@ -207,6 +208,29 @@ def processar_grade_do_dia(data_str_param):
                 'EV': s['ev'],
                 'Break_Even': s['break_even_wr'],
                 'Tipo': 'Lay 2x2'
+            })
+    except Exception:
+        pass
+        
+    # 3. Avaliar Lay 0x3 Correct Score (1 por Horário - Menor Liability)
+    try:
+        sinais_0x3 = avaliar_jogos_lay_0x3_grade(df_bf)
+        for s in sinais_0x3:
+            jogos_qualificados.append({
+                'Data': data_str_param,
+                'Horário': s['hora'],
+                'Jogo': f"{s['home']} x {s['away']}",
+                'Home': s['home'],
+                'Away': s['away'],
+                'Liga': s['league'],
+                'Método': s['metodo'],
+                'Mercado': s['mercado'],
+                'Lado': 'LAY',
+                'Odd_Entrada': s['odd_lay'],
+                'Prob_IA': s['prob_estimada'],
+                'EV': s['ev'],
+                'Break_Even': s['break_even_wr'],
+                'Tipo': 'Lay 0x3'
             })
     except Exception:
         pass
