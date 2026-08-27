@@ -29,6 +29,9 @@ from futpythontrader_client import get_daily_dataframe
 from hist_rf_loader import load_hist_rf
 import lay_draw_rf_v2_strategy as LD
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
+from inplay_telemetry_engine import InPlayTelemetryEngine
+
+telemetry_engine = InPlayTelemetryEngine()
 
 # Estilização visual moderna
 st.markdown("""
@@ -256,12 +259,13 @@ m4.metric("🛡️ Proteção Ativa", "Comissão 4.5% + Hedge 1x1")
 if df_jogos.empty:
     st.info(f"Nenhum jogo qualificado com EV+ para a data **{data_str}**. Os modelos mantêm critérios rígidos de valor esperado para proteger sua banca.")
 else:
-    # Formatar dados para a tabela
+    # Formatar dados para a tabela com telemetria in-play
     tabela_display = []
     
     for _, r in df_jogos.iterrows():
-        k = f"{data_str}_{_canon(r['Home'])}_{_canon(r['Away'])}"
-        info_placar = mapa_inplay.get(k, {'placar_final': 'N/A', 'placar_live': 'N/A', 'min_jogo': 'Pré-Jogo'})
+        diag_live = telemetry_engine.avaliar_situacao_inplay(
+            data_str, r['Home'], r['Away'], r['Método']
+        )
         
         odd_lay = r['Odd_Lay']
         prob = r['Prob_IA']
@@ -278,60 +282,51 @@ else:
             st_h_val = stake_real * r['Stake_Hedge_Ratio']
             st_hedge_txt = f"R$ {st_h_val:.2f} (Back 1x1 @ {r['Odd_Hedge']:.2f})"
             
-        placar_exibicao = info_placar['placar_live'] if info_placar['placar_live'] != 'N/A' else info_placar['placar_final']
-        if placar_exibicao == 'N/A':
-            status_txt = "⏳ AGUARDANDO KICK-OFF"
-        else:
-            status_txt = f"⚽ AO VIVO ({placar_exibicao})"
-            
         tabela_display.append({
             'Horário': r['Horário'],
             'Partida': r['Jogo'],
             'Liga': r['Liga'],
             'Método': r['Método'],
-            'Odd Lay Betfair': f"{odd_lay:.2f}",
+            'Odd Lay': f"{odd_lay:.2f}",
             'Prob IA': f"{prob*100:.1f}%",
-            'EV Estimado': f"{ev*100:+.1f}%",
-            'Break-Even': f"{be_wr*100:.1f}%",
+            'EV': f"{ev*100:+.1f}%",
             'Stake Entrada': f"R$ {stake_real:.2f}",
-            'Responsabilidade Máx': f"R$ {resp_max:.2f}",
-            'Cobertura (Hedge)': st_hedge_txt,
-            'Status / Placar': status_txt
+            'Resp. Máx': f"R$ {resp_max:.2f}",
+            'Minuto / Placar': f"{diag_live['minuto']} ({diag_live['placar']})",
+            'Status Ao Vivo': diag_live['badge']
         })
         
     df_tab = pd.DataFrame(tabela_display)
     
-    st.subheader(f"📋 Partidas Selecionadas para Operação ({len(df_tab)} jogos)")
+    st.subheader(f"📋 Partidas Selecionadas & Telemetria Ao Vivo ({len(df_tab)} jogos)")
     st.dataframe(
         df_tab,
         use_container_width=True,
         hide_index=True
     )
     
-    # ── Cards de Acompanhamento Detalhado ──
-    st.markdown("### 🔍 Guia Operacional por Jogo")
+    # ── Cards de Acompanhamento e Decisão In-Play ──
+    st.markdown("### 🔍 Radar de Decisão In-Play por Partida")
     for _, r in df_jogos.iterrows():
+        diag_live = telemetry_engine.avaliar_situacao_inplay(
+            data_str, r['Home'], r['Away'], r['Método']
+        )
         odd_lay = r['Odd_Lay']
         resp_max = stake_base * (odd_lay - 1.0)
         
-        with st.expander(f"⚽ {r['Jogo']} — {r['Método']} (Odd Lay: {odd_lay:.2f})", expanded=True):
+        with st.expander(f"{diag_live['badge']} | {r['Jogo']} — {r['Método']} ({diag_live['minuto']} | {diag_live['placar']})", expanded=True):
             c1, c2, c3 = st.columns([2, 2, 2])
             with c1:
                 st.markdown(f"**Liga:** {r['Liga']}")
                 st.markdown(f"**Mercado:** `{r['Mercado']}`")
-                st.markdown(f"**Odd de Entrada (Lay):** `{odd_lay:.2f}`")
+                st.markdown(f"**Odd de Entrada:** `{odd_lay:.2f}`")
             with c2:
                 st.markdown(f"**Probabilidade IA:** `{r['Prob_IA']*100:.1f}%`")
                 st.markdown(f"**Valor Esperado (EV):** `{r['EV']*100:+.1f}%`")
                 st.markdown(f"**Break-Even Mínimo:** `{r['Break_Even']*100:.1f}%`")
             with c3:
-                st.markdown(f"**Stake Sugerida:** `R$ {stake_base:.2f}`")
-                st.markdown(f"**Responsabilidade Máxima:** `R$ {resp_max:.2f}`")
-                if r['Tipo'] == 'Lay Draw' and r['Odd_Hedge'] > 1.0:
-                    st_h = stake_base * r['Stake_Hedge_Ratio']
-                    st.markdown(f"🛡️ **Proteção Back 1x1:** Colocar `R$ {st_h:.2f}` na odd `{r['Odd_Hedge']:.2f}`")
-                else:
-                    st.markdown("🛡️ **Gestão:** Lay puro sem cobertura necessária.")
+                st.markdown(f"**Stake:** `R$ {stake_base:.2f}` (Resp: `R$ {resp_max:.2f}`)")
+                st.info(f"📢 **Decisão In-Play:** {diag_live['recomendacao_live']}")
 
 st.markdown("---")
-st.caption("⚡ **ARKAD PROD** — Monitoramento em tempo real conectado à API Betfair Exchange. Todas as probabilidades utilizam modelos calibrados e validados contra overfitting.")
+st.caption("⚡ **ARKAD PROD** — Monitoramento em tempo real conectado à telemetria in-play da Betfair Exchange.")
