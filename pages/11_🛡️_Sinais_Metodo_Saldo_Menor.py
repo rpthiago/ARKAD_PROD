@@ -289,6 +289,20 @@ def processa_sinais():
             chunk_eh2_disp.columns = ['Horário', 'Liga', 'Mandante', 'Visitante', 'Zebra (+2 EH)', 'Odd EH +2 Est.', 'xG Total', 'Tipo Torneio']
             st.dataframe(chunk_eh2_disp, use_container_width=True)
 
+            try:
+                buffer_eh2 = io.BytesIO()
+                with pd.ExcelWriter(buffer_eh2, engine='openpyxl') as writer:
+                    chunk_eh2_disp.to_excel(writer, index=False, sheet_name='Simples_EH2_Zebra')
+                st.download_button(
+                    label="📥 Baixar Planilha Apostas Simples EH +2 (Excel)",
+                    data=buffer_eh2.getvalue(),
+                    file_name=f"apostas_simples_eh2_{date_str}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    key="btn_dl_eh2_simples"
+                )
+            except Exception as ex_eh2:
+                pass
+
             texto_simples = f"🎯 TOP APOSTAS SIMPLES EH +2 (BETANO - {date_str})\n"
             texto_simples += "-------------------------------------\n"
             for idx_s, row_s in df_eh2_sorted.head(5).iterrows():
