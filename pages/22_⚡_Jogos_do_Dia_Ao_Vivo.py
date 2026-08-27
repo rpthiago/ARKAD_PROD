@@ -28,7 +28,6 @@ import b365_data_utils
 from futpythontrader_client import get_daily_dataframe
 from hist_rf_loader import load_hist_rf
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
-from estrategia_back_mandante import avaliar_jogo_back_mandante
 from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
 from inplay_telemetry_engine import InPlayTelemetryEngine
 
@@ -189,35 +188,7 @@ def processar_grade_do_dia(data_str_param):
         except Exception:
             pass
             
-    # 2. Avaliar Back Mandante Favorito (XGBoost)
-    for _, row in df_bf.iterrows():
-        try:
-            res_bm = avaliar_jogo_back_mandante(row.to_dict(), ev_threshold=0.03)
-            if res_bm.get('aplica'):
-                odd_back = float(res_bm.get('odd_back', 1.80))
-                prob = float(res_bm.get('prob_estimada', 0.65))
-                ev = float(res_bm.get('ev', 0.05))
-                
-                jogos_qualificados.append({
-                    'Data': data_str_param,
-                    'Horário': str(row.get('Time', row.get('Hora', '15:00'))),
-                    'Jogo': f"{row['Home']} x {row['Away']}",
-                    'Home': row['Home'],
-                    'Away': row['Away'],
-                    'Liga': str(row.get('League', 'N/A')),
-                    'Método': 'Back Mandante Favorito (XGBoost)',
-                    'Mercado': 'Match Odds (Home)',
-                    'Lado': 'BACK',
-                    'Odd_Entrada': odd_back,
-                    'Prob_IA': prob,
-                    'EV': ev,
-                    'Break_Even': 1.0 / (odd_back * (1 - 0.045)),
-                    'Tipo': 'Back Mandante'
-                })
-        except Exception:
-            pass
-            
-    # 3. Avaliar Lay 2x2 Correct Score (1 por Horário - Menor Liability)
+    # 2. Avaliar Lay 2x2 Correct Score (1 por Horário - Menor Liability)
     try:
         sinais_2x2 = avaliar_jogos_lay_2x2_grade(df_bf)
         for s in sinais_2x2:

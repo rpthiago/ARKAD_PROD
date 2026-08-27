@@ -167,6 +167,8 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
   DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
   Dupla Chance 1X / Lay Away (XGBoost EV>=5%: N=438, ROI -5,04%/aposta, -2,27% s/ capital, IC95 [-18,7%, +10,1%]; já morto pela assimetria de liability),
+  Back Mandante Favorito 1X2 (XGBoost EV>=3%: N=619 no universo real, WR 56,5% vs BE 57,2%, Margem -0,6%, ROI +1,7%, IC95 [-3,8%, +11,0%] inclui zero; 224% do lucro concentrado em fevereiro sozinho; mercado 1X2 hiper-eficiente),
+  Lay Under 2.5 FT (XGBoost EV>=5%: N=295-522, Margem +2,4%, ROI +4,9%, IC95 [-2,4%, +13,8%] inclui zero, 4/8 meses negativos; mercado de Over/Under 2.5 hiper-eficiente),
   Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
   StandardScaler; IC95 cruza zero, p=0,13; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
   escanteios, Over 1.5 ML, HT scans.
