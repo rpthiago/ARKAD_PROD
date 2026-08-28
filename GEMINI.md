@@ -189,6 +189,10 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
   - **Lay 0x1 Super Favorito Mandante (`Odd_H <= 1.80/1.90`, `5 <= Odd_CS_0x1_Lay <= 15`):** 👑 **CARRO-CHEFE (Watchlist Stake-Zero Prioritária)** (Claude/Antigravity, ago/2026):
     Base 2026 completa: N=4.007, WR 94,24% vs BE 91,95% (margem +2,29%), ROI/liability +2,59%, 8/8 meses positivos (+1.131u / +R$ 113k). No forward real OOS (21/08+): isolado deu WR 92,7% a 96,6% e ROI/liability +2,2% a +5,7% ✅ (+R$ 1.674 a +R$ 2.475). É o método mais sólido do portfólio.
+  - **Lay Under 0.5 FT em Super Favorito (`Odd_Fav <= 1.60`, `Odd_Under05_Lay <= 15.0`):** ✅ **APROVADO / OBSERVAÇÃO** (Claude/Antigravity, ago/2026):
+    Base 2026 completa: N=4.321, WR 94,26% vs BE 91,65% (margem +2,61%), ROI/liability +3,18%, **8/8 meses positivos** (+1.438u / +R$ 143k), Bootstrap IC95% [+2,4%, +3,9%]. No forward real (21/08+): N=26, WR 96,2% (25W/1L), +1,32u ✅.
+  - **Lay Draw em Super Favorito Mandante (`Odd_H <= 1.40`, `Odd_D_Lay 4.5 a 10.0`):** ✅ **APROVADO / OBSERVAÇÃO** (Claude/Antigravity, ago/2026):
+    Base 2026 completa: N=1.678, WR 85,77% vs BE 83,54% (margem +2,24%), ROI/liability +3,26%, **7/8 meses positivos** (+264u / +R$ 26k), Bootstrap IC95% [+1,2%, +5,2%]. No forward real (21/08+): N=58, WR 91,4% (53W/5L), +4,17u ✅ (locomotiva de volume).
   - **Lay Away / Dupla Chance 1X no Super Favorito Mandante (`Odd_H <= 1.50`, `Odd_A_Lay <= 15.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
     N=3.253, WR 87,1% a 89,4% vs BE 87,8%, ROI sobre liability +4,2% (Claude) / +2,91% (Antigravity), **8/8 meses positivos**, Bootstrap IC95% [+1,7%, +4,0%] exclui zero. Observar em stake-zero (não operar por liability alta do visitante ~6-8).
   - **Portfólio Combinado de Métodos Aprovados (Forward 21/08+):** ⚠️ **POSITIVO, MAS MARGEM FINA (Ruído Estatístico)**:
