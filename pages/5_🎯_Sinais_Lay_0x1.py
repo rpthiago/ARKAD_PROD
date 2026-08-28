@@ -32,10 +32,10 @@ st.warning(
 
 
 @st.cache_data(ttl=900, show_spinner=False)
-def scan_sinais_api(_hoje):
-    """IDEIA 2 via API Betfair (sem filtro Over25, roda 100% no Cloud):
-    Lay 0x1: Odd_H_Back <= 1.80 + Odd_CS_0x1_Lay 5-13
-    Lay 1x0: Odd_A_Back <= 1.80 + Odd_CS_1x0_Lay 5-13"""
+def scan_sinais_api(_hoje, fav_max=1.90, lay_max=15.0):
+    """Scan via API Betfair FutPythonTrader (sem filtro Over25, roda 100% no Cloud):
+    Lay 0x1: Odd_H_Back <= fav_max + Odd_CS_0x1_Lay 5 a lay_max
+    Lay 1x0: Odd_A_Back <= fav_max + Odd_CS_1x0_Lay 5 a lay_max"""
     from datetime import date, timedelta
     from futpythontrader_client import get_daily_dataframe
     out = []
@@ -53,14 +53,14 @@ def scan_sinais_api(_hoje):
         l10 = pd.to_numeric(df["Odd_CS_1x0_Lay"], errors="coerce")
         base = dict(Data=ds, Hora=df["Time"].astype(str).str[:5], Liga=df["League"], Mandante=df["Home"], Visitante=df["Away"])
         
-        # 1. Lay 0x1 (Super Fav Mandante)
-        m1 = (oh <= 1.80) & (l01 >= 5) & (l01 <= 13)
+        # 1. Lay 0x1 (Mandante Fav)
+        m1 = (oh <= fav_max) & (l01 >= 5.0) & (l01 <= lay_max)
         if m1.any():
             s1 = pd.DataFrame(base)[m1].assign(Metodo="Lay 0x1", Fav_odd=oh[m1].round(2), Lay=l01[m1].round(2))
             out.append(s1)
             
-        # 2. Lay 1x0 (Super Fav Visitante)
-        m2 = (oa <= 1.80) & (l10 >= 5) & (l10 <= 13)
+        # 2. Lay 1x0 (Visitante Fav)
+        m2 = (oa <= fav_max) & (l10 >= 5.0) & (l10 <= lay_max)
         if m2.any():
             s2 = pd.DataFrame(base)[m2].assign(Metodo="Lay 1x0", Fav_odd=oa[m2].round(2), Lay=l10[m2].round(2))
             out.append(s2)
@@ -68,20 +68,22 @@ def scan_sinais_api(_hoje):
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
 
 
-c1, c2 = st.columns([1, 4])
-with c1:
-    scan = st.button("🔄 Scan Sinais Super Favorito (API)", use_container_width=True, type="primary")
-with c2:
-    st.caption("Sinais da **IDEIA 2** direto na API Betfair: **Lay 0x1** (Mandante Odd ≤ 1,80) e **Lay 1x0** "
-               "(Visitante Odd ≤ 1,80), ambos na faixa de lay 5-13. Modo Punter (Hold 90').")
+st.markdown("### 🎛️ Scanner de Sinais ao Vivo (API Betfair Cloud)")
+fc1, fc2, fc3 = st.columns([1.5, 1.5, 2])
+with fc1:
+    filtro_fav_max = st.slider("Odd Máx do Favorito", 1.20, 2.20, 1.90, 0.05, help="Padrão auditado: 1.80 a 1.90")
+with fc2:
+    filtro_lay_max = st.slider("Odd Máx do Lay CS", 10.0, 18.0, 15.0, 0.5, help="Padrão auditado: 13.0 a 15.0")
+with fc3:
+    scan = st.button("🔄 Scan Sinais ao Vivo (API Betfair)", use_container_width=True, type="primary")
 
 if scan:
-    with st.spinner("Puxando sinais na API Betfair Exchange..."):
-        sig = scan_sinais_api(date.today().isoformat())
+    with st.spinner(f"Consultando grade de hoje e amanhã na Betfair API (Fav ≤ {filtro_fav_max:.2f}, Lay ≤ {filtro_lay_max:.1f})..."):
+        sig = scan_sinais_api(date.today().isoformat(), fav_max=filtro_fav_max, lay_max=filtro_lay_max)
     if len(sig):
         n1 = (sig["Metodo"] == "Lay 0x1").sum()
         n2 = (sig["Metodo"] == "Lay 1x0").sum()
-        st.success(f"🎯 **{len(sig)} sinais encontrados** — 🟢 {n1} Lay 0x1 (Mandante Fav) | ⚠️ {n2} Lay 1x0 (Visitante Fav).")
+        st.success(f"🎯 **{len(sig)} sinais encontrados na API Betfair** — 🟢 {n1} Lay 0x1 (Mandante Fav) | ⚠️ {n2} Lay 1x0 (Visitante Fav).")
         
         tab_sig1, tab_sig2, tab_sig_tot = st.tabs(["🟢 Lay 0x1 (Mandante ≤ 1.80)", "⚠️ Lay 1x0 (Visitante ≤ 1.80)", "📋 Todos os Sinais"])
         with tab_sig1:

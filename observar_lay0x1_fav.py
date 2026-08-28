@@ -16,8 +16,8 @@ except Exception: pass
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(ROOT, "lay0x1_fav_acumulado.csv")
 VALID_START = "2026-08-28"
-FAV_SUPER_MAX = 1.80
-LAY_LO, LAY_HI = 5.0, 13.0
+FAV_SUPER_MAX = 1.90
+LAY_LO, LAY_HI = 5.0, 15.0
 COMM = 0.045
 VPS = "ubuntu@163.176.59.215"
 KEY = os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key")
