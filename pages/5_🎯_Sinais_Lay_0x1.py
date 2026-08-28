@@ -23,22 +23,11 @@ def be(o):
 st.title("🎯 Lay 0x1 — Favoritão (Odd_H ≤ 2,20)")
 st.warning(
     "**Observação FORWARD stake-ZERO — NÃO é aposta real.** Lay 0x1 puro perde (−7% no paper). O filtro "
-    "**favoritão em casa (Odd_H≤2,20)** é o único que sobrevive na odd de lay REAL. Mas na janela real recente "
-    "(21/08+) deu **break-even (+0,2%)**, não os +20% do backtest — a lay real fica no topo da faixa (10-13). "
-    "É candidato de **alta variância**, aguardando o forward confirmar em janelas novas.", icon="⚠️")
-
-c1, c2 = st.columns([1, 4])
-with c1:
-    if st.button("🔄 Escanear hoje", use_container_width=True):
-        with st.spinner("Puxando favoritões do dia + lay real do coletor..."):
-            try:
-                py = str(ROOT / ".venv" / "Scripts" / "python.exe")
-                if not os.path.exists(py):
-                    py = str(ROOT.parent / "DASHBOARD_ARKAD-1" / ".venv" / "Scripts" / "python.exe")
-                subprocess.run([py, str(ROOT / "observar_lay0x1_fav.py")], cwd=str(ROOT), timeout=600)
-                st.cache_data.clear(); st.success("Atualizado!")
-            except Exception as e:
-                st.error(f"Falha (rode local): {str(e)[:120]}")
+    "**favoritão em casa (Odd_H≤2,20)** é o único que sobrevive na odd de lay REAL. No forward OOS na odd real "
+    "(21/08+, após corrigir 2 falsos-reds do coletor): **WR 92,7% vs BE 91,3% → ROI +2,2%** — positivo, mas "
+    "**fino e de alta variância** (cauda gorda de CS). Segue acumulando pra confirmar.", icon="⚠️")
+st.caption("O log é atualizado pela tarefa **local** (`LAY0X1_FAV_forward`, diária) — o coletor só roda na máquina "
+           "local, não no Streamlit Cloud. Esta página **exibe** o resultado.")
 
 
 @st.cache_data(ttl=300, show_spinner=False)
@@ -69,8 +58,8 @@ if LOG.exists():
 else:
     st.info("Log forward ainda vazio. Rode **🔄 Escanear hoje** (ou a tarefa diária).")
 
-# ── VALIDAÇÃO histórica 21/08+ (dado real do coletor) ──
-st.subheader("Validação na odd real — 21/08 em diante (não conta como forward)")
+# ── FORWARD OOS 21/08+ (odd real do coletor, não selecionado por resultado) ──
+st.subheader("Forward OOS na odd real — 21/08 em diante (conta)")
 if HIST.exists():
     h = pd.read_excel(HIST)
     liq = h[h["Resultado"].isin(["GREEN", "RED"])]

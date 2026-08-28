@@ -74,11 +74,13 @@ def puxar_coletor():
         z = d[(d["run"] == "0 - 1") & d["lay"].notna()].copy()
         for g, gg in z.groupby("g"):
             gg = gg.assign(dist=gg["mtk"].abs()); o01[g] = float(gg.loc[gg["dist"].idxmin(), "lay"])
-        # FT: placar de menor lay na captura mais negativa
+        # FT ROBUSTO: runner de menor lay na janela POS-FT (mtk<=-100), nao numa unica captura
+        # (evita o bug do coletor perder gol tardio e gravar placar intermediario).
         ft = {}
         for g, gg in d.dropna(subset=["lay"]).groupby("g"):
-            end = gg.loc[gg["mtk"].idxmin()]; sub = gg[gg["mtk"] == end["mtk"]]
-            rr = sub.loc[sub["lay"].idxmin(), "run"]; a, b = rr.split(" - "); ft[g] = (int(a), int(b))
+            late = gg[gg["mtk"] <= -100]
+            use = late if len(late) else gg
+            rr = use.loc[use["lay"].idxmin(), "run"]; a, b = rr.split(" - "); ft[g] = (int(a), int(b))
         return o01, ft
     except Exception as e:
         print("[aviso] coletor:", str(e)[:60]); return {}, {}
