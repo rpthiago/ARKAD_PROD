@@ -188,29 +188,22 @@ with tab1:
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
         st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!**")
         
-        # Grid de cards
-        for _, r in df_radar_filt.iterrows():
-            with st.container():
-                st.markdown(f"""
-                <div class="card-aprovado">
-                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <span style="font-size:1.15em; font-weight:bold; color:#ffffff;">⚽ {r['Jogo']}</span>
-                        <span class="badge-top">{r['Método']}</span>
-                    </div>
-                    <div style="margin-top:6px; color:#b0bec5; font-size:0.9em;">
-                        🏆 Liga: <b>{r['Liga']}</b> | ⏰ Horário: <b>{r['Hora']}</b> | 👑 Odd Favorito: <b>{r['Odd_Fav']}</b>
-                    </div>
-                    <div style="margin-top:8px; display:flex; gap:20px; font-size:0.95em;">
-                        <span>🎯 Lado: <b style="color:#ff5252;">{r['Lado']}</b></span>
-                        <span>📈 Odd Executável: <b style="color:#00e676;">{r['Odd_Entrada']}</b></span>
-                        <span>🛡️ Win Rate Esperada: <b>{r['Expectativa_WR']}</b></span>
-                        <span>🚀 Edge / ROI: <b style="color:#00e676;">{r['EV_Estimado']}</b></span>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-                
-        st.markdown("---")
-        st.dataframe(df_radar_filt, use_container_width=True, hide_index=True)
+        # Exibição direta da planilha formatada
+        cols_order = ["Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", "Odd_Entrada", "Odd_Fav", "Expectativa_WR", "EV_Estimado"]
+        df_display = df_radar_filt[cols_order].sort_values(["Data", "Hora"]).reset_index(drop=True)
+        st.dataframe(df_display, use_container_width=True, hide_index=True)
+        
+        # Botão de download em Excel
+        _buf_sinais = io.BytesIO()
+        with pd.ExcelWriter(_buf_sinais, engine="openpyxl") as _writer:
+            df_display.to_excel(_writer, index=False, sheet_name="Sinais_Aprovados")
+        st.download_button(
+            label="📥 Baixar Planilha de Sinais do Dia (Excel)",
+            data=_buf_sinais.getvalue(),
+            file_name=f"Sinais_Metodos_Aprovados_{ds_str}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            type="primary"
+        )
     else:
         st.info(f"Nenhum sinal qualificado encontrado para a data {ds_str} na API da Betfair.")
 
