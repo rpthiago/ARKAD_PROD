@@ -231,6 +231,10 @@ def processar_grade_do_dia(data_str_param, limitar_1_hora=False):
                 'EV': s['ev'],
                 'Break_Even': s['break_even_wr'],
                 'Tipo': 'Lay 0x3'
+            })
+    except Exception:
+        pass
+        
     return pd.DataFrame(jogos_qualificados)
 
 # ── Execução e Apresentação ──
