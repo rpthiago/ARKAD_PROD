@@ -33,7 +33,41 @@ st.markdown(
 st.sidebar.header("⚙️ Configurações de Banca & Stake")
 stake_base = st.sidebar.number_input("Valor da Stake Base (R$)", min_value=10.0, value=100.0, step=10.0)
 
-# ── Carregamento de Dados ──
+# ── Carregamento de Dados Seguro ──
+def _ler_excel_seguro(path):
+    import ctypes
+    from ctypes import wintypes
+    try:
+        return pd.read_excel(path)
+    except Exception:
+        # Fallback Windows: ler arquivo mesmo se aberto no Excel
+        try:
+            k32 = ctypes.WinDLL("kernel32", use_last_error=True)
+            GENERIC_READ = 0x80000000
+            FILE_SHARE_READ = 1
+            FILE_SHARE_WRITE = 2
+            FILE_SHARE_DELETE = 4
+            OPEN_EXISTING = 3
+            FILE_ATTRIBUTE_NORMAL = 0x80
+            h = k32.CreateFileW(
+                str(path), GENERIC_READ,
+                FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE,
+                None, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, None
+            )
+            if h == -1 or h == 0xFFFFFFFFFFFFFFFF:
+                return pd.DataFrame()
+            try:
+                sz = k32.GetFileSize(h, None)
+                buf = ctypes.create_string_buffer(sz)
+                br = wintypes.DWORD()
+                k32.ReadFile(h, buf, sz, ctypes.byref(br), None)
+                return pd.read_excel(io.BytesIO(buf.raw[:br.value]))
+            finally:
+                k32.CloseHandle(h)
+        except Exception:
+            return pd.DataFrame()
+
+
 @st.cache_data(ttl=60, show_spinner=False)
 def carregar_dados_aprovados():
     if not FOLDER.exists():
@@ -44,12 +78,12 @@ def carregar_dados_aprovados():
     
     dfs = []
     for f in files:
-        try:
-            df = pd.read_excel(f)
+        if f.name.startswith("~$"):
+            continue
+        df = _ler_excel_seguro(f)
+        if df is not None and not df.empty:
             df["_Arquivo"] = f.name
             dfs.append(df)
-        except Exception:
-            continue
             
     if not dfs:
         return pd.DataFrame()
