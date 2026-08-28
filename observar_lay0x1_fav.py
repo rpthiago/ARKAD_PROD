@@ -19,7 +19,7 @@ except Exception: pass
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(ROOT, "lay0x1_fav_acumulado.csv")
-VALID_START = "2026-08-29"          # forward comeca aqui
+VALID_START = "2026-08-28"          # loga jogos de hoje em diante (pra voce ver os selecionados)
 ODDH_MAX = 2.20
 LAY_LO, LAY_HI = 5.0, 13.0
 COMM = 0.045

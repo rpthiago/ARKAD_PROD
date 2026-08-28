@@ -26,8 +26,28 @@ st.warning(
     "**favoritão em casa (Odd_H≤2,20)** é o único que sobrevive na odd de lay REAL. No forward OOS na odd real "
     "(21/08+, após corrigir 2 falsos-reds do coletor): **WR 92,7% vs BE 91,3% → ROI +2,2%** — positivo, mas "
     "**fino e de alta variância** (cauda gorda de CS). Segue acumulando pra confirmar.", icon="⚠️")
-st.caption("O log é atualizado pela tarefa **local** (`LAY0X1_FAV_forward`, diária) — o coletor só roda na máquina "
-           "local, não no Streamlit Cloud. Esta página **exibe** o resultado.")
+_local = os.path.exists(os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key"))
+c1, c2 = st.columns([1, 4])
+with c1:
+    if st.button("🔄 Scanner hoje", use_container_width=True, disabled=not _local):
+        with st.spinner("Puxando favoritões do dia + lay real do coletor..."):
+            try:
+                py = str(ROOT / ".venv" / "Scripts" / "python.exe")
+                if not os.path.exists(py):
+                    py = str(ROOT.parent / "DASHBOARD_ARKAD-1" / ".venv" / "Scripts" / "python.exe")
+                if not os.path.exists(py):
+                    py = "python"
+                subprocess.run([py, str(ROOT / "observar_lay0x1_fav.py")], cwd=str(ROOT), timeout=600)
+                st.cache_data.clear(); st.success("Atualizado!")
+            except Exception as e:
+                st.error(f"Falha: {str(e)[:120]}")
+with c2:
+    if _local:
+        st.caption("✅ Scanner roda AGORA (máquina local com coletor).")
+    else:
+        st.caption("⚠️ No **Streamlit Cloud** o botão fica off — o scanner precisa do **coletor (SSH ao VPS)**, "
+                   "que só existe na máquina local. Os jogos abaixo vêm da **tarefa diária local** "
+                   "(`LAY0X1_FAV_forward`, 12:00). Rode o app/`.bat` local pra escanear na hora.")
 
 
 @st.cache_data(ttl=300, show_spinner=False)
