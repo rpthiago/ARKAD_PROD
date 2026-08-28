@@ -195,11 +195,19 @@ with tab1:
         
     if not df_radar.empty:
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
-        st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!**")
+        st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!** (Gestão Dinâmica: Risco travado em R$ {liability_fixa:.2f} por jogo)")
         
-        # Exibição direta da planilha formatada
-        cols_order = ["Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", "Odd_Entrada", "Odd_Fav", "Expectativa_WR", "EV_Estimado"]
-        df_display = df_radar_filt[cols_order].sort_values(["Data", "Hora"]).reset_index(drop=True)
+        # Exibição direta da planilha formatada com dimensionamento automático
+        df_calc = df_radar_filt.copy()
+        df_calc["Stake_Sugerida_R$"] = (liability_fixa / (df_calc["Odd_Entrada"] - 1.0)).round(2)
+        df_calc["Lucro_Green_R$"] = (df_calc["Stake_Sugerida_R$"] * 0.955).round(2)
+        df_calc["Risco_Red_R$"] = liability_fixa
+        
+        cols_order = [
+            "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
+            "Odd_Entrada", "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Expectativa_WR", "EV_Estimado"
+        ]
+        df_display = df_calc[cols_order].sort_values(["Data", "Hora"]).reset_index(drop=True)
         st.dataframe(df_display, use_container_width=True, hide_index=True)
         
         # Botão de download em Excel
@@ -332,6 +340,26 @@ with tab3:
         
     st.info(f"💡 **Regra de Execução:** Ao entrar em Lay na odd **{odd_calc:.2f}**, aposte **R$ {stake_recomendada:.2f}** de stake nominal. "
             f"Se ganhar, seu lucro líquido é de **+R$ {stake_recomendada * 0.955:.2f}**. Se perder, seu prejuízo fica rigorosamente travado em **-R$ {liability_max:.2f} ({risco_max_banca:.2f}% da banca)**.")
+            
+    st.markdown("---")
+    st.markdown("### 📈 Simulador de Alavancagem com Gestão Dinâmica (5% da Banca)")
+    st.markdown("Veja como a sua banca evolui acumulando **+4,5 unidades líquidas por semana** com recalculação dinâmica:")
+    
+    col_s1, col_s2, col_s3, col_s4 = st.columns(4)
+    b_atual = banca_total
+    proj_semanal = []
+    for sem in range(1, 5):
+        b_atual = b_atual * (1.0 + (4.5 * (risco_max_banca / 100.0)))
+        proj_semanal.append(b_atual)
+        
+    with col_s1:
+        st.metric("Semana 1 (+4.5u)", f"R$ {proj_semanal[0]:.2f}", f"+{(proj_semanal[0]/banca_total - 1)*100:.1f}%")
+    with col_s2:
+        st.metric("Semana 2 (+9.0u)", f"R$ {proj_semanal[1]:.2f}", f"+{(proj_semanal[1]/banca_total - 1)*100:.1f}%")
+    with col_s3:
+        st.metric("Semana 3 (+13.5u)", f"R$ {proj_semanal[2]:.2f}", f"+{(proj_semanal[2]/banca_total - 1)*100:.1f}%")
+    with col_s4:
+        st.metric("Fim do Mês (+18.0u)", f"R$ {proj_semanal[3]:.2f}", f"+{(proj_semanal[3]/banca_total - 1)*100:.1f}% 🚀")
 
 # =========================================================================
 # TAB 4: DOWNLOAD DAS PLANILHAS
