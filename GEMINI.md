@@ -64,8 +64,9 @@
 | **Odd de Saída / Cashout Fabricada** (Assumir +0,19u de lucro no cashout 0x0 HT em Lay 0x1) | **Medir SEMPRE no coletor:** 0x0 HT no Lay 0x1 dá **−0,499u** de perda real. Nunca inventar P&L de saída |
 | **Spread Arbitrário de Lay CS** (Chutar spread ×1,5 ou ×1,12 sem medir) | **Medir a mediana real:** spread mediano no coletor Betfair é **1,19x** (p75 = 1,43) |
 | **Bug do Gol Tardio no Coletor** (Coletor perder gol nos acréscimos e gravar 0-1 em jogo que foi 0-2/0-3) | **Auditoria Web Obrigatória:** Todo RED registrado deve ser validado no pós-jogo (`min_to_ko <= -100`) antes de contar |
-| **Filtros com Conflito de Volume ao Vivo** (Over 2.5 <= 2.00 matando 100% dos sinais de favoritões na API) | **Validar Volume Real na API** da Betfair antes de adotar. Backtest bonito com 0 sinais ao vivo = inútil |
 | **Combinar Métodos Prematuramente** (Juntar Lay 1x0 com Lay 0x1 antes do 1x0 provar edge real) | **Tratamento e Portfólio Separados:** 1x0 é o elo fraco (−8% forward) e deve rodar isolado |
+| **Odd Estimada / Inventada em Handicap** (Assumir odd 2,45 em AH +1.5 Zebra gerando "+82% ROI" falso) | **NUNCA estimar odd.** Usar coluna real (`AH_*`, `EH_*`, `Odd_*`). AH +1.5 Zebra mandante na odd real 1,30 dá **−4,2%** de prejuízo |
+| **Risco de Cauda Excessivo em Lay de Odd Alta** (Lay 2x2 com liability 16,8 e margem navalha +1,14%) | **Evitar Lay de Odd Alta com Margem Fina.** 1 red apaga 17 greens, tornando o risco de ruína inaceitável |
 
 ---
 
@@ -166,12 +167,13 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
 
 - **MORTOS / miragem (na odd de lay real):** Lay 0x0 (paper de agosto: **−R$1.979**), Lay 1x0
   (teve mês bom na odd real, mas **sem edge confirmado** — não escalar), Lay 2x0 / 0x2
-  (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, sem confirmação),
+  (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, cauda gorda com liability 16,8u e margem de apenas +1,14% não paga risco de ruína; **DESCARTADO**),
   Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 0x1 In-Play (cashout 0x0 no HT gera **−0,499u** de perda real em vez do presumido +0,19u, colapsando ROI para **−11%** em N=17k e N=473 ticks reais no coletor; **DESCARTADO**), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
   ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%), Lay Draw (+2%, reprova FDR),
   Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
+  AH +1.5 Zebra Mandante (miragem de odd estimada 2,45; na odd real da base 1,30 tem break-even 81,5% vs WR 75,2% = **−4,2%** de prejuízo; **MIRAGEM DESCARTADA**),
   DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
-  Dupla Chance 1X / Lay Away (XGBoost EV>=5%: N=438, ROI -5,04%/aposta, -2,27% s/ capital, IC95 [-18,7%, +10,1%]; já morto pela assimetria de liability),
+  Dupla Chance 1X / Lay Away Genérico (sem filtro de super favorito: ROI -5,04%/aposta, -2,27% s/ capital; já morto pela assimetria de liability),
   Back Mandante Favorito 1X2 (XGBoost EV>=3%: N=619 no universo real, WR 56,5% vs BE 57,2%, Margem -0,6%, ROI +1,7%, IC95 [-3,8%, +11,0%] inclui zero; 224% do lucro concentrado em fevereiro sozinho; mercado 1X2 hiper-eficiente),
   Lay Under 2.5 FT (XGBoost EV>=5%: N=295-522, Margem +2,4%, ROI +4,9%, IC95 [-2,4%, +13,8%] inclui zero, 4/8 meses negativos; mercado de Over/Under 2.5 hiper-eficiente),
   Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
@@ -187,6 +189,8 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
   - **Lay 0x1 Super Favorito Mandante (`Odd_H <= 1.80/1.90`, `5 <= Odd_CS_0x1_Lay <= 15`):** 👑 **CARRO-CHEFE (Watchlist Stake-Zero Prioritária)** (Claude/Antigravity, ago/2026):
     Base 2026 completa: N=4.007, WR 94,24% vs BE 91,95% (margem +2,29%), ROI/liability +2,59%, 8/8 meses positivos (+1.131u / +R$ 113k). No forward real OOS (21/08+): isolado deu WR 92,7% a 96,6% e ROI/liability +2,2% a +5,7% ✅ (+R$ 1.674 a +R$ 2.475). É o método mais sólido do portfólio.
+  - **Lay Away / Dupla Chance 1X no Super Favorito Mandante (`Odd_H <= 1.50`, `Odd_A_Lay <= 15.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
+    N=3.253, WR 87,1% a 89,4% vs BE 87,8%, ROI sobre liability +4,2% (Claude) / +2,91% (Antigravity), **8/8 meses positivos**, Bootstrap IC95% [+1,7%, +4,0%] exclui zero. Observar em stake-zero (não operar por liability alta do visitante ~6-8).
   - **Portfólio Combinado de Métodos Aprovados (Forward 21/08+):** ⚠️ **POSITIVO, MAS MARGEM FINA (Ruído Estatístico)**:
     Na pasta `metodos_aprovados/` (N=107 jogos): +R$ 461 (+4,61u), WR 91,4% vs Break-Even 91,0% (ROI/liability +0,4%). O portfólio diluiu o Lay 0x1 porque Lay Draw, Lay 1x0 e Lay 0x2 arrastaram a margem para perto do break-even.
     **DIRETRIZ DE GOVERNANÇA:** Manter stake-zero até o forward ao vivo atingir **N ≥ 300 a 400 jogos** com WR ≥ 93%. Não operar com capital real pesado enquanto a WR estiver colada no break-even.
