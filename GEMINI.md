@@ -185,15 +185,17 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     N=225, WR 73,3% vs BE 68,4% (margem +4,9%), **7/8 meses positivos**, **bootstrap IC95
     [+4,3%, +34,2%] exclui zero**. Observação via **`observar_under15_forward.py`** (stake-ZERO,
     *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
-  - **Lay 0x1 Super Favorito Punter (`Odd_H <= 1.80`, `5 <= Odd_CS_0x1_Lay <= 13`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
-    8/8 meses positivos na base 2026 (N=1.685), WR 94,0% vs BE 91,1% (margem +2,9%), ROI sobre liability +3,30%. No forward real OOS (21/08+): N=109, WR 92,7%, ROI/liability +2,2% ✅.
-    Observação via **`observar_lay0x1_fav.py`** (stake-ZERO, 100% via API Betfair, liquidação com checagem web de REDs).
-  - **Lay 1x0 Super Favorito Punter (`Odd_A <= 1.80`, `5 <= Odd_CS_1x0_Lay <= 13`):** ⚠️ **WATCHLIST STAKE-ZERO ISOLADA (Elo Fraco)**:
-    8/8 meses positivos no backtest 2026 (N=488, WR 94,1%, ROI/liability +3,92%), porém no forward real recente deu WR 81,5% e ROI -8% ❌. Manter isolado e monitorar até provar recuperação.
+  - **Lay 0x1 Super Favorito Mandante (`Odd_H <= 1.80/1.90`, `5 <= Odd_CS_0x1_Lay <= 15`):** 👑 **CARRO-CHEFE (Watchlist Stake-Zero Prioritária)** (Claude/Antigravity, ago/2026):
+    Base 2026 completa: N=4.007, WR 94,24% vs BE 91,95% (margem +2,29%), ROI/liability +2,59%, 8/8 meses positivos (+1.131u / +R$ 113k). No forward real OOS (21/08+): isolado deu WR 92,7% a 96,6% e ROI/liability +2,2% a +5,7% ✅ (+R$ 1.674 a +R$ 2.475). É o método mais sólido do portfólio.
+  - **Portfólio Combinado de Métodos Aprovados (Forward 21/08+):** ⚠️ **POSITIVO, MAS MARGEM FINA (Ruído Estatístico)**:
+    Na pasta `metodos_aprovados/` (N=107 jogos): +R$ 461 (+4,61u), WR 91,4% vs Break-Even 91,0% (ROI/liability +0,4%). O portfólio diluiu o Lay 0x1 porque Lay Draw, Lay 1x0 e Lay 0x2 arrastaram a margem para perto do break-even.
+    **DIRETRIZ DE GOVERNANÇA:** Manter stake-zero até o forward ao vivo atingir **N ≥ 300 a 400 jogos** com WR ≥ 93%. Não operar com capital real pesado enquanto a WR estiver colada no break-even.
+  - **Lay 1x0 Super Favorito Punter (`Odd_A <= 1.80/1.90`, `5 <= Odd_CS_1x0_Lay <= 15`):** ⚠️ **WATCHLIST STAKE-ZERO ISOLADA (Elo Fraco)**:
+    8/8 meses positivos no backtest 2026, porém no forward real recente deu WR 81,5% e ROI -8% ❌. Manter estritamente isolado sem contaminar o Lay 0x1.
   - **Under-no-limite in-play** (pré-registrado; ~2 fins de semana; o estado 0-0 já oscilou de +32% pra −6% → instável, acompanhar).
 - O endpoint `fetch_betfair_daily` e `get_daily_dataframe(source="betfair")` **já entregam as odds reais de Lay e Back da Betfair Exchange** (validado 1,00x vs API direta da Betfair).
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
-  continua sem edge depois de bem escrito.
+  continua sem edge depois de bem estruturado. Backtest retroativo (R$ 42k) não é dinheiro real; autoridade é o paper forward executável (+R$ 461).
 
 ---
 
