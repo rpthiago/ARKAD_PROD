@@ -27,9 +27,10 @@ st.warning(
     "**favoritão em casa (Odd_H≤2,20)** é o único que sobrevive na odd de lay REAL. No forward OOS na odd real "
     "(21/08+, após corrigir 2 falsos-reds do coletor): **WR 92,7% vs BE 91,3% → ROI +2,2%** — positivo, mas "
     "**fino e de alta variância** (cauda gorda de CS). Segue acumulando pra confirmar.", icon="⚠️")
-@st.cache_data(ttl=600, show_spinner=False)
-def scan_candidatos_api(_hoje):
-    """Favoritões candidatos do dia via API (roda inline, funciona no Cloud). SEM a lay 0-1 (essa é do coletor local)."""
+@st.cache_data(ttl=900, show_spinner=False)
+def scan_sinais_api(_hoje):
+    """Método COMPLETO via API Betfair (roda inline no Cloud): favoritão (Odd_H_Back<=2.20) +
+    lay 0-1 REAL (Odd_CS_0x1_Lay entre 5 e 13). A API tem a odd de CS e atualiza de hora em hora."""
     from datetime import date, timedelta
     from futpythontrader_client import get_daily_dataframe
     out = []
@@ -39,33 +40,31 @@ def scan_candidatos_api(_hoje):
             df = get_daily_dataframe(source="betfair", date_str=ds)
         except Exception:
             continue
-        if df is None or df.empty:
+        if df is None or df.empty or "Odd_CS_0x1_Lay" not in df.columns:
             continue
-        oh = pd.to_numeric(df.get("Odd_H_Back", df.get("Odd_H_FT")), errors="coerce")
-        hc = "Home" if "Home" in df.columns else ("Mandante" if "Mandante" in df.columns else None)
-        ac = "Away" if "Away" in df.columns else ("Visitante" if "Visitante" in df.columns else None)
-        lc = "League" if "League" in df.columns else ("Liga" if "Liga" in df.columns else None)
-        m = oh <= 2.20
-        sub = pd.DataFrame({"Data": ds, "Mandante": df.loc[m, hc], "Visitante": df.loc[m, ac],
-                            "Liga": df.loc[m, lc] if lc else "?", "Odd_H": oh[m].round(2)})
-        out.append(sub)
+        oh = pd.to_numeric(df["Odd_H_Back"], errors="coerce")
+        lay = pd.to_numeric(df["Odd_CS_0x1_Lay"], errors="coerce")
+        m = (oh <= 2.20) & (lay >= 5) & (lay <= 13)
+        out.append(pd.DataFrame({"Data": ds, "Hora": df.loc[m, "Time"].astype(str).str[:5],
+                                 "Liga": df.loc[m, "League"], "Mandante": df.loc[m, "Home"], "Visitante": df.loc[m, "Away"],
+                                 "Odd_H": oh[m].round(2), "Lay_0x1": lay[m].round(2)}))
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
 
 
 c1, c2 = st.columns([1, 4])
 with c1:
-    scan = st.button("🔄 Scan candidatos (hoje/amanhã)", use_container_width=True)
+    scan = st.button("🔄 Scan sinais (hoje/amanhã)", use_container_width=True, type="primary")
 with c2:
-    st.caption("Botão roda no **Cloud** (via API): mostra os **favoritões candidatos** (Odd_H≤2,20). A **lay 0-1 real** "
-               "e a confirmação do sinal vêm da tarefa **local** (coletor). Os passados já liquidados estão abaixo.")
+    st.caption("Roda o **método completo direto no Cloud** via API Betfair (favoritão **+ lay 0-1 real**). "
+               "A API tem a odd de CS e atualiza de hora em hora — **não precisa do coletor** pros sinais.")
 if scan:
-    with st.spinner("Puxando favoritões do dia na API..."):
-        cand = scan_candidatos_api(date.today().isoformat())
-    if len(cand):
-        st.success(f"{len(cand)} favoritões candidatos (Odd_H≤2,20). A lay 0-1 (5-13) é filtrada pela tarefa local.")
-        st.dataframe(cand.sort_values(["Data", "Odd_H"]), use_container_width=True, hide_index=True)
+    with st.spinner("Puxando sinais do dia na API Betfair..."):
+        sig = scan_sinais_api(date.today().isoformat())
+    if len(sig):
+        st.success(f"🎯 {len(sig)} sinais Lay 0x1 favoritão (hoje/amanhã). Layar o **0-1** na odd mostrada.")
+        st.dataframe(sig.sort_values(["Data", "Hora"]), use_container_width=True, hide_index=True)
     else:
-        st.warning("API não retornou jogos agora (token/rede) ou sem favoritão hoje. Tente mais tarde ou rode local.")
+        st.warning("API não retornou sinais agora (token/rede) ou sem favoritão na faixa. Tente mais tarde.")
 
 
 @st.cache_data(ttl=300, show_spinner=False)
