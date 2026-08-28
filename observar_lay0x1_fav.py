@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-observar_lay0x1_fav.py — forward STAKE-ZERO COMBINADO (config OURO): Lay 0x1 + Lay 1x0.
-Sinais 100% da API Betfair (favoritão + lay do placar 5-13 + Over 2.5 <= 2.00):
-  Lay 0x1: Odd_H_Back<=2.20, Odd_CS_0x1_Lay 5-13, Odd_Over25_FT_Back<=2.00 -> RED se FT==0-1
-  Lay 1x0: Odd_A_Back<=2.20, Odd_CS_1x0_Lay 5-13, Odd_Over25_FT_Back<=2.00 -> RED se FT==1-0
-Liquidacao pelo COLETOR (FT robusto pos-FT). stake=0. So loga a partir de VALID_START.
+observar_lay0x1_fav.py — forward STAKE-ZERO da IDEIA 2 (Super Favorito <= 1.80):
+  - Lay 0x1: Odd_H_Back <= 1.80 E 5.0 <= Odd_CS_0x1_Lay <= 13.0 -> RED se FT == 0-1
+  - Lay 1x0: Odd_A_Back <= 1.80 E 5.0 <= Odd_CS_1x0_Lay <= 13.0 -> RED se FT == 1-0
+Sinais 100% via API Betfair FutPythonTrader (sem filtro Over25, funciona direto no Cloud).
+Liquidacao pelo COLETOR (FT robusto pos-FT mtk <= -100).
+Aviso de auditoria web obrigatoria para todo RED (bug do gol tardio).
 """
 import os, re, sys, subprocess, unicodedata
 from datetime import date, timedelta
@@ -15,8 +16,8 @@ except Exception: pass
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(ROOT, "lay0x1_fav_acumulado.csv")
 VALID_START = "2026-08-28"
-OVER_MAX = 2.00
-LAY_LO, LAY_HI, FAV_MAX = 5.0, 13.0, 2.20
+FAV_SUPER_MAX = 1.80
+LAY_LO, LAY_HI = 5.0, 13.0
 COMM = 0.045
 VPS = "ubuntu@163.176.59.215"
 KEY = os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key")
@@ -29,7 +30,7 @@ def _cn(s):
 
 
 def sinais_do_dia():
-    """Config OURO (0x1 + 1x0) da API. Colunas: data,jogo,metodo,fav_odd,lay,tgt(placar red)."""
+    """Ideia 2 (Super Favorito <= 1.80, sem filtro Over25) da API Betfair."""
     try:
         from futpythontrader_client import get_daily_dataframe
     except Exception as e:
@@ -43,16 +44,22 @@ def sinais_do_dia():
             continue
         if df is None or df.empty or "Odd_CS_0x1_Lay" not in df.columns:
             continue
-        oh = pd.to_numeric(df["Odd_H_Back"], errors="coerce"); oa = pd.to_numeric(df["Odd_A_Back"], errors="coerce")
-        ov = pd.to_numeric(df["Odd_Over25_FT_Back"], errors="coerce")
-        l01 = pd.to_numeric(df["Odd_CS_0x1_Lay"], errors="coerce"); l10 = pd.to_numeric(df["Odd_CS_1x0_Lay"], errors="coerce")
+        oh = pd.to_numeric(df["Odd_H_Back"], errors="coerce")
+        oa = pd.to_numeric(df["Odd_A_Back"], errors="coerce")
+        l01 = pd.to_numeric(df["Odd_CS_0x1_Lay"], errors="coerce")
+        l10 = pd.to_numeric(df["Odd_CS_1x0_Lay"], errors="coerce")
+        
         for _, r in df.iterrows():
-            i = r.name; h, a = str(r["Home"]), str(r["Away"]); jogo = f"{h} x {a}"
-            if ov[i] <= OVER_MAX and oh[i] <= FAV_MAX and LAY_LO <= l01[i] <= LAY_HI:
-                rows.append(dict(data=ds, jogo=jogo, liga=str(r["League"]), metodo="Lay 0x1",
+            i = r.name
+            h, a = str(r["Home"]), str(r["Away"])
+            jogo = f"{h} x {a}"
+            # 1. Lay 0x1: Super Favorito Mandante
+            if oh[i] <= FAV_SUPER_MAX and LAY_LO <= l01[i] <= LAY_HI:
+                rows.append(dict(data=ds, jogo=jogo, liga=str(r.get("League", "N/A")), metodo="Lay 0x1",
                                  fav_odd=round(float(oh[i]), 2), lay=round(float(l01[i]), 2), tgt=(0, 1)))
-            if ov[i] <= OVER_MAX and oa[i] <= FAV_MAX and LAY_LO <= l10[i] <= LAY_HI:
-                rows.append(dict(data=ds, jogo=jogo, liga=str(r["League"]), metodo="Lay 1x0",
+            # 2. Lay 1x0: Super Favorito Visitante
+            if oa[i] <= FAV_SUPER_MAX and LAY_LO <= l10[i] <= LAY_HI:
+                rows.append(dict(data=ds, jogo=jogo, liga=str(r.get("League", "N/A")), metodo="Lay 1x0",
                                  fav_odd=round(float(oa[i]), 2), lay=round(float(l10[i]), 2), tgt=(1, 0)))
     return rows
 
@@ -68,13 +75,17 @@ def puxar_ft():
         if not ls:
             return {}
         d = pd.DataFrame([l.split("|") for l in ls], columns=["h", "a", "ko", "mtk", "run", "lay"])
-        d["mtk"] = pd.to_numeric(d["mtk"], errors="coerce"); d["lay"] = pd.to_numeric(d["lay"], errors="coerce")
+        d["mtk"] = pd.to_numeric(d["mtk"], errors="coerce")
+        d["lay"] = pd.to_numeric(d["lay"], errors="coerce")
         d = d.dropna(subset=["mtk", "lay"])
         d["g"] = pd.to_datetime(d["ko"], errors="coerce").dt.strftime("%Y-%m-%d") + "|" + d["h"].map(_cn) + "|" + d["a"].map(_cn)
         ft = {}
         for g, gg in d.groupby("g"):
-            late = gg[gg["mtk"] <= -100]; use = late if len(late) else gg
-            rr = use.loc[use["lay"].idxmin(), "run"]; a, b = rr.split(" - "); ft[g] = (int(a), int(b))
+            late = gg[gg["mtk"] <= -100]
+            use = late if len(late) else gg
+            rr = use.loc[use["lay"].idxmin(), "run"]
+            a, b = rr.split(" - ")
+            ft[g] = (int(a), int(b))
         return ft
     except Exception as e:
         print("[aviso] coletor:", str(e)[:60]); return {}
@@ -82,9 +93,15 @@ def puxar_ft():
 
 def main():
     log = pd.read_csv(LOG) if os.path.exists(LOG) else pd.DataFrame(
-        columns=["data", "jogo", "liga", "metodo", "fav_odd", "odd_lay01", "stake", "primeiro_visto", "status", "resultado", "pnl"])
+        columns=["data", "jogo", "liga", "metodo", "fav_odd", "odd_lay01", "stake", "primeiro_visto", "status", "resultado", "pnl", "conferir_web"])
+    
+    if "conferir_web" not in log.columns:
+        log["conferir_web"] = ""
+
     vistos = set((log["data"].astype(str) + "|" + log["jogo"].astype(str) + "|" + log["metodo"].astype(str))) if len(log) else set()
-    hoje = date.today(); novos = 0
+    hoje = date.today()
+    novos = 0
+    
     for s in sinais_do_dia():
         if s["data"] < VALID_START:
             continue
@@ -94,31 +111,57 @@ def main():
         log = pd.concat([log, pd.DataFrame([{
             "data": s["data"], "jogo": s["jogo"], "liga": s["liga"], "metodo": s["metodo"],
             "fav_odd": s["fav_odd"], "odd_lay01": s["lay"], "stake": 0, "primeiro_visto": hoje.isoformat(),
-            "status": "Pendente", "resultado": "Pendente", "pnl": 0.0}])], ignore_index=True)
-        vistos.add(key); novos += 1
+            "status": "Pendente", "resultado": "Pendente", "pnl": 0.0, "conferir_web": ""}])], ignore_index=True)
+        vistos.add(key)
+        novos += 1
 
-    ft = puxar_ft(); liq = 0
+    ft = puxar_ft()
+    liq = 0
     for i in log.index[log["status"] == "Pendente"]:
-        d = str(log.loc[i, "data"]); h, a = str(log.loc[i, "jogo"]).split(" x ", 1)
+        d = str(log.loc[i, "data"])
+        h, a = str(log.loc[i, "jogo"]).split(" x ", 1)
         g = d + "|" + _cn(h) + "|" + _cn(a)
         if g in ft:
-            gh, ga = ft[g]; ol = float(log.loc[i, "odd_lay01"])
+            gh, ga = ft[g]
+            ol = float(log.loc[i, "odd_lay01"])
             tgt = (0, 1) if log.loc[i, "metodo"] == "Lay 0x1" else (1, 0)
             green = (gh, ga) != tgt
-            log.loc[i, "status"] = "Finalizado"; log.loc[i, "resultado"] = "GREEN" if green else "RED"
-            log.loc[i, "pnl"] = round((1 - COMM) if green else -(ol - 1), 4); liq += 1
+            log.loc[i, "status"] = "Finalizado"
+            log.loc[i, "resultado"] = "GREEN" if green else "RED"
+            log.loc[i, "pnl"] = round((1 - COMM) if green else -(ol - 1), 4)
+            if not green:
+                log.loc[i, "conferir_web"] = f"⚠️ Auditar na Web (coletor gravou {gh}x{ga})"
+            else:
+                log.loc[i, "conferir_web"] = f"Placar {gh}x{ga}"
+            liq += 1
 
     log.to_csv(LOG, index=False, encoding="utf-8-sig")
     fin = log[log["status"] == "Finalizado"]
     print("novos: %d | liquidados: %d | total %d (pend %d, liq %d)"
           % (novos, liq, len(log), (log["status"] == "Pendente").sum(), len(fin)))
+    
     if len(fin):
-        wr = (fin["resultado"] == "GREEN").mean() * 100
-        roi = fin["pnl"].sum() / (fin["odd_lay01"] - 1).sum() * 100
-        print("=== FORWARD OURO combinado (0x1+1x0, stake-zero) ===")
-        print("N=%d | WR=%.1f%% | ROI/liability=%+.1f%%" % (len(fin), wr, roi))
+        # 1. Total Combinado
+        wr_tot = (fin["resultado"] == "GREEN").mean() * 100
+        roi_tot = fin["pnl"].sum() / (fin["odd_lay01"] - 1).sum() * 100
+        print("\n=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===")
+        print("TOTAL COMBINADO: N=%d | WR=%.1f%% | ROI/liability=%+.2f%%" % (len(fin), wr_tot, roi_tot))
+        
+        # 2. Lay 0x1 Isolado
+        f01 = fin[fin["metodo"] == "Lay 0x1"]
+        if len(f01):
+            wr01 = (f01["resultado"] == "GREEN").mean() * 100
+            roi01 = f01["pnl"].sum() / (f01["odd_lay01"] - 1).sum() * 100
+            print("  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=%d | WR=%.1f%% | ROI/liability=%+.2f%%" % (len(f01), wr01, roi01))
+            
+        # 3. Lay 1x0 Isolado (Elo Fraco)
+        f10 = fin[fin["metodo"] == "Lay 1x0"]
+        if len(f10):
+            wr10 = (f10["resultado"] == "GREEN").mean() * 100
+            roi10 = f10["pnl"].sum() / (f10["odd_lay01"] - 1).sum() * 100
+            print("  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=%d | WR=%.1f%% | ROI/liability=%+.2f%%" % (len(f10), wr10, roi10))
     else:
-        print("(sem liquidados ainda)")
+        print("Ainda sem jogos liquidados a partir de %s." % VALID_START)
 
 
 if __name__ == "__main__":

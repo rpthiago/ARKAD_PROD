@@ -61,7 +61,11 @@
 | **Modelos Lineares sem Scaler** (LR crua com features 0–50 vs 0–1 gerando "edge" falso) | **`StandardScaler` obrigatório** em LR/SVM. Se o edge evapora com normalização, era ruído de condicionamento |
 | **Miragem de Denominador em Lay** (Reportar ROI de Lay sobre 1u nominal escondendo liability 3u) | **Reportar ROI sobre Capital em Risco** ($\text{liability} = \text{odd}-1$) e yield juntos |
 | **Esticar Janela OOS Ad-Hoc** (Adicionar jogos além da base congelada para inflar número) | **Respeitar o Cutoff Pré-Registrado** da base congelada. Novos dados = Paper Forward |
-| **Instabilidade de Threshold / Especificação** (EV>=5% dá verde mas EV>=3% dá vermelho) | **Testar thresholds vizinhos e seeds**: se o edge oscila de sinal, é ruído e não edge |
+| **Odd de Saída / Cashout Fabricada** (Assumir +0,19u de lucro no cashout 0x0 HT em Lay 0x1) | **Medir SEMPRE no coletor:** 0x0 HT no Lay 0x1 dá **−0,499u** de perda real. Nunca inventar P&L de saída |
+| **Spread Arbitrário de Lay CS** (Chutar spread ×1,5 ou ×1,12 sem medir) | **Medir a mediana real:** spread mediano no coletor Betfair é **1,19x** (p75 = 1,43) |
+| **Bug do Gol Tardio no Coletor** (Coletor perder gol nos acréscimos e gravar 0-1 em jogo que foi 0-2/0-3) | **Auditoria Web Obrigatória:** Todo RED registrado deve ser validado no pós-jogo (`min_to_ko <= -100`) antes de contar |
+| **Filtros com Conflito de Volume ao Vivo** (Over 2.5 <= 2.00 matando 100% dos sinais de favoritões na API) | **Validar Volume Real na API** da Betfair antes de adotar. Backtest bonito com 0 sinais ao vivo = inútil |
+| **Combinar Métodos Prematuramente** (Juntar Lay 1x0 com Lay 0x1 antes do 1x0 provar edge real) | **Tratamento e Portfólio Separados:** 1x0 é o elo fraco (−8% forward) e deve rodar isolado |
 
 ---
 
@@ -93,6 +97,7 @@ de verdade — não tem miragem de odd nem leak de base.
 11. **ROI de LAY sobre Capital em Risco:** Métricas de Lay devem sempre explicitar o ROI sobre a *liability real* ($\text{odd}-1$) junto ao yield por aposta, para que o risco de ruína e a assimetria fiquem transparentes.
 12. **Janela OOS Estritamente Congelada:** Nunca estender a janela de Out-of-Sample além do cutoff pré-registrado da base. Dúvidas sobre dados posteriores são resolvidas exclusivamente no Paper Forward ao vivo.
 13. **Robustez à Especificação & Thresholds Vizinhos:** Testar com/sem scaler, thresholds vizinhos (ex.: EV 3% vs 5%) e seeds. Se o edge evapora ou inverte o sinal em threshold vizinho, trata-se de ruído estatístico, não de edge explorável.
+14. **Sinais 100% via API Betfair Cloud:** A API `get_daily_dataframe(source="betfair")` fornece as odds reais de Lay de CS (`Odd_CS_0x1_Lay`, `Odd_CS_1x0_Lay`) e Back (`Odd_H_Back`, `Odd_A_Back`, `Odd_D_Back`) de hora em hora. Não depender de coletor local para gerar sinais no Streamlit.
 
 **Backtest histórico:** serve SÓ pra **descarte rápido** de ideia obviamente ruim e pra estimar
 volume — e mesmo assim **na odd de lay real, nunca de back**. **NUNCA aprova nada.** Quem aprova
@@ -180,13 +185,13 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     N=225, WR 73,3% vs BE 68,4% (margem +4,9%), **7/8 meses positivos**, **bootstrap IC95
     [+4,3%, +34,2%] exclui zero**. Observação via **`observar_under15_forward.py`** (stake-ZERO,
     *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
-    Falta p/ produção: FDR formal + confirmação forward real (single-split, não walk-forward).
-    ⚠️ **NÃO usar `gerar_sinais_forward_diario.py`** (DEPRECADO/arquivado em `_arquivo_backtest_gemini/`):
-    violava a própria regra de stake-zero (`stake:100`), empacotava as miragens já mortas
-    (0x3/2x2/BTTS/Lay Draw universo) e re-pontuava a base histórica chamando de "forward".
+  - **Lay 0x1 Super Favorito Punter (`Odd_H <= 1.80`, `5 <= Odd_CS_0x1_Lay <= 13`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
+    8/8 meses positivos na base 2026 (N=1.685), WR 94,0% vs BE 91,1% (margem +2,9%), ROI sobre liability +3,30%. No forward real OOS (21/08+): N=109, WR 92,7%, ROI/liability +2,2% ✅.
+    Observação via **`observar_lay0x1_fav.py`** (stake-ZERO, 100% via API Betfair, liquidação com checagem web de REDs).
+  - **Lay 1x0 Super Favorito Punter (`Odd_A <= 1.80`, `5 <= Odd_CS_1x0_Lay <= 13`):** ⚠️ **WATCHLIST STAKE-ZERO ISOLADA (Elo Fraco)**:
+    8/8 meses positivos no backtest 2026 (N=488, WR 94,1%, ROI/liability +3,92%), porém no forward real recente deu WR 81,5% e ROI -8% ❌. Manter isolado e monitorar até provar recuperação.
   - **Under-no-limite in-play** (pré-registrado; ~2 fins de semana; o estado 0-0 já oscilou de +32% pra −6% → instável, acompanhar).
-- O endpoint `fetch_betfair_daily` **já entrega a odd de lay real** (validado 1,00x vs API direta
-  da Betfair). A inflação estava só na **base b365 histórica / paper logs**.
+- O endpoint `fetch_betfair_daily` e `get_daily_dataframe(source="betfair")` **já entregam as odds reais de Lay e Back da Betfair Exchange** (validado 1,00x vs API direta da Betfair).
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
   continua sem edge depois de bem escrito.
 
