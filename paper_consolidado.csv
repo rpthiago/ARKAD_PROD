@@ -1,178 +1,4 @@
 ﻿Data,Metodo,Liga,Mandante,Visitante,Odd,Stake_R,Resp_R,Lucro_Est_R,Gols_M,Gols_V,Resultado,Lucro_Real_R
-2026-08-22,Lay 0x0,ROMANIA 2,CSM Slatina,Metalul Buzau,11.5,19.05,,,2,0,GREEN,95.0
-2026-08-22,Lay 0x0,SCOTLAND 3,Cove Rangers,Peterhead,13.0,16.67,,,3,0,GREEN,95.0
-2026-08-22,Lay 0x0,SPAIN 2,Oviedo,Leganes,9.2,24.39,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x0,SPAIN 1,Valencia,Celta Vigo,10.0,22.22,,,0,0,RED,-900.0
-2026-08-22,Lay 0x0,TURKEY 2,Antalyaspor,Pendikspor,14.5,14.81,,,2,3,GREEN,95.0
-2026-08-22,Lay 0x0,ITALY 1,Genoa,Napoli,8.0,28.57,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x0,ARGENTINA 1,Atl Tucuman,Instituto,8.2,27.78,,,0,0,RED,-720.0
-2026-08-22,Lay 0x0,BRAZIL 3,Volta Redonda,Floresta EC,7.0,33.33,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x0,BRAZIL 2,Cuiaba,Goias,6.4,37.04,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,MEXICO 1,Queretaro,Toluca,12.0,18.18,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x1,JAPAN 1,Kyoto,Mito,12.0,18.18,,,1,3,GREEN,95.0
-2026-08-22,Lay 0x1,JAPAN 2,Albirex Niigata,Fujieda Myfc,10.5,21.05,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x1,JAPAN 2,Iwata,Tokushima,9.8,22.73,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,PORTUGAL 2,Leixoes,Leiria,12.5,17.39,,,1,3,GREEN,95.0
-2026-08-22,Lay 0x1,SOUTH KOREA 2,Cheonan City,Suwon Bluewings,10.5,21.05,,,0,1,RED,-950.0
-2026-08-22,Lay 0x1,ENGLAND 5,Eastleigh,Scunthorpe,11.5,19.05,,,3,2,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 2,Lincoln,Portsmouth,12.5,17.39,,,1,3,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 4,Walsall,Grimsby,10.5,21.05,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 1,Ipswich,Sunderland,9.4,23.81,,,2,1,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 2,Blackburn,Middlesbrough,9.6,23.26,,,2,1,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 2,Preston,Wolves,9.6,23.26,,,0,3,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 3,AFC Wimbledon,Reading,10.5,21.05,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 3,Bromley,Cambridge Utd,10.5,21.05,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 3,MK Dons,Huddersfield,12.5,17.39,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 3,Stevenage,Oxford Utd,9.2,24.39,,,0,2,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 4,Rotherham,York City,11.5,19.05,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,ENGLAND 4,Shrewsbury,Barnet,9.6,23.26,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,FINLAND 1,Ilves,VPS,15.0,14.29,,,0,1,RED,-1400.0
-2026-08-22,Lay 0x1,FINLAND 1,Jaro,AC Oulu,11.0,20.0,,,0,1,RED,-1000.0
-2026-08-22,Lay 0x1,SCOTLAND 2,Morton,Arbroath,7.8,29.41,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,SCOTLAND 2,Queens Park,Stenhousemuir,10.5,21.05,,,0,2,GREEN,95.0
-2026-08-22,Lay 0x1,SCOTLAND 2,Raith,Ayr,15.0,14.29,,,2,0,GREEN,95.0
-2026-08-22,Lay 0x1,SCOTLAND 3,East Fife,Hamilton,11.0,20.0,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x1,ITALY 1,Udinese,Como,7.8,29.41,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x1,EGYPT 1,Al-Masry,Smouha,10.0,22.22,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x1,GREECE 1,Kalamata,Aris,8.2,27.78,,,2,3,GREEN,95.0
-2026-08-22,Lay 0x1,SPAIN 1,Valencia,Celta Vigo,10.0,22.22,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x1,BELGIUM 1,Antwerp,Genk,11.0,20.0,,,1,3,GREEN,95.0
-2026-08-22,Lay 0x1,BOSNIA 1,Siroki Brijeg,Radnik Bijeljina,11.5,19.05,,,2,1,GREEN,95.0
-2026-08-22,Lay 0x1,FRANCE 1,Le Mans,Brest,11.5,19.05,,,2,2,GREEN,95.0
-2026-08-22,Lay 0x1,ITALY 1,Genoa,Napoli,7.0,33.33,,,0,1,RED,-600.0
-2026-08-22,Lay 0x1,ITALY 1,Parma,Cagliari,8.0,28.57,,,0,1,RED,-700.0
-2026-08-22,Lay 0x1,ARGENTINA 1,Atl Tucuman,Instituto,8.0,28.57,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x1,ARGENTINA 2,Chaco For Ever,Los Andes,9.2,24.39,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x1,ITALY 2,Benevento,Modena,12.5,17.39,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x1,ITALY 3,Audace Cerignola,Cosenza,13.0,16.67,,,2,1,GREEN,95.0
-2026-08-22,Lay 0x1,ITALY 3,Giana Erminio,Albinoleffe,8.8,25.64,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x1,SPAIN 1,Espanyol,Real Madrid,11.5,19.05,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x1,BRAZIL 3,Volta Redonda,Floresta EC,12.5,17.39,,,1,2,GREEN,95.0
-2026-08-22,Lay 0x1,BRAZIL 2,Cuiaba,Goias,8.6,26.32,,,1,1,GREEN,95.0
-2026-08-22,Lay 1x0,ROMANIA 2,CSM Slatina,Metalul Buzau,9.2,24.39,,,2,0,GREEN,95.0
-2026-08-22,Lay 1x0,JAPAN 2,Albirex Niigata,Fujieda Myfc,8.0,28.57,,,1,0,RED,-700.0
-2026-08-22,Lay 1x0,CHINA 1,Ningbo Professional,Yanbian Longding,8.6,26.32,,,1,3,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 2,Birmingham,Bristol City,9.0,25.0,,,1,2,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 2,Lincoln,Portsmouth,9.6,23.26,,,1,3,GREEN,95.0
-2026-08-22,Lay 1x0,FRANCE 2,Nantes,Rodez,9.6,23.26,,,2,2,GREEN,95.0
-2026-08-22,Lay 1x0,PORTUGAL 2,Vizela,Amarante,7.4,31.25,,,0,0,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 2,QPR,Bolton,9.2,24.39,,,0,0,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 2,West Ham,Charlton,9.2,24.39,,,1,2,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 2,Wrexham,Watford,9.0,25.0,,,1,1,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 3,Stevenage,Oxford Utd,8.6,26.32,,,0,2,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 3,Wigan,Leyton Orient,8.8,25.64,,,0,2,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 3,Wycombe,Plymouth,11.5,19.05,,,1,1,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 4,Port Vale,Tranmere,8.6,26.32,,,1,1,GREEN,95.0
-2026-08-22,Lay 1x0,ENGLAND 4,Swindon,Cheltenham,9.4,23.81,,,2,1,GREEN,95.0
-2026-08-22,Lay 1x0,SCOTLAND 2,Livingston,Dunfermline,9.4,23.81,,,1,0,RED,-840.0
-2026-08-22,Lay 1x0,SCOTLAND 2,Raith,Ayr,8.2,27.78,,,2,0,GREEN,95.0
-2026-08-22,Lay 1x0,SPAIN 2,Oviedo,Leganes,6.2,38.46,,,0,1,GREEN,95.0
-2026-08-22,Lay 1x0,EGYPT 1,Al-Masry,Smouha,7.2,32.26,,,1,0,RED,-620.0
-2026-08-22,Lay 1x0,ITALY 2,Sudtirol,Entella,7.0,33.33,,,1,0,RED,-600.0
-2026-08-22,Lay 1x0,FRANCE 2,St Etienne,Grenoble,7.6,30.3,,,3,0,GREEN,95.0
-2026-08-22,Lay 1x0,ARGENTINA 2,Patronato,Gimnasia Jujuy,7.6,30.3,,,3,3,GREEN,95.0
-2026-08-22,Lay 1x0,BOSNIA 1,Siroki Brijeg,Radnik Bijeljina,7.4,31.25,,,2,1,GREEN,95.0
-2026-08-22,Lay 1x0,FRANCE 1,Nice,Lorient,9.0,25.0,,,0,0,GREEN,95.0
-2026-08-22,Lay 1x0,ITALY 1,Parma,Cagliari,8.2,27.78,,,0,1,GREEN,95.0
-2026-08-22,Lay 1x0,ARGENTINA 1,Atl Tucuman,Instituto,8.2,27.78,,,0,0,GREEN,95.0
-2026-08-22,Lay 1x0,ARGENTINA 2,Chaco For Ever,Los Andes,6.2,38.46,,,1,0,RED,-520.0
-2026-08-22,Lay 1x0,BRAZIL 1,Fluminense,Remo,7.0,33.33,,,2,1,GREEN,95.0
-2026-08-22,Lay 1x0,BRAZIL 1,Internacional,Atletico MG,7.6,30.3,,,0,0,GREEN,95.0
-2026-08-22,Lay 1x0,BRAZIL 2,Cuiaba,Goias,6.6,35.71,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x0,ROMANIA 2,CSM Slatina,Metalul Buzau,14.0,15.38,,,2,0,RED,-1300.0
-2026-08-22,Lay 2x0,ENGLAND 2,Birmingham,Bristol City,10.5,21.05,,,1,2,GREEN,95.0
-2026-08-22,Lay 2x0,ENGLAND 3,Wigan,Leyton Orient,13.0,16.67,,,0,2,GREEN,95.0
-2026-08-22,Lay 2x0,SCOTLAND 4,Edinburgh City,Annan,16.0,13.33,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x0,CZECH 1,Mlada Boleslav,Slovacko,14.5,14.81,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x0,SPAIN 2,Oviedo,Leganes,9.8,22.73,,,0,1,GREEN,95.0
-2026-08-22,Lay 2x0,SPAIN 1,Valencia,Celta Vigo,15.0,14.29,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x0,TURKEY 1,Fenerbahce,Konyaspor,7.8,29.41,,,3,1,GREEN,95.0
-2026-08-22,Lay 2x0,BRAZIL 1,Internacional,Atletico MG,10.5,21.05,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x0,USA 1,Vancouver Whitecaps,FC Dallas,10.5,21.05,,,5,0,GREEN,95.0
-2026-08-22,Lay 2x0,USA 1,Los Angeles FC,Portland Timbers,13.0,16.67,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x2,SOUTH KOREA 2,Cheonan City,Suwon Bluewings,11.0,20.0,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x2,SCOTLAND 2,Morton,Arbroath,12.0,18.18,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x2,SLOVENIA 1,Mura,Koper,16.0,13.33,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x2,ITALY 1,Udinese,Como,10.0,22.22,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x2,EGYPT 1,Ghazl El Mahallah,Pyramids,6.8,34.48,,,0,3,GREEN,95.0
-2026-08-22,Lay 0x2,ITALY 1,Genoa,Napoli,11.5,19.05,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x2,SPAIN 1,Espanyol,Real Madrid,9.2,24.39,,,1,2,GREEN,95.0
-2026-08-22,Lay Draw,MEXICO 1,Puebla,Santos Laguna,3.95,67.8,,,3,2,GREEN,95.0
-2026-08-22,Lay 0x3,JAPAN 2,Vanraure Hachinohe,Sendai,27.0,7.69,,,0,2,GREEN,95.0
-2026-08-22,Lay 0x3,JAPAN 2,Yamagata,Yokohama FC,23.0,9.09,,,2,0,GREEN,95.0
-2026-08-22,Lay 0x3,SOUTH KOREA 1,FC Anyang,FC Seoul,22.0,9.52,,,0,7,GREEN,95.0
-2026-08-22,Lay 0x3,ENGLAND 2,Blackburn,Middlesbrough,24.0,8.7,,,2,1,GREEN,95.0
-2026-08-22,Lay 0x3,ENGLAND 2,Preston,Wolves,24.0,8.7,,,0,3,RED,-2300.0
-2026-08-22,Lay 0x3,ENGLAND 4,Shrewsbury,Barnet,27.0,7.69,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x3,SCOTLAND 2,Morton,Arbroath,28.0,7.41,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x3,SCOTLAND 3,East Fife,Hamilton,29.0,7.14,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x3,POLAND 1,Piast Gliwice,Legia Warsaw,25.0,8.33,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x3,SLOVENIA 1,Mura,Koper,32.0,6.45,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x3,ITALY 1,Udinese,Como,19.5,10.81,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x3,SERBIA 1,Macva Sabac,Radnicki Nis,32.0,6.45,,,1,0,GREEN,95.0
-2026-08-22,Lay 0x3,GREECE 1,Kalamata,Aris,32.0,6.45,,,2,3,GREEN,95.0
-2026-08-22,Lay 0x3,POLAND 1,Slask Wroclaw,Widzew Lodz,32.0,6.45,,,3,3,GREEN,95.0
-2026-08-22,Lay 0x3,ITALY 1,Genoa,Napoli,27.0,7.69,,,0,1,GREEN,95.0
-2026-08-22,Lay 0x3,VENEZUELA 1,Estudiantes de Merida,Puerto Cabello,28.0,7.41,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x3,COLOMBIA 1,Aguilas Doradas,Millonarios,27.0,7.69,,,1,1,GREEN,95.0
-2026-08-22,Lay 0x3,URUGUAY 1,Deportivo Maldonado,Penarol,34.0,6.06,,,0,0,GREEN,95.0
-2026-08-22,Lay 0x3,BRAZIL 1,Cruzeiro MG,Flamengo,27.0,7.69,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,ROMANIA 2,ASA Targu Mures,CS Gloria 2018 Bistrita-Nasaud,19.0,11.11,,,1,0,GREEN,95.0
-2026-08-22,Lay 2x2,ROMANIA 2,Concordia Chiajna,Politehnica Timisoara,17.5,12.12,,,1,5,GREEN,95.0
-2026-08-22,Lay 2x2,JAPAN 1,Kyoto,Mito,18.5,11.43,,,1,3,GREEN,95.0
-2026-08-22,Lay 2x2,JAPAN 2,Tosu,Tochigi Uva FC,18.0,11.76,,,1,3,GREEN,95.0
-2026-08-22,Lay 2x2,JAPAN 2,Yamagata,Yokohama FC,18.5,11.43,,,2,0,GREEN,95.0
-2026-08-22,Lay 2x2,PORTUGAL 2,Leixoes,Leiria,17.0,12.5,,,1,3,GREEN,95.0
-2026-08-22,Lay 2x2,JAPAN 1,Yokohama FM,Kobe,19.0,11.11,,,1,0,GREEN,95.0
-2026-08-22,Lay 2x2,SOUTH KOREA 1,Jeju Utd,Gimcheon Sangmu,17.5,12.12,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,CHINA 1,Nantong Zhiyun F.C,Shaanxi Union FC,20.0,10.53,,,3,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 2,Lincoln,Portsmouth,17.5,12.12,,,1,3,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 2,Millwall,Norwich,17.0,12.5,,,3,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Walsall,Grimsby,19.5,10.81,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 1,Everton,Crystal Palace,17.0,12.5,,,2,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 1,Ipswich,Sunderland,18.0,11.76,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 1,Nottm Forest,Leeds,18.0,11.76,,,0,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 2,Preston,Wolves,17.0,12.5,,,0,3,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 2,Swansea,Sheff Utd,17.0,12.5,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 3,Bromley,Cambridge Utd,18.5,11.43,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 3,Wigan,Leyton Orient,19.5,10.81,,,0,2,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Colchester,Oldham,18.0,11.76,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Crewe,Northampton,18.0,11.76,,,1,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Exeter,Accrington,18.5,11.43,,,2,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Fleetwood Town,Gillingham,20.0,10.53,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Shrewsbury,Barnet,20.0,10.53,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,ENGLAND 4,Swindon,Cheltenham,17.0,12.5,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,SCOTLAND 2,Queens Park,Stenhousemuir,18.0,11.76,,,0,2,GREEN,95.0
-2026-08-22,Lay 2x2,SCOTLAND 3,Queen of South,Alloa,17.5,12.12,,,0,2,GREEN,95.0
-2026-08-22,Lay 2x2,AUSTRIA 1,SCR Altach,Hartberg,19.5,10.81,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,TURKEY 1,Corum Belediyespor,Kasimpasa,19.5,10.81,,,0,1,GREEN,95.0
-2026-08-22,Lay 2x2,CHILE 2,Deportes Recoleta,Deportes Copiapo,18.0,11.76,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,GREECE 1,Kalamata,Aris,20.0,10.53,,,2,3,GREEN,95.0
-2026-08-22,Lay 2x2,ISRAEL 1,Ironi Tiberias,Hapoel Petach Tikva,18.5,11.43,,,1,0,GREEN,95.0
-2026-08-22,Lay 2x2,ISRAEL 1,Maccabi Petach Tikva,Hapoel Kiryat Shmona,17.0,12.5,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,ITALY 2,Carrarese,Mantova,17.5,12.12,,,1,2,GREEN,95.0
-2026-08-22,Lay 2x2,PORTUGAL 2,Lusitania Futebol Clube,Torreense,19.0,11.11,,,2,2,RED,-1800.0
-2026-08-22,Lay 2x2,SERBIA 1,FK Radnicki 1923,FK IMT Novi Beograd,19.5,10.81,,,2,1,GREEN,95.0
-2026-08-22,Lay 2x2,SPAIN 1,Valencia,Celta Vigo,20.0,10.53,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,POLAND 1,Slask Wroclaw,Widzew Lodz,17.5,12.12,,,3,3,GREEN,95.0
-2026-08-22,Lay 2x2,TURKEY 2,Antalyaspor,Pendikspor,19.5,10.81,,,2,3,GREEN,95.0
-2026-08-22,Lay 2x2,FRANCE 1,Le Mans,Brest,17.0,12.5,,,2,2,RED,-1600.0
-2026-08-22,Lay 2x2,FRANCE 1,Nice,Lorient,19.0,11.11,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,FRANCE 1,Toulouse,Lyon,16.0,13.33,,,0,1,GREEN,95.0
-2026-08-22,Lay 2x2,CHILE 2,Puerto Montt,Deportes Iquique,17.0,12.5,,,0,2,GREEN,95.0
-2026-08-22,Lay 2x2,ITALY 2,Benevento,Modena,16.5,12.9,,,1,2,GREEN,95.0
-2026-08-22,Lay 2x2,ITALY 2,Calcio Avellino SSD,Arezzo,19.5,10.81,,,1,2,GREEN,95.0
-2026-08-22,Lay 2x2,ITALY 2,Empoli,US Cremonese,18.0,11.76,,,1,0,GREEN,95.0
-2026-08-22,Lay 2x2,PARAGUAY 1,Club Sportivo Ameliano,Deportivo Recoleta,18.5,11.43,,,3,1,GREEN,95.0
-2026-08-22,Lay 2x2,SPAIN 2,Eldense,Cadiz,18.5,11.43,,,2,2,RED,-1750.0
-2026-08-22,Lay 2x2,BRAZIL 3,Botafogo PB,Guarani,17.0,12.5,,,3,1,GREEN,95.0
-2026-08-22,Lay 2x2,VENEZUELA 1,Zamora FC,Universidad de Venezuela,19.0,11.11,,,2,0,GREEN,95.0
-2026-08-22,Lay 2x2,COLOMBIA 1,Aguilas Doradas,Millonarios,20.0,10.53,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,PERU 1,Juan Pablo II College,Asociacion Deportiva Tarma,20.0,10.53,,,2,0,GREEN,95.0
-2026-08-22,Lay 2x2,BRAZIL 1,Internacional,Atletico MG,19.5,10.81,,,0,0,GREEN,95.0
-2026-08-22,Lay 2x2,BRAZIL 1,Cruzeiro MG,Flamengo,16.5,12.9,,,1,1,GREEN,95.0
-2026-08-22,Lay 2x2,PERU 1,Deportivo Garcilaso,Cusco FC,18.0,11.76,,,4,1,GREEN,95.0
-2026-08-22,Lay 2x2,MEXICO 2,Alacranes de Durango,Universidad Guadalajara,18.0,11.76,,,1,2,GREEN,95.0
 2026-08-23,Lay 0x0,ENGLAND 2,West Brom,Burnley,12.0,18.18,,,3,1,GREEN,95.0
 2026-08-23,Lay 0x0,CHINA 1,Chongqing Tonglianglong,Dalian Yingbo,12.0,18.18,,,0,1,GREEN,95.0
 2026-08-23,Lay 0x0,PORTUGAL 1,Santa Clara,Famalicao,8.0,28.57,,,1,0,GREEN,95.0
@@ -292,7 +118,7 @@
 2026-08-24,Lay 0x1,ENGLAND 1,Fulham,Chelsea,12.0,18.18,,,2,3,GREEN,95.0
 2026-08-24,Lay 0x1,ITALY 3,Crotone,Foggia,15.5,13.79,,,0,1,RED,-1450.0
 2026-08-24,Lay 0x1,BRAZIL 2,Athletic Club,Novorizontino,9.0,25.0,,,1,3,GREEN,95.0
-2026-08-24,Lay 0x1,ECUADOR 1,Libertad FC,Macara,10.5,21.05,,,,,SEM_PLACAR,
+2026-08-24,Lay 0x1,ECUADOR 1,Libertad FC,Macara,10.5,21.05,,,1,0,GREEN,95.0
 2026-08-24,Lay 1x0,ITALY 1,Bologna,Lazio,8.2,27.78,,,0,1,GREEN,95.0
 2026-08-24,Lay 1x0,FRANCE 2,Reims,Annecy,9.2,24.39,,,3,1,GREEN,95.0
 2026-08-24,Lay 1x0,ITALY 3,Crotone,Foggia,8.8,25.64,,,0,1,GREEN,95.0
@@ -305,7 +131,7 @@
 2026-08-24,Lay 0x3,BULGARIA 1,Botev Vratsa,Botev Plovdiv,29.0,7.14,,,1,0,GREEN,95.0
 2026-08-24,Lay 0x3,SPAIN 2,Celta Vigo B,FC Andorra,34.0,6.06,,,3,2,GREEN,95.0
 2026-08-24,Lay 0x3,BULGARIA 1,Lokomotiv Plovdiv,Arda,28.0,7.41,,,0,1,GREEN,95.0
-2026-08-24,Lay 0x3,COLOMBIA 2,Leones FC,Real Cartagena,34.0,6.06,,,,,SEM_PLACAR,
+2026-08-24,Lay 0x3,COLOMBIA 2,Leones FC,Real Cartagena,34.0,6.06,,,1,6,GREEN,95.0
 2026-08-24,Lay 2x2,SWEDEN 2,Ostersunds FK,Ljungskile,16.5,12.9,,,0,0,GREEN,95.0
 2026-08-24,Lay 2x2,TURKEY 1,Kocaelispor,Amed Sportif Faaliyetler,19.5,10.81,,,2,0,GREEN,95.0
 2026-08-24,Lay 2x2,BRAZIL 1,Botafogo FR,Athletico-PR,18.0,11.76,,,2,3,GREEN,95.0
@@ -363,33 +189,81 @@
 2026-08-26,Lay 2x2,ENGLAND CUP,Bradford,Burnley,18.0,11.76,,,0,0,GREEN,95.0
 2026-08-26,Lay 2x2,EUROPA CHAMPIONS LEAGUE,NK Celje,Slovan Bratislava,17.5,12.12,,,1,1,GREEN,95.0
 2026-08-26,Lay 2x2,CHILE 1,Coquimbo Unido,Univ Catolica (Chile),19.0,11.11,,,1,2,GREEN,95.0
-2026-08-27,Lay 0x0,SPAIN 1,Celta Vigo,Osasuna,10.5,21.05,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Brann,PAOK,14.5,14.81,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,9.8,22.73,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hapoel Tel Aviv,Atalanta,10.0,22.22,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,SPAIN 1,Celta Vigo,Osasuna,12.5,17.39,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA LEAGUE,Ferencvaros,Trabzonspor,10.5,21.05,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,10.0,22.22,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hibernian,Gent,8.8,25.64,,,,,SEM_PLACAR,
-2026-08-27,Lay 1x0,EUROPA CONFERENCE LEAGUE,KuPS,Shamrock Rovers,8.2,27.78,,,,,SEM_PLACAR,
-2026-08-27,Lay 1x0,SAUDI ARABIA 1,Al Jabalain,Al Jeel,8.4,27.03,,,,,SEM_PLACAR,
-2026-08-27,Lay 1x0,EUROPA CONFERENCE LEAGUE,Monaco,Gornik Zabrze,12.0,18.18,,,,,SEM_PLACAR,
-2026-08-27,Lay 1x0,SPAIN 1,Celta Vigo,Osasuna,7.4,31.25,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x0,ENGLAND CUP,Chelsea,Luton,10.5,21.05,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x0,SPAIN 1,Celta Vigo,Osasuna,11.0,20.0,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x0,BOLIVIA 1,Always Ready,Aurora,11.0,20.0,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,FK Jablonec,Rangers,32.0,6.45,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA LEAGUE,Ararat Armenia,Universitatea Craiova,23.0,9.09,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,32.0,6.45,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Austria Wien,Braga,25.0,8.33,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA LEAGUE,Ferencvaros,Trabzonspor,34.0,6.06,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,34.0,6.06,,,,,SEM_PLACAR,
-2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Partizan Belgrade,Getafe,29.0,7.14,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,KuPS,Shamrock Rovers,19.5,10.81,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA LEAGUE,Ararat Armenia,Universitatea Craiova,20.0,10.53,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,18.5,11.43,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,SAUDI ARABIA 1,Al-Jndal,Al-Saqer FC,18.5,11.43,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA LEAGUE,Ferencvaros,Trabzonspor,16.5,12.9,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,18.5,11.43,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Larne,Lincoln Red Imps,19.5,10.81,,,,,SEM_PLACAR,
-2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Partizan Belgrade,Getafe,19.5,10.81,,,,,SEM_PLACAR,
+2026-08-27,Lay 0x0,SPAIN 1,Celta Vigo,Osasuna,10.5,21.05,,,1,2,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Brann,PAOK,14.5,14.81,,,3,2,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,9.8,22.73,,,1,1,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hapoel Tel Aviv,Atalanta,10.0,22.22,,,0,1,RED,-900.0
+2026-08-27,Lay 0x1,SPAIN 1,Celta Vigo,Osasuna,12.5,17.39,,,1,2,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA LEAGUE,Ferencvaros,Trabzonspor,10.5,21.05,,,3,0,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,10.0,22.22,,,1,3,GREEN,95.0
+2026-08-27,Lay 0x1,EUROPA CONFERENCE LEAGUE,Hibernian,Gent,8.8,25.64,,,2,3,GREEN,95.0
+2026-08-27,Lay 1x0,EUROPA CONFERENCE LEAGUE,KuPS,Shamrock Rovers,8.2,27.78,,,1,0,RED,-720.0
+2026-08-27,Lay 1x0,SAUDI ARABIA 1,Al Jabalain,Al Jeel,8.4,27.03,,,1,0,RED,-740.0
+2026-08-27,Lay 1x0,EUROPA CONFERENCE LEAGUE,Monaco,Gornik Zabrze,12.0,18.18,,,3,0,GREEN,95.0
+2026-08-27,Lay 1x0,SPAIN 1,Celta Vigo,Osasuna,7.4,31.25,,,1,2,GREEN,95.0
+2026-08-27,Lay 2x0,ENGLAND CUP,Chelsea,Luton,10.5,21.05,,,2,0,RED,-950.0
+2026-08-27,Lay 2x0,SPAIN 1,Celta Vigo,Osasuna,11.0,20.0,,,1,2,GREEN,95.0
+2026-08-27,Lay 2x0,BOLIVIA 1,Always Ready,Aurora,11.0,20.0,,,2,2,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,FK Jablonec,Rangers,32.0,6.45,,,1,0,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA LEAGUE,Ararat Armenia,Universitatea Craiova,23.0,9.09,,,1,0,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,32.0,6.45,,,1,1,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Austria Wien,Braga,25.0,8.33,,,0,0,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA LEAGUE,Ferencvaros,Trabzonspor,34.0,6.06,,,3,0,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,34.0,6.06,,,1,3,GREEN,95.0
+2026-08-27,Lay 0x3,EUROPA CONFERENCE LEAGUE,Partizan Belgrade,Getafe,29.0,7.14,,,2,1,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,KuPS,Shamrock Rovers,19.5,10.81,,,1,0,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA LEAGUE,Ararat Armenia,Universitatea Craiova,20.0,10.53,,,1,0,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Hradec Kralove,Panathinaikos,18.5,11.43,,,1,1,GREEN,95.0
+2026-08-27,Lay 2x2,SAUDI ARABIA 1,Al-Jndal,Al-Saqer FC,18.5,11.43,,,1,1,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA LEAGUE,Ferencvaros,Trabzonspor,16.5,12.9,,,3,0,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Rijeka,Midtjylland,18.5,11.43,,,1,3,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Larne,Lincoln Red Imps,19.5,10.81,,,0,2,GREEN,95.0
+2026-08-27,Lay 2x2,EUROPA CONFERENCE LEAGUE,Partizan Belgrade,Getafe,19.5,10.81,,,2,1,GREEN,95.0
+2026-08-28,Lay 0x0,POLAND 2,Odra Opole,LKS Lodz,13.5,16.0,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x0,SPAIN 1,Alaves,Villarreal,16.0,13.33,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x0,ARGENTINA 1,Boca Juniors,Lanus,9.0,25.0,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,EGYPT 1,ENPPI,Wadi Degla,8.2,27.78,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,POLAND 1,Wisla Plock,Korona Kielce,10.5,21.05,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,FRANCE 2,Laval,Grenoble,13.5,16.0,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,ENGLAND 5,Wealdstone,Carlisle,12.0,18.18,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,POLAND 2,Odra Opole,LKS Lodz,10.5,21.05,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,ENGLAND 2,Wrexham,Birmingham,11.5,19.05,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,IRELAND 1,Drogheda,Dundalk,10.5,21.05,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x1,SPAIN 1,Alaves,Villarreal,11.5,19.05,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,TURKEY 2,Keciorengucu,Umraniyespor,9.2,24.39,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,TURKEY 2,Pendikspor,Bandirmaspor,9.4,23.81,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,GERMANY 2,Bochum,VfL Osnabruck,11.0,20.0,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,FRANCE 2,Montpellier,Boulogne,7.8,29.41,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,TURKEY 2,Muglaspor,Boluspor,7.8,29.41,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,ITALY 1,AC Milan,Venezia,9.0,25.0,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,ENGLAND 2,Wrexham,Birmingham,8.8,25.64,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,PERU 1,Comerciantes Unidos,FC Cajamarca,8.6,26.32,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,ECUADOR 1,Mushuc Runa,Delfin,7.0,33.33,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,BRAZIL 2,Goias,Sao Bernardo,7.6,30.3,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,BRAZIL 2,Novorizontino,Sport Recife,7.6,30.3,,,,,SEM_PLACAR,
+2026-08-28,Lay 1x0,ARGENTINA 1,Boca Juniors,Lanus,6.4,37.04,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,SPAIN 1,Racing Santander,Elche,14.5,14.81,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,GERMANY 1,Bayern Munich,Stuttgart,15.0,14.29,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,IRELAND 1,Bohemians,Sligo Rovers,8.8,25.64,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,IRELAND 1,St Patricks,Waterford,9.4,23.81,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,ECUADOR 1,Mushuc Runa,Delfin,8.2,27.78,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,BRAZIL 2,Novorizontino,Sport Recife,9.6,23.26,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x0,ARGENTINA 1,Boca Juniors,Lanus,9.8,22.73,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x2,SPAIN 1,Alaves,Villarreal,15.5,13.79,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x3,POLAND 2,Odra Opole,LKS Lodz,34.0,6.06,,,,,SEM_PLACAR,
+2026-08-28,Lay 0x3,IRELAND 1,Drogheda,Dundalk,29.0,7.14,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ROMANIA 1,FC Voluntari,Otelul Galati,18.5,11.43,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,CYPRUS 1,Olympiakos Nicosia FC,Nea Salamis,19.5,10.81,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,PORTUGAL 2,Leiria,Tondela,20.0,10.53,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,FRANCE 2,Clermont,Sochaux,18.5,11.43,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,FRANCE 2,Laval,Grenoble,19.0,11.11,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ITALY 2,US Cremonese,Modena,19.0,11.11,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,SCOTLAND 2,Dunfermline,Raith,16.5,12.9,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ENGLAND 5,Barrow,Yeovil,20.0,10.53,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ENGLAND 5,Hornchurch,Woking,17.5,12.12,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,IRELAND 2,Kerry FC,Treaty United,19.0,11.11,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,POLAND 2,Odra Opole,LKS Lodz,19.0,11.11,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ENGLAND 2,Wrexham,Birmingham,19.0,11.11,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,IRELAND 1,Drogheda,Dundalk,18.0,11.76,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ITALY 3,Barletta,SSD Bari,20.0,10.53,,,,,SEM_PLACAR,
+2026-08-28,Lay 2x2,ITALY 3,Scafatese,AZ Picerno ASD,20.0,10.53,,,,,SEM_PLACAR,
