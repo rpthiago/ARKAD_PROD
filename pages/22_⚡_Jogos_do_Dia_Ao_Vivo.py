@@ -30,7 +30,6 @@ from hist_rf_loader import load_hist_rf
 from estrategia_lay_under15 import avaliar_jogo_lay_under15
 from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
 from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
-from estrategia_lay_0x1 import avaliar_jogos_lay_0x1_grade
 from inplay_telemetry_engine import InPlayTelemetryEngine
 
 telemetry_engine = InPlayTelemetryEngine()
@@ -232,33 +231,6 @@ def processar_grade_do_dia(data_str_param, limitar_1_hora=False):
                 'EV': s['ev'],
                 'Break_Even': s['break_even_wr'],
                 'Tipo': 'Lay 0x3'
-            })
-    except Exception:
-        pass
-
-    # 4. Avaliar Lay 0x1 Correct Score
-    try:
-        sinais_0x1 = avaliar_jogos_lay_0x1_grade(df_bf, selecionar_1_por_horario=limitar_1_hora)
-        for s in sinais_0x1:
-            jogos_qualificados.append({
-                'Data': data_str_param,
-                'Horário': s['hora'],
-                'Jogo': f"{s['home']} x {s['away']}",
-                'Home': s['home'],
-                'Away': s['away'],
-                'Liga': s['league'],
-                'Método': s['metodo'],
-                'Mercado': s['mercado'],
-                'Lado': 'LAY',
-                'Odd_Entrada': s['odd_lay'],
-                'Prob_IA': s['prob_estimada'],
-                'EV': s['ev'],
-                'Break_Even': s['break_even_wr'],
-                'Tipo': 'Lay 0x1'
-            })
-    except Exception:
-        pass
-            
     return pd.DataFrame(jogos_qualificados)
 
 # ── Execução e Apresentação ──

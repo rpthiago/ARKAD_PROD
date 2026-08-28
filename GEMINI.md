@@ -162,7 +162,7 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
 - **MORTOS / miragem (na odd de lay real):** Lay 0x0 (paper de agosto: **−R$1.979**), Lay 1x0
   (teve mês bom na odd real, mas **sem edge confirmado** — não escalar), Lay 2x0 / 0x2
   (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, sem confirmação),
-  Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
+  Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 0x1 In-Play (cashout 0x0 no HT gera **−0,499u** de perda real em vez do presumido +0,19u, colapsando ROI para **−11%** em N=17k e N=473 ticks reais no coletor; **DESCARTADO**), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
   ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%), Lay Draw (+2%, reprova FDR),
   Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
   DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
@@ -172,7 +172,9 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
   StandardScaler; IC95 cruza zero, p=0,13; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
   escanteios, Over 1.5 ML, HT scans.
-- **Observação / candidato (stake-zero):** 
+- **Aprovado / Observação (Fiel à Regra e Matemática):**
+  - **Handicap Asiático +2.0 / EH +2 Zebra (Saldo Menor Top 2):** ✅ CONFIRMADO independentemente (Claude, ago/2026):
+    Base 2026 completa (N=455 a 459), WR 88,6% (Betano) a 96,6% (Traderball AH +2.0 com 38 reembolsos), **8/8 meses positivos**.
   - **Lay Under 1.5 FT (XGBoost EV ≥ 5%):** ✅ CONFIRMADO independentemente (Claude, ago/2026):
     split leak-free (treino `<2026`, teste 2026), sem leak de feature (todas as VAR `|corr|<0,17`),
     N=225, WR 73,3% vs BE 68,4% (margem +4,9%), **7/8 meses positivos**, **bootstrap IC95
