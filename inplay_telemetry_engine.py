@@ -200,6 +200,59 @@ class InPlayTelemetryEngine:
                     'recomendacao_live': f'Jogo aos {m}\' ({placar}).'
                 }
                 
+        # Para Lay 0x1
+        elif '0x1' in metodo_pre:
+            gh, ga = tele.get('gh', -1), tele.get('ga', -1)
+            if (gh >= 1 or ga >= 2) and gh >= 0 and ga >= 0:
+                return {
+                    'status': 'GREEN_CONFIRMADO',
+                    'badge': '🟢 GREEN GANHO',
+                    'placar': placar,
+                    'minuto': f"{m}'" if m < 90 else "FT",
+                    'recomendacao_live': f'Placar {placar}: 0x1 se tornou impossível. Operação ganha!'
+                }
+            elif gh == 0 and ga == 1 and m < 90:
+                return {
+                    'status': 'STOP_RED_30',
+                    'badge': '🛡️ STOP RED 30%',
+                    'placar': placar,
+                    'minuto': f"{m}'",
+                    'recomendacao_live': f'Aos {m}\' com 0x1: Executar Stop Red para travar perda em 30% da liability.'
+                }
+            elif m >= 45 and m <= 55 and gh == 0 and ga == 0:
+                return {
+                    'status': 'CASHOUT_HT_0X0',
+                    'badge': '💰 CASHOUT HT (0x0)',
+                    'placar': placar,
+                    'minuto': f"{m}'",
+                    'recomendacao_live': 'Intervalo em 0x0: Executar saída no HT com lucro de tempo (~20% da stake).'
+                }
+            elif m >= 90:
+                if placar == '0 - 1':
+                    return {
+                        'status': 'RED',
+                        'badge': '🔴 RED (0x1)',
+                        'placar': placar,
+                        'minuto': "FT",
+                        'recomendacao_live': 'Terminou em 0x1.'
+                    }
+                else:
+                    return {
+                        'status': 'GREEN_CONFIRMADO',
+                        'badge': '🟢 GREEN GANHO',
+                        'placar': placar,
+                        'minuto': "FT",
+                        'recomendacao_live': f'Terminou em {placar}. Operação ganha!'
+                    }
+            elif m > 0:
+                return {
+                    'status': 'EM_ANDAMENTO',
+                    'badge': '⚽ AO VIVO',
+                    'placar': placar,
+                    'minuto': f"{m}'",
+                    'recomendacao_live': f'Jogo aos {m}\' ({placar}).'
+                }
+                
         return {
             'status': 'FINALIZADO' if m >= 90 else 'EM_ANDAMENTO',
             'badge': f'⚽ {placar}',
