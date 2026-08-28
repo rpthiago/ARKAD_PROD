@@ -1,173 +1,87 @@
-import os
-import sys
-import io
-import time
-from datetime import datetime, date
-import pandas as pd
-import numpy as np
-import streamlit as st
+# -*- coding: utf-8 -*-
+"""
+5_Sinais_Lay_0x1 — Lay 0x1 FAVORITÃO (Odd_H<=2.20) em observação FORWARD stake-zero.
+Regra: Lay Correct Score 0x1, só quando Odd_H_FT<=2.20 e a odd de LAY REAL do 0-1 está 5.00-13.00.
+Hold até o fim. GREEN se FT != 0-1; RED se FT == 0-1. Odd real do coletor Betfair.
+Lê o log do observador (lay0x1_fav_acumulado.csv) + a validação histórica (Lay0x1_Favoritao_21ago.xlsx).
+"""
+import os, subprocess
+from pathlib import Path
+import numpy as np, pandas as pd, streamlit as st
 
-# Configura a página do Streamlit
-st.set_page_config(
-    page_title="Sinais Lay 0x1 - Ao Vivo",
-    page_icon="🎯",
-    layout="wide",
-)
+st.set_page_config(page_title="Lay 0x1 Favoritão", page_icon="🎯", layout="wide")
+ROOT = Path(__file__).resolve().parent.parent
+LOG = ROOT / "lay0x1_fav_acumulado.csv"
+HIST = ROOT / "Lay0x1_Favoritao_21ago.xlsx"
+COMM = 0.045
 
-import traceback
-import importlib
-try:
-    import coleta_lay_cs_aovivo
-    importlib.reload(coleta_lay_cs_aovivo)
-    import b365_data_utils
-    import hist_rf_loader
-except Exception as e:
-    st.error("Erro ao carregar os módulos locais do Lay 0x1:")
-    st.code(traceback.format_exc())
-    st.stop()
 
-st.title("🎯 Sinais Lay 0x1 (XGBoost & Random Forest)")
-st.markdown("""
-Esta página bate na **API da Betfair em tempo real**, calcula as inteligências dos motores **XGBoost (Trader)** e **Random Forest (RF)**, e aplica os **filtros estritos e realistas** validados no nosso backtest de longo prazo (2024-2026):
+def be(o):
+    return (o - 1) / (o - COMM) if o and o > 1 else np.nan
 
-*   **🏆 Sweet Spot Unificado (XGBoost & RF):** Odd Betfair Lay entre **13.20 e 18.00**
-    *   *Métrica de Entrada:* Probabilidade Mínima **>= 75.0%** (XGBoost) ou **>= 92.0%** (Random Forest).
-    *   *Nota:* A Blacklist de ligas under (Brasil 2, França 2, Inglaterra 2, Espanha 2, Portugal 1) é **condicional à Odd Lay** (aplicada apenas para Odds <= 13.00). Na faixa Sweet Spot (13.20 - 18.00), estas ligas são totalmente liberadas após validação de 100% de aproveitamento em 2026.
 
-> ⚠️ **IMPORTANTE (FULL MATCH):** Conforme comprovado matematicamente pelo nosso Backtest Master, **NÃO faça Cash Out aos 60 minutos (Rota 60)**! Sair aos 60 minutos gera prejuízo a longo prazo. Deixe a operação correr até o final — o robô só toma Red se o placar final for exatamente 0x1.
-""")
+st.title("🎯 Lay 0x1 — Favoritão (Odd_H ≤ 2,20)")
+st.warning(
+    "**Observação FORWARD stake-ZERO — NÃO é aposta real.** Lay 0x1 puro perde (−7% no paper). O filtro "
+    "**favoritão em casa (Odd_H≤2,20)** é o único que sobrevive na odd de lay REAL. Mas na janela real recente "
+    "(21/08+) deu **break-even (+0,2%)**, não os +20% do backtest — a lay real fica no topo da faixa (10-13). "
+    "É candidato de **alta variância**, aguardando o forward confirmar em janelas novas.", icon="⚠️")
 
-col1, col2 = st.columns([1, 3])
-with col1:
-    import config
-    if not config.API_TOKEN:
-        st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do seu Streamlit Cloud! A coleta ao vivo não funcionará sem ela.")
-    target_date = st.date_input("Data dos Jogos", value=date.today())
-    gerar_btn = st.button("Pesquisar Oportunidades", type="primary")
+c1, c2 = st.columns([1, 4])
+with c1:
+    if st.button("🔄 Escanear hoje", use_container_width=True):
+        with st.spinner("Puxando favoritões do dia + lay real do coletor..."):
+            try:
+                py = str(ROOT / ".venv" / "Scripts" / "python.exe")
+                if not os.path.exists(py):
+                    py = str(ROOT.parent / "DASHBOARD_ARKAD-1" / ".venv" / "Scripts" / "python.exe")
+                subprocess.run([py, str(ROOT / "observar_lay0x1_fav.py")], cwd=str(ROOT), timeout=600)
+                st.cache_data.clear(); st.success("Atualizado!")
+            except Exception as e:
+                st.error(f"Falha (rode local): {str(e)[:120]}")
 
-if gerar_btn:
-    date_str = target_date.strftime("%Y-%m-%d")
-    with st.spinner(f"Baixando grade de {date_str}, montando Histórico Rolante e executando modelos..."):
-        try:
-            # Garante que o histórico está carregado na memória
-            hist_rf_loader.load_hist_rf()
-            
-            # Puxa os sinais brutos do motor 0x1
-            cfg = coleta_lay_cs_aovivo.MERCADOS["0x1"]
-            sinais_brutos = coleta_lay_cs_aovivo.sinais_do_dia(date_str, cfg)
-        except Exception as e:
-            st.error("Erro durante a execução do motor de sinais Lay 0x1:")
-            st.code(traceback.format_exc())
-            st.stop()
-        
-        if not sinais_brutos:
-            st.warning("Nenhum jogo encontrado para hoje na API Betfair (ou fora de temporada).")
-        else:
-            df = pd.DataFrame(sinais_brutos)
-            
-            # Limpa colunas e força numérico para a filtragem estrita
-            col_odd = next((c for c in ["Odd_lay_entrada", "odd_lay_entrada", "odd_execucao", "Odd_Lay", "odd"] if c in df.columns), None)
-            col_prob = next((c for c in ["Prob", "prob", "Prob_ML", "prob_ml"] if c in df.columns), None)
-            col_metodo = next((c for c in ["Metodo", "metodo"] if c in df.columns), None)
-            col_liga = next((c for c in ["Liga", "liga", "League", "league"] if c in df.columns), None)
 
-            df["Odd_Num"] = pd.to_numeric(df[col_odd], errors="coerce") if col_odd else np.nan
-            df["Prob_Num"] = pd.to_numeric(df[col_prob], errors="coerce") if col_prob else np.nan
-            
-            if col_metodo:
-                # 1. Filtragem do Trader (XGBoost) (Odd 10.0-18.0)
-                df_xg = df[
-                    df[col_metodo].astype(str).str.contains("Trader", na=False) &
-                    (df["Odd_Num"] >= 10.0) & (df["Odd_Num"] <= 18.0) &
-                    (df["Prob_Num"] >= 75.0)
-                ].copy()
-                if not df_xg.empty:
-                    df_xg["Metodo_Final"] = "XGBoost (Trader)"
-                
-                # 2. Filtragem do Random Forest RF v2 (Odd 6.0-9.5)
-                blacklist = {"BRAZIL 2", "FRANCE 2", "ENGLAND 2", "SPAIN 2", "PORTUGAL 1"}
-                liga_series = df[col_liga].astype(str).str.upper().str.strip() if col_liga else pd.Series([""] * len(df))
-                is_blacklisted = liga_series.isin(blacklist) & (df["Odd_Num"] <= 13.0)
-                df_rf = df[
-                    df[col_metodo].astype(str).str.contains("RF", na=False) &
-                    (df["Odd_Num"] >= 6.0) & (df["Odd_Num"] <= 9.5) &
-                    (df["Prob_Num"] >= 88.0) &
-                    (~is_blacklisted)
-                ].copy()
-                if not df_rf.empty:
-                    df_rf["Metodo_Final"] = "Random Forest (RF)"
-            else:
-                df_xg = pd.DataFrame()
-                df_rf = pd.DataFrame()
-            
-            # Combinar os sinais estritos
-            jogos_vistos = {}
-            
-            for d_idx, row in pd.concat([df_xg, df_rf]).iterrows():
-                mandante = row.get("Mandante") or row.get("Home") or "Mandante"
-                visitante = row.get("Visitante") or row.get("Away") or "Visitante"
-                key = (mandante, visitante)
-                if key not in jogos_vistos:
-                    odd_lay_val = row.get("Odd_lay_entrada") or row.get("odd_execucao") or row.get("odd") or ""
-                    prob_val = row.get("Prob") or row.get("prob") or ""
-                    raw_horario = row.get("Horario") or row.get("horario") or row.get("Time") or row.get("Hora") or ""
-                    game_time = str(raw_horario).strip()[:5] if (pd.notna(raw_horario) and str(raw_horario).strip().lower() != "nan") else ""
+@st.cache_data(ttl=300, show_spinner=False)
+def carregar(p, mt):
+    return pd.read_csv(p)
 
-                    jogos_vistos[key] = {
-                        "Date": row.get("Date") or row.get("data") or date_str,
-                        "Horario": game_time,
-                        "Liga": row.get("Liga") or row.get("liga") or "",
-                        "Mandante": mandante,
-                        "Visitante": visitante,
-                        "Odd_lay_entrada": odd_lay_val,
-                        "Prob": prob_val,
-                        "Modelos_Aprovados": [row.get("Metodo_Final", "IA")]
-                    }
-                else:
-                    if row.get("Metodo_Final") and row["Metodo_Final"] not in jogos_vistos[key]["Modelos_Aprovados"]:
-                        jogos_vistos[key]["Modelos_Aprovados"].append(row["Metodo_Final"])
-            
-            df_final = pd.DataFrame([
-                {
-                    "Data": j["Date"],
-                    "Horário": j["Horario"][:5] if j["Horario"] else "",
-                    "Liga": j["Liga"],
-                    "Mandante": j["Mandante"],
-                    "Visitante": j["Visitante"],
-                    "Odd Lay Betfair": j["Odd_lay_entrada"],
-                    "Probabilidade ML": f"{j['Prob']}%",
-                    "Estratégia": " + ".join(j["Modelos_Aprovados"])
-                }
-                for j in jogos_vistos.values()
-            ])
-            
-            st.divider()
-            
-            if df_final.empty:
-                st.info(f"O robô analisou {len(df)} jogos hoje, mas **nenhum** atendeu aos critérios estritos de longo prazo das IAs (XGBoost/RF na faixa 13.2-18.0). Guarde a banca!")
-                with st.expander("Ver todos os palpites rejeitados (fora da faixa de odd/probabilidade estrita/blacklist)"):
-                    rejected = df.copy()
-                    if "Metodo" in rejected.columns:
-                        rejected["Filtros_Originais"] = rejected["Metodo"]
-                    cols_drop = ["Odd_Num", "Prob_Num", "Metodo", "metodo", "PREENCHER_odd_abertura", "PREENCHER_odd_min60", "PREENCHER_odd_min75", "Placar_final", "Momento_gols", "status", "obs"]
-                    st.dataframe(rejected.drop(columns=cols_drop, errors="ignore"), use_container_width=True)
-            else:
-                st.success(f"🔥 {len(df_final)} Oportunidades de Valor Encontradas!")
-                
-                # Exibe a tabela bonita
-                st.dataframe(df_final, use_container_width=True)
-                
-                # Botão de Download
-                buffer = io.BytesIO()
-                with pd.ExcelWriter(buffer, engine='openpyxl') as writer:
-                    df_final.to_excel(writer, index=False, sheet_name='Sinais')
-                excel_data = buffer.getvalue()
-                
-                st.download_button(
-                    label="📥 Baixar Planilha de Sinais (Excel)",
-                    data=excel_data,
-                    file_name=f"sinais_lay0x1_realista_{target_date}.xlsx",
-                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                )
-                
-                st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva validados no backtest.")
+
+# ── FORWARD (log do observador) ──
+st.subheader("Forward stake-zero (a partir de 2026-08-29)")
+if LOG.exists():
+    fwd = carregar(str(LOG), os.path.getmtime(LOG))
+    fin = fwd[fwd["status"] == "Finalizado"]; pend = fwd[fwd["status"] == "Pendente"]
+    k1, k2, k3, k4 = st.columns(4)
+    k1.metric("Liquidados", f"{len(fin)}"); k2.metric("Pendentes", f"{len(pend)}")
+    if len(fin):
+        wr = (fin["resultado"] == "GREEN").mean() * 100
+        bem = fin["odd_lay01"].apply(be).mean() * 100
+        roi = fin["pnl"].sum() / (fin["odd_lay01"] - 1).sum() * 100
+        k3.metric("WR vs BE", f"{wr:.1f}%", f"{wr - bem:+.1f}%")
+        k4.metric("ROI / liability", f"{roi:+.1f}%")
+    if len(pend):
+        st.caption("Sinais de HOJE/próximos (siga estes):")
+        st.dataframe(pend[["data", "jogo", "liga", "odd_h", "odd_lay01"]].sort_values("data"),
+                     use_container_width=True, hide_index=True)
+    if len(fin):
+        st.dataframe(fin[["data", "jogo", "odd_h", "odd_lay01", "resultado", "pnl"]].sort_values("data", ascending=False),
+                     use_container_width=True, hide_index=True)
+else:
+    st.info("Log forward ainda vazio. Rode **🔄 Escanear hoje** (ou a tarefa diária).")
+
+# ── VALIDAÇÃO histórica 21/08+ (dado real do coletor) ──
+st.subheader("Validação na odd real — 21/08 em diante (não conta como forward)")
+if HIST.exists():
+    h = pd.read_excel(HIST)
+    liq = h[h["Resultado"].isin(["GREEN", "RED"])]
+    if len(liq):
+        wr = (liq["Resultado"] == "GREEN").mean() * 100
+        bem = liq["Odd_Lay_0x1"].apply(be).mean() * 100
+        roi = np.where(liq["Resultado"] == "GREEN", 0.955, -(liq["Odd_Lay_0x1"] - 1)).sum() / (liq["Odd_Lay_0x1"] - 1).sum() * 100
+        a, b, c = st.columns(3)
+        a.metric("N", f"{len(liq)}"); b.metric("WR vs BE", f"{wr:.1f}%", f"{wr - bem:+.1f}%")
+        c.metric("ROI / liability", f"{roi:+.1f}%")
+    st.dataframe(h.sort_values("Data", ascending=False), use_container_width=True, hide_index=True)
+    st.caption("Break-even ≈ 91-92% na odd real (10-13). A WR precisa ficar **confortavelmente acima** — hoje raspa.")
+else:
+    st.info("Validação histórica não gerada ainda.")
