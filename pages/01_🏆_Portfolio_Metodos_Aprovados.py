@@ -351,3 +351,9 @@ with tab4:
         if path_all.exists():
             with open(path_all, "rb") as f:
                 st.download_button("📥 Baixar Auditoria Todos os Lays (Excel)", f.read(), file_name="Auditoria_Forense_Todos_Lays_2026.xlsx", use_container_width=True)
+                
+        st.markdown("#### 📅 Todos os Jogos de Agosto/2026 (Backtest Multi-Aba)")
+        path_ago = ROOT / "Backtest_Agosto_2026_Todos_Jogos_Metodos_Aprovados.xlsx"
+        if path_ago.exists():
+            with open(path_ago, "rb") as f:
+                st.download_button("📥 Baixar Planilha Agosto/2026 Completa (Excel)", f.read(), file_name="Backtest_Agosto_2026_Todos_Jogos.xlsx", use_container_width=True, type="primary")
