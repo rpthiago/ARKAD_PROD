@@ -29,8 +29,9 @@ st.warning(
     "**fino e de alta variância** (cauda gorda de CS). Segue acumulando pra confirmar.", icon="⚠️")
 @st.cache_data(ttl=900, show_spinner=False)
 def scan_sinais_api(_hoje):
-    """Método COMPLETO via API Betfair (roda inline no Cloud): favoritão (Odd_H_Back<=2.20) +
-    lay 0-1 REAL (Odd_CS_0x1_Lay entre 5 e 13). A API tem a odd de CS e atualiza de hora em hora."""
+    """Config OURO COMBINADA via API Betfair (roda inline no Cloud):
+    Lay 0x1: Odd_H_Back<=2.20 + Odd_CS_0x1_Lay 5-13 + Odd_Over25_FT_Back<=2.00
+    Lay 1x0: Odd_A_Back<=2.20 + Odd_CS_1x0_Lay 5-13 + Odd_Over25_FT_Back<=2.00"""
     from datetime import date, timedelta
     from futpythontrader_client import get_daily_dataframe
     out = []
@@ -42,27 +43,35 @@ def scan_sinais_api(_hoje):
             continue
         if df is None or df.empty or "Odd_CS_0x1_Lay" not in df.columns:
             continue
-        oh = pd.to_numeric(df["Odd_H_Back"], errors="coerce")
-        lay = pd.to_numeric(df["Odd_CS_0x1_Lay"], errors="coerce")
-        m = (oh <= 2.20) & (lay >= 5) & (lay <= 13)
-        out.append(pd.DataFrame({"Data": ds, "Hora": df.loc[m, "Time"].astype(str).str[:5],
-                                 "Liga": df.loc[m, "League"], "Mandante": df.loc[m, "Home"], "Visitante": df.loc[m, "Away"],
-                                 "Odd_H": oh[m].round(2), "Lay_0x1": lay[m].round(2)}))
+        oh = pd.to_numeric(df["Odd_H_Back"], errors="coerce"); oa = pd.to_numeric(df["Odd_A_Back"], errors="coerce")
+        ov = pd.to_numeric(df["Odd_Over25_FT_Back"], errors="coerce")
+        l01 = pd.to_numeric(df["Odd_CS_0x1_Lay"], errors="coerce"); l10 = pd.to_numeric(df["Odd_CS_1x0_Lay"], errors="coerce")
+        base = dict(Data=ds, Hora=df["Time"].astype(str).str[:5], Liga=df["League"], Mandante=df["Home"], Visitante=df["Away"])
+        m1 = (oh <= 2.20) & (l01 >= 5) & (l01 <= 13) & (ov <= 2.00)
+        if m1.any():
+            s = pd.DataFrame(base)[m1].assign(Metodo="Lay 0x1", Fav_odd=oh[m1].round(2), Lay=l01[m1].round(2), Over25=ov[m1].round(2))
+            out.append(s)
+        m2 = (oa <= 2.20) & (l10 >= 5) & (l10 <= 13) & (ov <= 2.00)
+        if m2.any():
+            s = pd.DataFrame(base)[m2].assign(Metodo="Lay 1x0", Fav_odd=oa[m2].round(2), Lay=l10[m2].round(2), Over25=ov[m2].round(2))
+            out.append(s)
     return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
 
 
 c1, c2 = st.columns([1, 4])
 with c1:
-    scan = st.button("🔄 Scan sinais (hoje/amanhã)", use_container_width=True, type="primary")
+    scan = st.button("🔄 Scan sinais OURO (hoje/amanhã)", use_container_width=True, type="primary")
 with c2:
-    st.caption("Roda o **método completo direto no Cloud** via API Betfair (favoritão **+ lay 0-1 real**). "
-               "A API tem a odd de CS e atualiza de hora em hora — **não precisa do coletor** pros sinais.")
+    st.caption("Config **OURO combinada** direto no Cloud via API: **Lay 0x1** (favoritão casa) + **Lay 1x0** "
+               "(favoritão fora), ambos com **Over 2.5 ≤ 2,00** e lay do placar 5-13. Layar o placar (0-1 ou 1-0) na odd mostrada.")
 if scan:
-    with st.spinner("Puxando sinais do dia na API Betfair..."):
+    with st.spinner("Puxando sinais OURO na API Betfair..."):
         sig = scan_sinais_api(date.today().isoformat())
     if len(sig):
-        st.success(f"🎯 {len(sig)} sinais Lay 0x1 favoritão (hoje/amanhã). Layar o **0-1** na odd mostrada.")
-        st.dataframe(sig.sort_values(["Data", "Hora"]), use_container_width=True, hide_index=True)
+        n1 = (sig["Metodo"] == "Lay 0x1").sum(); n2 = (sig["Metodo"] == "Lay 1x0").sum()
+        st.success(f"🎯 {len(sig)} sinais OURO (hoje/amanhã) — {n1} Lay 0x1 + {n2} Lay 1x0.")
+        st.dataframe(sig[["Data", "Hora", "Liga", "Mandante", "Visitante", "Metodo", "Fav_odd", "Lay", "Over25"]].sort_values(["Data", "Hora"]),
+                     use_container_width=True, hide_index=True)
     else:
         st.warning("API não retornou sinais agora (token/rede) ou sem favoritão na faixa. Tente mais tarde.")
 
@@ -85,13 +94,13 @@ if LOG.exists():
         roi = fin["pnl"].sum() / (fin["odd_lay01"] - 1).sum() * 100
         k3.metric("WR vs BE", f"{wr:.1f}%", f"{wr - bem:+.1f}%")
         k4.metric("ROI / liability", f"{roi:+.1f}%")
+    _cols_p = [c for c in ["data", "jogo", "liga", "metodo", "fav_odd", "odd_lay01"] if c in fwd.columns]
+    _cols_f = [c for c in ["data", "jogo", "metodo", "fav_odd", "odd_lay01", "resultado", "pnl"] if c in fwd.columns]
     if len(pend):
         st.caption("Sinais de HOJE/próximos (siga estes):")
-        st.dataframe(pend[["data", "jogo", "liga", "odd_h", "odd_lay01"]].sort_values("data"),
-                     use_container_width=True, hide_index=True)
+        st.dataframe(pend[_cols_p].sort_values("data"), use_container_width=True, hide_index=True)
     if len(fin):
-        st.dataframe(fin[["data", "jogo", "odd_h", "odd_lay01", "resultado", "pnl"]].sort_values("data", ascending=False),
-                     use_container_width=True, hide_index=True)
+        st.dataframe(fin[_cols_f].sort_values("data", ascending=False), use_container_width=True, hide_index=True)
 else:
     st.info("Log forward ainda vazio. Rode **🔄 Escanear hoje** (ou a tarefa diária).")
 
