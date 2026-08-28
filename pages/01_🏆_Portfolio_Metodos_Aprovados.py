@@ -64,16 +64,25 @@ break-even verificado e consistência de 8 de 8 meses positivos na base congelad
 # ── Sidebar: Configurações de Gestão ──
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
-perfil_stake = st.sidebar.selectbox("Gestão de Risco", ["Conservador (1% da banca)", "Moderado (2% da banca)", "Kelly Fracionário (2.5%)"])
+perfil_stake = st.sidebar.selectbox("Risco Máx por Aposta (Liability)", [
+    "Conservador (0.5% da banca)", 
+    "Moderado (1.0% da banca)", 
+    "Firme (1.5% da banca)", 
+    "Agressivo (2.0% da banca)"
+], index=1)
 
-if "1%" in perfil_stake:
-    stake_nominal = banca_total * 0.01
-elif "2%" in perfil_stake:
-    stake_nominal = banca_total * 0.02
+if "0.5%" in perfil_stake:
+    pct_risco = 0.005
+elif "1.0%" in perfil_stake:
+    pct_risco = 0.010
+elif "1.5%" in perfil_stake:
+    pct_risco = 0.015
 else:
-    stake_nominal = banca_total * 0.025
+    pct_risco = 0.020
 
-st.sidebar.info(f"💰 **Stake Base Nominal:** R$ {stake_nominal:.2f}")
+liability_fixa = banca_total * pct_risco
+st.sidebar.success(f"🛡️ **Liability Fixa Máx:** R$ {liability_fixa:.2f}")
+st.sidebar.caption(f"Cada RED perde exatamente R$ {liability_fixa:.2f} ({pct_risco*100:.1f}% da banca).")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
@@ -312,17 +321,17 @@ with tab3:
     
     col_c1, col_c2, col_c3 = st.columns(3)
     with col_c1:
-        odd_calc = st.number_input("Odd de Lay da Entrada", min_value=1.05, max_value=30.0, value=10.0, step=0.5)
+        odd_calc = st.number_input("Odd de Lay da Entrada", min_value=1.05, max_value=30.0, value=5.80, step=0.5)
     with col_c2:
-        risco_max_banca = st.slider("Risco Máx por Operação (% da Banca)", 1.0, 5.0, 2.0, 0.5)
+        risco_max_banca = st.slider("Risco Máx por Operação (% da Banca)", 0.25, 2.5, 1.0, 0.25, help="Profissional: 0.5% a 1.5%")
     with col_c3:
         liability_max = banca_total * (risco_max_banca / 100.0)
         stake_recomendada = liability_max / (odd_calc - 1.0)
-        st.metric("Liability Máx Permitida", f"R$ {liability_max:.2f}")
-        st.metric("Stake Nominal Recomendada", f"R$ {stake_recomendada:.2f}")
+        st.metric("Liability Máx Permitida (Risco)", f"R$ {liability_max:.2f}")
+        st.metric("Stake Nominal a Digitar", f"R$ {stake_recomendada:.2f}")
         
     st.info(f"💡 **Regra de Execução:** Ao entrar em Lay na odd **{odd_calc:.2f}**, aposte **R$ {stake_recomendada:.2f}** de stake nominal. "
-            f"Se ganhar, seu lucro líquido é de **+R$ {stake_recomendada * 0.955:.2f}** (+0.955u). Se perder, o red fica estritamente travado em **-R$ {liability_max:.2f}**.")
+            f"Se ganhar, seu lucro líquido é de **+R$ {stake_recomendada * 0.955:.2f}**. Se perder, seu prejuízo fica rigorosamente travado em **-R$ {liability_max:.2f} ({risco_max_banca:.2f}% da banca)**.")
 
 # =========================================================================
 # TAB 4: DOWNLOAD DAS PLANILHAS
