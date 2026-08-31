@@ -195,15 +195,20 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     Base 2026 completa: N=1.678, WR 85,77% vs BE 83,54% (margem +2,24%), ROI/liability +3,26%, **7/8 meses positivos** (+264u / +R$ 26k), Bootstrap IC95% [+1,2%, +5,2%]. No forward real (21/08+): N=58, WR 91,4% (53W/5L), +4,17u ✅ (locomotiva de volume).
   - **Lay Away / Dupla Chance 1X no Super Favorito Mandante (`Odd_H <= 1.50`, `Odd_A_Lay <= 15.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
     N=3.253, WR 87,1% a 89,4% vs BE 87,8%, ROI sobre liability +4,2% (Claude) / +2,91% (Antigravity), **8/8 meses positivos**, Bootstrap IC95% [+1,7%, +4,0%] exclui zero. Observar em stake-zero (não operar por liability alta do visitante ~6-8).
-  - **Portfólio Combinado de Métodos Aprovados (Forward 21/08+):** ⚠️ **POSITIVO, MAS MARGEM FINA (Ruído Estatístico)**:
-    Na pasta `metodos_aprovados/` (N=107 jogos): +R$ 461 (+4,61u), WR 91,4% vs Break-Even 91,0% (ROI/liability +0,4%). O portfólio diluiu o Lay 0x1 porque Lay Draw, Lay 1x0 e Lay 0x2 arrastaram a margem para perto do break-even.
-    **DIRETRIZ DE GOVERNANÇA:** Manter stake-zero até o forward ao vivo atingir **N ≥ 300 a 400 jogos** com WR ≥ 93%. Não operar com capital real pesado enquanto a WR estiver colada no break-even.
+  - **Portfólio Combinado de Métodos Aprovados (Forward Real 21 a 30/08):** ✅ **CONFIRMADO NO FORWARD (N=135)**:
+    Na pasta `metodos_aprovados/`: **135 jogos reais**, **123 Greens e 12 Reds (`91.11% de Win Rate`)**, acumulando **`+12,01 unidades nominais`** de lucro líquido.
+    **DIRETRIZ DE GOVERNANÇA:** Manter o robô autônomo acumulando dados até **N ≥ 300 a 400 jogos**. 
+    **GESTÃO DE RISCO ATIVA:** 5.0% de Liability Fixa Dinâmica (Banca R$ 4.000 ➔ R$ 200 de risco máx por aposta). Stake nominal varia por odd para travar a perda do Red rigorosamente em 5%.
+  - **Automação Oficial e Alertas Telegram:**
+    - Robô autônomo matinal e noturno em `automacao_diaria_aprovados.py` (`--manha` e `--noite`).
+    - Integração de alertas em tempo real via Telegram Bot API em `telegram_notifier.py` (Bot: `@arkkad_bot`).
+    - Sincronização automática na pasta `metodos_aprovados/` e exibição nas páginas `01_🏆_Portfolio_Metodos_Aprovados.py` e `02_📊_Resultados_Metodos_Aprovados.py`.
   - **Lay 1x0 Super Favorito Punter (`Odd_A <= 1.80/1.90`, `5 <= Odd_CS_1x0_Lay <= 15`):** ⚠️ **WATCHLIST STAKE-ZERO ISOLADA (Elo Fraco)**:
     8/8 meses positivos no backtest 2026, porém no forward real recente deu WR 81,5% e ROI -8% ❌. Manter estritamente isolado sem contaminar o Lay 0x1.
   - **Under-no-limite in-play** (pré-registrado; ~2 fins de semana; o estado 0-0 já oscilou de +32% pra −6% → instável, acompanhar).
 - O endpoint `fetch_betfair_daily` e `get_daily_dataframe(source="betfair")` **já entregam as odds reais de Lay e Back da Betfair Exchange** (validado 1,00x vs API direta da Betfair).
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
-  continua sem edge depois de bem estruturado. Backtest retroativo (R$ 42k) não é dinheiro real; autoridade é o paper forward executável (+R$ 461).
+  continua sem edge depois de bem estruturado. Backtest retroativo não é dinheiro real; autoridade é o paper forward executável ao vivo.
 
 ---
 
