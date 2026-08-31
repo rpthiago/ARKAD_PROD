@@ -67,6 +67,9 @@
 | **Combinar Métodos Prematuramente** (Juntar Lay 1x0 com Lay 0x1 antes do 1x0 provar edge real) | **Tratamento e Portfólio Separados:** 1x0 é o elo fraco (−8% forward) e deve rodar isolado |
 | **Odd Estimada / Inventada em Handicap** (Assumir odd 2,45 em AH +1.5 Zebra gerando "+82% ROI" falso) | **NUNCA estimar odd.** Usar coluna real (`AH_*`, `EH_*`, `Odd_*`). AH +1.5 Zebra mandante na odd real 1,30 dá **−4,2%** de prejuízo |
 | **Risco de Cauda Excessivo em Lay de Odd Alta** (Lay 2x2 com liability 16,8 e margem navalha +1,14%) | **Evitar Lay de Odd Alta com Margem Fina.** 1 red apaga 17 greens, tornando o risco de ruína inaceitável |
+| **Vig-Cegueira em BTTS e HT** (BTTS com 8,3% e HT com 7,8% de overround da casa) | **NUNCA apostar em BTTS ou HT genérico.** A vig alta e spreads largos consom qualquer micro-edge |
+| **Miragem do O/U Pré-Jogo** (Assumir edge em Lay Under 2.5 / 3.5 em jogos over) | **O/U Pré-Jogo é hiper-eficiente.** O edge real de Over/Under vive estritamente no **In-Play (Minuto 75–85)** |
+| **Micro-Edges Travados por Liquidez** (0x2, 2x0, 0x3 Zebra com N<150 no ano e odd alta) | **Expurgar do operacional ativo.** Micro-edges com N minúsculo e CS raso não comportam volume real |
 
 ---
 
