@@ -120,6 +120,30 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
+
+        # 6. Lay 0x2 / 2x0 Zebra (Super Fav Mandante H <= 1.45 ou Super Fav Visitante A <= 1.45)
+        l02 = _get_series(df_games, ["Odd_CS_0x2_Lay"])
+        l20 = _get_series(df_games, ["Odd_CS_2x0_Lay"])
+        if oh.iloc[idx] <= 1.45 and 5.0 <= l02.iloc[idx] <= 25.0:
+            odd_e = round(float(l02.iloc[idx]), 2)
+            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            sinais.append({
+                "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                "Método": "Lay 0x2 Zebra", "Mercado": "CS (0x2)", "Lado": "LAY",
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+            })
+        elif oa.iloc[idx] <= 1.45 and 5.0 <= l20.iloc[idx] <= 25.0:
+            odd_e = round(float(l20.iloc[idx]), 2)
+            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            sinais.append({
+                "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                "Método": "Lay 2x0 Zebra", "Mercado": "CS (2x0)", "Lado": "LAY",
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa.iloc[idx]), 2),
+                "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+            })
             
     df_sinais = pd.DataFrame(sinais)
     print(f"[+] Total de sinais oficiais qualificados: {len(df_sinais)}")
@@ -213,6 +237,12 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 res = "RED" if (gh + ga >= 5) else "GREEN"
             elif "Away" in metodo:
                 res = "RED" if (ga > gh) else "GREEN"
+            elif "0x2" in metodo:
+                res = "RED" if (gh == 0 and ga == 2) else "GREEN"
+            elif "2x0" in metodo:
+                res = "RED" if (gh == 2 and ga == 0) else "GREEN"
+            elif "Under 1.5" in metodo:
+                res = "RED" if (gh + ga < 2) else "GREEN"
             else:
                 res = "GREEN"
                 
