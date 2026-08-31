@@ -108,9 +108,9 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | Lay_A <= 15.0)
+        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | 2.0 <= Lay_A <= 15.0)
         oa_lay = oa.iloc[idx] * 1.03
-        if oh.iloc[idx] <= 1.45 and oa_lay <= 15.0:
+        if oh.iloc[idx] <= 1.45 and 2.0 <= oa_lay <= 15.0:
             odd_e = round(float(oa_lay), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({

@@ -199,9 +199,9 @@ with tab1:
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
                 })
 
-            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | Odd_A_Lay <= 15.0)
+            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
             oa_lay = oa[i] * 1.03 if pd.notna(oa.get(i)) else 99.0
-            if pd.notna(oh.get(i)) and oh[i] <= 1.45 and oa_lay <= 15.0:
+            if pd.notna(oh.get(i)) and oh[i] <= 1.45 and 2.0 <= oa_lay <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
