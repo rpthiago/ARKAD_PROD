@@ -1,0 +1,58 @@
+ 
+===== 29/08/2026 12:00:02,40 ===== 
+2026-08-29 12:00:11.642 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-29 12:00:11.642 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\observar_lay0x1_fav.py:111: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  log = pd.concat([log, pd.DataFrame([{
+novos: 3 | liquidados: 2 | total 3 (pend 1, liq 2)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=2 | WR=100.0% | ROI/liability=+6.82%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=2 | WR=100.0% | ROI/liability=+6.82%
+[main 094d2af] update: lay0x1 favoritao forward 29/08/2026
+ 1 file changed, 3 insertions(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   02ed8d2..094d2af  main -> main
+(fim) 
+ 
+===== 30/08/2026 12:00:02,38 ===== 
+2026-08-30 12:00:10.576 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-30 12:00:10.576 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 3 | liquidados: 0 | total 6 (pend 4, liq 2)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=2 | WR=100.0% | ROI/liability=+6.82%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=2 | WR=100.0% | ROI/liability=+6.82%
+[main 6cef825] update: lay0x1 favoritao forward 30/08/2026
+ 1 file changed, 3 insertions(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   8461dee..6cef825  main -> main
+(fim) 

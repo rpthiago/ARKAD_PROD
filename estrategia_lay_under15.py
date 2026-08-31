@@ -53,7 +53,7 @@ def avaliar_jogo_lay_under15(row_dict, ev_threshold=0.05):
             return {'aplica': False, 'motivo': f'Feature {f} ausente/NaN (SKIP)'}
         feat_values.append(float(val))
         
-    X = np.array([feat_values])
+    X = pd.DataFrame([feat_values], columns=features)
     
     # 3. Predição de probabilidade (P de o Lay ganhar = P de sair >= 2 gols)
     p_win = float(model.predict_proba(X)[0, 1])

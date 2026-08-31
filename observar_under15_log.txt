@@ -32,3 +32,218 @@ total no log: 0 | pendentes: 0 | liquidados: 0
 To https://github.com/rpthiago/ARKAD_PROD.git
    fbe0b08..894e302  main -> main
 (fim) 
+ 
+===== 26/08/2026  8:45:02,41 ===== 
+[*] Buscando fixtures para a data: 2026-08-26...
+2026-08-26 08:45:04.923 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-26 08:45:04.923 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 43 jogos obtidos da API Betfair para 2026-08-26!
+[SUCESSO] Feed diário gerado e enriquecido com 43 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+
+[*] Executando observador forward com o novo feed...
+novos pendentes (forward): 0 | liquidados hoje: 0 | ignorados (jogo no passado, NAO forward): 0
+
+=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===
+total no log: 0 | pendentes: 0 | liquidados: 0
+(sem liquidados ainda â€” o forward comeca a valer quando o feed trouxer jogos futuros)
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 27/08/2026  8:45:02,97 ===== 
+[*] Buscando fixtures para a data: 2026-08-27...
+2026-08-27 08:45:06.353 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-27 08:45:06.354 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 58 jogos obtidos da API Betfair para 2026-08-27!
+[SUCESSO] Feed diário gerado e enriquecido com 58 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+
+[*] Executando observador forward com o novo feed...
+novos pendentes (forward): 0 | liquidados hoje: 0 | ignorados (jogo no passado, NAO forward): 0
+
+=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===
+total no log: 0 | pendentes: 0 | liquidados: 0
+(sem liquidados ainda â€” o forward comeca a valer quando o feed trouxer jogos futuros)
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   _placares_coletor_cache.csv
+	modified:   consolidar_log.txt
+	modified:   estrategia_lay_under15.py
+	modified:   observar_under15_log.txt
+	modified:   placares_manuais.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Backtest_Saldo_Menor_EH2_Top2_2026_Atualizado.xlsx
+	sinais_gerados/sinais_gerados_2026-08-26.xlsx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 28/08/2026  8:45:02,43 ===== 
+[*] Buscando fixtures para a data: 2026-08-28...
+2026-08-28 08:45:04.409 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-28 08:45:04.409 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 126 jogos obtidos da API Betfair para 2026-08-28!
+[SUCESSO] Feed diário gerado e enriquecido com 126 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+
+[*] Executando observador forward com o novo feed...
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\observar_under15_forward.py:115: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  log = pd.concat([log, pd.DataFrame([{
+novos pendentes (forward): 1 | liquidados hoje: 0 | ignorados (jogo no passado, NAO forward): 0
+
+=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===
+total no log: 1 | pendentes: 1 | liquidados: 0
+(sem liquidados ainda â€” o forward comeca a valer quando o feed trouxer jogos futuros)
+[main fda74f9] update: observacao under15 forward 28/08/2026
+ 1 file changed, 1 insertion(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   772875d..fda74f9  main -> main
+(fim) 
+ 
+===== 29/08/2026  8:45:03,02 ===== 
+[*] Buscando fixtures para a data: 2026-08-29...
+2026-08-29 08:45:06.896 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-29 08:45:06.897 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 300 jogos obtidos da API Betfair para 2026-08-29!
+[SUCESSO] Feed diário gerado e enriquecido com 300 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+
+[*] Executando observador forward com o novo feed...
+novos pendentes (forward): 2 | liquidados hoje: 0 | ignorados (jogo no passado, NAO forward): 0
+
+=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===
+total no log: 3 | pendentes: 3 | liquidados: 0
+(sem liquidados ainda â€” o forward comeca a valer quando o feed trouxer jogos futuros)
+[main f1244f2] update: observacao under15 forward 29/08/2026
+ 1 file changed, 2 insertions(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   6e401d9..f1244f2  main -> main
+(fim) 
+ 
+===== 30/08/2026  8:45:02,69 ===== 
+[*] Buscando fixtures para a data: 2026-08-30...
+2026-08-30 08:45:04.839 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-08-30 08:45:04.841 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 201 jogos obtidos da API Betfair para 2026-08-30!
+[SUCESSO] Feed diário gerado e enriquecido com 201 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+
+[*] Executando observador forward com o novo feed...
+novos pendentes (forward): 0 | liquidados hoje: 0 | ignorados (jogo no passado, NAO forward): 0
+
+=== OBSERVACAO Under 1.5 FORWARD (stake-zero) ===
+total no log: 3 | pendentes: 3 | liquidados: 0
+(sem liquidados ainda â€” o forward comeca a valer quando o feed trouxer jogos futuros)
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   _placares_coletor_cache.csv
+	modified:   consolidar_log.txt
+	modified:   estrategia_lay_under15.py
+	modified:   observar_under15_log.txt
+	modified:   placares_manuais.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	Backtest_Saldo_Menor_EH2_CORRIGIDO_2026.xlsx
+	Backtest_Saldo_Menor_EH2_ODDREAL_2026.xlsx
+	Backtest_Saldo_Menor_EH2_TODOS_2026.xlsx
+	Backtest_Saldo_Menor_EH2_TOP2_ODDREAL_2026.xlsx
+	Backtest_Saldo_Menor_EH2_Top2_2026_Atualizado.xlsx
+	Estudo_Quantitativo_12_Novas_Hipoteses_2026.xlsx
+	Laboratorio_Resgate_Metodos_Reprovados_2026.xlsx
+	gerar_backtest_saldo_menor_eh2.py
+	h+2/
+	lay0x1_fav_log.txt
+	sinais_gerados/sinais_gerados_2026-08-26.xlsx
+	sinais_gerados/sinais_gerados_2026-08-27.xlsx
+	sinais_gerados/sinais_gerados_2026-08-28.xlsx
+	sinais_gerados/sinais_gerados_2026-08-29.xlsx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
