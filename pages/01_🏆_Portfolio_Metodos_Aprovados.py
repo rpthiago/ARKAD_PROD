@@ -116,8 +116,8 @@ with tab1:
     with col_d2:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
-            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)"],
-            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)"]
+            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)"],
+            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)"]
         )
     with col_btn:
         st.write("")
@@ -139,6 +139,8 @@ with tab1:
         oa = pd.to_numeric(df.get("Odd_A_Back"), errors="coerce")
         od = pd.to_numeric(df.get("Odd_D_Back"), errors="coerce")
         ou05 = pd.to_numeric(df.get("Odd_Under05_FT_Back"), errors="coerce")
+        ou25 = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
+        ou45 = pd.to_numeric(df.get("Odd_Over45_FT_Back"), errors="coerce")
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
         l10 = pd.to_numeric(df.get("Odd_CS_1x0_Lay"), errors="coerce")
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
@@ -152,7 +154,7 @@ with tab1:
             liga = str(r.get("League", "N/A"))
             
             # 1. Lay 0x1 Super Favorito Mandante (Odd_H <= 1.90 | Lay 5-15)
-            if oh[i] <= 1.90 and 5.0 <= l01[i] <= 15.0:
+            if pd.notna(oh.get(i)) and oh[i] <= 1.90 and pd.notna(l01.get(i)) and 5.0 <= l01[i] <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay 0x1 Super Fav", "Mercado": "Correct Score (0x1)", "Lado": "LAY",
@@ -161,8 +163,8 @@ with tab1:
                 })
                 
             # 2. Lay Under 0.5 FT em Super Favorito (Odd <= 1.60 | Odd_U05 <= 15.0)
-            fav_odd = min(oh[i] if pd.notna(oh[i]) else 99, oa[i] if pd.notna(oa[i]) else 99)
-            if fav_odd <= 1.60 and pd.notna(ou05[i]) and 5.0 <= ou05[i] * 1.05 <= 15.0:
+            fav_odd = min(oh[i] if pd.notna(oh.get(i)) else 99, oa[i] if pd.notna(oa.get(i)) else 99)
+            if fav_odd <= 1.60 and pd.notna(ou05.get(i)) and 5.0 <= ou05[i] * 1.05 <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Under 0.5 FT (Fav)", "Mercado": "Under 0.5 FT", "Lado": "LAY",
@@ -171,7 +173,7 @@ with tab1:
                 })
                 
             # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | Lay 0x2 <= 25.0)
-            if oh[i] <= 1.80 and pd.notna(l02[i]) and 5.0 <= l02[i] <= 25.0:
+            if pd.notna(oh.get(i)) and oh[i] <= 1.80 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay 0x2 / 2x0 Zebra", "Mercado": "Correct Score (0x2)", "Lado": "LAY",
@@ -180,12 +182,21 @@ with tab1:
                 })
                 
             # 4. Lay Draw em Super Favorito Mandante (Odd_H <= 1.40 | Odd_D 4.5-10.0)
-            if oh[i] <= 1.40 and pd.notna(od[i]) and 4.5 <= od[i] * 1.03 <= 10.0:
+            if pd.notna(oh.get(i)) and oh[i] <= 1.40 and pd.notna(od.get(i)) and 4.5 <= od[i] * 1.03 <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
                     "Odd_Entrada": round(float(od[i] * 1.03), 2), "Odd_Fav": round(float(oh[i]), 2),
                     "Expectativa_WR": "85.8%", "EV_Estimado": "+3.26%"
+                })
+
+            # 5. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 2.0 <= Odd_O45 <= 20.0)
+            if pd.notna(ou25.get(i)) and ou25[i] <= 1.50 and pd.notna(ou45.get(i)) and 2.0 <= ou45[i] * 1.05 <= 20.0:
+                sinais.append({
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
+                    "Odd_Entrada": round(float(ou45[i] * 1.05), 2), "Odd_Fav": round(float(ou25[i]), 2),
+                    "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
                 })
                 
         return pd.DataFrame(sinais)
@@ -343,6 +354,19 @@ with tab2:
             "Bootstrap IC95%": "[+4.3%, +34.2%]",
             "Consistência": "7/8 meses positivos 🟢",
             "Status": "✅ APROVADO OFICIAL"
+        },
+        {
+            "Método": "Lay Over 4.5 FT em Under Pesado (Odd_U25 <= 1.50)",
+            "Mercado": "Over 4.5 FT (Longshot Bias)",
+            "Amostra (N)": "3.941 jogos",
+            "Win Rate Real": "94.34%",
+            "Break-Even Exigido": "91.70%",
+            "Margem Real": "+2.64%",
+            "Lucro Líquido": "+1.178,40 u (R$ +117k)",
+            "ROI s/ Liability": "+2.67%",
+            "Bootstrap IC95%": "[+1.9%, +3.4%]",
+            "Consistência": "8/8 meses positivos 🟢",
+            "Status": "⚠️ WATCHLIST STAKE-ZERO"
         }
     ]
     

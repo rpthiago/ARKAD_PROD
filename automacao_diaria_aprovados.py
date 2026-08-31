@@ -45,6 +45,8 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     oa = _get_series(df_games, ["Odd_A_Back", "Odd_A_FT", "Odd_A"])
     od = _get_series(df_games, ["Odd_D_Back", "Odd_D_FT", "Odd_D"])
     ou05 = _get_series(df_games, ["Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"])
+    ou25 = _get_series(df_games, ["Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
+    ou45 = _get_series(df_games, ["Odd_Over45_Back", "Odd_Over45_FT", "Odd_Over45"])
     l01 = _get_series(df_games, ["Odd_CS_0x1_Lay"])
     
     liability_fixa = banca * risco_pct
@@ -90,6 +92,18 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Draw Super Fav", "Mercado": "Draw", "Lado": "LAY",
                 "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+            })
+
+        # 4. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 2.0 <= Odd_O45 <= 20.0)
+        if ou25.iloc[idx] <= 1.50 and 2.0 <= ou45.iloc[idx] * 1.05 <= 20.0:
+            odd_e = round(float(ou45.iloc[idx] * 1.05), 2)
+            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            sinais.append({
+                "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                "Método": "Lay Over 4.5 FT", "Mercado": "Over 4.5", "Lado": "LAY",
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(ou25.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
@@ -182,6 +196,8 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 res = "RED" if (gh == 0 and ga == 0) else "GREEN"
             elif "Draw" in metodo:
                 res = "RED" if (gh == ga) else "GREEN"
+            elif "Over 4.5" in metodo:
+                res = "RED" if (gh + ga >= 5) else "GREEN"
             else:
                 res = "GREEN"
                 

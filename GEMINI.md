@@ -195,6 +195,8 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
     Base 2026 completa: N=1.678, WR 85,77% vs BE 83,54% (margem +2,24%), ROI/liability +3,26%, **7/8 meses positivos** (+264u / +R$ 26k), Bootstrap IC95% [+1,2%, +5,2%]. No forward real (21/08+): N=58, WR 91,4% (53W/5L), +4,17u ✅ (locomotiva de volume).
   - **Lay Away / Dupla Chance 1X no Super Favorito Mandante (`Odd_H <= 1.50`, `Odd_A_Lay <= 15.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
     N=3.253, WR 87,1% a 89,4% vs BE 87,8%, ROI sobre liability +4,2% (Claude) / +2,91% (Antigravity), **8/8 meses positivos**, Bootstrap IC95% [+1,7%, +4,0%] exclui zero. Observar em stake-zero (não operar por liability alta do visitante ~6-8).
+  - **Lay Over 4.5 FT em Jogos Under / Longshot Bias (`Odd_Under25 <= 1.50`, `2.0 <= Odd_Over45_Lay <= 20.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
+    Base 2026 limpa: N=3.941, WR 94,34% vs BE 91,70% (margem +2,64 pp), ROI/liability +2,67%, **8/8 meses positivos** (+1.178,4u / +R$ 117k), Bootstrap IC95% [+1,88%, +3,42%] exclui zero em reamostragem por aposta e por mês. Sobrevive ao stress de spread até 1,20x. Motor: viés de longshot na cauda de gols. Acompanhar liquidez e spread real na API da Betfair em stake-zero.
   - **Portfólio Combinado de Métodos Aprovados (Forward Real 21 a 30/08):** ✅ **CONFIRMADO NO FORWARD (N=135)**:
     Na pasta `metodos_aprovados/`: **135 jogos reais**, **123 Greens e 12 Reds (`91.11% de Win Rate`)**, acumulando **`+12,01 unidades nominais`** de lucro líquido.
     **DIRETRIZ DE GOVERNANÇA:** Manter o robô autônomo acumulando dados até **N ≥ 300 a 400 jogos**. 
