@@ -70,3 +70,31 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 31/08/2026  8:00:01,09 ===== 
+2026-08-31 08:00:06.044 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 242536 linhas | data max 2026-08-28 | 229 MB
+b365_base_lean.csv sincronizada: 242536 linhas | data max 2026-08-28 | 65 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+[main 3ed6561] update: base semanal 31/08/2026
+ 1 file changed, 56323 insertions(+), 55964 deletions(-)
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File b365_base_lean.csv is 65.09 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/rpthiago/ARKAD_PROD.git
+   228cc2c..3ed6561  main -> main
+(fim) 
