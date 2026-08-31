@@ -140,7 +140,7 @@ with tab1:
         od = pd.to_numeric(df.get("Odd_D_Back"), errors="coerce")
         ou05 = pd.to_numeric(df.get("Odd_Under05_FT_Back"), errors="coerce")
         ou25 = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
-        ou45 = pd.to_numeric(df.get("Odd_Over45_FT_Back"), errors="coerce")
+        l_o45 = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
         l10 = pd.to_numeric(df.get("Odd_CS_1x0_Lay"), errors="coerce")
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
@@ -190,12 +190,12 @@ with tab1:
                     "Expectativa_WR": "85.8%", "EV_Estimado": "+3.26%"
                 })
 
-            # 5. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 2.0 <= Odd_O45 <= 20.0)
-            if pd.notna(ou25.get(i)) and ou25[i] <= 1.50 and pd.notna(ou45.get(i)) and 2.0 <= ou45[i] * 1.05 <= 20.0:
+            # 5. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 4.0 <= Odd_Lay_O45 <= 20.0)
+            if pd.notna(ou25.get(i)) and ou25[i] <= 1.50 and pd.notna(l_o45.get(i)) and 4.0 <= l_o45[i] <= 20.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
-                    "Odd_Entrada": round(float(ou45[i] * 1.05), 2), "Odd_Fav": round(float(ou25[i]), 2),
+                    "Odd_Entrada": round(float(l_o45[i]), 2), "Odd_Fav": round(float(ou25[i]), 2),
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
                 })
                 

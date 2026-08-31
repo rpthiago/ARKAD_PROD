@@ -46,7 +46,7 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     od = _get_series(df_games, ["Odd_D_Back", "Odd_D_FT", "Odd_D"])
     ou05 = _get_series(df_games, ["Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"])
     ou25 = _get_series(df_games, ["Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
-    ou45 = _get_series(df_games, ["Odd_Over45_Back", "Odd_Over45_FT", "Odd_Over45"])
+    ou45_lay = _get_series(df_games, ["Odd_Over45_FT_Lay", "Odd_Over45_Lay"])
     l01 = _get_series(df_games, ["Odd_CS_0x1_Lay"])
     
     liability_fixa = banca * risco_pct
@@ -96,9 +96,9 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 4. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 2.0 <= Odd_O45 <= 20.0)
-        if ou25.iloc[idx] <= 1.50 and 2.0 <= ou45.iloc[idx] * 1.05 <= 20.0:
-            odd_e = round(float(ou45.iloc[idx] * 1.05), 2)
+        # 4. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 4.0 <= Odd_Lay_O45 <= 20.0)
+        if ou25.iloc[idx] <= 1.50 and 4.0 <= ou45_lay.iloc[idx] <= 20.0:
+            odd_e = round(float(ou45_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
