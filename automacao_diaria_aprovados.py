@@ -4,7 +4,7 @@ import os, time, argparse, json, numpy as np, pandas as pd
 from datetime import datetime, timedelta
 from pathlib import Path
 
-ROOT = Path("c:/Users/thiag/OneDrive/Documentos/GitHub/ARKAD_PROD")
+ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 import b365_data_utils

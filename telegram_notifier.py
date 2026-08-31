@@ -1,7 +1,7 @@
 import os, json, requests
 from pathlib import Path
 
-ROOT = Path("c:/Users/thiag/OneDrive/Documentos/GitHub/ARKAD_PROD")
+ROOT = Path(__file__).resolve().parent
 CONFIG_FILE = ROOT / "telegram_config.json"
 
 def carregar_config_telegram():
@@ -21,10 +21,18 @@ def carregar_config_telegram():
     return token, chat_id
 
 def salvar_config_telegram(bot_token, chat_id):
-    """Salva a configuração do Telegram no arquivo local."""
-    data = {"bot_token": bot_token.strip(), "chat_id": str(chat_id).strip()}
-    with open(CONFIG_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
+    """Salva a configuração do Telegram no arquivo local com fallback em memória."""
+    b_tok = bot_token.strip()
+    c_id = str(chat_id).strip()
+    os.environ["TELEGRAM_BOT_TOKEN"] = b_tok
+    os.environ["TELEGRAM_CHAT_ID"] = c_id
+    try:
+        CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        data = {"bot_token": b_tok, "chat_id": c_id}
+        with open(CONFIG_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4)
+    except Exception:
+        pass
     return True
 
 def enviar_mensagem_telegram(texto, parse_mode="Markdown"):
