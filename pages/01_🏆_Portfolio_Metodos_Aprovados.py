@@ -95,11 +95,12 @@ st.sidebar.markdown("""
 """)
 
 # ── Tabs Principais ──
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "⚡ Radar de Sinais do Dia (Ao Vivo)",
     "📊 Auditoria & Tabela Comparativa",
     "🧮 Calculadora de Entradas & Stake",
-    "📥 Planilhas de Auditoria (Download)"
+    "📥 Planilhas de Auditoria (Download)",
+    "📱 Alertas Telegram & Automação"
 ])
 
 # =========================================================================
@@ -210,17 +211,47 @@ with tab1:
         df_display = df_calc[cols_order].sort_values(["Data", "Hora"]).reset_index(drop=True)
         st.dataframe(df_display, use_container_width=True, hide_index=True)
         
-        # Botão de download em Excel
-        _buf_sinais = io.BytesIO()
-        with pd.ExcelWriter(_buf_sinais, engine="openpyxl") as _writer:
-            df_display.to_excel(_writer, index=False, sheet_name="Sinais_Aprovados")
-        st.download_button(
-            label="📥 Baixar Planilha de Sinais do Dia (Excel)",
-            data=_buf_sinais.getvalue(),
-            file_name=f"Sinais_Metodos_Aprovados_{ds_str}.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-            type="primary"
-        )
+        # Botões de Ação
+        col_b1, col_b2 = st.columns([1, 1])
+        with col_b1:
+            _buf_sinais = io.BytesIO()
+            with pd.ExcelWriter(_buf_sinais, engine="openpyxl") as _writer:
+                df_display.to_excel(_writer, index=False, sheet_name="Sinais_Aprovados")
+            st.download_button(
+                label="📥 Baixar Planilha de Sinais do Dia (Excel)",
+                data=_buf_sinais.getvalue(),
+                file_name=f"Sinais_Metodos_Aprovados_{ds_str}.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                type="primary",
+                use_container_width=True
+            )
+            
+        with col_b2:
+            if st.button("📲 Disparar estes Sinais no Telegram", use_container_width=True):
+                try:
+                    from telegram_notifier import enviar_mensagem_telegram, enviar_documento_telegram
+                    msg_linhas = [
+                        f"🎯 *ARKAD — SINAIS DO DIA ({ds_str})*",
+                        f"💰 *Banca:* R$ {banca_total:,.2f} | 🛡️ *Risco Máx:* R$ {liability_fixa:.2f} ({pct_risco*100:.1f}%)",
+                        f"📊 *Total de Entradas:* {len(df_display)} jogos\n",
+                        "━━━━━━━━━━━━━━━━━━━━━━━"
+                    ]
+                    for _, s in df_display.iterrows():
+                        msg_linhas.append(
+                            f"⏰ `{s['Hora']}` | 🏆 *{s['Liga']}*\n"
+                            f"⚽ *{s['Jogo']}*\n"
+                            f"📌 *{s['Método']}* (Odd: `{s['Odd_Entrada']:.2f}`)\n"
+                            f"💵 *Stake:* `R$ {s['Stake_Sugerida_R$']:.2f}` ➔ *Lucro:* `+R$ {s['Lucro_Green_R$']:.2f}`\n"
+                            "───────────────────────"
+                        )
+                    texto_tg = "\n".join(msg_linhas)
+                    ok_m, resp_m = enviar_mensagem_telegram(texto_tg)
+                    if ok_m:
+                        st.success("✅ Mensagem formatada enviada com sucesso no seu Telegram!")
+                    else:
+                        st.warning(f"⚠️ {resp_m} (Configure seu Bot Token na Aba 5)")
+                except Exception as e:
+                    st.error(f"Erro ao disparar no Telegram: {e}")
     else:
         st.info(f"Nenhum sinal qualificado encontrado para a data {ds_str} na API da Betfair.")
 
@@ -394,3 +425,74 @@ with tab4:
         if path_ago.exists():
             with open(path_ago, "rb") as f:
                 st.download_button("📥 Baixar Planilha Agosto/2026 Completa (Excel)", f.read(), file_name="Backtest_Agosto_2026_Todos_Jogos.xlsx", use_container_width=True, type="primary")
+
+# =========================================================================
+# TAB 5: ALERTAS TELEGRAM & AUTOMAÇÃO DIÁRIA
+# =========================================================================
+with tab5:
+    st.subheader("📱 Configuração de Alertas Telegram & Automação Autônoma")
+    st.markdown("""
+    Conecte seu **Bot do Telegram** para receber a grade de sinais matinal formatada com as **stakes prontas para digitar na Betfair**, 
+    além do relatório de fechamento noturno com todos os lucros apurados!
+    """)
+    
+    try:
+        from telegram_notifier import carregar_config_telegram, salvar_config_telegram, testar_conexao_telegram, enviar_mensagem_telegram
+        token_atual, chat_atual = carregar_config_telegram()
+    except Exception:
+        token_atual, chat_atual = "", ""
+        
+    col_t1, col_t2 = st.columns(2)
+    with col_t1:
+        st.markdown("#### 🔑 Credenciais do Bot")
+        novo_token = st.text_input("Telegram Bot Token", value=token_atual or "", type="password", placeholder="Ex: 123456789:ABCdefGhIJKlmNoPQRstuVWXyz")
+        novo_chat = st.text_input("Telegram Chat ID / Canal", value=chat_atual or "", placeholder="Ex: 987654321 ou @meucanal")
+        
+        col_tb1, col_tb2 = st.columns(2)
+        with col_tb1:
+            if st.button("💾 Salvar Configurações", use_container_width=True):
+                if novo_token and novo_chat:
+                    salvar_config_telegram(novo_token, novo_chat)
+                    st.success("✅ Configurações salvas com sucesso!")
+                else:
+                    st.warning("Preencha o Token e o Chat ID.")
+        with col_tb2:
+            if st.button("📡 Testar Conexão", use_container_width=True):
+                if novo_token and novo_chat:
+                    salvar_config_telegram(novo_token, novo_chat)
+                    ok, msg = testar_conexao_telegram()
+                    if ok:
+                        st.success(f"✅ {msg}")
+                        enviar_mensagem_telegram("🚀 *ARKAD PROD:* Conexão com Telegram configurada com sucesso!")
+                    else:
+                        st.error(f"❌ {msg}")
+                else:
+                    st.warning("Preencha as credenciais antes de testar.")
+                    
+    with col_t2:
+        st.markdown("#### 🤖 Painel de Execução Autônoma")
+        st.info("Você pode acionar o robô de geração matinal ou liquidação noturna manualmente a qualquer momento:")
+        
+        col_r1, col_r2 = st.columns(2)
+        with col_r1:
+            if st.button("🌅 Rodar Rotina Matinal Agora", use_container_width=True, type="primary"):
+                with st.spinner("Consultando API Betfair e gerando sinais..."):
+                    try:
+                        from automacao_diaria_aprovados import gerar_sinais_manha
+                        df_m = gerar_sinais_manha(banca=banca_total, risco_pct=pct_risco, enviar_telegram=True)
+                        st.success(f"✅ Rotina matinal concluída! {len(df_m)} sinais processados e enviados no Telegram.")
+                    except Exception as e:
+                        st.error(f"Erro na rotina matinal: {e}")
+                        
+        with col_r2:
+            if st.button("🌙 Rodar Liquidação Noturna", use_container_width=True):
+                with st.spinner("Buscando placares e apurando lucros..."):
+                    try:
+                        from automacao_diaria_aprovados import liquidar_resultados_noite
+                        df_n = liquidar_resultados_noite(enviar_telegram=True)
+                        if df_n is not None:
+                            st.success("✅ Liquidação noturna concluída e relatório enviado no Telegram!")
+                        else:
+                            st.warning("Sem jogos pendentes para liquidar hoje.")
+                    except Exception as e:
+                        st.error(f"Erro na liquidação noturna: {e}")
