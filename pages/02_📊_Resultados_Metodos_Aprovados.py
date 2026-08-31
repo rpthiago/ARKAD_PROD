@@ -105,6 +105,8 @@ def carregar_dados_aprovados():
         m_str = str(m)
         if "Away" in m_str or "1X" in m_str:
             return "Lay Away / DC 1X (Fav <= 1.45)"
+        elif "Home" in m_str or "X2" in m_str:
+            return "Lay Home / DC X2 (Fav Visitante <= 1.65)"
         elif "Over 4.5" in m_str:
             return "Lay Over 4.5 FT (Under Pesado)"
         elif "Draw" in m_str:

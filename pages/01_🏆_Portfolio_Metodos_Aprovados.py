@@ -116,8 +116,8 @@ with tab1:
     with col_d2:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
-            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)"],
-            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)"]
+            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)", "Lay Home / DC X2 (Fav Visitante <= 1.65)"],
+            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)", "Lay Home / DC X2 (Fav Visitante <= 1.65)"]
         )
     with col_btn:
         st.write("")
@@ -207,6 +207,16 @@ with tab1:
                     "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
                     "Odd_Entrada": round(float(oa_lay), 2), "Odd_Fav": round(float(oh[i]), 2),
                     "Expectativa_WR": "90.0%", "EV_Estimado": "+2.66%"
+                })
+
+            # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
+            oh_lay = oh[i] * 1.03 if pd.notna(oh.get(i)) else 99.0
+            if pd.notna(oa.get(i)) and oa[i] <= 1.65 and 2.0 <= oh_lay <= 10.0:
+                sinais.append({
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Mercado": "Match Odds (Home)", "Lado": "LAY",
+                    "Odd_Entrada": round(float(oh_lay), 2), "Odd_Fav": round(float(oa[i]), 2),
+                    "Expectativa_WR": "86.1%", "EV_Estimado": "+3.31%"
                 })
                 
         return pd.DataFrame(sinais)
@@ -388,6 +398,19 @@ with tab2:
             "Lucro Líquido": "+528,30 u (R$ +52k)",
             "ROI s/ Liability": "+2.66%",
             "Bootstrap IC95%": "[+1.5%, +3.9%]",
+            "Consistência": "8/8 meses positivos 🟢",
+            "Status": "⚠️ WATCHLIST STAKE-ZERO"
+        },
+        {
+            "Método": "Lay Home / Dupla Chance X2 (Fav Visitante <= 1.65)",
+            "Mercado": "Match Odds (Home Lay)",
+            "Amostra (N)": "1.404 jogos",
+            "Win Rate Real": "86.11%",
+            "Break-Even Exigido": "83.35%",
+            "Margem Real": "+2.77%",
+            "Lucro Líquido": "+234,70 u (R$ +23k)",
+            "ROI s/ Liability": "+3.31%",
+            "Bootstrap IC95%": "[+1.1%, +5.3%]",
             "Consistência": "8/8 meses positivos 🟢",
             "Status": "⚠️ WATCHLIST STAKE-ZERO"
         }
