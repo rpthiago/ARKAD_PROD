@@ -92,23 +92,68 @@ def carregar_dados_aprovados():
     df_all["Data"] = pd.to_datetime(df_all["Data"], errors="coerce")
     df_all["Hora"] = df_all.get("Hora", "15:00").astype(str).str[:5]
     
-    # Padronização de Resultado e P&L
-    df_all["Result_Num"] = pd.to_numeric(df_all.get("1/0"), errors="coerce")
-    df_all["PnL_u"] = pd.to_numeric(df_all.get("P/L"), errors="coerce")
-    
-    # Status amigável
-    def _status(r):
-        if pd.isna(r):
-            return "⏳ PENDENTE"
-        elif r == 1 or r == 1.0:
-            return "🟢 GREEN"
-        elif r == 0 or r == 0.0:
-            return "🔴 RED"
-        return "N/A"
+    # 1. Normalização de Odd de Entrada
+    if "Odd_Entrada" not in df_all.columns and "Odd_Lay" in df_all.columns:
+        df_all["Odd_Entrada"] = df_all["Odd_Lay"]
+    elif "Odd_Entrada" in df_all.columns and "Odd_Lay" in df_all.columns:
+        df_all["Odd_Entrada"] = df_all["Odd_Entrada"].fillna(df_all["Odd_Lay"])
         
-    df_all["Status"] = df_all["Result_Num"].apply(_status)
-    df_all["PnL_Reais"] = df_all["PnL_u"] * stake_base
+    df_all["Odd_Entrada"] = pd.to_numeric(df_all.get("Odd_Entrada"), errors="coerce").fillna(5.0)
     
+    # 2. Normalização de Nomes de Métodos
+    def _norm_metodo(m):
+        m_str = str(m)
+        if "Away" in m_str or "1X" in m_str:
+            return "Lay Away / DC 1X (Fav <= 1.45)"
+        elif "Over 4.5" in m_str:
+            return "Lay Over 4.5 FT (Under Pesado)"
+        elif "Draw" in m_str:
+            return "Lay Draw (Fav <= 1.40)"
+        elif "Under 0.5" in m_str:
+            return "Lay Under 0.5 FT (Fav)"
+        elif "0x1" in m_str:
+            return "Lay 0x1 Super Fav"
+        elif "0x2" in m_str or "2x0" in m_str:
+            return "Lay 0x2 / 2x0 Zebra"
+        elif "Under 1.5" in m_str:
+            return "Lay Under 1.5 FT (XGBoost)"
+        return m_str
+        
+    df_all["Método"] = df_all["Método"].apply(_norm_metodo)
+    
+    # 3. Normalização de Status e Resultado
+    def _calc_status(r):
+        res = str(r.get("Resultado", "")).upper()
+        r_num = r.get("1/0")
+        if pd.isna(r_num) and pd.isna(r.get("Resultado")):
+            return "⏳ PENDENTE"
+        if "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
+            return "⚪ SKIP"
+        if res == "GREEN" or r_num == 1 or r_num == 1.0:
+            return "🟢 GREEN"
+        if res == "RED" or r_num == 0 or r_num == 0.0:
+            return "🔴 RED"
+        return "⏳ PENDENTE"
+        
+    df_all["Status"] = df_all.apply(_calc_status, axis=1)
+    
+    # 4. Normalização de PnL em Unidades e Reais
+    def _calc_pnl_u(r):
+        st_val = r["Status"]
+        if st_val == "🟢 GREEN":
+            return float(r.get("PnL_u", 0.955)) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", 0.955)) if pd.notna(r.get("P/L")) else 0.955)
+        elif st_val == "🔴 RED":
+            odd = float(r.get("Odd_Entrada", 5.0))
+            return float(r.get("PnL_u", -(odd - 1.0))) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", -(odd - 1.0))) if pd.notna(r.get("P/L")) else -(odd - 1.0))
+        return 0.0
+        
+    df_all["PnL_u"] = df_all.apply(_calc_pnl_u, axis=1)
+    
+    if "PnL_R$" in df_all.columns:
+        df_all["PnL_Reais"] = pd.to_numeric(df_all["PnL_R$"], errors="coerce").fillna(df_all["PnL_u"] * stake_base)
+    else:
+        df_all["PnL_Reais"] = df_all["PnL_u"] * stake_base
+        
     return df_all.sort_values(["Data", "Hora"]).reset_index(drop=True)
 
 df_raw = carregar_dados_aprovados()
@@ -177,7 +222,7 @@ with tab_geral:
     
     cols_exibir = [
         "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
-        "Odd_Entrada", "Odd_Fav", "Status", "PnL_u", "PnL_Reais"
+        "Odd_Entrada", "Odd_Fav", "Placar", "Status", "PnL_u", "PnL_Reais"
     ]
     cols_disponiveis = [c for c in cols_exibir if c in df_filt.columns]
     
