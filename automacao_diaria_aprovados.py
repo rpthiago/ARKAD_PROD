@@ -107,6 +107,19 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
+
+        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | Lay_A <= 15.0)
+        oa_lay = oa.iloc[idx] * 1.03
+        if oh.iloc[idx] <= 1.45 and oa_lay <= 15.0:
+            odd_e = round(float(oa_lay), 2)
+            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            sinais.append({
+                "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                "Método": "Lay Away Super Fav", "Mercado": "Match Odds (Away)", "Lado": "LAY",
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+            })
             
     df_sinais = pd.DataFrame(sinais)
     print(f"[+] Total de sinais oficiais qualificados: {len(df_sinais)}")
@@ -198,6 +211,8 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 res = "RED" if (gh == ga) else "GREEN"
             elif "Over 4.5" in metodo:
                 res = "RED" if (gh + ga >= 5) else "GREEN"
+            elif "Away" in metodo:
+                res = "RED" if (ga > gh) else "GREEN"
             else:
                 res = "GREEN"
                 

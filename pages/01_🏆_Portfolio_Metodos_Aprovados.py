@@ -116,8 +116,8 @@ with tab1:
     with col_d2:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
-            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)"],
-            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)"]
+            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)"],
+            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)"]
         )
     with col_btn:
         st.write("")
@@ -197,6 +197,16 @@ with tab1:
                     "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
                     "Odd_Entrada": round(float(l_o45[i]), 2), "Odd_Fav": round(float(ou25[i]), 2),
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
+                })
+
+            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | Odd_A_Lay <= 15.0)
+            oa_lay = oa[i] * 1.03 if pd.notna(oa.get(i)) else 99.0
+            if pd.notna(oh.get(i)) and oh[i] <= 1.45 and oa_lay <= 15.0:
+                sinais.append({
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
+                    "Odd_Entrada": round(float(oa_lay), 2), "Odd_Fav": round(float(oh[i]), 2),
+                    "Expectativa_WR": "90.0%", "EV_Estimado": "+2.66%"
                 })
                 
         return pd.DataFrame(sinais)
@@ -365,6 +375,19 @@ with tab2:
             "Lucro Líquido": "+1.178,40 u (R$ +117k)",
             "ROI s/ Liability": "+2.67%",
             "Bootstrap IC95%": "[+1.9%, +3.4%]",
+            "Consistência": "8/8 meses positivos 🟢",
+            "Status": "⚠️ WATCHLIST STAKE-ZERO"
+        },
+        {
+            "Método": "Lay Away / Dupla Chance 1X (Odd_H <= 1.45)",
+            "Mercado": "Match Odds (Away Lay)",
+            "Amostra (N)": "2.685 jogos",
+            "Win Rate Real": "90.02%",
+            "Break-Even Exigido": "87.80%",
+            "Margem Real": "+2.22%",
+            "Lucro Líquido": "+528,30 u (R$ +52k)",
+            "ROI s/ Liability": "+2.66%",
+            "Bootstrap IC95%": "[+1.5%, +3.9%]",
             "Consistência": "8/8 meses positivos 🟢",
             "Status": "⚠️ WATCHLIST STAKE-ZERO"
         }
