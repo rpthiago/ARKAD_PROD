@@ -6,7 +6,7 @@ Reúne todos os métodos com edge matemático comprovado, IC95% positivo e 8/8 m
   2. Lay Under 0.5 FT em Super Favoritos (Casa <= 1.50 / Fora <= 1.40)
   3. Handicap Asiático +2.0 / EH +2 Zebra (Saldo Menor Top 2)
   4. Lay 0x2 / Lay 2x0 Zebra (Odd Fav <= 1.80 | Lay 5-25)
-  5. Lay Draw em Super Favorito (Mandante Odd <= 1.40 | Odd D 4.5-10.0)
+  5. Lay Draw em Super Favorito (Casa OU Fora Odd <= 1.40 | Odd D 4.5-10.0)
   6. Lay Under 1.5 FT (XGBoost EV >= 5% com Stop aos 75')
 """
 import os, io, sys
@@ -90,7 +90,7 @@ st.sidebar.markdown("""
 * 🟢 **Lay Under 0.5 FT Fav** (Casa ≤1.50 / Fora ≤1.40 | WR 94.1% | ROI +3.3%)
 * 🟢 **HA +2.0 Zebra Top 2** (WR 96.6% | ROI +13.3%)
 * 🟢 **Lay 0x2 / 2x0 Zebra** (WR 97.2% | ROI +1.8%)
-* 🟢 **Lay Draw Super Fav** (WR 85.8% | ROI +3.3%)
+* 🟢 **Lay Draw Super Fav** (Casa/Fora ≤1.40 | WR 85.4% | ROI +2.9%)
 * 🟢 **Lay Under 1.5 XGBoost** (WR 73.3% | ROI +4.9%)
 """)
 
@@ -187,13 +187,17 @@ with tab1:
                     "Expectativa_WR": "97.3%", "EV_Estimado": "+1.79%"
                 })
                 
-            # 4. Lay Draw em Super Favorito Mandante (Odd_H <= 1.40 | Odd_D 4.5-10.0)
-            if pd.notna(oh.get(i)) and oh[i] <= 1.40 and pd.notna(od.get(i)) and 4.5 <= od[i] * 1.03 <= 10.0:
+            # 4. Lay Draw em Super Favorito — SIMETRICO: Odd_H OU Odd_A <= 1.40 (Odd_D 4.5-10.0)
+            #    O empate e evento venue-neutral -> favorito de casa E de fora <=1.40 rendem IGUAL
+            #    (backtest 2 anos: casa +2.87% / fora +2.88%). O codigo antigo pegava so casa e perdia
+            #    ~30% de volume (os favoritoes visitantes tipo Real Madrid/Barcelona/Sporting fora).
+            _dfav = min(oh[i] if pd.notna(oh.get(i)) else 99.0, oa[i] if pd.notna(oa.get(i)) else 99.0)
+            if _dfav <= 1.40 and pd.notna(od.get(i)) and 4.5 <= od[i] * 1.03 <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(od[i] * 1.03), 2), "Odd_Fav": round(float(oh[i]), 2),
-                    "Expectativa_WR": "85.8%", "EV_Estimado": "+3.26%"
+                    "Odd_Entrada": round(float(od[i] * 1.03), 2), "Odd_Fav": round(float(_dfav), 2),
+                    "Expectativa_WR": "85.4%", "EV_Estimado": "+2.87%"
                 })
 
             # 5. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 4.0 <= Odd_Lay_O45 <= 20.0)
@@ -343,16 +347,16 @@ with tab2:
             "Status": "✅ APROVADO OFICIAL"
         },
         {
-            "Método": "Lay Draw em Super Favorito (Odd_H <= 1.40)",
+            "Método": "Lay Draw Super Fav (Casa OU Fora <= 1.40)",
             "Mercado": "Match Odds (Draw)",
-            "Amostra (N)": "1.673 jogos",
-            "Win Rate Real": "85.77%",
-            "Break-Even Exigido": "83.54%",
-            "Margem Real": "+2.24%",
-            "Lucro Líquido": "+264,64 u (R$ +26k)",
-            "ROI s/ Liability": "+3.26%",
-            "Bootstrap IC95%": "[+1.2%, +5.2%]",
-            "Consistência": "7/8 meses positivos 🟢",
+            "Amostra (N)": "2.260 jogos (2026)",
+            "Win Rate Real": "86.11%",
+            "Break-Even Exigido": "82.74%",
+            "Margem Real": "+3.36 pp",
+            "Lucro Líquido": "+410,8 u (liability)",
+            "ROI s/ Liability": "+3.82% (2026) | +2.87% (2 anos)",
+            "Bootstrap IC95%": "[+2.1%, +5.5%]",
+            "Consistência": "6/8 meses positivos 🟢",
             "Status": "✅ APROVADO OFICIAL"
         },
         {
