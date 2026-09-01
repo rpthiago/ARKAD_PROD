@@ -84,3 +84,45 @@ TOTAL COMBINADO: N=2 | WR=100.0% | ROI/liability=+6.82%
 To https://github.com/rpthiago/ARKAD_PROD.git
    3d006b3..32e47bf  main -> main
 (fim) 
+ 
+===== 01/09/2026 12:00:02,56 ===== 
+2026-09-01 12:00:08.840 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-01 12:00:08.840 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 0 | liquidados: 0 | total 8 (pend 6, liq 2)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=2 | WR=100.0% | ROI/liability=+6.82%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=2 | WR=100.0% | ROI/liability=+6.82%
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   _placares_coletor_cache.csv
+	modified:   consolidar_log.txt
+	modified:   lay0x1_fav_log.txt
+	modified:   observar_under15_log.txt
+	modified:   placares_manuais.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	sinais_gerados/sinais_gerados_2026-09-01.xlsx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
