@@ -3,7 +3,7 @@
 01_🏆_Portfolio_Metodos_Aprovados.py — Central Oficial de Métodos Aprovados e Auditados do ARKAD.
 Reúne todos os métodos com edge matemático comprovado, IC95% positivo e 8/8 meses no verde:
   1. Lay 0x1 Super Favorito (Mandante Odd <= 1.90 | Lay 5-15)
-  2. Lay Under 0.5 FT em Super Favoritos (Odd <= 1.60)
+  2. Lay Under 0.5 FT em Super Favoritos (Casa <= 1.50 / Fora <= 1.40)
   3. Handicap Asiático +2.0 / EH +2 Zebra (Saldo Menor Top 2)
   4. Lay 0x2 / Lay 2x0 Zebra (Odd Fav <= 1.80 | Lay 5-25)
   5. Lay Draw em Super Favorito (Mandante Odd <= 1.40 | Odd D 4.5-10.0)
@@ -87,7 +87,7 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
 * 🟢 **Lay 0x1 Super Fav** (WR 94.2% | ROI +2.6%)
-* 🟢 **Lay Under 0.5 FT Fav** (WR 94.3% | ROI +3.2%)
+* 🟢 **Lay Under 0.5 FT Fav** (Casa ≤1.50 / Fora ≤1.40 | WR 94.1% | ROI +3.3%)
 * 🟢 **HA +2.0 Zebra Top 2** (WR 96.6% | ROI +13.3%)
 * 🟢 **Lay 0x2 / 2x0 Zebra** (WR 97.2% | ROI +1.8%)
 * 🟢 **Lay Draw Super Fav** (WR 85.8% | ROI +3.3%)
@@ -162,14 +162,20 @@ with tab1:
                     "Expectativa_WR": "94.2%", "EV_Estimado": "+2.59%"
                 })
                 
-            # 2. Lay Under 0.5 FT em Super Favorito (Odd <= 1.60 | Odd_U05 <= 15.0)
-            fav_odd = min(oh[i] if pd.notna(oh.get(i)) else 99, oa[i] if pd.notna(oa.get(i)) else 99)
-            if fav_odd <= 1.60 and pd.notna(ou05.get(i)) and 5.0 <= ou05[i] * 1.05 <= 15.0:
+            # 2. Lay Under 0.5 FT em Super Favorito — filtro ASSIMETRICO (a vantagem de mando importa):
+            #    favorito MANDANTE: Odd_H <= 1.50  |  favorito VISITANTE: Odd_A <= 1.40 (elo mais fraco -> mais estrito).
+            #    Estudo 08/2026: combinado +3.33% (2026, IC95 [+2.3,+4.4], 8/8 meses); 25/25 meses positivos em 2 anos.
+            _oh = oh[i] if pd.notna(oh.get(i)) else 99.0
+            _oa = oa[i] if pd.notna(oa.get(i)) else 99.0
+            fav_home = _oh <= _oa
+            fav_odd = min(_oh, _oa)
+            fav_ok = (_oh <= 1.50) if fav_home else (_oa <= 1.40)
+            if fav_ok and pd.notna(ou05.get(i)) and 5.0 <= ou05[i] * 1.05 <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Under 0.5 FT (Fav)", "Mercado": "Under 0.5 FT", "Lado": "LAY",
                     "Odd_Entrada": round(float(ou05[i] * 1.05), 2), "Odd_Fav": round(float(fav_odd), 2),
-                    "Expectativa_WR": "94.3%", "EV_Estimado": "+3.18%"
+                    "Expectativa_WR": "94.1%", "EV_Estimado": "+3.33%"
                 })
                 
             # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | Lay 0x2 <= 25.0)
@@ -311,15 +317,15 @@ with tab2:
             "Status": "✅ APROVADO OFICIAL"
         },
         {
-            "Método": "Lay Under 0.5 FT em Super Fav (Odd <= 1.60)",
+            "Método": "Lay Under 0.5 FT (Casa <= 1.50 / Fora <= 1.40)",
             "Mercado": "Under 0.5 FT (Lay 0x0)",
-            "Amostra (N)": "4.321 jogos",
-            "Win Rate Real": "94.26%",
-            "Break-Even Exigido": "91.65%",
-            "Margem Real": "+2.61%",
-            "Lucro Líquido": "+1.438,48 u (R$ +143k)",
-            "ROI s/ Liability": "+3.18%",
-            "Bootstrap IC95%": "[+2.4%, +3.9%]",
+            "Amostra (N)": "2.468 jogos (2026)",
+            "Win Rate Real": "94.08%",
+            "Break-Even Exigido": "91.07%",
+            "Margem Real": "+3.01 pp",
+            "Lucro Líquido": "+830,7 u (liability)",
+            "ROI s/ Liability": "+3.33%",
+            "Bootstrap IC95%": "[+2.3%, +4.4%]",
             "Consistência": "8/8 meses positivos 🟢",
             "Status": "✅ APROVADO OFICIAL"
         },
