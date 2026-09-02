@@ -116,8 +116,8 @@ with tab1:
     with col_d2:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
-            ["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)", "Lay Home / DC X2 (Fav Visitante <= 1.65)"],
-            default=["Lay 0x1 Super Fav", "Lay Under 0.5 FT (Fav)", "Lay 0x2 / 2x0 Zebra", "Lay Draw (Fav <= 1.40)", "Lay Over 4.5 FT (Under Pesado)", "Lay Away / DC 1X (Fav <= 1.45)", "Lay Home / DC X2 (Fav Visitante <= 1.65)"]
+            ["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)", "Lay 0x1 Super Fav (Arquivado)", "Lay Under 0.5 FT (Arquivado)", "Lay Away / DC 1X (Arquivado)"],
+            default=["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)"]
         )
     with col_btn:
         st.write("")
