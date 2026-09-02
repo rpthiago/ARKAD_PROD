@@ -74,6 +74,8 @@
 | **Filtrar 0-0/Under0.5 só por `liga_rate`** (achar que "evitar liga defensiva" é o edge) | **O FAVORITISMO é o filtro dominante.** Com favorito forte, `liga_rate` vira redundante (medido: fav<1,50 dá +1,72% ignorando a liga). Favoritismo não anula liga só quando NÃO há favorito claro |
 | **Assumir simetria casa/fora sem medir o EVENTO** (aplicar mesmo threshold aos dois lados) | **Medir cada lado. 0-0 é ASSIMÉTRICO** (mando ajuda o favorito de casa a marcar → visitante exige odd mais estrita: casa ≤1,50 / fora ≤1,40). **Empate é SIMÉTRICO** (venue-neutral → mesmo ≤1,40 nos dois). O tipo do evento decide |
 | **Tratar API FutPythonTrader e coletor como fontes equivalentes** (mesma odd, mesma cobertura) | **Diferem.** Odd difere (snapshot da API vs perto-do-KO do coletor → FLIPAM sinais no limite ~1,40; ex.: Dinamo Zagreb 1,35 coletor vs 1,45 API) e cobertura difere (coletor pega ligas menores). **Coletor perto-do-KO é canônico; API é fallback conservador** |
+| **Miragem de Spread Fixo Bet365 vs Base Betfair Real** (Assumir spread fixo 1,03x/1,05x sobre Bet365 gerando "+2% a +4% ROI" falso) | **Na base Betfair FRESH com Lay real, os spreads reais são maiores** (1X2 = 1,065x-1,091x; Under 0.5 = 1,128x; Over 4.5 = 1,194x). O edge cai pra break-even/negativo e TODOS os IC95% cruzam o zero. **Nenhum método pré-jogo está confirmado por backtest.** Só o forward ao vivo decide |
+| **Overfitting por Mineração de Features (Garden of Forking Paths)** (Scan de 100 features achou 18 "holders" no Lay Home com odd [1.54, 1.65]) | **Rejeitar filtros refinados.** No forward real do gap 21/08-02/09, o filtro refinado rendeu MENOS que o base e inverteu sinal entre metades (−4,6% H1 vs +17,4% H2). **Manter estritamente as regras BASE amplas** |
 
 ---
 
@@ -177,46 +179,32 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, cauda gorda com liability 16,8u e margem de apenas +1,14% não paga risco de ruína; **DESCARTADO**),
   Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 0x1 In-Play (cashout 0x0 no HT gera **−0,499u** de perda real em vez do presumido +0,19u, colapsando ROI para **−11%** em N=17k e N=473 ticks reais no coletor; **DESCARTADO**), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
   ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%), Lay Draw (+2%, reprova FDR),
-  Lay Draw + Cobertura 100% Back 1x1 (N=250 na base congelada 08-06, ROI nominal +1,29%, mas ROI s/ capital em risco de apenas +0,45% ≈ break-even; IC95 [-11,5%, +13,3%] inclui zero; double-reds em 0-0/2-2 desprotegidos; 2pp de subprecificação frágil no 1x1),
+- **MORTOS / miragem (na odd de lay real e scan exaustivo):** Lay 0x0 (paper de agosto: **−R$1.979**), Lay 1x0
+  (teve mês bom na odd real, mas **sem edge confirmado** — não escalar), Lay 2x0 / 0x2
+  (falso-positivo de CS raso), Lay 2x2 (agosto +5,3k foi **1 mês**; instável, cauda gorda com liability 16,8u e margem de apenas +1,14% não paga risco de ruína; **DESCARTADO**),
+  Lay 0x3 (**−R$22k**; 77,5% WR vs 96,7% break-even), Lay 0x1 In-Play (cashout 0x0 no HT gera **−0,499u** de perda real em vez do presumido +0,19u, colapsando ROI para **−11%** em N=17k e N=473 ticks reais no coletor; **DESCARTADO**), Lay 1x1 (N=412, WR 87,9% vs BE 87,5%,
+  ROI 0,1%, colapso Mai-Jul: Mai −141,5%, Jun −115,9%, Jul −71,6%),
+  Lay 0x1 Super Fav Mandante (0/100 holders no scan de 600 testes; na base Betfair FRESH com Lay real 1,12x dá **−2,17% ROI**, IC95 [−8,0%, +2,9%]; **REPROVADO / ARQUIVADO**),
+  Lay Under 0.5 FT em Super Fav (0/100 holders no scan; na base Betfair FRESH com Lay real 1,13x dá **−0,76% ROI**, IC95 [−7,4%, +4,8%]; **REPROVADO / ARQUIVADO**),
+  Lay Away / DC 1X no Super Fav Mandante (1/100 holders no scan; na base Betfair FRESH com Lay real 1,09x dá apenas **+0,50% ROI** ≈ break-even estrito, IC95 [−1,8%, +2,8%] cruza zero; **REPROVADO / ARQUIVADO**),
+  Lay Under 1.5 FT XGBoost (walk-forward OOS de 24 meses negativo em **−0,50%**, 2025 = −7,2%, instável H1 −63u / H2 +21u; **REPROVADO / ARQUIVADO**),
   AH +1.5 Zebra Mandante (miragem de odd estimada 2,45; na odd real da base 1,30 tem break-even 81,5% vs WR 75,2% = **−4,2%** de prejuízo; **MIRAGEM DESCARTADA**),
   DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
-  Dupla Chance 1X / Lay Away Genérico (sem filtro de super favorito: ROI -5,04%/aposta, -2,27% s/ capital; já morto pela assimetria de liability),
-  Back Mandante Favorito 1X2 (XGBoost EV>=3%: N=619 no universo real, WR 56,5% vs BE 57,2%, Margem -0,6%, ROI +1,7%, IC95 [-3,8%, +11,0%] inclui zero; 224% do lucro concentrado em fevereiro sozinho; mercado 1X2 hiper-eficiente),
-  Lay Under 2.5 FT (XGBoost EV>=5%: N=295-522, Margem +2,4%, ROI +4,9%, IC95 [-2,4%, +13,8%] inclui zero, 4/8 meses negativos; mercado de Over/Under 2.5 hiper-eficiente),
-  Back BTTS Yes (reproduz com LR crua +8,8%, mas evapora para ROI +2,5% e margem +1,1% com
-  StandardScaler; IC95 cruza zero, p=0,13; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
+  Back BTTS Yes / BTTS Não (overround de 8,3% consome edge; Back Não = −10,1% em 2.580 jogos, 0/8 meses; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
   escanteios, Over 1.5 ML, HT scans.
-- **Aprovado / Observação (Fiel à Regra e Matemática):**
-  - **Handicap Asiático +2.0 / EH +2 Zebra (Saldo Menor Top 2):** ✅ CONFIRMADO independentemente (Claude, ago/2026):
-    Base 2026 completa (N=455 a 459), WR 88,6% (Betano) a 96,6% (Traderball AH +2.0 com 38 reembolsos), **8/8 meses positivos**.
-  - **Lay Under 1.5 FT (XGBoost EV ≥ 5%):** ✅ CONFIRMADO independentemente (Claude, ago/2026):
-    split leak-free (treino `<2026`, teste 2026), sem leak de feature (todas as VAR `|corr|<0,17`),
-    N=225, WR 73,3% vs BE 68,4% (margem +4,9%), **7/8 meses positivos**, **bootstrap IC95
-    [+4,3%, +34,2%] exclui zero**. Observação via **`observar_under15_forward.py`** (stake-ZERO,
-    *forward-only*: só registra jogo visto ANTES de jogado; ignora histórico re-pontuado).
-  - **Lay 0x1 Super Favorito Mandante (`Odd_H <= 1.80/1.90`, `5 <= Odd_CS_0x1_Lay <= 15`):** 👑 **CARRO-CHEFE (Watchlist Stake-Zero Prioritária)** (Claude/Antigravity, ago/2026):
-    Base 2026 completa: N=4.007, WR 94,24% vs BE 91,95% (margem +2,29%), ROI/liability +2,59%, 8/8 meses positivos (+1.131u / +R$ 113k). No forward real OOS (21/08+): isolado deu WR 92,7% a 96,6% e ROI/liability +2,2% a +5,7% ✅ (+R$ 1.674 a +R$ 2.475). É o método mais sólido do portfólio.
-  - **Lay Under 0.5 FT em Super Favorito — FILTRO ASSIMÉTRICO (`Casa Odd_H <= 1.50` OU `Fora Odd_A <= 1.40`, `Odd_Under05_Lay <= 15.0`):** ✅ **APROVADO / OBSERVAÇÃO** (Claude, atualizado 31/08/2026):
-    Ajuste do filtro (era `Odd_Fav <= 1.60` simétrico): o **0-0 é evento ASSIMÉTRICO** — a vantagem de mando ajuda o favorito de CASA a marcar (evita o 0-0), então o favorito VISITANTE exige odd mais estrita. Medido (2024-08→2026-08): favorito casa +3,31% vs visitante ≤1,40 +2,82% (a fatia visitante 1,40-1,50 era o elo trêmulo, cortada). Combinado 2026: N=2.685, WR 94,1% vs BE 91,1% (margem +3,0 pp), ROI/liability **+3,33%**, **8/8 meses**, Bootstrap IC95% [+2,3%, +4,4%]; **25/25 meses positivos em 2 anos**. Mesmo evento que o Lay 0x0 — mas mercado Under 0.5 FT tem spread apertado (1,05x), por isso é aprovado onde o CS 0-0 cru morre. **O filtro dominante é o FAVORITISMO; `liga_rate` vira redundante com favorito forte.**
-  - **Lay Draw em Super Favorito — FILTRO SIMÉTRICO (`Casa Odd_H <= 1.40` OU `Fora Odd_A <= 1.40`, `Odd_D_Lay 4.5 a 10.0`):** ✅ **APROVADO / OBSERVAÇÃO** (Claude, atualizado 31/08/2026):
-    Ajuste do filtro (era só `Odd_H <= 1.40`, mandante): o **empate é evento SIMÉTRICO / venue-neutral** — favorito forte quebra o empate igual em casa ou fora (medido: casa +2,87% vs fora +2,88%, idênticos). O código antigo pegava só casa e perdia ~30% de volume (favoritões visitantes: Real Madrid / Barcelona / Sporting jogando fora). Combinado 2026: N=2.260, WR 86,1% vs BE 82,7% (margem +3,4 pp), ROI/liability **+3,82%** (2 anos: +2,87%), **6/8 meses**, Bootstrap IC95% [+2,1%, +5,5%]. **Reality-check forward (29-31/08, N=8): 38% de empate (−25,6%) vs 14,6% esperado — variância de amostra pequena (a janela 21-28 dera +17,3% de sorte). O número que vale é o de 2 anos (+2,87%); sizing pequeno obrigatório.**
-  - **Lay Away / Dupla Chance 1X no Super Favorito Mandante (`Odd_H <= 1.45`, `Odd_A_Lay <= 15.0`):** ⚠️ **WATCHLIST STAKE-ZERO PRIORITÁRIA (1X2 MATCH ODDS)** (Claude/Antigravity, ago/2026):
-    Base 2026 completa: N=2.685, WR 90,02% vs BE 87,80% (margem +2,22 pp), ROI/liability +2,66%, **8/8 meses positivos** (+528,3u / +R$ 52,8k), Bootstrap IC95% [+1,47%, +3,85%] exclui zero. Mercado 1X2 ultra-líquido na Betfair Exchange com spread real de 1,03x e execução imediata. Viés de favorito-azarão confirmado. Acompanhar no forward.
-  - **Lay Home / Dupla Chance X2 no Favorito Visitante (`Odd_A <= 1.65`, `Odd_H_Lay <= 10.0`):** ⚠️ **WATCHLIST STAKE-ZERO PRIORITÁRIA (1X2 MATCH ODDS)** (Claude/Antigravity, ago/2026):
-    Base 2026 completa: N=1.404, WR 86,11% vs BE 83,35% (margem +2,77 pp), ROI/liability +3,31%, **8/8 meses positivos** (+234,7u / +R$ 23,5k), Bootstrap IC95% [+1,06%, +5,28%] exclui zero. Simetria perfeita do Lay Away no mercado 1X2. Viés de favorito-azarão confirmado. Acompanhar no forward.
-  - **Lay Over 4.5 FT em Jogos Under / Longshot Bias (`Odd_Under25 <= 1.50`, `4.0 <= Odd_Over45_Lay <= 20.0`):** ⚠️ **WATCHLIST STAKE-ZERO** (Claude/Antigravity, ago/2026):
-    Base 2026 limpa: N=3.941, WR 94,34% vs BE 91,70% (margem +2,64 pp), ROI/liability +2,67%, **8/8 meses positivos** (+1.178,4u / +R$ 117k), Bootstrap IC95% [+1,88%, +3,42%] exclui zero em reamostragem por aposta e por mês. Sobrevive ao stress de spread até 1,20x. Motor: viés de longshot na cauda de gols. Acompanhar liquidez e spread real na API da Betfair em stake-zero.
-  - **Portfólio Combinado de Métodos Aprovados (Forward Real 21 a 30/08):** ✅ **CONFIRMADO NO FORWARD (N=135)**:
-    Na pasta `metodos_aprovados/`: **135 jogos reais**, **123 Greens e 12 Reds (`91.11% de Win Rate`)**, acumulando **`+12,01 unidades nominais`** de lucro líquido.
-    **DIRETRIZ DE GOVERNANÇA:** Manter o robô autônomo acumulando dados até **N ≥ 300 a 400 jogos**. 
-    **GESTÃO DE RISCO ATIVA:** 5.0% de Liability Fixa Dinâmica (Banca R$ 4.000 ➔ R$ 200 de risco máx por aposta). Stake nominal varia por odd para travar a perda do Red rigorosamente em 5%.
-  - **Automação Oficial e Alertas Telegram:**
-    - Robô autônomo matinal e noturno em `automacao_diaria_aprovados.py` (`--manha` e `--noite`).
-    - Integração de alertas em tempo real via Telegram Bot API em `telegram_notifier.py` (Bot: `@arkkad_bot`).
-    - Sincronização automática na pasta `metodos_aprovados/` e exibição nas páginas `01_🏆_Portfolio_Metodos_Aprovados.py` e `02_📊_Resultados_Metodos_Aprovados.py`.
-  - **Lay 1x0 Super Favorito Punter (`Odd_A <= 1.80/1.90`, `5 <= Odd_CS_1x0_Lay <= 15`):** ⚠️ **WATCHLIST STAKE-ZERO ISOLADA (Elo Fraco)**:
-    8/8 meses positivos no backtest 2026, porém no forward real recente deu WR 81,5% e ROI -8% ❌. Manter estritamente isolado sem contaminar o Lay 0x1.
-  - **Under-no-limite in-play (Back Under no limite do placar, min 75-85, odd 1,40-2,20):** ⚠️ **EDGE NÃO CONFIRMADO — números anteriores eram BUG (01/09).** Os +18,8%/+26% reportados eram ARTEFATO do bug do gol tardio na liquidação por coletor (amostragem grossa de 5 min → gol do min 88-95 escapa antes do mercado fechar → false GREEN sistemático, ~+25pp de lucro fantasma). Auditoria manual (9 false greens em 42 num dia) + re-liquidação na base Bet365 (108 jogos, Ago 9-28: coletor +7% → placar real **−18,2%**) + audit do dia 01/09 (coletor +32% → real **+2,6%**) → **edge real é break-even/negativo.** Conserto (01/09): coletor amostra FINO no FT (`passar_ft`, 45s, min 80-105) + `compilar_under_dia.py` liquida pela última janela (settled). Revalidar limpo por fins de semana antes de qualquer capital. Por estado no audit: est0 (Under 0.5) melhor margem, est1 negativo.
+- **A Tríade Sobrevivente em Observação (FORWARD OCULTO STAKE-ZERO — 02/09/2026):**
+  - **1. Lay Draw Base em Super Favorito (`min(Odd_H_Back, Odd_A_Back) <= 1.40`, `Odd_D_Lay 4.5 a 10.0`):** 👑 **O MAIS SÓLIDO DO PORTFÓLIO**:
+    No forward real do gap 21/08 a 02/09 (N=113 jogos reais com odd lay executável Betfair): WR **90,3%**, ROI/liability **`+5,2%`**, estável em ambas as metades (H1 **+7,9%** / H2 **+1,8%**), P(ROI≤0) = 0,069. Regra BASE pura congelada. O filtro refinado (`Odd_Over35 >= 2.54`) rendeu menos e foi descartado por overfitting.
+  - **2. Lay Home Base no Favorito Visitante (`Odd_A_Back <= 1.65`, `Odd_H_Lay 2.0 a 10.0`):** 👑 **MAIOR ROI / VOLATILIDADE MODERADA**:
+    No forward real do gap 21/08 a 02/09 (N=63 jogos reais com odd lay executável Betfair): WR **93,7%**, ROI/liability **`+7,7%`**, P(ROI≤0) = 0,033, porém concentrado em H2 (H1 +2,1% / H2 +15,5%). Regra BASE pura congelada. O filtro refinado pós-scan (`Odd_A ∈ [1.54, 1.65]`) rendeu menos (+6,4%) e inverteu o sinal (−4,6% H1 / +17,4% H2) — **rejeitado como overfitting / garden of forking paths**.
+  - **3. Lay Over 4.5 FT em Jogos Under (`Odd_Under25_Back <= 1.50`, `4.0 <= Odd_Over45_Lay <= 20.0`):** ⚠️ **SOBREVIVENTE DE CAUDA (OBSERVAÇÃO ESTRITA)**:
+    Na base Betfair FRESH com Lay real: N=130, WR 96,9% vs BE 94,6%, ROI/liability **+2,91%** (único que segurou margem positiva). No gap 21/08 a 02/09: N=11, WR 100%, ROI +5,6%, mas com IC falsamente apertado devido a N minúsculo e zero reds. Segue em observação estrita pelo volume intrinsecamente raro (~0,4 jogo/dia).
+  - **4. Under-Limite In-Play (Minutos 75–85):** 🛑 **QUARENTENA TÉCNICA STAKE-ZERO TOTAL**:
+    Os supostos +18% a +26% eram artefato de bug de amostragem grossa (gol nos acréscimos perdido antes do fechamento do mercado gerando 27% de false-green no est3). Ao re-liquidar pelo placar real, caiu para **−18% de prejuízo**.
+    **SOLUÇÃO OFICIAL IMPLANTADA:** Liquidação 100% oficial pela Betfair API via `market_id` (status WINNER/LOSER oficial). O robô na VPS Oracle SP opera em **stake: 0.0 absoluto** até acumular N ≥ 400 jogos auditados oficialmente.
+- **Diretriz de Infraestrutura e Governança Oficial:**
+  - O pipeline de observação corre desacoplado na pasta `forward_oculto/` (tarefa `ARKAD_Forward_Oculto` todo dia 10:30; log central `forward_oculto_log.csv`).
+  - **Critério de Saída da Quarentena:** N ≥ 300 a 400 apostas por método OU 5 fins de semana com dados limpos e liquidação oficial. Bootstrap por bloco-semana com IC95% estritamente excluindo zero e FDR aprovado. Até lá: **ZERO CAPITAL REAL**.
 - O endpoint `fetch_betfair_daily` e `get_daily_dataframe(source="betfair")` **já entregam as odds reais de Lay e Back da Betfair Exchange** (validado 1,00x vs API direta da Betfair).
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
   continua sem edge depois de bem estruturado. Backtest retroativo não é dinheiro real; autoridade é o paper forward executável ao vivo.
