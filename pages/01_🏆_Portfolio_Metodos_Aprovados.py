@@ -135,14 +135,21 @@ with tab1:
             return pd.DataFrame()
             
         sinais = []
-        oh = pd.to_numeric(df.get("Odd_H_Back"), errors="coerce")
-        oa = pd.to_numeric(df.get("Odd_A_Back"), errors="coerce")
-        od = pd.to_numeric(df.get("Odd_D_Back"), errors="coerce")
-        ou05 = pd.to_numeric(df.get("Odd_Under05_FT_Back"), errors="coerce")
-        ou25 = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
-        l_o45 = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
+        oh_back = pd.to_numeric(df.get("Odd_H_Back"), errors="coerce")
+        oa_back = pd.to_numeric(df.get("Odd_A_Back"), errors="coerce")
+        od_back = pd.to_numeric(df.get("Odd_D_Back"), errors="coerce")
+        
+        oh_lay = pd.to_numeric(df.get("Odd_H_Lay"), errors="coerce").fillna(oh_back * 1.03)
+        oa_lay = pd.to_numeric(df.get("Odd_A_Lay"), errors="coerce").fillna(oa_back * 1.03)
+        od_lay = pd.to_numeric(df.get("Odd_D_Lay"), errors="coerce").fillna(od_back * 1.03)
+        
+        ou05_back = pd.to_numeric(df.get("Odd_Under05_FT_Back"), errors="coerce")
+        ou05_lay = pd.to_numeric(df.get("Odd_Under05_FT_Lay"), errors="coerce").fillna(ou05_back * 1.05)
+        
+        ou25_back = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
+        o45_lay = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
+        
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
-        l10 = pd.to_numeric(df.get("Odd_CS_1x0_Lay"), errors="coerce")
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
         l20 = pd.to_numeric(df.get("Odd_CS_2x0_Lay"), errors="coerce")
         
@@ -153,79 +160,73 @@ with tab1:
             hora = str(r.get("Time", "15:00"))[:5]
             liga = str(r.get("League", "N/A"))
             
-            # 1. Lay 0x1 Super Favorito Mandante (Odd_H <= 1.90 | Lay 5-15)
-            if pd.notna(oh.get(i)) and oh[i] <= 1.90 and pd.notna(l01.get(i)) and 5.0 <= l01[i] <= 15.0:
+            # 1. Lay 0x1 Super Favorito Mandante (Odd_H_Back <= 1.90 | 5.0 <= Lay 0x1 <= 15.0)
+            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.90 and pd.notna(l01.get(i)) and 5.0 <= l01[i] <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay 0x1 Super Fav", "Mercado": "Correct Score (0x1)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(l01[i]), 2), "Odd_Fav": round(float(oh[i]), 2),
+                    "Odd_Entrada": round(float(l01[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "94.2%", "EV_Estimado": "+2.59%"
                 })
                 
-            # 2. Lay Under 0.5 FT em Super Favorito — filtro ASSIMETRICO (a vantagem de mando importa):
-            #    favorito MANDANTE: Odd_H <= 1.50  |  favorito VISITANTE: Odd_A <= 1.40 (elo mais fraco -> mais estrito).
-            #    Estudo 08/2026: combinado +3.33% (2026, IC95 [+2.3,+4.4], 8/8 meses); 25/25 meses positivos em 2 anos.
-            _oh = oh[i] if pd.notna(oh.get(i)) else 99.0
-            _oa = oa[i] if pd.notna(oa.get(i)) else 99.0
+            # 2. Lay Under 0.5 FT em Super Favorito — filtro ASSIMETRICO:
+            #    favorito MANDANTE: Odd_H_Back <= 1.50 | favorito VISITANTE: Odd_A_Back <= 1.40
+            _oh = oh_back[i] if pd.notna(oh_back.get(i)) else 99.0
+            _oa = oa_back[i] if pd.notna(oa_back.get(i)) else 99.0
             fav_home = _oh <= _oa
             fav_odd = min(_oh, _oa)
             fav_ok = (_oh <= 1.50) if fav_home else (_oa <= 1.40)
-            if fav_ok and pd.notna(ou05.get(i)) and 5.0 <= ou05[i] * 1.05 <= 15.0:
+            if fav_ok and pd.notna(ou05_lay.get(i)) and 5.0 <= ou05_lay[i] <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Under 0.5 FT (Fav)", "Mercado": "Under 0.5 FT", "Lado": "LAY",
-                    "Odd_Entrada": round(float(ou05[i] * 1.05), 2), "Odd_Fav": round(float(fav_odd), 2),
+                    "Odd_Entrada": round(float(ou05_lay[i]), 2), "Odd_Fav": round(float(fav_odd), 2),
                     "Expectativa_WR": "94.1%", "EV_Estimado": "+3.33%"
                 })
                 
-            # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | Lay 0x2 <= 25.0)
-            if pd.notna(oh.get(i)) and oh[i] <= 1.80 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
+            # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | 5.0 <= Lay 0x2 <= 25.0)
+            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.80 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay 0x2 / 2x0 Zebra", "Mercado": "Correct Score (0x2)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(l02[i]), 2), "Odd_Fav": round(float(oh[i]), 2),
+                    "Odd_Entrada": round(float(l02[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "97.3%", "EV_Estimado": "+1.79%"
                 })
                 
-            # 4. Lay Draw em Super Favorito — SIMETRICO: Odd_H OU Odd_A <= 1.40 (Odd_D 4.5-10.0)
-            #    O empate e evento venue-neutral -> favorito de casa E de fora <=1.40 rendem IGUAL
-            #    (backtest 2 anos: casa +2.87% / fora +2.88%). O codigo antigo pegava so casa e perdia
-            #    ~30% de volume (os favoritoes visitantes tipo Real Madrid/Barcelona/Sporting fora).
-            _dfav = min(oh[i] if pd.notna(oh.get(i)) else 99.0, oa[i] if pd.notna(oa.get(i)) else 99.0)
-            if _dfav <= 1.40 and pd.notna(od.get(i)) and 4.5 <= od[i] * 1.03 <= 10.0:
+            # 4. Lay Draw em Super Favorito — SIMETRICO: Odd_Fav_Back <= 1.40 | 4.5 <= Odd_D_Lay <= 10.0
+            _dfav = min(oh_back[i] if pd.notna(oh_back.get(i)) else 99.0, oa_back[i] if pd.notna(oa_back.get(i)) else 99.0)
+            if _dfav <= 1.40 and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(od[i] * 1.03), 2), "Odd_Fav": round(float(_dfav), 2),
+                    "Odd_Entrada": round(float(od_lay[i]), 2), "Odd_Fav": round(float(_dfav), 2),
                     "Expectativa_WR": "85.4%", "EV_Estimado": "+2.87%"
                 })
 
-            # 5. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 4.0 <= Odd_Lay_O45 <= 20.0)
-            if pd.notna(ou25.get(i)) and ou25[i] <= 1.50 and pd.notna(l_o45.get(i)) and 4.0 <= l_o45[i] <= 20.0:
+            # 5. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0)
+            if pd.notna(ou25_back.get(i)) and ou25_back[i] <= 1.50 and pd.notna(o45_lay.get(i)) and 4.0 <= o45_lay[i] <= 20.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
-                    "Odd_Entrada": round(float(l_o45[i]), 2), "Odd_Fav": round(float(ou25[i]), 2),
+                    "Odd_Entrada": round(float(o45_lay[i]), 2), "Odd_Fav": round(float(ou25_back[i]), 2),
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
                 })
 
-            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
-            oa_lay = oa[i] * 1.03 if pd.notna(oa.get(i)) else 99.0
-            if pd.notna(oh.get(i)) and oh[i] <= 1.45 and 2.0 <= oa_lay <= 15.0:
+            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H_Back <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
+            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.45 and pd.notna(oa_lay.get(i)) and 2.0 <= oa_lay[i] <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(oa_lay), 2), "Odd_Fav": round(float(oh[i]), 2),
+                    "Odd_Entrada": round(float(oa_lay[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "90.0%", "EV_Estimado": "+2.66%"
                 })
 
-            # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
-            oh_lay = oh[i] * 1.03 if pd.notna(oh.get(i)) else 99.0
-            if pd.notna(oa.get(i)) and oa[i] <= 1.65 and 2.0 <= oh_lay <= 10.0:
+            # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
+            if pd.notna(oa_back.get(i)) and oa_back[i] <= 1.65 and pd.notna(oh_lay.get(i)) and 2.0 <= oh_lay[i] <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
                     "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Mercado": "Match Odds (Home)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(oh_lay), 2), "Odd_Fav": round(float(oa[i]), 2),
+                    "Odd_Entrada": round(float(oh_lay[i]), 2), "Odd_Fav": round(float(oa_back[i]), 2),
                     "Expectativa_WR": "86.1%", "EV_Estimado": "+3.31%"
                 })
                 

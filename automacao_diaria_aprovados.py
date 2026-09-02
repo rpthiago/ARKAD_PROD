@@ -41,13 +41,23 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
         
     print(f"[+] Total de jogos brutos na grade da Betfair: {len(df_games)}")
     
-    oh = _get_series(df_games, ["Odd_H_Back", "Odd_H_FT", "Odd_H"])
-    oa = _get_series(df_games, ["Odd_A_Back", "Odd_A_FT", "Odd_A"])
-    od = _get_series(df_games, ["Odd_D_Back", "Odd_D_FT", "Odd_D"])
-    ou05 = _get_series(df_games, ["Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"])
-    ou25 = _get_series(df_games, ["Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
+    oh_back = _get_series(df_games, ["Odd_H_Back", "Odd_H_FT", "Odd_H"])
+    oa_back = _get_series(df_games, ["Odd_A_Back", "Odd_A_FT", "Odd_A"])
+    od_back = _get_series(df_games, ["Odd_D_Back", "Odd_D_FT", "Odd_D"])
+    
+    oh_lay = _get_series(df_games, ["Odd_H_Lay"]).fillna(oh_back * 1.03)
+    oa_lay = _get_series(df_games, ["Odd_A_Lay"]).fillna(oa_back * 1.03)
+    od_lay = _get_series(df_games, ["Odd_D_Lay"]).fillna(od_back * 1.03)
+    
+    ou05_back = _get_series(df_games, ["Odd_Under05_FT_Back", "Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"])
+    ou05_lay = _get_series(df_games, ["Odd_Under05_FT_Lay", "Odd_Under05_Lay"]).fillna(ou05_back * 1.05)
+    
+    ou25_back = _get_series(df_games, ["Odd_Under25_FT_Back", "Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
     ou45_lay = _get_series(df_games, ["Odd_Over45_FT_Lay", "Odd_Over45_Lay"])
+    
     l01 = _get_series(df_games, ["Odd_CS_0x1_Lay"])
+    l02 = _get_series(df_games, ["Odd_CS_0x2_Lay"])
+    l20 = _get_series(df_games, ["Odd_CS_2x0_Lay"])
     
     liability_fixa = banca * risco_pct
     sinais = []
@@ -59,22 +69,26 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
         hora = str(r.get("Time", r.get("Hora", "15:00")))[:5]
         liga = str(r.get("League", r.get("Liga", "N/A")))
         
-        # 1. Lay 0x1 Super Fav Mandante (Odd_H <= 1.90 | Lay 5-15)
-        if oh.iloc[idx] <= 1.90 and 5.0 <= l01.iloc[idx] <= 15.0:
+        # 1. Lay 0x1 Super Fav Mandante (Odd_H_Back <= 1.90 | 5.0 <= Lay 0x1 <= 15.0)
+        if oh_back.iloc[idx] <= 1.90 and 5.0 <= l01.iloc[idx] <= 15.0:
             odd_e = round(float(l01.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay 0x1 Super Fav", "Mercado": "CS (0x1)", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
             
-        # 2. Lay Under 0.5 FT em Super Fav (Odd <= 1.60 | Odd_U05 <= 15.0)
-        fav_odd = min(oh.iloc[idx], oa.iloc[idx])
-        if fav_odd <= 1.60 and 5.0 <= ou05.iloc[idx] * 1.05 <= 15.0:
-            odd_e = round(float(ou05.iloc[idx] * 1.05), 2)
+        # 2. Lay Under 0.5 FT em Super Fav — filtro ASSIMETRICO:
+        #    Mandante Fav <= 1.50 OU Visitante Fav <= 1.40 | 5.0 <= Lay Under 0.5 FT <= 15.0
+        fav_h = oh_back.iloc[idx] <= oa_back.iloc[idx]
+        fav_ok = (oh_back.iloc[idx] <= 1.50) if fav_h else (oa_back.iloc[idx] <= 1.40)
+        fav_odd = min(oh_back.iloc[idx], oa_back.iloc[idx])
+        
+        if fav_ok and 5.0 <= ou05_lay.iloc[idx] <= 15.0:
+            odd_e = round(float(ou05_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
@@ -84,76 +98,72 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
             
-        # 3. Lay Draw em Super Fav Mandante (Odd_H <= 1.40 | Odd_D 4.5 a 10.0)
-        if oh.iloc[idx] <= 1.40 and 4.5 <= od.iloc[idx] * 1.03 <= 10.0:
-            odd_e = round(float(od.iloc[idx] * 1.03), 2)
+        # 3. Lay Draw em Super Fav — SIMETRICO (Odd_Fav_Back <= 1.40 | 4.5 <= Odd_D_Lay <= 10.0)
+        if fav_odd <= 1.40 and 4.5 <= od_lay.iloc[idx] <= 10.0:
+            odd_e = round(float(od_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Draw Super Fav", "Mercado": "Draw", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(fav_odd), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 4. Lay Over 4.5 FT em Jogos Under (Odd_U25 <= 1.50 | 4.0 <= Odd_Lay_O45 <= 20.0)
-        if ou25.iloc[idx] <= 1.50 and 4.0 <= ou45_lay.iloc[idx] <= 20.0:
+        # 4. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0)
+        if ou25_back.iloc[idx] <= 1.50 and 4.0 <= ou45_lay.iloc[idx] <= 20.0:
             odd_e = round(float(ou45_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Over 4.5 FT", "Mercado": "Over 4.5", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(ou25.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(ou25_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H <= 1.45 | 2.0 <= Lay_A <= 15.0)
-        oa_lay = oa.iloc[idx] * 1.03
-        if oh.iloc[idx] <= 1.45 and 2.0 <= oa_lay <= 15.0:
-            odd_e = round(float(oa_lay), 2)
+        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H_Back <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
+        if oh_back.iloc[idx] <= 1.45 and 2.0 <= oa_lay.iloc[idx] <= 15.0:
+            odd_e = round(float(oa_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Away Super Fav", "Mercado": "Match Odds (Away)", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 6. Lay 0x2 / 2x0 Zebra (Super Fav Mandante H <= 1.45 ou Super Fav Visitante A <= 1.45)
-        l02 = _get_series(df_games, ["Odd_CS_0x2_Lay"])
-        l20 = _get_series(df_games, ["Odd_CS_2x0_Lay"])
-        if oh.iloc[idx] <= 1.45 and 5.0 <= l02.iloc[idx] <= 25.0:
+        # 6. Lay 0x2 / 2x0 Zebra (Super Fav Mandante H_Back <= 1.45 ou Super Fav Visitante A_Back <= 1.45)
+        if oh_back.iloc[idx] <= 1.45 and 5.0 <= l02.iloc[idx] <= 25.0:
             odd_e = round(float(l02.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay 0x2 Zebra", "Mercado": "CS (0x2)", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
-        elif oa.iloc[idx] <= 1.45 and 5.0 <= l20.iloc[idx] <= 25.0:
+        elif oa_back.iloc[idx] <= 1.45 and 5.0 <= l20.iloc[idx] <= 25.0:
             odd_e = round(float(l20.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay 2x0 Zebra", "Mercado": "CS (2x0)", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A <= 1.65 | 2.0 <= Lay_H <= 10.0)
-        oh_lay = oh.iloc[idx] * 1.03
-        if oa.iloc[idx] <= 1.65 and 2.0 <= oh_lay <= 10.0:
-            odd_e = round(float(oh_lay), 2)
+        # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
+        if oa_back.iloc[idx] <= 1.65 and 2.0 <= oh_lay.iloc[idx] <= 10.0:
+            odd_e = round(float(oh_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Home Fav Visitante", "Mercado": "Match Odds (Home)", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa.iloc[idx]), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
