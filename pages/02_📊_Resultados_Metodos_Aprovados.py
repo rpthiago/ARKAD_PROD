@@ -260,11 +260,12 @@ kpi5.metric("Pendentes / Ao Vivo", f"{pendentes} jogos")
 st.markdown("---")
 
 # ── Abas de Análise ──
-tab_geral, tab_metodo, tab_dia, tab_grafico = st.tabs([
+tab_geral, tab_metodo, tab_dia, tab_grafico, tab_comparativo = st.tabs([
     "📋 Planilha Completa Jogo a Jogo",
     "🎯 Desempenho por Método",
     "📅 Desempenho Dia a Dia",
-    "📈 Curva de Lucro Acumulado"
+    "📈 Curva de Lucro Acumulado",
+    "⚖️ Comparativo: Regra Base vs Filtros Novos"
 ])
 
 # 1. PLANILHA GERAL
@@ -357,3 +358,91 @@ with tab_grafico:
         st.caption("Evolução do saldo financeiro acumulado (em R$) ao longo das apostas liquidadas.")
     else:
         st.info("Sem dados suficientes para gerar a curva de equity.")
+
+# 5. COMPARATIVO DIRETO: REGRA BASE vs FILTROS NOVOS
+with tab_comparativo:
+    st.subheader("⚖️ Comparativo Direto: Regra Base Ampla vs Novos Filtros Refinados")
+    st.markdown("""
+    Esta aba compara o desempenho real da **Regra Base Oficial** (que gerou +12,27u) 
+    contra os **Novos Filtros Refinados** (que exigem `Over 3.5 >= 2.54` no Lay Draw e restringem visitante para `[1.54, 1.65]` no Lay Home).
+    """)
+    
+    if "Passa_Filtro_Refinado" in df_raw.columns:
+        df_base = df_raw.copy()
+        df_ref = df_raw[df_raw["Passa_Filtro_Refinado"] == True].copy()
+        df_cortados = df_raw[df_raw["Passa_Filtro_Refinado"] == False].copy()
+        
+        n_base = len(df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])])
+        w_base = (df_base["Status"] == "🟢 GREEN").sum()
+        pnl_base_u = df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
+        pnl_base_rs = pnl_base_u * stake_base
+        wr_base = (w_base / n_base * 100) if n_base > 0 else 0
+        
+        n_ref = len(df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])])
+        w_ref = (df_ref["Status"] == "🟢 GREEN").sum()
+        pnl_ref_u = df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
+        pnl_ref_rs = pnl_ref_u * stake_base
+        wr_ref = (w_ref / n_ref * 100) if n_ref > 0 else 0
+        
+        diff_n = n_ref - n_base
+        diff_pnl_u = pnl_ref_u - pnl_base_u
+        diff_pnl_rs = pnl_ref_rs - pnl_base_rs
+        
+        col_c1, col_c2, col_c3 = st.columns(3)
+        with col_c1:
+            st.markdown("### 👑 Regra Base Ampla")
+            st.metric("Total de Jogos", f"{n_base} partidas")
+            st.metric("Win Rate Real", f"{wr_base:.1f}%", f"{w_base} Greens / {n_base - w_base} Reds")
+            st.metric("Lucro Líquido", f"{pnl_base_u:+.2f} u", f"R$ {pnl_base_rs:+,.2f}")
+            
+        with col_c2:
+            st.markdown("### 🔬 Filtros Novos Refinados")
+            st.metric("Total de Jogos", f"{n_ref} partidas", f"{diff_n} jogos descartados")
+            st.metric("Win Rate Real", f"{wr_ref:.1f}%", f"{w_ref} Greens / {n_ref - w_ref} Reds")
+            st.metric("Lucro Líquido", f"{pnl_ref_u:+.2f} u", f"R$ {pnl_ref_rs:+,.2f}")
+            
+        with col_c3:
+            st.markdown("### 📊 Diferença de Performance")
+            st.metric("Volume Descartado", f"{abs(diff_n)} jogos a menos", delta=f"{diff_n} jogos", delta_color="inverse")
+            st.metric("Diferença na Win Rate", f"{wr_ref - wr_base:+.1f} pp", delta=f"{wr_ref - wr_base:+.1f} pp")
+            st.metric("Lucro Deixado na Mesa", f"{diff_pnl_u:+.2f} u", delta=f"R$ {diff_pnl_rs:+,.2f}", delta_color="inverse")
+
+        st.markdown("---")
+        st.subheader("🎯 Desempenho Desdobrado por Método")
+        
+        comp_metodos = []
+        for m in sorted(df_base["Método"].unique()):
+            sub_b = df_base[(df_base["Método"] == m) & (df_base["Status"].isin(["🟢 GREEN", "🔴 RED"]))]
+            sub_r = df_ref[(df_ref["Método"] == m) & (df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"]))]
+            
+            nb = len(sub_b)
+            wb = (sub_b["Status"] == "🟢 GREEN").sum()
+            pnl_b = sub_b["PnL_u"].sum()
+            
+            nr = len(sub_r)
+            wr = (sub_r["Status"] == "🟢 GREEN").sum()
+            pnl_r = sub_r["PnL_u"].sum()
+            
+            comp_metodos.append({
+                "Método": m,
+                "Jogos (Base)": nb,
+                "WR (Base)": f"{(wb/nb*100):.1f}%" if nb>0 else "0%",
+                "PnL (Base)": f"{pnl_b:+.2f} u",
+                "Jogos (Filtro Novo)": nr,
+                "WR (Filtro Novo)": f"{(wr/nr*100):.1f}%" if nr>0 else "0%",
+                "PnL (Filtro Novo)": f"{pnl_r:+.2f} u",
+                "Diferença PnL": f"{(pnl_r - pnl_b):+.2f} u"
+            })
+        st.dataframe(pd.DataFrame(comp_metodos), use_container_width=True, hide_index=True)
+        
+        st.markdown("---")
+        st.subheader("🔍 Jogos Que os Filtros Novos Descartaram (E o que aconteceu neles)")
+        st.caption("Abaixo estão os 99 jogos cortados pelos filtros refinados: veja como a grande maioria deu Green com tranquilidade.")
+        
+        cols_corte = ["Data", "Liga", "Jogo", "Método", "Odd_Fav", "Odd_Entrada", "Placar", "Status", "PnL_u", "Detalhe_Filtro"]
+        cols_corte_disp = [c for c in cols_corte if c in df_cortados.columns]
+        df_cortados_show = df_cortados[cols_corte_disp].copy()
+        df_cortados_show["Data"] = pd.to_datetime(df_cortados_show["Data"]).dt.strftime("%d/%m/%Y")
+        st.dataframe(df_cortados_show, use_container_width=True, hide_index=True)
+    else:
+        st.info("A coluna de filtros refinados não está presente na base selecionada.")
