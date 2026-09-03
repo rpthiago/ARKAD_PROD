@@ -104,6 +104,17 @@ def carregar_dados_aprovados(modo="oficial"):
         if df_all.empty and f_xlsx.exists():
             df_all = _ler_excel_seguro(f_xlsx)
             
+        # Carregar e concatenar novas planilhas diárias (ex: 2026-09-03 em diante)
+        novas_planilhas = sorted([f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx") if "Odds_Reais" not in f.name])
+        for f_novo in novas_planilhas:
+            df_n = _ler_excel_seguro(f_novo)
+            if df_n is not None and not df_n.empty:
+                df_all = pd.concat([df_all, df_n], ignore_index=True)
+                
+        # Dedup inteligente mantendo a versão mais recente
+        if not df_all.empty and "Jogo" in df_all.columns:
+            df_all = df_all.drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last").reset_index(drop=True)
+            
     if df_all.empty:
         files = sorted(FOLDER.rglob("*.xlsx"))
         if not files:
@@ -165,30 +176,55 @@ def carregar_dados_aprovados(modo="oficial"):
     else:
         df_all["Método"] = "Lay Draw (Fav <= 1.40)"
         
-    # 3. Normalização de Status e Resultado
+    # 3. Normalização de Status e Resultado com Auto-Settlement Inteligente por Placar
     def _calc_status(r):
-        res = str(r.get("Resultado", "")).upper()
+        res = str(r.get("Resultado", "")).upper().strip()
         r_num = r.get("1/0")
         gr = r.get("Green")
+        
+        # 1. Se tem 1/0 explícito preenchido
+        if pd.notna(r_num):
+            try:
+                val = float(r_num)
+                if val == 1.0: return "🟢 GREEN"
+                elif val == 0.0: return "🔴 RED"
+            except Exception:
+                pass
+                
+        # 2. Se tem Green explícito (True/False)
         if gr is True or gr == "True" or gr == 1:
             return "🟢 GREEN"
         elif gr is False or gr == "False" or gr == 0:
             return "🔴 RED"
             
-        if pd.isna(r_num) and (pd.isna(r.get("Resultado")) or res == "" or res == "NAN"):
-            return "⏳ PENDENTE"
-        if "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
-            return "⚪ SKIP"
-        if res == "GREEN" or r_num == 1 or r_num == 1.0:
+        # 3. Se tem Resultado texto explícito
+        if res == "GREEN":
             return "🟢 GREEN"
-        if res == "RED" or r_num == 0 or r_num == 0.0:
+        elif res == "RED":
             return "🔴 RED"
+        elif "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
+            return "⚪ SKIP"
+            
+        # 4. Auto-Settlement Inteligente por Placar (ex: "2x0", "1x3", "0x0")
+        plc = str(r.get("Placar", "")).strip().lower()
+        met = str(r.get("Método", ""))
+        if "x" in plc and plc != "vs":
+            partes = plc.split("x")
+            try:
+                gh = int(partes[0].strip())
+                ga = int(partes[1].strip())
+                if "Draw" in met:
+                    return "🟢 GREEN" if gh != ga else "🔴 RED"
+                elif "Home" in met or "X2" in met:
+                    return "🟢 GREEN" if ga >= gh else "🔴 RED"
+                elif "Over 4.5" in met:
+                    return "🟢 GREEN" if (gh + ga) <= 4 else "🔴 RED"
+            except Exception:
+                pass
+                
         return "⏳ PENDENTE"
         
-    if "Status" not in df_all.columns:
-        df_all["Status"] = df_all.apply(_calc_status, axis=1)
-    else:
-        df_all["Status"] = df_all["Status"].fillna(df_all.apply(_calc_status, axis=1))
+    df_all["Status"] = df_all.apply(_calc_status, axis=1)
         
     # 4. Normalização de PnL em Unidades e Reais (Fórmula: =SE(L2=1; 0,965/(Odd_lay-1); -1))
     def _calc_pnl_u(r):
