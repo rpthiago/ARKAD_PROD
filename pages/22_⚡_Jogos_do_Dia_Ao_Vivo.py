@@ -118,11 +118,23 @@ metodos_ativos = st.sidebar.multiselect(
     default=["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)"]
 )
 
+st.sidebar.markdown("---")
+st.sidebar.header("🔬 Nível de Filtragem")
+modo_filtro = st.sidebar.radio(
+    "Critério de Filtros",
+    options=[
+        "🎯 Filtros Novos Refinados (Over 3.5 >= 2.54 | Visitante [1.54, 1.65])",
+        "👑 Regra Base Ampla (Sem os novos filtros)"
+    ],
+    index=0
+)
+usar_filtros_novos = "Refinados" in modo_filtro
+
 COMM = 0.045
 
 # ── Carregamento da Grade Betfair ──
 @st.cache_data(ttl=180, show_spinner=False)
-def escanear_triade_betfair(ds_iso):
+def escanear_triade_betfair(ds_iso, filtros_novos=True):
     try:
         df = get_daily_dataframe(source="betfair", date_str=ds_iso)
     except Exception:
@@ -137,7 +149,7 @@ def escanear_triade_betfair(ds_iso):
     for col in [
         'Odd_H_Back', 'Odd_A_Back', 'Odd_D_Back',
         'Odd_H_Lay', 'Odd_A_Lay', 'Odd_D_Lay',
-        'Odd_Over45_FT_Lay', 'Odd_Under25_FT_Back',
+        'Odd_Over45_FT_Lay', 'Odd_Under25_FT_Back', 'Odd_Over35_FT_Back',
         'Goals_H_FT', 'Goals_A_FT'
     ]:
         if col in df.columns:
@@ -152,6 +164,7 @@ def escanear_triade_betfair(ds_iso):
         oh_back = r.get("Odd_H_Back")
         oa_back = r.get("Odd_A_Back")
         od_back = r.get("Odd_D_Back")
+        o35_back = r.get("Odd_Over35_FT_Back")
         
         h_lay = r.get("Odd_H_Lay")
         d_lay = r.get("Odd_D_Lay")
@@ -176,7 +189,8 @@ def escanear_triade_betfair(ds_iso):
             "Placar": placar_str
         }
         
-        # 1. LAY DRAW BASE: min(Back_H, Back_A) <= 1.40 e Lay_D entre 4.5 e 10.0
+        # 1. LAY DRAW: min(Back_H, Back_A) <= 1.40 e Lay_D entre 4.5 e 10.0
+        # Se filtros_novos: exige Odd_Over35_FT_Back >= 2.54
         fav_back = None
         if pd.notna(oh_back) and pd.notna(oa_back):
             fav_back = min(oh_back, oa_back)
@@ -185,11 +199,13 @@ def escanear_triade_betfair(ds_iso):
         elif pd.notna(oa_back):
             fav_back = oa_back
             
-        if fav_back is not None and fav_back <= 1.40 and pd.notna(d_lay) and (4.5 <= d_lay <= 10.0):
+        filtro_d_extra = (pd.isna(o35_back) or o35_back >= 2.54) if filtros_novos else True
+        if fav_back is not None and fav_back <= 1.40 and pd.notna(d_lay) and (4.5 <= d_lay <= 10.0) and filtro_d_extra:
             is_green = (gh != ga) if tem_placar else None
+            tag_met = "Lay Draw (Fav <= 1.40)" + (" [Filtro Over3.5 >= 2.54]" if filtros_novos else "")
             sinais.append({
                 **base_sinal,
-                "Método": "Lay Draw (Fav <= 1.40)",
+                "Método": tag_met,
                 "Mercado": "Match Odds (Draw)",
                 "Odd_Fav": fav_back,
                 "Odd_Lay": d_lay,
@@ -197,12 +213,14 @@ def escanear_triade_betfair(ds_iso):
                 "Tipo": "LAY_DRAW"
             })
             
-        # 2. LAY HOME BASE: Away <= 1.65 e Lay_H entre 2.0 e 10.0
-        if pd.notna(oa_back) and oa_back <= 1.65 and pd.notna(h_lay) and (2.0 <= h_lay <= 10.0):
+        # 2. LAY HOME: Se filtros_novos: 1.54 <= Away <= 1.65; Se base: Away <= 1.65
+        cond_home_fav = (1.54 <= oa_back <= 1.65) if filtros_novos else (oa_back <= 1.65)
+        if pd.notna(oa_back) and cond_home_fav and pd.notna(h_lay) and (2.0 <= h_lay <= 10.0):
             is_green = (ga >= gh) if tem_placar else None
+            tag_met = "Lay Home / DC X2" + (" [Fav Visitante 1.54 a 1.65]" if filtros_novos else " (Fav Visitante <= 1.65)")
             sinais.append({
                 **base_sinal,
-                "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Método": tag_met,
                 "Mercado": "Match Odds (Home)",
                 "Odd_Fav": oa_back,
                 "Odd_Lay": h_lay,
@@ -233,7 +251,7 @@ if btn_atualizar:
     st.cache_data.clear()
 
 with st.spinner(f"Consultando grade de {data_str} na Betfair Exchange..."):
-    df_radar = escanear_triade_betfair(data_str)
+    df_radar = escanear_triade_betfair(data_str, filtros_novos=usar_filtros_novos)
 
 if df_radar.empty:
     st.info(f"Nenhum jogo qualificado para a tríade aprovada na grade de **{data_str}** na Betfair.")
