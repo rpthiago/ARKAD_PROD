@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-22_⚡_Jogos_do_Dia_Ao_Vivo.py — Painel de Monitoramento dos Jogos Selecionados do Dia
-Permite acompanhar ao vivo todas as partidas qualificadas pelos modelos com odds reais da Betfair,
-cálculo de stake/responsabilidade e placares em tempo real.
+22_⚡_Jogos_do_Dia_Ao_Vivo.py — Radar de Jogos do Dia: Tríade Aprovada & Gestão Dinâmica
+Monitoramento em tempo real dos 3 métodos validados no forward com odds de LAY reais da Betfair Exchange:
+1. Lay Draw Base (Fav <= 1.40)
+2. Lay Home Base (Fav Visitante <= 1.65)
+3. Lay Over 4.5 FT (Under Pesado)
+Gestão de Risco: 5% de Liability Dinâmica por entrada.
 """
 
 import os
 import sys
-import unicodedata
-import re
 from datetime import datetime, date
 from pathlib import Path
 import numpy as np
@@ -16,7 +17,7 @@ import pandas as pd
 import streamlit as st
 
 st.set_page_config(
-    page_title="Jogos do Dia — Radar Ao Vivo",
+    page_title="Radar de Jogos do Dia — Tríade Aprovada",
     page_icon="⚡",
     layout="wide"
 )
@@ -24,15 +25,7 @@ st.set_page_config(
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-import b365_data_utils
 from futpythontrader_client import get_daily_dataframe
-from hist_rf_loader import load_hist_rf
-from estrategia_lay_under15 import avaliar_jogo_lay_under15
-from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
-from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
-from inplay_telemetry_engine import InPlayTelemetryEngine
-
-telemetry_engine = InPlayTelemetryEngine()
 
 # Estilização visual moderna
 st.markdown("""
@@ -46,6 +39,13 @@ st.markdown("""
     }
     .badge-green {
         background-color: #2e7d32;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: bold;
+    }
+    .badge-red {
+        background-color: #c62828;
         color: white;
         padding: 4px 8px;
         border-radius: 4px;
@@ -68,269 +68,277 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("⚡ Radar de Jogos do Dia — Acompanhamento Ao Vivo")
+st.title("⚡ Radar de Jogos do Dia — Tríade Aprovada & Gestão Dinâmica")
 st.markdown("""
-Este painel monitora a **grade diária da Betfair Exchange**, aplica os modelos estatísticos auditados 
-(**Lay Under 1.5 FT** e **Lay Draw v2**) e exibe os jogos qualificados com suas respectivas odds reais, 
-dimensionamento de stake e placares atualizados em tempo real.
+Este radar monitora a **grade diária da Betfair Exchange** e filtra **exclusivamente os 3 métodos sobreviventes e validados no forward real**:
+* 👑 **Lay Draw Base:** Super Favorito (`Fav <= 1.40` | `Lay 4.5 a 10.0`) $\\rightarrow$ *+5,2% ROI no forward*
+* 👑 **Lay Home Base:** Favorito Visitante (`Visitante <= 1.65` | `Lay 2.0 a 10.0`) $\\rightarrow$ *+7,7% ROI no forward*
+* ⚠️ **Lay Over 4.5 FT:** Defesa Pesada (`Under 2.5 <= 1.50` | `Lay 4.0 a 20.0`) $\\rightarrow$ *+2,9% a +5,6% ROI*
+
+Todos os cálculos utilizam **odds executáveis de LAY da Betfair** e a **Gestão Dinâmica de 5% de Risco por aposta**.
 """)
 
-# ── Barra Lateral / Configurações ──
-st.sidebar.header("⚙️ Configurações & Gestão")
+# ── Barra Lateral / Gestão de Banca ──
+st.sidebar.header("💰 Gestão de Risco Dinâmica")
+banca_total = st.sidebar.number_input(
+    "Banca Atual (R$)",
+    min_value=100.0,
+    max_value=1_000_000.0,
+    value=4000.0,
+    step=200.0,
+    help="O valor atual da sua banca. A cada entrada, o risco máximo em caso de Red é proporcional a este valor."
+)
+
+risco_pct = st.sidebar.slider(
+    "Risco por Entrada (% da Banca)",
+    min_value=1.0,
+    max_value=10.0,
+    value=5.0,
+    step=0.5,
+    help="Risco máximo em caso de Red (Liability Fixa Dinâmica). Recomendado: 5.0%."
+)
+
+liability_alvo = banca_total * (risco_pct / 100.0)
+
+st.sidebar.markdown(f"""
+**Resumo de Gestão:**
+* **Banca Operacional:** R$ {banca_total:,.2f}
+* **Risco Máximo por Red (5%):** **R$ {liability_alvo:,.2f}**
+* **Comissão Betfair:** 4,5% nos greens
+""")
+
+st.sidebar.markdown("---")
+st.sidebar.header("📅 Seleção de Grade")
 data_selecionada = st.sidebar.date_input("Data dos Jogos", value=date.today())
 data_str = data_selecionada.strftime("%Y-%m-%d")
 
-banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=50.0, value=1000.0, step=50.0)
-perfil_risco = st.sidebar.selectbox(
-    "Perfil de Risco (Stake Máx)",
-    options=["Conservador (1% da banca)", "Moderado (2% da banca)", "Recomendado (Kelly Fracionário 2.5%)", "Personalizado"]
+metodos_ativos = st.sidebar.multiselect(
+    "Filtrar Métodos no Radar",
+    ["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)"],
+    default=["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)"]
 )
 
-if "1%" in perfil_risco:
-    stake_base = banca_total * 0.01
-elif "2%" in perfil_risco:
-    stake_base = banca_total * 0.02
-elif "2.5%" in perfil_risco:
-    stake_base = banca_total * 0.025
-else:
-    pct = st.sidebar.number_input("Percentual (%)", min_value=0.5, max_value=10.0, value=2.0, step=0.5)
-    stake_base = banca_total * (pct / 100.0)
+COMM = 0.045
 
-st.sidebar.info(f"💰 **Stake Base:** R$ {stake_base:.2f}")
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("### 🎛️ Filtros de Exibição")
-filtro_1_por_hora = st.sidebar.checkbox("Limitar a 1 Jogo por Horário (Menor Liability)", value=False, help="Se marcado, seleciona apenas o jogo de menor risco por bloco de horário.")
-@st.cache_data(ttl=60, show_spinner=False)
-def carregar_placares_coletor():
-    cache_file = ROOT / "_placares_coletor_cache.csv"
-    if not cache_file.exists():
-        return {}
+# ── Carregamento da Grade Betfair ──
+@st.cache_data(ttl=180, show_spinner=False)
+def escanear_triade_betfair(ds_iso):
     try:
-        df_ticks = pd.read_csv(cache_file)
-        df_ticks['min_to_ko'] = pd.to_numeric(df_ticks.get('min_to_ko'), errors='coerce')
-        df_ticks['lay'] = pd.to_numeric(df_ticks.get('lay'), errors='coerce')
-        
-        mapa = {}
-        def _canon(s):
-            if not isinstance(s, str): return ''
-            return s.lower().strip().replace(' ', '').replace('-', '').replace('.', '')
-            
-        for (ko, home, away), g in df_ticks.groupby(['ko', 'home', 'away']):
-            k_date = str(ko)[:10]
-            m_key = f"{k_date}_{_canon(home)}_{_canon(away)}"
-            g_sorted = g.sort_values('min_to_ko')
-            
-            # Placar final
-            f_ticks = g_sorted[g_sorted['min_to_ko'] <= -90]
-            if f_ticks.empty:
-                f_ticks = g_sorted.tail(15)
-            vf = f_ticks.dropna(subset=['lay'])
-            final_sc = vf.loc[vf['lay'].idxmin()]['runner'] if not vf.empty else "N/A"
-            
-            # Placar atual / in-play
-            latest = g_sorted.tail(10).dropna(subset=['lay'])
-            live_sc = latest.loc[latest['lay'].idxmin()]['runner'] if not latest.empty else "N/A"
-            min_ko = g_sorted['min_to_ko'].min() if not g_sorted.empty else 0
-            
-            mapa[m_key] = {
-                'placar_final': final_sc,
-                'placar_live': live_sc,
-                'min_jogo': f"{abs(int(min_ko))}'" if min_ko < 0 else "Pré-Jogo"
-            }
-        return mapa
+        df = get_daily_dataframe(source="betfair", date_str=ds_iso)
     except Exception:
-        return {}
-
-# ── Carregar Dados da Betfair e Avaliar ──
-@st.cache_data(ttl=120, show_spinner=False)
-def processar_grade_do_dia(data_str_param, limitar_1_hora=False):
-    try:
-        df_bf = get_daily_dataframe(source="betfair", date_str=data_str_param)
-    except Exception:
-        df_bf = None
-        
-    if df_bf is None or df_bf.empty:
-        try:
-            df_bf = b365_data_utils.fetch_betfair_daily(data_str_param)
-        except Exception:
-            df_bf = pd.DataFrame()
-            
-    if df_bf.empty:
         return pd.DataFrame()
         
-    jogos_qualificados = []
+    if df is None or df.empty:
+        return pd.DataFrame()
+        
+    sinais = []
     
-    # 1. Avaliar Lay Under 1.5 FT (XGBoost)
-    for _, row in df_bf.iterrows():
-        try:
-            res_u15 = avaliar_jogo_lay_under15(row.to_dict(), ev_threshold=0.05)
-            if res_u15.get('aplica'):
-                odd_lay = float(res_u15.get('odd_lay', 3.20))
-                prob = float(res_u15.get('prob_estimada', 0.75))
-                ev = float(res_u15.get('ev', 0.08))
-                
-                jogos_qualificados.append({
-                    'Data': data_str_param,
-                    'Horário': str(row.get('Time', row.get('Hora', '15:00'))),
-                    'Jogo': f"{row['Home']} x {row['Away']}",
-                    'Home': row['Home'],
-                    'Away': row['Away'],
-                    'Liga': str(row.get('League', 'N/A')),
-                    'Método': 'Lay Under 1.5 FT (XGBoost)',
-                    'Mercado': 'Under 1.5 FT',
-                    'Lado': 'LAY',
-                    'Odd_Entrada': odd_lay,
-                    'Prob_IA': prob,
-                    'EV': ev,
-                    'Break_Even': (odd_lay - 1.0) / (odd_lay - 0.045),
-                    'Tipo': 'Lay Under 1.5'
-                })
-        except Exception:
-            pass
+    # Conversões numéricas seguras
+    for col in [
+        'Odd_H_Back', 'Odd_A_Back', 'Odd_D_Back',
+        'Odd_H_Lay', 'Odd_A_Lay', 'Odd_D_Lay',
+        'Odd_Over45_FT_Lay', 'Odd_Under25_FT_Back',
+        'Goals_H_FT', 'Goals_A_FT'
+    ]:
+        if col in df.columns:
+            df[col] = pd.to_numeric(df[col], errors='coerce')
             
-    # 2. Avaliar Lay 2x2 Correct Score
-    try:
-        sinais_2x2 = avaliar_jogos_lay_2x2_grade(df_bf, selecionar_1_por_horario=limitar_1_hora)
-        for s in sinais_2x2:
-            jogos_qualificados.append({
-                'Data': data_str_param,
-                'Horário': s['hora'],
-                'Jogo': f"{s['home']} x {s['away']}",
-                'Home': s['home'],
-                'Away': s['away'],
-                'Liga': s['league'],
-                'Método': s['metodo'],
-                'Mercado': s['mercado'],
-                'Lado': 'LAY',
-                'Odd_Entrada': s['odd_lay'],
-                'Prob_IA': s['prob_estimada'],
-                'EV': s['ev'],
-                'Break_Even': s['break_even_wr'],
-                'Tipo': 'Lay 2x2'
-            })
-    except Exception:
-        pass
+    for _, r in df.iterrows():
+        liga = str(r.get("League", "N/A"))
+        hora = str(r.get("Time", r.get("Hora", "15:00")))[:5]
+        home = str(r.get("Home", "Home"))
+        away = str(r.get("Away", "Away"))
         
-    # 3. Avaliar Lay 0x3 Correct Score
-    try:
-        sinais_0x3 = avaliar_jogos_lay_0x3_grade(df_bf, selecionar_1_por_horario=limitar_1_hora)
-        for s in sinais_0x3:
-            jogos_qualificados.append({
-                'Data': data_str_param,
-                'Horário': s['hora'],
-                'Jogo': f"{s['home']} x {s['away']}",
-                'Home': s['home'],
-                'Away': s['away'],
-                'Liga': s['league'],
-                'Método': s['metodo'],
-                'Mercado': s['mercado'],
-                'Lado': 'LAY',
-                'Odd_Entrada': s['odd_lay'],
-                'Prob_IA': s['prob_estimada'],
-                'EV': s['ev'],
-                'Break_Even': s['break_even_wr'],
-                'Tipo': 'Lay 0x3'
-            })
-    except Exception:
-        pass
+        oh_back = r.get("Odd_H_Back")
+        oa_back = r.get("Odd_A_Back")
+        od_back = r.get("Odd_D_Back")
         
-    return pd.DataFrame(jogos_qualificados)
+        h_lay = r.get("Odd_H_Lay")
+        d_lay = r.get("Odd_D_Lay")
+        o45_lay = r.get("Odd_Over45_FT_Lay")
+        u25_back = r.get("Odd_Under25_FT_Back")
+        
+        gh = r.get("Goals_H_FT")
+        ga = r.get("Goals_A_FT")
+        tem_placar = pd.notna(gh) and pd.notna(ga)
+        placar_str = f"{int(gh)}x{int(ga)}" if tem_placar else "vs"
+        
+        base_sinal = {
+            "Data": ds_iso,
+            "Horário": hora,
+            "Liga": liga,
+            "Partida": f"{home} x {away}",
+            "Home": home,
+            "Away": away,
+            "Goals_H": gh,
+            "Goals_A": ga,
+            "Tem_Placar": tem_placar,
+            "Placar": placar_str
+        }
+        
+        # 1. LAY DRAW BASE: min(Back_H, Back_A) <= 1.40 e Lay_D entre 4.5 e 10.0
+        fav_back = None
+        if pd.notna(oh_back) and pd.notna(oa_back):
+            fav_back = min(oh_back, oa_back)
+        elif pd.notna(oh_back):
+            fav_back = oh_back
+        elif pd.notna(oa_back):
+            fav_back = oa_back
+            
+        if fav_back is not None and fav_back <= 1.40 and pd.notna(d_lay) and (4.5 <= d_lay <= 10.0):
+            is_green = (gh != ga) if tem_placar else None
+            sinais.append({
+                **base_sinal,
+                "Método": "Lay Draw (Fav <= 1.40)",
+                "Mercado": "Match Odds (Draw)",
+                "Odd_Fav": fav_back,
+                "Odd_Lay": d_lay,
+                "Green": is_green,
+                "Tipo": "LAY_DRAW"
+            })
+            
+        # 2. LAY HOME BASE: Away <= 1.65 e Lay_H entre 2.0 e 10.0
+        if pd.notna(oa_back) and oa_back <= 1.65 and pd.notna(h_lay) and (2.0 <= h_lay <= 10.0):
+            is_green = (ga >= gh) if tem_placar else None
+            sinais.append({
+                **base_sinal,
+                "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Mercado": "Match Odds (Home)",
+                "Odd_Fav": oa_back,
+                "Odd_Lay": h_lay,
+                "Green": is_green,
+                "Tipo": "LAY_HOME"
+            })
+            
+        # 3. LAY OVER 4.5 FT: Under 2.5 <= 1.50 e Lay_O45 entre 4.0 e 20.0
+        if pd.notna(u25_back) and u25_back <= 1.50 and pd.notna(o45_lay) and (4.0 <= o45_lay <= 20.0):
+            is_green = ((gh + ga) <= 4) if tem_placar else None
+            sinais.append({
+                **base_sinal,
+                "Método": "Lay Over 4.5 FT (Under Pesado)",
+                "Mercado": "Over/Under 4.5 FT",
+                "Odd_Fav": u25_back,
+                "Odd_Lay": o45_lay,
+                "Green": is_green,
+                "Tipo": "LAY_OVER45"
+            })
+            
+    return pd.DataFrame(sinais)
 
-# ── Execução e Apresentação ──
-col_btn, col_info = st.columns([1, 4])
-with col_btn:
-    atualizar_btn = st.button("🔄 Atualizar Radar Agora", type="primary", use_container_width=True)
+col_top1, col_top2 = st.columns([1, 4])
+with col_top1:
+    btn_atualizar = st.button("🔄 Atualizar Grade Agora", type="primary", use_container_width=True)
 
-if atualizar_btn:
+if btn_atualizar:
     st.cache_data.clear()
 
-with st.spinner(f"Consultando grade de {data_str} na Betfair Exchange e aplicando modelos de IA..."):
-    df_jogos = processar_grade_do_dia(data_str, limitar_1_hora=filtro_1_por_hora)
-    mapa_inplay = carregar_placares_coletor()
+with st.spinner(f"Consultando grade de {data_str} na Betfair Exchange..."):
+    df_radar = escanear_triade_betfair(data_str)
 
-def _canon(s):
-    if not isinstance(s, str): return ''
-    return s.lower().strip().replace(' ', '').replace('-', '').replace('.', '')
-
-# ── Métricas do Topo ──
-n_total = len(df_jogos)
-st.markdown("---")
-
-m1, m2, m3, m4 = st.columns(4)
-m1.metric("📅 Data Selecionada", data_str)
-m2.metric("🎯 Jogos Qualificados", f"{n_total}")
-m3.metric("💰 Stake Base Sugerida", f"R$ {stake_base:.2f}")
-m4.metric("🛡️ Proteção Ativa", "Comissão 4.5% + Stop Loss 75'")
-
-if df_jogos.empty:
-    st.info(f"Nenhum jogo qualificado com EV+ para a data **{data_str}**. Os modelos mantêm critérios rígidos de valor esperado para proteger sua banca.")
+if df_radar.empty:
+    st.info(f"Nenhum jogo qualificado para a tríade aprovada na grade de **{data_str}** na Betfair.")
 else:
-    # Formatar dados para a tabela com telemetria in-play
-    tabela_display = []
+    # Filtrar métodos selecionados na barra lateral
+    if metodos_ativos:
+        df_radar = df_radar[df_radar['Método'].isin(metodos_ativos)].copy().reset_index(drop=True)
+        
+    # Calcular Dimensionamento Dinâmico de Risco
+    df_radar['Liability_R$'] = liability_alvo
+    df_radar['Stake_R$'] = df_radar['Liability_R$'] / (df_radar['Odd_Lay'] - 1.0)
+    df_radar['Lucro_Potencial_R$'] = df_radar['Stake_R$'] * (1.0 - COMM)
+    df_radar['Break_Even_WR'] = (df_radar['Odd_Lay'] - 1.0) / (df_radar['Odd_Lay'] - COMM) * 100.0
     
-    for _, r in df_jogos.iterrows():
-        diag_live = telemetry_engine.avaliar_situacao_inplay(
-            data_str, r['Home'], r['Away'], r['Método']
-        )
+    # Calcular PnL Realizado para jogos finalizados
+    def calc_pnl(row):
+        if row['Green'] is None:
+            return None
+        return row['Lucro_Potencial_R$'] if row['Green'] else -row['Liability_R$']
         
-        odd_ent = r['Odd_Entrada']
-        lado = r['Lado']
-        prob = r['Prob_IA']
-        ev = r['EV']
-        be_wr = r['Break_Even']
-        
-        # Dimensionamento financeiro honesto
-        stake_real = stake_base
-        resp_max = stake_real * (odd_ent - 1.0) if lado == 'LAY' else stake_real
+    df_radar['PnL_R$'] = df_radar.apply(calc_pnl, axis=1)
+    
+    # ── Métricas do Topo ──
+    n_jogos = len(df_radar)
+    risco_total_dia = df_radar['Liability_R$'].sum()
+    lucro_potencial_dia = df_radar['Lucro_Potencial_R$'].sum()
+    
+    finalizados = df_radar[df_radar['Green'].notna()]
+    n_finalizados = len(finalizados)
+    pnl_realizado_dia = finalizados['PnL_R$'].sum() if n_finalizados > 0 else 0.0
+    
+    st.markdown("---")
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("🎯 Jogos Qualificados", f"{n_jogos} jogos", f"{n_finalizados} finalizados")
+    c2.metric("🛡️ Risco Máx por Aposta (5%)", f"R$ {liability_alvo:,.2f}", f"Banca: R$ {banca_total:,.2f}")
+    c3.metric("💰 Lucro Potencial Dia", f"R$ {lucro_potencial_dia:,.2f}", f"Risco Total: R$ {risco_total_dia:,.2f}")
+    if n_finalizados > 0:
+        c4.metric("📊 P&L Realizado Hoje", f"R$ {pnl_realizado_dia:+,.2f}", f"Greens: {finalizados['Green'].sum()}/{n_finalizados}")
+    else:
+        c4.metric("📊 P&L Realizado Hoje", "Aguardando Jogos", "0 finalizados")
+
+    # ── Tabela Principal ──
+    st.markdown("---")
+    st.subheader(f"📋 Grade de Oportunidades Auditadas ({n_jogos} jogos)")
+    
+    tabela_visual = []
+    for _, r in df_radar.iterrows():
+        if r['Green'] is True:
+            status_tag = f"✅ GREEN (+R$ {r['Lucro_Potencial_R$']:.2f})"
+        elif r['Green'] is False:
+            status_tag = f"❌ RED (-R$ {r['Liability_R$']:.2f})"
+        else:
+            status_tag = "⏳ PENDENTE"
             
-        tabela_display.append({
-            'Horário': r['Horário'],
-            'Partida': r['Jogo'],
-            'Liga': r['Liga'],
-            'Método': r['Método'],
-            'Lado': lado,
-            'Odd Entrada': f"{odd_ent:.2f}",
-            'Prob IA': f"{prob*100:.1f}%",
-            'EV': f"{ev*100:+.1f}%",
-            'Stake Entrada': f"R$ {stake_real:.2f}",
-            'Resp. Máx': f"R$ {resp_max:.2f}",
-            'Minuto / Placar': f"{diag_live['minuto']} ({diag_live['placar']})",
-            'Status Ao Vivo': diag_live['badge']
+        tabela_visual.append({
+            "Horário": r['Horário'],
+            "Liga": r['Liga'],
+            "Partida": r['Partida'],
+            "Método Aprovado": r['Método'],
+            "Odd Fav (Back)": f"{r['Odd_Fav']:.2f}",
+            "Odd LAY Real (Betfair)": f"{r['Odd_Lay']:.2f}",
+            "Stake Entrada": f"R$ {r['Stake_R$']:.2f}",
+            "Risco Máx (5%)": f"R$ {r['Liability_R$']:.2f}",
+            "Lucro Potencial": f"R$ {r['Lucro_Potencial_R$']:.2f}",
+            "Break-Even Exig.": f"{r['Break_Even_WR']:.1f}%",
+            "Placar": r['Placar'],
+            "Status": status_tag
         })
         
-    df_tab = pd.DataFrame(tabela_display)
-    
-    st.subheader(f"📋 Portfólio Unificado & Telemetria Ao Vivo ({len(df_tab)} jogos)")
     st.dataframe(
-        df_tab,
+        pd.DataFrame(tabela_visual),
         use_container_width=True,
         hide_index=True
     )
     
-    # ── Cards de Acompanhamento e Decisão In-Play ──
-    st.markdown("### 🔍 Radar de Decisão In-Play por Partida")
-    for _, r in df_jogos.iterrows():
-        diag_live = telemetry_engine.avaliar_situacao_inplay(
-            data_str, r['Home'], r['Away'], r['Método']
-        )
-        odd_ent = r['Odd_Entrada']
-        lado = r['Lado']
-        resp_max = stake_base * (odd_ent - 1.0) if lado == 'LAY' else stake_base
-        
-        with st.expander(f"{diag_live['badge']} | {r['Jogo']} — [{lado}] {r['Método']} ({diag_live['minuto']} | {diag_live['placar']})", expanded=True):
-            c1, c2, c3 = st.columns([2, 2, 2])
-            with c1:
-                st.markdown(f"**Liga:** {r['Liga']}")
+    # ── Cards Detalhados Jogo a Jogo ──
+    st.markdown("### 🔍 Detalhamento das Entradas e Regras de Execução")
+    for _, r in df_radar.iterrows():
+        if r['Green'] is True:
+            badge = "🟢 GREEN"
+        elif r['Green'] is False:
+            badge = "🔴 RED"
+        else:
+            badge = "🟡 PENDENTE"
+            
+        with st.expander(f"{badge} | {r['Horário']} — {r['Partida']} [{r['Método']}] (Odd Lay: {r['Odd_Lay']:.2f})", expanded=(r['Green'] is None)):
+            col1, col2, col3 = st.columns([2, 2, 2])
+            with col1:
+                st.markdown(f"**Liga:** `{r['Liga']}`")
                 st.markdown(f"**Mercado:** `{r['Mercado']}`")
-                st.markdown(f"**Odd de Entrada ({lado}):** `{odd_ent:.2f}`")
-            with c2:
-                st.markdown(f"**Probabilidade IA:** `{r['Prob_IA']*100:.1f}%`")
-                st.markdown(f"**Valor Esperado (EV):** `{r['EV']*100:+.1f}%`")
-                st.markdown(f"**Break-Even Mínimo:** `{r['Break_Even']*100:.1f}%`")
-            with c3:
-                st.markdown(f"**Stake:** `R$ {stake_base:.2f}` (Resp: `R$ {resp_max:.2f}`)")
-                st.info(f"📢 **Decisão In-Play:** {diag_live['recomendacao_live']}")
+                st.markdown(f"**Odd Fav (Back):** `{r['Odd_Fav']:.2f}`")
+                st.markdown(f"**Odd LAY Real Executável:** `{r['Odd_Lay']:.2f}`")
+            with col2:
+                st.markdown(f"**Stake Sugerida (Entrada):** `R$ {r['Stake_R$']:.2f}`")
+                st.markdown(f"**Risco Máximo Travado (Red):** `R$ {r['Liability_R$']:.2f}`")
+                st.markdown(f"**Lucro Líquido no Green:** `R$ {r['Lucro_Potencial_R$']:.2f}`")
+                st.markdown(f"**Break-Even Mínimo:** `{r['Break_Even_WR']:.1f}%`")
+            with col3:
+                st.markdown(f"**Placar Atual / Final:** `{r['Placar']}`")
+                if r['Tipo'] == 'LAY_DRAW':
+                    st.info("🎯 **Critério Green:** Qualquer vitória (não pode terminar em empate).")
+                elif r['Tipo'] == 'LAY_HOME':
+                    st.info("🎯 **Critério Green:** O visitante não pode perder (vitória do visitante ou empate dá green).")
+                elif r['Tipo'] == 'LAY_OVER45':
+                    st.info("🎯 **Critério Green:** Sair até 4 gols na partida (5+ gols dá red).")
 
 st.markdown("---")
-st.caption("⚡ **ARKAD PROD** — Monitoramento em tempo real conectado à telemetria in-play da Betfair Exchange.")
+st.caption("⚡ **ARKAD PROD** — Monitoramento oficial conectado à API Betfair Cloud com odds de LAY reais da Exchange.")
