@@ -202,10 +202,11 @@ def escanear_triade_betfair(ds_iso, filtros_novos=True):
         filtro_d_extra = (pd.isna(o35_back) or o35_back >= 2.54) if filtros_novos else True
         if fav_back is not None and fav_back <= 1.40 and pd.notna(d_lay) and (4.5 <= d_lay <= 10.0) and filtro_d_extra:
             is_green = (gh != ga) if tem_placar else None
-            tag_met = "Lay Draw (Fav <= 1.40)" + (" [Filtro Over3.5 >= 2.54]" if filtros_novos else "")
+            info_filtro = "Over3.5 >= 2.54" if filtros_novos else "Regra Base"
             sinais.append({
                 **base_sinal,
-                "Método": tag_met,
+                "Método": "Lay Draw (Fav <= 1.40)",
+                "Filtro_Aplicado": info_filtro,
                 "Mercado": "Match Odds (Draw)",
                 "Odd_Fav": fav_back,
                 "Odd_Lay": d_lay,
@@ -217,10 +218,11 @@ def escanear_triade_betfair(ds_iso, filtros_novos=True):
         cond_home_fav = (1.54 <= oa_back <= 1.65) if filtros_novos else (oa_back <= 1.65)
         if pd.notna(oa_back) and cond_home_fav and pd.notna(h_lay) and (2.0 <= h_lay <= 10.0):
             is_green = (ga >= gh) if tem_placar else None
-            tag_met = "Lay Home / DC X2" + (" [Fav Visitante 1.54 a 1.65]" if filtros_novos else " (Fav Visitante <= 1.65)")
+            info_filtro = "Away [1.54, 1.65]" if filtros_novos else "Regra Base"
             sinais.append({
                 **base_sinal,
-                "Método": tag_met,
+                "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Filtro_Aplicado": info_filtro,
                 "Mercado": "Match Odds (Home)",
                 "Odd_Fav": oa_back,
                 "Odd_Lay": h_lay,
@@ -234,6 +236,7 @@ def escanear_triade_betfair(ds_iso, filtros_novos=True):
             sinais.append({
                 **base_sinal,
                 "Método": "Lay Over 4.5 FT (Under Pesado)",
+                "Filtro_Aplicado": "Under <= 1.50",
                 "Mercado": "Over/Under 4.5 FT",
                 "Odd_Fav": u25_back,
                 "Odd_Lay": o45_lay,
@@ -311,6 +314,7 @@ else:
             "Liga": r['Liga'],
             "Partida": r['Partida'],
             "Método Aprovado": r['Método'],
+            "Filtro": r.get('Filtro_Aplicado', 'Base'),
             "Odd Fav (Back)": f"{r['Odd_Fav']:.2f}",
             "Odd LAY Real (Betfair)": f"{r['Odd_Lay']:.2f}",
             "Stake Entrada": f"R$ {r['Stake_R$']:.2f}",
