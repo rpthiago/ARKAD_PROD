@@ -190,14 +190,16 @@ def carregar_dados_aprovados(modo="oficial"):
     else:
         df_all["Status"] = df_all["Status"].fillna(df_all.apply(_calc_status, axis=1))
         
-    # 4. Normalização de PnL em Unidades e Reais
+    # 4. Normalização de PnL em Unidades e Reais (Fórmula: =SE(L2=1; 0,965/(Odd_lay-1); -1))
     def _calc_pnl_u(r):
         st_val = str(r.get("Status", ""))
+        odd = float(r.get("Odd_Entrada", 5.0))
+        if odd <= 1.0:
+            odd = 1.05
         if "GREEN" in st_val:
-            return float(r.get("PnL_u", 0.955)) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", 0.955)) if pd.notna(r.get("P/L")) else 0.955)
+            return 0.965 / (odd - 1.0)
         elif "RED" in st_val:
-            odd = float(r.get("Odd_Entrada", 5.0))
-            return float(r.get("PnL_u", -(odd - 1.0))) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", -(odd - 1.0))) if pd.notna(r.get("P/L")) else -(odd - 1.0))
+            return -1.0
         return 0.0
         
     df_all["PnL_u"] = df_all.apply(_calc_pnl_u, axis=1)
