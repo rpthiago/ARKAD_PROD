@@ -1,0 +1,190 @@
+Data,Liga,Home,Away,ID_Evento,Odd_H_Back,Odd_A_Back,Odd_Under25_FT_Back,Odd_Over35_FT_Back,Metodo,Odd_Lay,passa_filtro,kh,ka,Green,Placar,Fonte
+2026-08-21,CZECH 1,MFK Karvina,Zizkov,35956018,1.38,7.6,2.88,2.2,Lay_Draw,6.2,0,mfkkarvina,zizkov,True,?,sinais1/0
+2026-08-21,SAUDI ARABIA 1,Al Riyadh SC,Al Nassr,35945208,11.5,1.28,3.1,2.18,Lay_Draw,7.4,0,alriyadhsc,alnassr,True,0x4,manual_user
+2026-08-21,BOSNIA 1,Sarajevo,FK BSK Banja Luka,35959495,1.32,13.0,2.06,3.15,Lay_Draw,6.2,1,sarajevo,fkbskbanjaluka,True,?,sinais1/0
+2026-08-21,CROATIA 1,Rudes,Lokomotiva,35962104,6.0,1.61,2.14,3.05,Lay_Home,6.8,1,rudes,lokomotiva,False,4x1,manual_user
+2026-08-21,ICELAND 2,Aegir,Afturelding,35953331,10.5,1.27,5.3,1.52,Lay_Draw,8.0,0,aegir,afturelding,True,0x7,manual_user
+2026-08-21,TURKEY 1,Erzurum BB,Galatasaray,35950709,7.0,1.56,2.32,2.92,Lay_Home,7.4,1,erzurumbb,galatasaray,True,0x4,manual_user
+2026-08-21,IRELAND 2,Treaty United,Cork City,35940826,6.8,1.53,2.18,3.0,Lay_Home,8.0,0,treatyunited,corkcity,True,2x2,manual_user
+2026-08-21,WALES 1,Cardiff Metropolitan,The New Saints,35956051,9.4,1.37,2.42,2.64,Lay_Draw,5.8,1,cardiffmetropolitan,thenewsaints,True,0x5,manual_user
+2026-08-21,ENGLAND 1,Arsenal,Coventry,35737524,1.22,18.0,2.6,2.58,Lay_Draw,7.8,1,arsenal,coventry,True,?,sinais1/0
+2026-08-21,ITALY 3,Union Brescia,Carpi,35958377,1.36,12.5,1.93,3.5,Lay_Draw,5.5,1,unionbrescia,carpi,True,?,sinais1/0
+2026-08-21,BOLIVIA 1,The Strongest,Universitario de Vinto,35961090,1.4,7.8,3.0,2.04,Lay_Draw,6.0,0,thestrongest,universitariodevinto,True,?,sinais1/0
+2026-08-22,SOUTH KOREA 2,Cheonan City,Suwon Bluewings,35947410,6.0,1.57,2.4,2.74,Lay_Home,6.4,1,cheonancity,suwonbluewings,True,0x1,manual_user
+2026-08-22,CHINA 1,Meizhou Hakka,Guangdong GZ-Power FC,35962876,6.8,1.47,2.48,2.52,Lay_Home,8.2,0,meizhouhakka,guangdonggzpowerfc,True,1x5,manual_user
+2026-08-22,ENGLAND 1,Hull,Man Utd,35737540,10.0,1.38,2.62,2.54,Lay_Draw,5.7,1,hull,manutd,True,2x0,manual_user
+2026-08-22,NETHERLANDS 2,NAC Breda,Jong Ajax Amsterdam,35951313,1.29,11.0,3.8,1.84,Lay_Draw,7.2,0,nacbreda,jongajaxamsterdam,True,?,sinais1/0
+2026-08-22,NETHERLANDS 1,Fortuna Sittard,AZ Alkmaar,35944631,5.6,1.64,2.88,2.3,Lay_Home,5.7,1,fortunasittard,azalkmaar,True,0x2,manual_user
+2026-08-22,CZECH 1,SK Artis Brno,Sparta Prague,35948106,8.6,1.4,2.6,2.54,Lay_Home,9.4,0,skartisbrno,spartaprague,True,0x4,manual_user
+2026-08-22,CZECH 1,SK Artis Brno,Sparta Prague,35948106,8.6,1.4,2.6,2.54,Lay_Draw,5.8,1,skartisbrno,spartaprague,True,0x4,manual_user
+2026-08-22,BULGARIA 1,Ludogorets,Slavia Sofia,35945414,1.36,11.0,2.28,2.78,Lay_Draw,5.5,1,ludogorets,slaviasofia,False,?,sinais1/0
+2026-08-22,ESTONIA 1,Harju JK Laagri,Nomme Kalju,35952269,5.1,1.65,2.76,2.3,Lay_Home,5.6,1,harjujklaagri,nommekalju,False,1x0,manual_user
+2026-08-22,ITALY 3,FC Guidonia Montecelio 1937,Gubbio,35944095,2.36,3.5,1.49,5.7,Lay_Over45,18.0,1,fcguidoniamontecelio1937,gubbio,True,3x0,manual_user
+2026-08-22,PERU 1,Sport Huancayo,Cesar Vallejo Moquegua,35949311,1.38,9.4,2.22,2.94,Lay_Draw,5.7,1,sporthuancayo,cesarvallejomoquegua,True,?,sinais1/0
+2026-08-22,ITALY 1,Inter,AC Monza,35734727,1.2,18.5,2.66,2.5,Lay_Draw,8.8,0,inter,acmonza,True,?,sinais1/0
+2026-08-22,EGYPT 1,Al-Masry,Smouha,35944540,2.46,3.8,1.5,6.4,Lay_Over45,19.0,1,almasry,smouha,True,1x0,manual_user
+2026-08-22,GREECE 1,AEK Athens,Iraklis,35848421,1.23,20.0,2.44,2.7,Lay_Draw,7.2,1,aekathens,iraklis,True,?,sinais1/0
+2026-08-22,CZECH 1,Slavia Prague,Bohemians 1905,35949247,1.34,10.5,2.86,2.3,Lay_Draw,6.4,0,slaviaprague,bohemians1905,False,?,sinais1/0
+2026-08-22,FRANCE 2,St Etienne,Grenoble,35945201,1.38,11.0,2.14,3.1,Lay_Draw,5.4,1,stetienne,grenoble,True,?,sinais1/0
+2026-08-22,SAUDI ARABIA 1,Al Ahli,Abha,35955014,1.22,17.0,2.96,2.24,Lay_Draw,7.8,0,alahli,abha,True,?,sinais1/0
+2026-08-22,BULGARIA 1,PFC Levski Sofia,Spartak Varna,35947369,1.31,13.5,2.26,2.82,Lay_Draw,6.2,1,pfclevskisofia,spartakvarna,True,?,sinais1/0
+2026-08-22,GREECE 1,Olympiakos,Atromitos,35850566,1.23,21.0,2.24,3.05,Lay_Draw,7.0,1,olympiakos,atromitos,True,?,sinais1/0
+2026-08-22,TURKEY 1,Fenerbahce,Konyaspor,35945417,1.27,14.5,2.6,2.56,Lay_Draw,6.6,1,fenerbahce,konyaspor,True,?,sinais1/0
+2026-08-22,ECUADOR 1,Univ Catolica (Ecu),Manta FC,35949610,1.3,12.5,2.36,2.8,Lay_Draw,6.2,1,univcatolicaecu,mantafc,True,?,sinais1/0
+2026-08-22,PORTUGAL 1,Sporting Lisbon,Alverca,35945509,1.23,15.5,2.98,2.26,Lay_Draw,8.2,0,sportinglisbon,alverca,True,?,sinais1/0
+2026-08-22,SPAIN 1,Espanyol,Real Madrid,35895520,8.4,1.44,2.62,2.52,Lay_Home,8.6,0,espanyol,realmadrid,True,1x2,manual_user
+2026-08-22,VENEZUELA 1,Rayo Zuliano,Deportivo La Guaira,35964490,6.6,1.64,1.79,4.0,Lay_Home,7.0,1,rayozuliano,deportivolaguaira,True,1x4,manual_user
+2026-08-22,USA 1,Inter Miami CF,Toronto FC,35947115,1.38,8.0,5.0,1.59,Lay_Draw,6.6,0,intermiamicf,torontofc,True,?,sinais1/0
+2026-08-22,COLOMBIA 1,Ind Medellin,Cucuta Deportivo,35946024,1.27,14.0,2.4,2.78,Lay_Draw,6.8,1,indmedellin,cucutadeportivo,True,?,sinais1/0
+2026-08-22,USA 1,Vancouver Whitecaps,FC Dallas,35947155,1.4,8.6,3.05,2.16,Lay_Draw,5.8,0,vancouverwhitecaps,fcdallas,True,?,sinais1/0
+2026-08-23,CHINA 1,Shanghai Port FC,Qingdao Hainiu,35947513,1.35,9.0,3.8,1.85,Lay_Draw,6.6,0,shanghaiportfc,qingdaohainiu,True,?,sinais1/0
+2026-08-23,FINLAND 1,KuPS,IFK Mariehamn,35948175,1.37,9.4,2.78,2.36,Lay_Draw,6.0,0,kups,ifkmariehamn,True,?,sinais1/0
+2026-08-23,SWITZERLAND 1,Young Boys,FC Vaduz,35950898,1.33,9.6,4.9,1.6,Lay_Draw,6.8,0,youngboys,fcvaduz,True,?,sinais1/0
+2026-08-23,NETHERLANDS 1,PSV,FC Groningen,35947045,1.31,10.5,4.4,1.72,Lay_Draw,7.0,0,psv,fcgroningen,True,?,sinais1/0
+2026-08-23,NETHERLANDS 1,Cambuur Leeuwarden,Feyenoord,35945441,14.0,1.25,3.6,1.9,Lay_Draw,7.4,0,cambuurleeuwarden,feyenoord,True,2x5,manual_user
+2026-08-23,BULGARIA 1,Septemvri,CSKA 1948 Sofia,35947435,6.2,1.61,1.98,3.5,Lay_Home,7.0,1,septemvri,cska1948sofia,False,1x0,manual_user
+2026-08-23,ESTONIA 1,Parnu JK Vaprus,Tallinna FC Flora,35952168,5.2,1.59,2.96,2.16,Lay_Home,5.7,1,parnujkvaprus,tallinnafcflora,True,1x2,manual_user
+2026-08-23,TURKEY 2,Boluspor,Mardin Buyuksehir Belediyespor,35969877,6.4,1.61,1.92,3.65,Lay_Home,7.2,1,boluspor,mardinbuyuksehirbelediyespor,True,0x3,manual_user
+2026-08-23,BELGIUM 1,Club Brugge,Cercle Brugge,35949057,1.32,10.0,3.85,1.83,Lay_Draw,7.0,0,clubbrugge,cerclebrugge,True,?,sinais1/0
+2026-08-23,BOSNIA 1,Borac Banja Luka,Celik Zenica,35969300,1.22,19.0,2.24,2.74,Lay_Draw,7.6,1,boracbanjaluka,celikzenica,True,?,sinais1/0
+2026-08-23,ITALY 1,Frosinone,Juventus,35737568,8.2,1.48,2.38,2.78,Lay_Home,8.4,0,frosinone,juventus,True,0x1,manual_user
+2026-08-23,SERBIA 1,Crvena Zvezda,Cukaricki,35952265,1.2,15.0,3.1,2.04,Lay_Draw,8.8,0,crvenazvezda,cukaricki,True,?,sinais1/0
+2026-08-23,ISRAEL 1,Hapoel Jerusalem,Maccabi Tel Aviv,35945742,7.0,1.5,2.14,3.05,Lay_Home,8.6,0,hapoeljerusalem,maccabitelaviv,True,2x5,manual_user
+2026-08-23,FRANCE 1,Rennes,Paris St-G,35963344,6.8,1.5,2.98,2.24,Lay_Home,7.0,0,rennes,parisstg,True,2x2,manual_user
+2026-08-23,BOLIVIA 1,CDT Real Oruro,Bolivar,35964463,6.4,1.44,3.65,1.83,Lay_Home,8.0,0,cdtrealoruro,bolivar,True,2x4,manual_user
+2026-08-23,BOSNIA 1,Zrinjski,Zeljeznicar,35966087,1.2,23.0,2.22,2.88,Lay_Draw,8.0,1,zrinjski,zeljeznicar,True,?,sinais1/0
+2026-08-23,ICELAND 1,Vikingur Reykjavik,Valur,35969293,1.36,7.8,4.6,1.64,Lay_Draw,6.8,0,vikingurreykjavik,valur,True,?,sinais1/0
+2026-08-23,PORTUGAL 1,Porto,Arouca,35949415,1.3,12.5,2.42,2.82,Lay_Draw,6.6,1,porto,arouca,True,?,sinais1/0
+2026-08-23,SPAIN 1,Elche,Barcelona,35895544,9.4,1.37,2.88,2.34,Lay_Home,9.6,0,elche,barcelona,True,0x5,manual_user
+2026-08-23,SPAIN 1,Elche,Barcelona,35895544,9.4,1.37,2.88,2.34,Lay_Draw,6.2,0,elche,barcelona,True,0x5,manual_user
+2026-08-23,COLOMBIA 2,Quindio,Envigado,35970962,2.36,3.35,1.5,5.8,Lay_Over45,18.0,1,quindio,envigado,True,1x0,manual_user
+2026-08-23,BOLIVIA 1,Real Tomayapo,Always Ready,35964481,5.7,1.61,2.36,2.66,Lay_Home,6.4,1,realtomayapo,alwaysready,True,1x1,manual_user
+2026-08-23,PERU 1,Universitario de Deportes,CD Los Chankas,35949514,1.27,14.5,2.3,2.88,Lay_Draw,6.8,1,universitariodedeportes,cdloschankas,True,?,sinais1/0
+2026-08-24,SAUDI ARABIA 1,NEOM Sports Club,Al-Quadisiya (KSA),35973462,6.8,1.51,2.7,2.42,Lay_Home,7.0,0,neomsportsclub,alquadisiyaksa,True,0x2,manual_user
+2026-08-24,NETHERLANDS 2,Jong FC Utrecht,Heracles,35951327,6.4,1.52,2.62,2.44,Lay_Home,6.8,0,jongfcutrecht,heracles,True,1x6,manual_user
+2026-08-24,PARAGUAY 1,Libertad,Sportivo San Lorenzo,35952439,1.37,11.0,2.26,2.96,Lay_Draw,5.4,1,libertad,sportivosanlorenzo,True,?,sinais1/0
+2026-08-24,COLOMBIA 2,Boyaca Patriotas,Atletico FC Cali,35974913,1.39,9.6,2.22,3.05,Lay_Draw,5.4,1,boyacapatriotas,atleticofccali,True,?,sinais1/0
+2026-08-25,SOUTH AFRICA 1,Orlando Pirates (SA),Sekhukhune United,35977946,1.36,12.0,1.83,3.85,Lay_Draw,5.4,1,orlandopiratessa,sekhukhuneunited,True,?,sinais1/0
+2026-08-25,SAUDI ARABIA 1,Al-Ettifaq,Al Nassr,35970821,10.0,1.29,3.85,1.83,Lay_Draw,7.6,0,alettifaq,alnassr,True,2x3,manual_user
+2026-08-25,ENGLAND CUP,Doncaster,Middlesbrough,35927693,6.0,1.62,2.38,2.72,Lay_Home,6.2,1,doncaster,middlesbrough,True,1x3,manual_user
+2026-08-25,ENGLAND CUP,Sheff Wed,Wolves,35928144,6.2,1.61,2.24,3.05,Lay_Home,6.6,1,sheffwed,wolves,True,0x2,manual_user
+2026-08-25,ICELAND 2,Afturelding,Grotta,35957099,1.26,10.0,4.6,1.6,Lay_Draw,9.0,0,afturelding,grotta,True,?,sinais1/0
+2026-08-25,ARGENTINA 2,Deportivo Madryn,Godoy Cruz,35961638,2.2,4.4,1.5,6.0,Lay_Over45,18.5,1,deportivomadryn,godoycruz,True,2x0,manual_user
+2026-08-25,COLOMBIA 1,Santa Fe,Jaguares de Cordoba,35972017,1.28,9.0,1.44,1.33,Lay_Over45,10.5,1,santafe,jaguaresdecordoba,,,
+2026-08-26,NORWAY 2,Stromsgodset,Hodd,35957294,1.27,11.0,3.6,1.87,Lay_Draw,8.2,0,stromsgodset,hodd,True,?,sinais1/0
+2026-08-26,SOUTH AFRICA 1,Mamelodi Sundowns,AmaZulu,35978182,1.28,15.5,2.08,3.2,Lay_Draw,6.4,1,mamelodisundowns,amazulu,True,?,sinais1/0
+2026-08-26,ARGENTINA 2,Patronato,CA Atlanta,35961656,2.5,3.4,1.46,6.6,Lay_Over45,19.5,1,patronato,caatlanta,True,2x0,manual_user
+2026-08-26,ENGLAND CUP,Newcastle,West Brom,35931576,1.38,9.4,2.84,2.3,Lay_Draw,6.0,0,newcastle,westbrom,True,?,sinais1/0
+2026-08-26,ENGLAND CUP,Tottenham,Charlton,35928667,1.27,13.5,2.96,2.2,Lay_Draw,7.0,0,tottenham,charlton,True,?,sinais1/0
+2026-08-26,ENGLAND CUP,Preston,Everton,35928174,6.6,1.55,2.26,2.9,Lay_Home,7.2,1,preston,everton,True,0x4,manual_user
+2026-08-26,SPAIN 1,Real Madrid,Real Sociedad,35780321,1.3,11.5,3.3,2.06,Lay_Draw,6.8,0,realmadrid,realsociedad,True,?,sinais1/0
+2026-08-26,BOLIVIA 1,Real Potosi,Real Tomayapo,35979593,1.34,11.5,2.64,2.48,Lay_Draw,5.9,0,realpotosi,realtomayapo,True,?,sinais1/0
+2026-08-26,ARGENTINA 2,CA Colegiales,FC Midland,35967984,2.42,1.09,1.25,1.05,Lay_Draw,6.6,0,cacolegiales,fcmidland,,,
+2026-08-26,BOLIVIA 1,Blooming Santa Cruz,CDT Real Oruro,35980683,1.36,7.0,4.1,1.67,Lay_Draw,7.2,0,bloomingsantacruz,cdtrealoruro,False,?,sinais1/0
+2026-08-26,COPA SUDAMERICANA,River Plate,Santa Fe,35965764,1.36,13.5,1.78,4.3,Lay_Draw,5.2,1,riverplate,santafe,False,?,sinais1/0
+2026-08-27,EUROPA CONFERENCE LEAGUE,Freiburg,Motherwell,35969017,1.2,17.0,2.98,2.18,Lay_Draw,9.2,0,freiburg,motherwell,True,?,sinais1/0
+2026-08-27,EUROPA CONFERENCE LEAGUE,FC Copenhagen,FC Inter Turku,35964583,1.31,12.5,2.62,2.46,Lay_Draw,6.4,0,fccopenhagen,fcinterturku,True,?,sinais1/0
+2026-08-27,EUROPA CONFERENCE LEAGUE,Pafos FC,Dinamo Tirana,35969161,1.32,13.0,2.36,2.72,Lay_Draw,6.2,1,pafosfc,dinamotirana,True,?,sinais1/0
+2026-08-27,EUROPA LEAGUE,FK Kauno Zalgiris,Besiktas,35968035,9.6,1.4,2.18,3.05,Lay_Home,10.0,0,fkkaunozalgiris,besiktas,False,1x0,manual_user
+2026-08-27,EUROPA LEAGUE,FK Kauno Zalgiris,Besiktas,35968035,9.6,1.4,2.18,3.05,Lay_Draw,5.4,1,fkkaunozalgiris,besiktas,True,1x0,manual_user
+2026-08-27,EUROPA LEAGUE,Red Bull Salzburg,Mjallby,35967941,1.25,13.0,3.0,2.2,Lay_Draw,7.6,0,redbullsalzburg,mjallby,True,?,sinais1/0
+2026-08-27,EUROPA CONFERENCE LEAGUE,Ajax,Sion,35969276,1.36,9.0,3.6,1.84,Lay_Draw,6.6,0,ajax,sion,True,?,sinais1/0
+2026-08-27,EUROPA CONFERENCE LEAGUE,Hapoel Tel Aviv,Atalanta,35967945,7.0,1.51,2.36,2.8,Lay_Home,7.6,0,hapoeltelaviv,atalanta,True,0x1,manual_user
+2026-08-27,EUROPA LEAGUE,AGF,Benfica,35964593,7.8,1.44,2.92,2.24,Lay_Home,8.0,0,agf,benfica,True,1x3,manual_user
+2026-08-27,ENGLAND CUP,Chelsea,Luton,35928173,1.17,21.0,3.9,1.87,Lay_Draw,10.0,0,chelsea,luton,True,2x0,manual_user
+2026-08-27,EUROPA CONFERENCE LEAGUE,Brighton,Tromso,35971320,1.23,18.5,2.74,2.3,Lay_Draw,7.6,0,brighton,tromso,True,?,sinais1/0
+2026-08-27,EUROPA LEAGUE,Anderlecht,Kairat Almaty,35964598,1.39,9.6,2.3,2.9,Lay_Draw,5.6,1,anderlecht,kairatalmaty,True,?,sinais1/0
+2026-08-27,BOLIVIA 1,Always Ready,Aurora,35980680,1.28,10.5,3.1,2.08,Lay_Draw,7.2,0,alwaysready,aurora,False,?,sinais1/0
+2026-08-27,ENGLAND CUP,Fulham,AFC Wimbledon,35931570,1.24,16.0,3.2,2.08,Lay_Draw,7.8,0,fulham,afcwimbledon,True,?,sinais1/0
+2026-08-27,SPAIN 1,Barcelona,Athletic Bilbao,35780320,1.25,13.5,3.35,2.02,Lay_Draw,7.8,0,barcelona,athleticbilbao,True,?,sinais1/0
+2026-08-27,PARAGUAY CUP,Resistencia SC,Cerro Porteno,35986422,8.2,1.42,2.12,2.98,Lay_Home,10.0,0,resistenciasc,cerroporteno,True,0x1,manual_user
+2026-08-27,ARGENTINA CUP,CA Platense,Instituto,35950134,3.95,2.38,1.5,6.2,Lay_Over45,18.0,1,caplatense,instituto,True,1x1,manual_user
+2026-08-28,SOUTH KOREA 2,Ansan Greeners FC,Daegu Fc,35969850,7.6,1.43,2.92,2.2,Lay_Home,8.2,0,ansangreenersfc,daegufc,True,1x2,manual_user
+2026-08-28,SAUDI ARABIA 1,Al-Anwar Club,Al-Ula FC,35985563,6.2,1.59,2.16,3.05,Lay_Home,6.8,1,alanwarclub,alulafc,True,0x1,manual_user
+2026-08-28,EGYPT 1,Al Ittihad (EGY),Ceramica Cleopatra,35975686,5.6,2.02,1.46,6.6,Lay_Over45,20.0,1,alittihadegy,ceramicacleopatra,True,1x3,manual_user
+2026-08-28,SAUDI ARABIA 1,Al-Khaleej Saihat,Al-Hilal,35983824,11.5,1.3,2.62,2.52,Lay_Draw,6.6,0,alkhaleejsaihat,alhilal,True,1x5,manual_user
+2026-08-28,SAUDI ARABIA 1,Al Nassr,Al-Taawoun Buraidah,35984822,1.29,13.0,3.45,1.98,Lay_Draw,6.8,0,alnassr,altaawounburaidah,True,?,sinais1/0
+2026-08-28,GERMANY 1,Bayern Munich,Stuttgart,35785195,1.25,12.0,5.9,1.49,Lay_Draw,8.4,0,bayernmunich,stuttgart,True,?,sinais1/0
+2026-08-28,IRELAND 2,Cork City,Wexford F.C,35967706,1.33,10.0,2.96,2.22,Lay_Draw,6.6,0,corkcity,wexfordfc,True,?,sinais1/0
+2026-08-28,IRELAND 2,UCD,Finn Harps,35967710,1.25,13.5,3.4,1.99,Lay_Draw,8.0,0,ucd,finnharps,True,?,sinais1/0
+2026-08-28,IRELAND 1,Bohemians,Sligo Rovers,35967662,1.28,13.5,2.72,2.4,Lay_Draw,6.8,0,bohemians,sligorovers,True,?,sinais1/0
+2026-08-28,IRELAND 1,St Patricks,Waterford,35967700,1.4,8.6,2.7,2.44,Lay_Draw,5.7,0,stpatricks,waterford,True,?,sinais1/0
+2026-08-28,WALES 1,Holywell Town,Caernarfon Town,35974392,12.5,1.24,3.2,2.04,Lay_Draw,8.6,0,holywelltown,caernarfontown,True,3x5,manual_user
+2026-08-28,WALES 1,The New Saints,Colwyn Bay,35974415,1.28,11.5,2.64,2.44,Lay_Draw,7.0,0,thenewsaints,colwynbay,True,?,sinais1/0
+2026-08-28,ICELAND 2,Fylkir,Grotta,35989819,1.38,7.2,4.5,1.65,Lay_Draw,6.8,0,fylkir,grotta,True,?,sinais1/0
+2026-08-28,PORTUGAL 1,Rio Ave,Sporting Lisbon,35971610,11.0,1.36,2.54,2.62,Lay_Draw,5.8,1,rioave,sportinglisbon,True,0x4,manual_user
+2026-08-29,ROMANIA 2,Bihor Oradea,CSL Stefanestii de Jos,35973189,1.26,14.0,2.28,2.7,Lay_Draw,7.0,1,bihororadea,cslstefanestiidejos,True,2x0,placar
+2026-08-29,JAPAN 1,Nagasaki,FC Tokyo,35969793,6.0,1.62,2.1,3.25,Lay_Home,6.2,1,nagasaki,fctokyo,True,0x1,placar
+2026-08-29,JAPAN 2,Tokushima,Oita,35969847,2.38,3.75,1.5,6.4,Lay_Over45,18.0,1,tokushima,oita,True,1x0,placar
+2026-08-29,CHINA 1,Chengdu Rongcheng,Liaoning Tieren FC,35973516,1.39,8.0,3.0,2.18,Lay_Draw,6.2,0,chengdurongcheng,liaoningtierenfc,True,2x1,placar
+2026-08-29,GERMANY 1,Elversberg,Leverkusen,35785197,5.7,1.63,2.88,2.32,Lay_Home,5.8,1,elversberg,leverkusen,True,1x2,placar
+2026-08-29,CZECH 1,Arsenal CL,FC Sellier,35986306,1.5,1.8,1.26,1.69,Lay_Over45,10.5,1,arsenalcl,fcsellier,True,2x1,manual_user
+2026-08-29,ICELAND 2,Afturelding,IF Vestri,35989814,1.2,14.5,3.9,1.77,Lay_Draw,9.8,0,afturelding,ifvestri,True,1x0,placar
+2026-08-29,SCOTLAND 2,Partick,Queens Park,35970559,1.33,11.0,2.3,2.88,Lay_Draw,5.9,1,partick,queenspark,False,0x0,placar
+2026-08-29,SCOTLAND 1,Celtic,Falkirk,35979297,1.27,13.5,2.96,2.3,Lay_Draw,7.0,0,celtic,falkirk,True,3x1,placar
+2026-08-29,SAUDI ARABIA 1,Al-Kholood Club,Al Ahli,35988282,8.6,1.44,2.2,3.05,Lay_Home,9.0,0,alkholoodclub,alahli,True,0x1,placar
+2026-08-29,CROATIA 1,NK Istra,Dinamo Zagreb,35975624,7.2,1.45,2.76,2.32,Lay_Home,8.0,0,nkistra,dinamozagreb,True,0x2,placar
+2026-08-29,NETHERLANDS 1,AZ Alkmaar,Go Ahead Eagles,35965450,1.4,8.4,3.5,1.98,Lay_Draw,6.0,0,azalkmaar,goaheadeagles,True,5x2,placar
+2026-08-29,ISRAEL 1,Hapoel Ramat Gan,Hapoel Be'er Sheva,35992580,7.4,1.48,2.28,2.78,Lay_Home,8.4,0,hapoelramatgan,hapoelbeersheva,True,0x2,placar
+2026-08-29,PORTUGAL 1,Academico de Viseu,Porto,35979521,12.5,1.3,2.34,2.88,Lay_Draw,6.4,1,academicodeviseu,porto,True,0x3,manual_user
+2026-08-29,TURKEY 1,Galatasaray,Goztepe,35976838,1.33,11.5,2.78,2.36,Lay_Draw,6.4,0,galatasaray,goztepe,True,3x1,placar
+2026-08-29,ITALY 1,Juventus,Parma,35965555,1.26,16.0,2.2,3.05,Lay_Draw,6.8,1,juventus,parma,True,2x0,placar
+2026-08-29,CROATIA 1,Varazdin,Rudes,35986245,1.3,12.0,2.44,2.66,Lay_Draw,6.8,1,varazdin,rudes,True,1x0,placar
+2026-08-29,COLOMBIA 2,Real Cartagena,Tigres FC Zipaquira,35988913,1.27,14.5,2.12,3.1,Lay_Draw,6.8,1,realcartagena,tigresfczipaquira,True,1x0,placar
+2026-08-29,ARGENTINA 1,Atl Tucuman,Belgrano,35949497,2.82,3.15,1.48,6.0,Lay_Over45,18.5,1,atltucuman,belgrano,True,0x0,manual_user
+2026-08-29,PERU 1,Alianza Lima,Deportivo Garcilaso,35976951,1.34,13.5,1.93,3.45,Lay_Draw,5.5,1,alianzalima,deportivogarcilaso,True,3x4,placar
+2026-08-29,USA 1,Kansas City,Vancouver Whitecaps,35973474,7.0,1.46,2.98,2.22,Lay_Home,7.6,0,kansascity,vancouverwhitecaps,True,1x1,placar
+2026-08-30,NETHERLANDS 1,FC Utrecht,PSV,35974232,5.6,1.6,3.7,1.9,Lay_Home,5.8,1,fcutrecht,psv,True,1x2,placar
+2026-08-30,SOUTH KOREA 1,Gwangju FC,FC Seoul,35984349,7.4,1.51,2.1,3.25,Lay_Home,8.0,0,gwangjufc,fcseoul,True,0x1,placar
+2026-08-30,CHINA 1,Guangdong GZ-Power FC,Changchun Yatai,35992886,1.4,8.2,2.58,2.44,Lay_Draw,6.0,0,guangdonggzpowerfc,changchunyatai,True,2x1,placar
+2026-08-30,ESTONIA 1,Nomme Kalju,Fci Tallinn,35978822,6.4,1.56,2.24,2.88,Lay_Home,7.4,1,nommekalju,fcitallinn,True,1x1,placar
+2026-08-30,DENMARK 1,Silkeborg,Midtjylland,35965486,6.4,1.52,2.78,2.34,Lay_Home,6.8,0,silkeborg,midtjylland,True,1x1,placar
+2026-08-30,SWEDEN 1,AIK,Hammarby,35974597,6.4,1.53,2.68,2.44,Lay_Home,6.8,0,aik,hammarby,True,0x0,placar
+2026-08-30,NETHERLANDS 1,Feyenoord,ADO Den Haag,35974792,1.2,16.0,4.3,1.73,Lay_Draw,9.2,0,feyenoord,adodenhaag,False,2x2,placar
+2026-08-30,NORWAY 1,Bodo Glimt,Rosenborg,35957196,1.34,8.8,4.1,1.79,Lay_Draw,6.8,0,bodoglimt,rosenborg,True,4x1,placar
+2026-08-30,NETHERLANDS 1,SC Telstar,Ajax,35965511,6.2,1.55,3.35,2.04,Lay_Home,6.4,1,sctelstar,ajax,True,0x2,placar
+2026-08-30,CZECH 1,Plzen,Slovacko,35974675,1.33,11.0,2.36,2.74,Lay_Draw,6.0,1,plzen,slovacko,True,2x0,placar
+2026-08-30,NORWAY 2,Hodd,Stabaek,35988152,5.5,1.58,3.55,1.91,Lay_Home,5.7,1,hodd,stabaek,True,1x2,placar
+2026-08-30,NORWAY 2,Sogndal,Stromsgodset,35988149,5.0,1.58,4.5,1.67,Lay_Home,5.2,1,sogndal,stromsgodset,True,1x1,placar
+2026-08-30,NORWAY 1,Viking,Aalesunds,35957274,1.33,9.8,4.6,1.67,Lay_Draw,6.8,0,viking,aalesunds,True,0x1,placar
+2026-08-30,SLOVAKIA 1,Slovan Bratislava,Zemplin,35974748,1.31,10.5,3.4,1.95,Lay_Draw,7.0,0,slovanbratislava,zemplin,True,3x0,placar
+2026-08-30,ENGLAND 1,Man Utd,Ipswich,35971122,1.39,9.0,3.15,2.18,Lay_Draw,5.8,0,manutd,ipswich,True,5x2,placar
+2026-08-30,BULGARIA 1,Botev Plovdiv,PFC Levski Sofia,35974323,6.4,1.61,1.99,3.55,Lay_Home,6.8,1,botevplovdiv,pfclevskisofia,True,0x1,placar
+2026-08-30,BULGARIA 1,Spartak Varna,Ludogorets,35974389,6.6,1.6,1.93,3.6,Lay_Home,7.0,1,spartakvarna,ludogorets,True,1x1,placar
+2026-08-30,AUSTRIA 1,Red Bull Salzburg,Austria Wien,35965456,1.4,8.6,2.9,2.28,Lay_Draw,5.9,0,redbullsalzburg,austriawien,True,4x1,placar
+2026-08-30,CYPRUS 1,Karmiotissa Polemidion,Pafos FC,35971860,14.0,1.28,2.56,2.54,Lay_Draw,6.6,1,karmiotissapolemidion,pafosfc,True,0x3,manual_user
+2026-08-30,GREECE 1,Atromitos,PAOK,35967894,5.8,1.65,2.12,3.2,Lay_Home,6.2,1,atromitos,paok,True,1x2,placar
+2026-08-30,ARGENTINA 1,Banfield,River Plate,35949499,7.2,1.62,1.69,4.8,Lay_Home,7.6,1,banfield,riverplate,True,2x3,placar
+2026-08-30,NETHERLANDS 1,Cambuur Leeuwarden,FC Twente,35965458,10.0,1.32,3.6,1.93,Lay_Draw,6.6,0,cambuurleeuwarden,fctwente,True,1x4,manual_user
+2026-08-30,GREECE 1,Asteras Tripolis,Olympiakos,35967856,9.2,1.5,1.83,4.0,Lay_Home,9.4,0,asterastripolis,olympiakos,True,0x2,placar
+2026-08-30,GREECE 1,Kifisia,AEK Athens,35967864,12.5,1.34,2.18,3.05,Lay_Draw,5.7,1,kifisia,aekathens,False,1x1,manual_user
+2026-08-30,SAUDI ARABIA 1,Al-Quadisiya (KSA),Al Faisaly ( KSA ),35989889,1.2,15.0,4.1,1.76,Lay_Draw,9.8,0,alquadisiyaksa,alfaisalyksa,True,2x0,placar
+2026-08-30,SLOVENIA 1,Nafta Lendava,NK Maribor,35976908,7.4,1.47,2.38,2.62,Lay_Home,8.0,0,naftalendava,nkmaribor,True,0x1,placar
+2026-08-30,TURKEY 1,Samsunspor,Fenerbahce,35976837,6.2,1.62,2.32,2.82,Lay_Home,6.6,1,samsunspor,fenerbahce,True,0x2,placar
+2026-08-30,ITALY 1,Cagliari,Inter,35974484,9.4,1.44,2.24,3.05,Lay_Home,9.6,0,cagliari,inter,True,0x1,placar
+2026-08-30,BOSNIA 1,Radnik Bijeljina,Borac Banja Luka,35997943,10.5,1.29,1.92,3.3,Lay_Draw,6.4,1,radnikbijeljina,boracbanjaluka,False,2x2,manual_user
+2026-08-30,BRAZIL 1,Flamengo,Botafogo FR,35953415,1.36,10.0,2.44,2.68,Lay_Draw,5.8,1,flamengo,botafogofr,True,3x0,placar
+2026-08-30,BRAZIL 2,America MG,Ponte Preta,35980998,1.16,27.0,2.88,2.28,Lay_Draw,9.2,0,americamg,pontepreta,True,2x0,placar
+2026-08-30,VENEZUELA 1,Carabobo FC,Zamora FC,35996196,1.4,9.8,2.0,3.3,Lay_Draw,5.6,1,carabobofc,zamorafc,False,0x0,placar
+2026-08-30,MEXICO 1,Toluca,FC Juarez,35970044,1.32,10.0,3.0,2.2,Lay_Draw,6.6,0,toluca,fcjuarez,True,2x0,placar
+2026-08-31,WALES 1,Flint Town United,Connahs Quay,35997203,5.6,1.64,2.32,2.82,Lay_Home,6.0,1,flinttownunited,connahsquay,True,?,sinais1/0
+2026-08-31,EGYPT 1,Asyut Petroleum,National Bank,36009906,7.2,1.62,1.66,4.9,Lay_Home,7.8,1,asyutpetroleum,nationalbank,True,?,sinais1/0
+2026-08-31,ENGLAND 5,Worthing,Boreham Wood,35998771,6.4,1.47,3.35,1.96,Lay_Home,7.0,0,worthing,borehamwood,True,?,sinais1/0
+2026-08-31,GREECE 1,Levadiakos,Panathinaikos,35967852,6.2,1.65,1.96,3.55,Lay_Home,6.6,1,levadiakos,panathinaikos,True,?,sinais1/0
+2026-08-31,ITALY 1,Lecce,Roma,35974457,8.2,1.5,1.94,3.7,Lay_Home,8.4,0,lecce,roma,True,?,sinais1/0
+2026-08-31,CYPRUS 1,Omonia,Omonia FC Aradippou,35962496,1.2,20.0,2.84,2.26,Lay_Draw,9.0,0,omonia,omoniafcaradippou,False,?,sinais1/0
+2026-08-31,DENMARK 1,FC Copenhagen,SonderjyskE,35978634,1.36,9.8,2.88,2.28,Lay_Draw,6.0,0,fccopenhagen,sonderjyske,True,?,sinais1/0
+2026-08-31,ENGLAND 1,Aston Villa,Arsenal,35965583,7.0,1.54,2.24,3.0,Lay_Home,7.2,1,astonvilla,arsenal,True,?,sinais1/0
+2026-08-31,ARGENTINA 2,Los Andes,Acassuso,35961642,1.6,7.2,1.5,5.6,Lay_Over45,18.5,1,losandes,acassuso,True,?,sinais1/0
+2026-08-31,VENEZUELA 1,Puerto Cabello,Academia Anzoategui FC,35996231,1.4,9.8,2.02,3.15,Lay_Draw,5.5,1,puertocabello,academiaanzoateguifc,True,?,sinais1/0
+2026-09-01,TURKEY 2,Boluspor,Keciorengucu,35992417,6.6,1.53,2.56,2.5,Lay_Home,7.4,0,boluspor,keciorengucu,True,?,sinais1/0
+2026-09-01,AUSTRIA 1,RZ Pellets WAC,Lask Linz,35974330,7.2,1.45,3.45,2.02,Lay_Home,7.4,0,rzpelletswac,lasklinz,True,?,sinais1/0
+2026-09-01,SOUTH AFRICA 1,Kruger United FC,Orlando Pirates (SA),36017199,11.5,1.38,1.93,3.5,Lay_Draw,5.2,1,krugerunitedfc,orlandopiratessa,True,?,sinais1/0
+2026-09-01,SWITZERLAND 1,FC Zurich,Young Boys,36001167,5.1,1.63,4.0,1.79,Lay_Home,5.3,1,fczurich,youngboys,True,?,sinais1/0
+2026-09-01,BOSNIA 1,Zrinjski,FK BSK Banja Luka,36016228,1.18,22.0,2.4,2.56,Lay_Draw,8.8,1,zrinjski,fkbskbanjaluka,True,?,sinais1/0
+2026-09-02,BULGARIA 1,Slavia Sofia,PFC Levski Sofia,35940566,9.4,1.44,1.98,3.5,Lay_Home,10.0,0,slaviasofia,pfclevskisofia,True,1x2,manual_user
+2026-09-02,SOUTH AFRICA 1,Mamelodi Sundowns,Milford,36019277,1.24,22.0,2.4,2.62,Lay_Draw,7.2,1,mamelodisundowns,milford,True,2x0,manual_user
+2026-09-02,SLOVENIA 1,NK Aluminij,NK Celje,36008891,5.0,1.64,2.6,2.4,Lay_Home,5.9,1,nkaluminij,nkcelje,True,0x2,manual_user
+2026-09-02,BOSNIA 1,Borac Banja Luka,Zeljeznicar,36020433,1.31,12.0,2.06,2.94,Lay_Draw,6.4,1,boracbanjaluka,zeljeznicar,True,2x0,manual_user
+2026-09-02,SCOTLAND 1,Celtic,Aberdeen,36004311,1.26,13.5,3.2,2.12,Lay_Draw,7.2,0,celtic,aberdeen,True,3x0,manual_user
+2026-09-02,BRAZIL 1,Flamengo,Mirassol,35983136,1.23,16.5,2.66,2.46,Lay_Draw,7.6,0,flamengo,mirassol,True,2x0,manual_user

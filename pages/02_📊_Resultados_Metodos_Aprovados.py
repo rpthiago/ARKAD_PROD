@@ -96,7 +96,7 @@ def carregar_dados_aprovados(modo="oficial"):
                 df["PnL_Reais"] = df["PnL_u"] * stake_base
                 return df.sort_values(["Data", "Método"]).reset_index(drop=True)
                 
-    files = sorted(FOLDER.glob("*.xlsx"))
+    files = sorted(FOLDER.rglob("*.xlsx"))
     if not files:
         return pd.DataFrame()
     
