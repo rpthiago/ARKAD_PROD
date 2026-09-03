@@ -33,6 +33,17 @@ st.markdown(
 st.sidebar.header("⚙️ Configurações de Banca & Stake")
 stake_base = st.sidebar.number_input("Valor da Stake Base (R$)", min_value=10.0, value=100.0, step=10.0)
 
+st.sidebar.markdown("---")
+st.sidebar.header("📁 Fonte dos Dados")
+fonte_dados = st.sidebar.radio(
+    "Selecione a Base",
+    options=[
+        "👑 Tríade Aprovada Oficial (Odds de Lay Reais Betfair)",
+        "📁 Todas as Planilhas Diárias (Inclui Legado)"
+    ],
+    index=0
+)
+
 # ── Carregamento de Dados Seguro ──
 def _ler_excel_seguro(path):
     import ctypes
@@ -69,16 +80,29 @@ def _ler_excel_seguro(path):
 
 
 @st.cache_data(ttl=60, show_spinner=False)
-def carregar_dados_aprovados():
+def carregar_dados_aprovados(modo="oficial"):
     if not FOLDER.exists():
         return pd.DataFrame()
+        
+    if "Tríade" in modo:
+        f_oficial = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
+        if f_oficial.exists():
+            df = _ler_excel_seguro(f_oficial)
+            if not df.empty:
+                df["_Arquivo"] = f_oficial.name
+                df["Data"] = pd.to_datetime(df["Data"], errors="coerce")
+                df["Hora"] = df.get("Hora", "15:00").astype(str).str[:5]
+                df["Odd_Entrada"] = pd.to_numeric(df.get("Odd_Entrada"), errors="coerce").fillna(5.0)
+                df["PnL_Reais"] = df["PnL_u"] * stake_base
+                return df.sort_values(["Data", "Método"]).reset_index(drop=True)
+                
     files = sorted(FOLDER.glob("*.xlsx"))
     if not files:
         return pd.DataFrame()
     
     dfs = []
     for f in files:
-        if f.name.startswith("~$"):
+        if f.name.startswith("~$") or "Odds_Reais" in f.name:
             continue
         df = _ler_excel_seguro(f)
         if df is not None and not df.empty:
@@ -158,7 +182,7 @@ def carregar_dados_aprovados():
         
     return df_all.sort_values(["Data", "Hora"]).reset_index(drop=True)
 
-df_raw = carregar_dados_aprovados()
+df_raw = carregar_dados_aprovados(modo=fonte_dados)
 
 if df_raw.empty:
     st.warning("Nenhuma planilha encontrada na pasta `metodos_aprovados/`.")
