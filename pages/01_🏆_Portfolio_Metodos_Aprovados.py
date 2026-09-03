@@ -54,11 +54,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🏆 Portfólio Oficial de Métodos Aprovados — ARKAD")
+st.title("🏆 Portfólio de Métodos em Validação Forward — ARKAD")
+st.warning("""
+🚨 **STATUS DE GOVERNANÇA (02/09/2026): EM VALIDAÇÃO FORWARD (Stake-Zero)**
+* **Rótulo Oficial:** Os métodos da Tríade estão classificados como **PROMISSORES / EM VALIDAÇÃO FORWARD**, e **NÃO como Aprovados**.
+* **Critério de Risco:** O resultado do forward recente (+12,27u em 189 jogos) é positivo, mas o Bootstrap bloco-dia (Draw IC95% `[−1,8%; +11,8%]` e Home IC95% `[−0,7%; +13,6%]`) **ainda cruza o zero** antes de correção FDR.
+* **Portão de Saída da Quarentena:** Exige $N \ge 400$ apostas ou 5 fins de semana completos com dados Betfair Exchange e liquidação oficial. Até lá: **ZERO CAPITAL REAL / STAKE-ZERO**.
+""")
 st.markdown("""
-Esta é a **Central Oficial de Estratégias Auditadas** do ARKAD. Todos os métodos listados abaixo passaram pelos testes 
-forenses mais rigorosos da engenharia quantitativa: **odd de lay real da Betfair Exchange, Bootstrap IC95% estritamente positivo, 
-break-even verificado e consistência de 8 de 8 meses positivos na base congelada de 2026**.
+Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
+estritamente com **odds de lay reais da Betfair Exchange** e ledger de paper trading desacoplado.
 """)
 
 # ── Sidebar: Configurações de Gestão ──

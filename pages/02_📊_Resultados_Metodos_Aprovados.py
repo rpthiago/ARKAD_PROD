@@ -23,7 +23,13 @@ sys.path.insert(0, str(ROOT))
 FOLDER = ROOT / "metodos_aprovados"
 
 # ── Header ──
-st.title("📊 Resultados Reais dos Métodos Aprovados — ARKAD")
+st.title("📊 Resultados dos Métodos em Validação Forward — ARKAD")
+st.warning("""
+🚨 **STATUS DE GOVERNANÇA (02/09/2026): EM VALIDAÇÃO FORWARD (Stake-Zero)**
+* **Avaliação Científica:** O resultado do forward recente (+12,27u em 189 jogos de 13 dias) é **promissor**, mas NÃO aprovado.
+* **Intervalos de Confiança (Bootstrap Bloco-Dia):** Lay Draw IC95% `[−1,8%; +11,8%]` e Lay Home IC95% `[−0,7%; +13,6%]` **ainda cruzam o zero**, antes mesmo da correção de False Discovery Rate (FDR) contra ~45 hipóteses.
+* **Governança:** A autoridade canônica é o ledger `forward_oculto/`. Status de dinheiro real bloqueado até acumular $N \ge 400$ apostas ou 5 fins de semana com dados limpos e IC pós-FDR estritamente excluindo zero.
+""")
 st.markdown(
     "Acompanhamento e auditoria dos sinais diários gerados e liquidados a partir da pasta "
     "[`metodos_aprovados/`](file:///c:/Users/thiag/OneDrive/Documentos/GitHub/ARKAD_PROD/metodos_aprovados)."
@@ -34,11 +40,21 @@ st.sidebar.header("⚙️ Configurações de Banca & Stake")
 stake_base = st.sidebar.number_input("Valor da Stake Base (R$)", min_value=10.0, value=100.0, step=10.0)
 
 st.sidebar.markdown("---")
+st.sidebar.header("📉 Taxa de Comissão Betfair")
+taxa_comissao = st.sidebar.selectbox(
+    "Taxa de Comissão",
+    options=[3.5, 5.0],
+    format_func=lambda x: f"{x}% ({'Fórmula do Usuário - Fator 0.965' if x == 3.5 else 'Protocolo Conservador - Fator 0.950'})",
+    index=0
+)
+fator_comissao = 1.0 - (taxa_comissao / 100.0)
+
+st.sidebar.markdown("---")
 st.sidebar.header("📁 Fonte dos Dados")
 fonte_dados = st.sidebar.radio(
     "Selecione a Base",
     options=[
-        "👑 Tríade Aprovada Oficial (Odds de Lay Reais Betfair)",
+        "👑 Tríade em Validação Forward (Odds de Lay Reais Betfair)",
         "📁 Todas as Planilhas Diárias (Inclui Legado)"
     ],
     index=0
@@ -226,14 +242,14 @@ def carregar_dados_aprovados(modo="oficial"):
         
     df_all["Status"] = df_all.apply(_calc_status, axis=1)
         
-    # 4. Normalização de PnL em Unidades e Reais (Fórmula: =SE(L2=1; 0,965/(Odd_lay-1); -1))
+    # 4. Normalização de PnL em Unidades e Reais (Fórmula com comissão dinâmica)
     def _calc_pnl_u(r):
         st_val = str(r.get("Status", ""))
         odd = float(r.get("Odd_Entrada", 5.0))
         if odd <= 1.0:
             odd = 1.05
         if "GREEN" in st_val:
-            return 0.965 / (odd - 1.0)
+            return round(fator_comissao / (odd - 1.0), 4)
         elif "RED" in st_val:
             return -1.0
         return 0.0
@@ -397,10 +413,13 @@ with tab_grafico:
 
 # 5. COMPARATIVO DIRETO: REGRA BASE vs FILTROS NOVOS
 with tab_comparativo:
-    st.subheader("⚖️ Comparativo Direto: Regra Base Ampla vs Novos Filtros Refinados")
-    st.markdown("""
-    Esta aba compara o desempenho real da **Regra Base Oficial** (que gerou +12,27u) 
-    contra os **Novos Filtros Refinados** (que exigem `Over 3.5 >= 2.54` no Lay Draw e restringem visitante para `[1.54, 1.65]` no Lay Home).
+    st.subheader("⚖️ Prova Forense de Overfitting: Regra Base vs Filtros Refinados")
+    st.info("""
+    🔬 **TESTE DURO DE GOVERNANÇA: SUB-CONJUNTO MANTIDO vs DESCARTADO (Kept-vs-Discarded)**
+    Ao decompor os 189 jogos no teste mantido-vs-descartado, a estatística comprova:
+    * **Lay Draw:** O filtro refinado MANTIDO deu ROI **+4,0%** (N=46), enquanto o subconjunto DESCARTADO rendeu **+6,0%** (N=68).
+    * **Lay Home:** O filtro refinado MANTIDO deu ROI **+6,4%** (N=32), enquanto o subconjunto DESCARTADO rendeu **+8,7%** (N=31).
+    * **Veredito Científico:** O filtro refinado fica sistematicamente com a **metade pior** e corta favoritos visitantes mais fortes (o oposto do que o scan alegou). Isso comprova **sobreajuste (overfitting / garden of forking paths)**. Por isso a governança arquivou o filtro refinado e mantém a Regra Base Ampla.
     """)
     
     if "Passa_Filtro_Refinado" in df_raw.columns:

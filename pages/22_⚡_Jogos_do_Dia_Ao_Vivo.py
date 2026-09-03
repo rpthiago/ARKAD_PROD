@@ -68,14 +68,19 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("⚡ Radar de Jogos do Dia — Tríade Aprovada & Gestão Dinâmica")
+st.title("⚡ Radar de Jogos do Dia — Tríade em Validação Forward")
+st.warning("""
+🚨 **STATUS DE GOVERNANÇA (02/09/2026): EM VALIDAÇÃO FORWARD (Stake-Zero)**
+* **Quarentena Operacional:** Os métodos da Tríade operam em regime de **observação e papel** até acumularem $N \ge 400$ apostas com intervalos de confiança de Bootstrap excluindo zero após correção FDR.
+* **Gestão de Risco:** O cálculo de 5% de liability é para dimensionamento de referência em paper trading. **Zero capital real até a aprovação formal.**
+""")
 st.markdown("""
-Este radar monitora a **grade diária da Betfair Exchange** e filtra **exclusivamente os 3 métodos sobreviventes e validados no forward real**:
+Este radar monitora a **grade diária da Betfair Exchange** e filtra **exclusivamente os 3 métodos sobreviventes em validação forward**:
 * 👑 **Lay Draw Base:** Super Favorito (`Fav <= 1.40` | `Lay 4.5 a 10.0`) $\\rightarrow$ *+5,2% ROI no forward*
 * 👑 **Lay Home Base:** Favorito Visitante (`Visitante <= 1.65` | `Lay 2.0 a 10.0`) $\\rightarrow$ *+7,7% ROI no forward*
 * ⚠️ **Lay Over 4.5 FT:** Defesa Pesada (`Under 2.5 <= 1.50` | `Lay 4.0 a 20.0`) $\\rightarrow$ *+2,9% a +5,6% ROI*
 
-Todos os cálculos utilizam **odds executáveis de LAY da Betfair** e a **Gestão Dinâmica de 5% de Risco por aposta**.
+Todos os cálculos utilizam **odds executáveis de LAY da Betfair** e a **Gestão Dinâmica de 5% de Risco por aposta (Referência)**.
 """)
 
 # ── Barra Lateral / Gestão de Banca ──
