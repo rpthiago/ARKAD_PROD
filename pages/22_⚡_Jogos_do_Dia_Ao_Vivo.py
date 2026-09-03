@@ -308,37 +308,6 @@ else:
         use_container_width=True,
         hide_index=True
     )
-    
-    # ── Cards Detalhados Jogo a Jogo ──
-    st.markdown("### 🔍 Detalhamento das Entradas e Regras de Execução")
-    for _, r in df_radar.iterrows():
-        if r['Green'] is True:
-            badge = "🟢 GREEN"
-        elif r['Green'] is False:
-            badge = "🔴 RED"
-        else:
-            badge = "🟡 PENDENTE"
-            
-        with st.expander(f"{badge} | {r['Horário']} — {r['Partida']} [{r['Método']}] (Odd Lay: {r['Odd_Lay']:.2f})", expanded=(r['Green'] is None)):
-            col1, col2, col3 = st.columns([2, 2, 2])
-            with col1:
-                st.markdown(f"**Liga:** `{r['Liga']}`")
-                st.markdown(f"**Mercado:** `{r['Mercado']}`")
-                st.markdown(f"**Odd Fav (Back):** `{r['Odd_Fav']:.2f}`")
-                st.markdown(f"**Odd LAY Real Executável:** `{r['Odd_Lay']:.2f}`")
-            with col2:
-                st.markdown(f"**Stake Sugerida (Entrada):** `R$ {r['Stake_R$']:.2f}`")
-                st.markdown(f"**Risco Máximo Travado (Red):** `R$ {r['Liability_R$']:.2f}`")
-                st.markdown(f"**Lucro Líquido no Green:** `R$ {r['Lucro_Potencial_R$']:.2f}`")
-                st.markdown(f"**Break-Even Mínimo:** `{r['Break_Even_WR']:.1f}%`")
-            with col3:
-                st.markdown(f"**Placar Atual / Final:** `{r['Placar']}`")
-                if r['Tipo'] == 'LAY_DRAW':
-                    st.info("🎯 **Critério Green:** Qualquer vitória (não pode terminar em empate).")
-                elif r['Tipo'] == 'LAY_HOME':
-                    st.info("🎯 **Critério Green:** O visitante não pode perder (vitória do visitante ou empate dá green).")
-                elif r['Tipo'] == 'LAY_OVER45':
-                    st.info("🎯 **Critério Green:** Sair até 4 gols na partida (5+ gols dá red).")
 
 st.markdown("---")
 st.caption("⚡ **ARKAD PROD** — Monitoramento oficial conectado à API Betfair Cloud com odds de LAY reais da Exchange.")
