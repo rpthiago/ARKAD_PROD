@@ -163,7 +163,7 @@ with tab1:
             # 1. Lay 0x1 Super Favorito Mandante (Odd_H_Back <= 1.90 | 5.0 <= Lay 0x1 <= 15.0)
             if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.90 and pd.notna(l01.get(i)) and 5.0 <= l01[i] <= 15.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay 0x1 Super Fav", "Mercado": "Correct Score (0x1)", "Lado": "LAY",
                     "Odd_Entrada": round(float(l01[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "94.2%", "EV_Estimado": "+2.59%"
@@ -178,7 +178,7 @@ with tab1:
             fav_ok = (_oh <= 1.50) if fav_home else (_oa <= 1.40)
             if fav_ok and pd.notna(ou05_lay.get(i)) and 5.0 <= ou05_lay[i] <= 15.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Under 0.5 FT (Fav)", "Mercado": "Under 0.5 FT", "Lado": "LAY",
                     "Odd_Entrada": round(float(ou05_lay[i]), 2), "Odd_Fav": round(float(fav_odd), 2),
                     "Expectativa_WR": "94.1%", "EV_Estimado": "+3.33%"
@@ -187,7 +187,7 @@ with tab1:
             # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | 5.0 <= Lay 0x2 <= 25.0)
             if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.80 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay 0x2 / 2x0 Zebra", "Mercado": "Correct Score (0x2)", "Lado": "LAY",
                     "Odd_Entrada": round(float(l02[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "97.3%", "EV_Estimado": "+1.79%"
@@ -197,7 +197,7 @@ with tab1:
             _dfav = min(oh_back[i] if pd.notna(oh_back.get(i)) else 99.0, oa_back[i] if pd.notna(oa_back.get(i)) else 99.0)
             if _dfav <= 1.40 and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
                     "Odd_Entrada": round(float(od_lay[i]), 2), "Odd_Fav": round(float(_dfav), 2),
                     "Expectativa_WR": "85.4%", "EV_Estimado": "+2.87%"
@@ -206,7 +206,7 @@ with tab1:
             # 5. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0)
             if pd.notna(ou25_back.get(i)) and ou25_back[i] <= 1.50 and pd.notna(o45_lay.get(i)) and 4.0 <= o45_lay[i] <= 20.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
                     "Odd_Entrada": round(float(o45_lay[i]), 2), "Odd_Fav": round(float(ou25_back[i]), 2),
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
@@ -215,7 +215,7 @@ with tab1:
             # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H_Back <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
             if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.45 and pd.notna(oa_lay.get(i)) and 2.0 <= oa_lay[i] <= 15.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
                     "Odd_Entrada": round(float(oa_lay[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
                     "Expectativa_WR": "90.0%", "EV_Estimado": "+2.66%"
@@ -224,7 +224,7 @@ with tab1:
             # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
             if pd.notna(oa_back.get(i)) and oa_back[i] <= 1.65 and pd.notna(oh_lay.get(i)) and 2.0 <= oh_lay[i] <= 10.0:
                 sinais.append({
-                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo,
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Mercado": "Match Odds (Home)", "Lado": "LAY",
                     "Odd_Entrada": round(float(oh_lay[i]), 2), "Odd_Fav": round(float(oa_back[i]), 2),
                     "Expectativa_WR": "86.1%", "EV_Estimado": "+3.31%"
@@ -243,24 +243,41 @@ with tab1:
         # Exibição direta da planilha formatada com dimensionamento automático
         df_calc = df_radar_filt.copy()
         df_calc["Stake_Sugerida_R$"] = (liability_fixa / (df_calc["Odd_Entrada"] - 1.0)).round(2)
-        df_calc["Lucro_Green_R$"] = (df_calc["Stake_Sugerida_R$"] * 0.955).round(2)
+        df_calc["Lucro_Green_R$"] = (df_calc["Stake_Sugerida_R$"] * 0.965).round(2)
         df_calc["Risco_Red_R$"] = liability_fixa
         
         cols_order = [
             "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
             "Odd_Entrada", "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Expectativa_WR", "EV_Estimado"
         ]
-        df_display = df_calc[cols_order].sort_values(["Data", "Hora"]).reset_index(drop=True)
+        cols_disp = [c for c in cols_order if c in df_calc.columns]
+        df_display = df_calc[cols_disp].sort_values(["Data", "Hora"]).reset_index(drop=True)
         st.dataframe(df_display, use_container_width=True, hide_index=True)
+        
+        # Estrutura de exportação 100% compatível com a página 02_Resultados
+        df_export = df_calc.copy()
+        df_export["Placar"] = "vs"
+        df_export["Resultado"] = "PENDENTE"
+        df_export["1/0"] = ""
+        df_export["P/L"] = ""
+        df_export["Status"] = "⏳ PENDENTE"
+        
+        cols_export = [
+            "Data", "Hora", "Liga", "Jogo", "Home", "Away", "Método", "Mercado", "Lado",
+            "Odd_Entrada", "Odd_Fav", "Stake_Sugerida_R$", "Risco_Red_R$",
+            "Placar", "Resultado", "1/0", "P/L", "Status"
+        ]
+        cols_export_disp = [c for c in cols_export if c in df_export.columns]
+        df_export_final = df_export[cols_export_disp].sort_values(["Data", "Hora"]).reset_index(drop=True)
         
         # Botões de Ação
         col_b1, col_b2 = st.columns([1, 1])
         with col_b1:
             _buf_sinais = io.BytesIO()
             with pd.ExcelWriter(_buf_sinais, engine="openpyxl") as _writer:
-                df_display.to_excel(_writer, index=False, sheet_name="Sinais_Aprovados")
+                df_export_final.to_excel(_writer, index=False, sheet_name="Sinais_Aprovados")
             st.download_button(
-                label="📥 Baixar Planilha de Sinais do Dia (Excel)",
+                label="📥 Baixar Planilha de Sinais do Dia (Compatível com Resultados)",
                 data=_buf_sinais.getvalue(),
                 file_name=f"Sinais_Metodos_Aprovados_{ds_str}.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
