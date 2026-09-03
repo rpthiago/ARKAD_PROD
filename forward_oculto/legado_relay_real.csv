@@ -1,0 +1,150 @@
+Data,Hora,Liga,Jogo,Método,Mercado,Lado,Odd_Entrada,Odd_Fav,Expectativa_WR,EV_Estimado,1/0,P/L,Placar,Resultado,Stake_R$,PnL_R$,PnL_u,Stake_Sugerida_R$,Lucro_Green_R$,Risco_Red_R$,mk,kh,ka,lay_real,g
+2026-08-21,11:30,ROMANIA 2,Chindia Targoviste x CS FC Dinamo Bucuresti,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,7.35,1.07,94.3%,+3.18%,1,0.15196850393700786,,,,,,,,,Lay Under 0.5,chindiatargoviste,csfcdinamobucuresti,110.0,1
+2026-08-21,13:00,CZECH 1,MFK Karvina x Zizkov,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.46,1.38,85.8%,+3.26%,1,0.2163677130044843,,,,,,,,,Lay Draw,mfkkarvina,zizkov,6.2,1
+2026-08-21,13:00,ESTONIA 1,FCI Tallinn x Trans Narva,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,9.89,1.15,85.8%,+3.26%,1,0.10854893138357705,,,,,,,,,Lay Draw,fcitallinn,transnarva,11.0,1
+2026-08-21,14:00,EGYPT 1,Zamalek x Al Ittihad (EGY),Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,11.03,1.5,94.3%,+3.18%,0,-1.0,,,,,,,,,Lay Under 0.5,zamalek,alittihadegy,12.5,0
+2026-08-21,15:00,BOSNIA 1,Sarajevo x FK BSK Banja Luka,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.77,1.32,85.8%,+3.26%,1,0.20230607966457023,,,,,,,,,Lay Draw,sarajevo,fkbskbanjaluka,6.2,1
+2026-08-21,15:00,ICELAND 2,Aegir x Afturelding,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.7,1.27,94.3%,+3.18%,1,0.07043795620437956,,,,,,,,,Lay Under 0.5,aegir,afturelding,110.0,1
+2026-08-21,16:00,ENGLAND 1,Arsenal x Coventry,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.83,1.22,85.8%,+3.26%,1,0.14128843338213762,,,,,,,,,Lay Draw,arsenal,coventry,7.8,1
+2026-08-21,16:00,ITALY 3,Union Brescia x Carpi,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.36,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,unionbrescia,carpi,15.5,1
+2026-08-21,16:00,ITALY 3,Union Brescia x Carpi,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,4.94,1.36,85.8%,+3.26%,1,0.24492385786802026,,,,,,,,,Lay Draw,unionbrescia,carpi,5.5,1
+2026-08-21,19:30,BOLIVIA 1,The Strongest x Universitario de Vinto,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.46,1.4,85.8%,+3.26%,1,0.2163677130044843,,,,,,,,,Lay Draw,thestrongest,universitariodevinto,6.0,1
+2026-08-22,06:30,JAPAN 1,Okayama x Tokyo-V,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.0,1.86,94.2%,+2.59%,1,0.07423076923076923,,,,,,,,,Lay 0x1,okayama,tokyov,14.0,1
+2026-08-22,08:30,CHINA 1,Guangxi Hengchen x Suzhou Dongwu,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,1.47,94.3%,+3.18%,1,0.07321699544764795,,,,,,,,,Lay Under 0.5,guangxihengchen,suzhoudongwu,17.0,1
+2026-08-22,11:30,NETHERLANDS 2,NAC Breda x Jong Ajax Amsterdam,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.29,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,nacbreda,jongajaxamsterdam,7.2,1
+2026-08-22,12:00,SPAIN 1,Athletic Bilbao x Sevilla,Lay 0x1 Super Fav,Correct Score (0x1),LAY,15.0,1.83,94.2%,+2.59%,1,0.06892857142857142,,,,,,,,,Lay 0x1,athleticbilbao,sevilla,15.0,1
+2026-08-22,12:00,SPAIN 2,Oviedo x Leganes,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.0,1.89,94.2%,+2.59%,0,-1.0,,,,,,,,,Lay 0x1,oviedo,leganes,14.0,0
+2026-08-22,13:00,BULGARIA 1,Ludogorets x Slavia Sofia,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,1.36,94.3%,+3.18%,1,0.07321699544764795,,,,,,,,,Lay Under 0.5,ludogorets,slaviasofia,21.0,1
+2026-08-22,13:00,BULGARIA 1,Ludogorets x Slavia Sofia,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.46,1.36,85.8%,+3.26%,0,-1.0,,,,,,,,,Lay Draw,ludogorets,slaviasofia,5.5,0
+2026-08-22,13:00,ICELAND 2,Njardvik x Volsungur,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,9.45,1.45,94.3%,+3.18%,1,0.11420118343195267,,,,,,,,,Lay Under 0.5,njardvik,volsungur,26.0,1
+2026-08-22,13:00,ITALY 3,Cittadella x Pergolettese,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,9.66,1.58,94.3%,+3.18%,1,0.11143187066974596,,,,,,,,,Lay Under 0.5,cittadella,pergolettese,13.5,1
+2026-08-22,13:00,PERU 1,Sport Huancayo x Cesar Vallejo Moquegua,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.36,1.38,85.8%,+3.26%,1,0.22133027522935778,,,,,,,,,Lay Draw,sporthuancayo,cesarvallejomoquegua,5.7,1
+2026-08-22,13:30,ITALY 1,Inter x AC Monza,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,8.65,1.2,85.8%,+3.26%,1,0.1261437908496732,,,,,,,,,Lay Draw,inter,acmonza,8.8,1
+2026-08-22,14:00,EGYPT 1,Ghazl El Mahallah x Pyramids,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,7.98,1.51,94.3%,+3.18%,1,0.13825214899713464,,,,,,,,,Lay Under 0.5,ghazlelmahallah,pyramids,8.2,1
+2026-08-22,14:00,GREECE 1,AEK Athens x Iraklis,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.21,1.23,85.8%,+3.26%,1,0.15539452495974235,,,,,,,,,Lay Draw,aekathens,iraklis,7.2,1
+2026-08-22,15:00,ARGENTINA 2,Tristan Suarez x Agropecuario,Lay 0x1 Super Fav,Correct Score (0x1),LAY,13.5,1.86,94.2%,+2.59%,1,0.07719999999999999,,,,,,,,,Lay 0x1,tristansuarez,agropecuario,13.5,1
+2026-08-22,15:00,CZECH 1,Slavia Prague x Bohemians 1905,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.34,85.8%,+3.26%,0,-1.0,,,,,,,,,Lay Draw,slaviaprague,bohemians1905,6.4,0
+2026-08-22,15:00,FRANCE 2,St Etienne x Grenoble,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.46,1.38,85.8%,+3.26%,1,0.2163677130044843,,,,,,,,,Lay Draw,stetienne,grenoble,5.4,1
+2026-08-22,15:00,SAUDI ARABIA 1,Al Ahli x Abha,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.83,1.22,85.8%,+3.26%,1,0.14128843338213762,,,,,,,,,Lay Draw,alahli,abha,7.8,1
+2026-08-22,15:15,BULGARIA 1,PFC Levski Sofia x Spartak Varna,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.08,1.31,85.8%,+3.26%,1,0.18996062992125984,,,,,,,,,Lay Draw,pfclevskisofia,spartakvarna,6.2,1
+2026-08-22,15:30,GREECE 1,Olympiakos x Atromitos,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.0,1.23,85.8%,+3.26%,1,0.16083333333333333,,,,,,,,,Lay Draw,olympiakos,atromitos,7.0,1
+2026-08-22,15:30,TURKEY 1,Fenerbahce x Konyaspor,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.27,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,fenerbahce,konyaspor,6.6,1
+2026-08-22,16:00,BRAZIL 1,Fluminense x Remo,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,13.12,1.52,94.3%,+3.18%,1,0.07962046204620463,,,,,,,,,Lay Under 0.5,fluminense,remo,13.5,1
+2026-08-22,16:00,ECUADOR 1,Univ Catolica (Ecu) x Manta FC,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.08,1.3,85.8%,+3.26%,1,0.18996062992125984,,,,,,,,,Lay Draw,univcatolicaecu,mantafc,6.2,1
+2026-08-22,16:00,ITALY 3,Pescara x Pesaro,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,1.45,94.3%,+3.18%,1,0.07321699544764795,,,,,,,,,Lay Under 0.5,pescara,pesaro,18.0,1
+2026-08-22,16:00,SERBIA 1,OFK Beograd x Zemun,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.47,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,ofkbeograd,zemun,18.0,1
+2026-08-22,16:30,PORTUGAL 1,Sporting Lisbon x Alverca,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,8.24,1.23,85.8%,+3.26%,1,0.13328729281767954,,,,,,,,,Lay Draw,sportinglisbon,alverca,8.2,1
+2026-08-22,18:30,ECUADOR 1,Tecnico Universitario x Guayaquil City,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.0,1.9,94.2%,+2.59%,1,0.07423076923076923,,,,,,,,,Lay 0x1,tecnicouniversitario,guayaquilcity,14.0,1
+2026-08-22,20:30,USA 1,Inter Miami CF x Toronto FC,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.38,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,intermiamicf,torontofc,6.6,1
+2026-08-22,22:15,COLOMBIA 1,Ind Medellin x Cucuta Deportivo,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.27,85.8%,+3.26%,1,0.1790352504638219,,,,,,,,,Lay Draw,indmedellin,cucutadeportivo,6.8,1
+2026-08-22,22:30,USA 1,Vancouver Whitecaps x FC Dallas,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.77,1.4,85.8%,+3.26%,1,0.20230607966457023,,,,,,,,,Lay Draw,vancouverwhitecaps,fcdallas,5.8,1
+2026-08-23,08:35,CHINA 1,Shanghai Port FC x Qingdao Hainiu,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.35,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,shanghaiportfc,qingdaohainiu,6.6,1
+2026-08-23,09:00,FINLAND 1,KuPS x IFK Mariehamn,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.97,1.37,85.8%,+3.26%,1,0.19416498993963782,,,,,,,,,Lay Draw,kups,ifkmariehamn,6.0,1
+2026-08-23,09:00,SWITZERLAND 1,Young Boys x FC Vaduz,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.33,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,youngboys,fcvaduz,6.8,1
+2026-08-23,09:30,NETHERLANDS 1,PSV x FC Groningen,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.31,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,psv,fcgroningen,7.0,1
+2026-08-23,13:30,BELGIUM 1,Club Brugge x Cercle Brugge,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.32,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,clubbrugge,cerclebrugge,7.0,1
+2026-08-23,13:30,BOSNIA 1,Borac Banja Luka x Celik Zenica,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.22,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,boracbanjaluka,celikzenica,7.6,1
+2026-08-23,14:00,SERBIA 1,Crvena Zvezda x Cukaricki,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.83,1.2,85.8%,+3.26%,1,0.14128843338213762,,,,,,,,,Lay Draw,crvenazvezda,cukaricki,8.8,1
+2026-08-23,16:00,BOSNIA 1,Zrinjski x Zeljeznicar,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.42,1.2,85.8%,+3.26%,1,0.15031152647975077,,,,,,,,,Lay Draw,zrinjski,zeljeznicar,8.0,1
+2026-08-23,16:00,ITALY 2,Palermo x Juve Stabia,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,1.51,94.3%,+3.18%,1,0.07321699544764795,,,,,,,,,Lay Under 0.5,palermo,juvestabia,15.5,1
+2026-08-23,16:15,ICELAND 1,Vikingur Reykjavik x Valur,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.36,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,vikingurreykjavik,valur,6.8,1
+2026-08-23,16:30,PORTUGAL 1,Porto x Arouca,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.3,85.8%,+3.26%,1,0.1790352504638219,,,,,,,,,Lay Draw,porto,arouca,6.6,1
+2026-08-23,18:30,URUGUAY 1,Nacional (Uru) x Progreso,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.7,1.47,94.3%,+3.18%,1,0.07043795620437956,,,,,,,,,Lay Under 0.5,nacionaluru,progreso,18.0,1
+2026-08-23,20:30,PERU 1,Universitario de Deportes x CD Los Chankas,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.59,1.27,85.8%,+3.26%,1,0.17262969588550983,,,,,,,,,Lay Draw,universitariodedeportes,cdloschankas,6.8,1
+2026-08-24,16:00,ITALY 3,Salernitana x Sorrento,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.52,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,salernitana,sorrento,15.5,1
+2026-08-24,16:00,ITALY 3,Team Altamura x Monopoli,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,7.56,0.0,94.3%,+3.18%,1,0.14710365853658536,,,,,,,,,Lay Under 0.5,teamaltamura,monopoli,8.8,1
+2026-08-24,16:15,PORTUGAL 1,Gil Vicente x Casa Pia,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.0,1.83,94.2%,+2.59%,1,0.07423076923076923,,,,,,,,,Lay 0x1,gilvicente,casapia,14.0,1
+2026-08-24,18:30,PARAGUAY 1,Libertad x Sportivo San Lorenzo,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.46,1.37,85.8%,+3.26%,1,0.2163677130044843,,,,,,,,,Lay Draw,libertad,sportivosanlorenzo,5.4,1
+2026-08-24,19:30,COLOMBIA 2,Boyaca Patriotas x Atletico FC Cali,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.15,1.39,85.8%,+3.26%,1,0.23253012048192767,,,,,,,,,Lay Draw,boyacapatriotas,atleticofccali,5.4,1
+2026-08-24,20:00,ARGENTINA 2,Ferro Carril Oeste x All Boys,Lay 0x1 Super Fav,Correct Score (0x1),LAY,15.0,1.72,94.2%,+2.59%,1,0.06892857142857142,,,,,,,,,Lay 0x1,ferrocarriloeste,allboys,15.0,1
+2026-08-25,14:30,SOUTH AFRICA 1,Orlando Pirates (SA) x Sekhukhune United,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,11.55,1.36,94.3%,+3.18%,1,0.0914691943127962,,,,,,,,,Lay Under 0.5,orlandopiratessa,sekhukhuneunited,15.5,1
+2026-08-25,14:30,SOUTH AFRICA 1,Orlando Pirates (SA) x Sekhukhune United,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,4.84,1.36,85.8%,+3.26%,1,0.2513020833333333,,,,,,,,,Lay Draw,orlandopiratessa,sekhukhuneunited,5.4,1
+2026-08-25,14:30,SOUTH AFRICA 1,Siwelele FC x Chippa Utd,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.5,1.9,94.2%,+2.59%,1,0.07148148148148148,,,,,,,,,Lay 0x1,siwelelefc,chippautd,14.5,1
+2026-08-25,16:15,ICELAND 2,Afturelding x Grotta,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.26,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,afturelding,grotta,85.0,1
+2026-08-25,16:15,ICELAND 2,Afturelding x Grotta,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.62,1.26,85.8%,+3.26%,1,0.1457703927492447,,,,,,,,,Lay Draw,afturelding,grotta,9.0,1
+2026-08-26,07:30,SOUTH KOREA 1,Gangwon x Gwangju FC,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,11.03,1.58,94.3%,+3.18%,1,0.09621136590229312,,,,,,,,,Lay Under 0.5,gangwon,gwangjufc,12.0,1
+2026-08-26,14:00,NORWAY 2,Stromsgodset x Hodd,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.42,1.27,85.8%,+3.26%,1,0.15031152647975077,,,,,,,,,Lay Draw,stromsgodset,hodd,8.2,1
+2026-08-26,14:30,SOUTH AFRICA 1,Mamelodi Sundowns x AmaZulu,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.67,1.28,85.8%,+3.26%,1,0.20663811563169165,,,,,,,,,Lay Draw,mamelodisundowns,amazulu,6.4,1
+2026-08-26,15:45,ENGLAND CUP,Newcastle x West Brom,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.77,1.38,85.8%,+3.26%,1,0.20230607966457023,,,,,,,,,Lay Draw,newcastle,westbrom,6.0,1
+2026-08-26,15:45,ENGLAND CUP,Tottenham x Charlton,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.0,1.27,85.8%,+3.26%,1,0.16083333333333333,,,,,,,,,Lay Draw,tottenham,charlton,7.0,1
+2026-08-26,16:00,SPAIN 1,Real Madrid x Real Sociedad,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.3,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,realmadrid,realsociedad,6.8,1
+2026-08-26,16:00,EUROPA CHAMPIONS LEAGUE,AEK Athens x PFC Levski Sofia,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.54,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,aekathens,pfclevskisofia,13.5,1
+2026-08-26,19:30,BOLIVIA 1,Real Potosi x Real Tomayapo,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.87,1.34,85.8%,+3.26%,1,0.19815195071868583,,,,,,,,,Lay Draw,realpotosi,realtomayapo,5.9,1
+2026-08-26,21:30,BOLIVIA 1,Blooming Santa Cruz x CDT Real Oruro,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,10.5,1.36,94.3%,+3.18%,1,0.10157894736842105,,,,,,,,,Lay Under 0.5,bloomingsantacruz,cdtrealoruro,1000.0,1
+2026-08-26,21:30,BOLIVIA 1,Blooming Santa Cruz x CDT Real Oruro,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.18,1.36,85.8%,+3.26%,0,-1.0,,,,,,,,,Lay Draw,bloomingsantacruz,cdtrealoruro,7.2,0
+2026-08-26,21:30,COPA SUDAMERICANA,River Plate x Santa Fe,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,11.55,1.36,94.3%,+3.18%,1,0.0914691943127962,,,,,,,,,Lay Under 0.5,riverplate,santafe,12.0,1
+2026-08-26,21:30,COPA SUDAMERICANA,River Plate x Santa Fe,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.05,1.36,85.8%,+3.26%,0,-1.0,,,,,,,,,Lay Draw,riverplate,santafe,5.2,0
+2026-08-27,13:45,EUROPA CONFERENCE LEAGUE,Freiburg x Motherwell,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,9.06,1.2,85.8%,+3.26%,1,0.11972704714640198,,,,,,,,,Lay Draw,freiburg,motherwell,9.2,1
+2026-08-27,14:00,EGYPT 1,Pyramids x Abo Qair Semads,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.44,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,pyramids,aboqairsemads,14.5,1
+2026-08-27,14:00,EUROPA CONFERENCE LEAGUE,FC Copenhagen x FC Inter Turku,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.18,1.31,85.8%,+3.26%,1,0.1862934362934363,,,,,,,,,Lay Draw,fccopenhagen,fcinterturku,6.4,1
+2026-08-27,14:00,EUROPA CONFERENCE LEAGUE,Pafos FC x Dinamo Tirana,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.97,1.32,85.8%,+3.26%,1,0.19416498993963782,,,,,,,,,Lay Draw,pafosfc,dinamotirana,6.2,1
+2026-08-27,14:00,EUROPA LEAGUE,Red Bull Salzburg x Mjallby,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.42,1.25,85.8%,+3.26%,1,0.15031152647975077,,,,,,,,,Lay Draw,redbullsalzburg,mjallby,7.6,1
+2026-08-27,15:00,EUROPA CONFERENCE LEAGUE,Ajax x Sion,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.36,85.8%,+3.26%,1,0.1790352504638219,,,,,,,,,Lay Draw,ajax,sion,6.6,1
+2026-08-27,15:30,EUROPA CONFERENCE LEAGUE,Brighton x Tromso,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.62,1.23,85.8%,+3.26%,1,0.1457703927492447,,,,,,,,,Lay Draw,brighton,tromso,7.6,1
+2026-08-27,15:30,EUROPA LEAGUE,Anderlecht x Kairat Almaty,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.56,1.39,85.8%,+3.26%,1,0.21162280701754388,,,,,,,,,Lay Draw,anderlecht,kairatalmaty,5.6,1
+2026-08-27,16:00,BOLIVIA 1,Always Ready x Aurora,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.28,85.8%,+3.26%,0,-1.0,,,,,,,,,Lay Draw,alwaysready,aurora,7.2,0
+2026-08-27,16:00,ENGLAND CUP,Fulham x AFC Wimbledon,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.62,1.24,85.8%,+3.26%,1,0.1457703927492447,,,,,,,,,Lay Draw,fulham,afcwimbledon,7.8,1
+2026-08-27,16:00,SPAIN 1,Barcelona x Athletic Bilbao,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.83,1.25,85.8%,+3.26%,1,0.14128843338213762,,,,,,,,,Lay Draw,barcelona,athleticbilbao,7.8,1
+2026-08-27,21:30,BOLIVIA 1,Bolivar x Academia de Balompie Boliviano,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,9.68,1.2,85.8%,+3.26%,1,0.11117511520737328,,,,,,,,,Lay Draw,bolivar,academiadebalompieboliviano,10.5,1
+2026-08-28,14:00,EGYPT 1,ZED FC x Al Ahly Cairo,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,10.29,1.47,94.3%,+3.18%,1,0.10387513455328311,,,,,,,,,Lay Under 0.5,zedfc,alahlycairo,11.0,1
+2026-08-28,15:00,FRANCE 2,Montpellier x Boulogne,Lay 0x1 Super Fav,Correct Score (0x1),LAY,15.0,1.9,94.2%,+2.59%,1,0.06892857142857142,,,,,,,,,Lay 0x1,montpellier,boulogne,15.0,1
+2026-08-28,15:00,SAUDI ARABIA 1,Al Nassr x Al-Taawoun Buraidah,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.29,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,alnassr,altaawounburaidah,6.8,1
+2026-08-28,15:30,GERMANY 1,Bayern Munich x Stuttgart,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,8.24,1.25,85.8%,+3.26%,1,0.13328729281767954,,,,,,,,,Lay Draw,bayernmunich,stuttgart,8.4,1
+2026-08-28,15:30,TURKEY 2,Muglaspor x Boluspor,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,1.58,94.3%,+3.18%,1,0.08318965517241379,,,,,,,,,Lay Under 0.5,muglaspor,boluspor,13.5,1
+2026-08-28,15:45,IRELAND 2,Cork City x Wexford F.C,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.18,1.33,85.8%,+3.26%,1,0.1862934362934363,,,,,,,,,Lay Draw,corkcity,wexfordfc,6.6,1
+2026-08-28,15:45,IRELAND 2,UCD x Finn Harps,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,7.83,1.25,85.8%,+3.26%,1,0.14128843338213762,,,,,,,,,Lay Draw,ucd,finnharps,8.0,1
+2026-08-28,15:45,IRELAND 1,Bohemians x Sligo Rovers,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.8,1.28,85.8%,+3.26%,1,0.16637931034482759,,,,,,,,,Lay Draw,bohemians,sligorovers,6.8,1
+2026-08-28,15:45,IRELAND 1,St Patricks x Waterford,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.77,1.4,85.8%,+3.26%,1,0.20230607966457023,,,,,,,,,Lay Draw,stpatricks,waterford,5.7,1
+2026-08-28,15:45,WALES 1,The New Saints x Colwyn Bay,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.39,1.28,85.8%,+3.26%,1,0.1790352504638219,,,,,,,,,Lay Draw,thenewsaints,colwynbay,7.0,1
+2026-08-28,16:15,ICELAND 2,Fylkir x Grotta,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,6.18,1.38,85.8%,+3.26%,1,0.1862934362934363,,,,,,,,,Lay Draw,fylkir,grotta,6.8,1
+2026-08-28,20:30,BRAZIL 2,Nautico PE x Athletic Club,Lay 0x1 Super Fav,Correct Score (0x1),LAY,15.0,1.88,94.2%,+2.59%,1,0.06892857142857142,,,,,,,,,Lay 0x1,nauticope,athleticclub,19.0,1
+2026-08-28,21:30,ARGENTINA 1,Boca Juniors x Lanus,Lay 0x1 Super Fav,Correct Score (0x1),LAY,14.0,1.88,94.2%,+2.59%,1,0.07423076923076923,,,,,,,,,Lay 0x1,bocajuniors,lanus,14.0,1
+2026-08-29,05:00,ROMANIA 2,Bihor Oradea x CSL Stefanestii de Jos,Lay Draw Super Fav,,,5.77,,,,1,0.20230607966457023,2x0,GREEN,10.48,10.01,0.955,,,,Lay Draw,bihororadea,cslstefanestiidejos,7.0,1
+2026-08-29,08:35,CHINA 1,Chengdu Rongcheng x Liaoning Tieren FC,Lay Draw Super Fav,,,5.97,,,,1,0.19416498993963782,2x1,GREEN,10.06,9.61,0.955,,,,Lay Draw,chengdurongcheng,liaoningtierenfc,6.2,1
+2026-08-29,11:00,ICELAND 2,Afturelding x IF Vestri,Lay Draw Super Fav,,,8.86,,,,1,0.1227735368956743,1x0,GREEN,6.36,6.07,0.955,,,,Lay Draw,afturelding,ifvestri,9.8,1
+2026-08-29,11:00,SCOTLAND 2,Partick x Queens Park,Lay Draw Super Fav,,,5.67,,,,0,-1.0,0x0,RED,10.71,-50.0,-4.67,,,,Lay Draw,partick,queenspark,5.9,0
+2026-08-29,11:00,SCOTLAND 1,Celtic x Falkirk,Lay Draw Super Fav,,,7.0,,,,1,0.16083333333333333,3x1,GREEN,8.33,7.96,0.955,,,,Lay Draw,celtic,falkirk,7.0,1
+2026-08-29,13:45,NETHERLANDS 1,AZ Alkmaar x Go Ahead Eagles,Lay Draw Super Fav,,,5.97,,,,1,0.19416498993963782,5x2,GREEN,10.06,9.61,0.955,,,,Lay Draw,azalkmaar,goaheadeagles,6.0,1
+2026-08-29,15:30,TURKEY 1,Galatasaray x Goztepe,Lay Draw Super Fav,,,6.18,,,,1,0.1862934362934363,3x1,GREEN,9.65,9.22,0.955,,,,Lay Draw,galatasaray,goztepe,6.4,1
+2026-08-29,15:45,ITALY 1,Juventus x Parma,Lay Draw Super Fav,,,6.8,,,,1,0.16637931034482759,2x0,GREEN,8.62,8.23,0.955,,,,Lay Draw,juventus,parma,6.8,1
+2026-08-29,16:00,CROATIA 1,Varazdin x Rudes,Lay Draw Super Fav,,,5.97,,,,1,0.19416498993963782,1x0,GREEN,10.06,9.61,0.955,,,,Lay Draw,varazdin,rudes,6.8,1
+2026-08-29,16:30,ARGENTINA 2,FC Midland x Nueva Chicago,Lay 0x1 Super Fav,,,15.0,,,,1,0.06892857142857142,2x0,GREEN,3.57,3.41,0.955,,,,Lay 0x1,fcmidland,nuevachicago,15.0,1
+2026-08-29,17:00,BRAZIL 3,Figueirense x Maranhao,Lay 0x1 Super Fav,,,15.0,,,,1,0.06892857142857142,2x1,GREEN,3.57,3.41,0.955,,,,Lay 0x1,figueirense,maranhao,15.0,1
+2026-08-29,19:30,COLOMBIA 2,Real Cartagena x Tigres FC Zipaquira,Lay Draw Super Fav,,,5.77,,,,1,0.20230607966457023,1x0,GREEN,10.48,10.01,0.955,,,,Lay Draw,realcartagena,tigresfczipaquira,6.8,1
+2026-08-29,21:30,PERU 1,Alianza Lima x Deportivo Garcilaso,Lay Draw Super Fav,,,5.25,,,,1,0.22705882352941176,3x4,GREEN,11.76,11.23,0.955,,,,Lay Draw,alianzalima,deportivogarcilaso,5.5,1
+2026-08-30,08:30,CHINA 1,Guangdong GZ-Power FC x Changchun Yatai,Lay Draw Super Fav,,,5.46,,,,1,0.2163677130044843,2x1,GREEN,,42.82,0.955,44.84,42.82,200.0,Lay Draw,guangdonggzpowerfc,changchunyatai,6.0,1
+2026-08-30,09:30,NETHERLANDS 1,Feyenoord x ADO Den Haag,Lay Draw Super Fav,,,9.06,,,,0,-1.0,2x2,RED,,-200.0,-8.06,24.81,23.69,200.0,Lay Draw,feyenoord,adodenhaag,9.2,0
+2026-08-30,09:30,NORWAY 1,Bodo Glimt x Rosenborg,Lay Draw Super Fav,,,6.8,,,,1,0.16637931034482759,4x1,GREEN,,32.93,0.955,34.48,32.93,200.0,Lay Draw,bodoglimt,rosenborg,6.8,1
+2026-08-30,12:00,CZECH 1,Plzen x Slovacko,Lay Draw Super Fav,,,5.97,,,,1,0.19416498993963782,2x0,GREEN,,38.43,0.955,40.24,38.43,200.0,Lay Draw,plzen,slovacko,6.0,1
+2026-08-30,12:00,NORWAY 1,Viking x Aalesunds,Lay Draw Super Fav,,,6.8,,,,1,0.16637931034482759,0x1,GREEN,,32.93,0.955,34.48,32.93,200.0,Lay Draw,viking,aalesunds,6.8,1
+2026-08-30,12:00,SLOVAKIA 1,Slovan Bratislava x Zemplin,Lay Draw Super Fav,,,6.59,,,,1,0.17262969588550983,3x0,GREEN,,34.17,0.955,35.78,34.17,200.0,Lay Draw,slovanbratislava,zemplin,7.0,1
+2026-08-30,12:30,ENGLAND 1,Man Utd x Ipswich,Lay Draw Super Fav,,,5.87,,,,1,0.19815195071868583,5x2,GREEN,,39.22,0.955,41.07,39.22,200.0,Lay Draw,manutd,ipswich,5.8,1
+2026-08-30,14:00,AUSTRIA 1,Red Bull Salzburg x Austria Wien,Lay Draw Super Fav,,,5.87,,,,1,0.19815195071868583,4x1,GREEN,,39.22,0.955,41.07,39.22,200.0,Lay Draw,redbullsalzburg,austriawien,5.9,1
+2026-08-30,15:00,ARGENTINA 2,Club Atletico Mitre x CA Central Norte,Lay 0x1 Super Fav,,,14.0,,,,1,0.07423076923076923,2x2,GREEN,,14.69,0.955,15.38,14.69,200.0,Lay 0x1,clubatleticomitre,cacentralnorte,14.0,1
+2026-08-30,15:00,SAUDI ARABIA 1,Al-Quadisiya (KSA) x Al Faisaly ( KSA ),Lay Draw Super Fav,,,9.27,,,,1,0.11668681983071343,2x0,GREEN,,23.09,0.955,24.18,23.09,200.0,Lay Draw,alquadisiyaksa,alfaisalyksa,9.8,1
+2026-08-30,15:30,ARGENTINA 2,Deportivo Moron x CA San Miguel,Lay 0x1 Super Fav,,,14.0,,,,1,0.07423076923076923,2x1,GREEN,,14.69,0.955,15.38,14.69,200.0,Lay 0x1,deportivomoron,casanmiguel,14.0,1
+2026-08-30,16:00,BRAZIL 1,Flamengo x Botafogo FR,Lay Draw Super Fav,,,5.77,,,,1,0.20230607966457023,3x0,GREEN,,40.04,0.955,41.93,40.04,200.0,Lay Draw,flamengo,botafogofr,5.8,1
+2026-08-30,16:00,BRAZIL 2,America MG x Ponte Preta,Lay Draw Super Fav,,,9.27,,,,1,0.11668681983071343,2x0,GREEN,,23.09,0.955,24.18,23.09,200.0,Lay Draw,americamg,pontepreta,9.2,1
+2026-08-30,20:00,VENEZUELA 1,Carabobo FC x Zamora FC,Lay Draw Super Fav,,,4.74,,,,0,-1.0,0x0,RED,,-200.0,-3.74,53.48,51.07,200.0,Lay Draw,carabobofc,zamorafc,5.6,0
+2026-08-30,21:00,MEXICO 1,Toluca x FC Juarez,Lay Draw Super Fav,,,6.39,,,,1,0.1790352504638219,2x0,GREEN,,35.44,0.955,37.11,35.44,200.0,Lay Draw,toluca,fcjuarez,6.6,1
+2026-08-31,07:00,UKRAINE 1,Zorya x FC Kharkiv,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,12.6,,94.3%,+3.18%,1,0.08318965517241379,,,,,,8.62,8.23,100.0,Lay Under 0.5,zorya,fckharkiv,13.5,1
+2026-08-31,07:00,UKRAINE 1,Zorya x FC Kharkiv,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,2.06,,86.1%,+3.31%,1,0.910377358490566,,,,,,94.34,90.09,100.0,Lay Home,zorya,fckharkiv,720.0,1
+2026-08-31,10:30,WALES 1,Flint Town United x Connahs Quay,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,5.77,,86.1%,+3.31%,1,0.20230607966457023,,,,,,20.96,20.02,100.0,Lay Home,flinttownunited,connahsquay,6.0,1
+2026-08-31,11:00,EGYPT 1,Asyut Petroleum x National Bank,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,7.42,,86.1%,+3.31%,1,0.15031152647975077,,,,,,15.58,14.88,100.0,Lay Home,asyutpetroleum,nationalbank,7.8,1
+2026-08-31,11:00,ENGLAND 5,Worthing x Boreham Wood,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,6.59,,86.1%,+3.31%,1,0.17262969588550983,,,,,,17.89,17.08,100.0,Lay Home,worthing,borehamwood,7.0,1
+2026-08-31,13:30,GREECE 1,Levadiakos x Panathinaikos,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,6.39,,86.1%,+3.31%,1,0.1790352504638219,,,,,,18.55,17.72,100.0,Lay Home,levadiakos,panathinaikos,6.6,1
+2026-08-31,13:30,ITALY 1,Lecce x Roma,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,8.45,,86.1%,+3.31%,1,0.12953020134228188,,,,,,13.42,12.82,100.0,Lay Home,lecce,roma,8.4,1
+2026-08-31,14:00,CYPRUS 1,Omonia x Omonia FC Aradippou,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,8.03,,85.8%,+3.26%,0,-1.0,,,,,,14.22,13.58,100.0,Lay Draw,omonia,omoniafcaradippou,9.0,0
+2026-08-31,14:00,DENMARK 1,FC Copenhagen x SonderjyskE,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.87,,85.8%,+3.26%,1,0.19815195071868583,,,,,,20.53,19.61,100.0,Lay Draw,fccopenhagen,sonderjyske,6.0,1
+2026-08-31,14:00,DENMARK 1,FC Copenhagen x SonderjyskE,Lay Away / DC 1X (Fav <= 1.45),Match Odds (Away),LAY,10.09,,90.0%,+2.66%,1,0.10616061606160616,,,,,,11.0,10.5,100.0,Lay Away,fccopenhagen,sonderjyske,10.5,1
+2026-08-31,16:00,ENGLAND 1,Aston Villa x Arsenal,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,7.21,,86.1%,+3.31%,1,0.15539452495974235,,,,,,16.1,15.38,100.0,Lay Home,astonvilla,arsenal,7.2,1
+2026-08-31,19:00,ARGENTINA 2,Los Andes x Acassuso,Lay Over 4.5 FT (Under Pesado),Over 4.5 FT,LAY,18.5,,94.3%,+2.67%,1,0.05514285714285714,,,,,,5.71,5.45,100.0,Lay Over 4.5,losandes,acassuso,18.5,1
+2026-08-31,20:30,VENEZUELA 1,Puerto Cabello x Academia Anzoategui FC,Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,,94.3%,+3.18%,1,0.07321699544764795,,,,,,7.59,7.25,100.0,Lay Under 0.5,puertocabello,academiaanzoateguifc,18.0,1
+2026-08-31,20:30,VENEZUELA 1,Puerto Cabello x Academia Anzoategui FC,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,4.63,,85.8%,+3.26%,1,0.26584022038567495,,,,,,27.55,26.31,100.0,Lay Draw,puertocabello,academiaanzoateguifc,5.5,1
+2026-08-31,20:30,VENEZUELA 1,Puerto Cabello x Academia Anzoategui FC,Lay Away / DC 1X (Fav <= 1.45),Match Odds (Away),LAY,10.09,,90.0%,+2.66%,1,0.10616061606160616,,,,,,11.0,10.5,100.0,Lay Away,puertocabello,academiaanzoateguifc,12.5,1
+2026-09-01,14:00,TURKEY 2,Boluspor x Keciorengucu,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,6.8,,86.1%,+3.31%,1,0.16637931034482759,,,,,,17.24,16.46,100.0,Lay Home,boluspor,keciorengucu,7.4,1
+2026-09-01,14:30,AUSTRIA 1,RZ Pellets WAC x Lask Linz,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,7.42,,86.1%,+3.31%,1,0.15031152647975077,,,,,,15.58,14.88,100.0,Lay Home,rzpelletswac,lasklinz,7.4,1
+2026-09-01,14:30,SOUTH AFRICA 1,Kruger United FC x Orlando Pirates (SA),Lay Under 0.5 FT (Fav),Under 0.5 FT,LAY,14.18,,94.1%,+3.33%,1,0.07321699544764795,,,,,,7.59,7.25,100.0,Lay Under 0.5,krugerunitedfc,orlandopiratessa,15.5,1
+2026-09-01,14:30,SOUTH AFRICA 1,Kruger United FC x Orlando Pirates (SA),Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,5.05,,85.4%,+2.87%,1,0.2382716049382716,,,,,,24.69,23.58,100.0,Lay Draw,krugerunitedfc,orlandopiratessa,5.2,1
+2026-09-01,15:30,SWITZERLAND 1,FC Zurich x Young Boys,Lay Home / DC X2 (Fav Visitante <= 1.65),Match Odds (Home),LAY,5.25,,86.1%,+3.31%,1,0.22705882352941176,,,,,,23.53,22.47,100.0,Lay Home,fczurich,youngboys,5.3,1
+2026-09-01,15:45,BOSNIA 1,Zrinjski x FK BSK Banja Luka,Lay Draw (Fav <= 1.40),Match Odds (Draw),LAY,8.03,,85.4%,+2.87%,1,0.1372688477951636,,,,,,14.22,13.58,100.0,Lay Draw,zrinjski,fkbskbanjaluka,8.8,1

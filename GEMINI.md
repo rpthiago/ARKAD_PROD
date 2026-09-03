@@ -209,6 +209,30 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
 - **Fixar código faz o live parar de mentir vs o backtest — NÃO cria edge.** Um método sem edge
   continua sem edge depois de bem estruturado. Backtest retroativo não é dinheiro real; autoridade é o paper forward executável ao vivo.
 
+## 7. VEREDITO DE GOVERNANÇA — 02/09/2026 (revisão Claude do relatório noturno Antigravity)
+
+Engenharia **homologada**; aritmética **confere** (+12,27u a comissão 3,5%, flat-liability, bate na
+recomputação independente); rejeição dos filtros refinados **endossada**. Mas com 4 rulings:
+
+1. **🚩 "Regra Base Ampla APROVADA" é PREMATURO — proibido esse rótulo.** Bootstrap bloco-dia (13
+   blocos, máximo honesto p/ 13 dias): Draw IC95 **[−1,8%; +11,8%]** (p=0,069) e Home IC95
+   **[−0,7%; +13,6%]** (p=0,033) — **ambos incluem zero**, e isso é ANTES do FDR contra ~45+
+   hipóteses. Status correto = **EM VALIDAÇÃO FORWARD / stake-zero**, nunca "Aprovado". Páginas
+   01/02 devem exibir "Em validação", não "Aprovado", até o portão passar.
+2. **✅ Prova dura da rejeição do filtro (teste kept-vs-descartado):** o subconjunto que o filtro
+   MANTÉM rende MENOS que o que ele DESCARTA — Draw mantido +4,0% (N=46) vs descartado **+6,0%**
+   (N=67); Home mantido +6,4% (N=32) vs descartado **+8,7%** (N=31). O filtro ficou com a metade
+   pior. (Home descartado = favoritos visitantes mais FORTES, o oposto do scan → overfit confirmado.)
+3. **⚠️ O argumento "descartou 99 greens / deixou 8u na mesa" é INVÁLIDO** (apesar da conclusão
+   certa). Em book de lay de evento raro (WR ~91% mecânico), QUALQUER subconjunto removido é "quase
+   tudo green". O teste válido é ROI(mantido) vs ROI(descartado) + estabilidade OOS + FDR — item 2.
+   **Aposentar** esse raciocínio: aplicado em geral, ele "provaria" que nunca se deve filtrar nada.
+4. **Comissão 0,965 (3,5%) precisa de FONTE.** Protocolo usa 5%. 3,5% infla ROI ~0,2-0,3pp. Fixar
+   com extrato de aposta liquidada real da conta Betfair BR; se for 3,5%, vale p/ TODA a base
+   histórica, não só o gap. **Fonte única de contabilidade:** o ledger `forward_oculto/` (regras
+   congeladas, stake-zero) é a autoridade de VALIDAÇÃO; a página visível não pode dizer "Aprovado"
+   antes dele. WR alto e PnL positivo **não são** sinais de validação — só IC pós-FDR excluindo zero.
+
 ---
 
 *Mantido por: auditoria ARKAD (Claude / Antigravity), ago/2026. Atualize a seção 6 quando um método mudar de

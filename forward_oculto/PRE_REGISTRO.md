@@ -19,6 +19,13 @@ Captura registra o método BASE + flags de filtro (nada se perde; fatia base vs 
 - **Filtro refinado (o achado do scan, 18/100 holders):** `Odd_A_Back ∈ [1.54, 1.65]` (favorito visitante MODERADO).
 - **Green (lay ganha):** `Goals_A_FT >= Goals_H_FT` (visitante não perde).
 
+### ✈️ Lay Away (OBSERVAÇÃO — não é candidato)
+- **Base:** `Odd_H_Back <= 1.45` (mandante super-favorito) **E** `Odd_A_Lay ∈ [2, 15]`.
+- **Green (lay ganha):** `Goals_H_FT >= Goals_A_FT` (mandante não perde).
+- **Status:** o scan amplo (600 testes) REPROVOU o Away (1/100 holders = acaso). Entrou só para
+  vigiar se o +3,8% da janela 29-30/08 (N=34, real lay) segura fora dela. Não é candidato a
+  produção; peso de prova é contra. Ver [[veredito-governanca-triade-forward]].
+
 ### 🥇 Lay Over 4.5
 - **Base = método:** `Odd_Under25_FT_Back <= 1.50` (jogo de under pesado) **E** `Odd_Over45_FT_Lay ∈ [4, 20]`.
 - **Green:** `Goals_H_FT + Goals_A_FT <= 4`.

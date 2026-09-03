@@ -23,6 +23,7 @@ def canon(s):
 
 def green_de(metodo, gh, ga):
     if metodo == "Lay_Home":   return ga >= gh
+    if metodo == "Lay_Away":   return gh >= ga   # lay away ganha se mandante nao perde
     if metodo == "Lay_Over45": return (gh + ga) <= 4
     if metodo == "Lay_Draw":   return gh != ga
     return None
@@ -71,10 +72,11 @@ def main():
         print("  %-22s N=%-4d WR=%4.1f%% ROI/liab=%+6.1f%% lay_med=%.2f"
               % (tag, n, sub["g"].mean()*100, roi, sub["lay"].median()))
     print("=== ACUMULADO (liquidado) ===")
-    for m in ["Lay_Draw","Lay_Home","Lay_Over45"]:
+    for m in ["Lay_Draw","Lay_Home","Lay_Away","Lay_Over45"]:
         s = df[df["Metodo"]==m]
         if len(s)==0: continue
-        print(m + ":")
+        obs = " [OBSERVACAO]" if m == "Lay_Away" else ""
+        print(m + obs + ":")
         resumo(s, "base")
         if m in ("Lay_Home","Lay_Draw"):
             resumo(s[s["passa"]==1], "FILTRADO (refinado)")

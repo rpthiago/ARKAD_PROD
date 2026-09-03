@@ -867,3 +867,78 @@ sem placar: 123 | placares_manuais.xlsx: 123 p/ preencher a mao (cols Gols_M/Gol
 To https://github.com/rpthiago/ARKAD_PROD.git
    d7bb77f..888054f  main -> main
 (fim) 
+ 
+===== 03/09/2026  9:00:02,00 ===== 
+2026-09-03 09:00:07.221 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-03 09:00:07.221 No runtime found, using MemoryCacheStorageManager
+2026-09-03 09:00:08.428 No runtime found, using MemoryCacheStorageManager
+Gerando sinais locais p/ 2026-09-03 ...
+  Lay 0x0    0 sinais
+  Lay 0x1    2 sinais
+  Lay 1x0    1 sinais
+  Lay 2x0    2 sinais
+  Lay 0x2    0 sinais
+  Lay Draw   0 sinais
+  Lay 0x3    2 sinais
+  Lay 2x2    6 sinais
+
+13 sinais salvos: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\sinais_gerados\sinais_gerados_2026-09-03.xlsx
+Metodo
+Lay 0x1    2
+Lay 0x3    2
+Lay 1x0    1
+Lay 2x0    2
+Lay 2x2    6
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\consolidar_sinais.py:208: FutureWarning: The behavior of DataFrame concatenation with empty or all-NA entries is deprecated. In a future version, this will no longer exclude empty or all-NA columns when determining the result dtypes. To retain the old behavior, exclude the relevant entries before the concat operation.
+  final = pd.concat([filled, novos], ignore_index=True)
+Consolidando 11 planilhas (desde 2026-08-29)...
+  + Sinais_Metodos_Aprovados_2026-09-03.xlsx        2 sinais
+  + Sinais_Metodos_Aprovados_2026-08-29.xlsx       13 sinais
+  + Sinais_Metodos_Aprovados_2026-08-30.xlsx       15 sinais
+  + Sinais_Metodos_Aprovados_2026-08-31 (1).xlsx   57 sinais
+  + Sinais_Metodos_Aprovados_2026-09-01.xlsx        6 sinais
+  + sinais_gerados_2026-08-29.xlsx                158 sinais
+  + sinais_gerados_2026-08-30.xlsx                105 sinais
+  + sinais_gerados_2026-08-31.xlsx                 43 sinais
+  + sinais_gerados_2026-09-01.xlsx                 28 sinais
+  + sinais_gerados_2026-09-02.xlsx                 31 sinais
+  + sinais_gerados_2026-09-03.xlsx                 13 sinais
+
+Corte inicio-da-coleta (2026-08-09): 471 -> 471 sinais
+Total sinais uniformizados: 471 | metodos: ['Lay 0x0', 'Lay 0x1', 'Lay 0x2', 'Lay 0x3', 'Lay 1x0', 'Lay 2x0', 'Lay 2x2', 'Lay Away / DC 1X (Fav <= 1.45)', 'Lay Draw', 'Lay Home / DC X2 (Fav Visitante <= 1.65)', 'Lay Over 4.5 FT (Under Pesado)', 'Lay Under 0.5 FT (Fav)']
+
+Puxando placares do coletor Betfair (VPS)...
+  placares manuais preenchidos: 294
+  base historica (Bases_de_Dados_API_FutPythonTrader_Bet365.csv): 242536 jogos com placar
+
+=== RESUMO ===
+consolidado: 471 sinais | com placar: 350 (74%) | salvo: paper_consolidado.csv
+          sinais   WR%   lucro
+Metodo                        
+Lay 0x0       16  81.0 -1465.0
+Lay 0x1       70  87.0 -3035.0
+Lay 0x2       12  92.0    -5.0
+Lay 0x3       35  97.0   -70.0
+Lay 1x0       47  89.0   470.0
+Lay 2x0       36  89.0  -140.0
+Lay 2x2      104  94.0 -1290.0
+Lay Draw      26  85.0   -54.0
+LUCRO REAL TOTAL: R$ -5589
+
+sem placar: 121 | placares_manuais.xlsx: 121 p/ preencher a mao (cols Gols_M/Gols_V)
+[main a8b3314] update: paper_consolidado 03/09/2026
+ 1 file changed, 45 insertions(+), 78 deletions(-)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   f6526ad..a8b3314  main -> main
+(fim) 

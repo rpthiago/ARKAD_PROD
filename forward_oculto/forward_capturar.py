@@ -34,6 +34,7 @@ def sinais_do_dia(df):
         oh, oa = _f(r,"Odd_H_Back"), _f(r,"Odd_A_Back")
         u25, o35 = _f(r,"Odd_Under25_FT_Back"), _f(r,"Odd_Over35_FT_Back")
         h_lay, d_lay = _f(r,"Odd_H_Lay"), _f(r,"Odd_D_Lay")
+        a_lay = _f(r,"Odd_A_Lay")
         o45_lay = _f(r,"Odd_Over45_FT_Lay")
         base = dict(Data=str(r.get("Date",""))[:10], Liga=liga, Home=h, Away=a, ID_Evento=ev,
                     Odd_H_Back=oh, Odd_A_Back=oa, Odd_Under25_FT_Back=u25, Odd_Over35_FT_Back=o35)
@@ -45,6 +46,10 @@ def sinais_do_dia(df):
         if u25 is not None and u25 <= 1.50 and _in(o45_lay, 4, 20):
             out.append({**base, "Metodo":"Lay_Over45", "Odd_Lay":o45_lay,
                         "passa_filtro": 1})   # base = metodo
+        # LAY AWAY (OBSERVACAO — scan amplo reprovou; vigiar se +3,8% da janela segura)
+        if oh is not None and oh <= 1.45 and _in(a_lay, 2, 15):
+            out.append({**base, "Metodo":"Lay_Away", "Odd_Lay":a_lay,
+                        "passa_filtro": 1})   # sem sub-filtro; metodo em observacao
         # LAY DRAW
         fav = min([x for x in (oh, oa) if x is not None], default=None)
         if fav is not None and fav <= 1.40 and _in(d_lay, 4.5, 10):

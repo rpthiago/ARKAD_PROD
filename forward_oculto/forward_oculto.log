@@ -1,0 +1,14 @@
+dia 2026-09-03 | jogos no feed=32 | sinais=4 {'Lay_Away': 2, 'Lay_Draw': 1, 'Lay_Home': 1} | novos gravados=4
+liquidados agora: 0
+
+=== ACUMULADO (liquidado) ===
+Lay_Draw:
+  base                   N=113  WR=90.3% ROI/liab=  +5.2% lay_med=6.60
+  FILTRADO (refinado)    N=46   WR=87.0% ROI/liab=  +4.0% lay_med=6.20
+Lay_Home:
+  base                   N=63   WR=93.7% ROI/liab=  +7.7% lay_med=7.20
+  FILTRADO (refinado)    N=32   WR=90.6% ROI/liab=  +6.4% lay_med=6.50
+Lay_Over45:
+  base                   N=11   WR=100.0% ROI/liab=  +5.6% lay_med=18.50
+
+pendentes (aguardando placar da base): 9
