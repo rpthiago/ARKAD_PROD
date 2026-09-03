@@ -84,36 +84,51 @@ def carregar_dados_aprovados(modo="oficial"):
     if not FOLDER.exists():
         return pd.DataFrame()
         
+    df_all = pd.DataFrame()
     if "Tríade" in modo:
-        f_oficial = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
-        if f_oficial.exists():
-            df = _ler_excel_seguro(f_oficial)
-            if not df.empty:
-                df["_Arquivo"] = f_oficial.name
-                df["Data"] = pd.to_datetime(df["Data"], errors="coerce")
-                df["Hora"] = df.get("Hora", "15:00").astype(str).str[:5]
-                df["Odd_Entrada"] = pd.to_numeric(df.get("Odd_Entrada"), errors="coerce").fillna(5.0)
-                df["PnL_Reais"] = df["PnL_u"] * stake_base
-                return df.sort_values(["Data", "Método"]).reset_index(drop=True)
-                
-    files = sorted(FOLDER.rglob("*.xlsx"))
-    if not files:
-        return pd.DataFrame()
-    
-    dfs = []
-    for f in files:
-        if f.name.startswith("~$") or "Odds_Reais" in f.name:
-            continue
-        df = _ler_excel_seguro(f)
-        if df is not None and not df.empty:
-            df["_Arquivo"] = f.name
-            dfs.append(df)
-            
-    if not dfs:
-        return pd.DataFrame()
+        # Priorizar CSV para evitar qualquer problema de formato/lock em Linux/Windows
+        f_csv = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv"
+        f_xlsx = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
+        f_gap = ROOT / "forward_oculto" / "gap_2108_0209.csv"
         
-    df_all = pd.concat(dfs, ignore_index=True)
-    df_all["Data"] = pd.to_datetime(df_all["Data"], errors="coerce")
+        if f_csv.exists():
+            try:
+                df_all = pd.read_csv(f_csv, encoding="utf-8-sig")
+            except Exception:
+                df_all = pd.DataFrame()
+        if df_all.empty and f_gap.exists():
+            try:
+                df_all = pd.read_csv(f_gap, encoding="utf-8")
+            except Exception:
+                df_all = pd.DataFrame()
+        if df_all.empty and f_xlsx.exists():
+            df_all = _ler_excel_seguro(f_xlsx)
+            
+    if df_all.empty:
+        files = sorted(FOLDER.rglob("*.xlsx"))
+        if not files:
+            return pd.DataFrame()
+        
+        dfs = []
+        for f in files:
+            if f.name.startswith("~$") or "Odds_Reais" in f.name:
+                continue
+            df = _ler_excel_seguro(f)
+            if df is not None and not df.empty:
+                df["_Arquivo"] = f.name
+                dfs.append(df)
+                
+        if not dfs:
+            return pd.DataFrame()
+        df_all = pd.concat(dfs, ignore_index=True)
+        
+    # Normalização segura de colunas
+    # Corrigir encoding quebrado se houver (ex: Mtodo -> Método)
+    for c in list(df_all.columns):
+        if "todo" in c.lower():
+            df_all.rename(columns={c: "Método"}, inplace=True)
+            
+    df_all["Data"] = pd.to_datetime(df_all.get("Data"), errors="coerce")
     df_all["Hora"] = df_all.get("Hora", "15:00").astype(str).str[:5]
     
     # 1. Normalização de Odd de Entrada
@@ -131,7 +146,7 @@ def carregar_dados_aprovados(modo="oficial"):
             return "Lay Away / DC 1X (Fav <= 1.45)"
         elif "Home" in m_str or "X2" in m_str:
             return "Lay Home / DC X2 (Fav Visitante <= 1.65)"
-        elif "Over 4.5" in m_str:
+        elif "Over 4.5" in m_str or "Over45" in m_str:
             return "Lay Over 4.5 FT (Under Pesado)"
         elif "Draw" in m_str:
             return "Lay Draw (Fav <= 1.40)"
@@ -145,13 +160,22 @@ def carregar_dados_aprovados(modo="oficial"):
             return "Lay Under 1.5 FT (XGBoost)"
         return m_str
         
-    df_all["Método"] = df_all["Método"].apply(_norm_metodo)
-    
+    if "Método" in df_all.columns:
+        df_all["Método"] = df_all["Método"].apply(_norm_metodo)
+    else:
+        df_all["Método"] = "Lay Draw (Fav <= 1.40)"
+        
     # 3. Normalização de Status e Resultado
     def _calc_status(r):
         res = str(r.get("Resultado", "")).upper()
         r_num = r.get("1/0")
-        if pd.isna(r_num) and pd.isna(r.get("Resultado")):
+        gr = r.get("Green")
+        if gr is True or gr == "True" or gr == 1:
+            return "🟢 GREEN"
+        elif gr is False or gr == "False" or gr == 0:
+            return "🔴 RED"
+            
+        if pd.isna(r_num) and (pd.isna(r.get("Resultado")) or res == "" or res == "NAN"):
             return "⏳ PENDENTE"
         if "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
             return "⚪ SKIP"
@@ -161,26 +185,25 @@ def carregar_dados_aprovados(modo="oficial"):
             return "🔴 RED"
         return "⏳ PENDENTE"
         
-    df_all["Status"] = df_all.apply(_calc_status, axis=1)
-    
+    if "Status" not in df_all.columns:
+        df_all["Status"] = df_all.apply(_calc_status, axis=1)
+    else:
+        df_all["Status"] = df_all["Status"].fillna(df_all.apply(_calc_status, axis=1))
+        
     # 4. Normalização de PnL em Unidades e Reais
     def _calc_pnl_u(r):
-        st_val = r["Status"]
-        if st_val == "🟢 GREEN":
+        st_val = str(r.get("Status", ""))
+        if "GREEN" in st_val:
             return float(r.get("PnL_u", 0.955)) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", 0.955)) if pd.notna(r.get("P/L")) else 0.955)
-        elif st_val == "🔴 RED":
+        elif "RED" in st_val:
             odd = float(r.get("Odd_Entrada", 5.0))
             return float(r.get("PnL_u", -(odd - 1.0))) if pd.notna(r.get("PnL_u")) else (float(r.get("P/L", -(odd - 1.0))) if pd.notna(r.get("P/L")) else -(odd - 1.0))
         return 0.0
         
     df_all["PnL_u"] = df_all.apply(_calc_pnl_u, axis=1)
+    df_all["PnL_Reais"] = df_all["PnL_u"] * stake_base
     
-    if "PnL_R$" in df_all.columns:
-        df_all["PnL_Reais"] = pd.to_numeric(df_all["PnL_R$"], errors="coerce").fillna(df_all["PnL_u"] * stake_base)
-    else:
-        df_all["PnL_Reais"] = df_all["PnL_u"] * stake_base
-        
-    return df_all.sort_values(["Data", "Hora"]).reset_index(drop=True)
+    return df_all.sort_values(["Data", "Método"]).reset_index(drop=True)
 
 df_raw = carregar_dados_aprovados(modo=fonte_dados)
 
@@ -192,11 +215,11 @@ if df_raw.empty:
 st.markdown("### 🔍 Filtros de Visualização")
 f_c1, f_c2, f_c3 = st.columns(3)
 
-metodos_disponiveis = sorted(df_raw["Método"].dropna().unique().tolist())
+metodos_disponiveis = sorted(df_raw["Método"].dropna().unique().tolist()) if "Método" in df_raw.columns else []
 with f_c1:
     filtro_metodo = st.multiselect("Filtrar por Método", metodos_disponiveis, default=metodos_disponiveis)
 with f_c2:
-    status_disponiveis = sorted(df_raw["Status"].dropna().unique().tolist())
+    status_disponiveis = sorted(df_raw["Status"].dropna().unique().tolist()) if "Status" in df_raw.columns else ["🟢 GREEN", "🔴 RED", "⏳ PENDENTE"]
     filtro_status = st.multiselect("Filtrar por Status", status_disponiveis, default=status_disponiveis)
 with f_c3:
     dmin = df_raw["Data"].min().date() if df_raw["Data"].notna().any() else date.today()
