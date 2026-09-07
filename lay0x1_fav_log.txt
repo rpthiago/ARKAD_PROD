@@ -221,3 +221,136 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 04/09/2026 12:00:02,37 ===== 
+2026-09-04 12:00:12.930 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-04 12:00:12.931 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 0 | liquidados: 0 | total 8 (pend 6, liq 2)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=2 | WR=100.0% | ROI/liability=+6.82%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=2 | WR=100.0% | ROI/liability=+6.82%
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Backtest_Saldo_Menor_EH2_TOP2_ODDREAL_2026.xlsx
+	modified:   GEMINI.md
+	modified:   _placares_coletor_cache.csv
+	modified:   consolidar_log.txt
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   observar_under15_log.txt
+	modified:   placares_manuais.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	sinais_gerados/sinais_gerados_2026-09-04.xlsx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 05/09/2026 12:00:03,04 ===== 
+2026-09-05 12:00:07.065 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-05 12:00:07.065 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 1 | liquidados: 1 | total 9 (pend 6, liq 3)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=3 | WR=100.0% | ROI/liability=+6.82%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=2 | WR=100.0% | ROI/liability=+6.82%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+[main 0ce401c] update: lay0x1 favoritao forward 05/09/2026
+ 1 file changed, 1 insertion(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   6791c4e..0ce401c  main -> main
+(fim) 
+ 
+===== 06/09/2026 12:00:02,33 ===== 
+2026-09-06 12:00:12.823 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-06 12:00:12.823 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 3 | liquidados: 2 | total 12 (pend 7, liq 5)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=5 | WR=100.0% | ROI/liability=+6.92%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=4 | WR=100.0% | ROI/liability=+6.95%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+[main 1b20e26] update: lay0x1 favoritao forward 06/09/2026
+ 1 file changed, 3 insertions(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   e7836dc..1b20e26  main -> main
+(fim) 
+ 
+===== 07/09/2026 12:00:02,58 ===== 
+2026-09-07 12:00:11.738 
+Warning: the config option 'server.enableCORS=false' is not compatible with 'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-07 12:00:11.738 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run observar_lay0x1_fav.py [ARGUMENTS]
+novos: 2 | liquidados: 2 | total 14 (pend 7, liq 7)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=7 | WR=100.0% | ROI/liability=+7.00%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=6 | WR=100.0% | ROI/liability=+7.03%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+[main 4260f99] update: lay0x1 favoritao forward 07/09/2026
+ 1 file changed, 2 insertions(+)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   13803f4..4260f99  main -> main
+(fim) 

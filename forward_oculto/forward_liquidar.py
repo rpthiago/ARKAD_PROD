@@ -22,10 +22,10 @@ def canon(s):
     return "".join(ch for ch in s if ch.isalnum())
 
 def green_de(metodo, gh, ga):
-    if metodo == "Lay_Home":   return ga >= gh
+    if metodo in ("Lay_Home", "Pressao_Lay_Home_FalsoFav", "CONTROLE_Pressao_Home"): return ga >= gh
     if metodo == "Lay_Away":   return gh >= ga   # lay away ganha se mandante nao perde
     if metodo == "Lay_Over45": return (gh + ga) <= 4
-    if metodo == "Lay_Draw":   return gh != ga
+    if metodo in ("Lay_Draw", "Pressao_Lay_Draw", "CONTROLE_Pressao_Draw"): return gh != ga
     return None
 
 def carregar_base():

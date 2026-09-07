@@ -55,6 +55,22 @@ def sinais_do_dia(df):
         if fav is not None and fav <= 1.40 and _in(d_lay, 4.5, 10):
             out.append({**base, "Metodo":"Lay_Draw", "Odd_Lay":d_lay,
                         "passa_filtro": int(o35 is not None and o35 >= 2.54)})
+
+        # CONTROLE-NULO: PRESSÃO CRUZADA — LAY DRAW ALTA PRESSÃO (K_pressao <= 2.20)
+        # Auditoria Claude (07/09): não é candidato — passa_filtro=0 p/ não queimar FDR da Tríade
+        o25 = _f(r, "Odd_Over25_FT_Back") or _f(r, "Odd_Over25_FT")
+        if fav is not None and fav <= 1.40 and o25 is not None and _in(d_lay, 4.5, 10):
+            k_pressao = fav * o25
+            if k_pressao <= 2.20:
+                out.append({**base, "Metodo":"CONTROLE_Pressao_Draw", "Odd_Lay":d_lay,
+                            "passa_filtro": 0})
+
+        # CONTROLE-NULO: PRESSÃO CRUZADA — LAY HOME FALSO FAVORITO (K_pressao >= 3.80)
+        if oh is not None and 1.45 <= oh <= 1.70 and o25 is not None and _in(h_lay, 1.5, 4.0):
+            k_pressao_h = oh * o25
+            if k_pressao_h >= 3.80:
+                out.append({**base, "Metodo":"CONTROLE_Pressao_Home", "Odd_Lay":h_lay,
+                            "passa_filtro": 0})
     return out
 
 def carregar_existentes():

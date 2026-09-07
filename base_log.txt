@@ -98,3 +98,49 @@ remote: warning: GH001: Large files detected. You may want to try Git Large File
 To https://github.com/rpthiago/ARKAD_PROD.git
    228cc2c..3ed6561  main -> main
 (fim) 
+ 
+===== 07/09/2026  8:00:01,14 ===== 
+2026-09-07 08:00:07.756 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 242536 linhas | data max 2026-08-28 | 229 MB
+b365_base_lean.csv sincronizada: 242536 linhas | data max 2026-08-28 | 65 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Backtest_Saldo_Menor_EH2_TOP2_ODDREAL_2026.xlsx
+	modified:   GEMINI.md
+	modified:   _placares_coletor_cache.csv
+	modified:   base_log.txt
+	modified:   consolidar_log.txt
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   observar_under15_log.txt
+	modified:   placares_manuais.xlsx
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	sinais_gerados/sinais_gerados_2026-09-04.xlsx
+	sinais_gerados/sinais_gerados_2026-09-05.xlsx
+	sinais_gerados/sinais_gerados_2026-09-06.xlsx
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

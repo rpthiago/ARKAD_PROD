@@ -76,6 +76,11 @@
 | **Tratar API FutPythonTrader e coletor como fontes equivalentes** (mesma odd, mesma cobertura) | **Diferem.** Odd difere (snapshot da API vs perto-do-KO do coletor → FLIPAM sinais no limite ~1,40; ex.: Dinamo Zagreb 1,35 coletor vs 1,45 API) e cobertura difere (coletor pega ligas menores). **Coletor perto-do-KO é canônico; API é fallback conservador** |
 | **Miragem de Spread Fixo Bet365 vs Base Betfair Real** (Assumir spread fixo 1,03x/1,05x sobre Bet365 gerando "+2% a +4% ROI" falso) | **Na base Betfair FRESH com Lay real, os spreads reais são maiores** (1X2 = 1,065x-1,091x; Under 0.5 = 1,128x; Over 4.5 = 1,194x). O edge cai pra break-even/negativo e TODOS os IC95% cruzam o zero. **Nenhum método pré-jogo está confirmado por backtest.** Só o forward ao vivo decide |
 | **Overfitting por Mineração de Features (Garden of Forking Paths)** (Scan de 100 features achou 18 "holders" no Lay Home com odd [1.54, 1.65]) | **Rejeitar filtros refinados.** No forward real do gap 21/08-02/09, o filtro refinado rendeu MENOS que o base e inverteu sinal entre metades (−4,6% H1 vs +17,4% H2). **Manter estritamente as regras BASE amplas** |
+| **Miragem de Filtro Derivado Puramente de Odds / Cross-Market Index** (Multiplicar Odd_H × Odd_Over25 achando que gera alpha pré-jogo) | **Filtros derivados puramente de odds públicas e líquidas NÃO geram edge pré-jogo.** O mercado já precifica a distribuição conjunta: o filtro K≤2.20 derruba o empate de 28% para 15% (WR sobe pra 84,9%), mas a odd do lay cai junto e o BE sobe para 87,07% → líquido segue negativo (−2,09% em N=1723). Multiplicar preços eficientes não cria informação nova. Alpha só existe com modelo sobre estatísticas (stats que a odd não vê) ou viés emocional in-play lento |
+| **Overfitting por Fatiamento de Constante Falha / Garden of Forking Paths** ($K_{edge} = D_{ratio} / \text{Odd}_{Fav}$ isolando cauda positiva após 138/140 negativos) | **Se o scan amplo falha, refinar corte até cauda de 1% aparecer é seleção ad-hoc, NÃO descoberta.** $K_{edge}$ é idêntico à constante $C_4$ do scan amplo de 140 cenários. A monotonia é puramente mecânica (ordena por favorito forte). No bootstrap mensal da FRESH3: IC95 [−10,4%, +20,7%], $P(\le 0) = 0,24$ (engole zero com folga); 2025 (maior N=404) deu **−0,47%**. **ARQUIVADO como Overfitting.** |
+| **$P(\text{evento}) \ne \text{edge}$ / Miragem do Fenômeno In-Play vs Preço** (Achar que 78% de gol pós-60' em favorito empatando gera lucro de Lay Draw) | **Fenômeno real NÃO é edge se o mercado já precifica.** 1) Um gol não quebra o empate confiavelmente (0-0 que vira 1-1 tem gol e segue empate; equalizadores derrubam WR de 78% para 66,7%). 2) A odd in-play cai para ~3,2 (BE 70,4% > 66,7% real) gerando **−4,9% ROI real** no coletor. **Sempre validar contra a odd real do instante da entrada.** |
+| **Dutching de Correct Score (cesta de placares)** (Dutchar {0-0,1-0,0-1,1-1,2-0,0-2} achando que "cobre o Under 2.5" ou que Poisson EV+ gera alpha) | **NUNCA dutchar CS — desvantagem ESTRUTURAL medida.** Dutchar k placares paga o bid-ask spread de k livros rasos simultâneos. Medido na FRESH3 (N=51.079): a odd sintética dos 6 CS do Under 2.5 é **−10,2% (mediana) vs a odd direta de Under 2.5, em 97% dos jogos** (p75 = −44%). Nenhum modelo Poisson supera isso (precisaria edge >10% só p/ empatar com o Back direto). O "+1,73%" do K=2 EV≥0,20 nem reconcilia (WR 11,16% < BE 11,30% mas ROI+; dentro do ruído; morre na penalidade). **Regra: mispricing de placar = UM lay/back único (padrão 0x0), NUNCA cesta. Cobertura %% ≠ edge.** Se tem visão de placar, expresse no mercado PURO (Under/Over/Handicap): 1 livro, 1 spread, liquidez profunda |
+| **Ilusão de Modelo Simples de Médias Móveis vs Fechamento 1X2 (Winner's Curse)** (Achar que modelo ML treinado apenas em rolling goals/stats públicas supera a closing line do 1X2) | **O fechamento da Betfair é hiper-eficiente.** Log-loss da odd de mercado é ~0,97 vs ~1,04 do modelo simples. Quando o modelo indica 'EV+ ≥ 5%', trata-se quase sempre de ruído de estimação do modelo; apostar nas discrepâncias gerou ROI −5% a −7% em N=34.280 jogos OOS 2025-2026. Alpha real vive em **vieses comportamentais comprovados (Linha 1 — A Tríade)** ou no **timing de fluxo de dinheiro inteligente / Steam Moves (Linha 3)**, NUNCA em apostas cegas contra a linha de fechamento |
 
 ---
 
@@ -191,7 +196,31 @@ bootstrap**, nunca "p-value vs 50%". Confirme item a item:
   AH +1.5 Zebra Mandante (miragem de odd estimada 2,45; na odd real da base 1,30 tem break-even 81,5% vs WR 75,2% = **−4,2%** de prejuízo; **MIRAGEM DESCARTADA**),
   DNB / AH 0.0 Mandante (XGBoost EV>=5%: N=333, ROI +1,06%, mas com EV>=3% inverte para -0,66% e IC95 [-6,0%, +7,4%] cruza zero; mercado 1X2 hiper-eficiente),
   Back BTTS Yes / BTTS Não (overround de 8,3% consome edge; Back Não = −10,1% em 2.580 jogos, 0/8 meses; ruído de escala), Over 2.5, Saldo Menor, EH+3 múltiplas,
-  escanteios, Over 1.5 ML, HT scans.
+   escanteios, Over 1.5 ML, HT scans, Método Pressão Cruzada / Cross-Market Index (Lay Draw Alta Pressão K<=2.20: N=1.723, WR 84,9% vs BE 87,1%, ROI/liab -2,09%; Lay Home Falso Fav K>=3.80: N=337, WR 41,0% vs BE 42,4%, ROI/liab -5,01%; **ARQUIVADO / Eficiência de Mercado Provada**),
+   Scan de 140 Cenários Multifatoriais de Odds (138/140 negativos; Lay BTTS até −10,8%, Lay Over25 até −9,5%; **ARQUIVADO / Null Result**),
+   Dutching de Correct Score (Rotas 1 e 2: penalidade de spread de −10,2% em 97% dos jogos N=51.079; **ARQUIVADO / Ineficiência Estrutural**),
+   Modelo Fundamental 1X2 por Médias Móveis (Log-loss 1,04 vs 0,97 de fechamento da Betfair; Back Home −6,16%, Back Away −7,01%, Lay Home −5,22%, Lay Draw −3,06% em N=34.280 jogos OOS 2025-2026; **ARQUIVADO / Erro de Estimação vs Linha Eficiente**).
+- **MORTOS in-play (mineração do coletor, odd real capturada — 03/09/2026):** liquidados pelo
+  **1X2 (único mercado que resolve confiável no retro; mercados de gols suspendem no gol → viés de
+  sobrevivência, não settláveis pelas odds)** —
+  **Back Favorito após levar gol da zebra** (fav≤1,50, favorito atrás → mean-reversion): N=80, WR 46,2%,
+  **ROI −4,1%** — o mercado precifica CERTO o gol de volta (bate com o teste da BTTS in-play, também morto);
+  **Lay o Empate tarde** (min75+, empate favorito live → "crowd enche o empate"): N=848, WR 55,8%,
+  **ROI −11,8%** — hipótese FALSA, o empate tardio realmente tende a ficar (se algo, é subprecificado p/ laydar);
+  **Lay Draw In-Play 60' em Favorito Empatando** (D_ratio>=1.12 gera 78% gol pós-60', mas equalizadores 1-1 derrubam WR para 66,7% vs BE 70,4% na odd live @~3.2 -> **ROI real −4,9%** em N=69 ticks reais do coletor; **ARQUIVADO / Eficiência In-Play**).
+  Ambos **ARQUIVADOS**. (BTTS Yes in-play após zebra marcar: odd de entrada ~2,7 já precifica o gol de volta;
+  sem mispricing — arquivado junto.) **Lição:** retro-mining só é confiável no 1X2; mercado de gols
+  (Over/Under, BTTS, CS, HT) exige forward + liquidação OFICIAL por market_id.
+- **MORTO in-play — Overshoot do 1X2 pós-gol (trade, 03/09/2026):** hipótese = time que sofre gol
+  tem odd em pânico/overshoot que reverte (trade back-no-pico/lay-depois). Minerado nos TICKS reais
+  de MATCH_ODDS coletados (mercado que NÃO suspende → tick confiável; 1ª vez que testamos TRADE com
+  odd in-play real de saída). Resultado, odds sãs (conceder ≤4,0), janela 3-12min: **Conceder N=1631,
+  reverte só 11,9%, ROI −12,4%** (a odd continua SUBINDO — a piora é justa, não pânico); **Scorer
+  N=1635, reverte 19,8%, ROI +0,76% ≈ 0** (nem paga o spread duplo). **NÃO há overshoot — o 1X2
+  precifica gol de forma eficiente.** Mecanismo confirmado: edge vive em **estado emocional LENTO**
+  (medo do gol tardio no Under = under-limite), NÃO em **evento instantâneo de alta atenção** (gol no
+  1X2 líquido, onde o sharp reage na hora). Caveat: captura mid-game ~5min não mede scalp <2min
+  (inexecutável mesmo). **ARQUIVADO.**
 - **A Tríade Sobrevivente em Observação (FORWARD OCULTO STAKE-ZERO — 02/09/2026):**
   - **1. Lay Draw Base em Super Favorito (`min(Odd_H_Back, Odd_A_Back) <= 1.40`, `Odd_D_Lay 4.5 a 10.0`):** 👑 **O MAIS SÓLIDO DO PORTFÓLIO**:
     No forward real do gap 21/08 a 02/09 (N=113 jogos reais com odd lay executável Betfair): WR **90,3%**, ROI/liability **`+5,2%`**, estável em ambas as metades (H1 **+7,9%** / H2 **+1,8%**), P(ROI≤0) = 0,069. Regra BASE pura congelada. O filtro refinado (`Odd_Over35 >= 2.54`) rendeu menos e foi descartado por overfitting.
