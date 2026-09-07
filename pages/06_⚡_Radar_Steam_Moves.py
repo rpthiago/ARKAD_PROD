@@ -17,7 +17,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from steam_tracker import capturar_snapshot, detectar_steam_moves, STEAM_DIR
+from steam_tracker import capturar_snapshot, detectar_steam_moves, enviar_alertas_telegram, STEAM_DIR
 
 st.set_page_config(
     page_title="ARKAD — Radar de Steam Moves & Sharp Money",
@@ -53,6 +53,18 @@ if st.sidebar.button("🔄 Capturar Novo Snapshot Agora", use_container_width=Tr
             st.sidebar.success(f"Snapshot capturado com {len(df_new)} jogos!")
         else:
             st.sidebar.warning("Nenhum dado retornado para esta data.")
+
+if st.sidebar.button("📲 Disparar Alertas no Telegram", use_container_width=True):
+    with st.spinner("Analisando e disparando alertas no Telegram..."):
+        df_moves_temp = detectar_steam_moves(data_str, min_drop_pct=5.0)
+        if not df_moves_temp.empty:
+            n_sent = enviar_alertas_telegram(df_moves_temp, min_drop_pct=8.0)
+            if n_sent > 0:
+                st.sidebar.success(f"🚀 {n_sent} novos alertas enviados ao Telegram!")
+            else:
+                st.sidebar.info("Nenhum novo Steam Move pendente de envio.")
+        else:
+            st.sidebar.warning("Sem movimentações registradas.")
 
 # Filtros analíticos
 st.sidebar.markdown("---")

@@ -188,12 +188,76 @@ def detectar_steam_moves(date_str: str = None, min_drop_pct: float = 5.0) -> pd.
     return df_res
 
 
+def enviar_alertas_telegram(df_moves: pd.DataFrame, min_drop_pct: float = 8.0) -> int:
+    """
+    Envia alertas no Telegram para partidas que apresentarem Steam Move relevante (drop >= min_drop_pct).
+    Utiliza cache local steam_data/alertas_enviados.json para não duplicar envios no mesmo dia.
+    """
+    if df_moves is None or df_moves.empty:
+        return 0
+
+    import json
+    try:
+        from telegram_notifier import enviar_mensagem_telegram
+    except ImportError:
+        sys.path.insert(0, str(ROOT))
+        from telegram_notifier import enviar_mensagem_telegram
+
+    cache_file = STEAM_DIR / "alertas_enviados.json"
+    enviados = set()
+    if cache_file.exists():
+        try:
+            with open(cache_file, "r", encoding="utf-8") as f:
+                enviados = set(json.load(f))
+        except Exception:
+            enviados = set()
+
+    candidatos = df_moves[df_moves["Drop_Pct"] >= min_drop_pct].copy()
+    if candidatos.empty:
+        return 0
+
+    novos_enviados = 0
+    for _, row in candidatos.iterrows():
+        # Chave única por evento, mercado e faixa de queda arredondada para 2%
+        faixa = int(row.get("Drop_Pct", 0) // 2) * 2
+        key = f"{row.get('Date')}_{row.get('Home')}_{row.get('Away')}_{row.get('Mercado')}_{faixa}"
+        if key in enviados:
+            continue
+
+        drop_str = f"-{abs(row['Drop_Pct']):.1f}%"
+        intensidade = row.get("Intensidade", "🔴 STEAM MOVE")
+        
+        texto = (
+            f"🚨 *ARKAD — ALERTA DE SHARP MONEY* 🚨\n\n"
+            f"⚽ *{row.get('Home')} vs {row.get('Away')}*\n"
+            f"🏆 *Liga:* {row.get('League', 'N/A')} | ⏰ *Hora:* {row.get('Time', 'N/A')}\n"
+            f"🎯 *Mercado:* Back {row.get('Mercado')}\n"
+            f"📉 *Odd Abertura:* `{row.get('Odd_Abertura'):.2f}` ➡️ *Odd Atual:* `{row.get('Odd_Atual'):.2f}` ({drop_str})\n"
+            f"🔥 *Intensidade:* {intensidade}\n\n"
+            f"⚡ *Sindicatos injetando volume pesado na Betfair.* Entrar a favor antes da linha fechar!"
+        )
+
+        ok, msg = enviar_mensagem_telegram(texto)
+        if ok:
+            enviados.add(key)
+            novos_enviados += 1
+            print(f"[+] Alerta Telegram enviado para: {row.get('Home')} vs {row.get('Away')}")
+
+    if novos_enviados > 0:
+        with open(cache_file, "w", encoding="utf-8") as f:
+            json.dump(list(enviados), f, indent=2)
+
+    return novos_enviados
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Steam Tracker Betfair")
     parser.add_argument("--capture", action="store_true", help="Captura um novo snapshot hoje")
+    parser.add_argument("--notify", action="store_true", help="Envia alertas no Telegram para Steam Moves detectados")
     parser.add_argument("--date", type=str, default=None, help="Data YYYY-MM-DD")
-    parser.add_argument("--min_drop", type=float, default=5.0, help="Drop % mínimo")
+    parser.add_argument("--min_drop", type=float, default=5.0, help="Drop % mínimo para exibição")
+    parser.add_argument("--notify_drop", type=float, default=8.0, help="Drop % mínimo para alerta Telegram")
     args = parser.parse_args()
 
     target_d = args.date or datetime.now().strftime("%Y-%m-%d")
@@ -208,5 +272,9 @@ if __name__ == "__main__":
         print(f"[+] Total com Steam Move >= 5%: {len(steams)}")
         if not steams.empty:
             print(steams[["Time", "Home", "Away", "Mercado", "Odd_Abertura", "Odd_Atual", "Drop_Pct", "Intensidade"]].head(10))
+            
+        if args.notify:
+            n_sent = enviar_alertas_telegram(df_moves, min_drop_pct=args.notify_drop)
+            print(f"[+] {n_sent} novos alertas disparados no Telegram.")
     else:
         print("[i] Sem dados suficientes ou sem variações expressivas.")
