@@ -1,0 +1,5 @@
+﻿data_utc,match_id,league_id,home,away,minuto,placar_min80,gols_min80,tem_stats,xg_h,xg_a,xg_tot,shots_h,shots_a,shots_tot,sot_h,sot_a,sot_tot,tbox_h,tbox_a,tbox_tot,bigch_h,bigch_a,bigch_tot,poss_h,poss_a,status,placar_ft,gols_ft,gol_tardio
+2026-09-08 22:37:53,1000007314,9126,Puerto Montt,Rangers,78,1-1,2,0,0.0,0.0,0.0,0.0,0.0,0,0.0,0.0,0,0.0,0.0,0,0.0,0.0,0,50.0,50.0,PENDENTE,,,
+2026-09-08 22:45:02,1000007764,10282,New York City FC II,Red Bull New York  II,78,3-2,5,1,0.0,0.0,0.0,8.0,7.0,15,3.0,5.0,8,9.0,19.0,28,1.0,1.0,2,43.0,57.0,PENDENTE,,,
+2026-09-08 23:36:10,1000020026,1000001641,Fluminense,Club Atlético Platense,78,2-0,2,1,1.03,0.81,1.84,3.0,12.0,15,2.0,1.0,3,17.0,13.0,30,2.0,0.0,2,63.0,37.0,PENDENTE,,,
+2026-09-08 23:39:13,1000021050,1000001659,Santa Fe,Vasco da Gama,80,0-0,0,1,0.0,0.0,0.0,8.0,12.0,20,0.0,4.0,4,16.0,10.0,26,3.0,1.0,4,60.0,40.0,PENDENTE,,,

@@ -1,0 +1,1193 @@
+Date,Time,Ordem_Ciclo,League,Match,Home,Away,Metodo,Metodo_Curto,Selecao,Odd,Score,Goals_H,Goals_A,Placar,Won,Resultado
+2026-01-01,01:00,Jogo 1,AUSTRALIA 1,Auckland FC x Newcastle Jets,Auckland FC,Newcastle Jets,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.0,1,3,1x3,1,GREEN
+2026-01-01,09:35,Jogo 2,SAUDI ARABIA 2,Al Taee x Al Zulfi,Al Taee,Al Zulfi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Zulfi (+2.5),1.04,47.1,1,1,1x1,1,GREEN
+2026-01-01,12:00,Jogo 3,ENGLAND 2,Swansea x West Brom,Swansea,West Brom,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Swansea (+2.5),1.03,48.5,1,0,1x0,1,GREEN
+2026-01-01,15:30,Jogo 4,ISRAEL 1,Beitar Jerusalem x Hapoel Tel Aviv,Beitar Jerusalem,Hapoel Tel Aviv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,1,0,1x0,1,GREEN
+2026-01-01,17:00,Jogo 5,ENGLAND 1,Sunderland x Manchester City,Sunderland,Manchester City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.0,0,0,0x0,0,RED
+2026-01-02,05:35,Jogo 1,AUSTRALIA 1,Melbourne Victory x Perth Glory,Melbourne Victory,Perth Glory,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.0,3,2,3x2,1,GREEN
+2026-01-02,09:30,Jogo 2,EGYPT 2,Tersana x El-Entag El-Harby,Tersana,El-Entag El-Harby,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El-Entag El-Harby (+2.5),1.02,58.7,4,1,4x1,0,RED
+2026-01-02,10:00,Jogo 3,ISRAEL 2,Hap. Ramat Gan x Maccabi Jaffa,Hap. Ramat Gan,Maccabi Jaffa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.1,1,0,1x0,1,GREEN
+2026-01-02,14:00,Jogo 4,CYPRUS 1,Omonia Aradippou x Krasava,Omonia Aradippou,Krasava,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Krasava (+2.5),1.03,45.8,1,0,1x0,1,GREEN
+2026-01-02,17:00,Jogo 5,SPAIN 1,Rayo Vallecano x Getafe,Rayo Vallecano,Getafe,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Getafe (+2.5),1.05,55.4,1,1,1x1,1,GREEN
+2026-01-03,09:30,Jogo 1,EGYPT 2,Raya x Abu Qir Semad,Raya,Abu Qir Semad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Raya (+2.5),1.02,59.0,1,2,1x2,1,GREEN
+2026-01-03,12:00,Jogo 2,NORTHERN IRELAND 2,H&W Welders x Armagh,H&W Welders,Armagh,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,12,0,12x0,1,GREEN
+2026-01-03,13:30,Jogo 3,ISRAEL 1,Ironi Tiberias x Netanya,Ironi Tiberias,Netanya,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,4,0,4x0,1,GREEN
+2026-01-03,15:00,Jogo 4,SPAIN 4,Xerez CD x Xerez D.F.C.,Xerez CD,Xerez D.F.C.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Xerez D.F.C. (+2.5),1.03,59.0,1,0,1x0,1,GREEN
+2026-01-03,17:05,Jogo 5,FRANCE 1,Lille x Rennes,Lille,Rennes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.8,0,2,0x2,1,GREEN
+2026-01-04,08:00,Jogo 1,SPAIN 4,UCAM Murcia x Aguilas FC,UCAM Murcia,Aguilas FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aguilas FC (+2.5),1.03,59.0,1,0,1x0,1,GREEN
+2026-01-04,10:30,Jogo 2,ITALY 4,Tropical Coriano x Tuttocuoio,Tropical Coriano,Tuttocuoio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tuttocuoio (+2.5),1.1,62.6,1,1,1x1,1,GREEN
+2026-01-04,12:00,Jogo 3,PORTUGAL 3,AD Fafe x Varzim,AD Fafe,Varzim,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Varzim (+2.5),1.03,60.8,1,0,1x0,1,GREEN
+2026-01-04,14:30,Jogo 4,ENGLAND 1,Manchester City x Chelsea,Manchester City,Chelsea,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.8,1,1,1x1,1,GREEN
+2026-01-04,16:45,Jogo 5,FRANCE 1,PSG x Paris FC,PSG,Paris FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.8,2,1,2x1,1,GREEN
+2026-01-05,05:00,Jogo 1,AUSTRALIA 1,Macarthur FC x Auckland FC,Macarthur FC,Auckland FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.6,1,1,1x1,1,GREEN
+2026-01-05,09:05,Jogo 2,SAUDI ARABIA 2,Al Jubail x Al Arabi,Al Jubail,Al Arabi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Jubail (+2.5),1.032,45.8,2,0,2x0,1,GREEN
+2026-01-05,09:20,Jogo 3,SAUDI ARABIA 2,Al Anwar x Al Adalah,Al Anwar,Al Adalah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Adalah (+2.5),1.02,47.1,4,1,4x1,0,RED
+2026-01-05,15:00,Jogo 4,PORTUGAL 2,Benfica B x FC Porto B,Benfica B,FC Porto B,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,91.6,1,1,1x1,1,GREEN
+2026-01-05,16:30,Jogo 5,ITALY 3,Altamura x Casertana,Altamura,Casertana,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Altamura (+2.5),1.04,47.9,0,2,0x2,1,GREEN
+2026-01-06,09:35,Jogo 1,SAUDI ARABIA 2,Al Jabalain x Al-Faisaly,Al Jabalain,Al-Faisaly,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Jabalain (+2.5),1.02,45.8,2,1,2x1,1,GREEN
+2026-01-06,10:30,Jogo 2,ITALY 4,Legnago Salus x Bassano,Legnago Salus,Bassano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bassano (+2.5),1.033,43.8,1,2,1x2,1,GREEN
+2026-01-06,10:30,Jogo 3,ITALY 4,Pavia x Caldiero Terme,Pavia,Caldiero Terme,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Pavia (+2.5),1.1,39.6,1,3,1x3,1,GREEN
+2026-01-06,16:45,Jogo 4,WALES 1,TNS x Bala,TNS,Bala,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.8,2,1,2x1,1,GREEN
+2026-01-06,17:00,Jogo 5,SCOTLAND 1,Rangers x Aberdeen,Rangers,Aberdeen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.4,2,0,2x0,1,GREEN
+2026-01-07,09:30,Jogo 1,SAUDI ARABIA 2,Al Raed x Al-Ula,Al Raed,Al-Ula,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.2,3,2,3x2,1,GREEN
+2026-01-07,09:40,Jogo 2,SAUDI ARABIA 2,Al Jandal x Al Taee,Al Jandal,Al Taee,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Jandal (+2.5),1.034,45.8,1,1,1x1,1,GREEN
+2026-01-07,13:00,Jogo 3,SPAIN 4,Torrent x Poblense,Torrent,Poblense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Torrent (+2.5),1.034,57.1,1,1,1x1,1,GREEN
+2026-01-07,14:30,Jogo 4,ITALY 1,Napoli x Verona,Napoli,Verona,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Napoli ou Empate (1X),1.05,78.5,2,2,2x2,1,GREEN
+2026-01-07,16:45,Jogo 5,ITALY 1,Lazio x Fiorentina,Lazio,Fiorentina,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fiorentina (+2.5),1.05,46.6,2,2,2x2,1,GREEN
+2026-01-08,09:30,Jogo 1,EGYPT 2,WE SC x Al Qanah,WE SC,Al Qanah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,WE SC (+2.5),1.02,59.5,0,1,0x1,1,GREEN
+2026-01-08,11:55,Jogo 2,SAUDI ARABIA 1,Al Hilal x Al Hazem,Al Hilal,Al Hazem,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.8,3,0,3x0,1,GREEN
+2026-01-08,14:30,Jogo 3,SAUDI ARABIA 1,Al Nassr x Al Qadsiah,Al Nassr,Al Qadsiah,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.4,1,2,1x2,1,GREEN
+2026-01-08,17:00,Jogo 4,ENGLAND 1,Arsenal x Liverpool,Arsenal,Liverpool,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.9,0,0,0x0,0,RED
+2026-01-08,17:15,Jogo 5,PORTUGAL 2,Lusitania FC x Leixoes,Lusitania FC,Leixoes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Leixoes (+2.5),1.04,44.6,2,2,2x2,1,GREEN
+2026-01-09,09:30,Jogo 1,EGYPT 2,Baladiyat El Mahalla x Aswan SC,Baladiyat El Mahalla,Aswan SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Baladiyat El Mahalla (+2.5),1.034,59.8,2,1,2x1,1,GREEN
+2026-01-09,12:05,Jogo 2,SAUDI ARABIA 1,Al Taawon x Al Shabab,Al Taawon,Al Shabab,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Shabab (+2.5),1.04,37.2,2,0,2x0,1,GREEN
+2026-01-09,14:00,Jogo 3,TURKEY 2,Amedspor x Corum,Amedspor,Corum,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,91.3,1,0,1x0,1,GREEN
+2026-01-09,17:00,Jogo 4,SPAIN 1,Getafe x Real Sociedad,Getafe,Real Sociedad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Getafe (+2.5),1.04,52.4,1,2,1x2,1,GREEN
+2026-01-09,22:00,Jogo 5,MEXICO 2,Zacatecas Mineros x Tlaxcala,Zacatecas Mineros,Tlaxcala,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,91.8,4,1,4x1,1,GREEN
+2026-01-10,03:00,Jogo 1,AUSTRALIA 1,Melbourne Victory x WS Wanderers,Melbourne Victory,WS Wanderers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.7,0,1,0x1,1,GREEN
+2026-01-10,10:00,Jogo 2,TURKEY 2,Adana Demirspor x Erokspor,Adana Demirspor,Erokspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,141.5,0,5,0x5,1,GREEN
+2026-01-10,12:15,Jogo 3,SPAIN 3,Arenteiro x Lugo,Arenteiro,Lugo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lugo (+2.5),1.038,55.4,0,2,0x2,1,GREEN
+2026-01-10,14:30,Jogo 4,SPAIN 2,Burgos CF x Eibar,Burgos CF,Eibar,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Eibar (+2.5),1.041,57.2,1,0,1x0,1,GREEN
+2026-01-10,16:00,Jogo 5,NETHERLANDS 1,PSV x Excelsior,PSV,Excelsior,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,5,1,5x1,1,GREEN
+2026-01-11,03:00,Jogo 1,AUSTRALIA 1,Melbourne City x Newcastle Jets,Melbourne City,Newcastle Jets,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.1,0,1,0x1,1,GREEN
+2026-01-11,08:00,Jogo 2,SPAIN 4,Almeria B x Xerez CD,Almeria B,Xerez CD,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almeria B (+2.5),1.032,56.4,1,2,1x2,1,GREEN
+2026-01-11,11:00,Jogo 3,ENGLAND CUP,Portsmouth x Arsenal,Portsmouth,Arsenal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.0,1,4,1x4,1,GREEN
+2026-01-11,13:00,Jogo 4,SPAIN 4,Xerez D.F.C. x La Union,Xerez D.F.C.,La Union,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,La Union (+2.5),1.034,57.1,4,2,4x2,1,GREEN
+2026-01-11,17:00,Jogo 5,FRANCE CUP,Lille x Lyon,Lille,Lyon,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.2,1,2,1x2,1,GREEN
+2026-01-12,09:30,Jogo 1,EGYPT 2,Proxy x El Daklyeh,Proxy,El Daklyeh,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Daklyeh (+2.5),1.02,57.1,1,1,1x1,1,GREEN
+2026-01-12,14:00,Jogo 2,CYPRUS 1,Krasava x Ol. Nicosia,Krasava,Ol. Nicosia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ol. Nicosia (+2.5),1.02,51.8,1,0,1x0,1,GREEN
+2026-01-12,14:30,Jogo 3,ITALY 1,Genoa x Cagliari,Genoa,Cagliari,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cagliari (+2.5),1.05,52.3,3,0,3x0,0,RED
+2026-01-12,16:45,Jogo 4,ENGLAND CUP,Liverpool x Barnsley,Liverpool,Barnsley,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,132.5,4,1,4x1,1,GREEN
+2026-01-12,17:10,Jogo 5,FRANCE CUP,PSG x Paris FC,PSG,Paris FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,0,1,0x1,1,GREEN
+2026-01-13,09:30,Jogo 1,TURKEY CUP,Basaksehir x Boluspor,Basaksehir,Boluspor,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Basaksehir ou Empate (1X),1.06,78.5,2,1,2x1,1,GREEN
+2026-01-13,12:25,Jogo 2,SAUDI ARABIA 1,Al Okhdood x Al Kholood,Al Okhdood,Al Kholood,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Kholood (+2.5),1.02,46.6,1,0,1x0,1,GREEN
+2026-01-13,14:30,Jogo 3,TURKEY CUP,Fethiyespor x Galatasaray,Fethiyespor,Galatasaray,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,1,2,1x2,1,GREEN
+2026-01-13,16:45,Jogo 4,NORTHERN IRELAND 1,Glentoran x Larne,Glentoran,Larne,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Larne (+2.5),1.02,50.8,1,4,1x4,1,GREEN
+2026-01-13,22:00,Jogo 5,MEXICO 1,Necaxa x Monterrey,Necaxa,Monterrey,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.1,0,2,0x2,1,GREEN
+2026-01-14,10:30,Jogo 1,ITALY 4,Trestina x San Donato,Trestina,San Donato,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Donato (+2.5),1.034,49.1,3,3,3x3,1,GREEN
+2026-01-14,12:00,Jogo 2,TURKEY CUP,Istanbulspor AS x Trabzonspor,Istanbulspor AS,Trabzonspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.5,1,6,1x6,1,GREEN
+2026-01-14,15:00,Jogo 3,WOM FRANCE 1,Lyon W x Lens W,Lyon W,Lens W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,161.0,1,0,1x0,1,GREEN
+2026-01-14,17:45,Jogo 4,PORTUGAL CUP,FC Porto x Benfica,FC Porto,Benfica,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Benfica (+2.5),1.04,50.3,1,0,1x0,1,GREEN
+2026-01-14,20:00,Jogo 5,MEXICO 1,Cruz Azul x Atlas,Cruz Azul,Atlas,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.1,2,0,2x0,1,GREEN
+2026-01-15,00:10,Jogo 1,MEXICO 1,Toluca x Santos Laguna,Toluca,Santos Laguna,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Toluca ou Empate (1X),1.05,80.8,3,1,3x1,1,GREEN
+2026-01-15,09:30,Jogo 2,EGYPT 2,Al-Sekka x Raya,Al-Sekka,Raya,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Raya (+2.5),1.02,59.8,2,1,2x1,1,GREEN
+2026-01-15,12:00,Jogo 3,TURKEY CUP,Bodrumspor x Konyaspor,Bodrumspor,Konyaspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.0,1,2,1x2,1,GREEN
+2026-01-15,14:30,Jogo 4,TURKEY CUP,Besiktas x Keciorengucu,Besiktas,Keciorengucu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,3,0,3x0,1,GREEN
+2026-01-15,17:00,Jogo 5,SPAIN CUP,Racing Santander x Barcelona,Racing Santander,Barcelona,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,0,2,0x2,1,GREEN
+2026-01-16,09:30,Jogo 1,EGYPT 2,Tanta x Baladiyat El Mahalla,Tanta,Baladiyat El Mahalla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Baladiyat El Mahalla (+2.5),1.039,58.7,1,1,1x1,1,GREEN
+2026-01-16,14:00,Jogo 2,TURKEY 2,Corum x Adana Demirspor,Corum,Adana Demirspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,144.5,4,1,4x1,1,GREEN
+2026-01-16,16:45,Jogo 3,SCOTLAND CUP,Rangers x Annan,Rangers,Annan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,141.5,5,0,5x0,1,GREEN
+2026-01-16,20:00,Jogo 4,MEXICO 2,Tapatio x Venados,Tapatio,Venados,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.5,4,2,4x2,1,GREEN
+2026-01-16,22:00,Jogo 5,MEXICO 2,Correcaminos x Atletico La Paz,Correcaminos,Atletico La Paz,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.0,0,3,0x3,1,GREEN
+2026-01-17,07:30,Jogo 1,TURKEY 2,Hatayspor x Manisa FK,Hatayspor,Manisa FK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,2,2,2x2,1,GREEN
+2026-01-17,10:00,Jogo 2,SPAIN 1,Real Madrid x Levante,Real Madrid,Levante,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,2,0,2x0,1,GREEN
+2026-01-17,11:30,Jogo 3,SPAIN 4,Eibar B x SD Logrones,Eibar B,SD Logrones,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,SD Logrones (+2.5),1.032,54.4,0,0,0x0,1,GREEN
+2026-01-17,14:00,Jogo 4,TURKEY 1,Galatasaray x Gaziantep,Galatasaray,Gaziantep,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.8,1,1,1x1,1,GREEN
+2026-01-17,15:30,Jogo 5,ITALY 2,Bari x Juve Stabia,Bari,Juve Stabia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bari (+2.5),1.02,53.8,0,1,0x1,1,GREEN
+2026-01-18,03:00,Jogo 1,AUSTRALIA 1,Sydney FC x Wellington Phoenix,Sydney FC,Wellington Phoenix,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.7,0,2,0x2,1,GREEN
+2026-01-18,08:00,Jogo 2,SPAIN 4,Olot x Poblense,Olot,Poblense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Poblense (+2.5),1.039,59.8,1,0,1x0,1,GREEN
+2026-01-18,10:30,Jogo 3,ITALY 4,Pavia x Oltrepo,Pavia,Oltrepo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Oltrepo (+2.5),1.02,60.8,0,0,0x0,1,GREEN
+2026-01-18,12:30,Jogo 4,GERMANY 3,Schweinfurt x Viktoria Koln,Schweinfurt,Viktoria Koln,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.5,2,0,2x0,1,GREEN
+2026-01-18,14:00,Jogo 5,SPAIN 4,Xerez CD x Aguilas FC,Xerez CD,Aguilas FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aguilas FC (+2.5),1.036,58.7,1,1,1x1,1,GREEN
+2026-01-19,08:30,Jogo 1,TURKEY 2,Igdir FK x Sakaryaspor,Igdir FK,Sakaryaspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.6,1,0,1x0,1,GREEN
+2026-01-19,11:00,Jogo 2,TURKEY 1,Konyaspor x Eyupspor,Konyaspor,Eyupspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.2,1,1,1x1,1,GREEN
+2026-01-19,14:00,Jogo 3,TURKEY 1,Besiktas x Kayserispor,Besiktas,Kayserispor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.2,1,0,1x0,1,GREEN
+2026-01-19,16:30,Jogo 4,SPAIN 2,Granada CF x Eibar,Granada CF,Eibar,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Eibar (+2.5),1.03,49.8,0,0,0x0,1,GREEN
+2026-01-19,16:45,Jogo 5,ITALY 1,Lazio x Como,Lazio,Como,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lazio (+2.5),1.03,50.8,0,3,0x3,0,RED
+2026-01-20,12:30,Jogo 1,EUROPA CHAMPIONS LEAGUE,Kairat Almaty x Club Brugge KV,Kairat Almaty,Club Brugge KV,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.0,1,4,1x4,1,GREEN
+2026-01-20,14:30,Jogo 2,SOUTH AFRICA 1,Sekhukhune x Stellenbosch,Sekhukhune,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Stellenbosch (+2.5),1.032,56.4,0,1,0x1,1,GREEN
+2026-01-20,14:45,Jogo 3,EUROPA CHAMPIONS LEAGUE,Bodo/Glimt x Manchester City,Bodo/Glimt,Manchester City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,3,1,3x1,1,GREEN
+2026-01-20,16:45,Jogo 4,ENGLAND 2,Charlton x Derby,Charlton,Derby,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Derby (+2.5),1.02,49.0,1,2,1x2,1,GREEN
+2026-01-20,17:00,Jogo 5,EUROPA CHAMPIONS LEAGUE,Real Madrid x Monaco,Real Madrid,Monaco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,6,1,6x1,1,GREEN
+2026-01-21,10:30,Jogo 1,ITALY 4,Sondrio x Scanzorosciate,Sondrio,Scanzorosciate,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Scanzorosciate (+2.5),1.038,46.8,0,3,0x3,1,GREEN
+2026-01-21,12:30,Jogo 2,SAUDI ARABIA 1,Al Okhdood x Al Riyadh,Al Okhdood,Al Riyadh,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Riyadh (+2.5),1.02,47.6,2,2,2x2,1,GREEN
+2026-01-21,14:30,Jogo 3,SOUTH AFRICA 1,TS Galaxy x Marumo Gallants,TS Galaxy,Marumo Gallants,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Marumo Gallants (+2.5),1.034,56.4,2,0,2x0,1,GREEN
+2026-01-21,16:45,Jogo 4,ENGLAND 5,Carlisle x York City,Carlisle,York City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.8,0,3,0x3,1,GREEN
+2026-01-21,17:00,Jogo 5,EUROPA CHAMPIONS LEAGUE,Chelsea x Pafos,Chelsea,Pafos,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,1,0,1x0,1,GREEN
+2026-01-22,09:30,Jogo 1,EGYPT 2,Tanta x Abu Qir Semad,Tanta,Abu Qir Semad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tanta (+2.5),1.02,60.0,1,1,1x1,1,GREEN
+2026-01-22,11:10,Jogo 2,SAUDI ARABIA 2,Al-Ula x Al Wehda,Al-Ula,Al Wehda,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.2,0,3,0x3,1,GREEN
+2026-01-22,14:45,Jogo 3,EUROPA LEAGUE,Feyenoord x Sturm Graz,Feyenoord,Sturm Graz,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,3,0,3x0,1,GREEN
+2026-01-22,17:00,Jogo 4,EUROPA LEAGUE,Nice x G.A. Eagles,Nice,G.A. Eagles,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.2,3,1,3x1,1,GREEN
+2026-01-22,20:00,Jogo 5,ARGENTINA 1,Banfield x Huracan,Banfield,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan (+2.5),1.02,59.6,1,1,1x1,1,GREEN
+2026-01-23,05:35,Jogo 1,AUSTRALIA 1,Newcastle Jets x Wellington Phoenix,Newcastle Jets,Wellington Phoenix,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,4,1,4x1,1,GREEN
+2026-01-23,09:30,Jogo 2,EGYPT 2,Dayrout x Aswan SC,Dayrout,Aswan SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dayrout (+2.5),1.041,63.1,0,0,0x0,1,GREEN
+2026-01-23,14:30,Jogo 3,SOUTH AFRICA 1,Richards Bay x Siwelele,Richards Bay,Siwelele,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Siwelele (+2.5),1.038,61.3,1,1,1x1,1,GREEN
+2026-01-23,16:00,Jogo 4,NETHERLANDS 2,De Graafschap x Waalwijk,De Graafschap,Waalwijk,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.7,2,4,2x4,1,GREEN
+2026-01-23,19:00,Jogo 5,ARGENTINA 1,San Lorenzo x Lanus,San Lorenzo,Lanus,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lanus (+2.5),1.041,60.6,2,3,2x3,1,GREEN
+2026-01-24,10:30,Jogo 1,SOUTH AFRICA 1,Orbit College x Chippa Utd.,Orbit College,Chippa Utd.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Chippa Utd. (+2.5),1.032,58.7,0,1,0x1,1,GREEN
+2026-01-24,12:00,Jogo 2,NORTHERN IRELAND 2,Limavady x Armagh,Limavady,Armagh,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,138.5,5,0,5x0,1,GREEN
+2026-01-24,14:30,Jogo 3,ISRAEL 1,H. Beer Sheva x Kiryat Shmona,H. Beer Sheva,Kiryat Shmona,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,111.3,3,2,3x2,1,GREEN
+2026-01-24,16:00,Jogo 4,NETHERLANDS 1,PSV x NAC Breda,PSV,NAC Breda,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.6,2,2,2x2,1,GREEN
+2026-01-24,22:30,Jogo 5,COLOMBIA 1,Chico x America De Cali,Chico,America De Cali,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Chico (+2.5),1.03,56.7,0,1,0x1,1,GREEN
+2026-01-25,05:00,Jogo 1,AUSTRALIA 1,WS Wanderers x Perth Glory,WS Wanderers,Perth Glory,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.8,1,0,1x0,1,GREEN
+2026-01-25,08:00,Jogo 2,SPAIN 4,Linares x Yeclano,Linares,Yeclano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Yeclano (+2.5),1.1,59.0,2,1,2x1,1,GREEN
+2026-01-25,10:30,Jogo 3,ITALY 4,Castrumfavara x Nissa,Castrumfavara,Nissa,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Castrumfavara (+2.5),1.04,57.8,0,1,0x1,1,GREEN
+2026-01-25,13:00,Jogo 4,SOUTH AFRICA 1,Durban City x Polokwane,Durban City,Polokwane,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Polokwane (+2.5),1.032,59.0,1,0,1x0,1,GREEN
+2026-01-25,14:30,Jogo 5,WOM GERMANY 1,Bayern Munich W x RB Leipzig W,Bayern Munich W,RB Leipzig W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,134.0,3,0,3x0,1,GREEN
+2026-01-26,09:30,Jogo 1,SAUDI ARABIA 2,Al Batin x Al Raed,Al Batin,Al Raed,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.4,1,1,1x1,1,GREEN
+2026-01-26,12:00,Jogo 2,ROMANIA 1,Otelul x Csikszereda M. Ciuc,Otelul,Csikszereda M. Ciuc,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.5,3,0,3x0,1,GREEN
+2026-01-26,14:30,Jogo 3,SAUDI ARABIA 1,Al Ittihad x Al Okhdood,Al Ittihad,Al Okhdood,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.6,2,1,2x1,1,GREEN
+2026-01-26,17:00,Jogo 4,ARGENTINA 1,Platense x Instituto,Platense,Instituto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Instituto (+2.5),1.037,60.6,2,1,2x1,1,GREEN
+2026-01-26,19:00,Jogo 5,COLOMBIA 2,Real Cundinamarca x Envigado,Real Cundinamarca,Envigado,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Real Cundinamarca (+2.5),1.039,55.4,0,2,0x2,1,GREEN
+2026-01-27,10:30,Jogo 1,SOUTH AFRICA 2,Venda x Casric Stars,Venda,Casric Stars,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Venda (+2.5),1.038,59.5,1,2,1x2,1,GREEN
+2026-01-27,16:30,Jogo 2,GERMANY 1,Werder Bremen x Hoffenheim,Werder Bremen,Hoffenheim,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.0,0,2,0x2,1,GREEN
+2026-01-27,18:00,Jogo 3,PARAGUAY 1,Sp. Luqueno x Nacional Asuncion,Sp. Luqueno,Nacional Asuncion,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sp. Luqueno (+2.5),1.02,55.0,1,2,1x2,1,GREEN
+2026-01-27,20:00,Jogo 4,ARGENTINA 1,Gimnasia Mendoza x San Lorenzo,Gimnasia Mendoza,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia Mendoza (+2.5),1.034,59.3,0,1,0x1,1,GREEN
+2026-01-27,22:15,Jogo 5,ARGENTINA 1,Newells Old Boys x Independiente,Newells Old Boys,Independiente,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Newells Old Boys (+2.5),1.02,55.9,1,1,1x1,1,GREEN
+2026-01-28,10:30,Jogo 1,SOUTH AFRICA 2,Kruger United x Hungry Lions,Kruger United,Hungry Lions,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Hungry Lions (+2.5),1.02,55.4,1,0,1x0,1,GREEN
+2026-01-28,12:00,Jogo 2,SAUDI ARABIA 2,Al Adalah x Al Diriyah,Al Adalah,Al Diriyah,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.9,1,1,1x1,1,GREEN
+2026-01-28,17:00,Jogo 3,ARGENTINA 1,Aldosivi x Barracas Central,Aldosivi,Barracas Central,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barracas Central (+2.5),1.02,58.0,0,0,0x0,1,GREEN
+2026-01-28,20:00,Jogo 4,BRAZIL 1,Corinthians x Bahia,Corinthians,Bahia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.0,1,2,1x2,1,GREEN
+2026-01-28,22:15,Jogo 5,ARGENTINA 1,Estudiantes L.P. x Boca Juniors,Estudiantes L.P.,Boca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Estudiantes L.P. (+2.5),1.04,56.7,2,1,2x1,1,GREEN
+2026-01-29,09:30,Jogo 1,EGYPT 2,Maleyeit Kafr El Zayiat x La Viena,Maleyeit Kafr El Zayiat,La Viena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Maleyeit Kafr El Zayiat (+2.5),1.034,59.8,1,1,1x1,1,GREEN
+2026-01-29,12:00,Jogo 2,EGYPT 1,Enppi x Smouha,Enppi,Smouha,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Enppi (+2.5),1.039,59.0,1,2,1x2,1,GREEN
+2026-01-29,15:00,Jogo 3,EGYPT 1,Ghazl El Mahallah x El Gaish,Ghazl El Mahallah,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.02,60.0,0,0,0x0,1,GREEN
+2026-01-29,17:00,Jogo 4,EUROPA LEAGUE,Stuttgart x Young Boys,Stuttgart,Young Boys,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,3,2,3x2,1,GREEN
+2026-01-29,21:30,Jogo 5,ARGENTINA 1,Sarmiento Junin x Banfield,Sarmiento Junin,Banfield,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sarmiento Junin (+2.5),1.02,55.9,1,0,1x0,1,GREEN
+2026-01-30,06:05,Jogo 1,AUSTRALIA 1,Adelaide United x Macarthur FC,Adelaide United,Macarthur FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.4,1,1,1x1,1,GREEN
+2026-01-30,09:30,Jogo 2,EGYPT 2,Aswan SC x WE SC,Aswan SC,WE SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,WE SC (+2.5),1.041,61.3,0,1,0x1,1,GREEN
+2026-01-30,12:00,Jogo 3,ROMANIA 1,CFR Cluj x Metaloglobus Bucharest,CFR Cluj,Metaloglobus Bucharest,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.9,4,2,4x2,1,GREEN
+2026-01-30,15:00,Jogo 4,EGYPT 1,Arab Contractors x National Bank Egypt,Arab Contractors,National Bank Egypt,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Arab Contractors (+2.5),1.034,58.7,0,1,0x1,1,GREEN
+2026-01-30,16:30,Jogo 5,GERMANY 1,FC Koln x Wolfsburg,FC Koln,Wolfsburg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.3,1,0,1x0,1,GREEN
+2026-01-31,10:30,Jogo 1,SOUTH AFRICA 1,Marumo Gallants x AmaZulu,Marumo Gallants,AmaZulu,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,AmaZulu (+2.5),1.039,56.4,0,1,0x1,1,GREEN
+2026-01-31,12:15,Jogo 2,SPAIN 2,Burgos CF x Leganes,Burgos CF,Leganes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Leganes (+2.5),1.02,55.9,2,1,2x1,1,GREEN
+2026-01-31,14:30,Jogo 3,GERMANY 1,Hamburger SV x Bayern Munich,Hamburger SV,Bayern Munich,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.5,2,2,2x2,1,GREEN
+2026-01-31,17:00,Jogo 4,SPAIN 1,Elche x Barcelona,Elche,Barcelona,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.4,1,3,1x3,1,GREEN
+2026-01-31,22:00,Jogo 5,ARGENTINA 1,Atl. Tucuman x Huracan,Atl. Tucuman,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan (+2.5),1.04,57.2,1,1,1x1,1,GREEN
+2026-02-01,08:00,Jogo 1,WOM SPAIN 1,Dep. La Coruna W x Real Madrid W,Dep. La Coruna W,Real Madrid W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.1,2,4,2x4,1,GREEN
+2026-02-01,10:00,Jogo 2,SPAIN 1,Real Madrid x Rayo Vallecano,Real Madrid,Rayo Vallecano,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.8,2,1,2x1,1,GREEN
+2026-02-01,13:00,Jogo 3,SPAIN 4,Yeclano x Aguilas FC,Yeclano,Aguilas FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aguilas FC (+2.5),1.034,58.0,0,1,0x1,1,GREEN
+2026-02-01,14:30,Jogo 4,GREECE 1,PAOK x Panserraikos,PAOK,Panserraikos,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.0,4,1,4x1,1,GREEN
+2026-02-01,17:00,Jogo 5,ARGENTINA 1,Barracas Central x Dep. Riestra,Barracas Central,Dep. Riestra,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barracas Central (+2.5),1.043,60.6,1,1,1x1,1,GREEN
+2026-02-02,12:15,Jogo 1,SAUDI ARABIA 1,Al Riyadh x Al Nassr,Al Riyadh,Al Nassr,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.3,0,1,0x1,1,GREEN
+2026-02-02,14:00,Jogo 2,WOM GERMANY 1,Wolfsburg W x Koln W,Wolfsburg W,Koln W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,1,2x1,1,GREEN
+2026-02-02,16:00,Jogo 3,NETHERLANDS 2,Maastricht x Almere City,Maastricht,Almere City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,1,1,1x1,1,GREEN
+2026-02-02,17:30,Jogo 4,ARGENTINA 1,Gimnasia L.P. x Aldosivi,Gimnasia L.P.,Aldosivi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aldosivi (+2.5),1.04,55.2,3,1,3x1,1,GREEN
+2026-02-02,19:45,Jogo 5,ARGENTINA 1,Tigre x Racing Club,Tigre,Racing Club,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tigre (+2.5),1.03,55.9,3,1,3x1,1,GREEN
+2026-02-03,09:30,Jogo 1,TURKEY CUP,Samsunspor x Bodrumspor,Samsunspor,Bodrumspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,132.5,2,0,2x0,1,GREEN
+2026-02-03,13:00,Jogo 2,ROMANIA 1,U. Cluj x FC Arges,U. Cluj,FC Arges,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,FC Arges (+2.5),1.02,59.3,3,1,3x1,1,GREEN
+2026-02-03,14:30,Jogo 3,TURKEY CUP,Trabzonspor x Fethiyespor,Trabzonspor,Fethiyespor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,3,0,3x0,1,GREEN
+2026-02-03,17:00,Jogo 4,SPAIN CUP,Albacete x Barcelona,Albacete,Barcelona,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,1,2,1x2,1,GREEN
+2026-02-03,21:45,Jogo 5,COLOMBIA 2,Barranquilla x Patriotas,Barranquilla,Patriotas,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barranquilla (+2.5),1.04,52.3,2,0,2x0,1,GREEN
+2026-02-04,07:00,Jogo 1,TURKEY CUP,Boluspor x Alanyaspor,Boluspor,Alanyaspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.6,0,4,0x4,1,GREEN
+2026-02-04,12:00,Jogo 2,EGYPT 1,ZED x Al Masry,ZED,Al Masry,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Masry (+2.5),1.039,55.3,1,1,1x1,1,GREEN
+2026-02-04,14:30,Jogo 3,TURKEY CUP,Galatasaray x Istanbulspor AS,Galatasaray,Istanbulspor AS,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,3,1,3x1,1,GREEN
+2026-02-04,17:00,Jogo 4,COLOMBIA 2,Tigres x Orsomarso,Tigres,Orsomarso,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orsomarso (+2.5),1.03,56.7,0,1,0x1,1,GREEN
+2026-02-04,19:30,Jogo 5,COLOMBIA 2,Inter Palmira x Quindio,Inter Palmira,Quindio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Quindio (+2.5),1.033,53.1,1,2,1x2,1,GREEN
+2026-02-05,09:30,Jogo 1,EGYPT 2,Tanta x Al-Sekka,Tanta,Al-Sekka,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al-Sekka (+2.5),1.044,64.6,1,3,1x3,1,GREEN
+2026-02-05,12:00,Jogo 2,EGYPT 1,Haras El Hodood x Pharco,Haras El Hodood,Pharco,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Pharco (+2.5),1.041,58.7,2,2,2x2,1,GREEN
+2026-02-05,14:30,Jogo 3,TURKEY CUP,Fenerbahce x Erzurumspor,Fenerbahce,Erzurumspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,3,1,3x1,1,GREEN
+2026-02-05,16:00,Jogo 4,NETHERLANDS CUP,Telstar x G.A. Eagles,Telstar,G.A. Eagles,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,2,1,2x1,1,GREEN
+2026-02-05,17:45,Jogo 5,PORTUGAL CUP,Sporting CP x AFS,Sporting CP,AFS,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.8,3,2,3x2,1,GREEN
+2026-02-06,03:00,Jogo 1,AUSTRALIA 1,Wellington Phoenix x Melbourne Victory,Wellington Phoenix,Melbourne Victory,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.8,2,3,2x3,1,GREEN
+2026-02-06,09:30,Jogo 2,EGYPT 2,WE SC x Proxy,WE SC,Proxy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,WE SC (+2.5),1.041,61.3,0,1,0x1,1,GREEN
+2026-02-06,15:00,Jogo 3,EGYPT 1,El Gaish x Al Ittihad,El Gaish,Al Ittihad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Ittihad (+2.5),1.038,60.0,0,1,0x1,1,GREEN
+2026-02-06,16:30,Jogo 4,ITALY 3,Benevento x Picerno,Benevento,Picerno,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.1,1,0,1x0,1,GREEN
+2026-02-06,22:00,Jogo 5,MEXICO 1,Tigres UANL x Santos Laguna,Tigres UANL,Santos Laguna,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.0,5,1,5x1,1,GREEN
+2026-02-07,07:30,Jogo 1,TURKEY 2,Hatayspor x Erokspor,Hatayspor,Erokspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,0,5,0x5,1,GREEN
+2026-02-07,10:00,Jogo 2,WOM GERMANY 1,Eintracht Frankfurt W x Bayer Leverkusen W,Eintracht Frankfurt W,Bayer Leverkusen W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.4,1,0,1x0,1,GREEN
+2026-02-07,12:00,Jogo 3,SCOTLAND CUP,Elgin City x Partick Thistle,Elgin City,Partick Thistle,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.8,2,3,2x3,1,GREEN
+2026-02-07,14:00,Jogo 4,SPAIN 4,SD Logrones x Sestao,SD Logrones,Sestao,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,SD Logrones (+2.5),1.032,58.0,0,0,0x0,1,GREEN
+2026-02-07,16:30,Jogo 5,SWITZERLAND 1,Grasshoppers x Young Boys,Grasshoppers,Young Boys,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.2,1,1,1x1,1,GREEN
+2026-02-08,08:00,Jogo 1,SPAIN 4,CD Estepona x Xerez CD,CD Estepona,Xerez CD,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CD Estepona (+2.5),1.039,58.7,0,0,0x0,1,GREEN
+2026-02-08,10:00,Jogo 2,SPAIN 1,Alaves x Getafe,Alaves,Getafe,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Getafe (+2.5),1.03,59.0,0,2,0x2,1,GREEN
+2026-02-08,12:00,Jogo 3,WOM SPAIN 1,Real Madrid W x Espanyol W,Real Madrid W,Espanyol W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,3,0,3x0,1,GREEN
+2026-02-08,14:00,Jogo 4,WOM SPAIN 1,DUX Logrono W x Barcelona W,DUX Logrono W,Barcelona W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,144.5,0,3,0x3,1,GREEN
+2026-02-08,19:15,Jogo 5,ARGENTINA 1,Huracan x San Lorenzo,Huracan,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Lorenzo (+2.5),1.037,59.3,1,0,1x0,1,GREEN
+2026-02-09,09:40,Jogo 1,SAUDI ARABIA 2,Al Batin x Al-Ula,Al Batin,Al-Ula,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.5,0,1,0x1,1,GREEN
+2026-02-09,12:05,Jogo 2,SAUDI ARABIA 2,Al Jubail x Al Orubah,Al Jubail,Al Orubah,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.0,2,3,2x3,1,GREEN
+2026-02-09,15:00,Jogo 3,ISRAEL 1,Maccabi Tel Aviv x Maccabi Bnei Raina,Maccabi Tel Aviv,Maccabi Bnei Raina,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,4,0,4x0,1,GREEN
+2026-02-09,17:00,Jogo 4,DENMARK 1,Aarhus x Odense,Aarhus,Odense,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.2,2,1,2x1,1,GREEN
+2026-02-09,20:10,Jogo 5,COLOMBIA 2,Orsomarso x Patriotas,Orsomarso,Patriotas,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orsomarso (+2.5),1.034,57.9,0,0,0x0,1,GREEN
+2026-02-10,09:40,Jogo 1,SAUDI ARABIA 2,Al Anwar x Jeddah,Al Anwar,Jeddah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Jeddah (+2.5),1.03,47.9,2,1,2x1,1,GREEN
+2026-02-10,14:00,Jogo 2,ITALY 3,Altamura x Latina,Altamura,Latina,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Latina (+2.5),1.035,55.2,1,0,1x0,1,GREEN
+2026-02-10,16:30,Jogo 3,ITALY 3,Casertana x Crotone,Casertana,Crotone,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Crotone (+2.5),1.038,51.8,2,2,2x2,1,GREEN
+2026-02-10,18:00,Jogo 4,COLOMBIA 1,Cucuta x Ind. Medellin,Cucuta,Ind. Medellin,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.9,1,3,1x3,1,GREEN
+2026-02-10,21:00,Jogo 5,MEXICO 2,Venados x Cancun,Venados,Cancun,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.0,2,0,2x0,1,GREEN
+2026-02-11,12:00,Jogo 1,EGYPT 1,Al Ahly x El Ismaily,Al Ahly,El Ismaily,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Al Ahly ou Empate (1X),1.03,79.7,2,0,2x0,1,GREEN
+2026-02-11,15:00,Jogo 2,EGYPT 1,Zamalek x Smouha,Zamalek,Smouha,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Smouha (+2.5),1.02,58.7,1,0,1x0,1,GREEN
+2026-02-11,16:30,Jogo 3,ITALY 3,Giana Erminio x Lecco,Giana Erminio,Lecco,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Giana Erminio (+2.5),1.038,53.1,0,1,0x1,1,GREEN
+2026-02-11,20:00,Jogo 4,BRAZIL 1,Atletico-MG x Remo,Atletico-MG,Remo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,94.5,3,3,3x3,1,GREEN
+2026-02-11,21:30,Jogo 5,BRAZIL 1,Vasco x Bahia,Vasco,Bahia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,92.7,0,1,0x1,1,GREEN
+2026-02-12,09:30,Jogo 1,EGYPT 2,Proxy x La Viena,Proxy,La Viena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,La Viena (+2.5),1.038,63.3,0,0,0x0,1,GREEN
+2026-02-12,12:45,Jogo 2,SAUDI ARABIA 1,Damac x Al Taawon,Damac,Al Taawon,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Damac (+2.5),1.05,42.2,2,1,2x1,1,GREEN
+2026-02-12,14:30,Jogo 3,SAUDI ARABIA 1,Al Qadsiah x Neom SC,Al Qadsiah,Neom SC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.5,1,0,1x0,1,GREEN
+2026-02-12,17:00,Jogo 4,ENGLAND 1,Brentford x Arsenal,Brentford,Arsenal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.0,1,1,1x1,1,GREEN
+2026-02-12,21:30,Jogo 5,COPA LIBERTADORES,U. Catolica (Ecu) x Juventud (Uru),U. Catolica (Ecu),Juventud (Uru),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.1,3,5,3x5,1,GREEN
+2026-02-13,09:30,Jogo 1,EGYPT 2,El-Entag El-Harby x Baladiyat El Mahalla,El-Entag El-Harby,Baladiyat El Mahalla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El-Entag El-Harby (+2.5),1.034,59.3,2,2,2x2,1,GREEN
+2026-02-13,11:00,Jogo 2,TURKEY 2,Boluspor x Hatayspor,Boluspor,Hatayspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,3,1,3x1,1,GREEN
+2026-02-13,14:00,Jogo 3,TURKEY 1,Galatasaray x Eyupspor,Galatasaray,Eyupspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,5,1,5x1,1,GREEN
+2026-02-13,16:00,Jogo 4,WOM ENGLAND 1,Manchester City W x Leicester W,Manchester City W,Leicester W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,6,0,6x0,1,GREEN
+2026-02-13,22:15,Jogo 5,ARGENTINA 1,Union de Santa Fe x San Lorenzo,Union de Santa Fe,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Lorenzo (+2.5),1.02,59.3,0,0,0x0,1,GREEN
+2026-02-14,05:35,Jogo 1,AUSTRALIA 1,Sydney FC x Adelaide United,Sydney FC,Adelaide United,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.0,1,2,1x2,1,GREEN
+2026-02-14,11:30,Jogo 2,GERMANY 1,Werder Bremen x Bayern Munich,Werder Bremen,Bayern Munich,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.4,0,3,0x3,1,GREEN
+2026-02-14,13:00,Jogo 3,SOUTH AFRICA 1,Polokwane x Siwelele,Polokwane,Siwelele,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Siwelele (+2.5),1.036,59.8,0,0,0x0,1,GREEN
+2026-02-14,14:30,Jogo 4,WOM SPAIN 1,Barcelona W x Eibar W,Barcelona W,Eibar W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,144.5,4,0,4x0,1,GREEN
+2026-02-14,17:00,Jogo 5,ARGENTINA 2,All Boys x CA Mitre,All Boys,CA Mitre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Mitre (+2.5),1.034,60.6,2,1,2x1,1,GREEN
+2026-02-15,08:00,Jogo 1,WOM SPAIN 1,Alhama W x Real Madrid W,Alhama W,Real Madrid W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.3,0,3,0x3,1,GREEN
+2026-02-15,10:00,Jogo 2,WOM GERMANY 1,Wolfsburg W x SGS Essen W,Wolfsburg W,SGS Essen W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.8,1,1,1x1,1,GREEN
+2026-02-15,13:30,Jogo 3,ENGLAND CUP,Arsenal x Wigan,Arsenal,Wigan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,135.5,4,0,4x0,1,GREEN
+2026-02-15,17:30,Jogo 4,ARGENTINA 2,Los Andes x Almirante Brown,Los Andes,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.036,60.0,0,0,0x0,1,GREEN
+2026-02-15,19:00,Jogo 5,ARGENTINA 2,Racing Cordoba x CA Estudiantes,Racing Cordoba,CA Estudiantes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Estudiantes (+2.5),1.04,57.7,1,0,1x0,1,GREEN
+2026-02-16,12:00,Jogo 1,EGYPT 1,Al Ittihad x Smouha,Al Ittihad,Smouha,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Ittihad (+2.5),1.037,59.0,1,0,1x0,1,GREEN
+2026-02-16,13:30,Jogo 2,SLOVENIA 1,Bravo x Aluminij,Bravo,Aluminij,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,2,1,2x1,1,GREEN
+2026-02-16,15:00,Jogo 3,EGYPT 1,Enppi x National Bank Egypt,Enppi,National Bank Egypt,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Enppi (+2.5),1.02,58.7,0,0,0x0,1,GREEN
+2026-02-16,16:30,Jogo 4,ENGLAND CUP,Macclesfield x Brentford,Macclesfield,Brentford,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.5,0,1,0x1,1,GREEN
+2026-02-16,19:00,Jogo 5,ARGENTINA 1,Dep. Riestra x Newells Old Boys,Dep. Riestra,Newells Old Boys,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Newells Old Boys (+2.5),1.02,58.8,1,1,1x1,1,GREEN
+2026-02-17,05:00,Jogo 1,AUSTRALIA 1,Sydney FC x Auckland FC,Sydney FC,Auckland FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.0,1,1,1x1,1,GREEN
+2026-02-17,08:30,Jogo 2,TURKEY 2,Hatayspor x Igdir FK,Hatayspor,Igdir FK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,0,2,0x2,1,GREEN
+2026-02-17,16:45,Jogo 3,ENGLAND 2,Charlton x Portsmouth,Charlton,Portsmouth,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Portsmouth (+2.5),1.04,51.2,1,3,1x3,1,GREEN
+2026-02-17,20:00,Jogo 4,COLOMBIA 1,Jaguares de Cordoba x Santa Fe,Jaguares de Cordoba,Santa Fe,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Jaguares de Cordoba (+2.5),1.03,50.3,3,1,3x1,1,GREEN
+2026-02-17,22:10,Jogo 5,COLOMBIA 2,Boca Juniors x Orsomarso,Boca Juniors,Orsomarso,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orsomarso (+2.5),1.032,54.9,2,2,2x2,1,GREEN
+2026-02-18,08:30,Jogo 1,TURKEY 2,Serik Spor x Corum,Serik Spor,Corum,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.2,2,3,2x3,1,GREEN
+2026-02-18,14:30,Jogo 2,SOUTH AFRICA 1,Orlando Pirates x Mamelodi Sundowns,Orlando Pirates,Mamelodi Sundowns,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Mamelodi Sundowns (+2.5),1.04,56.9,1,2,1x2,1,GREEN
+2026-02-18,17:00,Jogo 3,ENGLAND 1,Wolves x Arsenal,Wolves,Arsenal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,2,2,2x2,1,GREEN
+2026-02-18,20:00,Jogo 4,BRAZIL CUP,America SE x Tirol,America SE,Tirol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tirol (+2.5),1.02,52.0,1,1,1x1,1,GREEN
+2026-02-18,21:30,Jogo 5,COPA LIBERTADORES,Barcelona SC (Ecu) x Argentinos Jrs (Arg),Barcelona SC (Ecu),Argentinos Jrs (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barcelona SC (Ecu) (+2.5),1.03,51.3,0,1,0x1,1,GREEN
+2026-02-19,07:30,Jogo 1,TURKEY 2,Adana Demirspor x Sivasspor,Adana Demirspor,Sivasspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,132.5,1,1,1x1,1,GREEN
+2026-02-19,14:45,Jogo 2,EUROPA CONFERENCE LEAGUE,KuPS x Lech Poznan,KuPS,Lech Poznan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.6,0,2,0x2,1,GREEN
+2026-02-19,16:30,Jogo 3,EGYPT 1,Arab Contractors x Al Masry,Arab Contractors,Al Masry,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Arab Contractors (+2.5),1.032,52.3,1,1,1x1,1,GREEN
+2026-02-19,19:00,Jogo 4,COPA LIBERTADORES,Juventud (Uru) x Guarani (Par),Juventud (Uru),Guarani (Par),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Guarani (Par) (+2.5),1.02,51.3,0,0,0x0,1,GREEN
+2026-02-19,21:30,Jogo 5,COPA LIBERTADORES,Dep. Tachira (Ven) x Deportes Tolima (Col),Dep. Tachira (Ven),Deportes Tolima (Col),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Tachira (Ven) (+2.5),1.03,55.0,0,1,0x1,1,GREEN
+2026-02-20,09:00,Jogo 1,SERBIA 2,Usce x Loznica,Usce,Loznica,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Usce (+2.5),1.036,55.4,0,0,0x0,1,GREEN
+2026-02-20,13:00,Jogo 2,UKRAINE 1,Dyn. Kyiv x Rukh Lviv,Dyn. Kyiv,Rukh Lviv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,99.8,1,0,1x0,1,GREEN
+2026-02-20,15:00,Jogo 3,DENMARK 1,Nordsjaelland x Vejle,Nordsjaelland,Vejle,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.0,3,3,3x3,1,GREEN
+2026-02-20,16:30,Jogo 4,EGYPT 1,Ghazl El Mahallah x ZED,Ghazl El Mahallah,ZED,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.031,55.4,0,0,0x0,1,GREEN
+2026-02-20,22:15,Jogo 5,ARGENTINA 1,Gimnasia Mendoza x Gimnasia L.P.,Gimnasia Mendoza,Gimnasia L.P.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia L.P. (+2.5),1.04,55.9,0,1,0x1,1,GREEN
+2026-02-21,11:30,Jogo 1,GERMANY 1,Bayern Munich x Eintracht Frankfurt,Bayern Munich,Eintracht Frankfurt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,3,2,3x2,1,GREEN
+2026-02-21,14:15,Jogo 2,WOM SPAIN 1,Granada CF W x Barcelona W,Granada CF W,Barcelona W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,141.5,0,2,0x2,1,GREEN
+2026-02-21,17:00,Jogo 3,WOM FRANCE 1,Marseille W x Lyon W,Marseille W,Lyon W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.2,2,6,2x6,1,GREEN
+2026-02-21,19:15,Jogo 4,ARGENTINA 1,Dep. Riestra x Huracan,Dep. Riestra,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan (+2.5),1.04,63.6,0,0,0x0,1,GREEN
+2026-02-21,21:30,Jogo 5,USA 1,Vancouver Whitecaps x Real Salt Lake,Vancouver Whitecaps,Real Salt Lake,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,111.3,1,0,1x0,1,GREEN
+2026-02-22,07:30,Jogo 1,TURKEY 2,Bandirmaspor x Hatayspor,Bandirmaspor,Hatayspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.7,4,0,4x0,1,GREEN
+2026-02-22,09:00,Jogo 2,ENGLAND 2,Sheffield Utd x Sheffield Wed,Sheffield Utd,Sheffield Wed,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.9,2,1,2x1,1,GREEN
+2026-02-22,12:15,Jogo 3,SPAIN 1,Barcelona x Levante,Barcelona,Levante,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,3,0,3x0,1,GREEN
+2026-02-22,17:00,Jogo 4,ARGENTINA 2,Almirante Brown x All Boys,Almirante Brown,All Boys,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,All Boys (+2.5),1.037,60.6,2,1,2x1,1,GREEN
+2026-02-22,20:00,Jogo 5,ARGENTINA 2,Colegiales x Atletico Atlanta,Colegiales,Atletico Atlanta,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Colegiales (+2.5),1.038,58.8,1,0,1x0,1,GREEN
+2026-02-23,08:00,Jogo 1,UKRAINE 1,Oleksandriya x Obolon,Oleksandriya,Obolon,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Obolon (+2.5),1.02,53.6,0,3,0x3,1,GREEN
+2026-02-23,10:00,Jogo 2,TURKEY 2,Pendikspor x Keciorengucu,Pendikspor,Keciorengucu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.5,0,1,0x1,1,GREEN
+2026-02-23,15:00,Jogo 3,ROMANIA 1,FCSB x Metaloglobus Bucharest,FCSB,Metaloglobus Bucharest,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.8,4,1,4x1,1,GREEN
+2026-02-23,16:30,Jogo 4,EGYPT 1,El Gouna x Arab Contractors,El Gouna,Arab Contractors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Arab Contractors (+2.5),1.038,59.0,1,1,1x1,1,GREEN
+2026-02-23,21:00,Jogo 5,WOM BRAZIL 1,Sao Paulo W x Bahia W,Sao Paulo W,Bahia W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.9,2,1,2x1,1,GREEN
+2026-02-24,14:30,Jogo 1,AUSTRIA 2,Admira x Austria Vienna (Am),Admira,Austria Vienna (Am),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,92.4,2,1,2x1,1,GREEN
+2026-02-24,17:00,Jogo 2,EUROPA CHAMPIONS LEAGUE,Newcastle x Qarabag,Newcastle,Qarabag,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.8,3,2,3x2,1,GREEN
+2026-02-24,19:15,Jogo 3,ARGENTINA 1,San Lorenzo x Instituto,San Lorenzo,Instituto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Instituto (+2.5),1.038,58.0,1,1,1x1,1,GREEN
+2026-02-24,19:45,Jogo 4,ARGENTINA 1,Central Cordoba x Talleres Cordoba,Central Cordoba,Talleres Cordoba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Central Cordoba (+2.5),1.02,56.7,2,0,2x0,1,GREEN
+2026-02-24,22:00,Jogo 5,ARGENTINA 1,Gimnasia Mendoza x Independiente,Gimnasia Mendoza,Independiente,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia Mendoza (+2.5),1.03,55.9,1,1,1x1,1,GREEN
+2026-02-25,13:30,Jogo 1,SPAIN 4,Castellon B x Barcelona B,Castellon B,Barcelona B,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.2,2,2,2x2,1,GREEN
+2026-02-25,15:00,Jogo 2,SPAIN 3,Torremolinos x Teruel,Torremolinos,Teruel,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Teruel (+2.5),1.035,55.4,2,2,2x2,1,GREEN
+2026-02-25,17:00,Jogo 3,ARGENTINA 1,Gimnasia L.P. x Rosario Central,Gimnasia L.P.,Rosario Central,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia L.P. (+2.5),1.02,58.4,1,2,1x2,1,GREEN
+2026-02-25,19:30,Jogo 4,ARGENTINA 1,Newells Old Boys x Estudiantes L.P.,Newells Old Boys,Estudiantes L.P.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Newells Old Boys (+2.5),1.02,56.7,0,2,0x2,1,GREEN
+2026-02-25,21:30,Jogo 5,COPA LIBERTADORES,Botafogo RJ (Bra) x Nacional Potosi (Bol),Botafogo RJ (Bra),Nacional Potosi (Bol),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,135.5,2,0,2x0,1,GREEN
+2026-02-26,14:45,Jogo 1,EUROPA LEAGUE,Stuttgart x Celtic,Stuttgart,Celtic,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,0,1,0x1,1,GREEN
+2026-02-26,16:30,Jogo 2,EGYPT 2,El Mansoura x Maleyeit Kafr El Zayiat,El Mansoura,Maleyeit Kafr El Zayiat,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Maleyeit Kafr El Zayiat (+2.5),1.033,60.8,0,0,0x0,1,GREEN
+2026-02-26,17:00,Jogo 3,EUROPA CONFERENCE LEAGUE,Lech Poznan x KuPS,Lech Poznan,KuPS,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,1,0,1x0,1,GREEN
+2026-02-26,19:30,Jogo 4,ARGENTINA 1,Estudiantes Rio Cuarto x Huracan,Estudiantes Rio Cuarto,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Estudiantes Rio Cuarto (+2.5),1.02,59.8,2,0,2x0,1,GREEN
+2026-02-26,21:30,Jogo 5,BRAZIL CUP,Portuguesa x AE Altos,Portuguesa,AE Altos,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.1,5,1,5x1,1,GREEN
+2026-02-27,08:00,Jogo 1,UKRAINE 1,Dyn. Kyiv x Epitsentr,Dyn. Kyiv,Epitsentr,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.8,4,0,4x0,1,GREEN
+2026-02-27,10:00,Jogo 2,ISRAEL 2,Maccabi Petah Tikva x Hapoel Afula,Maccabi Petah Tikva,Hapoel Afula,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.1,0,1,0x1,1,GREEN
+2026-02-27,14:30,Jogo 3,SOUTH AFRICA 1,Magesi x Polokwane,Magesi,Polokwane,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Polokwane (+2.5),1.041,61.3,0,2,0x2,1,GREEN
+2026-02-27,16:30,Jogo 4,EGYPT 2,Raya x Aswan SC,Raya,Aswan SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aswan SC (+2.5),1.041,63.3,2,0,2x0,1,GREEN
+2026-02-27,22:00,Jogo 5,MEXICO 2,Zacatecas Mineros x Venados,Zacatecas Mineros,Venados,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.8,2,0,2x0,1,GREEN
+2026-02-28,08:00,Jogo 1,UKRAINE 1,LNZ Cherkasy x Polissya Zhytomyr,LNZ Cherkasy,Polissya Zhytomyr,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Polissya Zhytomyr (+2.5),1.038,59.5,1,3,1x3,1,GREEN
+2026-02-28,12:00,Jogo 2,NORTHERN IRELAND 2,Institute x Armagh,Institute,Armagh,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,6,0,6x0,1,GREEN
+2026-02-28,14:00,Jogo 3,SWITZERLAND 1,St. Gallen x Winterthur,St. Gallen,Winterthur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,1,2x1,1,GREEN
+2026-02-28,17:00,Jogo 4,ARGENTINA 2,Los Andes x Def. de Belgrano,Los Andes,Def. de Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Def. de Belgrano (+2.5),1.038,60.8,0,1,0x1,1,GREEN
+2026-02-28,20:30,Jogo 5,ARGENTINA 2,Colon Santa Fe x Ferro,Colon Santa Fe,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ferro (+2.5),1.034,59.3,1,1,1x1,1,GREEN
+2026-03-01,07:30,Jogo 1,TURKEY 2,Adana Demirspor x Pendikspor,Adana Demirspor,Pendikspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,0,5,0x5,1,GREEN
+2026-03-01,10:00,Jogo 2,SWITZERLAND 2,Vaduz x Stade Nyonnais,Vaduz,Stade Nyonnais,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.0,1,0,1x0,1,GREEN
+2026-03-01,11:30,Jogo 3,GERMANY 1,Stuttgart x Wolfsburg,Stuttgart,Wolfsburg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,4,0,4x0,1,GREEN
+2026-03-01,13:30,Jogo 4,ITALY 3,Guidonia x Gubbio,Guidonia,Gubbio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gubbio (+2.5),1.034,59.3,0,1,0x1,1,GREEN
+2026-03-01,20:30,Jogo 5,ARGENTINA 2,Atl. Rafaela x Temperley,Atl. Rafaela,Temperley,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Temperley (+2.5),1.035,59.6,1,0,1x0,1,GREEN
+2026-03-02,08:00,Jogo 1,UKRAINE 1,SC Poltava x Kudrivka,SC Poltava,Kudrivka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.5,0,2,0x2,1,GREEN
+2026-03-02,14:00,Jogo 2,TURKEY 2,Manisa FK x Corum,Manisa FK,Corum,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.3,0,1,0x1,1,GREEN
+2026-03-02,16:00,Jogo 3,NETHERLANDS 2,FC Emmen x Jong Utrecht,FC Emmen,Jong Utrecht,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.4,1,0,1x0,1,GREEN
+2026-03-02,19:15,Jogo 4,ARGENTINA 1,Dep. Riestra x Platense,Dep. Riestra,Platense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (+2.5),1.038,61.6,0,0,0x0,1,GREEN
+2026-03-02,21:00,Jogo 5,COLOMBIA 2,Tigres x Cartagena,Tigres,Cartagena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tigres (+2.5),1.034,53.6,0,0,0x0,1,GREEN
+2026-03-03,09:30,Jogo 1,TURKEY CUP,Istanbulspor AS x Boluspor,Istanbulspor AS,Boluspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.8,0,0,0x0,0,RED
+2026-03-03,14:30,Jogo 2,SOUTH AFRICA 1,Siwelele x Stellenbosch,Siwelele,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Stellenbosch (+2.5),1.039,59.3,0,0,0x0,1,GREEN
+2026-03-03,17:00,Jogo 3,SPAIN CUP,Barcelona x Atl. Madrid,Barcelona,Atl. Madrid,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,3,0,3x0,1,GREEN
+2026-03-03,19:15,Jogo 4,ARGENTINA 1,Huracan x Belgrano,Huracan,Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan (+2.5),1.043,59.6,3,1,3x1,1,GREEN
+2026-03-03,22:00,Jogo 5,MEXICO 1,Pachuca x Necaxa,Pachuca,Necaxa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.8,2,1,2x1,1,GREEN
+2026-03-04,08:30,Jogo 1,TURKEY CUP,Erzurumspor x Keciorengucu,Erzurumspor,Keciorengucu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.4,4,2,4x2,1,GREEN
+2026-03-04,11:00,Jogo 2,BULGARIA 1,Cherno More x Arda,Cherno More,Arda,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Arda (+2.5),1.02,54.9,0,0,0x0,1,GREEN
+2026-03-04,14:30,Jogo 3,SOUTH AFRICA 1,Durban City x Sekhukhune,Durban City,Sekhukhune,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sekhukhune (+2.5),1.034,55.9,1,1,1x1,1,GREEN
+2026-03-04,16:00,Jogo 4,ITALY 2,Frosinone x Pescara,Frosinone,Pescara,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.8,2,2,2x2,1,GREEN
+2026-03-04,21:30,Jogo 5,BRAZIL CUP,America MG x Tirol,America MG,Tirol,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.5,1,1,1x1,1,GREEN
+2026-03-05,00:00,Jogo 1,MEXICO 2,Atletico La Paz x Leones Negros,Atletico La Paz,Leones Negros,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.9,3,0,3x0,1,GREEN
+2026-03-05,14:30,Jogo 2,TURKEY CUP,Antalyaspor x Samsunspor,Antalyaspor,Samsunspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,0,2,0x2,1,GREEN
+2026-03-05,16:30,Jogo 3,EGYPT 2,WE SC x La Viena,WE SC,La Viena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,La Viena (+2.5),1.038,59.8,1,0,1x0,1,GREEN
+2026-03-05,19:00,Jogo 4,COPA SUDAMERICANA,Boston River (Uru) x Racing Montevideo (Uru),Boston River (Uru),Racing Montevideo (Uru),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Boston River (Uru) (+2.5),1.02,51.0,1,0,1x0,1,GREEN
+2026-03-05,21:30,Jogo 5,BRAZIL CUP,Juventude x Guapore,Juventude,Guapore,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.5,5,0,5x0,1,GREEN
+2026-03-06,08:00,Jogo 1,UKRAINE 1,Oleksandriya x Shakhtar Donetsk,Oleksandriya,Shakhtar Donetsk,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.1,0,1,0x1,1,GREEN
+2026-03-06,13:30,Jogo 2,ESTONIA 2,Viimsi JK x Flora U21,Viimsi JK,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,2,1,2x1,1,GREEN
+2026-03-06,15:00,Jogo 3,DENMARK 2,Aalborg x Aarhus Fremad,Aalborg,Aarhus Fremad,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,92.5,0,1,0x1,1,GREEN
+2026-03-06,16:30,Jogo 4,EGYPT 2,Aswan SC x El Mansoura,Aswan SC,El Mansoura,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Mansoura (+2.5),1.02,63.1,1,0,1x0,1,GREEN
+2026-03-06,22:00,Jogo 5,MEXICO 2,Venados x Correcaminos,Venados,Correcaminos,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.1,0,1,0x1,1,GREEN
+2026-03-07,03:00,Jogo 1,AUSTRALIA 1,Newcastle Jets x WS Wanderers,Newcastle Jets,WS Wanderers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.3,2,1,2x1,1,GREEN
+2026-03-07,10:00,Jogo 2,GREECE 2,Panionios x Kalamata,Panionios,Kalamata,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Panionios (+2.5),1.039,59.8,0,1,0x1,1,GREEN
+2026-03-07,12:00,Jogo 3,ENGLAND 5,York City x Eastleigh,York City,Eastleigh,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,3,1,3x1,1,GREEN
+2026-03-07,14:00,Jogo 4,TURKEY 2,Amedspor x Serik Spor,Amedspor,Serik Spor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,1,0,1x0,1,GREEN
+2026-03-07,16:30,Jogo 5,EGYPT 1,Smouha x Modern Sport,Smouha,Modern Sport,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Modern Sport (+2.5),1.038,59.3,3,0,3x0,0,RED
+2026-03-08,04:30,Jogo 1,CHINA 1,Zhejiang Professional x Qingdao West Coast,Zhejiang Professional,Qingdao West Coast,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.8,2,0,2x0,1,GREEN
+2026-03-08,07:30,Jogo 2,ESTONIA 1,Levadia x Kuressaare,Levadia,Kuressaare,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.2,2,0,2x0,1,GREEN
+2026-03-08,10:30,Jogo 3,SOUTH AFRICA 2,The Bees x Highbury,The Bees,Highbury,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Highbury (+2.5),1.039,58.5,2,1,2x1,1,GREEN
+2026-03-08,12:00,Jogo 4,PORTUGAL 3,Amarante x Trofense,Amarante,Trofense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Trofense (+2.5),1.035,56.7,1,0,1x0,1,GREEN
+2026-03-08,16:00,Jogo 5,NETHERLANDS 1,Nijmegen x FC Volendam,Nijmegen,FC Volendam,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,111.7,3,0,3x0,1,GREEN
+2026-03-09,00:06,Jogo 1,MEXICO 1,Club Tijuana x Santos Laguna,Club Tijuana,Santos Laguna,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.5,1,2,1x2,1,GREEN
+2026-03-09,10:00,Jogo 2,SERBIA 2,Usce x Trayal Krusevac,Usce,Trayal Krusevac,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Trayal Krusevac (+2.5),1.033,52.3,2,2,2x2,1,GREEN
+2026-03-09,16:30,Jogo 3,ITALY 3,Monopoli x Casarano,Monopoli,Casarano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Casarano (+2.5),1.04,50.8,2,1,2x1,1,GREEN
+2026-03-09,20:20,Jogo 4,COLOMBIA 1,Millonarios x Cucuta,Millonarios,Cucuta,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.0,2,0,2x0,1,GREEN
+2026-03-09,22:30,Jogo 5,COLOMBIA 1,Dep. Pasto x America De Cali,Dep. Pasto,America De Cali,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,America De Cali (+2.5),1.03,50.8,2,0,2x0,1,GREEN
+2026-03-10,10:00,Jogo 1,TURKEY 2,Serik Spor x Pendikspor,Serik Spor,Pendikspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,91.9,3,4,3x4,1,GREEN
+2026-03-10,15:00,Jogo 2,WOM FRANCE 1,Lyon W x Le Havre W,Lyon W,Le Havre W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,144.5,3,0,3x0,1,GREEN
+2026-03-10,16:45,Jogo 3,NORTHERN IRELAND 2,H&W Welders x Dundela,H&W Welders,Dundela,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.3,3,1,3x1,1,GREEN
+2026-03-10,19:45,Jogo 4,ARGENTINA 1,Tigre x Velez Sarsfield,Tigre,Velez Sarsfield,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Velez Sarsfield (+2.5),1.02,57.9,1,1,1x1,1,GREEN
+2026-03-10,22:00,Jogo 5,ARGENTINA 1,Newells Old Boys x Platense,Newells Old Boys,Platense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Newells Old Boys (+2.5),1.02,55.2,1,1,1x1,1,GREEN
+2026-03-11,07:30,Jogo 1,TURKEY 2,Hatayspor x Sivasspor,Hatayspor,Sivasspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,1,2,1x2,1,GREEN
+2026-03-11,12:15,Jogo 2,WOM FRANCE 1,PSG W x Marseille W,PSG W,Marseille W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,2,1,2x1,1,GREEN
+2026-03-11,15:00,Jogo 3,SPAIN 3,Antequera x Algeciras,Antequera,Algeciras,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Algeciras (+2.5),1.04,52.8,2,0,2x0,1,GREEN
+2026-03-11,16:30,Jogo 4,EGYPT 1,ZED x Modern Sport,ZED,Modern Sport,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ZED (+2.5),1.04,57.1,2,0,2x0,1,GREEN
+2026-03-11,19:45,Jogo 5,COLOMBIA 2,Atletico F.C. x Orsomarso,Atletico F.C.,Orsomarso,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orsomarso (+2.5),1.038,53.1,1,1,1x1,1,GREEN
+2026-03-12,07:30,Jogo 1,TURKEY 2,Igdir FK x Bodrumspor,Igdir FK,Bodrumspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.1,2,3,2x3,1,GREEN
+2026-03-12,10:00,Jogo 2,TURKEY 2,Boluspor x Corum,Boluspor,Corum,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.8,1,2,1x2,1,GREEN
+2026-03-12,13:00,Jogo 3,ESTONIA 2,Maardu x Elva,Maardu,Elva,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.6,0,3,0x3,1,GREEN
+2026-03-12,17:00,Jogo 4,ARGENTINA 1,Dep. Riestra x Gimnasia Mendoza,Dep. Riestra,Gimnasia Mendoza,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia Mendoza (+2.5),1.02,61.4,0,0,0x0,1,GREEN
+2026-03-12,20:00,Jogo 5,BRAZIL 1,Sao Paulo x Chapecoense-SC,Sao Paulo,Chapecoense-SC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.6,2,0,2x0,1,GREEN
+2026-03-13,13:00,Jogo 1,SERBIA 2,Loznica x Macva,Loznica,Macva,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Macva (+2.5),1.032,59.0,0,0,0x0,1,GREEN
+2026-03-13,14:30,Jogo 2,GERMANY 2,Magdeburg x Darmstadt,Magdeburg,Darmstadt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.2,1,1,1x1,1,GREEN
+2026-03-13,16:30,Jogo 3,EGYPT 2,Raya x Dayrout,Raya,Dayrout,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dayrout (+2.5),1.034,60.8,0,0,0x0,1,GREEN
+2026-03-13,21:00,Jogo 4,ARGENTINA 2,Racing Cordoba x Almirante Brown,Racing Cordoba,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.02,59.8,2,1,2x1,1,GREEN
+2026-03-13,22:30,Jogo 5,COLOMBIA 1,Atl. Nacional x Llaneros,Atl. Nacional,Llaneros,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.0,2,0,2x0,1,GREEN
+2026-03-14,04:30,Jogo 1,CHINA 1,Shandong Taishan x Beijing Guoan,Shandong Taishan,Beijing Guoan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,2,1,2x1,1,GREEN
+2026-03-14,12:00,Jogo 2,ESTONIA 2,Flora U21 x Tartu Welco,Flora U21,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,1,6,1x6,1,GREEN
+2026-03-14,14:00,Jogo 3,TURKEY 1,Galatasaray x Basaksehir,Galatasaray,Basaksehir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.5,3,0,3x0,1,GREEN
+2026-03-14,16:00,Jogo 4,ARGENTINA 2,All Boys x Deportivo Madryn,All Boys,Deportivo Madryn,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Madryn (+2.5),1.02,59.8,1,0,1x0,1,GREEN
+2026-03-14,19:00,Jogo 5,ARGENTINA 2,Tristan Suarez x Club A. Guemes,Tristan Suarez,Club A. Guemes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Club A. Guemes (+2.5),1.02,57.2,1,1,1x1,1,GREEN
+2026-03-15,08:00,Jogo 1,SPAIN 4,Poblense x Reus FCR,Poblense,Reus FCR,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Reus FCR (+2.5),1.02,57.2,1,2,1x2,1,GREEN
+2026-03-15,10:30,Jogo 2,NETHERLANDS 1,Feyenoord x Excelsior,Feyenoord,Excelsior,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.4,2,1,2x1,1,GREEN
+2026-03-15,13:00,Jogo 3,WOM GERMANY 1,Koln W x Bayern Munich W,Koln W,Bayern Munich W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,0,3,0x3,1,GREEN
+2026-03-15,15:30,Jogo 4,ROMANIA 1,FCSB x Metaloglobus Bucharest,FCSB,Metaloglobus Bucharest,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,0,0,0x0,0,RED
+2026-03-15,22:00,Jogo 5,ARGENTINA 1,Union de Santa Fe x Boca Juniors,Union de Santa Fe,Boca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Boca Juniors (+2.5),1.043,59.2,1,1,1x1,1,GREEN
+2026-03-16,11:30,Jogo 1,SLOVENIA 2,Nafta x Dravinja,Nafta,Dravinja,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.9,2,1,2x1,1,GREEN
+2026-03-16,13:00,Jogo 2,ESTONIA 2,Levadia U21 x Nomme Utd U21,Levadia U21,Nomme Utd U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,0,1,0x1,1,GREEN
+2026-03-16,15:30,Jogo 3,ARGENTINA 1,Aldosivi x Huracan,Aldosivi,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aldosivi (+2.5),1.038,58.8,0,0,0x0,1,GREEN
+2026-03-16,18:30,Jogo 4,ARGENTINA 1,San Lorenzo x Defensa y Justicia,San Lorenzo,Defensa y Justicia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Defensa y Justicia (+2.5),1.03,55.9,2,5,2x5,1,GREEN
+2026-03-16,21:00,Jogo 5,WOM BRAZIL 1,Bahia W x Vitoria W,Bahia W,Vitoria W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.2,3,2,3x2,1,GREEN
+2026-03-17,05:00,Jogo 1,AUSTRALIA 1,Sydney FC x Melbourne City,Sydney FC,Melbourne City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.4,0,1,0x1,1,GREEN
+2026-03-17,14:45,Jogo 2,EUROPA CHAMPIONS LEAGUE,Sporting CP x Bodo/Glimt,Sporting CP,Bodo/Glimt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,5,0,5x0,1,GREEN
+2026-03-17,18:00,Jogo 3,URUGUAY 2,Tacuarembo x La Luz,Tacuarembo,La Luz,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tacuarembo (+2.5),1.036,54.9,1,1,1x1,1,GREEN
+2026-03-17,19:30,Jogo 4,BRAZIL CUP,Sao Bernardo x Ceara,Sao Bernardo,Ceara,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sao Bernardo (+2.5),1.03,51.2,0,0,0x0,1,GREEN
+2026-03-17,21:15,Jogo 5,ARGENTINA 1,Central Cordoba x Dep. Riestra,Central Cordoba,Dep. Riestra,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Central Cordoba (+2.5),1.042,61.6,1,0,1x0,1,GREEN
+2026-03-18,10:30,Jogo 1,SOUTH AFRICA 2,Lerumo Lions x Upington City,Lerumo Lions,Upington City,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Upington City (+2.5),1.038,52.0,0,2,0x2,1,GREEN
+2026-03-18,12:30,Jogo 2,EUROPA LEAGUE,Braga x Ferencvaros,Braga,Ferencvaros,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.9,4,0,4x0,1,GREEN
+2026-03-18,14:30,Jogo 3,SOUTH AFRICA 1,Golden Arrows x Stellenbosch,Golden Arrows,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Golden Arrows (+2.5),1.032,52.1,1,1,1x1,1,GREEN
+2026-03-18,16:00,Jogo 4,ITALY 2,Avellino x Sudtirol,Avellino,Sudtirol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sudtirol (+2.5),1.02,53.3,3,2,3x2,1,GREEN
+2026-03-18,19:00,Jogo 5,BRAZIL 1,Palmeiras x Botafogo RJ,Palmeiras,Botafogo RJ,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.2,2,1,2x1,1,GREEN
+2026-03-19,08:00,Jogo 1,UKRAINE 1,Oleksandriya x Dyn. Kyiv,Oleksandriya,Dyn. Kyiv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.5,0,5,0x5,1,GREEN
+2026-03-19,13:30,Jogo 2,ECUADOR 2,Cumbaya x Atletico FC,Cumbaya,Atletico FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atletico FC (+2.5),1.034,51.3,2,2,2x2,1,GREEN
+2026-03-19,15:30,Jogo 3,ROMANIA 1,Dinamo Bucuresti x Univ. Craiova,Dinamo Bucuresti,Univ. Craiova,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dinamo Bucuresti (+2.5),1.02,49.0,0,1,0x1,1,GREEN
+2026-03-19,17:00,Jogo 4,EUROPA CONFERENCE LEAGUE,Strasbourg x Rijeka,Strasbourg,Rijeka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,1,1,1x1,1,GREEN
+2026-03-19,20:00,Jogo 5,PARAGUAY 1,Sportivo Trinidense x Ameliano,Sportivo Trinidense,Ameliano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sportivo Trinidense (+2.5),1.038,50.0,1,1,1x1,1,GREEN
+2026-03-20,08:00,Jogo 1,CHINA 1,Dalian Yingbo x Shanghai Port,Dalian Yingbo,Shanghai Port,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.0,1,0,1x0,1,GREEN
+2026-03-20,11:30,Jogo 2,CROATIA 2,Sesvete x Orijent,Sesvete,Orijent,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orijent (+2.5),1.04,57.9,2,1,2x1,1,GREEN
+2026-03-20,14:30,Jogo 3,WOM GERMANY 1,SGS Essen W x Bayern Munich W,SGS Essen W,Bayern Munich W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,0,5,0x5,1,GREEN
+2026-03-20,16:00,Jogo 4,NETHERLANDS 2,Cambuur x Jong AZ,Cambuur,Jong AZ,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,3,4,3x4,1,GREEN
+2026-03-20,21:30,Jogo 5,ARGENTINA 2,San Martin S.J. x San Martin T.,San Martin S.J.,San Martin T.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Martin T. (+2.5),1.038,58.5,1,1,1x1,1,GREEN
+2026-03-21,10:00,Jogo 1,TURKEY 2,Keciorengucu x Adana Demirspor,Keciorengucu,Adana Demirspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,138.5,7,0,7x0,1,GREEN
+2026-03-21,12:00,Jogo 2,SERBIA 1,Crvena zvezda x Radnicki Nis,Crvena zvezda,Radnicki Nis,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,2,0,2x0,1,GREEN
+2026-03-21,14:00,Jogo 3,ARGENTINA 2,Almagro x Quilmes,Almagro,Quilmes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Quilmes (+2.5),1.038,58.8,1,0,1x0,1,GREEN
+2026-03-21,17:00,Jogo 4,ARGENTINA 2,Ciudad Bolivar x Almirante Brown,Ciudad Bolivar,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.036,65.5,0,0,0x0,1,GREEN
+2026-03-21,19:00,Jogo 5,ARGENTINA 2,Deportivo Madryn x CA Estudiantes,Deportivo Madryn,CA Estudiantes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Estudiantes (+2.5),1.02,59.3,3,0,3x0,0,RED
+2026-03-22,07:30,Jogo 1,TURKEY 2,Hatayspor x Amedspor,Hatayspor,Amedspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,0,3,0x3,1,GREEN
+2026-03-22,10:30,Jogo 2,ITALY 4,Olbia x Cassino,Olbia,Cassino,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cassino (+2.5),1.1,64.6,0,0,0x0,1,GREEN
+2026-03-22,12:00,Jogo 3,EGYPT 1,ZED x El Gaish,ZED,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gaish (+2.5),1.043,62.0,1,0,1x0,1,GREEN
+2026-03-22,14:00,Jogo 4,GREECE 1,Olympiacos Piraeus x AEL Larissa,Olympiacos Piraeus,AEL Larissa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.7,0,0,0x0,0,RED
+2026-03-22,16:00,Jogo 5,ARGENTINA 3,Tucuman Central x Bartolome Mitre,Tucuman Central,Bartolome Mitre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bartolome Mitre (+2.5),1.045,68.0,1,0,1x0,1,GREEN
+2026-03-23,13:00,Jogo 1,BULGARIA 2,Yantra Gabrovo x Fratria,Yantra Gabrovo,Fratria,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fratria (+2.5),1.02,53.1,1,1,1x1,1,GREEN
+2026-03-23,14:00,Jogo 2,WOM GERMANY 1,Union Berlin W x Werder Bremen W,Union Berlin W,Werder Bremen W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.3,4,1,4x1,1,GREEN
+2026-03-23,16:00,Jogo 3,ARGENTINA 2,Nueva Chicago x Gimnasia y Tiro,Nueva Chicago,Gimnasia y Tiro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia y Tiro (+2.5),1.038,59.6,3,1,3x1,1,GREEN
+2026-03-23,19:00,Jogo 4,VENEZUELA 1,Carabobo x Puerto Cabello,Carabobo,Puerto Cabello,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Puerto Cabello (+2.5),1.032,52.1,1,1,1x1,1,GREEN
+2026-03-23,21:00,Jogo 5,WOM BRAZIL 1,Corinthians W x America Mineiro W,Corinthians W,America Mineiro W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,4,0,4x0,1,GREEN
+2026-03-24,11:30,Jogo 1,ISRAEL 2,MS Kafr Qasim x M. Herzliya,MS Kafr Qasim,M. Herzliya,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,MS Kafr Qasim (+2.5),1.034,47.1,0,2,0x2,1,GREEN
+2026-03-24,14:00,Jogo 2,URUGUAY 1,Maldonado x Montevideo City,Maldonado,Montevideo City,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Montevideo City (+2.5),1.04,41.2,1,0,1x0,1,GREEN
+2026-03-24,16:45,Jogo 3,ENGLAND 5,Gateshead x York City,Gateshead,York City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.0,3,1,3x1,1,GREEN
+2026-03-24,20:00,Jogo 4,COLOMBIA 1,Junior x Bucaramanga,Junior,Bucaramanga,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bucaramanga (+2.5),1.04,45.6,2,0,2x0,1,GREEN
+2026-03-24,22:00,Jogo 5,COLOMBIA 1,Fortaleza x Dep. Pasto,Fortaleza,Dep. Pasto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Pasto (+2.5),1.02,49.0,1,2,1x2,1,GREEN
+2026-03-25,10:30,Jogo 1,ITALY 4,Lentigione x Pistoiese,Lentigione,Pistoiese,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lentigione (+2.5),1.034,50.8,1,1,1x1,1,GREEN
+2026-03-25,14:00,Jogo 2,URUGUAY 1,Albion x Wanderers,Albion,Wanderers,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Wanderers (+2.5),1.02,52.3,2,1,2x1,1,GREEN
+2026-03-25,17:00,Jogo 3,URUGUAY 1,CA Cerro x Juventud,CA Cerro,Juventud,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Cerro (+2.5),1.03,51.5,1,0,1x0,1,GREEN
+2026-03-25,19:00,Jogo 4,ARGENTINA 1,Dep. Riestra x San Lorenzo,Dep. Riestra,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Lorenzo (+2.5),1.036,58.5,1,1,1x1,1,GREEN
+2026-03-25,23:00,Jogo 5,WOM USA 1,San Diego Wave W x Portland Thorns W,San Diego Wave W,Portland Thorns W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,91.5,3,1,3x1,1,GREEN
+2026-03-26,10:30,Jogo 1,EGYPT 2,Aswan SC x Tanta,Aswan SC,Tanta,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tanta (+2.5),1.039,59.3,0,0,0x0,1,GREEN
+2026-03-26,14:00,Jogo 2,WORLD UEFA NATIONS LEAGUE,Malta x Luxembourg,Malta,Luxembourg,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Malta (+2.5),1.03,54.4,0,2,0x2,1,GREEN
+2026-03-26,16:45,Jogo 3,WORLD WORLD CUP,Italy x Northern Ireland,Italy,Northern Ireland,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.2,2,0,2x0,1,GREEN
+2026-03-26,19:00,Jogo 4,WORLD WORLD CUP,Bolivia x Suriname,Bolivia,Suriname,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Suriname (+2.5),1.02,48.8,2,1,2x1,1,GREEN
+2026-03-26,20:30,Jogo 5,CHILE CUP,U. De Concepcion x Cobresal,U. De Concepcion,Cobresal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,91.8,2,1,2x1,1,GREEN
+2026-03-27,00:00,Jogo 1,WORLD WORLD CUP,New Caledonia x Jamaica,New Caledonia,Jamaica,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,0,1,0x1,1,GREEN
+2026-03-27,10:30,Jogo 2,EGYPT 2,Dayrout x El Mansoura,Dayrout,El Mansoura,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Mansoura (+2.5),1.039,59.0,1,0,1x0,1,GREEN
+2026-03-27,16:45,Jogo 3,WALES 1,Caernarfon x TNS,Caernarfon,TNS,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,0,4,0x4,1,GREEN
+2026-03-27,18:15,Jogo 4,ARGENTINA 2,Ciudad Bolivar x Agropecuario,Ciudad Bolivar,Agropecuario,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Agropecuario (+2.5),1.041,58.5,0,0,0x0,1,GREEN
+2026-03-27,22:10,Jogo 5,ARGENTINA 2,San Martin S.J. x Racing Cordoba,San Martin S.J.,Racing Cordoba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Racing Cordoba (+2.5),1.03,58.8,0,0,0x0,1,GREEN
+2026-03-28,10:00,Jogo 1,WOM GERMANY 1,Bayern Munich W x 1.FC Nurnberg W,Bayern Munich W,1.FC Nurnberg W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,2,0,2x0,1,GREEN
+2026-03-28,11:30,Jogo 2,WALES 1,Flint x Llanelli,Flint,Llanelli,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.5,1,2,1x2,1,GREEN
+2026-03-28,14:00,Jogo 3,WOM FRANCE 1,Strasbourg W x Lyon W,Strasbourg W,Lyon W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.3,2,2,2x2,1,GREEN
+2026-03-28,15:30,Jogo 4,ARGENTINA 2,Almagro x Deportivo Moron,Almagro,Deportivo Moron,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almagro (+2.5),1.036,60.8,2,0,2x0,1,GREEN
+2026-03-28,20:00,Jogo 5,ARGENTINA 2,Colegiales x San Miguel,Colegiales,San Miguel,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Miguel (+2.5),1.039,59.3,0,0,0x0,1,GREEN
+2026-03-29,06:30,Jogo 1,SPAIN 4,Castellon B x Porreres,Castellon B,Porreres,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.7,1,3,1x3,1,GREEN
+2026-03-29,08:00,Jogo 2,WOM ENGLAND 1,Chelsea W x Aston Villa W,Chelsea W,Aston Villa W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.4,4,3,4x3,1,GREEN
+2026-03-29,10:00,Jogo 3,ITALY 4,Brusaporto x Chievo,Brusaporto,Chievo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Brusaporto (+2.5),1.039,60.8,0,1,0x1,1,GREEN
+2026-03-29,15:30,Jogo 4,ARGENTINA 2,Nueva Chicago x All Boys,Nueva Chicago,All Boys,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,All Boys (+2.5),1.038,61.8,0,0,0x0,1,GREEN
+2026-03-29,17:00,Jogo 5,ARGENTINA 2,Club A. Guemes x CA Mitre,Club A. Guemes,CA Mitre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Mitre (+2.5),1.02,61.3,2,2,2x2,1,GREEN
+2026-03-30,13:00,Jogo 1,WOM GERMANY 1,Hamburger SV W x Bayer Leverkusen W,Hamburger SV W,Bayer Leverkusen W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.9,1,3,1x3,1,GREEN
+2026-03-30,16:00,Jogo 2,ARGENTINA 2,Def. de Belgrano x Atl. Rafaela,Def. de Belgrano,Atl. Rafaela,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atl. Rafaela (+2.5),1.02,61.8,1,1,1x1,1,GREEN
+2026-03-30,18:00,Jogo 3,CHILE CUP,Cobresal x U. Catolica,Cobresal,U. Catolica,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,93.3,1,3,1x3,1,GREEN
+2026-03-30,21:00,Jogo 4,COLOMBIA 2,Orsomarso x Inter Palmira,Orsomarso,Inter Palmira,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orsomarso (+2.5),1.02,50.8,1,2,1x2,1,GREEN
+2026-03-30,21:30,Jogo 5,WOM BRAZIL 1,Palmeiras W x Flamengo W,Palmeiras W,Flamengo W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,1,1,1x1,1,GREEN
+2026-03-31,13:00,Jogo 1,WORLD UEFA NATIONS LEAGUE,Latvia x Gibraltar,Latvia,Gibraltar,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Latvia ou Empate (1X),1.05,79.0,1,0,1x0,1,GREEN
+2026-03-31,15:45,Jogo 2,ENGLAND 5,Woking x Altrincham,Woking,Altrincham,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.3,1,1,1x1,1,GREEN
+2026-03-31,18:00,Jogo 3,CHILE CUP,A. Italiano x U. De Chile,A. Italiano,U. De Chile,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,A. Italiano (+2.5),1.03,44.8,1,3,1x3,1,GREEN
+2026-03-31,19:00,Jogo 4,URUGUAY 1,Defensor Sp. x Albion,Defensor Sp.,Albion,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Albion (+2.5),1.04,51.0,1,1,1x1,1,GREEN
+2026-03-31,19:45,Jogo 5,COLOMBIA 2,Atletico F.C. x Boca Juniors,Atletico F.C.,Boca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atletico F.C. (+2.5),1.039,52.2,1,1,1x1,1,GREEN
+2026-04-01,00:00,Jogo 1,WORLD WORLD CUP,Iraq x Bolivia,Iraq,Bolivia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Iraq (+2.5),1.04,51.3,2,1,2x1,1,GREEN
+2026-04-01,10:00,Jogo 2,SOUTH AFRICA 2,Black Leopards x Upington City,Black Leopards,Upington City,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Upington City (+2.5),1.04,56.9,0,0,0x0,1,GREEN
+2026-04-01,16:00,Jogo 3,WOM BRAZIL 1,Bahia W x America Mineiro W,Bahia W,America Mineiro W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.5,3,1,3x1,1,GREEN
+2026-04-01,18:00,Jogo 4,CHILE CUP,Colo Colo x Huachipato,Colo Colo,Huachipato,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.1,1,0,1x0,1,GREEN
+2026-04-01,20:00,Jogo 5,ARGENTINA 1,Lanus x Platense,Lanus,Platense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (+2.5),1.03,54.9,0,0,0x0,1,GREEN
+2026-04-02,05:35,Jogo 1,AUSTRALIA 1,Macarthur FC x Newcastle Jets,Macarthur FC,Newcastle Jets,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.5,3,2,3x2,1,GREEN
+2026-04-02,10:00,Jogo 2,EGYPT 2,Tanta x Proxy,Tanta,Proxy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Proxy (+2.5),1.039,56.4,0,1,0x1,1,GREEN
+2026-04-02,13:30,Jogo 3,ITALY 4,Leon x Pavia,Leon,Pavia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,103.0,3,1,3x1,1,GREEN
+2026-04-02,15:00,Jogo 4,ARGENTINA 1,Barracas Central x Sarmiento Junin,Barracas Central,Sarmiento Junin,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sarmiento Junin (+2.5),1.02,58.0,1,2,1x2,1,GREEN
+2026-04-02,21:30,Jogo 5,BRAZIL 1,Palmeiras x Gremio,Palmeiras,Gremio,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.1,2,1,2x1,1,GREEN
+2026-04-03,08:30,Jogo 1,TURKEY 2,Adana Demirspor x Manisa FK,Adana Demirspor,Manisa FK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,2,1,2x1,1,GREEN
+2026-04-03,10:00,Jogo 2,EGYPT 2,Baladiyat El Mahalla x Tersana,Baladiyat El Mahalla,Tersana,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tersana (+2.5),1.036,60.8,1,0,1x0,1,GREEN
+2026-04-03,13:00,Jogo 3,ESTONIA 2,Nomme Utd U21 x Tartu Welco,Nomme Utd U21,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.1,1,3,1x3,1,GREEN
+2026-04-03,15:00,Jogo 4,SAUDI ARABIA 1,Al Nassr x Al Najma,Al Nassr,Al Najma,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,5,2,5x2,1,GREEN
+2026-04-03,19:30,Jogo 5,ARGENTINA 1,San Lorenzo x Estudiantes L.P.,San Lorenzo,Estudiantes L.P.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Lorenzo (+2.5),1.02,57.2,1,0,1x0,1,GREEN
+2026-04-04,08:30,Jogo 1,ESTONIA 1,Levadia x Nomme Utd,Levadia,Nomme Utd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,1,1,1x1,1,GREEN
+2026-04-04,13:15,Jogo 2,ENGLAND CUP,Chelsea x Port Vale,Chelsea,Port Vale,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,138.5,7,0,7x0,1,GREEN
+2026-04-04,15:30,Jogo 3,ARGENTINA 2,All Boys x Ferro,All Boys,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ferro (+2.5),1.033,60.8,0,0,0x0,1,GREEN
+2026-04-04,17:30,Jogo 4,USA 1,Real Salt Lake x Sporting Kansas City,Real Salt Lake,Sporting Kansas City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.4,3,1,3x1,1,GREEN
+2026-04-04,23:30,Jogo 5,USA 1,Vancouver Whitecaps x Portland Timbers,Vancouver Whitecaps,Portland Timbers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,3,2,3x2,1,GREEN
+2026-04-05,07:00,Jogo 1,ESTONIA 2,Levadia U21 x Flora U21,Levadia U21,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.2,1,3,1x3,1,GREEN
+2026-04-05,13:00,Jogo 2,DENMARK 1,FC Copenhagen x Silkeborg,FC Copenhagen,Silkeborg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.4,7,0,7x0,1,GREEN
+2026-04-05,15:30,Jogo 3,ARGENTINA 2,Almirante Brown x Def. de Belgrano,Almirante Brown,Def. de Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Def. de Belgrano (+2.5),1.037,60.6,0,2,0x2,1,GREEN
+2026-04-05,18:00,Jogo 4,BRAZIL 4,Humaita x Porto Velho,Humaita,Porto Velho,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,1,5,1x5,1,GREEN
+2026-04-05,20:00,Jogo 5,ARGENTINA 2,Atl. Rafaela x Club A. Guemes,Atl. Rafaela,Club A. Guemes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Club A. Guemes (+2.5),1.03,60.0,1,2,1x2,1,GREEN
+2026-04-06,09:30,Jogo 1,NETHERLANDS 2,Almere City x Den Bosch,Almere City,Den Bosch,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.7,1,2,1x2,1,GREEN
+2026-04-06,11:00,Jogo 2,ENGLAND 5,York City x Altrincham,York City,Altrincham,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,2,1,2x1,1,GREEN
+2026-04-06,12:30,Jogo 3,SOUTH AFRICA 1,AmaZulu x Sekhukhune,AmaZulu,Sekhukhune,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,AmaZulu (+2.5),1.038,55.4,2,2,2x2,1,GREEN
+2026-04-06,15:00,Jogo 4,EGYPT 1,ZED x Arab Contractors,ZED,Arab Contractors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Arab Contractors (+2.5),1.042,60.5,0,0,0x0,1,GREEN
+2026-04-06,20:00,Jogo 5,BRAZIL 3,Ypiranga FC x Figueirense,Ypiranga FC,Figueirense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Figueirense (+2.5),1.03,52.1,1,1,1x1,1,GREEN
+2026-04-07,08:30,Jogo 1,TURKEY 2,Hatayspor x Adana Demirspor,Hatayspor,Adana Demirspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,4,0,4x0,1,GREEN
+2026-04-07,10:00,Jogo 2,SOUTH AFRICA 2,Pretoria U. x Highbury,Pretoria U.,Highbury,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Highbury (+2.5),1.038,59.1,1,2,1x2,1,GREEN
+2026-04-07,12:00,Jogo 3,EGYPT 1,Smouha x Enppi,Smouha,Enppi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Enppi (+2.5),1.032,60.8,0,2,0x2,1,GREEN
+2026-04-07,14:30,Jogo 4,SOUTH AFRICA 1,Richards Bay x Stellenbosch,Richards Bay,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Richards Bay (+2.5),1.039,57.1,2,1,2x1,1,GREEN
+2026-04-07,16:00,Jogo 5,EUROPA CHAMPIONS LEAGUE,Real Madrid x Bayern Munich,Real Madrid,Bayern Munich,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,1,2,1x2,1,GREEN
+2026-04-08,10:00,Jogo 1,SOUTH AFRICA 2,Milford FC x Casric Stars,Milford FC,Casric Stars,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Milford FC (+2.5),1.038,57.1,1,1,1x1,1,GREEN
+2026-04-08,11:30,Jogo 2,SLOVENIA 2,Slovan Ljubljana x Ilirija,Slovan Ljubljana,Ilirija,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.3,2,1,2x1,1,GREEN
+2026-04-08,13:00,Jogo 3,ESTONIA 1,Levadia x Parnu JK Vaprus,Levadia,Parnu JK Vaprus,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.3,2,1,2x1,1,GREEN
+2026-04-08,15:00,Jogo 4,EGYPT 1,Ghazl El Mahallah x El Gouna,Ghazl El Mahallah,El Gouna,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.039,61.8,1,0,1x0,1,GREEN
+2026-04-08,21:30,Jogo 5,COPA SUDAMERICANA,Blooming (Bol) x River Plate (Arg),Blooming (Bol),River Plate (Arg),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.8,1,1,1x1,1,GREEN
+2026-04-09,10:00,Jogo 1,EGYPT 2,WE SC x Asyut Petroleum,WE SC,Asyut Petroleum,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,WE SC (+2.5),1.039,57.1,0,3,0x3,0,RED
+2026-04-09,13:00,Jogo 2,ESTONIA 2,Tallinna Kalev x Elva,Tallinna Kalev,Elva,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.5,2,1,2x1,1,GREEN
+2026-04-09,15:00,Jogo 3,EGYPT 1,Arab Contractors x El Ismaily,Arab Contractors,El Ismaily,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Ismaily (+2.5),1.032,60.0,1,0,1x0,1,GREEN
+2026-04-09,19:00,Jogo 4,COPA SUDAMERICANA,Botafogo RJ (Bra) x Caracas (Ven),Botafogo RJ (Bra),Caracas (Ven),👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Botafogo RJ (Bra) ou Empate (1X),1.03,80.9,1,1,1x1,1,GREEN
+2026-04-09,21:00,Jogo 5,COPA LIBERTADORES,Platense (Arg) x Corinthians (Bra),Platense (Arg),Corinthians (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (Arg) (+2.5),1.02,57.5,0,2,0x2,1,GREEN
+2026-04-10,05:00,Jogo 1,ROMANIA 2,Metalul Buzau x Campulung,Metalul Buzau,Campulung,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,1,0,1x0,1,GREEN
+2026-04-10,07:00,Jogo 2,UKRAINE 1,SC Poltava x Polissya Zhytomyr,SC Poltava,Polissya Zhytomyr,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,0,4,0x4,1,GREEN
+2026-04-10,13:00,Jogo 3,BOSNIA 1,Posusje x Siroki Brijeg,Posusje,Siroki Brijeg,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Siroki Brijeg (+2.5),1.02,52.3,2,0,2x0,1,GREEN
+2026-04-10,15:30,Jogo 4,POLAND 2,Odra Opole x Puszcza,Odra Opole,Puszcza,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Puszcza (+2.5),1.04,53.8,1,0,1x0,1,GREEN
+2026-04-10,19:30,Jogo 5,PARAGUAY 2,Independiente FBC x Sol de America,Independiente FBC,Sol de America,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sol de America (+2.5),1.039,60.3,1,0,1x0,1,GREEN
+2026-04-11,07:30,Jogo 1,TURKEY 2,Sariyer x Hatayspor,Sariyer,Hatayspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,4,0,4x0,1,GREEN
+2026-04-11,11:00,Jogo 2,ENGLAND 5,Forest Green x Braintree,Forest Green,Braintree,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,3,1,3x1,1,GREEN
+2026-04-11,15:00,Jogo 3,ARGENTINA 1,Dep. Riestra x Instituto,Dep. Riestra,Instituto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Instituto (+2.5),1.041,58.5,0,1,0x1,1,GREEN
+2026-04-11,18:00,Jogo 4,BRAZIL 4,Azuriz x Marcilio Dias,Azuriz,Marcilio Dias,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Azuriz (+2.5),1.036,57.9,0,0,0x0,1,GREEN
+2026-04-11,21:45,Jogo 5,ARGENTINA 1,Estudiantes Rio Cuarto x Barracas Central,Estudiantes Rio Cuarto,Barracas Central,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barracas Central (+2.5),1.02,57.8,1,2,1x2,1,GREEN
+2026-04-12,11:00,Jogo 1,SPAIN 3,Pontevedra x Ponferradina,Pontevedra,Ponferradina,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ponferradina (+2.5),1.03,59.5,3,1,3x1,1,GREEN
+2026-04-12,12:30,Jogo 2,GERMANY 1,Stuttgart x Hamburger SV,Stuttgart,Hamburger SV,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,4,0,4x0,1,GREEN
+2026-04-12,15:00,Jogo 3,ARGENTINA 2,Temperley x Quilmes,Temperley,Quilmes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Quilmes (+2.5),1.04,60.6,3,3,3x3,1,GREEN
+2026-04-12,17:00,Jogo 4,ARGENTINA 2,Chaco For Ever x All Boys,Chaco For Ever,All Boys,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,All Boys (+2.5),1.034,59.3,2,0,2x0,1,GREEN
+2026-04-12,20:00,Jogo 5,USA 1,Columbus Crew x Orlando City,Columbus Crew,Orlando City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.4,1,1,1x1,1,GREEN
+2026-04-13,10:00,Jogo 1,TURKEY 2,Sivasspor x Istanbulspor AS,Sivasspor,Istanbulspor AS,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.0,1,3,1x3,1,GREEN
+2026-04-13,12:00,Jogo 2,EGYPT 1,Ghazl El Mahallah x Wadi Degla,Ghazl El Mahallah,Wadi Degla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.032,56.4,0,0,0x0,1,GREEN
+2026-04-13,15:00,Jogo 3,NETHERLANDS 2,Jong AZ x Jong PSV,Jong AZ,Jong PSV,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.2,0,2,0x2,1,GREEN
+2026-04-13,16:30,Jogo 4,ARGENTINA 1,Sarmiento Junin x Gimnasia L.P.,Sarmiento Junin,Gimnasia L.P.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia L.P. (+2.5),1.039,55.9,1,2,1x2,1,GREEN
+2026-04-13,19:00,Jogo 5,ARGENTINA 2,Nueva Chicago x Midland,Nueva Chicago,Midland,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nueva Chicago (+2.5),1.043,60.5,2,2,2x2,1,GREEN
+2026-04-14,10:15,Jogo 1,SAUDI ARABIA 2,Al Jandal x Al-Ula,Al Jandal,Al-Ula,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.1,1,2,1x2,1,GREEN
+2026-04-14,12:00,Jogo 2,EGYPT 1,Modern Sport x El Gouna,Modern Sport,El Gouna,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gouna (+2.5),1.042,60.3,0,0,0x0,1,GREEN
+2026-04-14,15:00,Jogo 3,EGYPT 1,Al Ittihad x ZED,Al Ittihad,ZED,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ZED (+2.5),1.041,57.9,2,1,2x1,1,GREEN
+2026-04-14,19:00,Jogo 4,COPA LIBERTADORES,Estudiantes L.P. (Arg) x Cusco (Per),Estudiantes L.P. (Arg),Cusco (Per),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.1,2,1,2x1,1,GREEN
+2026-04-14,21:00,Jogo 5,COPA LIBERTADORES,Bolivar (Bol) x La Guaira (Ven),Bolivar (Bol),La Guaira (Ven),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.9,1,1,1x1,1,GREEN
+2026-04-15,07:30,Jogo 1,SOUTH KOREA 1,Ulsan HD x Seoul,Ulsan HD,Seoul,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Seoul (+2.5),1.02,45.3,1,4,1x4,1,GREEN
+2026-04-15,09:50,Jogo 2,SAUDI ARABIA 2,Abha x Jeddah,Abha,Jeddah,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.9,1,0,1x0,1,GREEN
+2026-04-15,12:00,Jogo 3,BULGARIA 1,Cherno More x CSKA 1948 Sofia,Cherno More,CSKA 1948 Sofia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CSKA 1948 Sofia (+2.5),1.02,52.8,0,4,0x4,1,GREEN
+2026-04-15,15:00,Jogo 4,SAUDI ARABIA 1,Al Nassr x Al Ettifaq,Al Nassr,Al Ettifaq,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,1,0,1x0,1,GREEN
+2026-04-15,21:00,Jogo 5,ECUADOR 2,San Antonio x Cuenca Juniors,San Antonio,Cuenca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Antonio (+2.5),1.038,47.6,1,1,1x1,1,GREEN
+2026-04-16,10:00,Jogo 1,EGYPT 2,Tanta x WE SC,Tanta,WE SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,WE SC (+2.5),1.037,57.1,1,1,1x1,1,GREEN
+2026-04-16,13:00,Jogo 2,ESTONIA 2,Tallinna Kalev x Flora U21,Tallinna Kalev,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.8,1,4,1x4,1,GREEN
+2026-04-16,16:00,Jogo 3,EUROPA LEAGUE,Aston Villa x Bologna,Aston Villa,Bologna,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.5,4,0,4x0,1,GREEN
+2026-04-16,19:00,Jogo 4,COPA LIBERTADORES,Lanus (Arg) x Always Ready (Bol),Lanus (Arg),Always Ready (Bol),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,98.1,1,0,1x0,1,GREEN
+2026-04-16,21:30,Jogo 5,COPA LIBERTADORES,Penarol (Uru) x Platense (Arg),Penarol (Uru),Platense (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (Arg) (+2.5),1.05,54.2,1,2,1x2,1,GREEN
+2026-04-17,06:35,Jogo 1,AUSTRALIA 1,Melbourne Victory x Newcastle Jets,Melbourne Victory,Newcastle Jets,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.8,2,2,2x2,1,GREEN
+2026-04-17,10:00,Jogo 2,EGYPT 2,El Mansoura x Tersana,El Mansoura,Tersana,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Mansoura (+2.5),1.038,60.0,1,1,1x1,1,GREEN
+2026-04-17,13:00,Jogo 3,ESTONIA 2,Tartu Welco x Levadia U21,Tartu Welco,Levadia U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,3,2,3x2,1,GREEN
+2026-04-17,15:30,Jogo 4,BOSNIA 1,Zeljeznicar x Posusje,Zeljeznicar,Posusje,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Posusje (+2.5),1.02,55.4,1,1,1x1,1,GREEN
+2026-04-17,23:30,Jogo 5,USA 1,Vancouver Whitecaps x Sporting Kansas City,Vancouver Whitecaps,Sporting Kansas City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,3,0,3x0,1,GREEN
+2026-04-18,09:00,Jogo 1,NORWAY 1,Bodo/Glimt x Aalesund,Bodo/Glimt,Aalesund,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.2,3,0,3x0,1,GREEN
+2026-04-18,11:00,Jogo 2,SCOTLAND 4,East Kilbride x Edinburgh City,East Kilbride,Edinburgh City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,132.5,4,0,4x0,1,GREEN
+2026-04-18,13:30,Jogo 3,ENGLAND 5,York City x Yeovil,York City,Yeovil,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,3,0,3x0,1,GREEN
+2026-04-18,15:00,Jogo 4,EGYPT 1,Arab Contractors x El Gaish,Arab Contractors,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gaish (+2.5),1.042,59.8,2,0,2x0,1,GREEN
+2026-04-18,20:00,Jogo 5,ARGENTINA 2,Ciudad Bolivar x Deportivo Madryn,Ciudad Bolivar,Deportivo Madryn,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Madryn (+2.5),1.02,58.3,1,0,1x0,1,GREEN
+2026-04-19,00:00,Jogo 1,AUSTRALIA 1,Auckland FC x Central Coast Mariners,Auckland FC,Central Coast Mariners,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.1,0,1,0x1,1,GREEN
+2026-04-19,10:00,Jogo 2,TURKEY 2,Boluspor x Adana Demirspor,Boluspor,Adana Demirspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,138.5,6,0,6x0,1,GREEN
+2026-04-19,12:00,Jogo 3,EGYPT 1,El Gouna x El Ismaily,El Gouna,El Ismaily,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Ismaily (+2.5),1.034,59.8,1,0,1x0,1,GREEN
+2026-04-19,15:00,Jogo 4,ARGENTINA 2,CA Mitre x Ferro,CA Mitre,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ferro (+2.5),1.02,59.8,0,1,0x1,1,GREEN
+2026-04-19,20:00,Jogo 5,ARGENTINA 2,Racing Cordoba x Def. de Belgrano,Racing Cordoba,Def. de Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Def. de Belgrano (+2.5),1.034,59.8,3,0,3x0,0,RED
+2026-04-20,14:00,Jogo 1,NORWAY 2,Lyn x Sandnes,Lyn,Sandnes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.2,0,2,0x2,1,GREEN
+2026-04-20,15:30,Jogo 2,SPAIN 2,Dep. La Coruna x Mirandes,Dep. La Coruna,Mirandes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.4,3,1,3x1,1,GREEN
+2026-04-20,17:00,Jogo 3,PERU 2,Binacional x Estudiantil CNI,Binacional,Estudiantil CNI,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,101.2,2,2,2x2,1,GREEN
+2026-04-20,19:00,Jogo 4,VENEZUELA 1,Carabobo x Anzoategui FC,Carabobo,Anzoategui FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.5,6,3,6x3,1,GREEN
+2026-04-20,21:45,Jogo 5,ARGENTINA 1,Tigre x Huracan,Tigre,Huracan,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan (+2.5),1.04,58.5,1,1,1x1,1,GREEN
+2026-04-21,10:00,Jogo 1,SOUTH AFRICA 2,Midlands Wanderers x Upington City,Midlands Wanderers,Upington City,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Upington City (+2.5),1.037,51.8,2,1,2x1,1,GREEN
+2026-04-21,13:00,Jogo 2,BOSNIA 1,Prijedor x Zeljeznicar,Prijedor,Zeljeznicar,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Zeljeznicar (+2.5),1.036,51.0,0,1,0x1,1,GREEN
+2026-04-21,16:30,Jogo 3,SPAIN 1,Real Madrid x Alaves,Real Madrid,Alaves,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,2,1,2x1,1,GREEN
+2026-04-21,19:00,Jogo 4,BOLIVIA 1,GV San Jose x Aurora,GV San Jose,Aurora,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.4,1,1,1x1,1,GREEN
+2026-04-21,21:30,Jogo 5,ECUADOR 1,Tecnico U. x Emelec,Tecnico U.,Emelec,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Emelec (+2.5),1.036,51.2,0,1,0x1,1,GREEN
+2026-04-22,10:00,Jogo 1,SOUTH AFRICA 2,Venda x Milford FC,Venda,Milford FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Venda (+2.5),1.039,57.5,1,0,1x0,1,GREEN
+2026-04-22,12:00,Jogo 2,EGYPT 1,Al Masry x Enppi,Al Masry,Enppi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Enppi (+2.5),1.02,56.4,2,2,2x2,1,GREEN
+2026-04-22,15:00,Jogo 3,EGYPT 1,Smouha x Ceramica Cleopatra,Smouha,Ceramica Cleopatra,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Smouha (+2.5),1.038,57.4,0,2,0x2,1,GREEN
+2026-04-22,16:30,Jogo 4,SPAIN 1,Barcelona x Celta Vigo,Barcelona,Celta Vigo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,1,0,1x0,1,GREEN
+2026-04-22,23:30,Jogo 5,USA 1,Los Angeles FC x Colorado Rapids,Los Angeles FC,Colorado Rapids,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.2,0,0,0x0,0,RED
+2026-04-23,10:00,Jogo 1,EGYPT 2,Maleyeit Kafr El Zayiat x Al Qanah,Maleyeit Kafr El Zayiat,Al Qanah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Maleyeit Kafr El Zayiat (+2.5),1.02,55.9,1,1,1x1,1,GREEN
+2026-04-23,12:00,Jogo 2,EGYPT 1,Arab Contractors x Al Ittihad,Arab Contractors,Al Ittihad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Al Ittihad (+2.5),1.039,57.1,0,0,0x0,1,GREEN
+2026-04-23,15:00,Jogo 3,EGYPT 1,Ghazl El Mahallah x Petrojet,Ghazl El Mahallah,Petrojet,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.04,56.1,1,1,1x1,1,GREEN
+2026-04-23,19:30,Jogo 4,BRAZIL CUP,Palmeiras x Jacuipense,Palmeiras,Jacuipense,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,3,0,3x0,1,GREEN
+2026-04-23,21:00,Jogo 5,BOLIVIA 1,Tomayapo x The Strongest,Tomayapo,The Strongest,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.3,0,0,0x0,0,RED
+2026-04-24,11:00,Jogo 1,EGYPT 1,Pharco x El Gouna,Pharco,El Gouna,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gouna (+2.5),1.039,57.1,0,1,0x1,1,GREEN
+2026-04-24,14:00,Jogo 2,EGYPT 1,El Ismaily x Modern Sport,El Ismaily,Modern Sport,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Modern Sport (+2.5),1.042,59.4,0,2,0x2,1,GREEN
+2026-04-24,16:15,Jogo 3,ICELAND 2,Fylkir x Aegir,Fylkir,Aegir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.0,3,0,3x0,1,GREEN
+2026-04-24,18:30,Jogo 4,WOM USA 1,Racing Louisville W x Orlando Pride W,Racing Louisville W,Orlando Pride W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.1,3,2,3x2,1,GREEN
+2026-04-24,21:30,Jogo 5,ARGENTINA 1,Platense x San Lorenzo,Platense,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Lorenzo (+2.5),1.037,58.0,0,1,0x1,1,GREEN
+2026-04-25,05:00,Jogo 1,ROMANIA 2,Poli Iasi x Campulung,Poli Iasi,Campulung,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,1,0,1x0,1,GREEN
+2026-04-25,08:30,Jogo 2,ENGLAND 5,Forest Green x Morecambe,Forest Green,Morecambe,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,5,0,5x0,1,GREEN
+2026-04-25,10:00,Jogo 3,TURKEY 2,Adana Demirspor x Umraniyespor,Adana Demirspor,Umraniyespor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,132.5,1,3,1x3,1,GREEN
+2026-04-25,15:30,Jogo 4,ARGENTINA 2,San Telmo x All Boys,San Telmo,All Boys,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Telmo (+2.5),1.036,60.5,1,0,1x0,1,GREEN
+2026-04-25,20:30,Jogo 5,USA 1,FC Cincinnati x New York Red Bulls,FC Cincinnati,New York Red Bulls,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.3,2,0,2x0,1,GREEN
+2026-04-26,07:00,Jogo 1,SPAIN 4,Barcelona B x Atletic Lleida,Barcelona B,Atletic Lleida,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,2,1,2x1,1,GREEN
+2026-04-26,11:00,Jogo 2,SERBIA 2,Smederevo x Usce,Smederevo,Usce,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.5,5,1,5x1,1,GREEN
+2026-04-26,13:00,Jogo 3,ESTONIA 2,Viimsi JK x Maardu,Viimsi JK,Maardu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,1,1,1x1,1,GREEN
+2026-04-26,15:00,Jogo 4,PERU 2,Minas x Binacional,Minas,Binacional,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Binacional (+2.5),1.02,65.5,0,0,0x0,1,GREEN
+2026-04-26,17:00,Jogo 5,ARGENTINA 2,Central Norte x Ciudad Bolivar,Central Norte,Ciudad Bolivar,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ciudad Bolivar (+2.5),1.02,58.3,0,1,0x1,1,GREEN
+2026-04-27,11:00,Jogo 1,EGYPT 1,Smouha x Al Masry,Smouha,Al Masry,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Smouha (+2.5),1.03,53.1,0,1,0x1,1,GREEN
+2026-04-27,13:00,Jogo 2,ESTONIA 2,FC Tallinn x Levadia U21,FC Tallinn,Levadia U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.2,4,2,4x2,1,GREEN
+2026-04-27,15:00,Jogo 3,ICELAND 1,KR Reykjavik x Hafnarfjordur,KR Reykjavik,Hafnarfjordur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,4,2,4x2,1,GREEN
+2026-04-27,18:00,Jogo 4,WOM BRAZIL 1,America Mineiro W x Sao Paulo W,America Mineiro W,Sao Paulo W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.9,0,0,0x0,0,RED
+2026-04-27,21:00,Jogo 5,ARGENTINA 1,Huracan x Argentinos Jrs,Huracan,Argentinos Jrs,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Argentinos Jrs (+2.5),1.041,58.8,1,2,1x2,1,GREEN
+2026-04-28,11:00,Jogo 1,EGYPT 1,ZED x Pharco,ZED,Pharco,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Pharco (+2.5),1.02,52.2,1,0,1x0,1,GREEN
+2026-04-28,14:00,Jogo 2,EGYPT 1,Arab Contractors x Ghazl El Mahallah,Arab Contractors,Ghazl El Mahallah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.04,63.3,1,1,1x1,1,GREEN
+2026-04-28,16:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,PSG x Bayern Munich,PSG,Bayern Munich,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.8,5,4,5x4,1,GREEN
+2026-04-28,19:00,Jogo 4,COPA SUDAMERICANA,San Lorenzo (Arg) x Santos (Bra),San Lorenzo (Arg),Santos (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Santos (Bra) (+2.5),1.03,51.0,1,1,1x1,1,GREEN
+2026-04-28,21:30,Jogo 5,COPA LIBERTADORES,Cruzeiro (Bra) x Boca Juniors (Arg),Cruzeiro (Bra),Boca Juniors (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Boca Juniors (Arg) (+2.5),1.03,50.8,1,0,1x0,1,GREEN
+2026-04-29,03:00,Jogo 1,JAPAN 1,Urawa Reds x Kawasaki Frontale,Urawa Reds,Kawasaki Frontale,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.3,2,0,2x0,1,GREEN
+2026-04-29,11:00,Jogo 2,EGYPT 1,El Gouna x Haras El Hodood,El Gouna,Haras El Hodood,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Haras El Hodood (+2.5),1.033,56.4,1,1,1x1,1,GREEN
+2026-04-29,14:00,Jogo 3,EGYPT 1,Modern Sport x El Gaish,Modern Sport,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Modern Sport (+2.5),1.039,60.3,0,0,0x0,1,GREEN
+2026-04-29,16:15,Jogo 4,PORTUGAL 1,Sporting CP x Tondela,Sporting CP,Tondela,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.2,2,2,2x2,1,GREEN
+2026-04-29,20:00,Jogo 5,WOM USA 1,Washington Spirit W x Racing Louisville W,Washington Spirit W,Racing Louisville W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.7,1,0,1x0,1,GREEN
+2026-04-30,10:30,Jogo 1,EGYPT 2,El-Entag El-Harby x WE SC,El-Entag El-Harby,WE SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El-Entag El-Harby (+2.5),1.038,57.1,3,0,3x0,1,GREEN
+2026-04-30,12:00,Jogo 2,SLOVENIA 2,Ilirija x Nafta,Ilirija,Nafta,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.0,0,2,0x2,1,GREEN
+2026-04-30,14:00,Jogo 3,NORWAY 1,Bodo/Glimt x Start,Bodo/Glimt,Start,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,5,0,5x0,1,GREEN
+2026-04-30,20:30,Jogo 4,ARGENTINA 2,All Boys x San Miguel,All Boys,San Miguel,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Miguel (+2.5),1.03,58.8,1,1,1x1,1,GREEN
+2026-04-30,23:00,Jogo 5,COPA LIBERTADORES,Ind. Medellin (Col) x Cusco (Per),Ind. Medellin (Col),Cusco (Per),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.1,1,0,1x0,1,GREEN
+2026-05-01,06:30,Jogo 1,ESTONIA 2,FC Tallinn x Tartu Welco,FC Tallinn,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,0,2,0x2,1,GREEN
+2026-05-01,08:30,Jogo 2,TURKEY 2,Hatayspor x Vanspor FK,Hatayspor,Vanspor FK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,3,1,3x1,1,GREEN
+2026-05-01,10:00,Jogo 3,SOUTH AFRICA 2,Highbury x Midlands Wanderers,Highbury,Midlands Wanderers,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Midlands Wanderers (+2.5),1.03,52.9,3,1,3x1,1,GREEN
+2026-05-01,13:00,Jogo 4,ICELAND 2,Afturelding x Volsungur,Afturelding,Volsungur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,0,0,0x0,0,RED
+2026-05-01,16:15,Jogo 5,ICELAND 2,Kopavogur x Aegir,Kopavogur,Aegir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,2,1,2x1,1,GREEN
+2026-05-02,08:30,Jogo 1,ESTONIA 1,Kuressaare x Levadia,Kuressaare,Levadia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,1,2,1x2,1,GREEN
+2026-05-02,10:30,Jogo 2,GERMANY 1,Bayern Munich x Heidenheim,Bayern Munich,Heidenheim,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,3,3,3x3,1,GREEN
+2026-05-02,15:30,Jogo 3,ARGENTINA 2,Los Andes x Colon Santa Fe,Los Andes,Colon Santa Fe,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Colon Santa Fe (+2.5),1.037,59.6,1,1,1x1,1,GREEN
+2026-05-02,17:45,Jogo 4,USA 1,Real Salt Lake x Portland Timbers,Real Salt Lake,Portland Timbers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,2,0,2x0,1,GREEN
+2026-05-02,21:15,Jogo 5,ARGENTINA 1,Platense x Estudiantes L.P.,Platense,Estudiantes L.P.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Estudiantes L.P. (+2.5),1.041,56.7,0,2,0x2,1,GREEN
+2026-05-03,07:15,Jogo 1,POLAND 1,GKS Katowice x Termalica B-B.,GKS Katowice,Termalica B-B.,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.0,5,1,5x1,1,GREEN
+2026-05-03,10:30,Jogo 2,WOM ENGLAND 1,Leicester W x Chelsea W,Leicester W,Chelsea W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,1,3,1x3,1,GREEN
+2026-05-03,14:00,Jogo 3,EGYPT 1,Ghazl El Mahallah x El Ismaily,Ghazl El Mahallah,El Ismaily,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Ismaily (+2.5),1.032,60.3,0,0,0x0,1,GREEN
+2026-05-03,16:00,Jogo 4,ARGENTINA 2,Ciudad Bolivar x Ferro,Ciudad Bolivar,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ciudad Bolivar (+2.5),1.039,60.8,2,4,2x4,1,GREEN
+2026-05-03,18:15,Jogo 5,BOLIVIA 1,The Strongest x Academia del Balompie,The Strongest,Academia del Balompie,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,3,1,3x1,1,GREEN
+2026-05-04,11:00,Jogo 1,ENGLAND 1,Chelsea x Nottingham,Chelsea,Nottingham,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.6,1,3,1x3,1,GREEN
+2026-05-04,13:00,Jogo 2,WOM GERMANY 1,Eintracht Frankfurt W x 1.FC Nurnberg W,Eintracht Frankfurt W,1.FC Nurnberg W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.9,4,1,4x1,1,GREEN
+2026-05-04,16:15,Jogo 3,PORTUGAL 1,Sporting CP x Vitoria Guimaraes,Sporting CP,Vitoria Guimaraes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.2,5,1,5x1,1,GREEN
+2026-05-04,20:00,Jogo 4,ARGENTINA 2,Quilmes x Chacarita Juniors,Quilmes,Chacarita Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Chacarita Juniors (+2.5),1.02,57.2,0,0,0x0,1,GREEN
+2026-05-04,21:30,Jogo 5,ARGENTINA 2,Gimnasia y Tiro x Agropecuario,Gimnasia y Tiro,Agropecuario,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Agropecuario (+2.5),1.02,56.9,2,3,2x3,1,GREEN
+2026-05-05,11:30,Jogo 1,ROMANIA 2,FC Bihor x Chindia Targoviste,FC Bihor,Chindia Targoviste,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.1,3,1,3x1,1,GREEN
+2026-05-05,13:00,Jogo 2,SLOVAKIA 1,Zilina x Michalovce,Zilina,Michalovce,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.6,3,2,3x2,1,GREEN
+2026-05-05,14:30,Jogo 3,SOUTH AFRICA 1,Siwelele x Durban City,Siwelele,Durban City,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Durban City (+2.5),1.034,57.1,2,2,2x2,1,GREEN
+2026-05-05,19:00,Jogo 4,COPA SUDAMERICANA,Dep. Riestra (Arg) x Gremio (Bra),Dep. Riestra (Arg),Gremio (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Riestra (Arg) (+2.5),1.044,60.3,0,3,0x3,0,RED
+2026-05-05,23:00,Jogo 5,COPA SUDAMERICANA,Dep. Cuenca (Ecu) x San Lorenzo (Arg),Dep. Cuenca (Ecu),San Lorenzo (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Cuenca (Ecu) (+2.5),1.041,53.4,0,0,0x0,1,GREEN
+2026-05-06,12:00,Jogo 1,WOM FRANCE 1,Lyon W x Montpellier W,Lyon W,Montpellier W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.9,3,1,3x1,1,GREEN
+2026-05-06,14:30,Jogo 2,SOUTH AFRICA 1,Richards Bay x Polokwane,Richards Bay,Polokwane,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Polokwane (+2.5),1.034,54.4,0,0,0x0,1,GREEN
+2026-05-06,16:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,Bayern Munich x PSG,Bayern Munich,PSG,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.9,1,1,1x1,1,GREEN
+2026-05-06,19:30,Jogo 4,BRAZIL 4,Moto Club x Sampaio Correa,Moto Club,Sampaio Correa,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Moto Club (+2.5),1.036,57.1,1,0,1x0,1,GREEN
+2026-05-06,21:30,Jogo 5,COPA LIBERTADORES,Santa Fe (Col) x Corinthians (Bra),Santa Fe (Col),Corinthians (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Santa Fe (Col) (+2.5),1.03,56.2,1,1,1x1,1,GREEN
+2026-05-07,11:00,Jogo 1,EGYPT 1,El Gaish x Ghazl El Mahallah,El Gaish,Ghazl El Mahallah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.033,61.5,1,0,1x0,1,GREEN
+2026-05-07,13:00,Jogo 2,ESTONIA 2,Elva x FC Tallinn,Elva,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,2,0,2x0,1,GREEN
+2026-05-07,15:00,Jogo 3,SAUDI ARABIA 1,Al Shabab x Al Nassr,Al Shabab,Al Nassr,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,2,4,2x4,1,GREEN
+2026-05-07,19:00,Jogo 4,COPA LIBERTADORES,Platense (Arg) x Penarol (Uru),Platense (Arg),Penarol (Uru),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Penarol (Uru) (+2.5),1.04,55.2,1,1,1x1,1,GREEN
+2026-05-07,21:00,Jogo 5,USA 2,Birmingham x Miami FC,Birmingham,Miami FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,0,0,0x0,0,RED
+2026-05-08,11:00,Jogo 1,EGYPT 1,Arab Contractors x El Gouna,Arab Contractors,El Gouna,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gouna (+2.5),1.032,58.3,1,0,1x0,1,GREEN
+2026-05-08,12:30,Jogo 2,FINLAND 2,Haka x Ekenas,Haka,Ekenas,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.0,4,3,4x3,1,GREEN
+2026-05-08,14:30,Jogo 3,SOUTH AFRICA 1,Durban City x Stellenbosch,Durban City,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Durban City (+2.5),1.038,57.1,0,0,0x0,1,GREEN
+2026-05-08,16:15,Jogo 4,ICELAND 1,Breidablik x Hafnarfjordur,Breidablik,Hafnarfjordur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,3,3,3x3,1,GREEN
+2026-05-08,19:00,Jogo 5,WOM BRAZIL 1,Cruzeiro W x America Mineiro W,Cruzeiro W,America Mineiro W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.4,4,0,4x0,1,GREEN
+2026-05-09,08:30,Jogo 1,ESTONIA 1,Levadia x Harju JK Laagri,Levadia,Harju JK Laagri,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,3,0,3x0,1,GREEN
+2026-05-09,11:15,Jogo 2,SPAIN 3,Hercules x UD Ibiza,Hercules,UD Ibiza,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,UD Ibiza (+2.5),1.044,59.4,2,1,2x1,1,GREEN
+2026-05-09,14:00,Jogo 3,TURKEY 1,Galatasaray x Antalyaspor,Galatasaray,Antalyaspor,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,4,2,4x2,1,GREEN
+2026-05-09,15:30,Jogo 4,ARGENTINA 2,San Miguel x CA Estudiantes,San Miguel,CA Estudiantes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Estudiantes (+2.5),1.037,58.0,1,1,1x1,1,GREEN
+2026-05-09,18:00,Jogo 5,BRAZIL 2,Athletic Club x Cuiaba,Athletic Club,Cuiaba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cuiaba (+2.5),1.04,57.2,0,0,0x0,1,GREEN
+2026-05-10,09:30,Jogo 1,UKRAINE 1,SC Poltava x Shakhtar Donetsk,SC Poltava,Shakhtar Donetsk,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,0,4,0x4,1,GREEN
+2026-05-10,11:30,Jogo 2,SWITZERLAND 1,Young Boys x Basel,Young Boys,Basel,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,3,0,3x0,1,GREEN
+2026-05-10,14:00,Jogo 3,WOM SPAIN 1,Costa Adeje Tenerife W x Barcelona W,Costa Adeje Tenerife W,Barcelona W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.5,1,3,1x3,1,GREEN
+2026-05-10,15:30,Jogo 4,ARGENTINA 2,Chacarita Juniors x Colegiales,Chacarita Juniors,Colegiales,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Colegiales (+2.5),1.036,58.5,2,0,2x0,1,GREEN
+2026-05-10,18:15,Jogo 5,BOLIVIA 1,The Strongest x Real Potosi,The Strongest,Real Potosi,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,0,0,0x0,0,RED
+2026-05-11,13:15,Jogo 1,ISRAEL 2,MS Kafr Qasim x Nof Hagalil,MS Kafr Qasim,Nof Hagalil,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nof Hagalil (+2.5),1.02,50.8,1,1,1x1,1,GREEN
+2026-05-11,15:00,Jogo 2,ROMANIA 1,FCSB x Unirea Slobozia,FCSB,Unirea Slobozia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.0,0,0,0x0,0,RED
+2026-05-11,17:00,Jogo 3,PARAGUAY 2,Atl. Tembetary x Deportivo Santani,Atl. Tembetary,Deportivo Santani,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Santani (+2.5),1.03,46.1,1,1,1x1,1,GREEN
+2026-05-11,20:00,Jogo 4,BRAZIL 3,Inter de Limeira x Santa Cruz,Inter de Limeira,Santa Cruz,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Santa Cruz (+2.5),1.05,50.2,1,2,1x2,1,GREEN
+2026-05-11,22:30,Jogo 5,PERU 1,Sport Boys x U. de Deportes,Sport Boys,U. de Deportes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sport Boys (+2.5),1.04,45.6,0,0,0x0,1,GREEN
+2026-05-12,07:30,Jogo 1,SOUTH KOREA 1,Incheon x Pohang,Incheon,Pohang,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Incheon (+2.5),1.038,57.1,0,1,0x1,1,GREEN
+2026-05-12,14:00,Jogo 2,ISRAEL 1,Hapoel Tel Aviv x Hapoel Petah Tikva,Hapoel Tel Aviv,Hapoel Petah Tikva,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.5,1,0,1x0,1,GREEN
+2026-05-12,15:30,Jogo 3,SWITZERLAND 1,Luzern x Zurich,Luzern,Zurich,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.9,1,0,1x0,1,GREEN
+2026-05-12,19:30,Jogo 4,BRAZIL 2,Londrina x Sao Bernardo,Londrina,Sao Bernardo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sao Bernardo (+2.5),1.02,56.9,1,3,1x3,1,GREEN
+2026-05-12,21:10,Jogo 5,ARGENTINA 2,San Martin T. x Gimnasia Jujuy,San Martin T.,Gimnasia Jujuy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia Jujuy (+2.5),1.02,59.7,2,0,2x0,1,GREEN
+2026-05-13,09:30,Jogo 1,UKRAINE 1,LNZ Cherkasy x SC Poltava,LNZ Cherkasy,SC Poltava,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.1,2,0,2x0,1,GREEN
+2026-05-13,11:00,Jogo 2,EGYPT 1,ZED x Ghazl El Mahallah,ZED,Ghazl El Mahallah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ZED (+2.5),1.034,57.4,3,2,3x2,1,GREEN
+2026-05-13,14:00,Jogo 3,EGYPT 1,Al Ittihad x El Gaish,Al Ittihad,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gaish (+2.5),1.035,58.8,1,0,1x0,1,GREEN
+2026-05-13,16:30,Jogo 4,SPAIN 1,Getafe x Mallorca,Getafe,Mallorca,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Mallorca (+2.5),1.03,54.4,3,1,3x1,1,GREEN
+2026-05-13,21:00,Jogo 5,BOLIVIA 1,Bolivar x Nacional Potosi,Bolivar,Nacional Potosi,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,1,1,1x1,1,GREEN
+2026-05-14,10:30,Jogo 1,EGYPT 2,Asyut Petroleum x Baladiyat El Mahalla,Asyut Petroleum,Baladiyat El Mahalla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Baladiyat El Mahalla (+2.5),1.02,57.1,1,0,1x0,1,GREEN
+2026-05-14,13:00,Jogo 2,ESTONIA 2,FC Tallinn x Tallinna Kalev,FC Tallinn,Tallinna Kalev,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,1,1,1x1,1,GREEN
+2026-05-14,15:00,Jogo 3,SAUDI ARABIA 2,Al Diriyah x Al Bukiryah,Al Diriyah,Al Bukiryah,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.2,3,2,3x2,1,GREEN
+2026-05-14,16:30,Jogo 4,SPAIN 1,Real Madrid x Oviedo,Real Madrid,Oviedo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.8,2,0,2x0,1,GREEN
+2026-05-14,19:00,Jogo 5,COLOMBIA 2,Tigres x Envigado,Tigres,Envigado,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tigres (+2.5),1.03,53.6,1,2,1x2,1,GREEN
+2026-05-15,09:00,Jogo 1,CHINA 1,Beijing Guoan x Qingdao Hainiu,Beijing Guoan,Qingdao Hainiu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.5,4,2,4x2,1,GREEN
+2026-05-15,12:00,Jogo 2,BULGARIA 2,Dunav Ruse x Yantra Gabrovo,Dunav Ruse,Yantra Gabrovo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dunav Ruse (+2.5),1.038,48.9,0,1,0x1,1,GREEN
+2026-05-15,15:00,Jogo 3,ITALY 2,Bari x Sudtirol,Bari,Sudtirol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bari (+2.5),1.02,50.3,0,0,0x0,1,GREEN
+2026-05-15,17:00,Jogo 4,PARAGUAY 1,Rubio Nu x Nacional Asuncion,Rubio Nu,Nacional Asuncion,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Rubio Nu (+2.5),1.03,49.8,1,1,1x1,1,GREEN
+2026-05-15,21:00,Jogo 5,WOM USA 1,Kansas City Current W x Houston Dash W,Kansas City Current W,Houston Dash W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,93.3,3,0,3x0,1,GREEN
+2026-05-16,07:00,Jogo 1,UKRAINE 1,SC Poltava x Dyn. Kyiv,SC Poltava,Dyn. Kyiv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,0,2,0x2,1,GREEN
+2026-05-16,10:30,Jogo 2,GERMANY 1,Bayern Munich x FC Koln,Bayern Munich,FC Koln,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,5,1,5x1,1,GREEN
+2026-05-16,13:00,Jogo 3,WOM FRANCE 1,Lyon W x Nantes W,Lyon W,Nantes W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.7,8,0,8x0,1,GREEN
+2026-05-16,16:00,Jogo 4,SPAIN 3,Torremolinos x Murcia,Torremolinos,Murcia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Torremolinos (+2.5),1.02,59.8,1,3,1x3,1,GREEN
+2026-05-16,19:30,Jogo 5,BRAZIL 3,Floresta EC x Amazonas,Floresta EC,Amazonas,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Amazonas (+2.5),1.02,59.0,3,2,3x2,1,GREEN
+2026-05-17,09:00,Jogo 1,WOM GERMANY 1,Wolfsburg W x 1.FC Nurnberg W,Wolfsburg W,1.FC Nurnberg W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.0,3,1,3x1,1,GREEN
+2026-05-17,10:30,Jogo 2,GERMANY 2,Elversberg x Preussen Munster,Elversberg,Preussen Munster,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,3,0,3x0,1,GREEN
+2026-05-17,12:00,Jogo 3,SERBIA 2,Tekstilac Odzaci x Usce,Tekstilac Odzaci,Usce,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.0,4,1,4x1,1,GREEN
+2026-05-17,15:00,Jogo 4,ARGENTINA 3,Circulo Deportivo x Kimberley,Circulo Deportivo,Kimberley,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Kimberley (+2.5),1.02,56.4,0,1,0x1,1,GREEN
+2026-05-17,17:00,Jogo 5,ARGENTINA 2,Quilmes x Tristan Suarez,Quilmes,Tristan Suarez,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tristan Suarez (+2.5),1.039,58.8,0,1,0x1,1,GREEN
+2026-05-18,11:00,Jogo 1,EGYPT 1,Kahrabaa Ismailia x Haras El Hodood,Kahrabaa Ismailia,Haras El Hodood,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Haras El Hodood (+2.5),1.02,47.9,0,2,0x2,1,GREEN
+2026-05-18,12:30,Jogo 2,FINLAND 2,Haka x Klubi 04,Haka,Klubi 04,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,111.9,1,1,1x1,1,GREEN
+2026-05-18,14:00,Jogo 3,EGYPT 1,Ghazl El Mahallah x Al Ittihad,Ghazl El Mahallah,Al Ittihad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.036,60.1,1,0,1x0,1,GREEN
+2026-05-18,16:00,Jogo 4,ENGLAND 1,Arsenal x Burnley,Arsenal,Burnley,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.3,1,0,1x0,1,GREEN
+2026-05-18,20:00,Jogo 5,ARGENTINA 2,All Boys x Deportivo Moron,All Boys,Deportivo Moron,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Moron (+2.5),1.02,61.3,1,0,1x0,1,GREEN
+2026-05-19,10:00,Jogo 1,PARAGUAY 2,Dep. Capiata x Fernando de la Mora,Dep. Capiata,Fernando de la Mora,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fernando de la Mora (+2.5),1.038,52.3,2,1,2x1,1,GREEN
+2026-05-19,13:00,Jogo 2,ISRAEL 2,Maccabi Jaffa x Hapoel Afula,Maccabi Jaffa,Hapoel Afula,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,4,1,4x1,1,GREEN
+2026-05-19,14:30,Jogo 3,ISRAEL 1,Maccabi Haifa x Hapoel Tel Aviv,Maccabi Haifa,Hapoel Tel Aviv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,4,1,4x1,1,GREEN
+2026-05-19,20:00,Jogo 4,ECUADOR CUP,LDU Portoviejo x Libertad,LDU Portoviejo,Libertad,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Libertad (+2.5),1.037,55.4,1,1,1x1,1,GREEN
+2026-05-19,23:00,Jogo 5,COPA SUDAMERICANA,America De Cali (Col) x Tigre (Arg),America De Cali (Col),Tigre (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tigre (Arg) (+2.5),1.04,53.4,1,1,1x1,1,GREEN
+2026-05-20,08:00,Jogo 1,CHINA 1,Liaoning Tieren x Qingdao Hainiu,Liaoning Tieren,Qingdao Hainiu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.4,2,1,2x1,1,GREEN
+2026-05-20,10:00,Jogo 2,PARAGUAY 2,Atl. Tembetary x 12 de Junio,Atl. Tembetary,12 de Junio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,12 de Junio (+2.5),1.02,50.2,0,1,0x1,1,GREEN
+2026-05-20,13:00,Jogo 3,NORWAY 1,Start x Bodo/Glimt,Start,Bodo/Glimt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,1,4,1x4,1,GREEN
+2026-05-20,15:00,Jogo 4,ITALY 2,Palermo x Catanzaro,Palermo,Catanzaro,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.6,2,0,2x0,1,GREEN
+2026-05-20,21:30,Jogo 5,COPA SUDAMERICANA,River Plate (Arg) x Bragantino (Bra),River Plate (Arg),Bragantino (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Bragantino (Bra) (+2.5),1.03,50.0,1,1,1x1,1,GREEN
+2026-05-21,12:00,Jogo 1,GREECE 1,Atromitos x Panserraikos,Atromitos,Panserraikos,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.1,6,0,6x0,1,GREEN
+2026-05-21,14:00,Jogo 2,EGYPT 1,Wadi Degla x ZED,Wadi Degla,ZED,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ZED (+2.5),1.03,55.0,2,2,2x2,1,GREEN
+2026-05-21,16:00,Jogo 3,CHILE 2,Recoleta x Cobreloa,Recoleta,Cobreloa,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cobreloa (+2.5),1.036,46.1,2,2,2x2,1,GREEN
+2026-05-21,18:00,Jogo 4,COLOMBIA 2,U. Magdalena x Bogota,U. Magdalena,Bogota,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.6,0,0,0x0,0,RED
+2026-05-21,21:30,Jogo 5,COPA LIBERTADORES,Penarol (Uru) x Corinthians (Bra),Penarol (Uru),Corinthians (Bra),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Corinthians (Bra) (+2.5),1.03,53.4,1,1,1x1,1,GREEN
+2026-05-22,11:00,Jogo 1,EGYPT 1,El Gouna x El Gaish,El Gouna,El Gaish,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gouna (+2.5),1.034,57.9,2,1,2x1,1,GREEN
+2026-05-22,12:30,Jogo 2,FINLAND 2,SJK Akatemia x Haka,SJK Akatemia,Haka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.9,0,1,0x1,1,GREEN
+2026-05-22,14:00,Jogo 3,EGYPT 1,Pharco x National Bank Egypt,Pharco,National Bank Egypt,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Pharco (+2.5),1.034,53.6,0,1,0x1,1,GREEN
+2026-05-22,16:15,Jogo 4,ICELAND 1,Vikingur Reykjavik x Hafnarfjordur,Vikingur Reykjavik,Hafnarfjordur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,5,0,5x0,1,GREEN
+2026-05-22,19:30,Jogo 5,URUGUAY 1,Liverpool M. x Racing Montevideo,Liverpool M.,Racing Montevideo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Liverpool M. (+2.5),1.02,52.4,0,0,0x0,1,GREEN
+2026-05-23,10:00,Jogo 1,SOUTH AFRICA 1,Orbit College x Orlando Pirates,Orbit College,Orlando Pirates,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.0,0,2,0x2,1,GREEN
+2026-05-23,12:00,Jogo 2,ISRAEL 1,Hapoel Petah Tikva x Maccabi Tel Aviv,Hapoel Petah Tikva,Maccabi Tel Aviv,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.8,2,2,2x2,1,GREEN
+2026-05-23,15:00,Jogo 3,ARGENTINA 2,San Telmo x Ciudad Bolivar,San Telmo,Ciudad Bolivar,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ciudad Bolivar (+2.5),1.038,59.8,0,1,0x1,1,GREEN
+2026-05-23,20:00,Jogo 4,BRAZIL 4,Humaita x Guapore,Humaita,Guapore,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,0,4,0x4,1,GREEN
+2026-05-23,22:30,Jogo 5,USA 1,Portland Timbers x San Jose Earthquakes,Portland Timbers,San Jose Earthquakes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.3,1,3,1x3,1,GREEN
+2026-05-24,09:00,Jogo 1,ESTONIA 2,Maardu x Tartu Welco,Maardu,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,0,1,0x1,1,GREEN
+2026-05-24,11:00,Jogo 2,NORWAY 1,Bodo/Glimt x Brann,Bodo/Glimt,Brann,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,3,1,3x1,1,GREEN
+2026-05-24,13:30,Jogo 3,BELGIUM 1,Club Brugge KV x Gent,Club Brugge KV,Gent,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,5,0,5x0,1,GREEN
+2026-05-24,15:30,Jogo 4,ARGENTINA 1,River Plate x Belgrano,River Plate,Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Belgrano (+2.5),1.02,58.8,2,3,2x3,1,GREEN
+2026-05-24,18:00,Jogo 5,BRAZIL 4,EC Sao Jose x Marcilio Dias,EC Sao Jose,Marcilio Dias,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Marcilio Dias (+2.5),1.034,59.0,1,1,1x1,1,GREEN
+2026-05-25,09:30,Jogo 1,NORWAY 1,Start x Valerenga,Start,Valerenga,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.1,2,0,2x0,1,GREEN
+2026-05-25,13:00,Jogo 2,ISRAEL 2,Hapoel Afula x MS Kafr Qasim,Hapoel Afula,MS Kafr Qasim,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Hapoel Afula (+2.5),1.047,61.0,2,0,2x0,1,GREEN
+2026-05-25,16:00,Jogo 3,ARGENTINA 3,Defensores de Vilelas x San Martin Formosa,Defensores de Vilelas,San Martin Formosa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.8,2,3,2x3,1,GREEN
+2026-05-25,19:00,Jogo 4,BRAZIL 2,Botafogo SP x Athletic Club,Botafogo SP,Athletic Club,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Athletic Club (+2.5),1.03,50.3,1,2,1x2,1,GREEN
+2026-05-25,21:00,Jogo 5,WOM BRAZIL 1,Corinthians W x Mixto W,Corinthians W,Mixto W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.9,4,1,4x1,1,GREEN
+2026-05-26,06:00,Jogo 1,UKRAINE 2,FC Chernihiv x Metalist Kharkiv,FC Chernihiv,Metalist Kharkiv,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Metalist Kharkiv (+2.5),1.02,47.9,1,2,1x2,1,GREEN
+2026-05-26,14:00,Jogo 2,WOM SPAIN 1,Badalona W x Real Madrid W,Badalona W,Real Madrid W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.8,0,4,0x4,1,GREEN
+2026-05-26,16:00,Jogo 3,BRAZIL 4,Atletico-CE x Tirol,Atletico-CE,Tirol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atletico-CE (+2.5),1.039,51.2,0,3,0x3,0,RED
+2026-05-26,19:00,Jogo 4,COPA SUDAMERICANA,Palestino (Chi) x Dep. Riestra (Arg),Palestino (Chi),Dep. Riestra (Arg),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Palestino (Chi) (+2.5),1.03,49.0,1,1,1x1,1,GREEN
+2026-05-26,21:30,Jogo 5,COPA LIBERTADORES,Flamengo RJ (Bra) x Cusco (Per),Flamengo RJ (Bra),Cusco (Per),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.2,3,0,3x0,1,GREEN
+2026-05-27,14:00,Jogo 1,WOM SPAIN 1,Barcelona W x Real Sociedad W,Barcelona W,Real Sociedad W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,1,2x1,1,GREEN
+2026-05-27,16:00,Jogo 2,EUROPA CONFERENCE LEAGUE,Crystal Palace x Rayo Vallecano,Crystal Palace,Rayo Vallecano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Rayo Vallecano (+2.5),1.05,46.9,1,0,1x0,1,GREEN
+2026-05-27,17:30,Jogo 3,ECUADOR CUP,Vinotinto x Orense,Vinotinto,Orense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Vinotinto (+2.5),1.02,51.0,2,1,2x1,1,GREEN
+2026-05-27,19:00,Jogo 4,COPA SUDAMERICANA,Racing Club (Arg) x Independiente (Bol),Racing Club (Arg),Independiente (Bol),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.9,2,0,2x0,1,GREEN
+2026-05-27,21:30,Jogo 5,COPA SUDAMERICANA,River Plate (Arg) x Blooming (Bol),River Plate (Arg),Blooming (Bol),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,3,0,3x0,1,GREEN
+2026-05-28,11:00,Jogo 1,EGYPT 1,El Gaish x Wadi Degla,El Gaish,Wadi Degla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Wadi Degla (+2.5),1.03,56.2,0,2,0x2,1,GREEN
+2026-05-28,13:00,Jogo 2,ESTONIA 2,Tartu Welco x Nomme Kalju U21,Tartu Welco,Nomme Kalju U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,4,2,4x2,1,GREEN
+2026-05-28,16:00,Jogo 3,PORTUGAL 1,Casa Pia x Torreense,Casa Pia,Torreense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Torreense (+2.5),1.037,57.2,2,0,2x0,1,GREEN
+2026-05-28,20:00,Jogo 4,ECUADOR CUP,EL Nacional x U. Catolica,EL Nacional,U. Catolica,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.3,1,4,1x4,1,GREEN
+2026-05-28,21:30,Jogo 5,COPA LIBERTADORES,Cruzeiro (Bra) x Barcelona SC (Ecu),Cruzeiro (Bra),Barcelona SC (Ecu),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.2,4,0,4x0,1,GREEN
+2026-05-29,11:00,Jogo 1,EGYPT 1,Arab Contractors x Modern Sport,Arab Contractors,Modern Sport,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Modern Sport (+2.5),1.04,58.4,3,1,3x1,1,GREEN
+2026-05-29,12:30,Jogo 2,FINLAND 2,KTP x SJK Akatemia,KTP,SJK Akatemia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.9,1,0,1x0,1,GREEN
+2026-05-29,14:00,Jogo 3,EGYPT 1,Ghazl El Mahallah x Haras El Hodood,Ghazl El Mahallah,Haras El Hodood,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Haras El Hodood (+2.5),1.034,54.8,4,2,4x2,1,GREEN
+2026-05-29,16:15,Jogo 4,ICELAND 1,Fram x Breidablik,Fram,Breidablik,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.5,4,3,4x3,1,GREEN
+2026-05-29,21:00,Jogo 5,ARGENTINA 2,Racing Cordoba x Ferro,Racing Cordoba,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ferro (+2.5),1.042,55.4,0,0,0x0,1,GREEN
+2026-05-30,09:00,Jogo 1,FINLAND 1,HJK x Mariehamn,HJK,Mariehamn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.4,1,0,1x0,1,GREEN
+2026-05-30,11:00,Jogo 2,ESTONIA 1,Tammeka x Levadia,Tammeka,Levadia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.8,0,1,0x1,1,GREEN
+2026-05-30,15:30,Jogo 3,ARGENTINA 2,All Boys x Los Andes,All Boys,Los Andes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Los Andes (+2.5),1.035,60.8,0,0,0x0,1,GREEN
+2026-05-30,17:00,Jogo 4,BRAZIL 3,Floresta EC x Confianca,Floresta EC,Confianca,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Confianca (+2.5),1.03,59.0,1,0,1x0,1,GREEN
+2026-05-30,20:00,Jogo 5,BRAZIL 4,Galvez x Porto Velho,Galvez,Porto Velho,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.3,2,6,2x6,1,GREEN
+2026-05-31,07:00,Jogo 1,WOM SPAIN 1,Real Madrid W x Granada CF W,Real Madrid W,Granada CF W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.9,2,0,2x0,1,GREEN
+2026-05-31,08:35,Jogo 2,CHINA 1,Wuhan Three Towns x Yunnan Yukun,Wuhan Three Towns,Yunnan Yukun,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.5,1,1,1x1,1,GREEN
+2026-05-31,11:00,Jogo 3,WOM SPAIN 1,Madrid C. W x Barcelona W,Madrid C. W,Barcelona W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.8,0,4,0x4,1,GREEN
+2026-05-31,14:00,Jogo 4,ICELAND 1,KR Reykjavik x KA Akureyri,KR Reykjavik,KA Akureyri,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,5,3,5x3,1,GREEN
+2026-05-31,16:00,Jogo 5,ARGENTINA 2,CA Mitre x Deportivo Moron,CA Mitre,Deportivo Moron,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Moron (+2.5),1.039,58.5,1,3,1x3,1,GREEN
+2026-06-01,07:00,Jogo 1,UKRAINE 2,Ahrobiznes Volochysk x FC Chernihiv,Ahrobiznes Volochysk,FC Chernihiv,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,FC Chernihiv (+2.5),1.036,50.4,1,0,1x0,1,GREEN
+2026-06-01,13:00,Jogo 2,ESTONIA 2,Nomme Kalju U21 x FC Tallinn,Nomme Kalju U21,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.2,1,3,1x3,1,GREEN
+2026-06-01,16:00,Jogo 3,BRAZIL 4,Tirol x Ferroviario,Tirol,Ferroviario,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tirol (+2.5),1.032,50.8,0,0,0x0,1,GREEN
+2026-06-01,17:30,Jogo 4,PERU 2,Sport Huancayo 2 x Ayacucho,Sport Huancayo 2,Ayacucho,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ayacucho (+2.5),1.04,47.9,0,0,0x0,1,GREEN
+2026-06-01,19:00,Jogo 5,ECUADOR 1,Leones del Norte x Macara,Leones del Norte,Macara,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Leones del Norte (+2.5),1.02,53.1,1,1,1x1,1,GREEN
+2026-06-02,07:00,Jogo 1,UKRAINE 2,SK Metalurh x Bukovyna,SK Metalurh,Bukovyna,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.2,0,4,0x4,1,GREEN
+2026-06-02,21:30,Jogo 2,COLOMBIA 1,Junior x Atl. Nacional,Junior,Atl. Nacional,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Junior (+2.5),1.02,45.3,3,0,3x0,1,GREEN
+2026-06-03,10:00,Jogo 1,SOUTH AFRICA 1,Milford FC x Magesi,Milford FC,Magesi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Milford FC (+2.5),1.04,52.8,1,0,1x0,1,GREEN
+2026-06-03,17:00,Jogo 2,ECUADOR 2,Atletico FC x Nueve de Octubre,Atletico FC,Nueve de Octubre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nueve de Octubre (+2.5),1.039,51.0,0,0,0x0,1,GREEN
+2026-06-03,17:30,Jogo 3,ECUADOR CUP,Gualaceo x Mushuc Runa,Gualaceo,Mushuc Runa,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gualaceo (+2.5),1.05,44.6,1,0,1x0,1,GREEN
+2026-06-03,21:00,Jogo 4,USA 2,Birmingham x Louisville City,Birmingham,Louisville City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.8,1,1,1x1,1,GREEN
+2026-06-04,16:00,Jogo 1,PARAGUAY 2,Paraguari AC x Atl. Tembetary,Paraguari AC,Atl. Tembetary,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atl. Tembetary (+2.5),1.04,50.8,1,1,1x1,1,GREEN
+2026-06-04,18:30,Jogo 2,PARAGUAY 2,Deportivo Santani x Resistencia,Deportivo Santani,Resistencia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Resistencia (+2.5),1.036,50.8,3,0,3x0,0,RED
+2026-06-04,20:30,Jogo 3,ECUADOR CUP,Cuenca Juniors x Macara,Cuenca Juniors,Macara,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cuenca Juniors (+2.5),1.032,49.5,0,1,0x1,1,GREEN
+2026-06-04,21:00,Jogo 4,ECUADOR 2,San Antonio x Ind. Juniors,San Antonio,Ind. Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Antonio (+2.5),1.04,50.2,0,0,0x0,1,GREEN
+2026-06-05,07:00,Jogo 1,JAPAN 2,Kamatamare x Nagano,Kamatamare,Nagano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nagano (+2.5),1.038,50.0,0,0,0x0,1,GREEN
+2026-06-05,12:00,Jogo 2,UKRAINE 1,Kudrivka x Ahrobiznes Volochysk,Kudrivka,Ahrobiznes Volochysk,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,91.7,0,0,0x0,0,RED
+2026-06-05,16:15,Jogo 3,ICELAND 2,Kopavogur x Afturelding,Kopavogur,Afturelding,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.7,2,1,2x1,1,GREEN
+2026-06-05,20:00,Jogo 4,BRAZIL 2,Operario-PR x Juventude,Operario-PR,Juventude,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Juventude (+2.5),1.03,51.1,2,1,2x1,1,GREEN
+2026-06-05,21:30,Jogo 5,ARGENTINA 2,Gimnasia y Tiro x Midland,Gimnasia y Tiro,Midland,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Midland (+2.5),1.02,55.4,1,0,1x0,1,GREEN
+2026-06-06,02:00,Jogo 1,JAPAN 1,FC Tokyo x Cerezo Osaka,FC Tokyo,Cerezo Osaka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.4,1,3,1x3,1,GREEN
+2026-06-06,07:00,Jogo 2,JAPAN 1,Kawasaki Frontale x Sanfrecce Hiroshima,Kawasaki Frontale,Sanfrecce Hiroshima,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.0,0,1,0x1,1,GREEN
+2026-06-06,11:00,Jogo 3,ICELAND 2,Fylkir x Throttur,Fylkir,Throttur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.3,1,3,1x3,1,GREEN
+2026-06-06,15:30,Jogo 4,ARGENTINA 2,Acassuso x Central Norte,Acassuso,Central Norte,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Central Norte (+2.5),1.04,61.8,2,1,2x1,1,GREEN
+2026-06-06,19:00,Jogo 5,CHILE CUP,U. Catolica x Cobresal,U. Catolica,Cobresal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.2,5,1,5x1,1,GREEN
+2026-06-07,07:30,Jogo 1,SOUTH KOREA 2,Seoul E-Land x Cheongju,Seoul E-Land,Cheongju,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.8,1,2,1x2,1,GREEN
+2026-06-07,12:00,Jogo 2,NORWAY 2,Ranheim x Strommen,Ranheim,Strommen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,2,2,2x2,1,GREEN
+2026-06-07,13:30,Jogo 3,CHILE CUP,U. De Chile x A. Italiano,U. De Chile,A. Italiano,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.5,2,2,2x2,1,GREEN
+2026-06-07,15:30,Jogo 4,ARGENTINA 3,Gimnasia E.R. x Sportivo Belgrano,Gimnasia E.R.,Sportivo Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sportivo Belgrano (+2.5),1.042,63.8,1,0,1x0,1,GREEN
+2026-06-07,19:00,Jogo 5,CHILE CUP,Limache x Everton,Limache,Everton,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,94.3,0,1,0x1,1,GREEN
+2026-06-08,19:00,Jogo 1,COLOMBIA 1,Atl. Nacional x Junior,Atl. Nacional,Junior,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.1,1,0,1x0,1,GREEN
+2026-06-08,19:00,Jogo 2,URUGUAY 1,Liverpool M. x Cerro Largo,Liverpool M.,Cerro Largo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cerro Largo (+2.5),1.05,47.1,0,0,0x0,1,GREEN
+2026-06-08,20:00,Jogo 3,BRAZIL 2,Vila Nova FC x Botafogo SP,Vila Nova FC,Botafogo SP,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Botafogo SP (+2.5),1.03,52.8,1,0,1x0,1,GREEN
+2026-06-08,20:00,Jogo 4,BRAZIL 2,America MG x Atletico GO,America MG,Atletico GO,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atletico GO (+2.5),1.02,52.8,1,2,1x2,1,GREEN
+2026-06-08,20:30,Jogo 5,CHILE 2,U. Espanola x San Felipe,U. Espanola,San Felipe,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.1,2,2,2x2,1,GREEN
+2026-06-09,14:00,Jogo 1,SWEDEN 2,Oster x Varnamo,Oster,Varnamo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.6,3,0,3x0,1,GREEN
+2026-06-09,16:00,Jogo 2,SPAIN 2,Almeria x Castellon,Almeria,Castellon,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.2,3,2,3x2,1,GREEN
+2026-06-09,19:00,Jogo 3,BRAZIL 2,Ponte Preta x Cuiaba,Ponte Preta,Cuiaba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ponte Preta (+2.5),1.02,55.9,1,2,1x2,1,GREEN
+2026-06-09,19:00,Jogo 4,BRAZIL 2,Nautico x Fortaleza,Nautico,Fortaleza,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fortaleza (+2.5),1.02,52.1,0,1,0x1,1,GREEN
+2026-06-09,21:00,Jogo 5,ECUADOR 2,San Antonio x LDU Portoviejo,San Antonio,LDU Portoviejo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,LDU Portoviejo (+2.5),1.04,52.9,4,2,4x2,1,GREEN
+2026-06-10,10:00,Jogo 1,SOUTH AFRICA 1,Cape Town City x Magesi,Cape Town City,Magesi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Magesi (+2.5),1.032,51.3,1,1,1x1,1,GREEN
+2026-06-10,14:00,Jogo 2,SWEDEN 2,Varberg x Norrby,Varberg,Norrby,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.9,2,0,2x0,1,GREEN
+2026-06-10,17:30,Jogo 3,ECUADOR 2,Gualaceo x Cumbaya,Gualaceo,Cumbaya,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cumbaya (+2.5),1.032,54.4,1,0,1x0,1,GREEN
+2026-06-10,20:00,Jogo 4,BRAZIL 2,Goias x Novorizontino,Goias,Novorizontino,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Novorizontino (+2.5),1.03,51.8,0,4,0x4,1,GREEN
+2026-06-10,23:00,Jogo 5,USA 2,Monterey Bay x Sporting Jax,Monterey Bay,Sporting Jax,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.9,2,1,2x1,1,GREEN
+2026-06-11,13:00,Jogo 1,ESTONIA 2,Elva x Maardu,Elva,Maardu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.5,4,3,4x3,1,GREEN
+2026-06-11,23:00,Jogo 2,WORLD WORLD CUP,South Korea x Czech Republic,South Korea,Czech Republic,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Czech Republic (+2.5),1.03,44.3,2,1,2x1,1,GREEN
+2026-06-12,12:30,Jogo 1,FINLAND 2,KTP x Ekenas,KTP,Ekenas,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.0,5,1,5x1,1,GREEN
+2026-06-12,15:45,Jogo 2,IRELAND 2,Kerry x Athlone,Kerry,Athlone,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Athlone (+2.5),1.03,49.2,1,0,1x0,1,GREEN
+2026-06-12,16:15,Jogo 3,ICELAND 2,Throttur x Kopavogur,Throttur,Kopavogur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.1,2,0,2x0,1,GREEN
+2026-06-12,19:00,Jogo 4,BRAZIL 2,Atletico GO x CRB,Atletico GO,CRB,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CRB (+2.5),1.05,43.3,3,3,3x3,1,GREEN
+2026-06-12,22:00,Jogo 5,WORLD WORLD CUP,USA x Paraguay,USA,Paraguay,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Paraguay (+2.5),1.06,44.9,4,1,4x1,0,RED
+2026-06-13,11:00,Jogo 1,ICELAND 2,Volsungur x Njardvik,Volsungur,Njardvik,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.4,2,1,2x1,1,GREEN
+2026-06-13,14:00,Jogo 2,ESTONIA 2,Tartu Welco x FC Tallinn,Tartu Welco,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,4,0,4x0,1,GREEN
+2026-06-13,16:00,Jogo 3,ARGENTINA 2,Ciudad Bolivar x Deportivo Moron,Ciudad Bolivar,Deportivo Moron,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Moron (+2.5),1.041,59.8,1,2,1x2,1,GREEN
+2026-06-13,18:30,Jogo 4,CHILE 1,Colo Colo x Cobresal,Colo Colo,Cobresal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.9,3,0,3x0,1,GREEN
+2026-06-13,22:00,Jogo 5,USA 2,El Paso x Phoenix Rising,El Paso,Phoenix Rising,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.9,1,1,1x1,1,GREEN
+2026-06-14,06:30,Jogo 1,ESTONIA 2,Flora U21 x Tallinna Kalev,Flora U21,Tallinna Kalev,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.7,3,1,3x1,1,GREEN
+2026-06-14,11:00,Jogo 2,NORWAY 2,Stromsgodset x Raufoss,Stromsgodset,Raufoss,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,6,1,6x1,1,GREEN
+2026-06-14,14:30,Jogo 3,ARGENTINA 3,Kimberley x Alvarado,Kimberley,Alvarado,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Alvarado (+2.5),1.038,61.3,2,2,2x2,1,GREEN
+2026-06-14,16:00,Jogo 4,ARGENTINA 2,CA Mitre x Los Andes,CA Mitre,Los Andes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Los Andes (+2.5),1.039,58.5,0,3,0x3,1,GREEN
+2026-06-14,18:00,Jogo 5,BRAZIL 4,Araguaina x Galvez,Araguaina,Galvez,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.7,9,0,9x0,1,GREEN
+2026-06-15,13:00,Jogo 1,WORLD WORLD CUP,Spain x Cape Verde,Spain,Cape Verde,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,0,0,0x0,0,RED
+2026-06-15,14:05,Jogo 2,SWEDEN 2,Norrkoping x Varberg,Norrkoping,Varberg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.0,2,0,2x0,1,GREEN
+2026-06-15,15:00,Jogo 3,ICELAND 1,KA Akureyri x Fram,KA Akureyri,Fram,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.8,3,4,3x4,1,GREEN
+2026-06-15,20:30,Jogo 4,BRAZIL 3,Ferroviaria x Barra FC,Ferroviaria,Barra FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Barra FC (+2.5),1.05,54.6,1,0,1x0,1,GREEN
+2026-06-15,21:00,Jogo 5,BRAZIL 2,Londrina x Avai,Londrina,Avai,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Avai (+2.5),1.03,47.9,3,2,3x2,1,GREEN
+2026-06-16,14:00,Jogo 1,SWEDEN 2,Varnamo x Helsingborg,Varnamo,Helsingborg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.7,0,1,0x1,1,GREEN
+2026-06-16,14:00,Jogo 2,SWEDEN 2,Landskrona x Nordic United,Landskrona,Nordic United,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.0,2,0,2x0,1,GREEN
+2026-06-16,16:00,Jogo 3,WORLD WORLD CUP,France x Senegal,France,Senegal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.5,3,1,3x1,1,GREEN
+2026-06-16,16:15,Jogo 4,ICELAND 1,Akranes x Valur,Akranes,Valur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.1,1,0,1x0,1,GREEN
+2026-06-16,19:00,Jogo 5,WORLD WORLD CUP,Iraq x Norway,Iraq,Norway,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.0,1,4,1x4,1,GREEN
+2026-06-17,01:00,Jogo 1,WORLD WORLD CUP,Austria x Jordan,Austria,Jordan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,93.2,3,1,3x1,1,GREEN
+2026-06-17,12:00,Jogo 2,FINLAND 1,HJK x Inter Turku,HJK,Inter Turku,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Inter Turku (+2.5),1.03,34.9,3,3,3x3,1,GREEN
+2026-06-17,14:00,Jogo 3,WORLD WORLD CUP,Portugal x D.R. Congo,Portugal,D.R. Congo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,95.1,1,1,1x1,1,GREEN
+2026-06-17,20:00,Jogo 4,WORLD WORLD CUP,Ghana x Panama,Ghana,Panama,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Panama (+2.5),1.04,44.6,1,0,1x0,1,GREEN
+2026-06-17,23:00,Jogo 5,WORLD WORLD CUP,Uzbekistan x Colombia,Uzbekistan,Colombia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.9,1,3,1x3,1,GREEN
+2026-06-18,13:00,Jogo 1,ESTONIA 2,FC Tallinn x Flora U21,FC Tallinn,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,1,3,1x3,1,GREEN
+2026-06-18,16:00,Jogo 2,WORLD WORLD CUP,Switzerland x Bosnia & Herzegovina,Switzerland,Bosnia & Herzegovina,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.9,4,1,4x1,1,GREEN
+2026-06-18,19:00,Jogo 3,WORLD WORLD CUP,Canada x Qatar,Canada,Qatar,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,98.0,6,0,6x0,1,GREEN
+2026-06-18,21:00,Jogo 4,CHILE 1,U. De Chile x O'Higgins,U. De Chile,O'Higgins,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,O'Higgins (+2.5),1.06,38.9,2,0,2x0,1,GREEN
+2026-06-18,22:00,Jogo 5,WORLD WORLD CUP,Mexico x South Korea,Mexico,South Korea,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,South Korea (+2.5),1.06,42.8,1,0,1x0,1,GREEN
+2026-06-19,14:00,Jogo 1,NORWAY 2,Ranheim x Lyn,Ranheim,Lyn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,3,2,3x2,1,GREEN
+2026-06-19,15:45,Jogo 2,IRELAND 2,Athlone x Wexford,Athlone,Wexford,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Wexford (+2.5),1.038,39.9,2,2,2x2,1,GREEN
+2026-06-19,18:00,Jogo 3,URUGUAY 2,Miramar x Huracan FC,Miramar,Huracan FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huracan FC (+2.5),1.02,43.0,0,1,0x1,1,GREEN
+2026-06-19,20:00,Jogo 4,CHILE CUP,A. Italiano x CD Santa Cruz,A. Italiano,CD Santa Cruz,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,94.6,0,1,0x1,1,GREEN
+2026-06-19,21:30,Jogo 5,WORLD WORLD CUP,Brazil x Haiti,Brazil,Haiti,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,124.8,3,0,3x0,1,GREEN
+2026-06-20,08:30,Jogo 1,ESTONIA 1,Harju JK Laagri x Nomme Utd,Harju JK Laagri,Nomme Utd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.4,1,3,1x3,1,GREEN
+2026-06-20,15:00,Jogo 2,BRAZIL 4,Sao Joseense x Cianorte,Sao Joseense,Cianorte,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sao Joseense (+2.5),1.043,61.8,0,1,0x1,1,GREEN
+2026-06-20,17:00,Jogo 3,WORLD WORLD CUP,Germany x Ivory Coast,Germany,Ivory Coast,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.6,2,1,2x1,1,GREEN
+2026-06-20,18:30,Jogo 4,CHILE CUP,Recoleta x Colo Colo,Recoleta,Colo Colo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.1,0,3,0x3,1,GREEN
+2026-06-20,20:00,Jogo 5,USA 2,Sporting Jax x Charleston,Sporting Jax,Charleston,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.0,2,5,2x5,1,GREEN
+2026-06-21,06:30,Jogo 1,ESTONIA 2,Levadia U21 x FC Tallinn,Levadia U21,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.7,4,0,4x0,1,GREEN
+2026-06-21,11:00,Jogo 2,NORWAY 2,Raufoss x Sogndal,Raufoss,Sogndal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,3,1,3x1,1,GREEN
+2026-06-21,13:00,Jogo 3,WORLD WORLD CUP,Spain x Saudi Arabia,Spain,Saudi Arabia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,4,0,4x0,1,GREEN
+2026-06-21,16:00,Jogo 4,BRAZIL 4,Cascavel x Marcilio Dias,Cascavel,Marcilio Dias,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Marcilio Dias (+2.5),1.037,59.8,2,2,2x2,1,GREEN
+2026-06-21,18:30,Jogo 5,CHILE CUP,U. De Chile x S. Wanderers,U. De Chile,S. Wanderers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,4,1,4x1,1,GREEN
+2026-06-22,13:00,Jogo 1,ESTONIA 2,Elva x Flora U21,Elva,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.6,0,3,0x3,1,GREEN
+2026-06-22,15:45,Jogo 2,IRELAND 1,Shelbourne x Bohemians,Shelbourne,Bohemians,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Shelbourne (+2.5),1.02,41.7,0,3,0x3,0,RED
+2026-06-22,16:15,Jogo 3,ICELAND 1,KR Reykjavik x Akranes,KR Reykjavik,Akranes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.3,5,3,5x3,1,GREEN
+2026-06-22,18:00,Jogo 4,WORLD WORLD CUP,France x Iraq,France,Iraq,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,3,0,3x0,1,GREEN
+2026-06-22,21:00,Jogo 5,WORLD WORLD CUP,Norway x Senegal,Norway,Senegal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,93.0,3,2,3x2,1,GREEN
+2026-06-23,14:00,Jogo 1,FINLAND 1,Mariehamn x HJK,Mariehamn,HJK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,0,4,0x4,1,GREEN
+2026-06-23,16:00,Jogo 2,CHILE CUP,Coquimbo x Limache,Coquimbo,Limache,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.2,1,1,1x1,1,GREEN
+2026-06-23,18:30,Jogo 3,ARGENTINA 2,Nueva Chicago x Atl. Rafaela,Nueva Chicago,Atl. Rafaela,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atl. Rafaela (+2.5),1.03,57.7,0,0,0x0,1,GREEN
+2026-06-23,20:00,Jogo 4,BRAZIL 2,America MG x Criciuma,America MG,Criciuma,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,America MG (+2.5),1.02,49.0,0,1,0x1,1,GREEN
+2026-06-23,21:30,Jogo 5,CHILE CUP,Palestino x A. Italiano,Palestino,A. Italiano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,A. Italiano (+2.5),1.06,34.1,1,2,1x2,1,GREEN
+2026-06-24,16:00,Jogo 1,WORLD WORLD CUP,Switzerland x Canada,Switzerland,Canada,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Canada (+2.5),1.03,45.3,2,1,2x1,1,GREEN
+2026-06-24,17:00,Jogo 2,CHILE CUP,La Serena x Cobresal,La Serena,Cobresal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.1,0,0,0x0,0,RED
+2026-06-24,19:00,Jogo 3,WORLD WORLD CUP,Morocco x Haiti,Morocco,Haiti,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.8,4,2,4x2,1,GREEN
+2026-06-24,20:00,Jogo 4,USA 2,Miami FC x Orange County SC,Miami FC,Orange County SC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Orange County SC (+2.5),1.02,42.8,2,4,2x4,1,GREEN
+2026-06-24,20:30,Jogo 5,CHILE CUP,D. Concepcion x Huachipato,D. Concepcion,Huachipato,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Huachipato (+2.5),1.036,38.5,3,2,3x2,1,GREEN
+2026-06-25,16:15,Jogo 1,ICELAND 1,Breidablik x Vikingur Reykjavik,Breidablik,Vikingur Reykjavik,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.8,1,4,1x4,1,GREEN
+2026-06-25,17:00,Jogo 2,WORLD WORLD CUP,Ecuador x Germany,Ecuador,Germany,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,2,1,2x1,1,GREEN
+2026-06-25,20:00,Jogo 3,WORLD WORLD CUP,Tunisia x Netherlands,Tunisia,Netherlands,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.3,1,3,1x3,1,GREEN
+2026-06-25,20:30,Jogo 4,CHILE CUP,Nublense x U. De Concepcion,Nublense,U. De Concepcion,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,U. De Concepcion (+2.5),1.034,42.3,4,2,4x2,1,GREEN
+2026-06-25,23:00,Jogo 5,WORLD WORLD CUP,Paraguay x Australia,Paraguay,Australia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Australia (+2.5),1.02,62.3,0,0,0x0,1,GREEN
+2026-06-26,14:00,Jogo 1,ESTONIA 1,Parnu JK Vaprus x Kuressaare,Parnu JK Vaprus,Kuressaare,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.3,1,0,1x0,1,GREEN
+2026-06-26,15:45,Jogo 2,IRELAND 2,Kerry x Longford,Kerry,Longford,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Longford (+2.5),1.08,46.1,2,1,2x1,1,GREEN
+2026-06-26,16:00,Jogo 3,IRELAND 1,Bohemians x St. Patricks,Bohemians,St. Patricks,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,St. Patricks (+2.5),1.02,43.5,2,0,2x0,1,GREEN
+2026-06-26,16:15,Jogo 4,ICELAND 2,Grindavik x Aegir,Grindavik,Aegir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.6,0,0,0x0,0,RED
+2026-06-26,21:00,Jogo 5,WORLD WORLD CUP,Cape Verde x Saudi Arabia,Cape Verde,Saudi Arabia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Saudi Arabia (+2.5),1.03,40.7,0,0,0x0,1,GREEN
+2026-06-27,00:00,Jogo 1,WORLD WORLD CUP,Egypt x Iran,Egypt,Iran,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Iran (+2.5),1.03,56.1,1,1,1x1,1,GREEN
+2026-06-27,09:00,Jogo 2,CHINA 1,Beijing Guoan x Wuhan Three Towns,Beijing Guoan,Wuhan Three Towns,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,1,0,1x0,1,GREEN
+2026-06-27,13:00,Jogo 3,NORWAY 2,Stromsgodset x Odd,Stromsgodset,Odd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,2,2,2x2,1,GREEN
+2026-06-27,18:30,Jogo 4,BRAZIL 4,Goiatuba x Brasiliense,Goiatuba,Brasiliense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Brasiliense (+2.5),1.02,55.2,1,0,1x0,1,GREEN
+2026-06-27,23:00,Jogo 5,WORLD WORLD CUP,Algeria x Austria,Algeria,Austria,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Austria (+2.5),1.052,62.9,3,3,3x3,1,GREEN
+2026-06-28,08:00,Jogo 1,CHINA 1,Dalian Yingbo x Shanghai Shenhua,Dalian Yingbo,Shanghai Shenhua,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,1,4,1x4,1,GREEN
+2026-06-28,12:00,Jogo 2,SWEDEN 2,Sandviken x Helsingborg,Sandviken,Helsingborg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.6,4,2,4x2,1,GREEN
+2026-06-28,15:00,Jogo 3,ARGENTINA 3,Circulo Deportivo x Olimpo Bahia Blanca,Circulo Deportivo,Olimpo Bahia Blanca,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Circulo Deportivo (+2.5),1.036,58.5,1,1,1x1,1,GREEN
+2026-06-28,16:30,Jogo 4,BRAZIL 4,Manauara x Independencia,Manauara,Independencia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.3,1,1,1x1,1,GREEN
+2026-06-28,18:30,Jogo 5,CHILE CUP,U. De Chile x San Felipe,U. De Chile,San Felipe,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.9,2,0,2x0,1,GREEN
+2026-06-29,16:15,Jogo 1,ICELAND 2,Afturelding x Aegir,Afturelding,Aegir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,8,1,8x1,1,GREEN
+2026-06-29,16:15,Jogo 2,ICELAND 1,Akranes x Fram,Akranes,Fram,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.5,0,2,0x2,1,GREEN
+2026-06-29,17:30,Jogo 3,WORLD WORLD CUP,Germany x Paraguay,Germany,Paraguay,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,98.2,1,1,1x1,1,GREEN
+2026-06-29,20:30,Jogo 4,CHILE CUP,U. Espanola x Colo Colo,U. Espanola,Colo Colo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.1,0,3,0x3,1,GREEN
+2026-06-29,22:00,Jogo 5,WORLD WORLD CUP,Netherlands x Morocco,Netherlands,Morocco,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Morocco (+2.5),1.05,42.7,1,1,1x1,1,GREEN
+2026-06-30,13:00,Jogo 1,ESTONIA 2,Nomme Utd U21 x Flora U21,Nomme Utd U21,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.7,3,3,3x3,1,GREEN
+2026-06-30,15:30,Jogo 2,PARAGUAY 2,Resistencia x Encarnacion FC,Resistencia,Encarnacion FC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Encarnacion FC (+2.5),1.03,40.2,1,0,1x0,1,GREEN
+2026-06-30,18:00,Jogo 3,PARAGUAY 2,Independiente FBC x Benjamin Aceval,Independiente FBC,Benjamin Aceval,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Benjamin Aceval (+2.5),1.02,42.3,1,2,1x2,1,GREEN
+2026-06-30,20:00,Jogo 4,BRAZIL 2,Botafogo SP x CRB,Botafogo SP,CRB,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CRB (+2.5),1.03,42.7,0,1,0x1,1,GREEN
+2026-06-30,22:00,Jogo 5,WORLD WORLD CUP,Mexico x Ecuador,Mexico,Ecuador,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ecuador (+2.5),1.03,57.2,2,0,2x0,1,GREEN
+2026-07-01,13:00,Jogo 1,WORLD WORLD CUP,England x D.R. Congo,England,D.R. Congo,👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,England ou Empate (1X),1.04,78.7,2,1,2x1,1,GREEN
+2026-07-01,15:00,Jogo 2,ECUADOR 2,Vinotinto x Gualaceo,Vinotinto,Gualaceo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gualaceo (+2.5),1.033,47.9,1,2,1x2,1,GREEN
+2026-07-01,17:00,Jogo 3,WORLD WORLD CUP,Belgium x Senegal,Belgium,Senegal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,94.1,3,2,3x2,1,GREEN
+2026-07-01,19:00,Jogo 4,CHILE CUP,Cobresal x La Serena,Cobresal,La Serena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,La Serena (+2.5),1.03,37.8,0,1,0x1,1,GREEN
+2026-07-01,21:00,Jogo 5,WORLD WORLD CUP,USA x Bosnia & Herzegovina,USA,Bosnia & Herzegovina,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.4,2,0,2x0,1,GREEN
+2026-07-02,13:00,Jogo 1,ESTONIA 1,Kuressaare x Flora,Kuressaare,Flora,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,93.5,0,3,0x3,1,GREEN
+2026-07-02,14:00,Jogo 2,ICELAND 1,Thor Akureyri x KR Reykjavik,Thor Akureyri,KR Reykjavik,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.3,3,3,3x3,1,GREEN
+2026-07-02,16:15,Jogo 3,ICELAND 1,Vikingur Reykjavik x KA Akureyri,Vikingur Reykjavik,KA Akureyri,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.06,96.8,3,2,3x2,1,GREEN
+2026-07-02,20:00,Jogo 4,WORLD WORLD CUP,Portugal x Croatia,Portugal,Croatia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.7,2,1,2x1,1,GREEN
+2026-07-02,21:00,Jogo 5,ECUADOR 2,Dep. Santo Domingo x Ind. Juniors,Dep. Santo Domingo,Ind. Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ind. Juniors (+2.5),1.038,52.0,1,0,1x0,1,GREEN
+2026-07-03,09:00,Jogo 1,CHINA 1,Yunnan Yukun x Henan Songshan Longmen,Yunnan Yukun,Henan Songshan Longmen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.4,2,1,2x1,1,GREEN
+2026-07-03,13:00,Jogo 2,NORWAY 2,Kongsvinger x Sogndal,Kongsvinger,Sogndal,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.9,5,1,5x1,1,GREEN
+2026-07-03,15:00,Jogo 3,WORLD WORLD CUP,Australia x Egypt,Australia,Egypt,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Australia (+2.5),1.03,52.5,1,1,1x1,1,GREEN
+2026-07-03,17:00,Jogo 4,PARAGUAY 2,Fernando de la Mora x 3 de Noviembre,Fernando de la Mora,3 de Noviembre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,3 de Noviembre (+2.5),1.03,47.9,2,2,2x2,1,GREEN
+2026-07-03,19:00,Jogo 5,WORLD WORLD CUP,Argentina x Cape Verde,Argentina,Cape Verde,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,104.5,3,2,3x2,1,GREEN
+2026-07-04,08:35,Jogo 1,CHINA 1,Beijing Guoan x Shandong Taishan,Beijing Guoan,Shandong Taishan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,2,0,2x0,1,GREEN
+2026-07-04,11:00,Jogo 2,NORWAY 2,Hodd x Stromsgodset,Hodd,Stromsgodset,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,4,3,4x3,1,GREEN
+2026-07-04,13:00,Jogo 3,ESTONIA 1,Narva x Levadia,Narva,Levadia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.0,1,3,1x3,1,GREEN
+2026-07-04,15:30,Jogo 4,ARGENTINA 2,Temperley x Tristan Suarez,Temperley,Tristan Suarez,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tristan Suarez (+2.5),1.02,62.1,1,0,1x0,1,GREEN
+2026-07-04,18:00,Jogo 5,BRAZIL 4,Marcilio Dias x Portuguesa,Marcilio Dias,Portuguesa,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Marcilio Dias (+2.5),1.04,58.8,1,1,1x1,1,GREEN
+2026-07-05,08:35,Jogo 1,CHINA 1,Shanghai Shenhua x Zhejiang Professional,Shanghai Shenhua,Zhejiang Professional,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,3,2,3x2,1,GREEN
+2026-07-05,11:00,Jogo 2,NORWAY 2,Odd x Haugesund,Odd,Haugesund,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.8,1,3,1x3,1,GREEN
+2026-07-05,15:00,Jogo 3,ARGENTINA 3,Olimpo Bahia Blanca x Villa Mitre,Olimpo Bahia Blanca,Villa Mitre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Villa Mitre (+2.5),1.036,60.1,0,0,0x0,1,GREEN
+2026-07-05,17:00,Jogo 4,CHILE CUP,CD Santa Cruz x A. Italiano,CD Santa Cruz,A. Italiano,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.0,2,1,2x1,1,GREEN
+2026-07-05,21:00,Jogo 5,CHILE CUP,Limache x San Marcos de Arica,Limache,San Marcos de Arica,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.9,4,1,4x1,1,GREEN
+2026-07-06,14:00,Jogo 1,SWEDEN 1,Hacken x Djurgarden,Hacken,Djurgarden,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.1,2,4,2x4,1,GREEN
+2026-07-06,16:15,Jogo 2,ICELAND 1,Keflavik x Fram,Keflavik,Fram,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.3,1,1,1x1,1,GREEN
+2026-07-06,18:00,Jogo 3,URUGUAY 2,Miramar x Atenas,Miramar,Atenas,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atenas (+2.5),1.02,42.0,1,1,1x1,1,GREEN
+2026-07-06,19:00,Jogo 4,PARAGUAY 2,Benjamin Aceval x Dep. Capiata,Benjamin Aceval,Dep. Capiata,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Capiata (+2.5),1.02,47.9,1,1,1x1,1,GREEN
+2026-07-06,20:30,Jogo 5,CHILE CUP,Colo Colo x Recoleta,Colo Colo,Recoleta,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,2,2x2,1,GREEN
+2026-07-07,13:00,Jogo 1,EUROPA CHAMPIONS LEAGUE,Sabah Baku (AZE) x TNS (WAL),Sabah Baku (AZE),TNS (WAL),👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Sabah Baku (AZE) ou Empate (1X),1.04,80.5,2,0,2x0,1,GREEN
+2026-07-07,14:15,Jogo 2,EUROPA CONFERENCE LEAGUE,UNA Strassen (LUX) x La Fiorita (SAN),UNA Strassen (LUX),La Fiorita (SAN),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.5,1,0,1x0,1,GREEN
+2026-07-07,15:30,Jogo 3,EUROPA CHAMPIONS LEAGUE,Borac Banja Luka (BIH) x Levski Sofia (BUL),Borac Banja Luka (BIH),Levski Sofia (BUL),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Borac Banja Luka (BIH) (+2.5),1.034,50.8,1,1,1x1,1,GREEN
+2026-07-07,17:00,Jogo 4,WORLD WORLD CUP,Switzerland x Colombia,Switzerland,Colombia,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Switzerland (+2.5),1.05,49.1,0,0,0x0,1,GREEN
+2026-07-07,20:00,Jogo 5,BRAZIL 2,Athletic Club x Operario-PR,Athletic Club,Operario-PR,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Operario-PR (+2.5),1.03,51.3,0,1,0x1,1,GREEN
+2026-07-08,12:00,Jogo 1,EUROPA CHAMPIONS LEAGUE,Kairat Almaty (KAZ) x Sutjeska (MNE),Kairat Almaty (KAZ),Sutjeska (MNE),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.0,2,1,2x1,1,GREEN
+2026-07-08,13:00,Jogo 2,EUROPA CHAMPIONS LEAGUE,Flora (EST) x Iberia 1999 (GEO),Flora (EST),Iberia 1999 (GEO),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.9,2,3,2x3,1,GREEN
+2026-07-08,14:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,Petrocub (MDA) x Egnatia (ALB),Petrocub (MDA),Egnatia (ALB),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Egnatia (ALB) (+2.5),1.033,50.3,1,1,1x1,1,GREEN
+2026-07-08,19:00,Jogo 4,BOLIVIA 1,Real Oruro x Universitario de Vinto,Real Oruro,Universitario de Vinto,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.4,4,1,4x1,1,GREEN
+2026-07-08,23:30,Jogo 5,USA 2,Sacramento Republic x Rhode Island,Sacramento Republic,Rhode Island,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Rhode Island (+2.5),1.05,42.0,2,1,2x1,1,GREEN
+2026-07-09,11:00,Jogo 1,EUROPA CONFERENCE LEAGUE,Atletic Escaldes (AND) x Mornar Bar (MNE),Atletic Escaldes (AND),Mornar Bar (MNE),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Mornar Bar (MNE) (+2.5),1.02,44.9,2,1,2x1,1,GREEN
+2026-07-09,13:00,Jogo 2,EUROPA CONFERENCE LEAGUE,Kalju (EST) x Linfield (NIR),Kalju (EST),Linfield (NIR),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Linfield (NIR) (+2.5),1.036,43.8,1,0,1x0,1,GREEN
+2026-07-09,14:30,Jogo 3,EUROPA CONFERENCE LEAGUE,Caernarfon (WAL) x Levadia (EST),Caernarfon (WAL),Levadia (EST),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.6,0,5,0x5,1,GREEN
+2026-07-09,16:00,Jogo 4,EUROPA CONFERENCE LEAGUE,Dinamo City (ALB) x FC Astana (KAZ),Dinamo City (ALB),FC Astana (KAZ),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,FC Astana (KAZ) (+2.5),1.03,44.9,0,1,0x1,1,GREEN
+2026-07-09,21:00,Jogo 5,BOLIVIA 1,Nacional Potosi x Aurora,Nacional Potosi,Aurora,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.7,2,0,2x0,1,GREEN
+2026-07-10,08:35,Jogo 1,CHINA 1,Shandong Taishan x Yunnan Yukun,Shandong Taishan,Yunnan Yukun,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,4,3,4x3,1,GREEN
+2026-07-10,16:15,Jogo 2,ICELAND 2,Aegir x Kopavogur,Aegir,Kopavogur,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.8,3,4,3x4,1,GREEN
+2026-07-10,18:00,Jogo 3,PARAGUAY 2,Fernando de la Mora x Paraguari AC,Fernando de la Mora,Paraguari AC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Paraguari AC (+2.5),1.02,45.1,2,2,2x2,1,GREEN
+2026-07-10,21:15,Jogo 4,ECUADOR 1,Tecnico U. x Macara,Tecnico U.,Macara,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tecnico U. (+2.5),1.03,51.3,0,2,0x2,1,GREEN
+2026-07-10,23:00,Jogo 5,WOM USA 1,Utah Royals W x Gotham W,Utah Royals W,Gotham W,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Utah Royals W (+2.5),1.06,45.6,1,3,1x3,1,GREEN
+2026-07-11,09:00,Jogo 1,FINLAND 1,Lahti x HJK,Lahti,HJK,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.9,2,0,2x0,1,GREEN
+2026-07-11,11:00,Jogo 2,SCOTLAND CUP,Partick Thistle x Brechin,Partick Thistle,Brechin,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,6,0,6x0,1,GREEN
+2026-07-11,13:30,Jogo 3,SCOTLAND CUP,Stirling x Dundee Utd,Stirling,Dundee Utd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,0,1,0x1,1,GREEN
+2026-07-11,15:00,Jogo 4,ARGENTINA 2,All Boys x Almirante Brown,All Boys,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.02,60.6,1,1,1x1,1,GREEN
+2026-07-11,18:30,Jogo 5,CHILE CUP,San Luis x U. Catolica,San Luis,U. Catolica,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.6,4,0,4x0,1,GREEN
+2026-07-12,09:00,Jogo 1,SWEDEN 1,Vasteras SK x Degerfors,Vasteras SK,Degerfors,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,91.3,2,0,2x0,1,GREEN
+2026-07-12,11:30,Jogo 2,SWEDEN 1,GAIS x Elfsborg,GAIS,Elfsborg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,91.9,1,0,1x0,1,GREEN
+2026-07-12,13:00,Jogo 3,ESTONIA 2,Nomme Utd U21 x Flora U21,Nomme Utd U21,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.4,1,1,1x1,1,GREEN
+2026-07-12,16:00,Jogo 4,ARGENTINA 2,Club A. Guemes x San Martin S.J.,Club A. Guemes,San Martin S.J.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Club A. Guemes (+2.5),1.041,58.5,0,2,0x2,1,GREEN
+2026-07-12,18:15,Jogo 5,BOLIVIA 1,The Strongest x Bolivar,The Strongest,Bolivar,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,105.0,1,1,1x1,1,GREEN
+2026-07-13,13:00,Jogo 1,ESTONIA 2,Maardu x Tartu Welco,Maardu,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.2,1,8,1x8,1,GREEN
+2026-07-13,15:00,Jogo 2,URUGUAY 2,La Luz x Tacuarembo,La Luz,Tacuarembo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tacuarembo (+2.5),1.032,53.2,2,0,2x0,1,GREEN
+2026-07-13,17:15,Jogo 3,ICELAND 2,Vestri x Fylkir,Vestri,Fylkir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,101.9,2,5,2x5,1,GREEN
+2026-07-13,19:00,Jogo 4,URUGUAY 1,Cerro Largo x Defensor Sp.,Cerro Largo,Defensor Sp.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cerro Largo (+2.5),1.037,49.8,1,1,1x1,1,GREEN
+2026-07-13,19:30,Jogo 5,BRAZIL 3,Itabaiana x Brusque,Itabaiana,Brusque,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Brusque (+2.5),1.03,52.6,1,0,1x0,1,GREEN
+2026-07-14,08:35,Jogo 1,CHINA 1,Zhejiang Professional x Qingdao Hainiu,Zhejiang Professional,Qingdao Hainiu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.2,3,2,3x2,1,GREEN
+2026-07-14,13:00,Jogo 2,EUROPA CHAMPIONS LEAGUE,Inter Escaldes (AND) x Lincoln Red Imps (GIB),Inter Escaldes (AND),Lincoln Red Imps (GIB),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,104.4,1,1,1x1,1,GREEN
+2026-07-14,15:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,Drita (KOS) x Kauno Zalgiris (LTU),Drita (KOS),Kauno Zalgiris (LTU),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Kauno Zalgiris (LTU) (+2.5),1.032,45.6,2,3,2x3,1,GREEN
+2026-07-14,19:00,Jogo 4,BOLIVIA 1,Real Oruro x Always Ready,Real Oruro,Always Ready,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.5,0,6,0x6,1,GREEN
+2026-07-14,21:00,Jogo 5,ECUADOR 1,Manta x Delfin,Manta,Delfin,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Delfin (+2.5),1.02,55.2,0,1,0x1,1,GREEN
+2026-07-15,11:30,Jogo 1,EUROPA CONFERENCE LEAGUE,Malisheva (KOS) x Vllaznia (ALB),Malisheva (KOS),Vllaznia (ALB),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.3,5,0,5x0,1,GREEN
+2026-07-15,14:30,Jogo 2,EUROPA CHAMPIONS LEAGUE,Univ. Craiova (ROU) x ML Vitebsk (BLR),Univ. Craiova (ROU),ML Vitebsk (BLR),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.9,1,0,1x0,1,GREEN
+2026-07-15,16:00,Jogo 3,WORLD WORLD CUP,England x Argentina,England,Argentina,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Argentina (+2.5),1.03,47.8,1,2,1x2,1,GREEN
+2026-07-15,19:00,Jogo 4,ECUADOR 1,Leones del Norte x Dep. Cuenca,Leones del Norte,Dep. Cuenca,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Cuenca (+2.5),1.04,54.2,1,1,1x1,1,GREEN
+2026-07-15,21:00,Jogo 5,WOM USA 1,Gotham W x Washington Spirit W,Gotham W,Washington Spirit W,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Washington Spirit W (+2.5),1.05,49.6,1,0,1x0,1,GREEN
+2026-07-16,13:00,Jogo 1,ECUADOR 2,Cumbaya x Nueve de Octubre,Cumbaya,Nueve de Octubre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nueve de Octubre (+2.5),1.034,57.2,0,0,0x0,1,GREEN
+2026-07-16,15:00,Jogo 2,EUROPA CONFERENCE LEAGUE,Sileks (MKD) x Din. Minsk (BLR),Sileks (MKD),Din. Minsk (BLR),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sileks (MKD) (+2.5),1.032,51.5,0,1,0x1,1,GREEN
+2026-07-16,17:00,Jogo 3,EUROPA LEAGUE,Vestri (ICE) x Qarabag (AZE),Vestri (ICE),Qarabag (AZE),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,0,3,0x3,1,GREEN
+2026-07-16,21:00,Jogo 4,ECUADOR 2,Dep. Santo Domingo x Cuenca Juniors,Dep. Santo Domingo,Cuenca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cuenca Juniors (+2.5),1.02,57.5,0,1,0x1,1,GREEN
+2026-07-16,23:30,Jogo 5,USA 1,Seattle Sounders x Portland Timbers,Seattle Sounders,Portland Timbers,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.6,1,5,1x5,1,GREEN
+2026-07-17,09:00,Jogo 1,CHINA 1,Yunnan Yukun x Shanghai Port,Yunnan Yukun,Shanghai Port,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.7,2,2,2x2,1,GREEN
+2026-07-17,13:00,Jogo 2,ESTONIA 1,Flora x Nomme Utd,Flora,Nomme Utd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.0,1,2,1x2,1,GREEN
+2026-07-17,15:00,Jogo 3,ARGENTINA 2,Almirante Brown x CA Estudiantes,Almirante Brown,CA Estudiantes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Estudiantes (+2.5),1.04,56.8,0,0,0x0,1,GREEN
+2026-07-17,19:30,Jogo 4,BRAZIL 1,Bahia x Chapecoense-SC,Bahia,Chapecoense-SC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,100.0,2,0,2x0,1,GREEN
+2026-07-17,21:00,Jogo 5,BOLIVIA 1,Bolivar x Guabira,Bolivar,Guabira,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,4,0,4x0,1,GREEN
+2026-07-18,08:35,Jogo 1,CHINA 1,Dalian Yingbo x Shandong Taishan,Dalian Yingbo,Shandong Taishan,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.5,3,1,3x1,1,GREEN
+2026-07-18,11:00,Jogo 2,SCOTLAND CUP,Elgin City x Kilmarnock,Elgin City,Kilmarnock,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.5,0,1,0x1,1,GREEN
+2026-07-18,13:00,Jogo 3,ESTONIA 2,Tartu Welco x FC Tallinn,Tartu Welco,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.9,0,2,0x2,1,GREEN
+2026-07-18,16:00,Jogo 4,BRAZIL 4,Cianorte x ASA,Cianorte,ASA,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ASA (+2.5),1.02,54.5,0,1,0x1,1,GREEN
+2026-07-18,19:00,Jogo 5,BRAZIL 4,Luverdense x ABC,Luverdense,ABC,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,ABC (+2.5),1.039,54.4,0,0,0x0,1,GREEN
+2026-07-19,00:10,Jogo 1,MEXICO 1,Queretaro x Club America,Queretaro,Club America,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.5,0,1,0x1,1,GREEN
+2026-07-19,07:30,Jogo 2,SOUTH KOREA 2,Suwon Bluewings x Paju Frontier,Suwon Bluewings,Paju Frontier,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.9,0,0,0x0,0,RED
+2026-07-19,11:00,Jogo 3,BRAZIL 4,Sao Luiz x CSA,Sao Luiz,CSA,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sao Luiz (+2.5),1.02,52.4,0,0,0x0,1,GREEN
+2026-07-19,13:30,Jogo 4,BULGARIA 1,Botev Vratsa x Cherno More,Botev Vratsa,Cherno More,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cherno More (+2.5),1.02,50.3,1,1,1x1,1,GREEN
+2026-07-19,21:00,Jogo 5,PERU 1,Alianza Lima x Sport Huancayo,Alianza Lima,Sport Huancayo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,95.8,2,1,2x1,1,GREEN
+2026-07-20,13:00,Jogo 1,PERU 2,Pirata x U. San Martin,Pirata,U. San Martin,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,U. San Martin (+2.5),1.03,43.8,3,2,3x2,1,GREEN
+2026-07-20,14:00,Jogo 2,SWEDEN 1,Orgryte x Djurgarden,Orgryte,Djurgarden,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.5,0,0,0x0,0,RED
+2026-07-20,16:15,Jogo 3,ICELAND 2,Kopavogur x Vestri,Kopavogur,Vestri,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.9,6,2,6x2,1,GREEN
+2026-07-20,17:00,Jogo 4,PARAGUAY 2,Tacuary x Dep. Capiata,Tacuary,Dep. Capiata,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tacuary (+2.5),1.02,44.8,0,0,0x0,1,GREEN
+2026-07-20,20:00,Jogo 5,BOLIVIA 1,Nacional Potosi x Real Oruro,Nacional Potosi,Real Oruro,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.4,1,4,1x4,1,GREEN
+2026-07-21,07:30,Jogo 1,SOUTH KOREA 1,Ulsan HD x Incheon,Ulsan HD,Incheon,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Incheon (+2.5),1.04,42.7,1,2,1x2,1,GREEN
+2026-07-21,14:00,Jogo 2,EUROPA CONFERENCE LEAGUE,Goteborg (SWE) x Levadia (EST),Goteborg (SWE),Levadia (EST),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,102.8,1,2,1x2,1,GREEN
+2026-07-21,15:45,Jogo 3,SCOTLAND CUP,Livingston x Forfar Athletic,Livingston,Forfar Athletic,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,8,0,8x0,1,GREEN
+2026-07-21,19:00,Jogo 4,COPA SUDAMERICANA,Nacional (URU) x Tigre (ARG),Nacional (URU),Tigre (ARG),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tigre (ARG) (+2.5),1.03,54.4,0,3,0x3,1,GREEN
+2026-07-21,21:35,Jogo 5,BRAZIL 2,Vila Nova FC x Fortaleza,Vila Nova FC,Fortaleza,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fortaleza (+2.5),1.02,49.4,2,1,2x1,1,GREEN
+2026-07-22,14:30,Jogo 1,EUROPA CHAMPIONS LEAGUE,Levski Sofia (BUL) x Univ. Craiova (ROU),Levski Sofia (BUL),Univ. Craiova (ROU),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Univ. Craiova (ROU) (+2.5),1.03,49.0,1,0,1x0,1,GREEN
+2026-07-22,16:00,Jogo 2,ECUADOR 1,Macara x Dep. Cuenca,Macara,Dep. Cuenca,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Cuenca (+2.5),1.04,49.0,3,0,3x0,0,RED
+2026-07-22,17:30,Jogo 3,ECUADOR 2,San Antonio x Cumbaya,San Antonio,Cumbaya,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cumbaya (+2.5),1.02,51.8,0,0,0x0,1,GREEN
+2026-07-22,20:30,Jogo 4,USA 1,Inter Miami x Chicago Fire,Inter Miami,Chicago Fire,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,3,2,3x2,1,GREEN
+2026-07-22,23:30,Jogo 5,USA 1,San Jose Earthquakes x Orlando City,San Jose Earthquakes,Orlando City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,0,4,0x4,1,GREEN
+2026-07-23,11:30,Jogo 1,EUROPA CONFERENCE LEAGUE,Malisheva (KOS) x Hibernian (SCO),Malisheva (KOS),Hibernian (SCO),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.6,2,0,2x0,1,GREEN
+2026-07-23,13:30,Jogo 2,EUROPA CONFERENCE LEAGUE,RFS (LAT) x Vestri (ICE),RFS (LAT),Vestri (ICE),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,4,1,4x1,1,GREEN
+2026-07-23,16:00,Jogo 3,EUROPA CONFERENCE LEAGUE,Partizan (SRB) x UNA Strassen (LUX),Partizan (SRB),UNA Strassen (LUX),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.8,4,0,4x0,1,GREEN
+2026-07-23,19:00,Jogo 4,COPA SUDAMERICANA,Bolivar (BOL) x Gremio (BRA),Bolivar (BOL),Gremio (BRA),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.3,3,2,3x2,1,GREEN
+2026-07-23,20:30,Jogo 5,BRAZIL 2,Cuiaba x Atletico GO,Cuiaba,Atletico GO,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atletico GO (+2.5),1.03,55.2,0,1,0x1,1,GREEN
+2026-07-24,13:00,Jogo 1,DENMARK 2,Vejle x AB Copenhagen,Vejle,AB Copenhagen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.5,2,2,2x2,1,GREEN
+2026-07-24,14:30,Jogo 2,SWITZERLAND 2,Lausanne Ouchy x Stade Nyonnais,Lausanne Ouchy,Stade Nyonnais,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.8,2,0,2x0,1,GREEN
+2026-07-24,17:00,Jogo 3,ICELAND 1,Vikingur Reykjavik x Keflavik,Vikingur Reykjavik,Keflavik,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.1,5,1,5x1,1,GREEN
+2026-07-24,19:00,Jogo 4,ARGENTINA 1,Velez Sarsfield x Instituto,Velez Sarsfield,Instituto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Instituto (+2.5),1.04,52.4,1,0,1x0,1,GREEN
+2026-07-24,21:15,Jogo 5,ARGENTINA 1,Huracan x Banfield,Huracan,Banfield,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Banfield (+2.5),1.04,54.9,1,0,1x0,1,GREEN
+2026-07-25,11:00,Jogo 1,SCOTLAND CUP,Aberdeen x Kelty Hearts,Aberdeen,Kelty Hearts,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,3,0,3x0,1,GREEN
+2026-07-25,13:00,Jogo 2,NORWAY 2,Stromsgodset x Lyn,Stromsgodset,Lyn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.4,1,1,1x1,1,GREEN
+2026-07-25,15:00,Jogo 3,ARGENTINA 3,Defensores Belgrano VR x Chivilcoy,Defensores Belgrano VR,Chivilcoy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Chivilcoy (+2.5),1.036,62.6,2,2,2x2,1,GREEN
+2026-07-25,18:15,Jogo 4,BOLIVIA 1,Guabira x Real Oruro,Guabira,Real Oruro,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,4,1,4x1,1,GREEN
+2026-07-25,23:30,Jogo 5,USA 1,Los Angeles FC x Sporting Kansas City,Los Angeles FC,Sporting Kansas City,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,4,0,4x0,1,GREEN
+2026-07-26,08:35,Jogo 1,CHINA 1,Shandong Taishan x Henan Songshan Longmen,Shandong Taishan,Henan Songshan Longmen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.2,1,2,1x2,1,GREEN
+2026-07-26,11:00,Jogo 2,WOM BRAZIL 1,Corinthians W x Vitoria W,Corinthians W,Vitoria W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,134.0,4,0,4x0,1,GREEN
+2026-07-26,15:00,Jogo 3,ARGENTINA 2,All Boys x Def. de Belgrano,All Boys,Def. de Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Def. de Belgrano (+2.5),1.038,61.3,0,0,0x0,1,GREEN
+2026-07-26,16:30,Jogo 4,VENEZUELA 2,Miranda x Aragua,Miranda,Aragua,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aragua (+2.5),1.036,59.6,2,1,2x1,1,GREEN
+2026-07-26,18:15,Jogo 5,BOLIVIA 1,Bolivar x Real Potosi,Bolivar,Real Potosi,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,1,2x1,1,GREEN
+2026-07-27,12:00,Jogo 1,SLOVAKIA 2,Samorin x Malzenice,Samorin,Malzenice,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.05,92.3,2,0,2x0,1,GREEN
+2026-07-27,14:00,Jogo 2,NORWAY 2,Stabaek x Hodd,Stabaek,Hodd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.9,6,0,6x0,1,GREEN
+2026-07-27,16:15,Jogo 3,ICELAND 1,KA Akureyri x Thor Akureyri,KA Akureyri,Thor Akureyri,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.3,0,0,0x0,0,RED
+2026-07-27,19:30,Jogo 4,BRAZIL 2,Sport Recife x Cuiaba,Sport Recife,Cuiaba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cuiaba (+2.5),1.04,52.8,1,1,1x1,1,GREEN
+2026-07-27,21:00,Jogo 5,ECUADOR 1,Dep. Cuenca x Emelec,Dep. Cuenca,Emelec,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Emelec (+2.5),1.034,50.3,2,1,2x1,1,GREEN
+2026-07-28,13:00,Jogo 1,EUROPA CHAMPIONS LEAGUE,Lincoln Red Imps (GIB) x Mjallby (SWE),Lincoln Red Imps (GIB),Mjallby (SWE),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.6,0,0,0x0,0,RED
+2026-07-28,16:00,Jogo 2,PARAGUAY 1,Rubio Nu x Ameliano,Rubio Nu,Ameliano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Rubio Nu (+2.5),1.02,52.3,1,1,1x1,1,GREEN
+2026-07-28,19:00,Jogo 3,ARGENTINA 1,Banfield x Sarmiento Junin,Banfield,Sarmiento Junin,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sarmiento Junin (+2.5),1.03,53.1,3,2,3x2,1,GREEN
+2026-07-28,19:30,Jogo 4,PARAGUAY 2,Independiente FBC x Dep. Capiata,Independiente FBC,Dep. Capiata,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Capiata (+2.5),1.04,51.0,1,1,1x1,1,GREEN
+2026-07-28,21:30,Jogo 5,COPA SUDAMERICANA,Santos (BRA) x Universidad Central (VEN),Santos (BRA),Universidad Central (VEN),👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Santos (BRA) ou Empate (1X),1.05,80.0,4,2,4x2,1,GREEN
+2026-07-29,12:30,Jogo 1,FINLAND 2,Mikkeli x KaPa,Mikkeli,KaPa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,95.7,2,1,2x1,1,GREEN
+2026-07-29,14:30,Jogo 2,ARGENTINA 1,Barracas Central x Aldosivi,Barracas Central,Aldosivi,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aldosivi (+2.5),1.02,59.8,1,0,1x0,1,GREEN
+2026-07-29,17:00,Jogo 3,ARGENTINA 1,Defensa y Justicia x Dep. Riestra,Defensa y Justicia,Dep. Riestra,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Riestra (+2.5),1.038,57.2,2,1,2x1,1,GREEN
+2026-07-29,21:00,Jogo 4,ECUADOR 2,Dep. Santo Domingo x Nueve de Octubre,Dep. Santo Domingo,Nueve de Octubre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Santo Domingo (+2.5),1.038,59.6,0,0,0x0,1,GREEN
+2026-07-29,23:00,Jogo 5,WOM USA 1,Bay FC W x Gotham W,Bay FC W,Gotham W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,94.0,0,1,0x1,1,GREEN
+2026-07-30,11:00,Jogo 1,EUROPA CONFERENCE LEAGUE,Tobol (KAZ) x FK Panevezys (LTU),Tobol (KAZ),FK Panevezys (LTU),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,97.0,1,1,1x1,1,GREEN
+2026-07-30,13:00,Jogo 2,EUROPA CONFERENCE LEAGUE,Auda (LAT) x FCSB (ROU),Auda (LAT),FCSB (ROU),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,4,1,4x1,1,GREEN
+2026-07-30,15:00,Jogo 3,EUROPA CONFERENCE LEAGUE,Ajax (NED) x Vojvodina (SRB),Ajax (NED),Vojvodina (SRB),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,4,1,4x1,1,GREEN
+2026-07-30,17:30,Jogo 4,ECUADOR 2,Cumbaya x Cuenca Juniors,Cumbaya,Cuenca Juniors,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cuenca Juniors (+2.5),1.032,51.3,0,0,0x0,1,GREEN
+2026-07-30,19:00,Jogo 5,ARGENTINA 1,Talleres Cordoba x Velez Sarsfield,Talleres Cordoba,Velez Sarsfield,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Velez Sarsfield (+2.5),1.02,55.9,1,3,1x3,1,GREEN
+2026-07-31,10:00,Jogo 1,UKRAINE 2,Ahrobiznes Volochysk x Fenix Mariupol,Ahrobiznes Volochysk,Fenix Mariupol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fenix Mariupol (+2.5),1.036,49.1,2,0,2x0,1,GREEN
+2026-07-31,12:00,Jogo 2,UKRAINE 1,FK Zorya Luhansk x Kolos Kovalivka,FK Zorya Luhansk,Kolos Kovalivka,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Kolos Kovalivka (+2.5),1.02,48.9,2,0,2x0,1,GREEN
+2026-07-31,14:00,Jogo 3,SLOVAKIA 2,L. Mikulas x Galanta,L. Mikulas,Galanta,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.9,2,0,2x0,1,GREEN
+2026-07-31,16:00,Jogo 4,NORWAY 1,Bodo/Glimt x Lillestrom,Bodo/Glimt,Lillestrom,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,4,0,4x0,1,GREEN
+2026-07-31,19:30,Jogo 5,PARAGUAY 2,Fernando de la Mora x 12 de Junio,Fernando de la Mora,12 de Junio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fernando de la Mora (+2.5),1.033,52.4,1,1,1x1,1,GREEN
+2026-08-01,09:00,Jogo 1,CHINA 1,Chengdu Rongcheng x Wuhan Three Towns,Chengdu Rongcheng,Wuhan Three Towns,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,1,1,1x1,1,GREEN
+2026-08-01,13:00,Jogo 2,ESTONIA 2,Nomme Utd U21 x Tartu Welco,Nomme Utd U21,Tartu Welco,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,2,1,2x1,1,GREEN
+2026-08-01,15:00,Jogo 3,ARGENTINA 2,Def. de Belgrano x CA Estudiantes,Def. de Belgrano,CA Estudiantes,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,CA Estudiantes (+2.5),1.02,58.0,1,1,1x1,1,GREEN
+2026-08-01,16:30,Jogo 4,ARGENTINA 3,Chivilcoy x Sportivo Belgrano,Chivilcoy,Sportivo Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Sportivo Belgrano (+2.5),1.035,58.3,0,0,0x0,1,GREEN
+2026-08-01,20:30,Jogo 5,USA 1,FC Cincinnati x San Jose Earthquakes,FC Cincinnati,San Jose Earthquakes,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,4,2,4x2,1,GREEN
+2026-08-02,00:00,Jogo 1,USA 2,Sacramento Republic x Sporting Jax,Sacramento Republic,Sporting Jax,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.8,5,0,5x0,1,GREEN
+2026-08-02,05:30,Jogo 2,SLOVAKIA 2,Petrzalka x MFK Bytca,Petrzalka,MFK Bytca,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.1,4,0,4x0,1,GREEN
+2026-08-02,08:35,Jogo 3,CHINA 1,Liaoning Tieren x Shanghai Shenhua,Liaoning Tieren,Shanghai Shenhua,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,3,1,3x1,1,GREEN
+2026-08-02,12:00,Jogo 4,NORWAY 2,Kongsvinger x Strommen,Kongsvinger,Strommen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,1,3,1x3,1,GREEN
+2026-08-02,15:00,Jogo 5,ARGENTINA 3,Germinal x Juventud U.U.,Germinal,Juventud U.U.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Juventud U.U. (+2.5),1.037,62.1,2,1,2x1,1,GREEN
+2026-08-03,12:00,Jogo 1,UKRAINE 1,Shakhtar Donetsk x Kudrivka,Shakhtar Donetsk,Kudrivka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.9,5,1,5x1,1,GREEN
+2026-08-03,14:00,Jogo 2,NORWAY 2,Ranheim x Haugesund,Ranheim,Haugesund,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,3,4,3x4,1,GREEN
+2026-08-03,16:00,Jogo 3,ARGENTINA 2,Club A. Guemes x Tristan Suarez,Club A. Guemes,Tristan Suarez,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tristan Suarez (+2.5),1.043,62.8,1,3,1x3,1,GREEN
+2026-08-03,17:30,Jogo 4,COLOMBIA 2,Ind. Valle del Cauca x Envigado,Ind. Valle del Cauca,Envigado,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Envigado (+2.5),1.03,51.9,1,1,1x1,1,GREEN
+2026-08-03,19:00,Jogo 5,ARGENTINA 1,Platense x Talleres Cordoba,Platense,Talleres Cordoba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Talleres Cordoba (+2.5),1.038,55.9,0,4,0x4,1,GREEN
+2026-08-04,13:00,Jogo 1,EUROPA CHAMPIONS LEAGUE,Mjallby (SWE) x Slovan Bratislava (SVK),Mjallby (SWE),Slovan Bratislava (SVK),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Slovan Bratislava (SVK) (+2.5),1.04,49.0,1,2,1x2,1,GREEN
+2026-08-04,14:30,Jogo 2,EUROPA CHAMPIONS LEAGUE,H. Beer Sheva (ISR) x Crvena zvezda (SRB),H. Beer Sheva (ISR),Crvena zvezda (SRB),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,1,0,1x0,1,GREEN
+2026-08-04,16:00,Jogo 3,BOLIVIA 1,Academia del Balompie x Real Oruro,Academia del Balompie,Real Oruro,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,4,1,4x1,1,GREEN
+2026-08-04,19:30,Jogo 4,BRAZIL CUP,Juventude x Atletico-MG,Juventude,Atletico-MG,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Juventude (+2.5),1.02,55.2,0,1,0x1,1,GREEN
+2026-08-04,21:00,Jogo 5,BOLIVIA 1,Guabira x Tomayapo,Guabira,Tomayapo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.8,3,0,3x0,1,GREEN
+2026-08-05,15:00,Jogo 1,ARGENTINA 2,Almagro x Gimnasia y Tiro,Almagro,Gimnasia y Tiro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia y Tiro (+2.5),1.042,55.9,0,2,0x2,1,GREEN
+2026-08-05,19:00,Jogo 2,CHILE CUP,S. Wanderers x Union La Calera,S. Wanderers,Union La Calera,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.5,0,4,0x4,1,GREEN
+2026-08-05,21:00,Jogo 3,BOLIVIA 1,Bolivar x Oriente Petrolero,Bolivar,Oriente Petrolero,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,2,1,2x1,1,GREEN
+2026-08-05,21:15,Jogo 4,ARGENTINA 1,Tigre x Belgrano,Tigre,Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Belgrano (+2.5),1.036,58.5,0,0,0x0,1,GREEN
+2026-08-05,21:30,Jogo 5,USA 2,FC Tulsa x Sacramento Republic,FC Tulsa,Sacramento Republic,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,FC Tulsa (+2.5),1.02,49.8,1,0,1x0,1,GREEN
+2026-08-06,14:00,Jogo 1,EUROPA CONFERENCE LEAGUE,Riga FC (LAT) x Gyor (HUN),Riga FC (LAT),Gyor (HUN),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.6,1,0,1x0,1,GREEN
+2026-08-06,16:00,Jogo 2,EUROPA LEAGUE,Benfica (POR) x Hearts (SCO),Benfica (POR),Hearts (SCO),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,126.5,6,1,6x1,1,GREEN
+2026-08-06,17:30,Jogo 3,ECUADOR 2,San Antonio x Gualaceo,San Antonio,Gualaceo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gualaceo (+2.5),1.02,53.9,2,1,2x1,1,GREEN
+2026-08-06,19:00,Jogo 4,ARGENTINA 1,Union de Santa Fe x Lanus,Union de Santa Fe,Lanus,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lanus (+2.5),1.04,56.9,2,1,2x1,1,GREEN
+2026-08-06,20:30,Jogo 5,BOLIVIA 1,Blooming x Always Ready,Blooming,Always Ready,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.8,0,0,0x0,0,RED
+2026-08-07,08:35,Jogo 1,CHINA 1,Beijing Guoan x Shenzhen Xinpengcheng,Beijing Guoan,Shenzhen Xinpengcheng,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,4,0,4x0,1,GREEN
+2026-08-07,13:30,Jogo 2,AUSTRIA 2,Liefering x Hertha Wels,Liefering,Hertha Wels,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.8,2,3,2x3,1,GREEN
+2026-08-07,15:45,Jogo 3,FRANCE 3,Paris 13 Atl. x Quevilly Rouen,Paris 13 Atl.,Quevilly Rouen,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Paris 13 Atl. (+2.5),1.036,52.3,1,0,1x0,1,GREEN
+2026-08-07,19:00,Jogo 4,URUGUAY 1,Cerro Largo x Juventud,Cerro Largo,Juventud,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Cerro Largo (+2.5),1.02,48.0,1,1,1x1,1,GREEN
+2026-08-07,21:30,Jogo 5,COLOMBIA 2,Quindio x Inter Palmira,Quindio,Inter Palmira,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Inter Palmira (+2.5),1.03,47.9,1,1,1x1,1,GREEN
+2026-08-08,09:00,Jogo 1,NORWAY 1,Valerenga x Bodo/Glimt,Valerenga,Bodo/Glimt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,1,2,1x2,1,GREEN
+2026-08-08,11:00,Jogo 2,NORWAY 1,Viking x Sarpsborg 08,Viking,Sarpsborg 08,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.9,2,1,2x1,1,GREEN
+2026-08-08,13:00,Jogo 3,ESTONIA 2,Nomme Utd U21 x Levadia U21,Nomme Utd U21,Levadia U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.8,1,2,1x2,1,GREEN
+2026-08-08,16:00,Jogo 4,ECUADOR 2,Cuenca Juniors x Vinotinto,Cuenca Juniors,Vinotinto,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Vinotinto (+2.5),1.034,60.3,0,2,0x2,1,GREEN
+2026-08-08,18:15,Jogo 5,BOLIVIA 1,The Strongest x Independiente,The Strongest,Independiente,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,1,2,1x2,1,GREEN
+2026-08-09,09:00,Jogo 1,SWEDEN 1,Hammarby x Hacken,Hammarby,Hacken,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,113.0,3,0,3x0,1,GREEN
+2026-08-09,13:00,Jogo 2,ESTONIA 1,Levadia x Nomme Utd,Levadia,Nomme Utd,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,5,0,5x0,1,GREEN
+2026-08-09,14:30,Jogo 3,ARGENTINA 2,Los Andes x Ferro,Los Andes,Ferro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ferro (+2.5),1.04,58.0,1,2,1x2,1,GREEN
+2026-08-09,16:00,Jogo 4,ARGENTINA 2,Racing Cordoba x San Miguel,Racing Cordoba,San Miguel,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Miguel (+2.5),1.02,57.5,1,0,1x0,1,GREEN
+2026-08-09,18:00,Jogo 5,ARGENTINA 2,San Martin T. x San Martin S.J.,San Martin T.,San Martin S.J.,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Martin S.J. (+2.5),1.02,57.2,1,1,1x1,1,GREEN
+2026-08-10,12:00,Jogo 1,UKRAINE 1,Karpaty Lviv x LNZ Cherkasy,Karpaty Lviv,LNZ Cherkasy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Karpaty Lviv (+2.5),1.02,54.8,3,0,3x0,1,GREEN
+2026-08-10,15:00,Jogo 2,ARGENTINA 2,All Boys x Central Norte,All Boys,Central Norte,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Central Norte (+2.5),1.02,57.8,1,1,1x1,1,GREEN
+2026-08-10,16:30,Jogo 3,PARAGUAY 2,Tacuary x Guairena,Tacuary,Guairena,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Guairena (+2.5),1.02,47.1,1,0,1x0,1,GREEN
+2026-08-10,19:00,Jogo 4,URUGUAY 1,Maldonado x Racing Montevideo,Maldonado,Racing Montevideo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Racing Montevideo (+2.5),1.039,51.3,2,2,2x2,1,GREEN
+2026-08-10,21:00,Jogo 5,WOM BRAZIL 1,America Mineiro W x Flamengo W,America Mineiro W,Flamengo W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,96.3,1,1,1x1,1,GREEN
+2026-08-11,13:00,Jogo 1,EUROPA CHAMPIONS LEAGUE,Bodo/Glimt (NOR) x Royale Union SG (BEL),Bodo/Glimt (NOR),Royale Union SG (BEL),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,99.7,3,2,3x2,1,GREEN
+2026-08-11,14:30,Jogo 2,SOUTH AFRICA 1,Polokwane x Stellenbosch,Polokwane,Stellenbosch,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Stellenbosch (+2.5),1.036,58.0,3,3,3x3,1,GREEN
+2026-08-11,15:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,Crvena zvezda (SRB) x H. Beer Sheva (ISR),Crvena zvezda (SRB),H. Beer Sheva (ISR),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,107.7,0,2,0x2,1,GREEN
+2026-08-11,19:00,Jogo 4,COPA SUDAMERICANA,Boca Juniors (ARG) x Recoleta (PAR),Boca Juniors (ARG),Recoleta (PAR),👑 Dupla Chance 1X Super Fav,DC 1X Super Fav,Boca Juniors (ARG) ou Empate (1X),1.04,80.5,3,1,3x1,1,GREEN
+2026-08-11,21:00,Jogo 5,ARGENTINA 1,Talleres Cordoba x Lanus,Talleres Cordoba,Lanus,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Lanus (+2.5),1.02,55.9,0,3,0x3,1,GREEN
+2026-08-12,11:30,Jogo 1,ARGENTINA 3,Fundacion Amigos x Costa Brava,Fundacion Amigos,Costa Brava,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Costa Brava (+2.5),1.036,55.9,0,0,0x0,1,GREEN
+2026-08-12,13:00,Jogo 2,EUROPA CONFERENCE LEAGUE,SK Rapid (AUT) x Paide (EST),SK Rapid (AUT),Paide (EST),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,115.2,2,0,2x0,1,GREEN
+2026-08-12,16:00,Jogo 3,CHILE 2,Magallanes x Cobreloa,Magallanes,Cobreloa,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.2,2,2,2x2,1,GREEN
+2026-08-12,19:30,Jogo 4,ARGENTINA 3,Olimpo Bahia Blanca x Villa Mitre,Olimpo Bahia Blanca,Villa Mitre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Villa Mitre (+2.5),1.04,59.0,2,0,2x0,1,GREEN
+2026-08-12,21:00,Jogo 5,ARGENTINA 3,Biblioteca Atenas x Kimberley,Biblioteca Atenas,Kimberley,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Kimberley (+2.5),1.032,60.0,2,1,2x1,1,GREEN
+2026-08-13,12:00,Jogo 1,EUROPA CONFERENCE LEAGUE,Tobol (KAZ) x Partizan (SRB),Tobol (KAZ),Partizan (SRB),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tobol (KAZ) (+2.5),1.04,35.4,1,2,1x2,1,GREEN
+2026-08-13,13:30,Jogo 2,EUROPA CONFERENCE LEAGUE,RFS (LAT) x Jablonec (CZE),RFS (LAT),Jablonec (CZE),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Jablonec (CZE) (+2.5),1.04,43.3,1,2,1x2,1,GREEN
+2026-08-13,15:00,Jogo 3,EUROPA CONFERENCE LEAGUE,Drita (KOS) x Tre Fiori (SAN),Drita (KOS),Tre Fiori (SAN),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.4,5,0,5x0,1,GREEN
+2026-08-13,17:30,Jogo 4,ECUADOR 2,EL Nacional x San Antonio,EL Nacional,San Antonio,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,EL Nacional (+2.5),1.04,38.1,0,1,0x1,1,GREEN
+2026-08-13,21:30,Jogo 5,COPA LIBERTADORES,Rosario Central (ARG) x Corinthians (BRA),Rosario Central (ARG),Corinthians (BRA),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Corinthians (BRA) (+2.5),1.02,59.3,0,0,0x0,1,GREEN
+2026-08-14,08:35,Jogo 1,CHINA 1,Shandong Taishan x Qingdao Hainiu,Shandong Taishan,Qingdao Hainiu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,3,1,3x1,1,GREEN
+2026-08-14,13:00,Jogo 2,ESTONIA 1,Nomme Utd x Tammeka,Nomme Utd,Tammeka,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.2,0,1,0x1,1,GREEN
+2026-08-14,15:00,Jogo 3,ARGENTINA 2,Acassuso x Midland,Acassuso,Midland,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Acassuso (+2.5),1.02,56.7,1,1,1x1,1,GREEN
+2026-08-14,20:30,Jogo 4,ARGENTINA 2,Atl. Rafaela x Def. de Belgrano,Atl. Rafaela,Def. de Belgrano,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atl. Rafaela (+2.5),1.042,59.6,0,0,0x0,1,GREEN
+2026-08-14,23:00,Jogo 5,WOM USA 1,Seattle Reign W x Chicago W,Seattle Reign W,Chicago W,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.6,1,0,1x0,1,GREEN
+2026-08-15,09:00,Jogo 1,GERMANY 3,RW Essen x TSV Havelse,RW Essen,TSV Havelse,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.0,1,0,1x0,1,GREEN
+2026-08-15,11:00,Jogo 2,ESTONIA 2,Maardu x FC Tallinn,Maardu,FC Tallinn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.9,1,0,1x0,1,GREEN
+2026-08-15,13:00,Jogo 3,ESTONIA 2,Tartu Welco x Flora U21,Tartu Welco,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.1,2,1,2x1,1,GREEN
+2026-08-15,14:30,Jogo 4,ARGENTINA 1,Aldosivi x Tigre,Aldosivi,Tigre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Aldosivi (+2.5),1.04,58.5,0,0,0x0,1,GREEN
+2026-08-15,20:30,Jogo 5,USA 1,Orlando City x FC Cincinnati,Orlando City,FC Cincinnati,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,116.0,1,1,1x1,1,GREEN
+2026-08-16,09:00,Jogo 1,DENMARK 1,Nordsjaelland x Silkeborg,Nordsjaelland,Silkeborg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,1,0,1x0,1,GREEN
+2026-08-16,13:00,Jogo 2,ESTONIA 1,Harju JK Laagri x Levadia,Harju JK Laagri,Levadia,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,119.8,1,2,1x2,1,GREEN
+2026-08-16,15:00,Jogo 3,ARGENTINA 2,Tristan Suarez x Almirante Brown,Tristan Suarez,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.02,59.3,3,1,3x1,1,GREEN
+2026-08-16,17:00,Jogo 4,ARGENTINA 2,Central Norte x Gimnasia y Tiro,Central Norte,Gimnasia y Tiro,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Gimnasia y Tiro (+2.5),1.04,59.8,0,0,0x0,1,GREEN
+2026-08-16,20:15,Jogo 5,ARGENTINA 1,Barracas Central x Rosario Central,Barracas Central,Rosario Central,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Rosario Central (+2.5),1.04,58.5,0,1,0x1,1,GREEN
+2026-08-17,13:00,Jogo 1,ESTONIA 2,Nomme Utd U21 x Nomme Kalju U21,Nomme Utd U21,Nomme Kalju U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,117.5,2,0,2x0,1,GREEN
+2026-08-17,15:00,Jogo 2,ARGENTINA 2,All Boys x Nueva Chicago,All Boys,Nueva Chicago,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nueva Chicago (+2.5),1.02,58.8,1,0,1x0,1,GREEN
+2026-08-17,18:00,Jogo 3,ARGENTINA 3,Santamarina x Fundacion Amigos,Santamarina,Fundacion Amigos,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fundacion Amigos (+2.5),1.036,54.4,2,0,2x0,1,GREEN
+2026-08-17,20:00,Jogo 4,BRAZIL 3,Ferroviaria x Paysandu PA,Ferroviaria,Paysandu PA,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Paysandu PA (+2.5),1.02,45.8,4,0,4x0,0,RED
+2026-08-17,21:30,Jogo 5,CHILE 1,Palestino x Huachipato,Palestino,Huachipato,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.2,5,1,5x1,1,GREEN
+2026-08-18,00:06,Jogo 1,MEXICO 1,Pachuca x Puebla,Pachuca,Puebla,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.8,2,3,2x3,1,GREEN
+2026-08-18,13:30,Jogo 2,ISRAEL 2,Hapoel Kfar Shalem x MS Kafr Qasim,Hapoel Kfar Shalem,MS Kafr Qasim,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.04,94.4,2,0,2x0,1,GREEN
+2026-08-18,16:00,Jogo 3,EUROPA CHAMPIONS LEAGUE,Levski Sofia (BUL) x AEK Athens (GRE),Levski Sofia (BUL),AEK Athens (GRE),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Levski Sofia (BUL) (+2.5),1.03,49.0,0,0,0x0,1,GREEN
+2026-08-18,19:00,Jogo 4,COPA LIBERTADORES,Ind. Rivadavia (ARG) x Fluminense (BRA),Ind. Rivadavia (ARG),Fluminense (BRA),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fluminense (BRA) (+2.5),1.02,50.3,1,1,1x1,1,GREEN
+2026-08-18,21:30,Jogo 5,COPA LIBERTADORES,U. Catolica (CHI) x Estudiantes L.P. (ARG),U. Catolica (CHI),Estudiantes L.P. (ARG),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,U. Catolica (CHI) (+2.5),1.02,52.3,0,3,0x3,0,RED
+2026-08-19,08:35,Jogo 1,CHINA 1,Shanghai Port x Dalian Yingbo,Shanghai Port,Dalian Yingbo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,110.9,1,1,1x1,1,GREEN
+2026-08-19,12:00,Jogo 2,SERBIA 2,Graficar Beograd x Loznica,Graficar Beograd,Loznica,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Loznica (+2.5),1.02,52.3,2,2,2x2,1,GREEN
+2026-08-19,19:00,Jogo 3,COPA LIBERTADORES,Coquimbo (CHI) x Platense (ARG),Coquimbo (CHI),Platense (ARG),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (ARG) (+2.5),1.02,52.4,0,0,0x0,1,GREEN
+2026-08-19,21:30,Jogo 4,COPA SUDAMERICANA,Montevideo City (URU) x Tigre (ARG),Montevideo City (URU),Tigre (ARG),🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Montevideo City (URU) (+2.5),1.04,52.4,2,1,2x1,1,GREEN
+2026-08-19,23:30,Jogo 5,USA 1,Portland Timbers x San Diego FC,Portland Timbers,San Diego FC,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,112.8,3,1,3x1,1,GREEN
+2026-08-20,09:00,Jogo 1,ESTONIA 2,Tartu Welco x Levadia U21,Tartu Welco,Levadia U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.2,4,2,4x2,1,GREEN
+2026-08-20,10:30,Jogo 2,EGYPT 2,El Mansoura x Baladiyat El Mahalla,El Mansoura,Baladiyat El Mahalla,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Baladiyat El Mahalla (+2.5),1.039,57.9,2,1,2x1,1,GREEN
+2026-08-20,16:00,Jogo 3,EUROPA LEAGUE,Benfica (POR) x Aarhus (DEN),Benfica (POR),Aarhus (DEN),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.9,3,1,3x1,1,GREEN
+2026-08-20,18:10,Jogo 4,ECUADOR 2,San Antonio x Nueve de Octubre,San Antonio,Nueve de Octubre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Antonio (+2.5),1.039,57.1,0,0,0x0,1,GREEN
+2026-08-20,21:30,Jogo 5,COPA SUDAMERICANA,Botafogo RJ (BRA) x Cienciano (PER),Botafogo RJ (BRA),Cienciano (PER),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,1,0,1x0,1,GREEN
+2026-08-21,10:30,Jogo 1,EGYPT 2,Al-Sekka x Tersana,Al-Sekka,Tersana,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Tersana (+2.5),1.037,57.9,0,1,0x1,1,GREEN
+2026-08-21,13:00,Jogo 2,GERMANY CUP,SC St.Tonis x Eintracht Frankfurt,SC St.Tonis,Eintracht Frankfurt,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,153.5,0,11,0x11,1,GREEN
+2026-08-21,15:00,Jogo 3,ICELAND 2,Aegir x Afturelding,Aegir,Afturelding,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,122.0,0,7,0x7,1,GREEN
+2026-08-21,20:00,Jogo 4,ARGENTINA 1,Estudiantes Rio Cuarto x San Lorenzo,Estudiantes Rio Cuarto,San Lorenzo,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Estudiantes Rio Cuarto (+2.5),1.036,60.8,0,0,0x0,1,GREEN
+2026-08-21,21:30,Jogo 5,BOLIVIA 1,Oriente Petrolero x SA Bulo Bulo,Oriente Petrolero,SA Bulo Bulo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,109.4,4,0,4x0,1,GREEN
+2026-08-22,08:00,Jogo 1,GERMANY CUP,Wehen x Bayer Leverkusen,Wehen,Bayer Leverkusen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,0,4,0x4,1,GREEN
+2026-08-22,10:30,Jogo 2,GERMANY CUP,Hemelingen x Hannover,Hemelingen,Hannover,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,153.5,1,9,1x9,1,GREEN
+2026-08-22,13:00,Jogo 3,GERMANY CUP,Eintracht Trier x RB Leipzig,Eintracht Trier,RB Leipzig,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,141.5,0,6,0x6,1,GREEN
+2026-08-22,15:30,Jogo 4,ARGENTINA 2,Def. de Belgrano x Almirante Brown,Def. de Belgrano,Almirante Brown,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Almirante Brown (+2.5),1.02,59.6,0,2,0x2,1,GREEN
+2026-08-22,21:00,Jogo 5,ARGENTINA 1,Huracan x Dep. Riestra,Huracan,Dep. Riestra,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Dep. Riestra (+2.5),1.035,64.1,0,0,0x0,1,GREEN
+2026-08-23,08:00,Jogo 1,GERMANY CUP,Jeddeloh x Heidenheim,Jeddeloh,Heidenheim,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,128.0,5,2,5x2,1,GREEN
+2026-08-23,09:30,Jogo 2,NETHERLANDS 1,PSV x Groningen,PSV,Groningen,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,118.6,5,1,5x1,1,GREEN
+2026-08-23,11:00,Jogo 3,EGYPT 1,El Gouna x Modern Sport,El Gouna,Modern Sport,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Modern Sport (+2.5),1.042,59.8,1,1,1x1,1,GREEN
+2026-08-23,13:00,Jogo 4,GERMANY CUP,Phonix Lubeck x Paderborn,Phonix Lubeck,Paderborn,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,121.2,2,4,2x4,1,GREEN
+2026-08-23,14:45,Jogo 5,ARGENTINA 1,Barracas Central x Platense,Barracas Central,Platense,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Platense (+2.5),1.038,57.7,1,2,1x2,1,GREEN
+2026-08-24,12:30,Jogo 1,ESTONIA 2,Elva x Flora U21,Elva,Flora U21,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,114.0,0,0,0x0,0,RED
+2026-08-24,13:00,Jogo 2,GERMANY CUP,Altglienicke x Wolfsburg,Altglienicke,Wolfsburg,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,123.5,3,3,3x3,1,GREEN
+2026-08-24,16:00,Jogo 3,ARGENTINA 2,Club A. Guemes x Atl. Rafaela,Club A. Guemes,Atl. Rafaela,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Atl. Rafaela (+2.5),1.02,57.2,0,0,0x0,1,GREEN
+2026-08-24,18:30,Jogo 4,PARAGUAY 1,Libertad Asuncion x San Lorenzo,Libertad Asuncion,San Lorenzo,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.4,1,0,1x0,1,GREEN
+2026-08-24,21:15,Jogo 5,ARGENTINA 1,Lanus x Argentinos Jrs,Lanus,Argentinos Jrs,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Argentinos Jrs (+2.5),1.02,54.2,1,1,1x1,1,GREEN
+2026-08-25,07:30,Jogo 1,SOUTH KOREA 1,Seoul x Bucheon FC 1995,Seoul,Bucheon FC 1995,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,98.4,1,0,1x0,1,GREEN
+2026-08-25,14:30,Jogo 2,SOUTH AFRICA 1,Marumo Gallants x TS Galaxy,Marumo Gallants,TS Galaxy,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,TS Galaxy (+2.5),1.036,54.4,2,3,2x3,1,GREEN
+2026-08-25,16:15,Jogo 3,ICELAND 2,Afturelding x Grotta,Afturelding,Grotta,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,120.5,2,0,2x0,1,GREEN
+2026-08-25,18:30,Jogo 4,PARAGUAY 1,2 de Mayo x Guarani,2 de Mayo,Guarani,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,2 de Mayo (+2.5),1.036,52.3,0,0,0x0,1,GREEN
+2026-08-25,20:00,Jogo 5,BOLIVIA 1,Universitario de Vinto x Nacional Potosi,Universitario de Vinto,Nacional Potosi,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.9,2,0,2x0,1,GREEN
+2026-08-26,07:30,Jogo 1,SOUTH KOREA 1,Daejeon x Ulsan HD,Daejeon,Ulsan HD,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,96.2,2,1,2x1,1,GREEN
+2026-08-26,13:00,Jogo 2,ESTONIA 1,Tammeka x Flora,Tammeka,Flora,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,103.9,3,1,3x1,1,GREEN
+2026-08-26,15:00,Jogo 3,ARGENTINA 2,Chaco For Ever x San Miguel,Chaco For Ever,San Miguel,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,San Miguel (+2.5),1.03,57.5,3,0,3x0,0,RED
+2026-08-26,19:00,Jogo 4,BRAZIL 4,EC Sao Jose x Goiatuba,EC Sao Jose,Goiatuba,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Goiatuba (+2.5),1.02,57.9,0,0,0x0,1,GREEN
+2026-08-26,21:30,Jogo 5,ARGENTINA 2,Central Norte x Deportivo Moron,Central Norte,Deportivo Moron,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Deportivo Moron (+2.5),1.02,57.2,0,0,0x0,1,GREEN
+2026-08-27,11:00,Jogo 1,EGYPT 1,Modern Sport x Ghazl El Mahallah,Modern Sport,Ghazl El Mahallah,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Ghazl El Mahallah (+2.5),1.034,61.3,2,0,2x0,1,GREEN
+2026-08-27,13:45,Jogo 2,EUROPA CONFERENCE LEAGUE,Freiburg (GER) x Motherwell (SCO),Freiburg (GER),Motherwell (SCO),⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,108.8,4,1,4x1,1,GREEN
+2026-08-27,15:30,Jogo 3,ENGLAND CUP,Chelsea x Luton,Chelsea,Luton,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,125.0,2,0,2x0,1,GREEN
+2026-08-27,19:30,Jogo 4,BOLIVIA 1,Independiente x Guabira,Independiente,Guabira,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,97.0,3,1,3x1,1,GREEN
+2026-08-27,21:00,Jogo 5,ECUADOR 2,Cuenca Juniors x Nueve de Octubre,Cuenca Juniors,Nueve de Octubre,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Nueve de Octubre (+2.5),1.038,63.1,1,1,1x1,1,GREEN
+2026-08-28,06:00,Jogo 1,UKRAINE 2,Lokomotyv Kyiv x Fenix Mariupol,Lokomotyv Kyiv,Fenix Mariupol,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,Fenix Mariupol (+2.5),1.037,46.9,1,3,1x3,1,GREEN
+2026-08-28,07:30,Jogo 2,SOUTH KOREA 2,Ansan Greeners x Daegu,Ansan Greeners,Daegu,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.2,1,2,1x2,1,GREEN
+2026-08-28,11:00,Jogo 3,EGYPT 1,Al Qanah x El Gouna,Al Qanah,El Gouna,🛡️ Saldo Menor (+2.5 Zebra),Saldo Menor,El Gouna (+2.5),1.033,60.3,1,1,1x1,1,GREEN
+2026-08-28,13:30,Jogo 4,AUSTRIA 2,ASK Voitsberg x Liefering,ASK Voitsberg,Liefering,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,106.0,2,3,2x3,1,GREEN
+2026-08-28,16:15,Jogo 5,ICELAND 2,Throttur x Aegir,Throttur,Aegir,⚽ Over 0.5 FT (Gols),Over 0.5 FT,Mais de 0.5 Gols,1.03,129.5,7,2,7x2,1,GREEN

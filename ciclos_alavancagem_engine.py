@@ -120,7 +120,7 @@ def extrair_candidatos_dc_1x(df: pd.DataFrame) -> List[Dict[str, Any]]:
             continue
 
         home_team = str(row.get('Home') or '')
-        odd_1x = row.get('Odd_1X_FT')
+        odd_1x = row.get('Odd_1X_FT') if pd.notna(row.get('Odd_1X_FT')) else row.get('Odd_DC_1X')
         odd_1x = pd.to_numeric(odd_1x, errors='coerce')
 
         if pd.isna(odd_1x) or odd_1x <= 1.01 or odd_1x > 1.25:

@@ -1,0 +1,346 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+tracker_favorito_dominante_inplay.py — Rastreador In-Play de Back Favorito Dominante.
+
+MÉTODO PRÉ-REGISTRADO: PRE_REGISTRO_FAVORITO_DOMINANTE.md
+STATUS: OBSERVACAO_STAKE_ZERO (stake: 0.0)
+
+GATILHO:
+- Minuto entre 30' e 70'.
+- Favorito pré-jogo perdendo por 1 gol (0x1, 1x2) OU empatando (0x0, 1x1 após min 40).
+- Dominância estatística Opta ao vivo:
+  * xG_fav >= 1.00
+  * xG_fav >= 2.5 * xG_zebra
+  * Chutes no alvo_fav >= 3
+  * Toques na área_fav >= 15
+- Liquidação pós-jogo via agenda do dia (get-matches-by-date).
+"""
+
+import os, sys, re, csv, json, time, argparse
+from datetime import datetime, timezone
+import urllib.request, urllib.parse
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+LOG_CSV = os.path.join(AQUI, "favorito_dominante_log.csv")
+HOST = "free-api-live-football-data.p.rapidapi.com"
+
+COLS = [
+    "data_utc", "match_id", "league_id", "home", "away",
+    "fav_side", "fav_team", "minuto", "placar_entrada",
+    "odd_inplay_est", "xg_fav", "xg_und", "razao_xg",
+    "sot_fav", "sot_und", "tbox_fav", "tbox_und", "bigch_fav",
+    "poss_fav", "tipo_gatilho", "status", "placar_ft", "resultado_fav", "pnl_simulado"
+]
+
+TETO_DIA = 200
+_gasto = {"dia": "", "n": 0}
+
+def load_key():
+    k = os.environ.get("RAPIDAPI_KEY")
+    if k:
+        return k
+    for p in (
+        os.path.join(AQUI, ".rapidapi_key"),
+        os.path.expanduser("~/.rapidapi_key"),
+        os.path.join(AQUI, "alerta.env")
+    ):
+        if os.path.exists(p):
+            for line in open(p, encoding="utf-8", errors="ignore"):
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if "=" in line:
+                    k_name, val = line.split("=", 1)
+                    if k_name.strip() in ("RAPIDAPI_KEY", "FOTMOB_API_KEY", "RAPID_KEY"):
+                        return val.strip().strip("'\"")
+                elif len(line) > 20 and not line.startswith("["):
+                    return line
+    return None
+
+def _pode_gastar():
+    hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    if _gasto["dia"] != hoje:
+        _gasto.update(dia=hoje, n=0)
+    return _gasto["n"] < TETO_DIA
+
+def api_get(path, key, retries=2):
+    if not _pode_gastar():
+        return None
+    url = f"https://{HOST}/{path}"
+    req = urllib.request.Request(url, headers={"x-rapidapi-host": HOST, "x-rapidapi-key": key})
+    for attempt in range(retries):
+        try:
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                _gasto["n"] += 1
+                rest = resp.headers.get("X-RateLimit-Requests-Remaining")
+                if rest and int(rest) < 800:
+                    print(f"  [PARADA SEGURA] Cota mensal baixa ({rest}) — pausando.")
+                    _gasto["n"] = TETO_DIA
+                    return None
+                return json.loads(resp.read().decode())
+        except Exception:
+            if attempt < retries - 1:
+                time.sleep(2)
+                continue
+            return None
+
+def extrair_minuto(live_time_obj):
+    if not live_time_obj:
+        return None
+    s = live_time_obj.get("short", "") or live_time_obj.get("long", "")
+    m = re.search(r"(\d+)", str(s))
+    return int(m.group(1)) if m else None
+
+def parse_num(val):
+    if val is None:
+        return 0.0
+    s = str(val).split("(")[0].strip().replace("%", "")
+    try:
+        return float(s)
+    except:
+        return 0.0
+
+def extrair_stats(eventid, key):
+    res = api_get(f"football-get-match-all-stats?eventid={eventid}", key)
+    if not res or res.get("status") != "success":
+        return None
+    out = {}
+    for grupo in (res.get("response", {}) or {}).get("stats", []) or []:
+        for st in grupo.get("stats", []) or []:
+            k, v = st.get("key"), st.get("stats")
+            if k and v and v[0] is not None and k not in out:
+                out[k] = v
+    return out if out else None
+
+def carregar_log():
+    if not os.path.exists(LOG_CSV):
+        return {}
+    registros = {}
+    try:
+        with open(LOG_CSV, mode="r", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            for r in reader:
+                registros[str(r["match_id"])] = r
+    except Exception as e:
+        print(f"Erro lendo {LOG_CSV}: {e}")
+    return registros
+
+def salvar_log(registros):
+    with open(LOG_CSV, mode="w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=COLS)
+        writer.writeheader()
+        for r in registros.values():
+            writer.writerow(r)
+
+def liquidar_pendentes(registros, key):
+    pendentes = [r for r in registros.values() if r["status"] == "PENDENTE"]
+    if not pendentes:
+        return
+    datas = sorted({str(p.get("data_utc", ""))[:10].replace("-", "") for p in pendentes})
+    datas = [d for d in datas if len(d) == 8][-3:]
+    placares = {}
+    for dia in datas:
+        ag = api_get(f"football-get-matches-by-date?date={dia}", key)
+        if not ag:
+            continue
+        for m in (ag.get("response", {}) or {}).get("matches", []) or []:
+            st = m.get("status", {}) or {}
+            if st.get("finished"):
+                gh = (m.get("home") or {}).get("score")
+                ga = (m.get("away") or {}).get("score")
+                if gh is not None and ga is not None:
+                    placares[str(m.get("id"))] = (int(gh), int(ga))
+    
+    atualizou = False
+    for pr in pendentes:
+        par = placares.get(str(pr["match_id"]))
+        if not par:
+            continue
+        gh_ft, ga_ft = par
+        fav_side = pr["fav_side"]
+        pr["placar_ft"] = f"{gh_ft}-{ga_ft}"
+        
+        # Venceu se o lado do favorito marcou mais gols FT
+        if fav_side == "HOME":
+            fav_ganhou = gh_ft > ga_ft
+        else:
+            fav_ganhou = ga_ft > gh_ft
+            
+        pr["resultado_fav"] = "VENCEU" if fav_ganhou else "NAO_VENCEU"
+        odd_est = float(pr.get("odd_inplay_est") or 1.90)
+        
+        # P&L com 5% de comissão no Green:
+        if fav_ganhou:
+            pr["pnl_simulado"] = round((odd_est - 1.0) * 0.95, 3)
+            res_txt = f"GREEN (+{pr['pnl_simulado']}u)"
+        else:
+            pr["pnl_simulado"] = -1.000
+            res_txt = "RED (-1.0u)"
+            
+        pr["status"] = "LIQUIDADO"
+        atualizou = True
+        print(f"  [LIQUIDAÇÃO FAVORITO] {pr['fav_team']} ({pr['fav_side']}) | FT: {pr['placar_ft']} | {res_txt}")
+        
+    if atualizou:
+        salvar_log(registros)
+
+def ciclo_monitoramento(key):
+    registros = carregar_log()
+    liquidar_pendentes(registros, key)
+    
+    live_res = api_get("football-current-live", key)
+    if not live_res or live_res.get("status") != "success":
+        return
+        
+    matches = (live_res.get("response", {}) or {}).get("live", [])
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    
+    novos = 0
+    for m in matches:
+        mid = str(m.get("id"))
+        if mid in registros:
+            continue
+            
+        st = m.get("status", {}) or {}
+        if st.get("finished") or not st.get("started"):
+            continue
+            
+        minuto = extrair_minuto(st.get("liveTime", {}))
+        if minuto is None or not (30 <= minuto <= 70):
+            continue
+            
+        home_name = (m.get("home") or {}).get("name", "Home")
+        away_name = (m.get("away") or {}).get("name", "Away")
+        gh = (m.get("home") or {}).get("score", 0)
+        ga = (m.get("away") or {}).get("score", 0)
+        placar_str = f"{gh}-{ga}"
+        
+        # Só avalia se:
+        # 1. Alguém estiver perdendo por 1 gol (0x1, 1x2, 1x0, 2x1)
+        # 2. OU empatado (0x0, 1x1) entre min 40 e 65
+        diff_gols = abs(gh - ga)
+        if diff_gols > 1:
+            continue
+        if diff_gols == 0 and not (40 <= minuto <= 65):
+            continue
+            
+        # Puxa stats Opta ao vivo
+        stats = extrair_stats(mid, key)
+        if not stats:
+            continue
+            
+        xg_h = parse_num((stats.get("expected_goals") or [0, 0])[0])
+        xg_a = parse_num((stats.get("expected_goals") or [0, 0])[1])
+        sot_h = parse_num((stats.get("ShotsOnTarget") or [0, 0])[0])
+        sot_a = parse_num((stats.get("ShotsOnTarget") or [0, 0])[1])
+        tbox_h = parse_num((stats.get("touches_opp_box") or [0, 0])[0])
+        tbox_a = parse_num((stats.get("touches_opp_box") or [0, 0])[1])
+        bigch_h = parse_num((stats.get("big_chance") or [0, 0])[0])
+        bigch_a = parse_num((stats.get("big_chance") or [0, 0])[1])
+        poss_h = parse_num((stats.get("BallPossesion") or [50, 50])[0])
+        poss_a = parse_num((stats.get("BallPossesion") or [50, 50])[1])
+        
+        # Identifica se há dominância de algum lado
+        # Critério: xG >= 1.0, xG >= 2.5 * zebra, sot >= 3, tbox >= 15
+        fav_side = None
+        if xg_h >= 1.0 and xg_h >= 2.5 * max(xg_a, 0.1) and sot_h >= 3 and tbox_h >= 15:
+            fav_side = "HOME"
+            fav_team = home_name
+            xg_fav, xg_und = xg_h, xg_a
+            sot_fav, sot_und = sot_h, sot_a
+            tbox_fav, tbox_und = tbox_h, tbox_a
+            bigch_fav = bigch_h
+            poss_fav = poss_h
+            is_trailing = (gh < ga)
+            is_drawn = (gh == ga)
+        elif xg_a >= 1.0 and xg_a >= 2.5 * max(xg_h, 0.1) and sot_a >= 3 and tbox_a >= 15:
+            fav_side = "AWAY"
+            fav_team = away_name
+            xg_fav, xg_und = xg_a, xg_h
+            sot_fav, sot_und = sot_a, sot_h
+            tbox_fav, tbox_und = tbox_a, tbox_h
+            bigch_fav = bigch_a
+            poss_fav = poss_a
+            is_trailing = (ga < gh)
+            is_drawn = (gh == ga)
+            
+        if not fav_side:
+            continue
+            
+        # O favorito dominante precisa estar perdendo OU empatando
+        if not (is_trailing or is_drawn):
+            continue
+            
+        tipo_gatilho = "PERDENDO_POR_1" if is_trailing else "EMPATE_TARDIO"
+        # Odd estimada in-play: perdendo ~2.30; empatando aos 45-65 ~1.85
+        odd_est = 2.30 if is_trailing else 1.85
+        razao_xg = round(xg_fav / max(xg_und, 0.05), 2)
+        
+        print(f"\n[GATILHO FAVORITO DOMINANTE - {tipo_gatilho}]")
+        print(f"  Jogo: {home_name} vs {away_name} ({minuto}') | Placar: {placar_str}")
+        print(f"  Dominante: {fav_team} ({fav_side}) | xG: {xg_fav:.2f} vs {xg_und:.2f} (Razão {razao_xg}x)")
+        print(f"  Toques na Área: {tbox_fav} vs {tbox_und} | Chutes no Alvo: {sot_fav} vs {sot_und} | Odd Est: {odd_est}")
+        
+        registros[mid] = {
+            "data_utc": now_str,
+            "match_id": mid,
+            "league_id": m.get("leagueId", ""),
+            "home": home_name,
+            "away": away_name,
+            "fav_side": fav_side,
+            "fav_team": fav_team,
+            "minuto": minuto,
+            "placar_entrada": placar_str,
+            "odd_inplay_est": odd_est,
+            "xg_fav": xg_fav,
+            "xg_und": xg_und,
+            "razao_xg": razao_xg,
+            "sot_fav": sot_fav,
+            "sot_und": sot_und,
+            "tbox_fav": tbox_fav,
+            "tbox_und": tbox_und,
+            "bigch_fav": bigch_fav,
+            "poss_fav": poss_fav,
+            "tipo_gatilho": tipo_gatilho,
+            "status": "PENDENTE",
+            "placar_ft": "",
+            "resultado_fav": "",
+            "pnl_simulado": ""
+        }
+        novos += 1
+        
+    if novos > 0:
+        salvar_log(registros)
+        print(f"  [+] {novos} novo(s) sinal(is) de Favorito Dominante registrado(s) em {LOG_CSV}")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--once", action="store_true")
+    parser.add_argument("--intervalo", type=int, default=180)
+    args = parser.parse_args()
+    
+    key = load_key()
+    if not key:
+        print("[ERRO] Chave RapidAPI não encontrada.")
+        sys.exit(1)
+        
+    print("=" * 70)
+    print("RASTREADOR IN-PLAY — BACK FAVORITO DOMINANTE (STAKE ZERO)")
+    print(f"Log: {LOG_CSV}")
+    print(f"Intervalo: {args.intervalo}s | Teto: {TETO_DIA} req/dia")
+    print("=" * 70)
+    
+    if args.once:
+        ciclo_monitoramento(key)
+        return
+        
+    try:
+        while True:
+            ciclo_monitoramento(key)
+            time.sleep(args.intervalo)
+    except KeyboardInterrupt:
+        print("\n[Encerrado pelo usuário]")
+
+if __name__ == "__main__":
+    main()

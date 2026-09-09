@@ -12,3 +12,6 @@ betfair_snapshot.csv
 # Rascunhos e PKL
 scratch/
 *.pkl
+.rapidapi_key
+hist_agenda/
+hist_stats/

@@ -1,0 +1,331 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+coletor_inplay_min80.py — Coletor In-Play de Estatísticas ao Vivo para Under Limite (Min 78-83).
+
+POR QUE EXISTE:
+Testar empiricamente (sem "achismos" ou teorias) se as estatísticas acumuladas até o
+minuto 80 (xG total, chutes no alvo, toques na área e grandes chances) conseguem prever
+a ocorrência de gols tardios (minuto 80 ao 95) e gerar um filtro lucrativo de Under Limite.
+
+FUNCIONAMENTO:
+1. Consulta `football-current-live` periodicamente (a cada 60s).
+2. Quando uma partida entra na janela de Under Limite (minuto 78 a 83):
+   - Captura placar atual, minuto exato e consulta `football-get-match-all-stats`.
+   - Extrai xG, chutes no alvo, toques na área e grandes chances.
+   - Registra no CSV `inplay_min80_log.csv` com status PENDENTE.
+3. Quando a partida termina:
+   - Captura o placar final e liquida: gol_tardio = 1 (saiu gol pós-80') ou 0 (GREEN Under).
+
+USO:
+  python coletor_inplay_min80.py             # Roda em loop contínuo
+  python coletor_inplay_min80.py --once      # Executa uma única varredura e sai
+"""
+
+import os, sys, re, csv, json, time, argparse
+from datetime import datetime, timezone
+import urllib.request, urllib.parse
+
+AQUI = os.path.dirname(os.path.abspath(__file__))
+LOG_CSV = os.path.join(AQUI, "inplay_min80_log.csv")
+KEY_PATH = os.path.join(AQUI, ".rapidapi_key")
+HOST = "free-api-live-football-data.p.rapidapi.com"
+
+COLS = [
+    "data_utc", "match_id", "league_id", "home", "away",
+    "minuto", "placar_min80", "gols_min80", "tem_stats",
+    "xg_h", "xg_a", "xg_tot",
+    "shots_h", "shots_a", "shots_tot",
+    "sot_h", "sot_a", "sot_tot",
+    "tbox_h", "tbox_a", "tbox_tot",
+    "bigch_h", "bigch_a", "bigch_tot",
+    "poss_h", "poss_a",
+    "status", "placar_ft", "gols_ft", "gol_tardio"
+]
+
+def load_key():
+    k = os.environ.get("RAPIDAPI_KEY")
+    if k:
+        return k
+    for p in (
+        os.path.join(AQUI, ".rapidapi_key"),
+        os.path.expanduser("~/.rapidapi_key"),
+        os.path.join(AQUI, "alerta.env")
+    ):
+        if os.path.exists(p):
+            for line in open(p, encoding="utf-8", errors="ignore"):
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if "=" in line:
+                    k_name, val = line.split("=", 1)
+                    if k_name.strip() in ("RAPIDAPI_KEY", "FOTMOB_API_KEY", "RAPID_KEY"):
+                        return val.strip().strip("'\"")
+                elif len(line) > 20 and not line.startswith("["):
+                    return line
+    return None
+
+# Teto DIARIO proprio: o servico `xg-ht` consome a MESMA cota mensal. Sem este teto,
+# um defeito de liquidacao drena o mes inteiro em horas (foi o que a auditoria achou).
+TETO_DIA = 260
+_gasto = {"dia": "", "n": 0}
+
+
+def _pode_gastar():
+    hoje = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    if _gasto["dia"] != hoje:
+        _gasto.update(dia=hoje, n=0)
+    return _gasto["n"] < TETO_DIA
+
+
+def api_get(path, key, retries=2):
+    if not _pode_gastar():
+        return None                       # dorme ate virar o dia; NAO mata o processo
+    url = f"https://{HOST}/{path}"
+    req = urllib.request.Request(url, headers={"x-rapidapi-host": HOST, "x-rapidapi-key": key})
+    for attempt in range(retries):
+        try:
+            with urllib.request.urlopen(req, timeout=25) as resp:
+                _gasto["n"] += 1
+                rest = resp.headers.get("X-RateLimit-Requests-Remaining")
+                if rest and int(rest) < 800:
+                    print(f"  [PARADA SEGURA] cota mensal baixa ({rest}) — pausando o dia.")
+                    _gasto["n"] = TETO_DIA
+                    return None
+                return json.loads(resp.read().decode())
+        except Exception:
+            if attempt < retries - 1:
+                time.sleep(2)
+                continue
+            return None
+
+
+def extrair_minuto(live_time_obj):
+    if not live_time_obj:
+        return None
+    s = live_time_obj.get("short", "") or live_time_obj.get("long", "")
+    m = re.search(r"(\d+)", str(s))
+    return int(m.group(1)) if m else None
+
+def parse_num(val):
+    if val is None:
+        return 0.0
+    s = str(val).split("(")[0].strip().replace("%", "")
+    try:
+        return float(s)
+    except:
+        return 0.0
+
+def extrair_stats(eventid, key):
+    res = api_get(f"football-get-match-all-stats?eventid={eventid}", key)
+    if not res or res.get("status") != "success":
+        return None
+    
+    out = {}
+    for grupo in (res.get("response", {}) or {}).get("stats", []) or []:
+        for st in grupo.get("stats", []) or []:
+            k, v = st.get("key"), st.get("stats")
+            if k and v and v[0] is not None and k not in out:
+                out[k] = v
+    return out if out else None
+
+def carregar_log():
+    if not os.path.exists(LOG_CSV):
+        return {}
+    registros = {}
+    try:
+        with open(LOG_CSV, mode="r", encoding="utf-8-sig") as f:
+            reader = csv.DictReader(f)
+            for r in reader:
+                registros[str(r["match_id"])] = r
+    except Exception as e:
+        print(f"Erro lendo {LOG_CSV}: {e}")
+    return registros
+
+def salvar_log(registros):
+    with open(LOG_CSV, mode="w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=COLS)
+        writer.writeheader()
+        for r in registros.values():
+            writer.writerow(r)
+
+def liquidar_partidas_pendentes(registros, key):
+    """Liquida pela AGENDA DO DIA: 1 requisicao devolve o placar de TODAS as partidas da data.
+
+    Por que mudou: `football-get-match-detail` NAO traz placar — auditado, nao existe `scoreStr`
+    no payload; a versao anterior nunca liquidava nada. E consultava 1 requisicao por pendente
+    a CADA ciclo, o que drenaria a cota mensal inteira em poucas horas.
+    """
+    pendentes = [r for r in registros.values() if r["status"] == "PENDENTE"]
+    if not pendentes:
+        return
+    datas = sorted({str(p.get("data_utc", ""))[:10].replace("-", "") for p in pendentes})
+    datas = [d for d in datas if len(d) == 8][-3:]        # so os 3 dias mais recentes
+    placares = {}
+    for dia in datas:
+        ag = api_get(f"football-get-matches-by-date?date={dia}", key)
+        if not ag:
+            continue
+        for m in (ag.get("response", {}) or {}).get("matches", []) or []:
+            st = m.get("status", {}) or {}
+            if st.get("finished"):
+                gh = (m.get("home") or {}).get("score")
+                ga = (m.get("away") or {}).get("score")
+                if gh is not None and ga is not None:
+                    placares[str(m.get("id"))] = (int(gh), int(ga))
+
+    atualizou = False
+    for pr in pendentes:
+        par = placares.get(str(pr["match_id"]))
+        if not par:
+            continue
+        gh_ft, ga_ft = par
+        gols_ft = gh_ft + ga_ft
+        gols_min80 = int(pr["gols_min80"])
+        pr["placar_ft"] = f"{gh_ft}-{ga_ft}"
+        pr["gols_ft"] = gols_ft
+        pr["gol_tardio"] = 1 if gols_ft > gols_min80 else 0
+        pr["status"] = "LIQUIDADO"
+        atualizou = True
+        res_str = "GOL TARDIO (RED Under)" if pr["gol_tardio"] == 1 else "SEM GOL (GREEN Under)"
+        print(f"  [LIQUIDACAO] {pr['home']} x {pr['away']} | 80': {pr['placar_min80']} -> "
+              f"FT: {pr['placar_ft']} | {res_str}")
+    if atualizou:
+        salvar_log(registros)
+
+
+def ciclo_monitoramento(key):
+    registros = carregar_log()
+    
+    # 1. Primeiro liquida as que estavam pendentes
+    liquidar_partidas_pendentes(registros, key)
+    
+    # 2. Busca partidas ao vivo
+    live_res = api_get("football-current-live", key)
+    if not live_res or live_res.get("status") != "success":
+        return
+    
+    matches = (live_res.get("response", {}) or {}).get("live", [])
+    now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+    
+    novos = 0
+    for m in matches:
+        mid = str(m.get("id"))
+        st = m.get("status", {}) or {}
+        
+        # Só partidas em andamento
+        if st.get("finished") or not st.get("started"):
+            continue
+        
+        live_time = st.get("liveTime", {})
+        minuto = extrair_minuto(live_time)
+        if minuto is None:
+            continue
+        
+        # JANELA DE CAPTURA DO UNDER LIMITE: Minuto 78 a 83
+        if 78 <= minuto <= 83:
+            # Já capturamos essa partida?
+            if mid in registros:
+                continue
+            
+            home_name = (m.get("home") or {}).get("name", "Home")
+            away_name = (m.get("away") or {}).get("name", "Away")
+            home_score = (m.get("home") or {}).get("score", 0)
+            away_score = (m.get("away") or {}).get("score", 0)
+            placar_80 = f"{home_score}-{away_score}"
+            gols_80 = home_score + away_score
+            
+            print(f"\n[DETECTADO MINUTO {minuto}'] {home_name} vs {away_name} (Placar: {placar_80})")
+            print(f"  Buscando estatísticas profundas in-play (eventid: {mid})...")
+            
+            stats = extrair_stats(mid, key)
+            tem_stats = 1 if stats else 0
+            if not stats:
+                # 6a Lei do GEMINI.md: dado ausente NAO pode virar 0. Sem stats o jogo
+                # nao entra — senao o log fica com xG=0 indistinguivel de xG real zero.
+                print('  [sem stats] liga sem cobertura Opta — jogo NAO registrado.')
+                continue
+            
+            xg_h = parse_num((stats or {}).get("expected_goals", [0, 0])[0])
+            xg_a = parse_num((stats or {}).get("expected_goals", [0, 0])[1])
+            xg_tot = round(xg_h + xg_a, 2)
+            
+            shots_h = parse_num((stats or {}).get("total_shots", [0, 0])[0])
+            shots_a = parse_num((stats or {}).get("total_shots", [0, 0])[1])
+            shots_tot = int(shots_h + shots_a)
+            
+            sot_h = parse_num((stats or {}).get("ShotsOnTarget", [0, 0])[0])
+            sot_a = parse_num((stats or {}).get("ShotsOnTarget", [0, 0])[1])
+            sot_tot = int(sot_h + sot_a)
+            
+            tbox_h = parse_num((stats or {}).get("touches_opp_box", [0, 0])[0])
+            tbox_a = parse_num((stats or {}).get("touches_opp_box", [0, 0])[1])
+            tbox_tot = int(tbox_h + tbox_a)
+            
+            bigch_h = parse_num((stats or {}).get("big_chance", [0, 0])[0])
+            bigch_a = parse_num((stats or {}).get("big_chance", [0, 0])[1])
+            bigch_tot = int(bigch_h + bigch_a)
+            
+            poss_h = parse_num((stats or {}).get("BallPossesion", [50, 50])[0])
+            poss_a = parse_num((stats or {}).get("BallPossesion", [50, 50])[1])
+            
+            print(f"  Stats capturadas: xG Total={xg_tot} | Chutes no Gol={sot_tot} | Toques na Área={tbox_tot} | BigChances={bigch_tot}")
+            
+            rec = {
+                "data_utc": now_str,
+                "match_id": mid,
+                "league_id": m.get("leagueId", ""),
+                "home": home_name,
+                "away": away_name,
+                "minuto": minuto,
+                "placar_min80": placar_80,
+                "gols_min80": gols_80,
+                "tem_stats": tem_stats,
+                "xg_h": xg_h, "xg_a": xg_a, "xg_tot": xg_tot,
+                "shots_h": shots_h, "shots_a": shots_a, "shots_tot": shots_tot,
+                "sot_h": sot_h, "sot_a": sot_a, "sot_tot": sot_tot,
+                "tbox_h": tbox_h, "tbox_a": tbox_a, "tbox_tot": tbox_tot,
+                "bigch_h": bigch_h, "bigch_a": bigch_a, "bigch_tot": bigch_tot,
+                "poss_h": poss_h, "poss_a": poss_a,
+                "status": "PENDENTE",
+                "placar_ft": "",
+                "gols_ft": "",
+                "gol_tardio": ""
+            }
+            registros[mid] = rec
+            novos += 1
+    
+    if novos > 0:
+        salvar_log(registros)
+        print(f"  [+] {novos} nova(s) partida(s) registrada(s) em {LOG_CSV}")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--once", action="store_true", help="Executa apenas uma rodada e encerra")
+    parser.add_argument("--intervalo", type=int, default=180, help="Intervalo em segundos entre checagens")
+    args = parser.parse_args()
+    
+    key = load_key()
+    if not key:
+        print("[ERRO] Chave RapidAPI não encontrada.")
+        sys.exit(1)
+        
+    print("=" * 70)
+    print("COLETOR IN-PLAY AO VIVO — UNDER LIMITE (MINUTO 78-83)")
+    print(f"Log de saída: {LOG_CSV}")
+    print(f"Checagem a cada {args.intervalo}s | teto proprio: {TETO_DIA} req/dia")
+    print("=" * 70)
+    
+    if args.once:
+        ciclo_monitoramento(key)
+        return
+        
+    try:
+        while True:
+            ciclo_monitoramento(key)
+            time.sleep(args.intervalo)
+    except KeyboardInterrupt:
+        print("\n[Encerrado pelo usuário]")
+
+if __name__ == "__main__":
+    main()

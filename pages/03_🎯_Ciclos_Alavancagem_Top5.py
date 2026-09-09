@@ -139,11 +139,12 @@ m5.metric("Projeção Hoje", f"R$ {proj_final:,.2f}", f"+R$ {proj_final - banca_
 st.divider()
 
 # ── Tabs Principais ──
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "🏆 TOP 5 Confrontos do Dia",
     "💰 Simulador do Ciclo (R$ 100 -> R$ 200)",
     "📋 Todos os Candidatos Analisados",
-    "🛡️ Regras e Gestão Anti-Ruína"
+    "🛡️ Regras e Gestão Anti-Ruína",
+    "📜 Histórico Real 2026 (1.192 Jogos)"
 ])
 
 # ── TAB 1: TOP 5 Confrontos ──
@@ -291,3 +292,64 @@ with tab4:
        - Mais do que 5 jogos no mesmo dia expõe o capital a cansaço e falta de liquidez.
        - Feche o dia após os 5 jogos e continue no dia seguinte com a mente fria.
     """)
+
+
+# ── TAB 5: Histórico Real 2026 (1.192 Jogos) ──
+with tab5:
+    st.subheader("📜 Histórico Real e Auditado — 2026 Completo (240 Dias)")
+    st.markdown("""
+    Todos os **1.192 confrontos** selecionados dia a dia pela engine do Radar desde **01/01/2026 até o presente**, liquidados com os **placares reais** das partidas.
+    """)
+
+    hist_file = ROOT / "simulacao_top5_2026_detalhada.csv"
+    if hist_file.exists():
+        df_hist = pd.read_csv(hist_file)
+        
+        # Métricas Consolidadas
+        h_tot = len(df_hist)
+        h_g = int(df_hist["Won"].sum())
+        h_r = h_tot - h_g
+        h_wr = (h_g / h_tot) * 100.0
+        h_odd = float(df_hist["Odd"].mean())
+
+        hc1, hc2, hc3, hc4, hc5 = st.columns(5)
+        hc1.metric("Total de Jogos", f"{h_tot:,}")
+        hc2.metric("Greens / Reds", f"{h_g:,} G / {h_r} R")
+        hc3.metric("Taxa de Acerto (WR)", f"{h_wr:.2f}%")
+        hc4.metric("Odd Média Executada", f"{h_odd:.3f}")
+        hc5.metric("Lucro com Trava R$ 150", "+R$ 3.835,92", "+38 ciclos")
+
+        # Filtros
+        st.markdown("---")
+        cf1, cf2, cf3 = st.columns(3)
+        with cf1:
+            meses_disp = ["Todos"] + sorted(list(pd.to_datetime(df_hist["Date"]).dt.strftime("%Y-%m").unique()))
+            mes_sel = st.selectbox("Filtrar por Mês", options=meses_disp, index=0)
+        with cf2:
+            metodos_disp = ["Todos"] + sorted(list(df_hist["Metodo_Curto"].unique()))
+            met_sel = st.selectbox("Filtrar por Método", options=metodos_disp, index=0)
+        with cf3:
+            res_disp = ["Todos", "GREEN", "RED"]
+            res_sel = st.selectbox("Filtrar por Resultado", options=res_disp, index=0)
+
+        df_view = df_hist.copy()
+        if mes_sel != "Todos":
+            df_view = df_view[pd.to_datetime(df_view["Date"]).dt.strftime("%Y-%m") == mes_sel]
+        if met_sel != "Todos":
+            df_view = df_view[df_view["Metodo_Curto"] == met_sel]
+        if res_sel != "Todos":
+            df_view = df_view[df_view["Resultado"] == res_sel]
+
+        st.markdown(f"**Exibindo {len(df_view)} jogos filtrados:**")
+        cols_show = ["Date", "Time", "Ordem_Ciclo", "League", "Match", "Metodo_Curto", "Selecao", "Odd", "Placar", "Resultado"]
+        st.dataframe(df_view[cols_show], use_container_width=True, hide_index=True)
+
+        st.download_button(
+            label="📥 Baixar Base Completa de 2026 em CSV",
+            data=df_hist.to_csv(index=False).encode('utf-8'),
+            file_name="historico_radar_top5_2026.csv",
+            mime="text/csv"
+        )
+    else:
+        st.info("Arquivo de simulação histórica ainda não gerado.")
+

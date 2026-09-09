@@ -1,7 +1,12 @@
 # ARKAD — Regras de Engenharia e Validação de Métodos
 > **LEIA ISTO ANTES DE:** montar método · auditar método · rodar no Streamlit · fazer backtest.
-> Este documento é a fonte única de verdade. Toda regra aqui nasceu de um erro real que já
+> Este documento é a fonte única de verdade (as REGRAS). Toda regra aqui nasceu de um erro real que já
 > custou tempo e dinheiro. Se contrariar seu instinto, o instinto está errado — siga o doc.
+>
+> **COORDENAÇÃO (Claude ↔ Antigravity/Gemini):** ao INICIAR uma sessão no ARKAD, todo AI lê também o
+> **[worklog.md](worklog.md)** (diário append-only — onde paramos) e o **[tasks.md](tasks.md)** (roadmap —
+> o que fazer). Ao TERMINAR, adiciona uma entrada NOVA no topo do worklog (nunca sobrescreve histórico).
+> Autoridade: GEMINI.md (regras) > tasks.md (o quê) > worklog.md (diário).
 
 ---
 
@@ -33,6 +38,17 @@
    não confirmar no **paper trading forward** (seção 2). Um mês bom é variância. Um placar raro
    que "sempre deu green" é a amostra pequena ainda não ter pego o red.
 
+6. **DADO AUSENTE VEM COMO ZERO — nunca filtre sobre estatística sem checar o flag.**
+   Na `Bases_de_Dados_API_FutPythonTrader_Bet365.csv`, quando a estatística não foi coletada ela é
+   gravada como **`0`, não como vazio**. `isna()` não pega nada; a coluna parece 100% preenchida.
+   **Só 63% dos jogos têm stats confiáveis** (xG: 22%). E o buraco **não é aleatório** — é **0% ou
+   100% por liga** (ITALY 4, FRANCE 4, SPAIN 4, VENEZUELA 2 = 0%; ITALY 1, FRANCE 1, SCOTLAND 1 =
+   100%). Logo **qualquer filtro do tipo `stat >= X` vira, na prática, um filtro de "liga grande"** —
+   e liga grande tem taxa-base diferente.
+   **Obrigatório:** juntar com `base_stats_flag.csv` (colunas `stats_ht_ok`, `stats_ft_ok`,
+   `xg_ht_ok`, `xg_ft_ok`) e comparar **sempre dentro do subconjunto com dado**.
+   Foi assim que um "edge" de **+12,24pp** virou **−2,33pp (p=0,618)** — ver Hall of Shame.
+
 ---
 
 ## 1. HALL OF SHAME — bugs reais, NÃO repita
@@ -40,6 +56,11 @@
 | Erro | O certo |
 |---|---|
 | Validar lay na odd de **back** (~13) em vez da real (~17) | Odd de lay real (`Odd_*_Lay`) em tudo |
+| **Stats ausentes gravadas como `0`** → o filtro `SoT>=3` virou filtro de "liga que tem dado". Radar HT: **+12,24pp** viraram **+3,27pp** (só jogos com stats) e **−2,33pp, p=0,618** com dado limpo do FotMob | Juntar `base_stats_flag.csv` e comparar dentro do subconjunto com dado. Coluna de contagem cheia de zeros exatos e **nenhum NaN** = suspeita imediata |
+| Assumir odd in-play **sem medir** (Radar HT supôs "odd de HT 1,80-2,05"; Late Goal supôs "Over 3,20-5,00") | Medir no coletor antes de desenhar. O real era **~1,23-2,32** no HT e **mediana 2,00** no Over (3 de 360 sinais na banda suposta) |
+| Inverter o lado de um método perdedor esperando ganhar | Medido: Back Under **−4,64%** e Back Over **−4,63%** no mesmo cohort (N=371). Os dois lados pagam o overround (2,36%) + comissão |
+| Buscar edge onde o dado é bom (elite) **e** onde o mercado é ruim (cauda longa) sem ver que são conjuntos **opostos** | Onde o xG existe, o mercado já o tem; onde o mercado é raso, não existe xG a nenhum preço. Medir cobertura ANTES de desenhar o método |
+| Achar que outra fonte de dados "preenche os buracos" da base | Medido: dos 292 jogos sem stats na base, o FotMob recuperou **1 (0%)**. A fronteira de cobertura é a mesma — quem não coleta, não coleta em lugar nenhum |
 | Confiar no **walk-forward** em base estática (0x0: +11% no walk-forward, **negativo** no real) | **Paper trading forward** na odd real é a autoridade; backtest só descarta |
 | **p-value** de WR vs 50% ("EV+ significante") | Comparar WR com **break-even WR** + **bootstrap por mês** |
 | "31/31 = 100% = alpha" | Placar raro: 100% é o esperado até o 1º red. Sem odd+break-even não diz nada |
