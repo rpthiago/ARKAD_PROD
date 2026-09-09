@@ -1,9 +1,21 @@
 # -*- coding: utf-8 -*-
 """Varredura de cobertura: para cada liga do ARKAD, testa se o FotMob/RapidAPI tem
 stats do 1o tempo (e xG). 2 requisicoes por liga. Para sozinho se a cota acabar."""
-import json, sys, time, urllib.request
+import os, json, sys, time, urllib.request
 
-KEY = "25f457d6d6msh7957c28b6440142p1c07fdjsn1b00fe338d7b"
+# NUNCA hardcode a chave: ela vaza no historico do git. Le do arquivo local (no .gitignore).
+def _load_key():
+    k = os.environ.get("RAPIDAPI_KEY")
+    if k:
+        return k
+    for _p in (os.path.join(os.path.dirname(os.path.abspath(__file__)), ".rapidapi_key"),
+               os.path.expanduser("~/.rapidapi_key")):
+        if os.path.exists(_p):
+            return open(_p).read().strip()
+    raise SystemExit("[erro] sem RAPIDAPI_KEY (env ou arquivo .rapidapi_key)")
+
+
+KEY = _load_key()
 HOST = "free-api-live-football-data.p.rapidapi.com"
 SAIDA = "cobertura_ligas.csv"
 

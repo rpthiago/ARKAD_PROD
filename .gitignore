@@ -15,3 +15,6 @@ scratch/
 .rapidapi_key
 hist_agenda/
 hist_stats/
+hist_stats_ft/
+*.bak_pre_blindagem
+*.orig

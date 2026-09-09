@@ -107,6 +107,7 @@
 - [x] **Lay Away, Lay Under 0.5, Lay 0x1 (pré-jogo)** (mortos no scan + histórico).
 - [x] **Filtros refinados do scan** (18 holders Lay Home = overfit, flipam no forward).
 - [x] **CS suite: Lay 2x2/0x3/2x0/0x2/1x0** (cauda gorda, liability, margem navalha).
+- [x] **xG 12 jogos como filtro de veto no Lay 0x0 (`sum_xg12 >= 2.80`)** (auditado por Claude: pico isolado de 2 cortes numa curva negativa de 2.20 a 3.50; inverte no split temporal da odd real [+0,92% treino vs −0,17% OOS]; p=0,669 controlado pelo preço; IC95 engole zero. ARQUIVADO como filtro ativo; mantido apenas K=12 como escolha física de engenharia de features futuras).
 
 ## 🧭 NORTE (a filosofia que sobrou de tudo)
 

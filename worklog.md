@@ -7,7 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
-## 2026-09-08 (noite) · Antigravity & Claude · Implantação e Alinhamento VPS de Favorito Dominante & In-Play Min 80
+## 2026-09-09 (noite) · Antigravity & Claude · Benchmark de Janelas de xG (5 vs 10 vs 12) & Veredito de sum_xg12 no Lay 0x0
+
+- **Feito:**
+  - Antigravity conduziu benchmark empírico comparando janelas de xG ($K \in [3, 5, 8, 10, 12, 15]$) sobre a base master `hist_time_stats_expandido.csv` (11.500 partidas, 7.671 com xG Opta oficial).
+  - Testada hipótese de novo método de Lay 0x0 filtrando soma de xG de 12 jogos ($\text{sum\_xG}_{12} \ge 2,80$) pareado com a base `FRESH3` de `Odd_CS_0x0_Lay` executável real da Betfair (4.404 jogos casados).
+  - Claude reproduziu os números na VPS e conduziu auditoria forense aprofundada da curva de cortes, split temporal na odd executável e teste de hipótese controlado pelo preço.
+- **Achados & Consenso Científico:**
+  1. **Evidência Física Real (Aprovada):** A correlação com gols do jogo seguinte sobe monotonicamente de $r = 0,1879$ ($K=5$) para $r = 0,2221$ ($K=12$, ganho de $+18\%$, menor MAE de 0,930). $K=12$ estima o processo físico melhor que $K=5$ e melhor que médias de gols passados.
+  2. **Custo de Amostra:** $K=12$ descarta $2.389$ jogos da base por falta de histórico ($50,2\%$ de cobertura vs $60,6\%$ de $K=5$).
+  3. **Refutação de sum_xg12 como Filtro de Veto no Lay 0x0 (Auditado e Arquivado):**
+     - *Curva Não-Monotônica:* O ROI sobe até 3,00 (+0,45%) e despenca para negativo nos dois lados (2,20 a 2,70 negativo; 3,10 a 3,50 despenca até −2,04%). É formato clássico de ruído/pico isolado.
+     - *Inversão Fora da Amostra:* No split temporal com odd real executável, corte 2,80 dá Treino $+0,92\%$ vs Validação OOS $−0,17\%$.
+     - *IC95%:* Intervalos engolem o zero e se sobrepõem inteiramente à base sem filtro (IC95 [−0,96%; +1,63%]).
+     - *Controle pelo Preço:* Na regressão controlando pela odd de lay real, $p = 0,6694$ na amostra toda e $p = 0,7367$ na validação (com troca de sinal).
+- **Veredito Operacional:**
+  - 🛑 **NÃO plugar `sum_xg12` como filtro de veto nem criar método autônomo.** Hipótese arquivada por falta de sobrevivência OOS e não-significância contra a closing line.
+  - ✅ **Aproveitar $K=12$ puramente como escolha de engenharia física** para calibração de modelos futuros de projeção de gols/Poisson, onde o ganho físico de $r=0,222$ é legítimo e estável.
+- **Arquivos:** `scratch/benchmark_janelas_xg_5_10_12.py`, `tasks.md`, `worklog.md`.
+
+---
 
 - **Feito:**
   - Claude auditou e implantou o `tracker_favorito_dominante_inplay.py` como serviço systemd ativo na VPS (`/home/ubuntu/betfair-collector`).
