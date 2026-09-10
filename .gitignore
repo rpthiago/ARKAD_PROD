@@ -18,3 +18,8 @@ hist_stats/
 hist_stats_ft/
 *.bak_pre_blindagem
 *.orig
+
+# Backups locais (o historico do git ja e o backup)
+*.bak
+*.bak_*
+*.orig

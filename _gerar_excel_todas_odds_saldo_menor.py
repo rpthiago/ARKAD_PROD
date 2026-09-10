@@ -1,4 +1,12 @@
 """
+# ==============================================================================================
+# ATENCAO — FABRICACAO DE ODD REMOVIDA EM 10/09/2026 (auditoria forense).
+# Este script fazia `fillna(Odd_H_FT * 1.05 + 0.15)`, inventando odd de LAY a partir da odd de
+# BACK. Isso viola a Lei no 1 (a odd tem que ser a EXECUTAVEL na Betfair) e a Lei no 3 (nunca
+# fabricar valor de feature — sem dado, SKIP). Agora o fallback e np.nan.
+# O metodo Saldo Menor esta ARQUIVADO/REPROVADO; este gerador nao e chamado pelo Streamlit nem
+# pela automacao. Se voltar a ser usado, as linhas sem odd de lay real precisam ser DESCARTADAS.
+# ==============================================================================================
 GERADOR DE PLANILHA EXCEL COMPLETA (TODAS AS ODDS DA BASE) - MÉTODO SALDO MENOR
 ARKAD_PROD
 
@@ -116,9 +124,13 @@ def build_full_odds_excel():
     df_approved['Status_LayHome'] = np.where(df_approved['Green_LayHome'], 'GREEN', 'RED')
     
     if 'Odd_H_Lay' in df_approved.columns and df_approved['Odd_H_Lay'].notna().any():
-        df_approved['Odd_Lay_Home_Real'] = pd.to_numeric(df_approved['Odd_H_Lay'], errors='coerce').fillna(df_approved['Odd_H_FT'] * 1.05 + 0.15)
+        df_approved['Odd_Lay_Home_Real'] = pd.to_numeric(df_approved['Odd_H_Lay'], errors='coerce').fillna(np.nan)  # [10/09/2026] fabricacao de odd removida (Lei no 1 e no 3)
     else:
-        df_approved['Odd_Lay_Home_Real'] = df_approved['Odd_H_FT'] * 1.05 + 0.15
+        # [10/09/2026] LEI No 1 e No 3: NAO fabricar odd de lay a partir da odd de back.
+        # A base primaria (Bet365) nao tem 'Odd_H_Lay', entao este else disparava para
+        # 100%% das linhas e a coluna chamada '_Real' era inteiramente inventada.
+        # Sem odd executavel -> NaN, e as linhas afetadas devem ser DESCARTADAS a jusante.
+        df_approved['Odd_Lay_Home_Real'] = np.nan
 
     liability = 100.0
     df_approved['Lucro_LayHome_RS'] = np.where(

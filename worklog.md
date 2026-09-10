@@ -7,6 +7,58 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Claude · Auditoria das 3 intervencoes + reunificacao da convencao de P&L
+
+Auditados os commits `4f26bae`, `d92da7b` e `581a11e`. Relatorio completo para o Antigravity em
+`AUDITORIA_3_INTERVENCOES_para_gemini.md`.
+
+- **1. Spreads fabricados — CONFIRMADO.** `pages/01_...py` e `automacao_diaria_aprovados.py` estao
+  limpos (0 ocorrencias de `back*1.03/1.05`, agora `default=np.nan` = SKIP correto).
+  ⚠️ **Resquicio:** `_gerar_excel_backtest_saldo_menor.py:133` e
+  `_gerar_excel_todas_odds_saldo_menor.py:119` AINDA fazem `fillna(Odd_H_FT * 1.05 + 0.15)`.
+  Saldo Menor esta arquivado, entao e risco latente — mas quem rodar produz numero fabricado.
+  ✅ Checagem extra: o tracker da goleada v1 (candidato ATIVO) usa `back` legitimamente (e Back
+  Under, nao Lay) com `dropna` — sem violacao.
+
+- **2. Liquidacao dos 77 — a liquidacao esta CORRETA, a SOMA nao estava.**
+  Reproduzi 77 jogos / 68G / 9R / +17,80 u. Formula de lay correta nos 9 reds e 68 greens.
+  **Sem false green** (os 12 unicos mercados sensiveis a gol tardio ficam fora da janela).
+  🔴 **A base somava DUAS convencoes:** 187 linhas ate 02/09 com `RED=-1,0` (LIABILITY, comissao
+  implicita **3,51%**) + 77 linhas novas com `RED=-(odd-1)` (STAKE, comissao 5%). `+12,27 + 17,80`
+  somava unidades de escala ~5x diferente.
+  **Pista que definiu o conserto:** as colunas em R$ dos 77 JA usavam liability fixa de R$100 —
+  a convencao pretendida no arquivo sempre foi liability; o desvio era so no `PnL_u` dos 77.
+  ✅ **EXECUTADO** (`reunificar_convencao_pnl.py`, backup automatico): tudo em **LIABILITY=1u,
+  comissao 5%**; colunas `PnL_stake_u` e `Convencao_PnL` adicionadas; R$ recoerentes.
+  | | antes | depois |
+  |---|---|---|
+  | total | +30,07 u (misturado) | **+12,89 u** |
+  | os 77 (03-09/09) | +17,80 u | **+1,048 u** |
+  | gap vs break-even, 187 antigos | — | +5,47 pp |
+  | gap vs break-even, 77 novos | — | **+1,42 pp** |
+
+- **3. Lay 0x1 In-Play (Rota C) — codigo conforme, mas a MEDICAO reprova.**
+  ✅ Break-even e P&L conforme a Lei no 4; sem odd fabricada; sem look-ahead; `Stake_Real=0.0`
+  genuino (com `Stake_Nominal=100` separado so p/ liability).
+  ✅ **A faixa de odd EXISTE** — medida no coletor: de 624 jogos com 0x0 no min 55-75, **187 (30%)**
+  tem odd de lay do CS 0-1 entre 2,00 e 5,50. Melhora real vs Radar HT (3 de 360) e Late Goal (4 de 77).
+  🔴 **Mas a faixa e SELECAO ADVERSA:** cruzando com o placar final (N=610), o 0x1 sai em **18,36%**
+  na populacao geral e em **28,73% dentro da faixa**. Odd media 4,58 -> break-even 79,05%; WR real
+  71,27% -> **margem −7,78 pp**. O mercado nao erra: a odd baixa e consequencia do risco maior.
+  O vies da medicao (placar final reconstruido pelo CS, que perde gol tardio) e **a favor** do
+  metodo — o numero real tende a ser pior.
+  ✅ **CONSERTADO: filtro permissivo** (Hall of Shame "NaN passa"). `odd_h_back_pre` ausente/NaN
+  passava livre; agora **SKIP**. Testado nos 6 casos de borda.
+  ⚠️ **Nao mexido (decisao de desenho):** o `score_pressao` e calculado e gravado mas **nunca
+  filtra** — a tese cita pressao, a regra nao exige. E o break-even declarado ("66-78%") na verdade
+  vai de **51,3% a 82,6%** na faixa 2,00-5,50.
+
+- **Arquivos:** `auditar_liquidacao_77.py`, `reunificar_convencao_pnl.py`,
+  `AUDITORIA_3_INTERVENCOES_para_gemini.md`, `estrategia_lay_0x1_inplay.py` (+ `.bak`),
+  `metodos_aprovados/Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` (+ `.bak_20260910_1854.csv`).
+
+---
+
 ## 2026-09-10 · Antigravity · Pesquisa Quantitativa Lay 0x1 (Rotas A e B) & Implantação da Rota C In-Play
 
 - **Feito:**

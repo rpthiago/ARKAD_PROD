@@ -57,7 +57,7 @@ def validar_entrada_lay0x1_inplay(
     gols_h_atual: int,
     gols_a_atual: int,
     odd_lay_0x1: float,
-    odd_h_back_pre: float = None,
+    odd_h_back_pre: float = None,   # OBRIGATORIO desde 10/09: ausente -> SKIP
     sot_h: int = None,
     sot_a: int = None,
     xg_h: float = None,
@@ -81,9 +81,15 @@ def validar_entrada_lay0x1_inplay(
         return False, f"ODD_LAY_FORA_FAIXA (Odd {odd_lay_0x1} fora de [{ODD_LAY_0X1_MIN}, {ODD_LAY_0X1_MAX}])", {}
 
     # 4. Validação de Perfil Pré-Jogo (Mandante não pode ser zebraça)
-    if odd_h_back_pre is not None and pd.notna(odd_h_back_pre):
-        if odd_h_back_pre > ODD_H_BACK_PRE_MAX:
-            return False, f"MANDANTE_ZEBRA_PRE (Odd {odd_h_back_pre:.2f} > {ODD_H_BACK_PRE_MAX:.2f})", {}
+    #    Hall of Shame — "filtro permissivo: NaN passa". O favoritismo pré-jogo do mandante é
+    #    PARTE DA TESE da Rota C; sem a odd pré-jogo o gatilho não pode ser avaliado, então
+    #    ausência de dado é SKIP e não passe livre (Lei nº 3: sem dado suficiente -> SKIP).
+    if odd_h_back_pre is None or pd.isna(odd_h_back_pre):
+        return False, "SEM_ODD_PRE_JOGO (Lei nº 3: dado ausente -> SKIP, nunca passe livre)", {}
+    if float(odd_h_back_pre) <= 1.01:
+        return False, f"ODD_PRE_INVALIDA ({odd_h_back_pre})", {}
+    if float(odd_h_back_pre) > ODD_H_BACK_PRE_MAX:
+        return False, f"MANDANTE_ZEBRA_PRE (Odd {odd_h_back_pre:.2f} > {ODD_H_BACK_PRE_MAX:.2f})", {}
 
     # 5. Indicadores de Pressão Ofensiva (quando disponíveis)
     score_pressao = 0

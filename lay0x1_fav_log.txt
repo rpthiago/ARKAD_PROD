@@ -383,3 +383,18 @@ TOTAL COMBINADO: N=7 | WR=100.0% | ROI/liability=+7.00%
 To https://github.com/rpthiago/ARKAD_PROD.git
    33a9ce3..97fc582  main -> main
 (fim) 
+ 
+===== 10/09/2026 12:00:02,17 ===== 
+[PAUSADO] registro de sinais novos desligado (ver nota no topo do arquivo).
+          a liquidacao dos pendentes segue rodando.
+novos: 0 | liquidados: 1 | total 15 (pend 7, liq 8)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=8 | WR=100.0% | ROI/liability=+6.98%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=7 | WR=100.0% | ROI/liability=+7.00%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+[main 2c1e7bb] update: lay0x1 favoritao forward 10/09/2026
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+To https://github.com/rpthiago/ARKAD_PROD.git
+   049689e..2c1e7bb  main -> main
+(fim) 
