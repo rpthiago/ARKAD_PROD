@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Arquivamento da Pagina 18 + Registro do Lay 0x1 In-Play no Hall of Shame
+
+Consolidação final das tarefas delegadas por Claude após os commits `cada962` (DASHBOARD_ARKAD-1) e `d7e613e` (ARKAD_PROD):
+
+- **1. Arquivamento da UI do Lay 0x1 In-Play:**
+  - `pages/18_⚽_Sinais_Lay_0x1_InPlay.py` movido via `git mv` para `pages_arquivadas/18_⚽_Sinais_Lay_0x1_InPlay.py`.
+  - Página expurgada da navegação ativa do Streamlit, cumprindo a regra de expurgo 100% de métodos reprovados.
+
+- **2. Formalização no GEMINI.md (Hall of Shame & Verdades Atuais):**
+  - Registrada a *Armadilha da Compressão de Preço / Miragem da Odd Baixa In-Play em CS*:
+    No 0-0 aos 55'-75', odd de lay do CS 0-1 na faixa [2.00, 5.50] sofre seleção adversa severa (taxa de 0-1 salta de 18,36% geral para 28,73% na faixa; WR real de 71,27% vs BE 79,05% @ odd média 4,58, gerando margem de −7,78 pp e ROI de −9,0% no risco).
+  - Odd baixa in-play em CS é sintoma de risco elevado, não barganha.
+  - Método formalmente arquivado no Hall of Shame e na Seção 6 (MORTOS in-play).
+
+- **Arquivos modificados:** `GEMINI.md`, `worklog.md`, `pages/18_...py` (renomeado para `pages_arquivadas/`).
+
 ## 2026-09-10 · Claude · Auditoria das 3 intervencoes + reunificacao da convencao de P&L
 
 Auditados os commits `4f26bae`, `d92da7b` e `581a11e`. Relatorio completo para o Antigravity em
