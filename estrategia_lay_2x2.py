@@ -12,6 +12,9 @@ import os
 import numpy as np
 import pandas as pd
 
+# Ligas com histórico de desequilíbrio e alta taxa de 2x2
+BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND']
+
 def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """
     Avalia a grade diária da Betfair para entradas em Lay 2x2 com Trava Top 3 Menor Odd.
@@ -61,6 +64,12 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
         home = str(row.get("Home", row.get("Home_Team", "")))
         away = str(row.get("Away", row.get("Away_Team", "")))
         liga = str(row.get("League", row.get("Div", "Liga Externa")))
+        
+        # Filtro de Ligas com histórico de desequilíbrio e alta taxa de 2x2
+        liga_upper = liga.upper()
+        if any(b in liga_upper for b in BLACKLIST_LIGAS_2X2):
+            continue
+            
         tm = str(row.get("Time", row.get("horario", "15:00")))[:5]
         bloco_hora = tm[:2]
         

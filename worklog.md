@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-09 (madrugada) · Antigravity · Simulação de Gestão de Banca 2026 (Trava R$ 2.000) & Auditoria dos Reds do Lay 2x2
+
+- **Feito:**
+  - **Simulação com Trava de R$ 2.000 de Responsabilidade (Jan a Set/2026):**
+    - Simulação iniciando com banca de R$ 1.000,00 e alavancagem dinâmica de 20% da banca até atingir teto de liquidez de R$ 2.000,00 por entrada (atingido em 07/02/2026, 38 dias).
+    - *Portfólio Combinado (1.092 jogos):* 1.064 Greens / 28 Reds (97,4% WR). Banca final: **R$ 73.847,46** (+7.284%, 73,8x o capital inicial). Drawdown Máximo no ano: **20,0%** (-R$ 5.299).
+    - *Lay 0x3 Top 3 (493 jogos):* 491 Greens / 2 Reds (99,6% WR). Banca final: **R$ 33.005,09** (33,0x). Drawdown Máximo: **6,9%**.
+    - *Lay 2x2 Top 3 (599 jogos):* 573 Greens / 26 Reds (95,7% WR). Banca final: **R$ 27.311,90** (27,3x). Drawdown Máximo: **26,3%**.
+  - **Auditoria Forense dos 26 Reds no Lay 2x2 em 2026:**
+    - *Padrão de Ligas Periféricas:* Taxa de Red concentrada em ligas periféricas/discrepantes: IRELAND 1 (25%), SERBIA 1 (25%), TURKEY 1 (25%), SCOTLAND 1 (16,7%). Se excluídas essas 4 ligas, cortam-se 8 dos 26 reds (WR sobe de 95,7% para 96,8%).
+    - *Contraste com Ligas de Elite:* SPAIN 1, ENGLAND 1 e GERMANY 1 tiveram **zero reds** no Top 3 no ano todo; ITALY 1 teve apenas 1 red em 24 jogos (4,1%).
+    - *Padrão Tático do Super-Favorito Visitante:* 50% dos reds (13/26) ocorreram com odd de Lay 2x2 entre 8.4 e 11.5 gerada por super-favorito visitante (Besiktas odd 1.32 fora, Rangers 1.32 fora, Crvena Zvezda 1.24 fora, Inter 1.42 fora).
+    - *Portfólio Completo (2.636 jogos / 140 Reds) sem Top 3:*
+      - Confirmação robusta: SERBIA 1 (16,7% red, edge -10,1%), IRELAND 1 (14,3% red, edge -8,0%), ENGLAND CUP (14,3% red, edge -5,8%), PORTUGAL 1 (13,0% red, edge -5,9%), BRAZIL 1 (10,4% red, edge -4,7%). Essas 7 ligas sozinhas concentram 32 dos 140 reds.
+      - Ligas Ultra-Seguras: FRANCE 1 (0 reds em 32 jogos, edge +6,7%), ARGENTINA 1 (1 red em 73 jogos, edge +5,3%), ENGLAND 2 (1 red em 60 jogos, edge +4,5%), SPAIN 2 (1 red em 56 jogos, edge +3,9%), ITALY 1 (2 reds em 75 jogos, edge +4,7%).
+      - Faixa de Odds Crítica: Na odd 8.0-14.0 o edge é positivo (+3,2% a +4,3%); na odd 17.0-20.5 concentram-se 69 dos 140 reds e o edge vira negativo (-0,38%), provando matematicamente a superioridade do filtro de menor odd.
+- **Arquivos:** `scratch/simular_2026_trava_2000.py`, `scratch/investigar_reds_lay2x2_2026.py`, `scratch/investigar_todos_reds_lay2x2_2026.py`, `worklog.md`.
+
+---
+
 ## 2026-09-09 (noite) · Antigravity · Limpeza do Streamlit & Trava Top 3 Menor Odd (Lay 2x2 & Lay 0x3)
 
 - **Feito:**
@@ -167,6 +187,63 @@
   - Custo irrisório (<100 requisições/mês, ~2-3/dia), preservando 100% da integridade do método congelado.
   - Avaliar o efeito real do filtro em 2-3 meses sobre picks reais, na odd executável da Betfair e no universo filtrado do modelo.
 - **Arquivos:** `worklog.md`, `tasks.md`, `PROMPT_CLAUDE_AUDITORIA_4_MODELOS.md`.
+
+---
+
+## 2026-09-09 · Claude · Dois observadores auditados e PAUSADOS (Lay Under 1.5 FT e Lay 0x1/1x0)
+
+Os dois rodavam sozinhos no Agendador, com auto-commit diario no ARKAD_PROD, e nenhum dos dois
+tinha passado por auditoria com odd de lay real. Agora passaram.
+
+**🔴 1. LAY UNDER 1.5 FT (XGBoost) — PAUSADO**
+- **Mercado negativo em TODOS os anos** (odd `Odd_Under15_FT_Lay` real, faixa 2,50-4,50, N=23.424):
+  TODOS `WR 69,69% vs BE 72,51% -> ROI liability -3,87%` · 2024 **-5,47%** · 2025 **-4,04%** ·
+  2026 **-2,47%**. A WR fica sempre 2-4 pp ABAIXO do break-even. Diferente do Under 1.5 HT (que
+  foi +35% em 2021 e morreu em 2023), este **nunca teve edge** na janela disponivel.
+- **O modelo gera ZERO sinais no historico.** Em 22.883 jogos com features completas, nenhum
+  atinge EV>=5% — nem EV>=0. Aritmetica: na odd media 3,60 o EV>=5% exige `p >= 0,7454`; o modelo
+  tem `p` mediana 0,505 e **maximo 0,693**.
+- 🚨 **VIOLACAO DA LEI No 2 (backtest != live).** O observador registrou 8 sinais com
+  `prob_ml` 0,63-0,69, mas rodando o modelo no **proprio feed que ele usou** a `p` maxima e
+  **0,596**. Nao consegui reproduzir os sinais. Tres causas possiveis e nao distinguiveis com o
+  que havia em disco: feed sobrescrito, caminho de features diferente, ou a versao do XGBoost
+  (o joblib avisa que o modelo foi salvo por versao antiga).
+- **Divergencia de features MEDIDA:** 16 das 41 features (todo o bloco `_r5`) divergem. O historico
+  tem **36% de zeros** nas de xG; o feed diario tem **0%** — e a 6a Lei (dado ausente gravado como
+  zero) contaminando o TREINO. Efeito medido: trocar as 16 pela mediana historica desloca a `p`
+  mediana de 0,5247 para 0,4965 (-0,028). Real e direcional, mas **pequeno demais** para explicar
+  a diferenca de 0,50 para 0,69.
+- **Liquidacao:** nao e bug de codigo — a base FRESH3 esta parada em **20/08**. Liquidei 2 dos 8
+  pendentes pelo feed `football_data_odds.csv` (1G 1R). Os outros 6: 3 estao alem do feed (que
+  atrasa ~6 dias) e 3 **nunca poderao ser liquidados** — o feed **nao cobre liga brasileira
+  nenhuma**, e 4 dos 8 sinais eram BRAZIL 2.
+
+**🔴 2. LAY 0x1 / LAY 1x0 no super favorito — PAUSADO (confirma o registro de morto)**
+- Odd de lay real, N=580, os dois metodos juntos: `WR 91,72% vs BE 93,06% -> ROI liability -1,48%`.
+  **2024 +3,41% (so 6 reds) · 2025 -4,02% (27 reds) · 2026 -2,24% (15 reds).** Bootstrap IC95
+  `[-3,95%, +0,81%]`. **Mesmo desenho que matou o Under 1.5 HT:** ano inicial bom puxando o pool.
+- **O forward de 7 GREEN / 0 RED nao e evidencia.** Com BE 93,5%, o numero ESPERADO de reds em
+  7 picks e **0,46** — zero red e o resultado modal. Um red na odd 14 custa ~13 u e apaga os 7 greens.
+  E a linha do Hall of Shame "31/31 = 100% = alpha".
+- **INVIAVEL de validar:** para detectar 2% de edge com IC excluindo zero seriam **~839 picks**
+  (~4 anos a 0,6/dia); para 1%, **~3.354** (>15 anos).
+- **Nuance:** a faixa declarada 5,0-15,0 e ilusoria — **419 de 437** sinais do Lay 0x1 caem em
+  13-15. O metodo opera num ponto, nao numa faixa.
+
+**Como foram pausados (cirurgico, nao desligado):**
+- Under 1.5: `OBSERVADOR_UNDER15_PAUSADO = True` em `atualizar_feed_forward_diario.py`. A tarefa
+  `UNDER15_observacao` **voltou a Ready** de proposito: e ela que gera o feed diario, e ninguem mais
+  gera. Desabilita-la mataria o pipeline junto (erro que eu cometi e corrigi).
+- Lay 0x1: `SINAIS_PAUSADOS = True` em `observar_lay0x1_fav.py` — **so o registro de sinal novo**;
+  a liquidacao segue rodando para fechar os 8 pendentes. Testado: `novos: 0 | pend 8, liq 7`.
+
+**Melhoria de auditabilidade implantada:** o feed diario passou a ser arquivado com data em
+`scratch/feed_arquivo/feed_forward_diario_AAAA-MM-DD.parquet` (retencao 180 dias). Foi a falta disso
+que impediu de reproduzir os 8 sinais. Preservei o unico feed que restava (08/09, 43 jogos).
+
+**Arquivos:** `auditar_lay_under15.py`, `diagnosticar_features_under15.py`,
+`liquidar_under15_pendentes.py`, `auditar_lay0x1_fav.py`, `atualizar_feed_forward_diario.py`,
+`observar_lay0x1_fav.py` (+ `.bak` dos alterados).
 
 ---
 

@@ -16,6 +16,21 @@ except Exception: pass
 ROOT = os.path.dirname(os.path.abspath(__file__))
 LOG = os.path.join(ROOT, "lay0x1_fav_acumulado.csv")
 VALID_START = "2026-08-28"
+
+# ---------------------------------------------------------------------------------
+# SINAIS NOVOS PAUSADOS EM 09/09/2026 (auditoria historica com odd de LAY REAL).
+# Lay 0x1 + Lay 1x0 no super favorito, N=580 na base Betfair FRESH3:
+#   TODOS  WR 91,72% vs BE 93,06% -> gap -1,33 pp -> ROI liability -1,48%
+#   2024 +3,41% (so 6 reds) · 2025 -4,02% (27 reds) · 2026 -2,24% (15 reds)
+#   bootstrap IC95 do ROI: [-3,95%, +0,81%]  (inclui zero, ponto negativo)
+# Mesmo desenho que matou o Under 1.5 HT: um ano inicial bom puxando o pool, negativo depois.
+# E INVIAVEL de validar: para detectar 2% de edge com IC excluindo zero precisaria de
+# ~839 picks; o forward faz ~0,6/dia -> ~4 anos. Para 1%, ~3.354 picks (>15 anos).
+# O forward de 7 GREEN / 0 RED nao e evidencia: com BE 93,5%, o numero ESPERADO de reds em
+# 7 picks e 0,46 — zero red e o resultado mais provavel. Um red na odd 14 apaga os 7 greens.
+# A LIQUIDACAO CONTINUA RODANDO para fechar os pendentes. Religar = trocar para False.
+SINAIS_PAUSADOS = True
+# ---------------------------------------------------------------------------------
 FAV_SUPER_MAX = 1.90
 LAY_LO, LAY_HI = 5.0, 15.0
 COMM = 0.045
@@ -102,7 +117,10 @@ def main():
     hoje = date.today()
     novos = 0
     
-    for s in sinais_do_dia():
+    if SINAIS_PAUSADOS:
+        print("[PAUSADO] registro de sinais novos desligado (ver nota no topo do arquivo).")
+        print("          a liquidacao dos pendentes segue rodando.")
+    for s in ([] if SINAIS_PAUSADOS else sinais_do_dia()):
         if s["data"] < VALID_START:
             continue
         key = s["data"] + "|" + s["jogo"] + "|" + s["metodo"]
