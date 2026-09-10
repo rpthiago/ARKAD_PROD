@@ -1,6 +1,6 @@
 ﻿data,jogo,liga,odd_lay,prob_ml,ev,stake,primeiro_visto,status,resultado,pnl_unidades
-2026-08-28,Boca Juniors x Lanus,ARGENTINA 1,2.82,0.6756,0.0547,0,2026-08-28,Pendente,Pendente,0.0
-2026-08-29,Alverca x Santa Clara,PORTUGAL 1,2.84,0.6772,0.0528,0,2026-08-29,Pendente,Pendente,0.0
+2026-08-28,Boca Juniors x Lanus,ARGENTINA 1,2.82,0.6756,0.0547,0,2026-08-28,Liquidado,RED,-1.8200
+2026-08-29,Alverca x Santa Clara,PORTUGAL 1,2.84,0.6772,0.0528,0,2026-08-29,Liquidado,GREEN,0.9550
 2026-08-29,Londrina x Juventude,BRAZIL 2,2.94,0.6917,0.0624,0,2026-08-29,Pendente,Pendente,0.0
 2026-09-01,Londrina x Juventude,BRAZIL 2,2.98,0.6926,0.0529,0,2026-09-01,Pendente,Pendente,0.0
 2026-09-05,San Telmo x Los Andes,ARGENTINA 2,2.5,0.6343,0.0572,0,2026-09-05,Pendente,Pendente,0.0

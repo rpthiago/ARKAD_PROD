@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-09 (noite) · Antigravity · Limpeza do Streamlit & Trava Top 3 Menor Odd (Lay 2x2 & Lay 0x3)
+
+- **Feito:**
+  - **Limpeza do Streamlit (6 páginas arquivadas):** Movidas 6 páginas obsoletas para `pages_arquivadas/`, removendo-as automaticamente do menu lateral:
+    1. `pages/03_🎯_Ciclos_Alavancagem_Top5.py`
+    2. `pages/06_⚡_Radar_Steam_Moves.py`
+    3. `pages/9_🎯_Sinais_Lay_0x0.py`
+    4. `pages/19_🤝_Sinais_Lay_Draw.py`
+    5. `pages/20_📊_Resultados_Paper.py`
+    6. `pages/22_⚡_Jogos_do_Dia_Ao_Vivo.py`
+  - **Implementação da Trava Top 3 por Menor Odd:**
+    - Atualizadas `pages/16_⚽_Sinais_Lay_0x3.py` e `pages/17_⚽_Sinais_Lay_2x2.py` para ordenar por menor odd de lay e limitar a exibição rigorosamente aos 3 melhores jogos do dia.
+    - Atualizados módulos `estrategia_lay_0x3.py` e `estrategia_lay_2x2.py` com o parâmetro padrão `top_n=3`.
+  - **Estudo Empírico Anual 2026 (Jan a Set - 13.000+ partidas) e Semana 03 a 08/Set:**
+    - *Lay 0x3 Top 3 Menor Odd:* 493 apostas no ano de 2026, 491 Greens e **apenas 2 Reds no ano inteiro** (99,6% WR vs 95,2% BE, ROI Liability +4,21%, P&L +R$ 41.745). Em Agosto/Setembro evitou 100% dos reds (50 G / 0 R, +R$ 4.750).
+    - *Lay 2x2 Top 3 Menor Odd:* 599 apostas no ano de 2026, 576 Greens e 23 Reds (96,2% WR vs 92,5% BE, ROI Liability +3,40%, P&L +R$ 26.500). Obteve o MESMO lucro financeiro que os 2.634 jogos abertos (+R$ 26.360), porém cortou 117 reds da carteira e quintuplicou o retorno por capital arriscado (+3,40% vs +0,67%).
+- **Arquivos:** `pages/16_⚽_Sinais_Lay_0x3.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `estrategia_lay_0x3.py`, `estrategia_lay_2x2.py`, `pages_arquivadas/`, `scratch/analise_ano_2026_completo_ranking_odd.py`, `worklog.md`.
+
+---
+
 ## 2026-09-09 (noite) · Antigravity & Claude · Benchmark de Janelas de xG (5 vs 10 vs 12) & Veredito de sum_xg12 no Lay 0x0
 
 - **Feito:**

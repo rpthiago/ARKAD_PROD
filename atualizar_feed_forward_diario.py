@@ -19,6 +19,24 @@ warnings.filterwarnings('ignore', category=pd.errors.PerformanceWarning)
 
 ROOT = Path(__file__).resolve().parent
 FEED_FORWARD_PATH = ROOT / "scratch" / "feed_forward_diario.parquet"
+# Arquivo datado: o feed acima e sobrescrito todo dia. Sem copia com data, sinal antigo
+# fica NAO auditavel (foi o que impediu de reproduzir os 8 sinais do Under 1.5).
+FEED_ARQUIVO_DIR = ROOT / "scratch" / "feed_arquivo"
+FEED_ARQUIVO_DIAS = 180        # retencao; ~110 KB por dia
+
+# ---------------------------------------------------------------------------------
+# OBSERVADOR DO UNDER 1.5 PAUSADO EM 09/09/2026.
+# Motivo (auditoria): (a) o mercado Lay Under 1.5 na faixa 2,50-4,50 e negativo em TODOS
+# os anos com a odd de lay REAL (-5,47% em 2024, -4,04% em 2025, -2,47% em 2026, N=23.424);
+# (b) o modelo XGB roda no historico e gera ZERO sinais com EV>=5% (precisaria de p>=0,745
+# na odd media e nunca passa de 0,693); (c) os 8 sinais registrados tinham prob_ml 0,63-0,69,
+# acima do maximo (0,596) que o modelo produz no proprio feed que ele usou -> nao reproduziveis;
+# (d) o feed de resultados nao cobre liga brasileira, e 4 dos 8 sinais eram BRAZIL 2.
+# O PIPELINE DO FEED CONTINUA RODANDO (e agora arquiva com data), para que o dia em que a
+# divergencia for resolvida existam feeds auditaveis. Religar = trocar para False.
+OBSERVADOR_UNDER15_PAUSADO = True
+# ---------------------------------------------------------------------------------
+
 HIST_DATASET_PATH = ROOT / "scratch" / "dataset_leak_free_features.parquet"
 
 def get_upcoming_fixtures(target_date_str=None):
@@ -170,7 +188,31 @@ def main():
     df_feed.to_parquet(FEED_FORWARD_PATH, index=False)
     print(f"[SUCESSO] Feed diário gerado e enriquecido com {len(df_feed)} jogos em: {FEED_FORWARD_PATH}")
 
+    # --- ARQUIVAMENTO DATADO (auditabilidade dos sinais) ---
+    try:
+        FEED_ARQUIVO_DIR.mkdir(parents=True, exist_ok=True)
+        alvo = FEED_ARQUIVO_DIR / f"feed_forward_diario_{date_str}.parquet"
+        df_feed.to_parquet(alvo, index=False)
+        print(f"[ARQUIVO] copia datada: {alvo.name} ({len(df_feed)} jogos)")
+        corte = (datetime.now() - pd.Timedelta(days=FEED_ARQUIVO_DIAS)).date()
+        podados = 0
+        for f in FEED_ARQUIVO_DIR.glob("feed_forward_diario_*.parquet"):
+            try:
+                d = datetime.strptime(f.stem.replace("feed_forward_diario_", ""), "%Y-%m-%d").date()
+                if d < corte:
+                    f.unlink(); podados += 1
+            except Exception:
+                pass
+        if podados:
+            print(f"[ARQUIVO] podados {podados} feeds com mais de {FEED_ARQUIVO_DIAS} dias")
+    except Exception as e:
+        print(f"[ARQUIVO] falhou o arquivamento datado: {e}")
+
     # Chamar observador honesto
+    if OBSERVADOR_UNDER15_PAUSADO:
+        print("\n[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).")
+        print("          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.")
+        return
     print("\n[*] Executando observador forward com o novo feed...")
     from observar_under15_forward import main as run_observador
     sys.argv = ['observar_under15_forward.py', '--feed', str(FEED_FORWARD_PATH)]

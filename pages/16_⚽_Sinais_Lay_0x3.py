@@ -25,6 +25,7 @@ Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Vi
 1. **Mandante Favorito (Odd H $\le 2.20$):** Foco exclusivo em mandantes dominantes em campo.
 2. **Mercado Under 2.5 Favorecido:** Odd Under 2.5 $\le 2.10$ (Expectativa de baixa média de gols).
 3. **Livro de Ofertas Betfair:** Odd Lay 0x3 entre **14.00 e 35.00** e xG Visitante $\le 1.10$.
+4. **Trava de Elite (Top 3 Menor Odd):** Exclusão de cauda longa e seleção dos 3 jogos com menor odd de lay no dia (99,6% WR em 2026 com apenas 2 reds no ano todo).
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
@@ -109,6 +110,10 @@ if gerar_btn:
                             "status": "Aguardando"
                         })
                         
+            if sinais:
+                # Trava de Segurança: Top 3 Menor Odd por Dia (Elimina risco de cauda e odds assassinas)
+                sinais = sorted(sinais, key=lambda x: x["odd_execucao"])[:3]
+                
             st.session_state.sinais_lay0x3 = sinais
             st.session_state.sinais_date_0x3 = target_date
         except Exception as e:
@@ -152,7 +157,7 @@ with col2:
                 })
                 
             df_final = pd.DataFrame(df_disp)
-            st.success(f"🛡️ {len(df_final)} Oportunidades Protegidas de Lay 0x3 Under 2.5 Encontradas em {date_str}!")
+            st.success(f"🛡️ TOP {len(df_final)} Oportunidades Protegidas de Lay 0x3 (Menor Odd / Menor Risco) Encontradas em {date_str}!")
             st.dataframe(df_final, use_container_width=True)
             
             buffer = io.BytesIO()

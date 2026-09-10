@@ -12,9 +12,9 @@ import os
 import numpy as np
 import pandas as pd
 
-def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False):
+def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """
-    Avalia a grade diária da Betfair para entradas em Lay 2x2.
+    Avalia a grade diária da Betfair para entradas em Lay 2x2 com Trava Top 3 Menor Odd.
     """
     if df_dia is None or df_dia.empty:
         return []
@@ -87,6 +87,9 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False):
         df_cand = df_cand.sort_values('Odd_Lay', ascending=True).groupby('Bloco_Hora').first().reset_index()
     else:
         df_cand = df_cand.sort_values('Odd_Lay', ascending=True).reset_index(drop=True)
+        
+    if top_n is not None and top_n > 0:
+        df_cand = df_cand.head(top_n).reset_index(drop=True)
         
     resultados = []
     for _, r in df_cand.iterrows():
