@@ -29,8 +29,8 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
     odd_u25_cols = [c for c in df_dia.columns if ('under25_ft_back' in str(c).lower() or 'under25_ft' in str(c).lower() or 'under 2.5 ft' in str(c).lower()) and 'ht' not in str(c).lower()]
     if not odd_u25_cols:
         odd_u25_cols = [c for c in df_dia.columns if 'under25' in str(c).lower() and 'ht' not in str(c).lower()]
-    odd_h_cols = [c for c in df_dia.columns if str(c).lower() in ['odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
-    odd_a_cols = [c for c in df_dia.columns if str(c).lower() in ['odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
+    odd_h_cols = [c for c in df_dia.columns if str(c).lower() in ['odd_h_back', 'odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
+    odd_a_cols = [c for c in df_dia.columns if str(c).lower() in ['odd_a_back', 'odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
     
     candidatos = []
     

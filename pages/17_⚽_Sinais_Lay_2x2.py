@@ -116,8 +116,8 @@ if gerar_btn:
                 odd_u25_col = [c for c in df_day.columns if ('under25_ft_back' in str(c).lower() or 'under25_ft' in str(c).lower() or 'under 2.5 ft' in str(c).lower()) and 'ht' not in str(c).lower()]
                 if not odd_u25_col:
                     odd_u25_col = [c for c in df_day.columns if 'under25' in str(c).lower() and 'ht' not in str(c).lower()]
-                odd_h_col = [c for c in df_day.columns if str(c).lower() in ['odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
-                odd_a_col = [c for c in df_day.columns if str(c).lower() in ['odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
+                odd_h_col = [c for c in df_day.columns if str(c).lower() in ['odd_h_back', 'odd_h', 'odd_h_ft', 'odd_h_ft_back', 'odd_home', 'odd_1']]
+                odd_a_col = [c for c in df_day.columns if str(c).lower() in ['odd_a_back', 'odd_a', 'odd_a_ft', 'odd_a_ft_back', 'odd_away', 'odd_2']]
                 
                 for _, r in df_day.iterrows():
                     o_2x2 = pd.to_numeric(r.get(odd_2x2_col[0]), errors='coerce') if odd_2x2_col else 0.0
