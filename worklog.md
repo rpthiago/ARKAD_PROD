@@ -7,6 +7,15 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Arquivamento da Página de Observação Under 1.5
+
+- **Feito:**
+  - Arquivada a página `pages/21_🔬_Observacao_Under15.py` movendo-a para `pages_arquivadas/21_🔬_Observacao_Under15.py`.
+  - Remove o item do menu lateral do Streamlit, mantendo o menu focado exclusivamente nas estratégias ativas do portfólio.
+- **Arquivos:** `pages_arquivadas/21_🔬_Observacao_Under15.py`, `worklog.md`.
+
+---
+
 ## 2026-09-09 (madrugada) · Antigravity · Desempate do Top 3 por Horários Distintos (Lay 2x2 & Lay 0x3)
 
 - **Feito:**
