@@ -24,6 +24,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from futpythontrader_client import get_daily_dataframe
+from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
+from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
 
 # Estilização visual moderna
 st.markdown("""
@@ -91,12 +93,11 @@ st.sidebar.caption(f"Cada RED perde exatamente R$ {liability_fixa:.2f} ({pct_ris
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
-* 🟢 **Lay 0x1 Super Fav** (WR 94.2% | ROI +2.6%)
-* 🟢 **Lay Under 0.5 FT Fav** (Casa ≤1.50 / Fora ≤1.40 | WR 94.1% | ROI +3.3%)
-* 🟢 **HA +2.0 Zebra Top 2** (WR 96.6% | ROI +13.3%)
-* 🟢 **Lay 0x2 / 2x0 Zebra** (WR 97.2% | ROI +1.8%)
-* 🟢 **Lay Draw Super Fav** (Casa/Fora ≤1.40 | WR 85.4% | ROI +2.9%)
-* 🟢 **Lay Under 1.5 XGBoost** (WR 73.3% | ROI +4.9%)
+* 🟢 **Lay 0x3 Top 3** (WR 99.4% | ROI +4.2% | Produção)
+* 🟢 **Lay 2x2 Top 3** (WR 96.8% | ROI +3.8% | Produção)
+* 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward Stake-Zero)
+* 🟡 **Lay Home Fav Visitante** (WR 92.3% | ROI +6.2% | Forward Stake-Zero)
+* 🟡 **Lay Over 4.5 Under Pesado** (WR 100% | ROI +5.6% | Forward Stake-Zero)
 """)
 
 # ── Tabs Principais ──
@@ -121,8 +122,23 @@ with tab1:
     with col_d2:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
-            ["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)", "Lay 0x1 Super Fav (Arquivado)", "Lay Under 0.5 FT (Arquivado)", "Lay Away / DC 1X (Arquivado)"],
-            default=["Lay Draw (Fav <= 1.40)", "Lay Home / DC X2 (Fav Visitante <= 1.65)", "Lay Over 4.5 FT (Under Pesado)"]
+            [
+                "Lay 0x3 Top 3 (Aprovado)",
+                "Lay 2x2 Top 3 (Aprovado)",
+                "Lay Draw (Fav <= 1.40)",
+                "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Lay Over 4.5 FT (Under Pesado)",
+                "Lay 0x1 Super Fav (Arquivado)",
+                "Lay Under 0.5 FT (Arquivado)",
+                "Lay Away / DC 1X (Arquivado)",
+            ],
+            default=[
+                "Lay 0x3 Top 3 (Aprovado)",
+                "Lay 2x2 Top 3 (Aprovado)",
+                "Lay Draw (Fav <= 1.40)",
+                "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Lay Over 4.5 FT (Under Pesado)",
+            ]
         )
     with col_btn:
         st.write("")
@@ -144,12 +160,12 @@ with tab1:
         oa_back = pd.to_numeric(df.get("Odd_A_Back"), errors="coerce")
         od_back = pd.to_numeric(df.get("Odd_D_Back"), errors="coerce")
         
-        oh_lay = pd.to_numeric(df.get("Odd_H_Lay"), errors="coerce").fillna(oh_back * 1.03)
-        oa_lay = pd.to_numeric(df.get("Odd_A_Lay"), errors="coerce").fillna(oa_back * 1.03)
-        od_lay = pd.to_numeric(df.get("Odd_D_Lay"), errors="coerce").fillna(od_back * 1.03)
+        oh_lay = pd.to_numeric(df.get("Odd_H_Lay"), errors="coerce")
+        oa_lay = pd.to_numeric(df.get("Odd_A_Lay"), errors="coerce")
+        od_lay = pd.to_numeric(df.get("Odd_D_Lay"), errors="coerce")
         
         ou05_back = pd.to_numeric(df.get("Odd_Under05_FT_Back"), errors="coerce")
-        ou05_lay = pd.to_numeric(df.get("Odd_Under05_FT_Lay"), errors="coerce").fillna(ou05_back * 1.05)
+        ou05_lay = pd.to_numeric(df.get("Odd_Under05_FT_Lay"), errors="coerce")
         
         ou25_back = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
         o45_lay = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
@@ -157,6 +173,34 @@ with tab1:
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
         l20 = pd.to_numeric(df.get("Odd_CS_2x0_Lay"), errors="coerce")
+        
+        # 1. Lay 0x3 Top 3 Menor Odd (Método Aprovado Produção)
+        try:
+            res_0x3 = avaliar_jogos_lay_0x3_grade(df, top_n=3)
+            for s in res_0x3:
+                sinais.append({
+                    "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
+                    "Home": s["home"], "Away": s["away"], "Método": "Lay 0x3 Top 3 (Aprovado)",
+                    "Mercado": "Correct Score (0x3)", "Lado": "LAY",
+                    "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
+                    "Expectativa_WR": "99.4%", "EV_Estimado": "+4.21%"
+                })
+        except Exception:
+            pass
+
+        # 2. Lay 2x2 Top 3 Menor Odd (Método Aprovado Produção)
+        try:
+            res_2x2 = avaliar_jogos_lay_2x2_grade(df, top_n=3)
+            for s in res_2x2:
+                sinais.append({
+                    "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
+                    "Home": s["home"], "Away": s["away"], "Método": "Lay 2x2 Top 3 (Aprovado)",
+                    "Mercado": "Correct Score (2x2)", "Lado": "LAY",
+                    "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
+                    "Expectativa_WR": "96.8%", "EV_Estimado": "+3.79%"
+                })
+        except Exception:
+            pass
         
         for _, r in df.iterrows():
             i = r.name
@@ -331,121 +375,121 @@ with tab2:
     
     tabela_auditoria = [
         {
-            "Método": "Lay 0x1 Super Favorito (Odd_H <= 1.90)",
-            "Mercado": "Correct Score (0x1)",
-            "Amostra (N)": "4.007 jogos",
-            "Win Rate Real": "94.24%",
-            "Break-Even Exigido": "91.95%",
-            "Margem Real": "+2.29%",
-            "Lucro Líquido": "+1.131,02 u (R$ +113k)",
-            "ROI s/ Liability": "+2.59%",
-            "Bootstrap IC95%": "[+1.8%, +3.4%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
+            "Método": "Lay 0x3 Top 3 Menor Odd (Under 2.5 <= 2.10 | Odd A >= 1.85)",
+            "Mercado": "Correct Score (0x3)",
+            "Amostra (N)": "494 jogos (Ano 2026)",
+            "Win Rate Real": "99.39%",
+            "Break-Even Exigido": "95.20%",
+            "Margem Real": "+4.19%",
+            "Lucro Líquido": "+393,45 u (R$ +39.345)",
+            "ROI s/ Liability": "+4.21%",
+            "Bootstrap IC95%": "[+3.4%, +5.1%]",
+            "Consistência": "8/9 meses sem reds (3 reds no ano) 🟢",
+            "Status": "✅ APROVADO PRODUÇÃO"
         },
         {
-            "Método": "Lay Under 0.5 FT (Casa <= 1.50 / Fora <= 1.40)",
-            "Mercado": "Under 0.5 FT (Lay 0x0)",
-            "Amostra (N)": "2.468 jogos (2026)",
-            "Win Rate Real": "94.08%",
-            "Break-Even Exigido": "91.07%",
-            "Margem Real": "+3.01 pp",
-            "Lucro Líquido": "+830,7 u (liability)",
-            "ROI s/ Liability": "+3.33%",
-            "Bootstrap IC95%": "[+2.3%, +4.4%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
-        },
-        {
-            "Método": "Handicap Asiático +2.0 / EH +2 Zebra (Saldo Menor Top 2)",
-            "Mercado": "Handicap Zebra (+2)",
-            "Amostra (N)": "455 jogos",
-            "Win Rate Real": "96.64% (c/ reembolsos)",
-            "Break-Even Exigido": "88.50%",
-            "Margem Real": "+8.14%",
-            "Lucro Líquido": "+55,96 u (R$ +5.596)",
-            "ROI s/ Capital": "+13.29%",
-            "Bootstrap IC95%": "[+8.1%, +18.4%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
+            "Método": "Lay 2x2 Top 3 Menor Odd (Under 2.5 <= 2.00 | Super Fav)",
+            "Mercado": "Correct Score (2x2)",
+            "Amostra (N)": "558 jogos (Ano 2026)",
+            "Win Rate Real": "96.77%",
+            "Break-Even Exigido": "92.49%",
+            "Margem Real": "+4.28%",
+            "Lucro Líquido": "+273,90 u (R$ +27.390)",
+            "ROI s/ Liability": "+3.79%",
+            "Bootstrap IC95%": "[+2.6%, +4.9%]",
+            "Consistência": "9/9 meses positivos (Blacklist 4 Ligas) 🟢",
+            "Status": "✅ APROVADO PRODUÇÃO"
         },
         {
             "Método": "Lay Draw Super Fav (Casa OU Fora <= 1.40)",
             "Mercado": "Match Odds (Draw)",
-            "Amostra (N)": "2.260 jogos (2026)",
-            "Win Rate Real": "86.11%",
-            "Break-Even Exigido": "82.74%",
-            "Margem Real": "+3.36 pp",
-            "Lucro Líquido": "+410,8 u (liability)",
-            "ROI s/ Liability": "+3.82% (2026) | +2.87% (2 anos)",
-            "Bootstrap IC95%": "[+2.1%, +5.5%]",
-            "Consistência": "6/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
-        },
-        {
-            "Método": "Lay 0x2 Zebra (Mandante Fav <= 1.80)",
-            "Mercado": "Correct Score (0x2)",
-            "Amostra (N)": "1.829 jogos",
-            "Win Rate Real": "97.27%",
-            "Break-Even Exigido": "95.61%",
-            "Margem Real": "+1.65%",
-            "Lucro Líquido": "+683,30 u (R$ +68k)",
-            "ROI s/ Liability": "+1.79%",
-            "Bootstrap IC95%": "[+1.0%, +2.5%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
-        },
-        {
-            "Método": "Lay Under 1.5 FT (XGBoost EV >= 5% c/ Stop 75')",
-            "Mercado": "Under 1.5 FT",
-            "Amostra (N)": "225 jogos",
-            "Win Rate Real": "73.33%",
-            "Break-Even Exigido": "68.40%",
-            "Margem Real": "+4.93%",
-            "Lucro Líquido": "+33,40 u (R$ +3.340)",
-            "ROI s/ Capital": "+4.90%",
-            "Bootstrap IC95%": "[+4.3%, +34.2%]",
-            "Consistência": "7/8 meses positivos 🟢",
-            "Status": "✅ APROVADO OFICIAL"
-        },
-        {
-            "Método": "Lay Over 4.5 FT em Under Pesado (Odd_U25 <= 1.50)",
-            "Mercado": "Over 4.5 FT (Longshot Bias)",
-            "Amostra (N)": "3.941 jogos",
-            "Win Rate Real": "94.34%",
-            "Break-Even Exigido": "91.70%",
-            "Margem Real": "+2.64%",
-            "Lucro Líquido": "+1.178,40 u (R$ +117k)",
-            "ROI s/ Liability": "+2.67%",
-            "Bootstrap IC95%": "[+1.9%, +3.4%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "⚠️ WATCHLIST STAKE-ZERO"
-        },
-        {
-            "Método": "Lay Away / Dupla Chance 1X (Odd_H <= 1.45)",
-            "Mercado": "Match Odds (Away Lay)",
-            "Amostra (N)": "2.685 jogos",
-            "Win Rate Real": "90.02%",
-            "Break-Even Exigido": "87.80%",
-            "Margem Real": "+2.22%",
-            "Lucro Líquido": "+528,30 u (R$ +52k)",
-            "ROI s/ Liability": "+2.66%",
-            "Bootstrap IC95%": "[+1.5%, +3.9%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "⚠️ WATCHLIST STAKE-ZERO"
+            "Amostra (N)": "119 jogos (Forward)",
+            "Win Rate Real": "90.76%",
+            "Break-Even Exigido": "85.68%",
+            "Margem Real": "+5.07%",
+            "Lucro Líquido": "+40,30 u (liability)",
+            "ROI s/ Liability": "+5.80%",
+            "Bootstrap IC95%": "[−1.8%, +11.8%]",
+            "Consistência": "Forward recente positivo 🟢",
+            "Status": "⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)"
         },
         {
             "Método": "Lay Home / Dupla Chance X2 (Fav Visitante <= 1.65)",
             "Mercado": "Match Odds (Home Lay)",
-            "Amostra (N)": "1.404 jogos",
-            "Win Rate Real": "86.11%",
-            "Break-Even Exigido": "83.35%",
-            "Margem Real": "+2.77%",
-            "Lucro Líquido": "+234,70 u (R$ +23k)",
-            "ROI s/ Liability": "+3.31%",
-            "Bootstrap IC95%": "[+1.1%, +5.3%]",
-            "Consistência": "8/8 meses positivos 🟢",
-            "Status": "⚠️ WATCHLIST STAKE-ZERO"
+            "Amostra (N)": "65 jogos (Forward)",
+            "Win Rate Real": "92.31%",
+            "Break-Even Exigido": "86.60%",
+            "Margem Real": "+5.71%",
+            "Lucro Líquido": "+25,40 u (liability)",
+            "ROI s/ Liability": "+6.18%",
+            "Bootstrap IC95%": "[−0.7%, +13.6%]",
+            "Consistência": "Forward recente positivo 🟢",
+            "Status": "⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)"
+        },
+        {
+            "Método": "Lay Over 4.5 FT em Under Pesado (Odd_U25 <= 1.50)",
+            "Mercado": "Over 4.5 FT (Longshot Bias)",
+            "Amostra (N)": "12 jogos (Forward)",
+            "Win Rate Real": "100.00%",
+            "Break-Even Exigido": "94.57%",
+            "Margem Real": "+5.43%",
+            "Lucro Líquido": "+11,40 u (liability)",
+            "ROI s/ Liability": "+5.57%",
+            "Bootstrap IC95%": "Amostra N pequena",
+            "Consistência": "Aguardando volume ⏳",
+            "Status": "⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)"
+        },
+        {
+            "Método": "Lay 0x1 Super Favorito (Odd_H <= 1.90)",
+            "Mercado": "Correct Score (0x1)",
+            "Amostra (N)": "Scan 600 testes / Base FRESH",
+            "Win Rate Real": "92.1%",
+            "Break-Even Exigido": "94.2%",
+            "Margem Real": "−2.10%",
+            "Lucro Líquido": "Negativo",
+            "ROI s/ Liability": "−2.17%",
+            "Bootstrap IC95%": "[−8.0%, +2.9%]",
+            "Consistência": "0/100 holders no scan 🔴",
+            "Status": "❌ REPROVADO / ARQUIVADO"
+        },
+        {
+            "Método": "Lay Under 0.5 FT em Super Favorito",
+            "Mercado": "Under 0.5 FT (Lay 0x0)",
+            "Amostra (N)": "Scan 600 testes / Base FRESH",
+            "Win Rate Real": "91.8%",
+            "Break-Even Exigido": "92.5%",
+            "Margem Real": "−0.70%",
+            "Lucro Líquido": "Negativo",
+            "ROI s/ Liability": "−0.76%",
+            "Bootstrap IC95%": "[−7.4%, +4.8%]",
+            "Consistência": "0/100 holders no scan 🔴",
+            "Status": "❌ REPROVADO / ARQUIVADO"
+        },
+        {
+            "Método": "Handicap Asiático +2.0 Zebra Mandante",
+            "Mercado": "Handicap Zebra (+2)",
+            "Amostra (N)": "Auditoria Odd Real",
+            "Win Rate Real": "75.2%",
+            "Break-Even Exigido": "81.5%",
+            "Margem Real": "−6.30%",
+            "Lucro Líquido": "Negativo",
+            "ROI s/ Capital": "−4.20%",
+            "Bootstrap IC95%": "[−12.0%, −0.5%]",
+            "Consistência": "Odd estimada 2.45 era miragem 🔴",
+            "Status": "❌ MIRAGEM / DESCARTADO"
+        },
+        {
+            "Método": "Lay Under 1.5 FT (XGBoost)",
+            "Mercado": "Under 1.5 FT",
+            "Amostra (N)": "24 meses OOS",
+            "Win Rate Real": "71.1%",
+            "Break-Even Exigido": "71.6%",
+            "Margem Real": "−0.50%",
+            "Lucro Líquido": "Negativo",
+            "ROI s/ Capital": "−0.50%",
+            "Bootstrap IC95%": "[−6.5%, +5.5%]",
+            "Consistência": "Ano 2025 = −7,2% 🔴",
+            "Status": "❌ REPROVADO / ARQUIVADO"
         }
     ]
     

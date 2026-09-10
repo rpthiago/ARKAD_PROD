@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Auditoria Forense do Portfólio de Validação Forward & Eliminação de Spreads Falsos
+
+- **Feito:**
+  - **Auditoria Forense da Página 01 (`pages/01_🏆_Portfolio_Metodos_Aprovados.py`) e Automação Diária (`automacao_diaria_aprovados.py`):**
+    - Identificada e eliminada violação grave das Leis 1 e 3 do GEMINI.md: preenchimento artificial de odds de Lay ausentes via `.fillna(back * 1.03)` e `.fillna(back * 1.05)`. Se não há odd executável na Betfair, o sinal é agora descartado honestamente (`np.nan` / SKIP).
+    - Integrados os métodos oficiais de produção de 2026 (Lay 0x3 Top 3 e Lay 2x2 Top 3) diretamente no scanner unificado da Página 01 (`escanear_api_unificada`), unificando o portfólio oficial.
+    - Atualizada a Tabela de Auditoria e Governança da Aba 2 da Página 01: métodos descartados/miragens (Lay 0x1, Lay Under 0.5, Handicap +2, Under 1.5) foram devidamente marcados como `❌ REPROVADO / ARQUIVADO / DESCARTADO`; a Tríade (Lay Draw, Lay Home, Lay Over 4.5) foi corrigida para `⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)`; e Lay 0x3 / Lay 2x2 Top 3 foram incluídos com status `✅ APROVADO PRODUÇÃO`.
+  - **Auditoria dos Dados Reais do Forward Oculto (`forward_oculto/forward_oculto_log.csv`):**
+    - Auditados 203 sinais liquidados no período 21/08 a 10/09:
+      - *Lay Draw (Base):* N=119, WR 90,76% vs 85,68% BE (+5,07% Edge), Lucro +40,30u, ROI Liab +5,80%. (Filtro refinado Over 3.5: N=46, WR 86,96%, Lucro +9,70u).
+      - *Lay Home (Base):* N=65, WR 92,31% vs 86,60% BE (+5,71% Edge), Lucro +25,40u, ROI Liab +6,18%. (Filtro refinado Away: N=33, WR 90,91%, Lucro +12,10u).
+      - *Lay Over 4.5:* N=12, WR 100,00%, Lucro +11,40u, ROI Liab +5,57%.
+      - *Lay Away (Controle/Observação):* N=7, WR 85,71% vs 91,14% BE (-5,43% Edge), Lucro -2,10u (negativo, confirmando arquivamento).
+    - As regras amplas da Tríade superaram os filtros minerados em amostra forward, confirmando a Lei do GEMINI.md contra overfitting de features (Garden of Forking Paths). Mantidos em quarentena stake-zero até $N \ge 400$.
+  - **Diagnóstico do Settlement Diário (`metodos_aprovados/`):**
+    - Descoberto por que 77 jogos entre 03/09 e 09/09 estavam como `⏳ PENDENTE`: divergência de schema entre `automacao_diaria_aprovados.py` e o cache do coletor, além da ausência de handlers para `0x3` e `2x2`. Corrigidos os handlers em `automacao_diaria_aprovados.py`.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-10 · Antigravity · Auditoria e Sincronização Estrita Backtest ↔ Live (Lay 0x3 & Lay 2x2)
 
 - **Feito:**

@@ -45,12 +45,12 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     oa_back = _get_series(df_games, ["Odd_A_Back", "Odd_A_FT", "Odd_A"])
     od_back = _get_series(df_games, ["Odd_D_Back", "Odd_D_FT", "Odd_D"])
     
-    oh_lay = _get_series(df_games, ["Odd_H_Lay"]).fillna(oh_back * 1.03)
-    oa_lay = _get_series(df_games, ["Odd_A_Lay"]).fillna(oa_back * 1.03)
-    od_lay = _get_series(df_games, ["Odd_D_Lay"]).fillna(od_back * 1.03)
+    oh_lay = _get_series(df_games, ["Odd_H_Lay"], default=np.nan)
+    oa_lay = _get_series(df_games, ["Odd_A_Lay"], default=np.nan)
+    od_lay = _get_series(df_games, ["Odd_D_Lay"], default=np.nan)
     
-    ou05_back = _get_series(df_games, ["Odd_Under05_FT_Back", "Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"])
-    ou05_lay = _get_series(df_games, ["Odd_Under05_FT_Lay", "Odd_Under05_Lay"]).fillna(ou05_back * 1.05)
+    ou05_back = _get_series(df_games, ["Odd_Under05_FT_Back", "Odd_Under05_Back", "Odd_Under05_FT", "Odd_Under05"], default=np.nan)
+    ou05_lay = _get_series(df_games, ["Odd_Under05_FT_Lay", "Odd_Under05_Lay"], default=np.nan)
     
     ou25_back = _get_series(df_games, ["Odd_Under25_FT_Back", "Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
     ou45_lay = _get_series(df_games, ["Odd_Over45_FT_Lay", "Odd_Over45_Lay"])
@@ -266,6 +266,10 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 res = "RED" if (gh == 0 and ga == 2) else "GREEN"
             elif "2x0" in metodo:
                 res = "RED" if (gh == 2 and ga == 0) else "GREEN"
+            elif "0x3" in metodo:
+                res = "RED" if (gh == 0 and ga == 3) else "GREEN"
+            elif "2x2" in metodo:
+                res = "RED" if (gh == 2 and ga == 2) else "GREEN"
             elif "Under 1.5" in metodo:
                 res = "RED" if (gh + ga < 2) else "GREEN"
             else:
