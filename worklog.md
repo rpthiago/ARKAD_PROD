@@ -7,6 +7,23 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Pesquisa Quantitativa Lay 0x1 (Rotas A e B) & Implantação da Rota C In-Play
+
+- **Feito:**
+  - **Pesquisa Quantitativa Forense de Lay 0x1 Pré-Jogo (Rotas A e B):**
+    - Avaliados 37.442 jogos com liquidez real na Betfair (`FRESH3`).
+    - *Rota A (Super Favorito Mandante):* Em `Odd_H <= 1.40`, WR real foi 97,55% vs 96,56% BE (+1,41% ROI), mas a odd média de Lay é de 32.0 (liability de 31x a stake e apenas 8 jogos/mês, gerando risco de ruína assimétrico). Tetos menores (Lay $\le$ 25) colapsaram para ROI negativo (-1,54%).
+    - *Rota B (Ligas de Alto Over):* Em ligas de muitos gols (Tier 1), o mercado já precifica a baixa probabilidade subindo a odd para 18-23, resultando em ROI negativo (-0,18% a -0,76%) e todos os IC95% cruzando o zero.
+    - *Veredito:* Rotas A e B reprovadas por falta de edge sustentável pré-jogo.
+  - **Desenvolvimento e Implantação da Rota C (In-Play Tardio Minuto 55–75):**
+    - *Tese:* Jogo 0x0 entre os minutos 55' e 75' com mandante não-zebra pré-jogo. A odd de Lay 0x1 despenca para 2.00 a 5.50 (liability baixo de 1.0x a 4.5x a stake, com BE de 66% a 78% vs 93%+ do pré-jogo).
+    - Criado módulo canônico `estrategia_lay_0x1_inplay.py` com regras estritas, cálculo de liability e break-even WR.
+    - Criado rastreador e motor de paper trading `tracker_lay0x1_inplay.py` conectado à telemetria ao vivo com registro em `paper_trading_lay0x1_inplay.csv` (`stake: 0.0`, `status: OBSERVACAO_STAKE_ZERO`).
+    - Criada a página do Streamlit `pages/18_⚽_Sinais_Lay_0x1_InPlay.py` com radar ao vivo e painel de auditoria.
+- **Arquivos:** `estrategia_lay_0x1_inplay.py`, `tracker_lay0x1_inplay.py`, `pages/18_⚽_Sinais_Lay_0x1_InPlay.py`, `worklog.md`.
+
+---
+
 ## 2026-09-10 · Antigravity · Liquidação Completa dos 77 Jogos Pendentes (03/09 a 09/09) com Placares Reais
 
 - **Feito:**
