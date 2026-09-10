@@ -17,15 +17,15 @@ st.set_page_config(
     layout="wide",
 )
 
-st.title("⚽ Sinais Lay 0x3 (Mandante Favorito HA -0.25 a -2.0 & Under 2.5)")
+st.title("⚽ Sinais Lay 0x3 (Tendência Under 2.5 & Anti-Favorito Visitante)")
 st.markdown("""
-Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante (Filtrado por Handicap do Mandante + Under 2.5)**:
+Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Visitante**:
 
 ### 🛡️ Critérios de Filtro de Elite Validados no Backtest:
-1. **Mandante Favorito (Odd H $\le 2.20$):** Foco exclusivo em mandantes dominantes em campo.
-2. **Mercado Under 2.5 Favorecido:** Odd Under 2.5 $\le 2.10$ (Expectativa de baixa média de gols).
-3. **Livro de Ofertas Betfair:** Odd Lay 0x3 entre **14.00 e 35.00** e xG Visitante $\le 1.10$.
-4. **Trava de Elite (Top 3 Menor Odd):** Exclusão de cauda longa e seleção dos 3 jogos com menor odd de lay no dia (99,6% WR em 2026 com apenas 2 reds no ano todo).
+1. **Mercado Under 2.5 Favorecido:** Odd Under 2.5 FT $\le 2.10$ (Expectativa estatística de jogo com poucos gols).
+2. **Livro de Ofertas Betfair:** Odd Lay 0x3 entre **14.00 e 35.00**.
+3. **Filtro Anti-Goleada Visitante:** Odd Visitante Back $\ge 1.85$ (Elimina super favoritos como Bayern/Real Madrid fora de casa).
+4. **Trava de Elite (Top 3 Menor Odd):** Seleção dos 3 jogos com menor odd de lay no dia e desempate por horários distintos (99,4% WR em 2026 com apenas 3 reds no ano todo).
 
 > ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
@@ -90,9 +90,8 @@ if gerar_btn:
                     odd_a = float(row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A') or 0.0)
                     odd_u25 = float(row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25_FT') or row.get('Odd_Under25') or 0.0)
                     odd_0x3 = float(row.get('Odd_CS_0x3_Lay') or row.get('Odd_CS_0x3') or 0.0)
-                    xg_a = float(row.get('A_xGF_r5') or row.get('Media_Gols_Pro_Visitante') or row.get('xG_A_FT') or 1.0)
                     
-                    if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and (odd_a >= 1.85 or odd_a == 0.0) and xg_a <= 1.10:
+                    if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and (odd_a >= 1.85 or odd_a == 0.0):
                         home = str(row.get("Home", row.get("Home_Team", "")))
                         away = str(row.get("Away", row.get("Away_Team", "")))
                         liga = str(row.get("League", row.get("Div", "Liga Externa")))
@@ -103,7 +102,7 @@ if gerar_btn:
                             "horario": tm,
                             "liga": liga,
                             "jogo": f"{home} x {away}",
-                            "metodo": "Lay 0x3 Visitante Under 2.5 (xG Protected)",
+                            "metodo": "Lay 0x3 Correct Score",
                             "odd_execucao": odd_0x3,
                             "mercado": "CS_0x3",
                             "lado": "lay",

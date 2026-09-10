@@ -43,18 +43,24 @@ def validar_entrada_lay2x2(
     if odd_lay_2x2 > ODD_LAY_2X2_MAX:
         return False, f"Odd Lay 2x2 ({odd_lay_2x2:.2f}) acima do teto de risco ({ODD_LAY_2X2_MAX:.2f})."
         
-    # Filtro de Tendência Under / Estabilidade de Gols
+    # Filtro de Tendência Under / Estabilidade de Gols / Super Favoritismo
     passou_filtro_tendencia = False
     motivo_filtro = ""
     
     if odd_under25 is not None and pd.notna(odd_under25) and odd_under25 <= ODD_UNDER25_MAX:
         passou_filtro_tendencia = True
         motivo_filtro = f"Odd Under 2.5 ({odd_under25:.2f}) <= {ODD_UNDER25_MAX:.2f}"
+    elif odd_h is not None and pd.notna(odd_h) and odd_h <= 1.55:
+        passou_filtro_tendencia = True
+        motivo_filtro = f"Super Favorito Mandante (Odd {odd_h:.2f} <= 1.55)"
+    elif odd_a is not None and pd.notna(odd_a) and odd_a <= 1.60:
+        passou_filtro_tendencia = True
+        motivo_filtro = f"Super Favorito Visitante (Odd {odd_a:.2f} <= 1.60)"
     elif total_xg is not None and pd.notna(total_xg) and total_xg <= 2.40:
         passou_filtro_tendencia = True
         motivo_filtro = f"Total xG ({total_xg:.2f}) <= 2.40"
 
-    # Se não houver informação de xG ou Under 2.5, rejeita
+    # Se não houver informação de xG, Under 2.5 ou Favoritismo, rejeita
     if not passou_filtro_tendencia:
         return False, f"Não atende aos critérios de tendência Under 2.5 ou Favoritismo."
 

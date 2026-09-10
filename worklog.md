@@ -7,6 +7,21 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Auditoria e Sincronização Estrita Backtest ↔ Live (Lay 0x3 & Lay 2x2)
+
+- **Feito:**
+  - **Auditoria e Alinhamento do Lay 0x3:**
+    - Identificado que o backtest oficial de 2026 (494 jogos, 99,4% WR, +R$ 39.345) operava estritamente sobre 3 filtros de odds (`Odd_CS_0x3_Lay [14.0, 35.0]`, `Odd_Under25 <= 2.10`, `Odd_A_Back >= 1.85`).
+    - Removido fallback falso de xG (`xg_a = ... or 1.0`) e condição inócua (`xg_a <= 1.10`) em `pages/16_⚽_Sinais_Lay_0x3.py`, `estrategia_lay_0x3.py` e `lay_goleada_quant_strategy.py`, alinhando 100% o código do live com o backtest (Leis 2 e 3 do GEMINI.md).
+    - O jogo de 10/09 (Sundsvall 0 x 3 Orebro, odd 25.0) era de fato elegível pelo backtest; representou o 3º red em 494 jogos no ano (99,4% WR real vs 95,2% Break-even, Edge +4,2%).
+  - **Auditoria e Correção Crítica do Lay 2x2:**
+    - Descoberto que `validar_entrada_lay2x2` em `metodo_lay2x2_strategy.py` recebia `odd_h` e `odd_a`, mas não continha os blocos `elif odd_h <= 1.55` e `elif odd_a <= 1.60` que existiam no backtest oficial e em `estrategia_lay_2x2.py`.
+    - Corrigido `metodo_lay2x2_strategy.py` para validar super favoritos mandante/visitante.
+    - Medido impacto em 2026 no Top 3: WR sobe de 94,68% para **96,77%** (com Blacklist das 4 ligas), cortando reds para apenas 18 no ano inteiro e elevando o P&L de +R$ 7.520 para **+R$ 27.390,00** (ROI Liab +3,79%).
+- **Arquivos:** `metodo_lay2x2_strategy.py`, `pages/16_⚽_Sinais_Lay_0x3.py`, `estrategia_lay_0x3.py`, `lay_goleada_quant_strategy.py`, `worklog.md`.
+
+---
+
 ## 2026-09-10 · Antigravity · Arquivamento da Página de Observação Under 1.5
 
 - **Feito:**
