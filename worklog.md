@@ -7,6 +7,24 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-10 · Antigravity · Liquidação Completa dos 77 Jogos Pendentes (03/09 a 09/09) com Placares Reais
+
+- **Feito:**
+  - **Liquidação e Preenchimento Forense dos 77 Jogos Pendentes:**
+    - Localizados e preenchidos 100% dos placares reais para os 77 jogos distribuídos nas planilhas diárias `Sinais_Metodos_Aprovados_2026-09-03.xlsx` a `2026-09-09.xlsx` e na base consolidada `Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` / `.xlsx`.
+    - Fontes oficiais cruzadas: Base Histórica Betfair API (`futpythontrader_client`), Cache de Ticks do Coletor FT (`_placares_coletor_cache.csv`) e auditoria direta de súmulas web para ligas com nomenclatura divergente.
+    - Zero jogos restantes como `⏳ PENDENTE` no período 03/09 a 09/09.
+  - **Desempenho dos 77 Jogos Liquidados (03/09 a 09/09):**
+    - *Consolidado:* 77 Jogos | **68 Greens / 9 Reds** (**88,3% WR** | PnL **+17,80 unidades** | **+R$ 104,89** com stakes nominais).
+    - *Lay Draw (Fav <= 1.40):* N=52 | 45 Greens / 7 Reds (**86,5% WR** | PnL **+6,85 u**).
+    - *Lay Home / DC X2 (Fav Visitante <= 1.65):* N=18 | 16 Greens / 2 Reds (**88,9% WR** | PnL **+4,30 u**).
+    - *Lay Over 4.5 FT (Under Pesado):* N=7 | 7 Greens / 0 Reds (**100,0% WR** | PnL **+6,65 u**).
+  - **Atualização da Base Mestre:**
+    - `Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` e `.xlsx` expandidos de 189 para **266 jogos liquidados**, elevando o PnL acumulado oficial do forward para **+30,07 unidades**.
+- **Arquivos:** `metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-0*.xlsx` (7 planilhas), `metodos_aprovados/Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv`, `metodos_aprovados/Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx`, `worklog.md`.
+
+---
+
 ## 2026-09-10 · Antigravity · Auditoria Forense do Portfólio de Validação Forward & Eliminação de Spreads Falsos
 
 - **Feito:**
