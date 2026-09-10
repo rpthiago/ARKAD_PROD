@@ -7,6 +7,17 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-09 (madrugada) · Antigravity · Desempate do Top 3 por Horários Distintos (Lay 2x2 & Lay 0x3)
+
+- **Feito:**
+  - **Implementação do Desempate por Horários Distintos no Top 3:**
+    - Regra: ordena primariamente por Menor Odd de Lay. Quando houver empates na mesma odd, prioriza partidas com horários diferentes dos já selecionados para permitir a circulação do capital e entrada em todos os 3 jogos do dia. Se não houver opção de horário diferente na mesma odd, seleciona normalmente.
+    - *Backtest 2026 Lay 2x2 (586 jogos):* 568 Greens / 18 Reds (96,93% WR | P&L +R$ 29.600,00 mantidos 100% intactos). Dias com horários 100% distintos subiram para 76,9%.
+    - *Backtest 2026 Lay 0x3 (493 jogos):* 491 Greens / 2 Reds (99,59% WR | P&L +R$ 41.745,00 mantidos 100% intactos). Dias com horários 100% distintos subiram de 72,0% para 77,6% (+8 dias com horários perfeitamente escalonados).
+- **Arquivos:** `estrategia_lay_2x2.py`, `estrategia_lay_0x3.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `pages/16_⚽_Sinais_Lay_0x3.py`, `worklog.md`.
+
+---
+
 ## 2026-09-09 (madrugada) · Antigravity · Simulação de Gestão de Banca 2026 (Trava R$ 2.000) & Auditoria dos Reds do Lay 2x2
 
 - **Feito:**

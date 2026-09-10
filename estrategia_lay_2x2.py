@@ -97,8 +97,38 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
     else:
         df_cand = df_cand.sort_values('Odd_Lay', ascending=True).reset_index(drop=True)
         
-    if top_n is not None and top_n > 0:
-        df_cand = df_cand.head(top_n).reset_index(drop=True)
+    if top_n is not None and top_n > 0 and len(df_cand) > top_n:
+        # Desempate por Horário Distinto:
+        # Quando houver a mesma odd, prioriza jogos com horários diferentes dos já selecionados
+        df_sorted = df_cand.sort_values('Odd_Lay', ascending=True).copy()
+        selecionados = []
+        horarios_usados = set()
+        
+        odds_unicas = sorted(df_sorted['Odd_Lay'].unique())
+        for o in odds_unicas:
+            grupo_odd = df_sorted[df_sorted['Odd_Lay'] == o]
+            
+            # 1. Tenta horários diferentes
+            for idx, row_item in grupo_odd.iterrows():
+                if len(selecionados) == top_n: break
+                h = row_item['Hora']
+                if h not in horarios_usados:
+                    selecionados.append(row_item)
+                    horarios_usados.add(h)
+            if len(selecionados) == top_n: break
+            
+            # 2. Se ainda faltam vagas na mesma odd, preenche com os restantes
+            for idx, row_item in grupo_odd.iterrows():
+                if len(selecionados) == top_n: break
+                ja_add = any(s.name == row_item.name for s in selecionados)
+                if not ja_add:
+                    selecionados.append(row_item)
+                    horarios_usados.add(row_item['Hora'])
+            if len(selecionados) == top_n: break
+            
+        df_cand = pd.DataFrame(selecionados).reset_index(drop=True)
+    else:
+        df_cand = df_cand.reset_index(drop=True)
         
     resultados = []
     for _, r in df_cand.iterrows():

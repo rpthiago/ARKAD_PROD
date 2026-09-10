@@ -111,8 +111,36 @@ if gerar_btn:
                         })
                         
             if sinais:
-                # Trava de Segurança: Top 3 Menor Odd por Dia (Elimina risco de cauda e odds assassinas)
-                sinais = sorted(sinais, key=lambda x: x["odd_execucao"])[:3]
+                # Trava de Segurança: Top 3 Menor Odd com Desempate por Horário Distinto
+                # 1. Ordena primariamente por menor odd
+                # 2. Se houver empates de odd, prioriza horários diferentes dos já selecionados
+                # 3. Se não houver horário diferente para a mesma odd, seleciona normalmente
+                sinais_sorted = sorted(sinais, key=lambda x: x["odd_execucao"])
+                top3_sinais = []
+                horarios_usados = set()
+                
+                odds_unicas = sorted(list(set([s["odd_execucao"] for s in sinais_sorted])))
+                for o in odds_unicas:
+                    grupo = [s for s in sinais_sorted if s["odd_execucao"] == o]
+                    
+                    # Passo A: Prioriza horários diferentes
+                    for s in grupo:
+                        if len(top3_sinais) == 3: break
+                        h = s.get("horario", "")
+                        if h not in horarios_usados:
+                            top3_sinais.append(s)
+                            horarios_usados.add(h)
+                    if len(top3_sinais) == 3: break
+                    
+                    # Passo B: Se ainda faltam vagas nessa mesma odd, preenche com os demais
+                    for s in grupo:
+                        if len(top3_sinais) == 3: break
+                        if s not in top3_sinais:
+                            top3_sinais.append(s)
+                            horarios_usados.add(s.get("horario", ""))
+                    if len(top3_sinais) == 3: break
+                    
+                sinais = top3_sinais
                 
             st.session_state.sinais_lay0x3 = sinais
             st.session_state.sinais_date_0x3 = target_date
