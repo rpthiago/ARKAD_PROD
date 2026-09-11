@@ -19,7 +19,7 @@ GATILHO:
 
 import os, sys, re, csv, json, time, argparse, subprocess, unicodedata
 from datetime import datetime, timezone, timedelta
-import urllib.request, urllib.parse
+import urllib.request, urllib.parse, urllib.error
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 LOG_CSV = os.path.join(AQUI, "favorito_dominante_log.csv")
@@ -33,7 +33,7 @@ COLS = [
     "poss_fav", "tipo_gatilho", "status", "placar_ft", "resultado_fav", "pnl_simulado"
 ]
 
-TETO_DIA = 200
+TETO_DIA = 100
 _gasto = {"dia": "", "n": 0}
 
 def load_key():
@@ -74,6 +74,10 @@ def api_get(path, key, retries=2):
             with urllib.request.urlopen(req, timeout=25) as resp:
                 _gasto["n"] += 1
                 rest = resp.headers.get("X-RateLimit-Requests-Remaining")
+                if rest and int(rest) <= 0:
+                    print("  [COTA ZERADA] pausando o dia (nada e tratado como liga sem dado).")
+                    _gasto["n"] = TETO_DIA
+                    return None
                 if rest and int(rest) < 800:
                     print(f"  [PARADA SEGURA] Cota mensal baixa ({rest}) — pausando.")
                     _gasto["n"] = TETO_DIA
@@ -285,7 +289,10 @@ def candidatos_do_coletor(cache_pre):
         k = (ko[:16], h, a)
         if tag == "P":
             cur = cache_pre.get(k)
-            if cur is None or mtk < cur[0]:
+            # [11/09] '<=' e nao '<': Home e Away chegam em linhas separadas com o MESMO mtk;
+            # com '<' estrito o segundo runner era descartado e odd_a ficava 0.0 para sempre
+            # (413 de 413 linhas do cache sem odd_a -> favorito visitante nunca detectado).
+            if cur is None or mtk <= cur[0]:
                 oh = val if runner == h else (cur[1] if cur else 0.0)
                 oa = val if runner == a else (cur[2] if cur else 0.0)
                 cache_pre[k] = (mtk, oh, oa)
@@ -333,6 +340,7 @@ def ciclo_monitoramento(key):
     now_str = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     novos = 0
 
+    fun = dict(vivos=len(cands), placar=0, fav=0, nao_vencendo=0, odd_ok=0, eid=0, stats=0, dominante=0)
     for c in cands:
         gh, ga, minuto = c["gh"], c["ga"], c["minuto"]
 
@@ -342,6 +350,7 @@ def ciclo_monitoramento(key):
             continue
         if diff == 0 and not (40 <= minuto <= 65):
             continue
+        fun["placar"] += 1
 
         # --- UNIVERSO DE FAVORITISMO: odd PRE-JOGO <= 1.65 -------------------------
         # Esta regra esta no pre-registro (secao 2.1) mas NAO estava implementada: o codigo
@@ -352,17 +361,20 @@ def ciclo_monitoramento(key):
             fav_side, fav_team = "AWAY", c["away"]
         else:
             continue
+        fun["fav"] += 1
 
         # o favorito precisa estar PERDENDO por 1 ou EMPATANDO
         is_trailing = (gh < ga) if fav_side == "HOME" else (ga < gh)
         is_drawn = (gh == ga)
         if not (is_trailing or is_drawn):
             continue
+        fun["nao_vencendo"] += 1
 
         # --- ODD REAL de back do favorito, medida no coletor (Lei no 1 / Hall of Shame) ---
         odd_real = c["back_h"] if fav_side == "HOME" else c["back_a"]
         if not odd_real or odd_real < 1.70:
             continue                      # regra 5 do pre-registro, agora com odd MEDIDA
+        fun["odd_ok"] += 1
 
         chave = "%s|%s|%s" % (c["ko"], c["home"], c["away"])
         if any(r.get("chave") == chave for r in registros.values()):
@@ -381,11 +393,15 @@ def ciclo_monitoramento(key):
             if eid:
                 break
         if not eid:
+            print("  [sem eventid] %s x %s" % (c["home"], c["away"]), flush=True)
             continue
+        fun["eid"] += 1
 
         stats = extrair_stats(eid, key)
         if not stats:
+            print("  [sem stats/cobertura] %s x %s" % (c["home"], c["away"]), flush=True)
             continue                      # 6a Lei: sem cobertura Opta, o jogo nao entra
+        fun["stats"] += 1
 
         xg_h = parse_num((stats.get("expected_goals") or [0, 0])[0])
         xg_a = parse_num((stats.get("expected_goals") or [0, 0])[1])
@@ -412,7 +428,10 @@ def ciclo_monitoramento(key):
         # --- dominancia (thresholds do pre-registro, INALTERADOS) ---
         if not (xg_fav >= 1.0 and xg_fav >= 2.5 * max(xg_und, 0.1)
                 and sot_fav >= 3 and tbox_fav >= 15):
+            print("  [nao dominante] %s x %s %d-%d min%d | xG %.2f vs %.2f SoT %d tbox %d"
+                  % (c["home"], c["away"], gh, ga, minuto, xg_fav, xg_und, sot_fav, tbox_fav), flush=True)
             continue
+        fun["dominante"] += 1
 
         tipo_gatilho = "PERDENDO_POR_1" if is_trailing else "EMPATE_TARDIO"
         razao_xg = round(xg_fav / max(xg_und, 0.05), 2)
@@ -442,6 +461,9 @@ def ciclo_monitoramento(key):
     if novos > 0:
         salvar_log(registros)
         print("  [+] %d novo(s) sinal(is) em %s" % (novos, LOG_CSV))
+    if fun["vivos"]:
+        print("  [funil %s] vivos=%d placar=%d fav<=1.65=%d nao_vencendo=%d back>=1.70=%d eid=%d stats=%d dominante=%d novos=%d"
+              % ((now_str[11:16],) + tuple(fun.values()) + (novos,)), flush=True)
 
 
 def main():
