@@ -48,3 +48,37 @@ Células impossíveis (linha já batida pelo placar) são descartadas. Célula s
 - Não adicionar célula depois de ver resultado. Não mudar janelas nem faixas.
 - Não ler "PASSA" em célula que passa hoje e não passa no próximo snapshot — o critério é
   sobreviver em snapshots sucessivos com N crescente.
+
+---
+
+## Snapshot 1 — 2026-09-12 (retroativo 16/08 → 05/09)
+
+1.193 jogos, 19 dias, 13.115 apostas, 98 células com N ≥ 30. BH sobre M = 98: **0 PASSA, 9 REPROVA,
+89 INCONCLUSIVO**. Melhor p = 0,034 (limiar 0,0005). Total: gap −1,6pp, ROI −4,7%. Por linha, só
+Over 1.5 positiva (+0,6pp / +1,1%); por estado, só `1 gol` (+0,5pp). Tabela completa em
+`varredura_over/varredura_over_2026-09-12.csv`.
+
+## H-extra — pré-registrada em 2026-09-12, DEPOIS do snapshot 1 (declarado)
+
+**Hipótese única:** *backar Over 1.5 quando já saiu exatamente 1 gol, sem favorito claro pré-jogo
+(menor back no Match Odds > 1,80), entre o minuto 25 e 85.*
+
+**De onde veio:** no snapshot 1 essa regra apareceu como cinco células separadas da grade e foi
+positiva em quatro (25-40 +2,4pp · 46-60 +5,1pp · 60-75 +3,5pp · 75-85 +3,9pp; 10-25 −0,3pp), N≈200-250
+cada, nenhuma sobrevivendo ao BH, todos os ICs cruzando zero. **Somar as janelas agora seria decisão
+pós-resultado** — por isso ela entra como hipótese separada, a ser julgada só com dados posteriores a
+esta data (liquidação oficial da VPS).
+
+**Regra congelada:** linha Over 1.5 · estado `1 gol` (1-0 ou 0-1) · fav pré-jogo > 1,80 · janela
+25 ≤ minuto < 85 · uma aposta por jogo (a primeira captura elegível) · odd de back real · stake 1u ·
+comissão 5%.
+
+**Critério (3 vias, no snapshot 2 em diante):** APROVA se N ≥ 300 **e** piso do IC95 (bloco-dia,
+≥ 6 dias) > 0 **e** p ≤ 0,05 sem correção (é UMA hipótese, não 98 — mas fica registrado que nasceu
+de uma varredura, então o snapshot 3 precisa confirmar de novo com N novo). REPROVA se teto do IC95
+< 0. INCONCLUSIVO no resto.
+
+**Dado de julgamento:** somente jogos com KO ≥ 2026-09-13, placar da liquidação oficial. Os 1.193
+jogos do snapshot 1 **não contam** para a H-extra.
+
+**Próximo snapshot da grade e 1º julgamento da H-extra:** 2026-10-12.

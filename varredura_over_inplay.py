@@ -161,6 +161,22 @@ def main():
         print("  %-12s N=%5d WR=%5.1f%% BE=%5.1f%% gap=%+5.1fpp ROI=%+5.1f%%" % (S, len(g), 100 * g.green.mean(), 100 * g.be.mean(), 100 * (g.green.mean() - g.be.mean()), 100 * g.pnl.mean()))
     print("=== TOTAL: N=%d WR=%.1f%% BE=%.1f%% gap=%+.1fpp ROI=%+.1f%% ===" % (len(df), 100 * df.green.mean(), 100 * df.be.mean(), 100 * (df.green.mean() - df.be.mean()), 100 * df.pnl.mean()))
 
+    # ---- H-extra (pre-registrada 12/09, ver PREREGISTRO): Over 1.5 · 1 gol · fav>1.80 · min 25-85,
+    #      1 aposta/jogo, SO jogos com KO >= 2026-09-13 (os do snapshot 1 nao contam)
+    hx = df[(df["linha"] == 1.5) & (df["estado"] == "1 gol") & (df["fav"] == ">1.80") &
+            (df["minuto"] >= 25) & (df["minuto"] < 85) & (df["ko"] >= "2026-09-13")]
+    hx = hx.sort_values("minuto").drop_duplicates(["ko", "home", "away"], keep="first")
+    print("\n=== H-EXTRA (Over 1.5 · 1 gol · fav>1.80 · min 25-85 · KO>=13/09) ===")
+    if hx.empty:
+        print("  sem jogos elegiveis ainda (dado de julgamento comeca em 13/09)")
+    else:
+        wr, be, roi = hx.green.mean(), hx.be.mean(), hx.pnl.mean(); lo, hi, p0, nk = boot_dia(hx)
+        ic = "[%+.1f%%,%+.1f%%] p=%.4f" % (100 * lo, 100 * hi, p0) if np.isfinite(lo) else "IC INDEFINIDO (nk=%d<%d)" % (nk, MIN_BLOCOS)
+        print("  N=%d (de 300) | WR=%.1f%% BE=%.1f%% gap=%+.1fpp | ROI=%+.1f%% | IC95 %s" % (len(hx), 100 * wr, 100 * be, 100 * (wr - be), 100 * roi, ic))
+        if np.isfinite(hi) and hi < 0: print("  -> REPROVA")
+        elif len(hx) >= 300 and np.isfinite(lo) and lo > 0 and p0 <= 0.05: print("  -> APROVA (snapshot 3 precisa confirmar com N novo)")
+        else: print("  -> INCONCLUSIVO")
+
 
 if __name__ == "__main__":
     main()
