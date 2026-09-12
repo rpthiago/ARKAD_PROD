@@ -25,3 +25,4 @@ hist_stats_ft/
 *.orig
 metodos_aprovados/.cache_base_betfair.csv
 metodos_aprovados/.cache_placares_coletor_ft.csv
+metodos_aprovados/.cache_placares_ft.csv

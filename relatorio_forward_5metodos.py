@@ -146,18 +146,52 @@ def _base_betfair():
     return pd.read_csv(CACHE_BF, low_memory=False)
 
 
-def placares():
-    """Dict {(data, canon(home), canon(away)): (gh, ga, fonte)}. Betfair primeiro; b365 (a copia mais
-    recente entre ARKAD_PROD e DASHBOARD) so onde a Betfair nao tem, e sem sobrescrever."""
+VPS = "ubuntu@163.176.59.215"
+VPS_KEY = os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key")
+CACHE_FT = os.path.join(ROOT, "metodos_aprovados", ".cache_placares_ft.csv")
+
+
+def _placares_oficiais():
+    """placares_ft.csv da VPS (liquidar_betfair_oficial.py): o runner WINNER do Correct Score
+    depois que a Betfair liquidou = placar OFICIAL. Nomes identicos aos do feed diario (mesma
+    fonte) -> match exato. Fonte PRIMARIA a partir de 12/09/2026. Copia via scp; se falhar, usa a
+    ultima copia local."""
+    import subprocess
+    try:
+        subprocess.run(["scp", "-q", "-i", VPS_KEY, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=20",
+                        VPS + ":/home/ubuntu/betfair-collector/placares_ft.csv", CACHE_FT],
+                       capture_output=True, timeout=90)
+    except Exception as e:
+        print("  [placares oficiais] scp falhou (%s) — usando cache local" % str(e)[:50])
     out = {}
+    if not os.path.exists(CACHE_FT):
+        return out
+    try:
+        d = pd.read_csv(CACHE_FT, dtype=str).fillna("")
+    except Exception:
+        return out
+    for _, r in d.iterrows():
+        if r.get("status") != "LIQUIDADO" or not r.get("gh") or not r.get("ga"):
+            continue          # "Any Other ..." fica sem gh/ga: nao entra aqui (so mo/ou winners)
+        out[(r["ko"][:10], canon(r["home"]), canon(r["away"]))] = (int(float(r["gh"])), int(float(r["ga"])), "betfair_oficial")
+    print("  placares OFICIAIS (VPS): %d" % len(out))
+    return out
+
+
+def placares():
+    """Dict {(data, canon(home), canon(away)): (gh, ga, fonte)}. Ordem: OFICIAL da VPS (liquidacao
+    da Betfair) -> base Betfair -> b365 (a copia mais recente). Nunca sobrescreve fonte anterior."""
+    out = _placares_oficiais()
     bf = _base_betfair()
     if not bf.empty and "Goals_H_FT" in bf.columns:
         d = pd.to_datetime(bf["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
         gh = pd.to_numeric(bf["Goals_H_FT"], errors="coerce"); ga = pd.to_numeric(bf["Goals_A_FT"], errors="coerce")
+        n0 = len(out)
         for dd, h, a, x, y in zip(d, bf["Home"], bf["Away"], gh, ga):
-            if pd.notna(x) and pd.notna(y) and isinstance(dd, str):
-                out[(dd, canon(h), canon(a))] = (int(x), int(y), "betfair")
-        print("  placares betfair: %d (ate %s)" % (len(out), d.max()))
+            k = (dd, canon(h), canon(a))
+            if pd.notna(x) and pd.notna(y) and isinstance(dd, str) and k not in out:
+                out[k] = (int(x), int(y), "betfair")
+        print("  placares base betfair: +%d (ate %s)" % (len(out) - n0, d.max()))
     # b365: pega a copia mais nova (o DASHBOARD atualiza diariamente; a do ARKAD_PROD e semanal)
     cands = [os.path.join(ROOT, "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"),
              os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "Bases_de_Dados_API_FutPythonTrader_Bet365.csv")]
