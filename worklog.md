@@ -7,6 +7,16 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-11 · Claude · Correcao de atribuicao (apos o Thiago)
+
+Os placares de 29-30/08 da mestre e das planilhas diarias 03-09/09 foram preenchidos **manualmente
+pelo Thiago**, nao por pipeline. O achado (23 de 42 divergem de duas bases que concordam entre si;
+5 falsos GREEN) se mantem; a causa provavel e digitacao/placar parcial. Desfeito o meu reset a
+PENDENTE de 06-09/09 (restaurado como `manual`). `liquidar_resultados_noite` passou a conferir
+linhas manuais contra as bases e a listar divergencias no fechamento em vez de ignora-las.
+
+---
+
 ## 2026-09-11 · Claude · Correcoes executadas apos a auditoria da liquidacao
 
 - **Base mestre substituida pela VERIFICADA** (backup `.bak_20260911_liquidacao.csv`). +12,89u -> +7,02u.
@@ -17,8 +27,9 @@
   `PnL_u = 0.955 / -(odd-1)` (STAKE, 4,5%) — o mesmo defeito que inflou os 77 em 17x; agora
   LIABILITY=1u / 5% com `PnL_stake_u` e `Convencao_PnL` ao lado.
 - **Planilhas diarias 03-09/09 re-liquidadas pelas bases** (`reliquidar_planilhas_diarias.py`, backups
-  `.bak_20260911`). Estavam 100% liquidadas em stake pelo coletor — inclusive 06-09/09, que as bases
-  nem cobriam. Nos 17 verificaveis, 0 resultados trocaram. 42 voltaram a PENDENTE ate a base cobrir.
+  `.bak_20260911`). Estavam 100% liquidadas em stake, **manualmente pelo Thiago** (eu assumi coletor — errado).
+  Restaurei o resultado manual como `Fonte_Placar=manual`; a rotina noturna agora CONFERE as linhas
+  manuais contra as bases quando o placar chega e lista divergencias no fechamento. Nos 17 verificaveis, 0 resultados trocaram. 42 voltaram a PENDENTE ate a base cobrir.
   **Isso importa porque a pagina 02 faz `drop_duplicates(keep="last")` com as diarias concatenadas
   DEPOIS da mestre: para 03/09+ a planilha diaria vence a mestre.**
 - **Descoberta:** as diarias so eram geradas/liquidadas por BOTAO na pagina 01 (aba 5) — nenhuma tarefa
@@ -41,8 +52,8 @@ mestre nao foi tocada) em `..._VERIFICADA.csv`.
 - **Placar: 23 de 104 comparaveis divergem (22%) — TODOS em 29 e 30/08** (10 de 16 e 13 de 26).
   Zero divergencia em qualquer outra data. As duas fontes externas concordam entre si (score 1,00)
   e discordam da mestre. O coletor NAO tem dados de 30/08 e para 29/08 reconstruiu certo (Celtic x
-  Falkirk 2-1, mestre diz 3x1) — os placares desses dois dias na mestre **nao vieram de fonte
-  rastreavel**. Nao e "gol tardio perdido": AIK x Hammarby 0x0 vs 3-2, Alianza Lima 3x4 vs 0-1.
+  Falkirk 2-1, mestre diz 3x1) — os placares desses dois dias na mestre foram **preenchidos manualmente pelo Thiago** (informado
+  por ele em 11/09) — provavel erro de digitacao ou placar consultado antes do fim. Nao e "gol tardio perdido": AIK x Hammarby 0x0 vs 3-2, Alianza Lima 3x4 vs 0-1.
 - **Resultado: 5 falsos GREEN, 0 falso RED.** 4 no Lay Home (Elversberg, Al-Kholood, AIK, Hodd) e
   1 no Lay Draw (Plzen x Slovacko 1-1). Corrige o que eu escrevi em 10/09 ("sem false green"): aquela
   checagem so olhou mercados sensiveis a gol tardio e confiou no placar da propria base.
