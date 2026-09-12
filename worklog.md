@@ -7,6 +7,36 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-11 · Claude · Auditoria da LIQUIDACAO da base mestre — 5 falsos GREEN em 29-30/08
+
+Cruzei as 266 linhas de `Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` com duas fontes de placar
+independentes (base Betfair apicomunidade + base b365, match exato -> fuzzy no mesmo dia).
+Script: `auditar_liquidacao_base_mestre.py`; planilha linha a linha em
+`metodos_aprovados/auditoria_liquidacao_base_mestre.csv`; versao corrigida (arquivo SEPARADO, a
+mestre nao foi tocada) em `..._VERIFICADA.csv`.
+
+- **167 de 266 verificaveis.** 99 sao de ligas sem placar em base nenhuma (PnL gravado nelas +2,86u,
+  nao auditavel por esta via).
+- **Placar: 23 de 104 comparaveis divergem (22%) — TODOS em 29 e 30/08** (10 de 16 e 13 de 26).
+  Zero divergencia em qualquer outra data. As duas fontes externas concordam entre si (score 1,00)
+  e discordam da mestre. O coletor NAO tem dados de 30/08 e para 29/08 reconstruiu certo (Celtic x
+  Falkirk 2-1, mestre diz 3x1) — os placares desses dois dias na mestre **nao vieram de fonte
+  rastreavel**. Nao e "gol tardio perdido": AIK x Hammarby 0x0 vs 3-2, Alianza Lima 3x4 vs 0-1.
+- **Resultado: 5 falsos GREEN, 0 falso RED.** 4 no Lay Home (Elversberg, Al-Kholood, AIK, Hodd) e
+  1 no Lay Draw (Plzen x Slovacko 1-1). Corrige o que eu escrevi em 10/09 ("sem false green"): aquela
+  checagem so olhou mercados sensiveis a gol tardio e confiou no placar da propria base.
+- **P&L:** base inteira +12,89u -> **+7,02u** (−5,87u = R$ −587). Lay Home +5,52 -> **+0,84u**
+  (WR 92,6% -> 87,7%, contra break-even ~86,7%: gap cai de +5,9pp para ~+1pp). Lay Draw +6,37 ->
+  +5,18u. Over 4.5 inalterado.
+- **Coletor como fonte de placar: reprovado.** Validado em 527 jogos contra a base Betfair: 27%
+  errados, sempre com menos gols (mercado suspende no gol tardio). Muda G/R em 7-9% dos jogos.
+  `preencher_placares.py` / `_placares_coletor_cache.csv` nao devem liquidar nada.
+- **Pendente de decisao:** substituir a mestre pela VERIFICADA (backup automatico) e trocar a fonte
+  de placar do `automacao_diaria_aprovados.py` para bases + fuzzy (o que o
+  `relatorio_forward_5metodos.py` ja faz).
+
+---
+
 ## 2026-09-10 · Antigravity · Arquivamento da Pagina 18 + Registro do Lay 0x1 In-Play no Hall of Shame
 
 Consolidação final das tarefas delegadas por Claude após os commits `cada962` (DASHBOARD_ARKAD-1) e `d7e613e` (ARKAD_PROD):
