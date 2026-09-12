@@ -7,6 +7,19 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-12 · Claude · REVERSAO (decisao do Thiago: opcao A)
+
+Revertido tudo o que alterei nos arquivos do usuario: mestre (voltou a +12,89u, sem colunas
+Fonte/Original), planilhas diarias 03-09/09 (resultado manual, convencao stake como estavam) e
+`automacao_diaria_aprovados.py` (comportamento original, por botao). A rotina das 23:30 nao escreve
+em nenhum arquivo do usuario: roda o relatorio dos 5 metodos (ledger proprio) e
+`conferir_placares_manuais.py`, que SO AVISA divergencia planilha x base no Telegram. Hoje: 5
+(os mesmos de 29-30/08). Scripts que escreviam nas planilhas foram para `_arquivados_11set/`.
+A auditoria (`auditar_liquidacao_base_mestre.py`, `..._VERIFICADA.csv`) fica como registro, sem
+efeito. Motivo: confianca — o Thiago pediu o controle de volta antes de qualquer decisao de numero.
+
+---
+
 ## 2026-09-11 · Claude · Correcao de atribuicao (apos o Thiago)
 
 Os placares de 29-30/08 da mestre e das planilhas diarias 03-09/09 foram preenchidos **manualmente
