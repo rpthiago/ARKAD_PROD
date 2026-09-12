@@ -325,12 +325,13 @@ def _linha(nome, rows, largura=6):
     return "%-*s %3d  %3dG/%2dR %s  %+7.2fu%s" % (largura, nome, n, g, r, wr, pnl, p)
 
 
-def montar_mensagem(L, hoje):
-    """Mensagem em HTML do Telegram (<b>, <i>, <pre>) — o Markdown legado quebra com '_' e '*'."""
+def montar_mensagem(L, hoje, rotulo="HOJE"):
+    """Mensagem em HTML do Telegram (<b>, <i>, <pre>). `hoje` e o DIA DE REFERENCIA do relatorio
+    (na rodada das 6h e o dia anterior, com todos os placares oficiais ja liquidados)."""
     rows = list(L.values())
     hoje_s = hoje.isoformat()
     linhas = ["<b>ARKAD — Forward 5 Métodos</b>",
-              "<i>%s · liability 1u = R$%.0f · comissão 5%%</i>" % (hoje.strftime("%d/%m/%Y"), LIAB_RS), ""]
+              "<i>jogos de %s · liability 1u = R$%.0f · comissão 5%%</i>" % (hoje.strftime("%d/%m/%Y"), LIAB_RS), ""]
 
     def bloco(titulo, sub):
         out = ["<b>%s</b>" % titulo, "<pre>"]
@@ -345,7 +346,29 @@ def montar_mensagem(L, hoje):
         out.append("</pre>")
         return out
 
-    linhas += bloco("HOJE %s" % hoje.strftime("%d/%m"), [r for r in rows if r["Data"] == hoje_s])
+    linhas += bloco("%s %s" % (rotulo, hoje.strftime("%d/%m")), [r for r in rows if r["Data"] == hoje_s])
+
+    # ---- JOGOS: liquidados nas ultimas 24h (o placar oficial chega ~2-3h depois do apito, entao os
+    #      jogos da noite aparecem no relatorio do dia seguinte) + pendentes de hoje
+    rec = sorted([r for r in rows if r["status"] == "LIQUIDADO" and r["Data"] == hoje_s],
+                 key=lambda r: (r["Hora"], r["Metodo"]))
+    if rec:
+        linhas += ["", "<b>RESULTADOS de %s (%d liquidados)</b>" % (hoje.strftime("%d/%m"), len(rec)), "<pre>"]
+        for r in rec:
+            fonte = str(r.get("fonte_placar", "")).split(":")[0]
+            tag = "★" if fonte == "betfair_oficial" else "b"
+            linhas.append("%s %s %-5s %-30s @%-5.2f %-4s %s %+6.2f" % (
+                r["Hora"], tag, CURTO[r["Metodo"]],
+                ("%s x %s" % (r["Home"], r["Away"]))[:30], float(r["Odd_Lay"]), r["placar"],
+                "G" if r["resultado"] == "GREEN" else "R", float(r["pnl_u"])))
+        linhas += ["</pre>", "<i>★ = placar oficial da liquidação Betfair (VPS) · b = base histórica</i>"]
+    pend_hoje = [r for r in rows if r["Data"] == hoje_s and r["status"] == "PENDENTE"]
+    if pend_hoje:
+        linhas += ["", "<b>AINDA SEM PLACAR em %s (%d) — entram quando liquidar</b>" % (hoje.strftime("%d/%m"), len(pend_hoje)), "<pre>"]
+        for r in sorted(pend_hoje, key=lambda r: (r["Hora"], r["Metodo"])):
+            linhas.append("%s %-5s %-30s @%.2f" % (r["Hora"], CURTO[r["Metodo"]], ("%s x %s" % (r["Home"], r["Away"]))[:30], float(r["Odd_Lay"])))
+        linhas.append("</pre>")
+
     meses = sorted({r["Data"][:7] for r in rows}, reverse=True)
     nomes = {"08": "AGOSTO", "09": "SETEMBRO", "10": "OUTUBRO", "11": "NOVEMBRO", "12": "DEZEMBRO",
              "01": "JANEIRO", "02": "FEVEREIRO", "03": "MARÇO", "04": "ABRIL", "05": "MAIO", "06": "JUNHO", "07": "JULHO"}
@@ -393,10 +416,14 @@ def main():
     ap.add_argument("--desde", default=INICIO_PADRAO)
     ap.add_argument("--ate", default=date.today().isoformat())
     ap.add_argument("--sem-telegram", action="store_true")
+    ap.add_argument("--ontem", action="store_true", help="relatorio do dia anterior (rodada das 6h)")
     a = ap.parse_args()
     print("=== forward 5 metodos: %s -> %s ===" % (a.desde, a.ate))
     L = atualizar(a.desde, a.ate)
-    msg = montar_mensagem(L, datetime.strptime(a.ate, "%Y-%m-%d").date())
+    ref = datetime.strptime(a.ate, "%Y-%m-%d").date()
+    if a.ontem:
+        ref = ref - timedelta(days=1)
+    msg = montar_mensagem(L, ref, "ONTEM" if a.ontem else "HOJE")
     print("\n" + re.sub(r"</?(b|i|pre)>", "", msg))
     print("\n(%d caracteres)" % len(msg))
     if not a.sem_telegram:
