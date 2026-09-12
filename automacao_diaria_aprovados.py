@@ -217,19 +217,19 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
         
     print(f"[+] Total de jogos a liquidar: {len(df_dia)}")
     
-    # Mapa de placares
-    mapa_placares = {}
-    cache_file = ROOT / "_placares_coletor_cache.csv"
-    if cache_file.exists():
-        try:
-            df_c = pd.read_csv(cache_file)
-            for _, rc in df_c.iterrows():
-                k = f"{str(rc.get('Home')).strip().lower()}_{str(rc.get('Away')).strip().lower()}"
-                mapa_placares[k] = (rc.get('Goals_H_FT'), rc.get('Goals_A_FT'))
-        except Exception:
-            pass
-            
-    COMM = 0.045
+    # Mapa de placares — CORRIGIDO 11/09/2026.
+    # Antes: reconstrucao pelo Correct Score do coletor (_placares_coletor_cache.csv). Validada
+    # contra a base Betfair em 527 jogos: 27% de placares errados, SEMPRE com menos gols (o mercado
+    # suspende no gol tardio), mudando a decisao G/R em 7-9% dos jogos. Reprovada como fonte.
+    # Agora: bases Betfair (apicomunidade) + b365, match exato -> fuzzy no mesmo dia, com a fonte
+    # gravada em cada linha. Sem placar em base nenhuma = fica PENDENTE (Lei no 3: sem dado, SKIP;
+    # nunca herdar Goals_H/Goals_A da propria planilha, que nao tem origem rastreavel).
+    import relatorio_forward_5metodos as _RF
+    _P = _RF.placares(); _IDX = _RF._por_dia(_P)
+    if "Fonte_Placar" not in df_dia.columns:
+        df_dia["Fonte_Placar"] = ""
+
+    COMM = 0.05          # Lei no 4 / convencao da base mestre reunificada em 10/09 (era 0.045)
     for idx, r in df_dia.iterrows():
         # Se já estiver liquidado, mantém
         if r.get("Resultado") in ["GREEN", "RED"]:
@@ -238,15 +238,19 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
         jogo = str(r["Jogo"])
         partes = jogo.split(" x ")
         h, a = partes[0].strip(), partes[1].strip()
-        k = f"{h.lower()}_{a.lower()}"
-        
-        gh, ga = mapa_placares.get(k, (r.get("Goals_H"), r.get("Goals_A")))
+
+        _sc = _RF.achar_placar(_P, _IDX, str(r.get("Data", data_str))[:10], h, a)
+        if _sc is None:
+            gh, ga = None, None
+        else:
+            gh, ga, _fonte = _sc
+            df_dia.at[idx, "Fonte_Placar"] = _fonte
         metodo = str(r["Método"])
         odd = float(r["Odd_Entrada"])
         stake_r = float(r.get("Stake_Sugerida_R$", 10.0))
         liab_r = float(r.get("Risco_Red_R$", 50.0))
         
-        if pd.notna(gh) and pd.notna(ga) and str(gh) != "nan":
+        if gh is not None and ga is not None:
             gh, ga = int(gh), int(ga)
             df_dia.at[idx, "Placar"] = f"{gh}x{ga}"
             
@@ -277,8 +281,14 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 
             df_dia.at[idx, "Resultado"] = res
             df_dia.at[idx, "1/0"] = 1 if res == "GREEN" else 0
-            df_dia.at[idx, "PnL_u"] = 0.955 if res == "GREEN" else -(odd - 1.0)
-            df_dia.at[idx, "PnL_R$"] = round(stake_r * (1.0 - COMM), 2) if res == "GREEN" else -liab_r
+            # LIABILITY = 1u, comissao 5% — a MESMA convencao da base mestre (Convencao_PnL).
+            # Antes era 0.955/-(odd-1) = STAKE=1u com 4,5%: somar isso com a mestre misturava
+            # escalas ~5x diferentes (foi o que inflou os 77 jogos de 03-09/09 em 17x na auditoria).
+            pnl_liab = (1.0 - COMM) / (odd - 1.0) if res == "GREEN" else -1.0
+            df_dia.at[idx, "PnL_u"] = round(pnl_liab, 5)
+            df_dia.at[idx, "PnL_stake_u"] = round((1.0 - COMM) if res == "GREEN" else -(odd - 1.0), 5)
+            df_dia.at[idx, "Convencao_PnL"] = "LIABILITY=1u;comissao=5%"
+            df_dia.at[idx, "PnL_R$"] = round(liab_r * pnl_liab, 2)
             
     df_dia.to_excel(excel_path, index=False)
     print(f"[+] Planilha liquidada e atualizada em: {excel_path.name}")

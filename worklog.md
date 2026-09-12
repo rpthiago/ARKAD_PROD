@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-11 · Claude · Correcoes executadas apos a auditoria da liquidacao
+
+- **Base mestre substituida pela VERIFICADA** (backup `.bak_20260911_liquidacao.csv`). +12,89u -> +7,02u.
+  Colunas novas: `Placar_Original`, `Resultado_Original`, `PnL_u_Original`, `Fonte_Placar`.
+- **`automacao_diaria_aprovados.py` (liquidacao noturna):** fonte de placar trocada do cache do coletor
+  para bases + fuzzy (`relatorio_forward_5metodos.achar_placar`), `Fonte_Placar` gravada por linha,
+  sem placar = PENDENTE (nunca herda `Goals_H/A` da planilha). **E a convencao:** gravava
+  `PnL_u = 0.955 / -(odd-1)` (STAKE, 4,5%) — o mesmo defeito que inflou os 77 em 17x; agora
+  LIABILITY=1u / 5% com `PnL_stake_u` e `Convencao_PnL` ao lado.
+- **Planilhas diarias 03-09/09 re-liquidadas pelas bases** (`reliquidar_planilhas_diarias.py`, backups
+  `.bak_20260911`). Estavam 100% liquidadas em stake pelo coletor — inclusive 06-09/09, que as bases
+  nem cobriam. Nos 17 verificaveis, 0 resultados trocaram. 42 voltaram a PENDENTE ate a base cobrir.
+  **Isso importa porque a pagina 02 faz `drop_duplicates(keep="last")` com as diarias concatenadas
+  DEPOIS da mestre: para 03/09+ a planilha diaria vence a mestre.**
+- **Descoberta:** as diarias so eram geradas/liquidadas por BOTAO na pagina 01 (aba 5) — nenhuma tarefa
+  agendada. Criado `liquidar_pendentes_recentes.py` (retenta os ultimos 10 dias) acoplado ao job das
+  23:30 (`relatorio_forward_5metodos.bat`, tarefa `ARKAD_Forward_5Metodos_2330`).
+- A planilha de 11/09 estava aberta no Excel e foi pulada; entra na retentativa de amanha.
+
+---
+
 ## 2026-09-11 · Claude · Auditoria da LIQUIDACAO da base mestre — 5 falsos GREEN em 29-30/08
 
 Cruzei as 266 linhas de `Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` com duas fontes de placar
