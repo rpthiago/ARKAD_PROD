@@ -51,12 +51,32 @@ Células impossíveis (linha já batida pelo placar) são descartadas. Célula s
 
 ---
 
-## Snapshot 1 — 2026-09-12 (retroativo 16/08 → 05/09)
+## Correção de MEDIÇÃO — 2026-09-12 (auditoria B4; a grade não mudou)
 
-1.193 jogos, 19 dias, 13.115 apostas, 98 células com N ≥ 30. BH sobre M = 98: **0 PASSA, 9 REPROVA,
-89 INCONCLUSIVO**. Melhor p = 0,034 (limiar 0,0005). Total: gap −1,6pp, ROI −4,7%. Por linha, só
-Over 1.5 positiva (+0,6pp / +1,1%); por estado, só `1 gol` (+0,5pp). Tabela completa em
-`varredura_over/varredura_over_2026-09-12.csv`.
+O "placar no momento" do snapshot 1 vinha do runner de **menor lay do Correct Score**. Medido contra
+as linhas de Over/Under na mesma captura: aos 10-25 min ele bate com o total real de gols em **27,5%**
+dos casos (diz *mais* gols em 70%) — é o placar **final mais provável**, não o atual. Quando o jogo
+está 0-0 de verdade, o CS diz 0-0 em 28%. Aos 75-85 min ainda erra 13%.
+
+**Estado corrigido:** gols já saídos = linhas de O/U **batidas** (Over L a ≤1,02) ou que **sumiram e
+não voltaram** (mercado liquidado após o gol — o Over 0.5 some no 1º gol). É fato, não previsão.
+A divisão casa/fora vem do CS **só quando** o total do CS coincide com o do O/U; com 2+ gols sem
+divisão confiável a captura não é classificada. Nenhuma informação de resultado entra no estado.
+
+Também testado e **rejeitado** um guard "FT < parcial → fora": removia 9,7% das apostas, todas as
+que terminaram com poucos gols — seleção pelo resultado. Não usar.
+
+## Snapshot 1 (REFEITO com o estado corrigido) — 2026-09-12, retroativo 16/08 → 05/09
+
+1.181 jogos, 19 dias, **15.018 apostas**, **101 células** com N ≥ 30. BH sobre M = 101:
+**0 PASSA, 7 REPROVA, 94 INCONCLUSIVO**. Melhor p = 0,0027 (Over 3.5 · 25-40 · 1-1 · >1,80, N=45;
+limiar 0,0005). Total: gap −1,2pp, ROI −4,0%. Por linha, só Over 1.5 positiva (+1,4pp / +2,3%).
+Por estado: 0-0 −1,5pp · 1 gol −0,1pp · 1-1 +0,1pp · diff≥2 −6,4pp.
+Tabela: `varredura_over/varredura_over_2026-09-12.csv` (sobrescreve a versão com estado errado).
+
+Família Over 1.5 · 1 gol · fav >1,80, com o estado corrigido: 10-25 −1,0pp (N=258) · 25-40 +3,0pp
+(314) · 46-60 +3,7pp (296) · 60-75 +4,3pp (266) · 75-85 +5,8pp (227). Mesmo padrão, N maior. A
+H-extra abaixo fica como registrada (janela 25-85), agora medida com o estado correto.
 
 ## H-extra — pré-registrada em 2026-09-12, DEPOIS do snapshot 1 (declarado)
 

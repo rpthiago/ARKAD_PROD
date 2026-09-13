@@ -66,3 +66,43 @@ fonte nova (B5).
 2. **A1, A2, A3** — re-liquidar os reprovados do coletor contra bases exatas.
 3. **B1, B2** — reconferir os dois positivos que sustentam decisões.
 4. **C** — grep/rodar cada script listado.
+
+
+---
+
+# RESULTADO DA VARREDURA — executada em 2026-09-12 (B5 pendente até as bases alcançarem 12/09)
+
+| # | item | resultado | veredito muda? |
+|---|---|---|---|
+| A1 | Under-limite | 154 de 637 liquidados pelo coletor; nos verificáveis, **4 falsos GREEN em 57** (7%), 0 falso RED; oficial 0/65. Log completo: −2,03% gravado → **−3,11%** com os 4 corrigidos; 97 linhas do coletor ainda sem verificação (~7 falsos GREEN a mais). Subconjunto do coletor +5,4% vs oficial **−4,4%** — o viés em ação | não: REPROVADO, e pior que parecia |
+| A2 | Idea1 Back Under | **100% liquidado pelo status oficial** (`BF:*`), 0 pelo coletor | não precisa refazer |
+| A3 | Rota C | refeito com 0-0 **real** (O/U) e placar externo: 0x1 na faixa **26,3%** vs 15,4% geral; gap −5,75pp, ROI liab −7,3%, IC95 [−23,5; +4,0] | não: seleção adversa confirmada |
+| A4 | Lay 0x1 RF v2 | não refeito hoje; cobertura checada em 11/09 | — |
+| A5 | Late Goal | liquidação oficial OK. **Mas o estado (diff==1 e a linha) vinha do CS de menor lay** — errado em ~13% aos 75-85 min. O −7,3pp fica; a coorte tem ~13% de jogos mal classificados | ver "achado novo" |
+| A7 | Emenda 0x0 | recalculado: N=1476, desvio 0,2294, média 0,0117 — bate | não |
+| B1 | Lay 0x0 backtest | recalculado independente: N=1947, gap +1,10pp, ROI +1,17%, IC95 [+0,29; +2,00], p=0,0047, nk=30 — bate | não |
+| B2 | Forward 5 métodos | SEM_PLACAR (151): odd média 12,99 vs 11,99, perfil de método parecido; ligas parcialmente cobertas WR 89,0% vs 90,7% geral — sem sinal de seleção por resultado | não |
+| B4 | Varredura Over | **achado novo** (abaixo). Snapshot 1 refeito: 0 passa, 7 reprova, 94 inconclusivo; total −4,0% | grade inalterada; números substituídos |
+| C | código | 11 conferências: 9 OK; 2 "FALHA" eram falso alarme (regex contou comentário; CRLF vs LF) | não |
+| D | fuzzy de placar | jogo errado: exato 0,4%, fuzzy 1,2% (jogos com parcial ≥ min 60) | limite conhecido; a fonte oficial elimina daqui em diante |
+
+## ACHADO NOVO — o "placar atual" pelo Correct Score é o placar FINAL mais provável
+
+Medido em 38.263 capturas: aos 10-25 min o runner de menor lay do CS coincide com o total real de
+gols em **27,5%**; 25-40: 55%; 46-60: 69%; 60-75: 80%; 75-85: 87%. O erro é sempre "mais gols" —
+é previsão, não estado. A fonte correta de gols-até-agora está no próprio coletor: linhas de O/U
+batidas (Over L ≤ 1,02) ou liquidadas (sumiram e não voltaram).
+
+**Contaminados (usam CS como placar atual):** `late_goal_capturar.py` (linha 182 — define diff==1
+e a linha Over), `tracker_favorito_dominante_inplay.py` (linha 272), `radar_ht_favorito.py`
+(desligado), `varredura_over_inplay.py` (**corrigido hoje**).
+**Corretos:** `alerta_under_vps.py` (estado pelas linhas O/U; CS só instrumenta),
+`coletor_inplay_min80.py` e `xg_ht_logger.py` (placar da API FotMob), liquidação oficial.
+
+**Pendente de decisão do Thiago:** trocar a origem do placar nos dois scripts ao vivo (Late Goal e
+favorito-dominante) para a regra das linhas O/U. Não altera limiar nenhum — altera a medição do
+estado. Afeta o que dispara daqui em diante; o que já foi registrado fica como está, marcado.
+
+## Não fechado hoje
+- **B5**: validar `placares_ft.csv` contra as bases quando alcançarem 12/09 (~17/09).
+- A1: 97 linhas do under-limite liquidadas pelo coletor sem base externa (ligas sem cobertura).

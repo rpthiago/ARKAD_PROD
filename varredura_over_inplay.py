@@ -52,9 +52,43 @@ def carregar(pasta):
     return ou, cs, fav
 
 
+def gols_por_ou(ou_all):
+    """Gols JA SAIDOS por captura, pelo Over/Under (fato, nao previsao). Auditoria 12/09: o runner de
+    menor lay do Correct Score e o placar FINAL mais provavel (bate com o real em 27,5% aos 10-25 min).
+    Regra por linha L (0.5..3.5) numa captura ts:
+      - batida se 'Over L' esta a <=1,02, OU se o mercado da linha sumiu e NAO volta em nenhuma
+        captura posterior do jogo (liquidado apos o gol — o Over 0.5 some no 1o gol).
+      - nao batida se presente com back > 1,02.
+    gols = exato quando o maior L batido + 0,5 == o menor L nao-batido - 0,5; senao indefinido."""
+    o = ou_all[ou_all["runner"].str.startswith("Over", na=False)].copy()
+    o["L"] = o["mtype"].map(LINHAS)
+    out = {}
+    for (ko, h, a), g in o.groupby(["ko", "home", "away"]):
+        g = g.sort_values("minuto")
+        ult = g.groupby("L")["minuto"].max().to_dict()          # ultima captura em que cada linha aparece
+        for ts, cap in g.groupby("ts"):
+            mn = float(cap["minuto"].iloc[0])
+            pres = {float(r.L): float(r.back) for r in cap.itertuples()}
+            bat, nao = [], []
+            for L in LINHAS.values():
+                if L in pres:
+                    (bat if pres[L] <= 1.02 else nao).append(L)
+                elif L in ult and ult[L] < mn:
+                    bat.append(L)                              # sumiu antes desta captura e nao volta
+            lo_ = (max(bat) + 0.5) if bat else 0
+            hi_ = (min(nao) - 0.5) if nao else None
+            if hi_ is not None and lo_ == hi_:
+                out[(ts, ko, h, a)] = int(lo_)
+            elif hi_ is None and bat and max(bat) == 3.5:
+                out[(ts, ko, h, a)] = 4                        # 4+ gols
+    return out
+
+
 def montar_apostas(ou, cs, fav, P, idx):
-    """Uma linha por (jogo, janela, linha): odd de back na 1a captura da janela + estado + resultado."""
+    """Uma linha por (jogo, janela, linha): odd de back na 1a captura da janela + estado + resultado.
+    Estado = gols pelo O/U (fato) + divisao casa/fora pelo CS SO quando o CS concorda com o total."""
     cs_k = {k: g.sort_values("minuto") for k, g in cs.groupby(["ts", "ko", "home", "away"])}
+    ou_g = gols_por_ou(ou)
     out = []
     sem_placar = set()
     for (ko, h, a, mtype), g in ou.groupby(["ko", "home", "away", "mtype"]):
@@ -70,9 +104,18 @@ def montar_apostas(ou, cs, fav, P, idx):
             w = g[(g["minuto"] >= lo) & (g["minuto"] < hi)]
             if w.empty: continue
             cap = w.iloc[0]
+            tot = ou_g.get((cap["ts"], ko, h, a))
+            if tot is None: continue                       # sem as 4 linhas nessa captura
             st = cs_k.get((cap["ts"], ko, h, a))
-            if st is None or st.empty: continue
-            gh, ga = int(st.iloc[0]["gh"]), int(st.iloc[0]["ga"])
+            gh_cs, ga_cs = (int(st.iloc[0]["gh"]), int(st.iloc[0]["ga"])) if (st is not None and not st.empty) else (None, None)
+            if gh_cs is not None and gh_cs + ga_cs == tot:
+                gh, ga = gh_cs, ga_cs                      # CS concorda com o total -> usa a divisao
+            elif tot == 0:
+                gh, ga = 0, 0
+            elif tot == 1:
+                gh, ga = 1, 0                              # '1 gol' independe de quem fez
+            else:
+                continue                                   # 2+ gols sem divisao confiavel: nao classifica
             if gh + ga > L:            # linha ja batida: celula impossivel
                 continue
             S = estado(gh, ga)

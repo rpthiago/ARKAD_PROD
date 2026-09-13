@@ -1,0 +1,1297 @@
+﻿ko,home,away,gh_mom,ga_mom,min_ult,gh,ga,tipo,score,impossivel
+2026-08-22 23:30,New York Red Bulls,Chicago Fire,1,1,-14.1,1,1,exato,1.0,False
+2026-08-29 19:00,Huracan del Paso,Cerrito,1,1,-14.1,2,1,fuzzy,0.8,False
+2026-08-22 23:30,Inter Miami CF,Toronto FC,2,1,-14.1,1,2,fuzzy,0.95,True
+2026-08-28 13:30,Baladeyet Al-Mahalla,El Daklyeh,2,0,-9.2,0,0,fuzzy,0.89,True
+2026-08-29 19:00,Madrid (W),Granada (W),1,1,-3.0999999999999996,3,1,fuzzy,0.86,False
+2026-08-29 19:00,Padova,Verona,1,1,-3.0999999999999996,1,1,exato,1.0,False
+2026-08-29 19:00,Cukaricki,Vojvodina,1,1,-3.0999999999999996,0,5,exato,1.0,True
+2026-08-29 19:00,Radnicki Nis,FK Radnicki 1923,1,1,-3.0999999999999996,1,1,fuzzy,0.96,False
+2026-08-29 19:00,Ciudad de Bolivar,Defensores de Belgrano,0,0,-3.0999999999999996,1,0,fuzzy,0.86,False
+2026-08-29 19:00,Varazdin,Rudes,2,0,-3.0999999999999996,2,0,exato,1.0,False
+2026-08-29 19:00,Santiago Wanderers,Magallanes,1,1,-3.0999999999999996,2,1,fuzzy,0.87,False
+2026-08-29 19:00,Atletico Rafaela,Tristan Suarez,0,0,-3.0999999999999996,2,1,fuzzy,0.9,False
+2026-08-29 19:00,PEC Zwolle,NEC Nijmegen,1,2,-3.0999999999999996,1,3,fuzzy,0.82,False
+2026-08-29 19:00,Ascoli,Carrarese,1,0,-3.0999999999999996,1,1,exato,1.0,False
+2026-08-22 13:30,SV Hemelingen,Hannover,1,3,6.300000000000001,1,9,fuzzy,0.95,False
+2026-08-23 11:00,Changchun Yatai,Foshan Nanshi FC,3,1,9.8,6,0,fuzzy,0.96,True
+2026-09-05 03:00,FC Juarez,Pachuca,0,1,10.3,0,2,fuzzy,0.93,False
+2026-09-04 19:00,Fleury 91 (W),Lyon (W),1,2,10.3,1,7,fuzzy,0.83,False
+2026-08-29 18:45,Brest,Toulouse,2,1,11.899999999999999,2,2,exato,1.0,False
+2026-08-29 18:45,Lorient,ESTAC Troyes,0,1,11.899999999999999,1,2,fuzzy,0.85,False
+2026-08-29 18:45,Cercle Brugge,Lommel,1,0,11.899999999999999,0,1,fuzzy,0.87,True
+2026-08-29 18:45,Lyon,Le Havre,1,0,11.899999999999999,1,1,exato,1.0,False
+2026-08-29 18:45,Sarajevo,Zrinjski,0,0,11.899999999999999,0,1,fuzzy,0.94,False
+2026-08-29 18:45,Auxerre,Angers,1,1,11.899999999999999,1,3,exato,1.0,False
+2026-08-29 18:45,Juventus,Parma,1,0,11.899999999999999,2,0,exato,1.0,False
+2026-08-23 13:00,Brighton,Aston Villa,3,0,13.899999999999999,4,0,exato,1.0,False
+2026-08-23 13:30,VfB 1921 Krieschow,Mainz,0,3,17.9,0,9,fuzzy,0.86,False
+2026-08-23 13:30,Westfalia Rhynern,Dynamo Dresden,0,3,17.9,0,6,fuzzy,0.96,False
+2026-08-24 19:15,Breidablik,Fram,2,3,20.200000000000003,3,4,exato,1.0,False
+2026-08-23 17:00,KA Akureyri,KR Reykjavik,2,3,20.6,3,5,exato,1.0,False
+2026-08-22 10:30,FC Anyang,FC Seoul,0,3,21.6,0,7,fuzzy,0.85,False
+2026-08-24 18:00,Jong FC Utrecht,Heracles,0,3,22.5,1,6,fuzzy,0.96,False
+2026-08-28 19:15,Rio Ave,Sporting Lisbon,0,3,23.700000000000003,0,4,fuzzy,0.83,False
+2026-08-17 18:00,Leiknir R,Aegir,3,0,24.4,6,1,fuzzy,0.97,False
+2026-08-29 18:30,Dukla Banska Bystrica,KFC Komarno,1,1,26.9,2,2,fuzzy,0.84,False
+2026-08-29 18:30,Galatasaray,Goztepe,2,1,26.9,3,2,exato,1.0,False
+2026-08-29 18:30,Young Boys,FC Basel,3,2,26.9,3,3,fuzzy,0.92,False
+2026-08-29 18:30,Gaziantep FK,Rizespor,0,2,26.9,1,2,fuzzy,0.95,False
+2026-08-29 18:30,Nurnberg,Arminia Bielefeld,3,1,26.9,4,1,exato,1.0,False
+2026-08-29 18:30,Batman Petrolspor,Sivasspor,1,2,26.9,2,1,exato,1.0,True
+2026-08-29 18:30,Panaitolikos,Kalamata,1,0,26.9,2,0,fuzzy,0.93,False
+2026-08-22 14:00,Fylkir,Grindavik,3,0,28.1,6,1,exato,1.0,False
+2026-08-28 18:00,Al-Khaleej Saihat,Al-Hilal,1,3,29.200000000000003,1,5,fuzzy,0.88,False
+2026-08-24 22:00,Leones FC,Real Cartagena,1,3,29.5,1,6,fuzzy,0.84,False
+2026-09-04 16:00,Vejle,Vendsyssel FF,3,0,30.299999999999997,4,1,fuzzy,0.95,False
+2026-08-29 18:15,Zaglebie Lubin,Pogon Szczecin,1,0,41.9,0,0,fuzzy,0.88,True
+2026-08-18 16:30,Maccabi Kabilio Jaffa,SC Kiryat Yam,2,3,48.3,2,6,fuzzy,0.84,False
+2026-08-22 08:00,Concordia Chiajna,Politehnica Timisoara,0,3,50.0,1,5,fuzzy,0.86,False
+2026-08-21 18:00,Den Bosch,FC Eindhoven,3,2,50.5,5,2,fuzzy,0.91,False
+2026-09-05 14:00,Kongsvinger,Raufoss,3,0,50.5,9,1,exato,1.0,False
+2026-08-29 14:00,Sheff Wed,Bromley,3,0,51.7,7,2,fuzzy,0.9,False
+2026-08-17 19:15,Casa Pia,Benfica,0,3,53.2,0,7,exato,1.0,False
+2026-08-23 12:30,PSV,FC Groningen,3,1,54.7,5,1,fuzzy,0.95,False
+2026-08-22 11:30,FC Halifax Town,Tamworth FC,3,0,55.8,4,1,fuzzy,0.85,False
+2026-08-28 18:00,FC Volendam,FC Dordrecht,3,1,55.900000000000006,6,1,fuzzy,0.95,False
+2026-08-29 18:00,Guingamp,Nantes,2,2,56.900000000000006,3,3,exato,1.0,False
+2026-08-29 18:00,Banik Ostrava,Sigma Olomouc,2,2,56.900000000000006,1,0,fuzzy,0.87,True
+2026-08-29 18:00,CD Los Chankas,Juan Pablo II College,2,3,56.900000000000006,3,4,fuzzy,0.83,False
+2026-08-29 18:00,Cruz Azul Hidalgo,CD Tepatitlan De Morelos,2,0,56.900000000000006,6,0,fuzzy,0.97,False
+2026-08-29 18:00,Al-Ettifaq,Al Draih,0,1,56.900000000000006,0,3,fuzzy,0.88,False
+2026-08-29 18:00,Al-Fateh (KSA),Al-Ittihad,0,0,56.900000000000006,0,0,fuzzy,0.91,False
+2026-08-22 18:30,Fenerbahce,Konyaspor,3,1,58.8,4,2,exato,1.0,False
+2026-08-18 16:30,Maccabi Bnei Raina,Bnei Yehuda,1,3,58.900000000000006,1,4,exato,1.0,False
+2026-08-23 21:30,Maranhao,Itabaiana,3,1,59.099999999999994,4,1,exato,1.0,False
+2026-09-02 19:00,Reading,Mansfield,3,0,60.2,5,0,exato,1.0,False
+2026-09-05 18:00,Danubio,Penarol,0,3,60.400000000000006,0,4,exato,1.0,False
+2026-08-28 19:15,Throttur,Aegir,3,2,60.599999999999994,7,2,exato,1.0,False
+2026-08-22 19:00,Puerto Montt,Deportes Iquique,0,2,61.0,0,4,fuzzy,0.98,False
+2026-08-21 18:00,Aegir,Afturelding,1,3,61.3,0,7,exato,1.0,True
+2026-08-22 16:00,Dunajska Streda,Podbrezova,2,0,61.400000000000006,5,0,fuzzy,0.89,False
+2026-08-22 16:00,Njardvik,Volsungur,3,0,61.400000000000006,4,0,exato,1.0,False
+2026-08-22 18:00,Al Ahli,Abha,3,0,61.900000000000006,4,0,fuzzy,0.93,False
+2026-08-23 13:30,TSV Schott Mainz,Mgladbach,0,3,62.599999999999994,0,5,fuzzy,0.8,False
+2026-08-23 15:00,Nesebar,Pirin Blagoevgrad,3,0,63.2,7,0,exato,1.0,False
+2026-08-25 18:45,Watford,Peterborough,1,3,63.400000000000006,1,5,exato,1.0,False
+2026-08-29 14:00,Stockport,Wycombe,3,1,63.599999999999994,5,1,fuzzy,0.88,False
+2026-08-23 18:00,Sport Boys (Per),Cienciano,3,1,64.2,5,1,fuzzy,0.93,False
+2026-08-22 16:30,Inter,AC Monza,3,1,64.6,4,1,fuzzy,0.92,False
+2026-09-01 18:45,West Ham,Wolves,3,1,64.8,4,2,exato,1.0,False
+2026-09-01 18:45,Bromley,Leyton Orient,0,3,64.8,0,5,exato,1.0,False
+2026-09-02 10:00,Mito,Kashima,3,2,65.2,4,2,fuzzy,0.83,False
+2026-09-02 13:30,Vukovar,GNK Dinamo Zagreb II,1,3,65.2,2,6,fuzzy,0.83,False
+2026-08-26 19:00,Preston,Everton,0,2,65.2,0,4,exato,1.0,False
+2026-09-04 18:00,Al Ahli,Al Riyadh SC,3,0,65.3,5,0,fuzzy,0.87,False
+2026-08-22 15:00,SK Artis Brno,Sparta Prague,1,3,65.6,0,4,fuzzy,0.95,True
+2026-08-23 11:00,SSV Jeddeloh,FC Heidenheim,3,2,66.2,5,2,fuzzy,0.88,False
+2026-08-23 11:00,Liaoning Tieren FC,Henan Songshan Longmen,1,2,66.2,4,4,fuzzy,0.97,False
+2026-08-29 16:45,AZ Alkmaar,Go Ahead Eagles,3,1,66.5,5,2,fuzzy,0.88,False
+2026-08-22 11:30,Nantong Zhiyun F.C,Shaanxi Union FC,3,1,66.8,4,1,fuzzy,0.93,False
+2026-08-19 23:30,Vila Nova,Ponte Preta,3,0,67.3,6,0,fuzzy,0.94,False
+2026-08-22 15:15,Lens,Auxerre,3,1,67.6,5,2,exato,1.0,False
+2026-08-23 12:00,KuPS,IFK Mariehamn,3,3,68.0,2,4,fuzzy,0.93,True
+2026-08-29 14:30,Hoffenheim II,Jahn Regensburg,3,1,68.2,5,1,fuzzy,0.92,False
+2026-08-22 18:15,PFC Levski Sofia,Spartak Varna,3,0,68.4,6,0,fuzzy,0.94,False
+2026-08-25 19:00,Birmingham,Brentford,1,3,69.1,1,6,exato,1.0,False
+2026-08-29 14:00,Southampton,Millwall,3,1,69.5,5,1,exato,1.0,False
+2026-08-29 14:00,Norwich,Burnley,3,1,69.5,4,1,exato,1.0,False
+2026-08-22 10:00,CF Os Belenenses,Santarem,3,0,69.8,5,0,fuzzy,0.96,False
+2026-08-23 16:00,FC Phonix Lubeck,Paderborn,1,3,69.9,2,4,fuzzy,0.96,False
+2026-08-23 16:00,Viborg,FC Copenhagen,3,0,69.9,4,0,exato,1.0,False
+2026-09-03 14:00,CSKA Sofia II,Spartak Pleven,3,1,70.2,5,1,exato,1.0,False
+2026-09-04 18:00,Emmen,FC Volendam,3,1,70.3,5,3,fuzzy,0.92,False
+2026-09-04 18:00,FC Cajamarca,Cienciano,2,3,70.3,2,5,exato,1.0,False
+2026-09-05 14:00,Rosenborg,Ham-Kam,3,0,70.4,4,0,exato,1.0,False
+2026-08-23 17:15,Hapoel Jerusalem,Maccabi Tel Aviv,1,2,71.3,2,5,exato,1.0,False
+2026-08-26 17:30,Mamelodi Sundowns,AmaZulu,3,1,71.6,5,2,exato,1.0,False
+2026-08-29 17:45,Deportivo Riestra,Velez Sarsfield,1,0,71.9,1,1,fuzzy,0.88,False
+2026-08-28 18:00,Den Bosch,Vitesse Arnhem,0,3,72.2,1,4,fuzzy,0.85,False
+2026-08-29 11:30,Blackpool,Peterborough,3,0,73.5,4,0,exato,1.0,False
+2026-08-22 11:35,Chengdu Rongcheng,Shanghai Shenhua,2,3,73.9,4,5,exato,1.0,False
+2026-08-28 18:45,Genk,Waasland-Beveren,3,0,74.7,4,0,fuzzy,0.82,False
+2026-08-23 19:30,Elche,Barcelona,0,2,75.2,0,5,exato,1.0,False
+2026-08-29 14:00,Kilmarnock,Dundee Utd,0,3,75.4,0,4,exato,1.0,False
+2026-08-23 17:00,LKS Lodz,Stal Mielec,3,0,75.7,4,0,exato,1.0,False
+2026-08-28 16:30,Braunschweig,Hertha Berlin,2,3,75.7,3,5,exato,1.0,False
+2026-08-22 10:00,Leixoes,Leiria,1,3,75.9,2,4,exato,1.0,False
+2026-08-29 17:30,Beitar Jerusalem,Maccabi Netanya,1,3,75.9,1,4,fuzzy,0.83,False
+2026-08-29 16:30,Ross Co,East Kilbride,3,0,75.9,4,0,fuzzy,0.88,False
+2026-08-22 18:45,Antwerp,Genk,1,3,76.0,4,4,exato,1.0,False
+2026-08-17 18:00,Valur,KA Akureyri,3,3,76.6,4,4,exato,1.0,False
+2026-08-29 09:00,Qingdao Hainiu,Wuhan Three Towns,0,3,77.1,1,5,exato,1.0,False
+2026-08-22 16:00,Eintracht Trier,RB Leipzig,0,3,77.7,0,6,exato,1.0,False
+2026-08-22 12:00,Nantes,Rodez,2,3,78.0,2,5,exato,1.0,False
+2026-08-22 17:00,AEK Athens,Iraklis,3,0,78.2,4,0,fuzzy,0.89,False
+2026-08-29 16:00,Varzim,CD Trofense,3,2,78.6,5,1,fuzzy,0.94,True
+2026-08-29 12:00,Red Star,Reims,1,3,78.7,1,4,exato,1.0,False
+2026-08-22 11:30,Bristol Rovers,Newport County,3,2,78.9,5,3,fuzzy,0.85,False
+2026-08-25 18:45,Plymouth,Coventry,2,3,78.9,2,4,exato,1.0,False
+2026-08-25 18:45,Blackpool,Lincoln,1,3,78.9,1,4,exato,1.0,False
+2026-08-22 11:30,Carlisle,Hornchurch,3,1,78.9,4,1,exato,1.0,False
+2026-08-23 15:00,Trencin,Spartak Trnava,1,3,79.6,0,4,fuzzy,0.82,True
+2026-08-23 13:30,Bahlinger SC,FC Magdeburg,0,3,79.8,0,4,fuzzy,0.9,False
+2026-08-29 14:30,De Graafschap,Almere City,1,2,79.8,1,4,exato,1.0,False
+2026-09-01 18:30,FC Zurich,Young Boys,1,3,79.8,2,4,fuzzy,0.93,False
+2026-09-02 18:45,Burton Albion,AFC Wimbledon,3,1,80.2,4,1,fuzzy,0.83,False
+2026-08-29 11:00,Cottbus,Greuther Furth,2,3,80.4,3,4,exato,1.0,False
+2026-08-28 22:00,Union Santa Fe,Sarmiento de Junin,3,0,80.8,4,1,fuzzy,0.93,False
+2026-09-04 23:30,Athletic Club,Vila Nova,3,0,81.1,5,0,fuzzy,0.94,False
+2026-08-17 22:00,Deportes Copiapo,Curico Unido,3,0,82.4,4,0,fuzzy,0.82,False
+2026-08-27 18:30,Ferencvaros,Trabzonspor,3,0,82.5,4,0,fuzzy,0.88,False
+2026-08-27 22:30,Club Independiente Petrolero,Guabira,3,1,82.7,3,1,fuzzy,0.83,False
+2026-08-27 18:45,Rijeka,Midtjylland,1,3,82.9,1,4,fuzzy,0.84,False
+2026-08-23 15:30,GKS Katowice,Wisla Plock,3,0,83.0,5,0,exato,1.0,False
+2026-08-29 15:00,Levante,Betis,3,2,83.3,5,2,exato,1.0,False
+2026-08-22 18:00,St Etienne,Grenoble,3,0,83.4,4,0,exato,1.0,False
+2026-08-17 23:00,Ferroviaria,Paysandu,2,0,83.5,4,0,fuzzy,0.94,False
+2026-08-27 16:45,Monaco,Gornik Zabrze,3,0,83.7,4,1,fuzzy,0.84,False
+2026-08-25 18:45,Southampton,West Ham,1,3,84.1,1,4,exato,1.0,False
+2026-08-21 18:30,Erzurum BB,Galatasaray,0,3,84.1,0,4,fuzzy,0.85,False
+2026-08-21 16:00,Hobro,AaB,1,0,84.2,2,1,fuzzy,0.8,False
+2026-08-23 19:00,CDT Real Oruro,Bolivar,1,3,84.2,2,4,fuzzy,0.93,False
+2026-09-03 17:00,Bursaspor,Istanbulspor,3,0,84.3,4,0,fuzzy,0.96,False
+2026-08-28 18:30,Bayern Munich,Stuttgart,3,1,84.4,5,1,exato,1.0,False
+2026-08-23 12:00,Young Boys,FC Vaduz,3,2,84.7,4,2,fuzzy,0.92,False
+2026-08-21 18:45,Hansa Rostock,Stuttgart,0,3,84.8,0,4,exato,1.0,False
+2026-08-21 18:45,Bohemians,Derry City,3,2,84.8,5,3,exato,1.0,False
+2026-09-02 20:00,Zamora FC,Deportivo Tachira,1,3,84.9,2,5,fuzzy,0.81,False
+2026-08-21 18:45,Penybont FC,Llandudno FC,2,0,84.9,2,1,fuzzy,0.89,False
+2026-08-22 11:30,Meizhou Hakka,Guangdong GZ-Power FC,0,3,85.0,1,5,fuzzy,0.97,False
+2026-08-22 11:30,Guangxi Hengchen,Suzhou Dongwu,3,1,85.0,3,3,exato,1.0,False
+2026-09-04 18:45,Genoa,Como,1,3,85.1,1,4,exato,1.0,False
+2026-09-05 10:00,Bucheon FC 1995,Daejeon Citizen,1,3,85.3,0,5,fuzzy,0.83,True
+2026-08-29 11:30,Wolves,Stoke,3,1,85.6,4,1,exato,1.0,False
+2026-08-21 22:30,The Strongest,Universitario de Vinto,3,3,85.6,4,3,exato,1.0,False
+2026-08-21 19:15,Grotta,IR Reykjavik,1,3,85.9,1,3,exato,1.0,False
+2026-08-26 19:00,Real Madrid,Real Sociedad,3,1,85.9,4,1,exato,1.0,False
+2026-08-28 19:00,Crystal Palace,Man City,1,3,85.9,1,4,fuzzy,0.83,False
+2026-08-26 17:00,Stabaek,Ranheim IL,3,2,85.9,4,2,fuzzy,0.94,False
+2026-08-23 16:00,Hapoel Kfar Saba,Ironi Modiin,0,3,86.2,1,4,exato,1.0,False
+2026-08-23 16:00,Caldas SC,Louletano,1,3,86.2,2,4,fuzzy,0.93,False
+2026-08-22 12:45,Korona Kielce,LKP Motor Lublin,1,1,86.2,1,1,fuzzy,0.94,False
+2026-08-23 16:00,Fortuna Dusseldorf,Freiburg,1,3,86.2,1,5,fuzzy,0.87,False
+2026-08-23 17:00,Crvena Zvezda,Cukaricki,3,0,86.3,4,0,exato,1.0,False
+2026-08-29 14:00,Elgin City FC,Stirling,3,0,86.4,4,0,fuzzy,0.95,False
+2026-08-28 19:15,Fylkir,Grotta,1,0,86.5,3,1,exato,1.0,False
+2026-09-04 15:00,NK Dren Vrhnika,Rudar,3,2,86.5,4,2,fuzzy,0.85,False
+2026-08-24 19:00,Team Altamura,Monopoli,1,0,86.7,1,0,fuzzy,0.9,False
+2026-08-21 15:30,Mladost Zdralovi,Vukovar,1,1,86.9,1,1,fuzzy,0.89,False
+2026-08-21 15:30,NK Sesvete,Karlovac,2,0,86.9,3,0,fuzzy,0.94,False
+2026-08-29 17:30,Karlovac,Opatija,1,1,86.9,2,1,exato,1.0,False
+2026-09-04 18:00,Heracles,De Graafschap,3,0,87.0,5,0,exato,1.0,False
+2026-08-19 17:00,FK Bor 1919,Vozdovac,2,1,87.3,2,2,fuzzy,0.94,False
+2026-08-29 13:30,Polonia Warszawa,Lechia Gdansk,1,3,87.6,2,4,exato,1.0,False
+2026-08-22 09:30,Toyama,FC Imabari,3,0,87.7,4,0,fuzzy,0.94,False
+2026-08-21 18:00,Clermont,Dijon,0,0,87.8,1,1,exato,1.0,False
+2026-08-24 17:05,Norrkoping,Falkenbergs,2,1,88.0,2,1,fuzzy,0.98,False
+2026-08-22 15:00,Rilski Sportist,Montana,2,1,88.2,2,1,exato,1.0,False
+2026-08-22 15:00,SCR Altach,Hartberg,1,1,88.2,1,2,fuzzy,0.9,False
+2026-08-24 15:30,Botosani,Csikszereda,1,0,88.8,1,0,fuzzy,0.85,False
+2026-08-22 18:00,Cerro Largo FC,Defensor Sporting,0,1,88.8,1,1,fuzzy,0.84,False
+2026-08-27 16:45,Freiburg,Motherwell,3,1,88.9,4,1,fuzzy,0.86,False
+2026-08-19 17:30,Mamelodi Sundowns,Marumo Gallants FC,2,0,88.9,2,0,fuzzy,0.97,False
+2026-08-28 18:15,CSKA 1948 Sofia,Lokomotiv Plovdiv,1,0,89.0,2,0,fuzzy,0.88,False
+2026-08-28 18:15,Etoile Carouge,Rapperswil-Jona,2,1,89.0,2,1,exato,1.0,False
+2026-08-25 18:45,Fleetwood Town,Shrewsbury,3,0,89.4,4,0,fuzzy,0.91,False
+2026-08-28 15:00,NK Sesvete,NK Dugopolje,1,2,89.5,1,2,fuzzy,0.89,False
+2026-08-28 15:00,Slovan Ljublana,Ilirija Extra-Lux,2,1,89.5,2,1,fuzzy,0.8,False
+2026-08-28 15:00,FC Voluntari,Otelul Galati,2,2,89.5,2,2,fuzzy,0.83,False
+2026-08-23 14:00,Lommel,Westerlo,3,0,89.5,4,0,fuzzy,0.93,False
+2026-08-28 16:00,NK Primorje,Krka,2,2,89.6,3,2,fuzzy,0.84,False
+2026-08-29 16:00,Servette,Luzern,1,1,89.7,1,1,exato,1.0,False
+2026-08-21 16:00,Al Riyadh SC,Al Nassr,0,3,89.7,0,4,fuzzy,0.94,False
+2026-08-21 16:00,Prostejov,SK Kladno,3,1,89.7,3,1,exato,1.0,False
+2026-08-21 16:00,SFC Opava,Trinec,2,2,89.7,2,2,fuzzy,0.88,False
+2026-08-21 16:00,MFK Karvina,Zizkov,3,0,89.7,3,0,fuzzy,0.91,False
+2026-08-29 16:00,Zeljeznicar,Siroki Brijeg,1,1,89.8,1,1,exato,1.0,False
+2026-08-29 16:00,Volsungur,IR Reykjavik,2,1,89.8,3,1,exato,1.0,False
+2026-08-29 16:00,AEK Larnaca,APOEL,3,0,89.8,3,1,exato,1.0,False
+2026-08-25 23:00,Universitario de Vinto,Nacional Potosi,2,0,90.0,2,0,exato,1.0,False
+2026-09-02 18:45,VfL Osnabruck,Bayern Munich,1,3,90.1,1,4,exato,1.0,False
+2026-08-24 16:00,Altglienicke,Wolfsburg,2,2,90.3,3,3,exato,1.0,False
+2026-08-24 16:00,Maccabi Ahi Nazareth,Hapoel Afula,0,1,90.3,0,1,fuzzy,0.83,False
+2026-08-24 16:00,Verl,Hamburger SV,0,3,90.3,0,3,exato,1.0,False
+2026-08-24 16:00,Botev Vratsa,Botev Plovdiv,1,0,90.3,1,0,exato,1.0,False
+2026-08-24 16:00,FC Ashdod,Maccabi Kabilio Jaffa,0,0,90.3,1,0,fuzzy,0.82,False
+2026-08-26 18:45,Tottenham,Charlton,3,0,90.4,5,1,exato,1.0,False
+2026-08-20 22:30,Athletic Club,CRB,0,2,90.5,0,2,exato,1.0,False
+2026-08-28 18:45,St Patricks,Waterford,0,2,90.6,0,2,exato,1.0,False
+2026-08-28 18:45,Cork City,Wexford F.C,2,0,90.6,2,0,fuzzy,0.94,False
+2026-08-28 18:45,Edinburgh City,Forfar,1,1,90.6,1,1,fuzzy,0.8,False
+2026-08-28 18:45,Southend,Kidderminster,1,2,90.6,1,3,exato,1.0,False
+2026-08-28 18:45,AFC Fylde,Forest Green,2,0,90.6,2,0,exato,1.0,False
+2026-08-28 18:45,Scunthorpe,Solihull Moors,3,1,90.6,3,1,exato,1.0,False
+2026-08-28 18:45,Kerry FC,Treaty United,3,1,90.6,3,1,fuzzy,0.92,False
+2026-08-28 18:45,Galway Utd,Shelbourne,0,1,90.6,1,1,fuzzy,0.9,False
+2026-08-28 18:45,Bohemians,Sligo Rovers,3,0,90.6,3,0,exato,1.0,False
+2026-08-28 18:45,Trefelin,Ammanford AFC,0,1,90.6,1,1,fuzzy,0.93,False
+2026-08-28 18:45,Gateshead,Sutton Utd,0,1,90.6,0,1,fuzzy,0.9,False
+2026-08-28 18:45,Odra Opole,LKS Lodz,0,0,90.6,0,0,exato,1.0,False
+2026-08-28 18:45,Altrincham,FC Halifax Town,2,1,90.6,2,1,fuzzy,0.91,False
+2026-08-29 12:00,Alemannia Aachen,SV Meppen,0,3,90.8,0,3,fuzzy,0.93,False
+2026-08-29 12:00,Duisburg,Wurzburger Kickers,3,0,90.8,3,0,exato,1.0,False
+2026-08-29 12:00,Henan Songshan Longmen,Chongqing Tonglianglong,1,1,90.8,1,1,exato,1.0,False
+2026-08-23 18:00,FK Jedinstvo Ub,FK Vrsac,1,3,90.9,1,3,fuzzy,0.85,False
+2026-08-23 18:00,PAOK,Levadiakos,3,0,90.9,4,0,exato,1.0,False
+2026-08-22 11:30,Doncaster,Barnsley,0,0,91.1,0,0,exato,1.0,False
+2026-08-22 11:30,Hull,Man Utd,2,0,91.1,2,0,fuzzy,0.82,False
+2026-08-22 11:30,Salford City,Chesterfield,0,1,91.2,0,1,fuzzy,0.89,False
+2026-08-26 17:00,Haugesund,Egersund,3,0,91.2,3,0,exato,1.0,False
+2026-08-22 11:30,Lincoln,Portsmouth,1,3,91.2,1,3,exato,1.0,False
+2026-08-26 17:00,Asane,Lyn,0,2,91.2,1,2,exato,1.0,False
+2026-08-22 11:30,Worthing,Wealdstone,1,0,91.2,1,0,exato,1.0,False
+2026-08-22 11:30,Boston Utd,Altrincham,1,0,91.2,1,0,exato,1.0,False
+2026-08-22 11:30,Birmingham,Bristol City,1,2,91.2,2,2,exato,1.0,False
+2026-08-22 11:30,Sutton Utd,Hartlepool,2,1,91.2,2,1,fuzzy,0.9,False
+2026-09-01 17:00,Boluspor,Keciorengucu,0,2,91.2,0,2,exato,1.0,False
+2026-08-22 11:30,Yeovil,Gateshead,2,0,91.2,3,0,exato,1.0,False
+2026-08-22 11:30,Walsall,Grimsby,0,0,91.2,0,0,exato,1.0,False
+2026-08-26 17:00,Moss,Sogndal,2,2,91.2,2,2,exato,1.0,False
+2026-08-22 11:30,Millwall,Norwich,3,0,91.2,3,0,exato,1.0,False
+2026-08-22 11:30,Woking,AFC Fylde,2,2,91.2,3,2,exato,1.0,False
+2026-08-29 11:00,Ljungskile,Varnamo,0,0,91.3,0,1,exato,1.0,False
+2026-08-29 11:00,Karlsruhe,Wolfsburg,2,3,91.3,2,5,fuzzy,0.93,False
+2026-08-29 11:00,FC Heidenheim,Dynamo Dresden,2,2,91.3,5,3,fuzzy,0.92,False
+2026-08-24 18:45,Roma,Fiorentina,3,0,91.4,4,0,fuzzy,0.9,False
+2026-08-20 23:30,Novorizontino,America MG,2,0,91.5,3,0,exato,1.0,False
+2026-08-22 14:00,Livingston,Dunfermline,1,0,91.6,2,0,exato,1.0,False
+2026-08-17 17:45,Estudiantes Rio Cuarto,Atl Tucuman,0,1,91.6,0,1,exato,1.0,False
+2026-09-01 15:40,Al Jeel,Jeddah Club,0,0,91.6,0,0,fuzzy,0.88,False
+2026-08-18 19:00,PFC Levski Sofia,AEK Athens,0,0,91.6,0,0,fuzzy,0.82,False
+2026-08-22 14:00,Airdrieonians,Ross Co,1,3,91.7,1,3,fuzzy,0.88,False
+2026-08-22 10:30,Suwon FC,Gimhae City,1,0,91.7,2,0,fuzzy,0.88,False
+2026-08-22 14:00,Montrose,East Kilbride,3,0,91.7,3,0,exato,1.0,False
+2026-08-22 14:00,Raith,Ayr,2,0,91.7,2,0,exato,1.0,False
+2026-08-22 14:00,Stirling,Stranraer,2,2,91.7,2,2,exato,1.0,False
+2026-08-22 14:00,Tammeka Tartu,Kuressaare,1,0,91.7,1,0,fuzzy,0.87,False
+2026-08-29 12:45,LKP Motor Lublin,Piast Gliwice,0,1,91.7,0,2,fuzzy,0.94,False
+2026-08-22 14:00,Sandnes Ulf,Bryne,0,1,91.7,0,1,fuzzy,0.91,False
+2026-08-22 14:00,Clyde,Forfar,3,0,91.7,3,0,fuzzy,0.8,False
+2026-08-22 14:00,Queens Park,Stenhousemuir,0,2,91.7,0,2,exato,1.0,False
+2026-08-27 18:00,Hapoel Tel Aviv,Atalanta,0,1,91.8,0,1,fuzzy,0.87,False
+2026-08-22 10:30,Bucheon FC 1995,Pohang Steelers,2,0,91.8,3,0,fuzzy,0.8,False
+2026-08-22 16:30,Slaven Belupo,HNK Gorica,2,0,92.0,2,0,fuzzy,0.9,False
+2026-08-17 18:00,De Graafschap,Jong AZ Alkmaar,2,3,92.1,2,5,fuzzy,0.82,False
+2026-08-17 18:00,Grindavik,Grotta,0,0,92.1,0,0,exato,1.0,False
+2026-08-22 18:45,Nice,Lorient,0,0,92.2,0,0,exato,1.0,False
+2026-08-22 18:45,Genoa,Napoli,0,1,92.2,0,2,exato,1.0,False
+2026-08-22 18:45,Parma,Cagliari,0,1,92.2,0,1,exato,1.0,False
+2026-08-29 14:00,Bournemouth,Everton,1,0,92.2,1,1,exato,1.0,False
+2026-08-26 15:45,Al-Adalh,Al Taee,2,3,92.2,3,4,fuzzy,0.97,False
+2026-08-22 18:45,Toulouse,Lyon,0,2,92.2,0,2,exato,1.0,False
+2026-08-23 23:00,Atletico San Luis,Pachuca,0,0,92.2,1,1,fuzzy,0.9,False
+2026-08-29 14:00,Montrose,Queen of South,2,1,92.2,2,1,exato,1.0,False
+2026-08-29 14:00,Celtic,Falkirk,2,1,92.2,2,1,exato,1.0,False
+2026-08-22 18:45,ESTAC Troyes,Paris FC,0,0,92.2,0,0,fuzzy,0.85,False
+2026-08-29 14:00,Grindavik,HK Kopavogur,3,3,92.3,4,3,fuzzy,0.95,False
+2026-08-29 14:00,Watford,West Ham,1,1,92.3,1,1,exato,1.0,False
+2026-08-29 14:00,Ayr,Morton,1,1,92.3,1,1,exato,1.0,False
+2026-08-29 14:00,Hamilton,Cove Rangers,1,0,92.3,1,0,exato,1.0,False
+2026-08-29 14:00,Oldham,Swindon,2,0,92.3,3,0,exato,1.0,False
+2026-08-29 14:00,Grimsby,Fleetwood Town,2,2,92.3,2,2,fuzzy,0.91,False
+2026-08-29 14:00,Kuressaare,Parnu JK Vaprus,2,2,92.3,2,2,exato,1.0,False
+2026-08-29 14:00,Crawley Town,Bristol Rovers,0,2,92.3,0,2,fuzzy,0.89,False
+2026-08-29 14:00,Stranraer,Kelty Hearts,2,0,92.3,2,0,exato,1.0,False
+2026-08-29 14:00,Blackburn,QPR,1,2,92.3,1,2,exato,1.0,False
+2026-08-28 15:30,Vukovar,Segesta,2,0,92.4,2,0,fuzzy,0.89,False
+2026-08-23 10:00,SonderjyskE,FC Nordsjaelland,0,2,92.6,0,3,fuzzy,0.96,False
+2026-08-17 18:15,Arda,Lokomotiv Sofia,2,1,92.6,3,1,fuzzy,0.86,False
+2026-08-25 15:00,CSKA Sofia II,Ludogorets Razgrad B,1,1,92.6,1,1,fuzzy,0.83,False
+2026-08-29 16:30,AC Monza,Udinese,2,3,92.6,2,3,fuzzy,0.92,False
+2026-08-17 22:00,Club Deportes Santa Cruz,San Luis,0,2,92.6,0,2,fuzzy,0.84,False
+2026-08-23 13:00,Angers,Lille,0,2,92.6,0,2,exato,1.0,False
+2026-08-29 16:30,Sassuolo,Torino,2,1,92.6,2,1,exato,1.0,False
+2026-08-29 16:30,Dortmund,Hamburger SV,2,0,92.6,2,0,exato,1.0,False
+2026-08-29 16:30,Tottenham,Newcastle,0,2,92.6,0,2,exato,1.0,False
+2026-08-26 17:30,Richards Bay FC,Kaizer Chiefs,2,2,92.7,2,2,fuzzy,0.96,False
+2026-08-22 15:45,Al-Fateh (KSA),Al-Ettifaq,0,1,92.7,0,1,fuzzy,0.91,False
+2026-08-27 18:30,Brighton,Tromso,3,0,92.7,4,0,fuzzy,0.82,False
+2026-08-26 17:30,Golden Arrows,Stellenbosch FC,1,0,92.7,1,0,fuzzy,0.96,False
+2026-08-26 17:30,Polokwane City,Milford,0,0,92.7,0,0,fuzzy,0.85,False
+2026-08-20 16:00,FC Inter Turku,FC Copenhagen,0,0,92.7,0,0,fuzzy,0.84,False
+2026-09-01 17:30,Kruger United FC,Orlando Pirates (SA),0,3,92.8,0,4,fuzzy,0.93,False
+2026-08-23 23:30,Curico Unido,Union San Felipe,1,0,92.8,2,0,fuzzy,0.89,False
+2026-09-01 17:30,Stade Nyonnais,Winterthur,2,2,92.8,2,2,exato,1.0,False
+2026-08-23 18:30,Ciudad de Bolivar,Racing de Cordoba,1,1,92.9,1,1,fuzzy,0.93,False
+2026-09-05 14:00,IF Vestri,Throttur,0,2,93.0,0,2,fuzzy,0.93,False
+2026-08-24 17:00,Stal Rzeszow,Ruch Chorzow,0,1,93.0,0,1,fuzzy,0.92,False
+2026-08-22 13:30,Duisburg,Elversberg,1,2,93.0,1,3,exato,1.0,False
+2026-08-24 17:00,Ostersunds FK,Ljungskile,0,0,93.0,0,0,fuzzy,0.93,False
+2026-08-24 17:00,Varnamo,Landskrona,1,1,93.0,1,1,exato,1.0,False
+2026-08-23 13:45,BSK Bijelo Brdo,GNK Dinamo Zagreb II,1,0,93.0,1,0,fuzzy,0.87,False
+2026-08-24 17:00,Malmo FF,Djurgardens,0,3,93.0,0,3,fuzzy,0.98,False
+2026-08-24 17:00,Brondby,Silkeborg,3,1,93.0,3,1,exato,1.0,False
+2026-08-23 08:30,MSK Zilina II,Malzenice,1,1,93.1,2,1,fuzzy,0.83,False
+2026-08-21 18:00,FC Dordrecht,Roda JC,0,1,93.1,0,1,fuzzy,0.85,False
+2026-08-21 18:00,Vitesse Arnhem,Almere City,0,3,93.1,0,3,fuzzy,0.85,False
+2026-08-21 18:00,Pau,Nancy,0,1,93.1,0,1,fuzzy,0.88,False
+2026-08-21 18:00,MVV Maastricht,FC Volendam,1,0,93.1,1,0,fuzzy,0.93,False
+2026-08-23 17:15,Francs Borains,Sporting Hasselt,0,1,93.2,0,1,fuzzy,0.82,False
+2026-08-23 14:30,Brommapojkarna,Degerfors,2,0,93.2,2,0,exato,1.0,False
+2026-08-23 14:30,Hammarby,GAIS,2,0,93.2,2,0,exato,1.0,False
+2026-08-27 18:45,Boreham Wood,Boston Utd,2,1,93.2,2,1,exato,1.0,False
+2026-08-19 23:40,FC Cincinnati,New York City,1,1,93.3,2,1,exato,1.0,False
+2026-09-01 17:40,Al Najma Club,Al Jabalain,0,1,93.3,1,1,fuzzy,0.89,False
+2026-08-28 18:00,Clermont,Sochaux,0,0,93.3,0,0,exato,1.0,False
+2026-08-19 23:40,DC Utd,New England Revolution,0,3,93.3,0,3,fuzzy,0.88,False
+2026-08-28 18:00,FC Oss,Jong FC Utrecht,2,1,93.3,2,1,fuzzy,0.83,False
+2026-08-28 18:00,Roda JC,NAC Breda,2,2,93.3,2,2,fuzzy,0.9,False
+2026-08-17 18:45,US Cremonese,Sampdoria,1,0,93.5,2,0,fuzzy,0.95,False
+2026-08-27 15:00,KuPS,Shamrock Rovers,1,0,93.5,1,0,fuzzy,0.82,False
+2026-08-27 19:00,Larne,Lincoln Red Imps,0,2,93.6,0,3,fuzzy,0.84,False
+2026-09-02 15:00,Mladost Zdralovi,NK Sesvete,1,0,93.7,1,0,fuzzy,0.94,False
+2026-08-20 18:00,Al-Feiha,Al-Hilal,0,3,93.7,0,3,fuzzy,0.86,False
+2026-08-21 18:15,Cherno More,Dunav Ruse,2,1,93.8,3,1,exato,1.0,False
+2026-08-23 18:45,Torino,AC Milan,0,2,93.9,1,2,exato,1.0,False
+2026-08-23 18:45,Atalanta,Sassuolo,2,1,93.9,2,1,exato,1.0,False
+2026-08-25 18:30,Doncaster,Middlesbrough,0,3,93.9,1,3,exato,1.0,False
+2026-08-17 15:00,Slovan Bratislava II,FK Humenne,2,0,94.0,3,0,fuzzy,0.96,False
+2026-08-17 15:00,Chernomorets Bourgas,CSKA Sofia II,0,1,94.0,0,1,fuzzy,0.84,False
+2026-08-26 18:00,Chaco For Ever,CA San Miguel,2,0,94.0,3,0,fuzzy,0.95,False
+2026-08-23 11:00,Oddevold,Helsingborgs,3,1,94.1,3,1,fuzzy,0.98,False
+2026-08-24 17:30,Osasuna,Levante,0,0,94.1,0,0,exato,1.0,False
+2026-08-23 11:00,HB Koge,Kolding IF,2,2,94.1,2,2,fuzzy,0.9,False
+2026-08-23 11:00,West Brom,Burnley,3,1,94.1,3,1,exato,1.0,False
+2026-08-23 11:00,Shenzhen Juniors FC,Nanjing City,2,1,94.1,3,1,fuzzy,0.97,False
+2026-08-29 15:00,SD Eibar (W),Espanyol (W),0,0,94.1,1,0,fuzzy,0.93,False
+2026-08-22 13:00,Orgryte,Halmstads,1,1,94.1,1,1,fuzzy,0.97,False
+2026-08-28 10:30,Jeonnam Dragons,Cheonan City,1,0,94.2,1,0,fuzzy,0.83,False
+2026-08-17 19:15,Throttur,Fylkir,3,1,94.2,3,1,exato,1.0,False
+2026-08-17 19:15,Fram,Stjarnan,3,1,94.2,3,1,exato,1.0,False
+2026-08-28 10:30,Ansan Greeners FC,Daegu Fc,1,2,94.2,1,2,fuzzy,0.88,False
+2026-08-23 12:30,Miedz Legnica,Arka Gdynia,1,0,94.5,2,0,fuzzy,0.87,False
+2026-08-20 15:00,Kairat Almaty,Anderlecht,0,3,94.5,0,3,fuzzy,0.88,False
+2026-08-21 21:30,Rubio Nu,Sportivo Trinidense,0,0,94.5,0,0,exato,1.0,False
+2026-08-22 19:30,Rayo Zuliano,Deportivo La Guaira,1,3,94.6,1,4,fuzzy,0.82,False
+2026-08-22 16:00,Juventus B,Novara,1,0,94.6,1,0,fuzzy,0.9,False
+2026-08-22 16:00,Cittadella,Pergolettese,1,0,94.6,2,0,exato,1.0,False
+2026-08-21 15:00,NK Jadran Dekani,Jesenice,0,2,94.6,0,2,fuzzy,0.91,False
+2026-08-25 18:45,Stevenage,Reading,0,3,94.6,0,3,exato,1.0,False
+2026-08-22 16:00,FC Wil,Kriens,0,1,94.6,0,2,fuzzy,0.88,False
+2026-08-23 19:00,Cesena,Sampdoria,1,1,94.6,1,1,exato,1.0,False
+2026-08-21 17:00,Zamalek,Al Ittihad (EGY),0,0,94.6,0,0,fuzzy,0.93,False
+2026-08-28 17:00,Leiria,Tondela,2,0,94.6,2,0,exato,1.0,False
+2026-09-04 16:00,Hobro,Hvidovre,1,3,94.6,1,3,fuzzy,0.94,False
+2026-08-22 16:00,Harju JK Laagri,Nomme Kalju,1,0,94.6,1,0,fuzzy,0.83,False
+2026-08-26 10:30,Gangwon,Gwangju FC,1,2,94.6,2,2,exato,1.0,False
+2026-08-25 18:45,Sheff Wed,Wolves,0,2,94.6,0,2,fuzzy,0.9,False
+2026-08-21 17:00,Krka,Slovan Ljublana,2,3,94.6,2,3,fuzzy,0.88,False
+2026-08-22 16:00,Luzern,Lausanne,1,0,94.6,1,0,exato,1.0,False
+2026-08-25 18:45,Barnsley,Crewe,3,2,94.6,3,2,exato,1.0,False
+2026-08-22 16:00,AC Ospitaletto,Lumezzane,2,0,94.6,2,0,fuzzy,0.96,False
+2026-08-22 16:00,Ludogorets,Slavia Sofia,1,1,94.6,1,1,exato,1.0,False
+2026-08-23 19:00,Hajduk Split,Osijek,3,0,94.6,4,0,exato,1.0,False
+2026-08-23 19:00,A.C. Trento S.C.S.D.,Treviso,2,1,94.6,2,1,fuzzy,0.83,False
+2026-08-21 17:00,Fredericia,Aarhus Fremad,0,0,94.6,0,0,exato,1.0,False
+2026-08-21 17:00,Benfica B,Portimonense,1,1,94.6,1,1,exato,1.0,False
+2026-08-28 17:00,AC Horsens,Viborg,2,3,94.6,2,3,fuzzy,0.94,False
+2026-08-21 17:00,Sirius,Hacken,0,3,94.6,0,3,exato,1.0,False
+2026-08-22 16:00,Rizespor,Samsunspor,0,2,94.6,0,2,exato,1.0,False
+2026-08-22 16:00,Ruzomberok,Dukla Banska Bystrica,0,1,94.6,0,1,fuzzy,0.92,False
+2026-08-22 16:00,Umraniyespor,Erokspor A.S,1,0,94.6,1,1,fuzzy,0.94,False
+2026-08-22 16:00,1860 Munich,Holstein Kiel,0,1,94.6,0,2,fuzzy,0.8,False
+2026-08-25 18:45,Cambridge Utd,Millwall,0,1,94.6,0,1,exato,1.0,False
+2026-08-23 16:30,Rijeka,NK Istra,3,1,94.7,3,2,fuzzy,0.81,False
+2026-08-22 21:15,Aurora,Real Potosi,0,0,94.7,0,0,exato,1.0,False
+2026-08-23 16:30,Borac Banja Luka,Celik Zenica,2,0,94.7,2,0,exato,1.0,False
+2026-08-25 17:00,Osters,Sundsvall,1,0,94.8,1,0,fuzzy,0.95,False
+2026-08-27 17:00,FC Copenhagen,FC Inter Turku,3,1,94.8,4,1,fuzzy,0.84,False
+2026-08-27 17:00,FK Kauno Zalgiris,Besiktas,1,0,94.8,1,0,fuzzy,0.84,False
+2026-08-29 13:00,Elfsborg,Degerfors,2,0,94.8,2,0,exato,1.0,False
+2026-08-29 13:00,Hacken,Vasteras SK,1,3,94.8,1,3,exato,1.0,False
+2026-08-22 17:00,Ironi Tiberias,Hapoel Petach Tikva,1,0,94.8,1,0,fuzzy,0.98,False
+2026-08-29 13:00,Falkenbergs,IK Brage,3,1,94.8,4,1,fuzzy,0.89,False
+2026-09-03 23:00,Metropolitanos,Trujillanos,3,1,94.9,4,1,exato,1.0,False
+2026-08-20 18:30,Lugano,Maccabi Tel Aviv,2,1,94.9,2,1,fuzzy,0.85,False
+2026-08-20 18:30,Atalanta,Hapoel Tel Aviv,0,0,94.9,0,0,fuzzy,0.87,False
+2026-08-28 18:30,US Cremonese,Modena,0,3,95.0,0,3,fuzzy,0.95,False
+2026-08-17 17:00,Hacken,Halmstads,1,0,95.0,1,0,fuzzy,0.97,False
+2026-08-17 17:00,Brondby,SonderjyskE,3,2,95.0,3,2,exato,1.0,False
+2026-08-28 18:30,Muglaspor,Boluspor,2,0,95.0,2,0,exato,1.0,False
+2026-09-05 14:00,Parnu JK Vaprus,Nomme Utd,1,0,95.0,1,0,exato,1.0,False
+2026-08-28 18:30,Antalyaspor,Sariyer G.K.,1,2,95.0,1,2,fuzzy,0.94,False
+2026-08-21 18:45,Drogheda,St Patricks,0,1,95.1,0,2,exato,1.0,False
+2026-09-02 18:00,NK Aluminij,NK Celje,0,2,95.1,0,2,fuzzy,0.86,False
+2026-08-28 16:00,Keciorengucu,Umraniyespor,2,2,95.1,2,2,exato,1.0,False
+2026-08-28 16:00,Pohronie,Tatran Presov,3,1,95.1,3,1,fuzzy,0.83,False
+2026-08-28 16:00,Slavia Sofia,Septemvri,1,1,95.1,1,1,fuzzy,0.89,False
+2026-08-28 16:00,Wisla Plock,Korona Kielce,0,2,95.1,0,2,exato,1.0,False
+2026-08-21 18:45,Treaty United,Cork City,2,2,95.1,2,2,exato,1.0,False
+2026-08-21 18:45,Wexford F.C,Athlone Town,0,1,95.1,0,2,fuzzy,0.83,False
+2026-08-21 18:45,Haverfordwest County,Cambrian United,0,2,95.1,0,3,fuzzy,0.91,False
+2026-08-28 16:00,Dukla Prague,Vysocina Jihlava,3,1,95.1,3,1,fuzzy,0.82,False
+2026-08-21 18:45,Dundalk,Galway Utd,1,2,95.1,1,2,fuzzy,0.9,False
+2026-08-28 11:35,Dalian Yingbo,Beijing Guoan,1,1,95.1,1,1,exato,1.0,False
+2026-08-28 16:00,Unia Skierniewice,Stal Rzeszow,0,1,95.1,0,1,fuzzy,0.85,False
+2026-08-28 16:00,Pendikspor,Bandirmaspor,1,1,95.1,1,1,exato,1.0,False
+2026-08-28 16:00,Al-Feiha,Abha,2,1,95.1,3,2,fuzzy,0.86,False
+2026-08-21 18:45,Finn Harps,Cobh Ramblers,1,3,95.1,1,3,exato,1.0,False
+2026-08-29 09:00,Tochigi Uva FC,Iwata,1,3,95.2,1,3,fuzzy,0.85,False
+2026-08-29 09:00,FC Ryukyu,Sagamihara,2,1,95.2,2,1,fuzzy,0.93,False
+2026-08-22 21:30,Deportivo Maldonado,Penarol,0,0,95.2,0,0,fuzzy,0.83,False
+2026-08-29 09:00,Fukushima Utd,Nara Club,2,2,95.2,2,2,exato,1.0,False
+2026-09-02 18:30,Grasshoppers Zurich,St Gallen,2,0,95.2,2,0,fuzzy,0.9,False
+2026-08-29 09:00,Kamatamare Sanuki,Kagoshima Utd,3,3,95.2,3,4,fuzzy,0.88,False
+2026-09-02 15:30,Opatija,Hrvace,1,0,95.2,1,0,exato,1.0,False
+2026-08-29 09:00,Iwaki SC,Albirex Niigata,2,3,95.2,2,3,fuzzy,0.92,False
+2026-08-29 09:00,FC Gifu,Tochigi SC,3,1,95.2,4,1,fuzzy,0.9,False
+2026-08-22 21:30,CA Independiente,Independiente Rivadavia,0,0,95.2,0,0,fuzzy,0.82,False
+2026-08-29 17:00,Bnei Sakhnin,Maccabi Petach Tikva,1,2,95.3,1,2,fuzzy,0.87,False
+2026-09-04 16:00,MFK Karvina,SK Kladno,2,0,95.3,2,0,fuzzy,0.91,False
+2026-09-05 11:30,Kuressaare,Trans Narva,3,1,95.4,3,1,fuzzy,0.83,False
+2026-08-29 17:00,Leganes,Eldense,0,0,95.4,1,0,exato,1.0,False
+2026-08-29 17:00,Entella,Cesena,1,2,95.4,1,2,exato,1.0,False
+2026-08-29 17:00,Hapoel Ramat Gan,Hapoel Be'er Sheva,1,1,95.4,1,2,fuzzy,0.84,False
+2026-08-29 17:00,Real Sociedad,Espanyol,2,1,95.4,2,1,exato,1.0,False
+2026-08-29 17:00,Albacete,Oviedo,0,1,95.4,0,1,exato,1.0,False
+2026-08-29 17:00,Hapoel Petach Tikva,Hapoel Jerusalem,1,0,95.4,1,0,fuzzy,0.98,False
+2026-08-29 17:00,Hapoel Kiryat Shmona,Ironi Tiberias,2,0,95.4,2,0,fuzzy,0.9,False
+2026-08-23 17:45,Sarmiento de Junin,Estudiantes,2,0,95.5,2,0,fuzzy,0.93,False
+2026-09-01 14:00,Umraniyespor,Muglaspor,0,1,95.5,0,1,exato,1.0,False
+2026-08-23 19:15,Vikingur Reykjavik,Valur,2,0,95.5,2,0,exato,1.0,False
+2026-08-20 18:45,Rouen,Quevilly Rouen,3,0,95.5,3,0,exato,1.0,False
+2026-08-23 17:45,Barracas Central,CA Platense,1,1,95.5,1,2,fuzzy,0.94,False
+2026-08-27 20:30,22 de Julio FC,Deportivo Santo Domingo,0,3,95.6,0,3,fuzzy,0.87,False
+2026-08-26 18:45,Bradford,Burnley,0,0,95.6,0,0,fuzzy,0.9,False
+2026-08-26 18:45,Newcastle,West Brom,3,2,95.6,3,2,exato,1.0,False
+2026-08-21 19:00,Sligo Rovers,Waterford,0,0,95.7,0,0,exato,1.0,False
+2026-08-21 19:00,FC Vado,Atalanta U23,2,0,95.7,2,0,fuzzy,0.9,False
+2026-09-01 18:45,Bristol Rovers,Colchester,1,0,95.8,2,0,exato,1.0,False
+2026-09-01 18:45,Exeter,Barnet,1,1,95.8,1,1,exato,1.0,False
+2026-09-01 18:45,Leicester,Plymouth,2,0,95.8,2,0,exato,1.0,False
+2026-09-01 18:45,Swansea,Watford,2,0,95.8,2,0,exato,1.0,False
+2026-09-01 18:45,Peterborough,Stevenage,0,0,95.8,0,0,exato,1.0,False
+2026-09-01 18:45,Wycombe,Sheff Wed,1,2,95.8,1,2,fuzzy,0.9,False
+2026-09-01 18:45,Swindon,Port Vale,2,1,95.8,3,1,exato,1.0,False
+2026-09-01 18:45,FC Halifax Town,Hartlepool,1,0,95.8,1,0,fuzzy,0.91,False
+2026-09-01 18:45,Cheltenham,York City,3,2,95.8,3,2,exato,1.0,False
+2026-09-01 18:45,Bradford,Cambridge Utd,1,2,95.8,1,2,fuzzy,0.9,False
+2026-08-18 16:30,Hapoel Kfar Shelem,MS Kfar Kasem,2,0,95.8,2,0,fuzzy,0.83,False
+2026-09-01 18:45,Huddersfield,Oxford Utd,3,1,95.8,3,1,exato,1.0,False
+2026-09-01 18:45,Zrinjski,FK BSK Banja Luka,2,1,95.8,3,1,fuzzy,0.96,False
+2026-09-01 18:45,Northampton,Crawley Town,1,1,95.8,1,1,fuzzy,0.89,False
+2026-09-01 18:45,Chesterfield,Gillingham,1,1,95.8,1,1,exato,1.0,False
+2026-09-01 18:45,Lincoln,Blackburn,0,0,95.8,0,0,exato,1.0,False
+2026-08-18 16:30,Ironi Modiin,Maccabi Herzliya,0,2,95.8,0,2,fuzzy,0.88,False
+2026-09-01 18:45,Crewe,Walsall,1,2,95.8,2,2,exato,1.0,False
+2026-09-01 18:45,Fleetwood Town,Oldham,1,1,95.8,1,1,fuzzy,0.91,False
+2026-09-01 18:45,Portsmouth,Derby,0,2,95.8,0,2,exato,1.0,False
+2026-08-18 16:30,Hapoel Afula,FC Ashdod,2,0,95.8,2,0,fuzzy,0.94,False
+2026-09-01 18:45,Sheff Utd,Bolton,2,2,95.8,3,2,fuzzy,0.9,False
+2026-08-23 08:00,CSA Steaua Bucuresti,ACS Dumbravita,2,2,95.8,2,2,fuzzy,0.92,False
+2026-09-01 18:45,Rochdale,Shrewsbury,3,0,95.8,3,0,exato,1.0,False
+2026-09-01 18:45,Preston,Bristol City,1,3,95.8,1,3,exato,1.0,False
+2026-09-01 18:45,Doncaster,Notts Co,1,1,95.8,1,1,fuzzy,0.89,False
+2026-09-01 18:45,Tranmere,Rotherham,2,1,95.8,2,2,exato,1.0,False
+2026-08-20 19:00,Shamrock Rovers,KuPS,1,1,96.0,1,1,fuzzy,0.82,False
+2026-09-03 20:30,Vinotinto Ecuador,San Antonio FC,3,2,96.0,4,2,fuzzy,0.81,False
+2026-08-23 19:30,Tenerife,Almeria,1,0,96.0,1,0,exato,1.0,False
+2026-08-20 19:00,Sheff Wed,Bradford,0,1,96.0,0,1,fuzzy,0.8,False
+2026-08-23 10:30,Gwangju FC,Incheon Utd,0,0,96.1,0,1,fuzzy,0.91,False
+2026-09-02 18:30,Borac Banja Luka,Zeljeznicar,2,0,96.1,2,0,exato,1.0,False
+2026-08-20 17:00,Trabzonspor,Ferencvaros,0,1,96.1,0,1,fuzzy,0.88,False
+2026-08-20 17:00,Midtjylland,Rijeka,2,0,96.1,2,0,fuzzy,0.84,False
+2026-08-23 10:30,Daejeon Citizen,Gangwon,3,0,96.1,3,0,fuzzy,0.83,False
+2026-08-20 17:00,FC Nordsjaelland,St Gallen,1,0,96.1,1,0,fuzzy,0.84,False
+2026-09-02 18:45,Kilmarnock,St Mirren,0,1,96.1,0,1,exato,1.0,False
+2026-08-20 17:00,Tromso,Brighton,0,0,96.1,0,0,fuzzy,0.82,False
+2026-08-28 22:00,Wanderers (Uru),Central Espanol,3,0,96.1,3,0,fuzzy,0.85,False
+2026-08-20 17:00,Besiktas,FK Kauno Zalgiris,3,0,96.1,3,0,fuzzy,0.84,False
+2026-08-20 17:00,Vendsyssel FF,Hillerod Fodbold,1,0,96.1,1,0,fuzzy,0.8,False
+2026-09-01 19:00,Birmingham,Southampton,1,1,96.2,1,1,exato,1.0,False
+2026-09-01 19:00,Rubio Nu,Sportivo San Lorenzo,3,1,96.2,3,1,fuzzy,0.86,False
+2026-08-24 18:30,Sivasspor,Manisa FK,2,2,96.2,2,2,exato,1.0,False
+2026-09-01 19:00,Stoke,Norwich,1,0,96.2,1,0,exato,1.0,False
+2026-09-04 17:30,CFR Cluj,Farul Constanta,0,0,96.2,0,0,exato,1.0,False
+2026-08-29 14:30,Excelsior,Sparta Rotterdam,1,1,96.3,2,1,exato,1.0,False
+2026-08-26 19:00,San Antonio Bulo Bulo,The Strongest,0,2,96.3,0,3,fuzzy,0.86,False
+2026-08-23 12:00,Midtjylland,Randers,1,0,96.3,1,0,fuzzy,0.94,False
+2026-08-29 08:00,CS Gloria 2018 Bistrita-Nasaud,CSM Satu Mare,1,0,96.3,1,0,fuzzy,0.85,False
+2026-08-22 12:00,Metz,Laval,1,1,96.3,1,1,exato,1.0,False
+2026-08-29 08:00,CS Afumati,Unirea Slobozia,1,1,96.3,2,1,fuzzy,0.94,False
+2026-08-23 12:00,Vasteras SK,Kalmar FF,0,0,96.3,0,0,fuzzy,0.93,False
+2026-08-28 19:00,Wrexham,Birmingham,1,2,96.3,1,2,exato,1.0,False
+2026-08-29 08:00,Metalul Buzau,Chindia Targoviste,1,3,96.3,1,3,exato,1.0,False
+2026-08-23 12:00,Chongqing Tonglianglong,Dalian Yingbo,0,1,96.3,0,1,exato,1.0,False
+2026-08-23 12:00,IFK Goteborg,Elfsborg,1,1,96.3,1,1,fuzzy,0.92,False
+2026-08-29 08:00,ACS Dumbravita,CSM Ramnicu-Valcea,0,1,96.3,0,1,fuzzy,0.91,False
+2026-08-24 22:30,Athletic Club,Novorizontino,1,3,96.3,1,4,exato,1.0,False
+2026-08-23 18:00,Sigma Olomouc,Pardubice,3,1,96.3,3,1,fuzzy,0.95,False
+2026-08-23 18:00,Al-Ula FC,Al Jabalain,3,0,96.3,3,1,fuzzy,0.92,False
+2026-08-23 22:15,River Plate,Velez Sarsfield,2,2,96.3,2,2,exato,1.0,False
+2026-08-29 08:00,CSM Scolar Resita,CSA Steaua Bucuresti,2,0,96.3,2,1,fuzzy,0.83,False
+2026-08-22 18:30,San Martin De San Juan,Club Gimnasia y Tiro,3,1,96.4,3,1,fuzzy,0.81,False
+2026-08-22 18:30,FC Kosice,Slovan Bratislava,1,2,96.4,1,2,fuzzy,0.93,False
+2026-08-23 13:30,Braunschweig,Union Berlin,2,3,96.4,2,4,exato,1.0,False
+2026-08-22 18:30,Olympiakos,Atromitos,1,0,96.4,1,0,fuzzy,0.83,False
+2026-08-22 18:30,Antalyaspor,Pendikspor,2,3,96.4,2,3,exato,1.0,False
+2026-08-29 11:30,Port Vale,Crewe,0,0,96.5,0,0,exato,1.0,False
+2026-08-21 23:00,Estudiantes Rio Cuarto,San Lorenzo,0,0,96.5,0,0,exato,1.0,False
+2026-08-29 11:30,Barnet,Cheltenham,2,2,96.5,2,2,exato,1.0,False
+2026-08-29 11:30,Nomme Utd,Harju JK Laagri,1,2,96.5,1,2,exato,1.0,False
+2026-08-29 11:30,Derby,Swansea,0,3,96.5,0,3,exato,1.0,False
+2026-08-21 23:00,Caracas,Carabobo FC,1,1,96.5,1,1,fuzzy,0.94,False
+2026-08-29 11:30,Foshan Nanshi FC,Shenzhen Juniors FC,1,2,96.5,1,2,fuzzy,0.93,False
+2026-08-29 11:30,Shijiazhuang Gongfu FC,Wuxi Wugou,2,0,96.5,2,0,fuzzy,0.97,False
+2026-08-29 11:30,MK Dons,Leicester,0,0,96.5,0,0,exato,1.0,False
+2026-09-01 17:00,Helsingborgs,Orebro,1,1,96.5,1,1,fuzzy,0.98,False
+2026-08-29 11:30,Middlesbrough,West Brom,3,1,96.5,3,1,exato,1.0,False
+2026-08-25 17:30,Siwelele FC,Chippa Utd,1,1,96.5,1,1,fuzzy,0.94,False
+2026-09-01 17:00,Sariyer G.K.,Pendikspor,2,0,96.5,2,0,fuzzy,0.94,False
+2026-08-24 18:45,Hallescher FC,Schalke 04,2,2,96.6,2,5,fuzzy,0.89,False
+2026-08-23 15:00,TPS,FC Inter Turku,0,0,96.6,0,0,fuzzy,0.95,False
+2026-08-24 18:45,Reims,Annecy,3,1,96.6,3,1,exato,1.0,False
+2026-08-23 15:00,Norrby IF,Sandvikens IF,1,1,96.6,1,1,fuzzy,0.86,False
+2026-08-23 15:00,Eibar,Valladolid,1,0,96.6,1,0,exato,1.0,False
+2026-08-21 17:30,Aldosivi,Union Santa Fe,1,3,96.6,1,3,fuzzy,0.96,False
+2026-08-23 15:00,FK Loznica,FK Bor 1919,0,0,96.6,0,0,fuzzy,0.88,False
+2026-08-21 17:30,Stade Nyonnais,Etoile Carouge,0,0,96.6,0,0,exato,1.0,False
+2026-08-21 17:30,SV Ried,Grazer AK,1,0,96.7,1,0,fuzzy,0.9,False
+2026-08-23 12:45,Radomiak Radom,Zaglebie Lubin,0,0,96.8,0,0,fuzzy,0.88,False
+2026-08-28 11:00,FC Kolos Kovalivka 2,SK Poltava,0,1,96.8,0,1,fuzzy,0.91,False
+2026-08-28 22:30,Cobresal,Palestino,1,0,96.8,2,0,exato,1.0,False
+2026-08-28 17:30,Winterthur,Stade Lausanne-Ouchy,1,1,96.8,1,1,fuzzy,0.92,False
+2026-08-22 22:00,Metropolitanos,Deportivo Tachira,3,1,96.8,3,1,fuzzy,0.88,False
+2026-08-22 11:00,Cottbus,Augsburg,0,1,96.8,0,2,exato,1.0,False
+2026-08-22 11:00,Wuhan Three Towns,Tianjin Jinmen Tiger FC,0,0,96.8,0,0,fuzzy,0.97,False
+2026-08-22 11:00,Ningbo Professional,Yanbian Longding,2,3,96.8,2,3,exato,1.0,False
+2026-09-02 18:45,Dundee,St Johnstone,1,1,96.9,1,1,fuzzy,0.93,False
+2026-08-16 23:00,Carabobo FC,Metropolitanos,1,0,96.9,1,0,fuzzy,0.94,False
+2026-09-02 18:45,Motherwell,Dundee Utd,3,0,96.9,3,0,exato,1.0,False
+2026-09-05 14:00,Grotta,Volsungur,0,2,97.0,0,2,exato,1.0,False
+2026-09-04 18:15,Etoile Carouge,FC Wil,1,1,97.0,1,1,fuzzy,0.88,False
+2026-09-05 14:00,Asane,Hodd,2,2,97.0,2,2,exato,1.0,False
+2026-09-05 14:00,IR Reykjavik,Leiknir R,3,2,97.0,3,2,fuzzy,0.97,False
+2026-09-04 18:30,Las Palmas,Leganes,0,0,97.0,0,0,exato,1.0,False
+2026-08-25 16:05,Abha,Al-Khaleej Saihat,1,1,97.0,1,1,fuzzy,0.88,False
+2026-09-05 13:00,Degerfors,Halmstads,2,0,97.0,2,0,fuzzy,0.97,False
+2026-09-04 18:00,Sparta Rotterdam,PEC Zwolle,2,2,97.0,2,2,fuzzy,0.9,False
+2026-09-04 17:00,Aalesunds,Start,2,0,97.1,2,0,fuzzy,0.97,False
+2026-08-24 19:00,CA Guemes,Atletico Rafaela,0,0,97.1,0,0,fuzzy,0.82,False
+2026-08-24 19:00,Crotone,Foggia,0,1,97.1,0,1,exato,1.0,False
+2026-09-02 16:00,Fk Velez Mostar,Radnik Bijeljina,1,1,97.1,1,1,fuzzy,0.96,False
+2026-08-27 16:00,Maccabi Tel Aviv,Lugano,1,1,97.1,1,1,fuzzy,0.85,False
+2026-08-24 19:00,Fulham,Chelsea,2,3,97.1,2,3,exato,1.0,False
+2026-08-24 19:00,Reggiana,Ravenna,1,1,97.1,1,1,exato,1.0,False
+2026-08-26 22:30,Real Potosi,Real Tomayapo,0,1,97.1,0,1,fuzzy,0.9,False
+2026-08-24 19:00,Caratese,SSD Dolomiti Bellunesi,1,1,97.1,1,2,fuzzy,0.81,False
+2026-08-23 20:00,Belgrano,Defensa y Justicia,1,2,97.2,1,2,exato,1.0,False
+2026-09-04 16:00,Septemvri,Botev Vratsa,2,3,97.2,2,3,fuzzy,0.89,False
+2026-08-21 14:30,Chindia Targoviste,CS FC Dinamo Bucuresti,1,2,97.2,1,2,fuzzy,0.92,False
+2026-08-16 23:15,Central Cordoba (SdE),Instituto,0,1,97.2,0,1,fuzzy,0.95,False
+2026-08-25 20:30,Boca Juniors de Cali,Bogota,1,2,97.2,1,2,fuzzy,0.89,False
+2026-08-28 19:30,Alaves,Villarreal,1,0,97.3,1,0,exato,1.0,False
+2026-08-17 18:00,All Boys,Nueva Chicago,1,0,97.3,1,0,exato,1.0,False
+2026-08-29 15:30,Wisla Krakow,Wieczysta Krakow,2,0,97.3,2,0,fuzzy,0.81,False
+2026-08-17 18:00,IR Reykjavik,Njardvik,3,1,97.3,3,1,exato,1.0,False
+2026-08-23 17:00,Santa Clara,Famalicao,1,0,97.3,1,0,exato,1.0,False
+2026-08-23 17:00,Pisa,Padova,0,1,97.3,0,1,exato,1.0,False
+2026-08-23 17:00,Zilina,KFC Komarno,2,1,97.3,2,1,fuzzy,0.91,False
+2026-08-17 18:00,Jong FC Utrecht,Vitesse Arnhem,1,3,97.3,1,3,fuzzy,0.81,False
+2026-08-23 17:00,Hebar,Chernomorets Bourgas,1,0,97.3,1,0,fuzzy,0.84,False
+2026-08-17 18:00,Volsungur,IF Vestri,2,0,97.3,2,0,fuzzy,0.93,False
+2026-08-29 15:30,Halmstads,Kalmar FF,1,0,97.3,1,0,fuzzy,0.9,False
+2026-08-23 16:00,Eyupspor,Gaziantep FK,0,1,97.4,0,1,fuzzy,0.95,False
+2026-08-23 16:00,Pro Vercelli,Desenzano Calvina,1,1,97.4,1,1,fuzzy,0.86,False
+2026-08-23 16:00,Trabzonspor,Basaksehir,2,1,97.4,2,1,exato,1.0,False
+2026-08-29 11:00,Shaanxi Union FC,Yanbian Longding,3,1,97.4,3,1,fuzzy,0.96,False
+2026-09-05 15:00,Helsingborgs,Sandvikens IF,0,2,97.4,0,2,fuzzy,0.91,False
+2026-08-23 16:00,Nuovo Campobasso,US Pianese,2,0,97.4,2,0,fuzzy,0.84,False
+2026-08-17 16:00,Pisa,Empoli,1,1,97.4,1,1,exato,1.0,False
+2026-08-17 16:00,Spartak Varna,Septemvri,0,1,97.4,0,1,fuzzy,0.89,False
+2026-08-23 16:00,Bnei Yehuda,Hapoel Kfar Shelem,3,1,97.4,3,1,fuzzy,0.97,False
+2026-08-29 11:00,Landskrona,Ostersunds FK,1,1,97.4,1,1,fuzzy,0.93,False
+2026-08-23 16:00,Rot-Weiss Essen,St Pauli,2,0,97.4,2,0,fuzzy,0.85,False
+2026-08-17 16:00,Trinec,Usti nad Labem,0,0,97.4,0,0,exato,1.0,False
+2026-08-22 14:00,HK Kopavogur,Throttur,2,0,97.5,3,0,fuzzy,0.95,False
+2026-08-23 18:15,Pogon Szczecin,Wisla Krakow,2,2,97.5,2,2,fuzzy,0.81,False
+2026-08-22 14:00,Southampton,Stoke,3,1,97.5,3,1,exato,1.0,False
+2026-08-23 18:15,NK Maribor,NK Bravo,3,1,97.5,3,1,fuzzy,0.85,False
+2026-08-22 14:00,Swansea,Sheff Utd,0,0,97.5,0,0,fuzzy,0.9,False
+2026-08-20 20:00,Club Juventud Italiana,Delfin,0,1,97.5,0,1,fuzzy,0.94,False
+2026-08-22 14:00,Blackburn,Middlesbrough,2,1,97.5,2,1,exato,1.0,False
+2026-08-22 14:00,East Fife,Hamilton,0,0,97.5,0,0,exato,1.0,False
+2026-08-22 14:00,Fleetwood Town,Gillingham,0,0,97.6,0,0,fuzzy,0.91,False
+2026-08-22 14:00,Exeter,Accrington,2,0,97.6,2,0,exato,1.0,False
+2026-08-19 17:00,FK Teleoptik Zemun,FK Napredak,0,1,97.6,1,1,fuzzy,0.8,False
+2026-08-29 11:35,Chengdu Rongcheng,Liaoning Tieren FC,2,1,97.6,2,1,fuzzy,0.97,False
+2026-08-22 16:30,Brentford,Tottenham,3,0,97.6,3,0,exato,1.0,False
+2026-08-22 16:30,Macva Sabac,Radnicki Nis,1,0,97.6,1,0,fuzzy,0.83,False
+2026-08-16 23:30,Cienciano,Deportivo Garcilaso,0,0,97.6,0,0,exato,1.0,False
+2026-08-22 14:00,West Ham,Charlton,1,2,97.6,1,2,exato,1.0,False
+2026-08-22 14:00,Ipswich,Sunderland,2,1,97.6,2,1,exato,1.0,False
+2026-08-22 14:00,Ilves,VPS,0,1,97.6,0,1,exato,1.0,False
+2026-09-01 22:30,Londrina,Juventude,0,0,97.6,0,0,exato,1.0,False
+2026-09-01 22:30,Barranquilla,Boca Juniors de Cali,2,1,97.6,2,1,fuzzy,0.89,False
+2026-08-22 14:00,Swindon,Cheltenham,2,1,97.6,2,1,exato,1.0,False
+2026-08-22 14:00,Stockport,Blackpool,0,2,97.6,1,2,fuzzy,0.88,False
+2026-08-22 14:00,MK Dons,Huddersfield,1,1,97.6,1,1,exato,1.0,False
+2026-08-22 14:00,Colchester,Oldham,1,1,97.6,2,1,exato,1.0,False
+2026-08-22 14:00,Peterborough,Mansfield,2,1,97.6,2,1,exato,1.0,False
+2026-08-22 14:00,Leicester,Burton Albion,1,2,97.6,1,2,fuzzy,0.83,False
+2026-08-22 14:00,Wycombe,Plymouth,1,1,97.6,1,1,exato,1.0,False
+2026-08-22 14:00,QPR,Bolton,0,0,97.6,0,0,exato,1.0,False
+2026-08-22 14:00,Wrexham,Watford,1,1,97.6,1,1,exato,1.0,False
+2026-08-22 14:00,Morton,Arbroath,1,2,97.6,1,2,exato,1.0,False
+2026-08-22 14:00,Queen of South,Alloa,0,2,97.6,0,2,exato,1.0,False
+2026-08-22 16:30,Udinese,Como,1,1,97.6,1,1,exato,1.0,False
+2026-08-22 14:00,Kelty Hearts,Dumbarton,3,1,97.6,3,1,exato,1.0,False
+2026-08-22 14:00,Rochdale,Crawley Town,1,2,97.6,1,2,fuzzy,0.89,False
+2026-08-22 14:00,Edinburgh City,Annan,1,0,97.6,1,0,exato,1.0,False
+2026-08-22 14:00,AFC Wimbledon,Reading,0,0,97.6,0,0,exato,1.0,False
+2026-08-22 14:00,Cove Rangers,Peterhead,3,0,97.6,3,0,exato,1.0,False
+2026-08-22 14:00,Rotherham,York City,1,1,97.6,1,1,exato,1.0,False
+2026-08-22 14:00,Preston,Wolves,0,3,97.6,1,3,exato,1.0,False
+2026-08-22 14:00,Spartans,Elgin City FC,3,3,97.6,3,3,fuzzy,0.95,False
+2026-08-28 16:30,1. FC Koln (W),Hoffenheim (W),1,0,97.7,1,0,fuzzy,0.88,False
+2026-08-24 15:00,Fk Smederevo,FK Teleoptik Zemun,1,1,97.7,1,1,fuzzy,0.81,False
+2026-09-02 18:45,QPR,Cardiff,2,1,97.7,2,1,exato,1.0,False
+2026-08-28 16:30,Bochum,VfL Osnabruck,0,1,97.7,0,1,exato,1.0,False
+2026-09-04 18:15,Arda,Botev Plovdiv,2,3,97.7,2,3,exato,1.0,False
+2026-08-22 10:30,Ansan Greeners FC,Seongnam FC,1,2,97.8,1,2,fuzzy,0.91,False
+2026-09-04 18:30,Livingston,Stenhousemuir,0,1,97.8,0,1,exato,1.0,False
+2026-08-29 12:45,Aubagne FC,Bourg-en-Bresse,2,0,97.8,2,0,fuzzy,0.94,False
+2026-09-04 18:30,Stuttgart,FC Koln,3,1,97.8,4,1,exato,1.0,False
+2026-09-04 18:00,RKC Waalwijk,NAC Breda,3,2,97.8,4,2,fuzzy,0.92,False
+2026-08-22 10:30,Jeju Utd,Gimcheon Sangmu,0,0,97.8,0,0,fuzzy,0.81,False
+2026-08-29 12:45,Amiens,Versailles 78 FC,2,0,97.8,3,0,fuzzy,0.92,False
+2026-08-22 10:30,Cheonan City,Suwon Bluewings,0,1,97.8,0,1,exato,1.0,False
+2026-09-04 18:45,Finn Harps,Athlone Town,0,1,97.8,0,1,fuzzy,0.89,False
+2026-08-24 19:30,Granada,Mallorca,2,0,97.8,2,0,fuzzy,0.94,False
+2026-09-04 19:00,Shamrock Rovers,Shelbourne,0,0,97.8,0,0,exato,1.0,False
+2026-09-04 18:45,Altrincham,Eastleigh,2,1,97.8,2,1,exato,1.0,False
+2026-08-29 12:45,Valenciennes,Concarneau,0,0,97.8,0,0,exato,1.0,False
+2026-09-04 18:45,Lommel,Club Brugge,0,1,97.8,0,1,fuzzy,0.88,False
+2026-08-18 15:30,Pirin Blagoevgrad,Hebar,2,3,97.9,2,3,exato,1.0,False
+2026-08-25 18:00,Cardiff,Norwich,0,2,97.9,1,2,exato,1.0,False
+2026-08-27 18:30,Anderlecht,Kairat Almaty,3,0,97.9,3,0,fuzzy,0.88,False
+2026-09-04 17:00,Ingolstadt,Alemannia Aachen,0,3,97.9,0,3,exato,1.0,False
+2026-08-27 18:30,Chelsea,Luton,2,0,97.9,2,0,exato,1.0,False
+2026-08-27 18:30,Borac Banja Luka,Vikingur Reykjavik,2,1,97.9,3,1,fuzzy,0.91,False
+2026-09-02 15:00,Segesta,Kustosija,0,0,97.9,0,0,exato,1.0,False
+2026-08-22 22:30,Confianca,Anapolis GO,0,0,97.9,0,1,fuzzy,0.94,False
+2026-09-05 14:00,Aegir,Grindavik,1,1,98.0,1,1,exato,1.0,False
+2026-09-05 14:00,Sandnes Ulf,Ranheim IL,1,1,98.0,1,1,fuzzy,0.85,False
+2026-09-05 11:30,Foshan Nanshi FC,Dalian Kun City FC,0,0,98.0,0,0,fuzzy,0.93,False
+2026-09-05 14:00,Haugesund,Sogndal,2,0,98.0,2,0,exato,1.0,False
+2026-09-05 11:00,Varnamo,Varbergs BoIS,1,0,98.0,1,1,fuzzy,0.87,False
+2026-09-05 11:00,Changchun Yatai,Ningbo Professional,2,0,98.0,2,0,exato,1.0,False
+2026-09-04 16:00,Usti Nad Labem,Slavia Praha B,1,1,98.0,1,1,fuzzy,0.9,False
+2026-08-17 22:15,Velez Sarsfield,Defensa y Justicia,1,1,98.0,1,1,exato,1.0,False
+2026-08-23 15:15,Le Havre,Monaco,0,1,98.0,0,1,exato,1.0,False
+2026-09-01 17:30,Rapperswil-Jona,Kriens,1,1,98.1,1,1,exato,1.0,False
+2026-09-01 17:30,Stade Lausanne-Ouchy,Etoile Carouge,3,0,98.1,3,0,fuzzy,0.92,False
+2026-08-27 16:20,Al Jabalain,Al Jeel,1,0,98.1,1,0,exato,1.0,False
+2026-08-20 16:00,Lincoln Red Imps,Larne,0,2,98.1,0,2,fuzzy,0.84,False
+2026-09-05 16:30,Keflavik,Valur,1,2,98.1,1,2,exato,1.0,False
+2026-09-01 17:30,Durban City,Stellenbosch FC,0,0,98.1,0,0,fuzzy,0.96,False
+2026-08-21 20:30,LDU de Portoviejo,22 de Julio FC,2,0,98.1,2,0,fuzzy,0.91,False
+2026-08-29 14:00,Partick,Queens Park,0,0,98.2,0,0,fuzzy,0.83,False
+2026-08-29 14:00,Spartans,Clyde,3,3,98.2,3,3,exato,1.0,False
+2026-08-20 20:30,Independiente Juniors,El Nacional,1,1,98.2,1,1,fuzzy,0.83,False
+2026-08-29 14:00,Cardiff,Sheff Utd,2,2,98.2,2,2,fuzzy,0.9,False
+2026-08-29 14:00,Alloa,Peterhead,1,1,98.2,1,1,exato,1.0,False
+2026-08-29 14:00,Hearts,St Johnstone,2,1,98.2,2,1,exato,1.0,False
+2026-08-29 14:00,Coventry,Hull,0,1,98.2,0,1,exato,1.0,False
+2026-08-29 14:00,Plymouth,Bradford,2,0,98.2,2,0,fuzzy,0.9,False
+2026-08-29 14:00,Stevenage,Doncaster,2,2,98.2,2,2,exato,1.0,False
+2026-08-23 18:30,CFR Cluj,FCSB,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,Gillingham,Northampton,1,1,98.2,1,1,exato,1.0,False
+2026-08-29 14:00,York City,Exeter,2,0,98.2,2,1,exato,1.0,False
+2026-08-29 14:00,Colchester,Rochdale,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,Leiknir R,Njardvik,1,0,98.2,2,0,fuzzy,0.97,False
+2026-08-29 14:00,Afturelding,IF Vestri,1,0,98.2,2,0,fuzzy,0.93,False
+2026-08-23 18:30,Alanyaspor,Besiktas,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,Annan,Dumbarton,2,0,98.2,2,0,exato,1.0,False
+2026-08-29 14:00,Progreso,Danubio,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,FC Liege,FCV Dender,1,2,98.2,1,2,fuzzy,0.87,False
+2026-08-23 18:30,Sariyer G.K.,Batman Petrolspor,1,2,98.2,1,2,fuzzy,0.94,False
+2026-09-01 16:00,Parma,US Cremonese,0,2,98.2,0,2,fuzzy,0.95,False
+2026-08-29 14:00,Bolton,Lincoln,0,1,98.2,0,1,exato,1.0,False
+2026-08-29 14:00,Bristol City,Portsmouth,2,0,98.2,2,1,exato,1.0,False
+2026-08-29 14:00,Stenhousemuir,Inverness CT,3,1,98.2,3,1,fuzzy,0.95,False
+2026-08-29 14:00,Newport County,Tranmere,2,2,98.2,2,2,fuzzy,0.85,False
+2026-08-29 14:00,Charlton,Preston,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,Arbroath,Livingston,1,0,98.2,1,0,exato,1.0,False
+2026-08-29 14:00,Airdrieonians,East Fife,0,0,98.2,0,0,exato,1.0,False
+2026-08-17 18:30,FCSB,Botosani,2,2,98.2,3,2,fuzzy,0.94,False
+2026-08-29 14:00,Shrewsbury,Salford City,1,0,98.2,1,0,fuzzy,0.89,False
+2026-08-22 19:00,Atl Tucuman,Instituto,0,0,98.3,0,0,exato,1.0,False
+2026-08-29 10:30,Bucheon FC 1995,FC Anyang,1,1,98.3,1,1,fuzzy,0.93,False
+2026-08-22 19:00,Gimnasia La Plata,Gimnasia Mendoza,2,3,98.3,2,3,fuzzy,0.9,False
+2026-08-22 19:00,Dinamo Zagreb,Varazdin,2,1,98.3,3,1,fuzzy,0.93,False
+2026-08-26 16:00,Strommen,Raufoss,3,1,98.3,3,1,exato,1.0,False
+2026-08-22 19:00,Audace Cerignola,Cosenza,2,1,98.3,3,1,exato,1.0,False
+2026-08-29 10:30,Hwaseong FC,Cheongju FC,2,1,98.3,2,1,fuzzy,0.89,False
+2026-08-22 19:00,Fluminense,Remo,2,1,98.3,2,1,exato,1.0,False
+2026-08-22 19:00,Heerenveen,PEC Zwolle,0,2,98.3,0,2,fuzzy,0.9,False
+2026-08-23 13:00,Penafiel,Sporting Lisbon B,2,0,98.3,2,0,fuzzy,0.85,False
+2026-08-22 19:00,OFK Beograd,Zemun,1,0,98.3,1,0,fuzzy,0.83,False
+2026-08-22 19:00,Chaco For Ever,Los Andes,1,0,98.3,1,0,exato,1.0,False
+2026-08-23 13:00,Man City,Bournemouth,1,1,98.3,2,1,fuzzy,0.83,False
+2026-09-03 23:00,Inter Palmir,Real Soacha Cundinamarca,0,2,98.4,0,2,fuzzy,0.9,False
+2026-08-27 18:45,Caen,Bastia,0,1,98.4,0,1,exato,1.0,False
+2026-08-29 10:30,Seongnam FC,Seoul E-Land FC,1,1,98.4,1,1,fuzzy,0.9,False
+2026-08-21 18:00,Sarajevo,FK BSK Banja Luka,1,0,98.5,1,0,fuzzy,0.91,False
+2026-08-21 18:00,Dunkerque,Montpellier,0,1,98.5,0,1,exato,1.0,False
+2026-09-02 18:45,Celtic,Aberdeen,3,0,98.5,3,0,exato,1.0,False
+2026-09-02 19:00,Macara,Manta FC,3,3,98.5,4,3,fuzzy,0.92,False
+2026-09-04 20:30,Leones FC,Atletico FC Cali,0,3,98.5,0,3,fuzzy,0.85,False
+2026-08-21 18:00,Boulogne,Red Star,1,1,98.5,1,1,exato,1.0,False
+2026-09-02 18:45,Luton,Stockport,2,0,98.5,2,0,fuzzy,0.88,False
+2026-08-21 18:00,Al-Quadisiya (KSA),Al-Ittihad,0,2,98.5,0,1,fuzzy,0.85,True
+2026-08-21 18:00,Sochaux,Guingamp,1,0,98.5,1,0,exato,1.0,False
+2026-09-02 18:45,West Brom,Charlton,1,1,98.5,1,1,exato,1.0,False
+2026-09-02 18:30,Luzern,FC Vaduz,2,1,98.6,2,1,fuzzy,0.92,False
+2026-09-04 18:00,Dunkerque,Clermont,1,1,98.6,1,1,exato,1.0,False
+2026-09-04 17:30,Kriens,Stade Lausanne-Ouchy,0,2,98.6,0,2,fuzzy,0.92,False
+2026-08-28 18:00,Montpellier,Boulogne,0,0,98.7,0,0,exato,1.0,False
+2026-08-27 19:00,Always Ready,Aurora,2,2,98.7,2,2,exato,1.0,False
+2026-09-04 17:00,Fredrikstad,Bodo Glimt,1,2,98.7,1,2,exato,1.0,False
+2026-08-28 18:00,Rodez,Pau,2,2,98.7,2,2,fuzzy,0.88,False
+2026-09-02 15:00,NK Dugopolje,Karlovac,2,1,98.7,2,2,fuzzy,0.95,False
+2026-08-27 19:00,Fulham,AFC Wimbledon,3,0,98.7,3,0,exato,1.0,False
+2026-08-27 13:30,Tersana SC,La Viena FC,0,0,98.7,0,0,fuzzy,0.88,False
+2026-08-27 13:30,Maleyeit Kafr El Zayiat,Tanta,0,0,98.7,0,0,exato,1.0,False
+2026-08-28 18:00,Laval,Grenoble,0,3,98.7,0,3,exato,1.0,False
+2026-08-22 16:45,Sparta Rotterdam,FC Utrecht,2,3,98.7,3,3,fuzzy,0.94,False
+2026-08-22 16:45,Dundee Utd,Dundee,0,2,98.7,0,2,fuzzy,0.93,False
+2026-08-28 18:00,Nancy,Dunkerque,2,0,98.7,2,0,exato,1.0,False
+2026-09-04 16:00,Triglav,NK Slovenska Bistrica,1,0,98.8,1,0,fuzzy,0.84,False
+2026-08-17 23:00,Internacional,Remo,1,0,98.8,1,1,exato,1.0,False
+2026-08-22 10:00,Yamagata,Yokohama FC,2,0,98.8,2,0,fuzzy,0.83,False
+2026-08-22 10:00,Iwata,Tokushima,1,1,98.8,2,1,exato,1.0,False
+2026-08-22 10:00,Kumamoto,Nagano Parceiro,0,1,98.8,0,1,fuzzy,0.8,False
+2026-08-22 10:00,Tottori,Fukushima Utd,2,1,98.8,2,1,fuzzy,0.83,False
+2026-08-22 10:00,Cerezo Osaka,Shimizu,1,0,98.8,1,0,fuzzy,0.85,False
+2026-08-22 10:00,Kagoshima Utd,FC Gifu,0,0,98.8,0,0,fuzzy,0.9,False
+2026-08-22 13:30,Saarbrucken,Hertha Berlin,1,1,98.9,1,1,exato,1.0,False
+2026-08-22 15:00,Zlin,Slovan Liberec,0,1,98.9,0,1,fuzzy,0.85,False
+2026-08-17 16:30,Sassuolo,Cesena,3,0,98.9,3,0,exato,1.0,False
+2026-08-23 11:35,Shanghai Port FC,Qingdao Hainiu,2,1,98.9,2,1,fuzzy,0.96,False
+2026-08-26 16:10,Al Bukayriyah,Al-Okhdood Club,1,1,98.9,1,1,fuzzy,0.82,False
+2026-08-22 13:30,Viktoria Koln,Nurnberg,0,1,98.9,1,1,exato,1.0,False
+2026-08-22 15:00,Mlada Boleslav,Slovacko,2,1,98.9,2,1,exato,1.0,False
+2026-08-22 15:00,IF Vestri,Leiknir R,2,0,98.9,2,0,fuzzy,0.9,False
+2026-09-05 14:00,Njardvik,Afturelding,2,1,99.0,2,1,exato,1.0,False
+2026-08-21 21:05,Jaguares de Cordoba,Boyaca Chico,1,0,99.0,1,0,fuzzy,0.81,False
+2026-08-17 19:00,Sportivo Belgrano,Def Belgrano VR,0,2,99.0,0,2,fuzzy,0.89,False
+2026-08-20 18:00,Gornik Zabrze,Monaco,2,3,99.0,2,3,fuzzy,0.84,False
+2026-08-20 21:10,San Antonio FC,Club Nueve de Octubre,0,0,99.1,0,0,fuzzy,0.89,False
+2026-08-21 18:15,Rapperswil-Jona,Winterthur,0,2,99.1,0,2,exato,1.0,False
+2026-09-02 23:00,Caracas,Portuguesa FC,1,1,99.1,1,1,fuzzy,0.95,False
+2026-08-22 11:45,Harrogate Town,Barrow,2,1,99.1,2,2,fuzzy,0.91,False
+2026-08-21 10:30,FC Tokyo,Jef Utd Chiba,2,0,99.1,2,0,fuzzy,0.81,False
+2026-09-03 18:30,FC Basel,Sion,1,2,99.2,1,2,fuzzy,0.92,False
+2026-09-02 19:00,Falkirk,Rangers,1,2,99.2,1,2,exato,1.0,False
+2026-09-03 18:30,Anderlecht,Kortrijk,1,0,99.2,1,0,exato,1.0,False
+2026-08-18 11:35,Shanghai Shenhua,Beijing Guoan,0,3,99.3,0,3,exato,1.0,False
+2026-09-04 18:30,Piast Gliwice,GKS Katowice,3,0,99.3,3,0,exato,1.0,False
+2026-09-02 18:45,Wigan,MK Dons,3,1,99.3,3,1,exato,1.0,False
+2026-08-23 21:00,Operario PR,Vila Nova,0,0,99.3,0,0,fuzzy,0.94,False
+2026-09-05 08:00,CSC 1599 Selimbar,Metalul Buzau,1,1,99.3,1,1,fuzzy,0.85,False
+2026-09-03 16:00,Palermo,Mantova,3,2,99.3,5,2,exato,1.0,False
+2026-09-04 16:30,Hoffenheim (W),Leverkusen (W),1,2,99.4,1,2,fuzzy,0.91,False
+2026-08-29 10:00,Kyoto,Fukuoka,2,1,99.4,2,1,fuzzy,0.85,False
+2026-09-04 17:30,Richards Bay FC,Amazulu,1,2,99.4,1,2,fuzzy,0.96,False
+2026-09-01 16:20,Al Orubah,Al-Zulfi SC,1,1,99.4,1,1,fuzzy,0.94,False
+2026-09-04 16:30,Arminia Bielefeld,St Pauli,2,2,99.4,2,2,exato,1.0,False
+2026-08-17 15:00,Gnistan,Ilves,3,2,99.4,3,2,exato,1.0,False
+2026-08-29 10:00,Real Sociedad (W),EDF Logrono (W),0,1,99.4,0,2,fuzzy,0.92,False
+2026-08-29 10:00,Nagoya,Okayama,1,1,99.4,2,1,fuzzy,0.82,False
+2026-09-04 17:00,Viborg,Lyngby,0,2,99.4,0,2,exato,1.0,False
+2026-08-28 18:15,NK Aluminij,Koper,0,1,99.4,0,1,fuzzy,0.94,False
+2026-09-02 18:30,Thun,Lausanne,0,0,99.4,0,0,exato,1.0,False
+2026-08-29 10:00,Sendai,Tegevajaro Miyazaki,3,2,99.4,4,2,fuzzy,0.82,False
+2026-08-29 10:00,Deportivo La Coruna (W),Sevilla FC (W),0,1,99.4,0,1,fuzzy,0.88,False
+2026-09-04 17:00,Norrkoping,Ljungskile,2,2,99.4,2,2,exato,1.0,False
+2026-08-29 13:30,Elversberg,Leverkusen,3,2,99.5,3,2,fuzzy,0.9,False
+2026-08-29 13:30,FC Koln,Hoffenheim,3,2,99.5,3,2,exato,1.0,False
+2026-08-29 13:30,Pogon Siedlce,Stal Mielec,2,0,99.5,2,0,exato,1.0,False
+2026-09-05 11:35,Dalian Yingbo,Qingdao Hainiu,2,1,99.5,2,1,exato,1.0,False
+2026-09-05 11:35,Shanghai Port FC,Beijing Guoan,0,0,99.5,0,0,fuzzy,0.96,False
+2026-08-29 13:30,Mainz,Paderborn,0,0,99.5,0,0,exato,1.0,False
+2026-09-04 14:30,CSM Slatina,Chindia Targoviste,3,2,99.5,3,2,exato,1.0,False
+2026-08-29 13:30,Union Berlin,Eintracht Frankfurt,2,3,99.5,3,3,exato,1.0,False
+2026-08-25 22:30,Atletico GO,Botafogo SP,3,0,99.6,3,0,exato,1.0,False
+2026-09-05 10:00,FC Seoul,Incheon Utd,1,0,99.6,1,0,fuzzy,0.83,False
+2026-09-04 16:00,Prostejov,MAS Taborsko,1,1,99.6,1,1,fuzzy,0.92,False
+2026-08-23 17:30,Getafe,Racing Santander,1,0,99.6,1,0,exato,1.0,False
+2026-08-29 15:00,Shakhtar,Polissya Zhytomyr,0,2,99.7,0,2,fuzzy,0.85,False
+2026-08-22 18:00,Slavia Prague,Bohemians 1905,3,2,99.7,2,2,fuzzy,0.91,True
+2026-08-21 15:50,Al Jeel,Al-Zulfi SC,0,2,99.7,0,2,fuzzy,0.94,False
+2026-08-29 15:00,Pardubice,SK Artis Brno,1,2,99.7,1,2,fuzzy,0.9,False
+2026-08-20 13:30,El Mansurah,Baladeyet Al-Mahalla,0,1,99.7,2,1,fuzzy,0.84,False
+2026-08-22 18:00,Tristan Suarez,Agropecuario,2,0,99.7,2,0,exato,1.0,False
+2026-09-12 19:00,Cambuur Leeuwarden,NEC Nijmegen,3,0,99.7,3,0,exato,1.0,False
+2026-08-29 15:00,Sabadell,Almeria,1,0,99.7,1,0,exato,1.0,False
+2026-08-23 11:00,Greuther Furth,Bochum,1,2,99.8,1,2,exato,1.0,False
+2026-08-25 18:45,Walsall,Leyton Orient,0,0,99.8,0,0,exato,1.0,False
+2026-08-21 18:30,San Telmo,Deportivo Moron,1,2,99.8,2,2,exato,1.0,False
+2026-08-21 18:30,Lechia Gdansk,Pogon Siedlce,1,0,99.8,1,0,exato,1.0,False
+2026-08-25 18:45,Stoke,Hull,1,1,99.8,1,1,exato,1.0,False
+2026-08-25 18:45,Blackburn,Sheff Utd,1,2,99.8,1,2,fuzzy,0.9,False
+2026-08-21 18:30,Cracovia Krakow,Wieczysta Krakow,2,2,99.8,3,2,fuzzy,0.86,False
+2026-08-21 18:30,Albion FC,Boston River,2,3,99.8,2,3,fuzzy,0.93,False
+2026-08-25 18:45,Ipswich,Leicester,3,1,99.8,3,1,exato,1.0,False
+2026-08-21 18:30,Fatih Karagumruk Istanbul,Bursaspor,2,1,99.8,2,1,fuzzy,0.8,False
+2026-08-21 18:30,LR Vicenza Virtus,Catanzaro,3,2,99.8,3,2,fuzzy,0.88,False
+2026-08-22 19:30,Eldense,Cadiz,2,2,99.9,2,2,fuzzy,0.92,False
+2026-08-23 19:00,Ponte Preta,Avai,0,2,99.9,0,2,exato,1.0,False
+2026-08-23 19:00,Perugia,Ostia Mare Lido,1,0,99.9,1,0,fuzzy,0.91,False
+2026-08-23 19:00,Grosseto,Spezia,1,1,99.9,1,1,exato,1.0,False
+2026-08-23 19:00,Sao Bernardo,Nautico PE,1,1,99.9,1,1,fuzzy,0.94,False
+2026-08-23 19:00,Inter Limeira,Figueirense,0,0,99.9,0,0,fuzzy,0.96,False
+2026-09-03 21:30,Deportivo Recoleta,Cerro Porteno,1,3,99.9,1,3,fuzzy,0.82,False
+2026-08-23 19:00,Sambenedettese,Forli,2,2,99.9,2,2,exato,1.0,False
+2026-08-23 15:30,Universitatea Craiova,FC Voluntari,3,1,99.9,3,1,fuzzy,0.85,False
+2026-08-22 19:30,Espanyol,Real Madrid,1,2,99.9,1,2,exato,1.0,False
+2026-08-23 19:00,Red Bull Bragantino,Gremio,0,0,99.9,1,0,fuzzy,0.87,False
+2026-08-22 23:30,Cruzeiro MG,Flamengo,1,1,99.9,2,1,fuzzy,0.89,False
+2026-08-23 19:00,Zrinjski,Zeljeznicar,2,0,99.9,2,0,exato,1.0,False
+2026-08-23 19:00,Palermo,Juve Stabia,1,0,99.9,1,0,exato,1.0,False
+2026-08-23 19:00,Olimpia,Cerro Porteno,2,1,99.9,2,1,fuzzy,0.82,False
+2026-08-23 21:15,Guabira,Blooming Santa Cruz,1,1,99.9,1,1,fuzzy,0.82,False
+2026-08-23 15:30,Newcastle,Liverpool,2,1,99.9,2,2,exato,1.0,False
+2026-09-03 18:45,Toulouse,Lille,0,1,100.0,0,1,exato,1.0,False
+2026-08-27 17:00,Hradec Kralove,Panathinaikos,1,1,100.0,1,2,fuzzy,0.9,False
+2026-09-05 14:00,HK Kopavogur,Fylkir,2,1,100.0,2,1,fuzzy,0.95,False
+2026-08-28 17:00,Olympiakos Nicosia FC,Nea Salamis,3,3,100.0,3,3,fuzzy,0.82,False
+2026-08-28 17:00,Fortuna Dusseldorf,Stuttgart II,1,0,100.0,1,0,fuzzy,0.87,False
+2026-08-27 17:00,Pyramids,Abo Qair Semads,2,0,100.0,2,0,fuzzy,0.92,False
+2026-08-27 17:00,Plzen,Crvena Zvezda,3,1,100.0,5,1,fuzzy,0.83,False
+2026-08-28 17:00,Al Ittihad (EGY),Ceramica Cleopatra,1,3,100.0,1,3,fuzzy,0.93,False
+2026-08-28 17:00,Racing Santander,Elche,3,2,100.0,3,2,exato,1.0,False
+2026-09-04 19:45,Estudiantes Rio Cuarto,Sarmiento de Junin,0,2,100.0,0,2,fuzzy,0.97,False
+2026-08-28 15:55,Al-Anwar Club,Al-Ula FC,0,1,100.1,0,1,fuzzy,0.81,False
+2026-08-20 22:00,Macara,Santos,0,0,100.1,0,0,fuzzy,0.8,False
+2026-08-20 22:00,Leones FC,Real Soacha Cundinamarca FC,1,1,100.1,1,1,fuzzy,0.83,False
+2026-08-25 19:00,Valencia,Betis,0,1,100.1,0,1,exato,1.0,False
+2026-08-22 13:00,Vizela,Amarante,0,0,100.1,0,0,exato,1.0,False
+2026-08-20 18:30,Motherwell,Freiburg,1,2,100.1,1,3,fuzzy,0.86,False
+2026-08-22 23:40,New York Red Bulls,Chicago Fire,1,1,100.2,1,1,exato,1.0,False
+2026-09-02 17:30,Mamelodi Sundowns,Milford,2,0,100.2,2,0,fuzzy,0.94,False
+2026-09-04 18:00,FCV Dender,Seraing Utd,2,0,100.2,2,0,fuzzy,0.81,False
+2026-08-25 17:00,Orebro,Varbergs BoIS,2,1,100.2,2,1,fuzzy,0.87,False
+2026-09-03 17:00,Mjallby,Djurgardens,0,2,100.2,0,2,fuzzy,0.98,False
+2026-09-05 13:00,Oddevold,Falkenbergs,2,1,100.2,2,1,fuzzy,0.98,False
+2026-08-23 16:30,Venezia,Lecce,0,2,100.2,0,2,exato,1.0,False
+2026-08-22 17:00,FK Radnicki 1923,FK IMT Novi Beograd,2,1,100.3,2,1,fuzzy,0.93,False
+2026-08-21 16:00,SJK,Lahti,1,1,100.3,1,2,exato,1.0,False
+2026-08-22 17:00,AD Ceuta FC,Las Palmas,0,2,100.3,0,2,fuzzy,0.86,False
+2026-08-22 17:00,Kalamata,Aris,2,2,100.3,2,3,exato,1.0,False
+2026-08-21 16:00,Vejle,Esbjerg,3,2,100.3,4,2,exato,1.0,False
+2026-08-23 14:00,AC Horsens,Lyngby,2,1,100.3,2,1,fuzzy,0.94,False
+2026-08-21 16:00,Usti nad Labem,Dukla Prague,3,1,100.3,3,1,exato,1.0,False
+2026-09-04 19:00,Ipswich,Liverpool,0,2,100.3,0,2,exato,1.0,False
+2026-08-22 17:00,Lusitania Futebol Clube,Torreense,2,2,100.3,2,2,fuzzy,0.84,False
+2026-08-22 17:00,Estoril Praia,Rio Ave,0,2,100.3,0,2,fuzzy,0.87,False
+2026-08-22 17:00,Maccabi Petach Tikva,Hapoel Kiryat Shmona,2,1,100.3,2,1,fuzzy,0.89,False
+2026-09-04 15:00,NK Jadran Dekani,Tabor Sezana,0,0,100.3,0,0,fuzzy,0.96,False
+2026-08-22 17:00,Covilha,Atletico Clube de Portugal,0,3,100.3,0,3,fuzzy,0.8,False
+2026-08-22 17:00,Carrarese,Mantova,1,2,100.3,1,2,exato,1.0,False
+2026-09-05 09:30,Fujieda Myfc,Vanraure Hachinohe,0,0,100.3,0,0,fuzzy,0.82,False
+2026-09-04 21:15,Academia de Balompie Bol,Universitario de Vinto,2,0,100.3,2,0,fuzzy,0.95,False
+2026-08-23 21:30,Ypiranga RS,Ferroviaria,1,0,100.3,1,0,fuzzy,0.9,False
+2026-08-22 17:00,Sudtirol,Entella,1,0,100.3,1,0,exato,1.0,False
+2026-08-17 20:00,Lanus,CA Independiente,1,3,100.3,1,3,fuzzy,0.96,False
+2026-08-22 17:00,Albacete,Sociedad B,1,2,100.3,1,2,fuzzy,0.91,False
+2026-08-22 17:00,Al-Masry,Smouha,1,0,100.3,1,0,exato,1.0,False
+2026-08-23 14:00,Bandirmaspor,Keciorengucu,1,1,100.3,1,1,exato,1.0,False
+2026-09-04 18:00,Varazdin,NK Istra,0,0,100.3,0,0,fuzzy,0.81,False
+2026-09-04 18:00,Laval,Red Star,1,2,100.3,1,2,exato,1.0,False
+2026-08-28 18:30,Genclerbirligi,Erzurum BB,1,1,100.3,1,1,fuzzy,0.85,False
+2026-08-28 18:30,Dunfermline,Raith,1,0,100.3,1,0,exato,1.0,False
+2026-08-21 22:00,Plaza Colonia,Colon FC,1,1,100.3,1,1,fuzzy,0.92,False
+2026-08-21 16:00,Preussen Munster,Karlsruhe,1,2,100.3,1,2,fuzzy,0.93,False
+2026-08-23 21:30,Criciuma,Fortaleza EC,0,2,100.3,0,2,fuzzy,0.95,False
+2026-09-04 18:45,Treaty United,Wexford F.C,0,1,100.3,0,1,fuzzy,0.94,False
+2026-08-21 16:00,Chrobry Glogow,Warta Poznan,0,1,100.3,0,1,exato,1.0,False
+2026-08-28 18:30,Legia Warsaw,Slask Wroclaw,0,1,100.3,1,1,fuzzy,0.81,False
+2026-08-22 17:00,Ghazl El Mahallah,Pyramids,0,3,100.3,0,3,exato,1.0,False
+2026-08-23 21:30,Chapecoense,Sao Paulo,1,0,100.3,1,0,fuzzy,0.96,False
+2026-09-05 10:00,Tosu,Tegevajaro Miyazaki,2,0,100.3,2,0,fuzzy,0.81,False
+2026-08-29 16:00,Konyaspor,Kocaelispor,1,2,100.4,1,2,exato,1.0,False
+2026-08-25 10:30,Gimcheon Sangmu,Jeonbuk Motors,0,0,100.4,0,0,fuzzy,0.85,False
+2026-08-29 16:00,Podbrezova,FC Kosice,2,2,100.4,2,2,fuzzy,0.93,False
+2026-09-05 10:00,Yamagata,Kofu,1,2,100.4,1,2,fuzzy,0.83,False
+2026-08-29 16:00,Lausanne,FC Zurich,2,3,100.4,2,3,fuzzy,0.93,False
+2026-08-29 09:30,Toyama,Fujieda MYFC,2,3,100.4,2,3,exato,1.0,False
+2026-08-29 16:00,Kayserispor,Bursaspor,1,2,100.4,1,2,exato,1.0,False
+2026-08-29 09:30,Nagasaki,FC Tokyo,0,3,100.4,0,3,fuzzy,0.86,False
+2026-08-25 10:30,FC Seoul,Bucheon FC 1995,1,0,100.4,1,0,fuzzy,0.92,False
+2026-09-05 11:00,Wuxi Wugou,Yanbian Longding,2,0,100.4,2,0,exato,1.0,False
+2026-09-05 13:00,GAIS,Hacken,0,0,100.4,0,0,exato,1.0,False
+2026-09-05 10:00,Tottori,Renofa Yamaguchi,0,3,100.4,0,3,fuzzy,0.83,False
+2026-08-21 18:45,Marseille,Strasbourg,3,0,100.4,4,0,exato,1.0,False
+2026-09-05 13:00,Norrby IF,Landskrona,1,3,100.4,1,3,fuzzy,0.93,False
+2026-08-26 14:00,Smouha,Asyut Petroleum,0,0,100.5,0,0,exato,1.0,False
+2026-08-22 18:15,UTC Cajamarca,Comerciantes Unidos,1,3,100.6,1,3,fuzzy,0.93,False
+2026-09-12 19:00,Atletico MG,Fluminense,3,1,100.6,3,1,exato,1.0,False
+2026-08-25 19:15,Afturelding,Grotta,2,0,100.6,2,0,exato,1.0,False
+2026-08-19 22:00,Cerro Porteno,SE Palmeiras,0,1,100.6,0,1,fuzzy,0.84,False
+2026-08-22 18:15,Slask Wroclaw,Widzew Lodz,3,3,100.6,3,3,exato,1.0,False
+2026-08-24 16:00,Wurzburger Kickers,FC Koln,1,2,100.6,1,2,exato,1.0,False
+2026-08-27 14:00,Modern Sport FC,Ghazl El Mahallah,2,0,100.6,2,0,fuzzy,0.96,False
+2026-08-22 21:30,Huachipato,Deportes Limache,1,3,100.7,1,3,fuzzy,0.82,False
+2026-08-20 18:45,Concarneau,Villefranche Beaujolais,2,0,100.7,2,0,fuzzy,0.85,False
+2026-08-20 18:45,Caen,Aubagne FC,1,0,100.7,1,0,fuzzy,0.94,False
+2026-08-22 09:00,Blaublitz Akita,Kofu,3,0,100.7,3,0,fuzzy,0.89,False
+2026-08-29 13:00,Csikszereda,CFR Cluj,2,3,100.7,2,3,fuzzy,0.91,False
+2026-08-20 18:45,Fleury Merogis,Orleans,0,2,100.7,0,2,exato,1.0,False
+2026-08-22 09:00,FC Osaka,FC Ryukyu,2,2,100.7,2,2,fuzzy,0.85,False
+2026-08-20 18:45,Paris 13 Atletico,Valenciennes,2,1,100.7,2,1,fuzzy,0.9,False
+2026-08-29 13:00,Academica,Lusitania Futebol Clube,0,1,100.7,0,2,fuzzy,0.84,False
+2026-08-22 09:00,Nara Club,Renofa Yamaguchi,2,1,100.7,3,1,exato,1.0,False
+2026-08-20 18:45,Bourg-en-Bresse,US Thionville Lusitanos,0,2,100.7,0,2,fuzzy,0.82,False
+2026-08-20 18:45,La Roche-sur-Yon VF,Cannes,1,1,100.7,1,1,fuzzy,0.82,False
+2026-08-22 21:30,Cuiaba,Goias,1,1,100.7,1,1,exato,1.0,False
+2026-08-24 18:15,Lokomotiv Plovdiv,Arda,0,1,100.8,0,1,fuzzy,0.88,False
+2026-08-21 19:00,Betis,Real Sociedad,1,0,100.9,1,0,exato,1.0,False
+2026-08-24 22:00,Tigre,Central Cordoba (SdE),2,1,100.9,2,1,fuzzy,0.95,False
+2026-08-28 18:45,Connahs Quay,Cambrian United,3,0,100.9,3,0,fuzzy,0.92,False
+2026-08-21 19:00,Potenza,S.S.D. Casarano Calcio,3,1,100.9,4,1,fuzzy,0.82,False
+2026-08-21 19:00,FC Giugliano,Scafatese,3,3,100.9,3,3,fuzzy,0.95,False
+2026-08-28 18:45,Barrow,Yeovil,1,2,100.9,1,2,exato,1.0,False
+2026-08-28 18:45,Hornchurch,Woking,1,0,100.9,1,0,exato,1.0,False
+2026-08-28 18:45,Llandudno FC,Haverfordwest County,2,0,100.9,2,0,fuzzy,0.86,False
+2026-08-21 19:00,Arsenal,Coventry,3,0,100.9,3,0,exato,1.0,False
+2026-08-28 18:45,Cobh Ramblers,Longford,2,2,100.9,2,2,exato,1.0,False
+2026-08-21 19:00,Union Brescia,Carpi,3,1,100.9,3,1,fuzzy,0.87,False
+2026-08-21 19:00,ASD Alcione,Renate,3,1,100.9,3,1,fuzzy,0.8,False
+2026-08-28 18:45,Wealdstone,Carlisle,1,1,100.9,1,1,exato,1.0,False
+2026-08-21 19:00,Cordoba,Girona,2,1,100.9,2,1,exato,1.0,False
+2026-08-24 22:00,Orsomarso,Real Soacha Cundinamarca FC,2,0,100.9,2,0,fuzzy,0.9,False
+2026-08-28 18:45,Cardiff Metropolitan,Briton Ferry Llansawel,3,0,100.9,3,0,fuzzy,0.85,False
+2026-08-28 18:45,Hartlepool,Eastleigh,0,0,100.9,0,1,exato,1.0,False
+2026-08-28 18:45,AC Milan,Venezia,1,0,100.9,2,0,exato,1.0,False
+2026-09-03 20:00,Academia Anzoategui FC,Monagas,1,3,101.0,1,3,fuzzy,0.88,False
+2026-08-20 22:45,Real Cartagena,Bogota,2,0,101.0,2,0,fuzzy,0.91,False
+2026-09-03 18:30,Lugano,Servette,1,0,101.1,1,0,exato,1.0,False
+2026-09-03 18:00,FC Copenhagen,FC Nordsjaelland,2,0,101.1,2,0,fuzzy,0.96,False
+2026-09-02 18:45,Millwall,Wrexham,0,3,101.1,0,3,exato,1.0,False
+2026-08-22 14:30,NAC Breda,Jong Ajax Amsterdam,3,2,101.2,3,2,fuzzy,0.82,False
+2026-08-22 14:30,Fortuna Sittard,AZ Alkmaar,0,1,101.2,0,2,fuzzy,0.83,False
+2026-09-02 17:00,Slavia Sofia,PFC Levski Sofia,1,2,101.2,1,2,fuzzy,0.94,False
+2026-09-04 18:00,Boulogne,Dijon,1,1,101.2,1,1,exato,1.0,False
+2026-08-22 14:30,Maritimo,Academico de Viseu,2,2,101.2,2,2,fuzzy,0.97,False
+2026-08-23 19:30,Porto,Arouca,2,0,101.2,2,0,fuzzy,0.92,False
+2026-08-23 15:45,AD Cantolao,Pirata FC,1,1,101.2,1,1,fuzzy,0.93,False
+2026-08-21 19:15,Tondela,Academica,0,1,101.3,0,2,exato,1.0,False
+2026-09-02 15:00,NK Croatia Zmijavci,BSK Bijelo Brdo,1,0,101.3,1,0,fuzzy,0.9,False
+2026-08-29 10:15,Radomiak Radom,Cracovia Krakow,2,1,101.3,2,1,fuzzy,0.86,False
+2026-08-18 22:30,Londrina,Atletico GO,0,0,101.3,0,0,exato,1.0,False
+2026-08-22 20:00,Estudiantes de Merida,Puerto Cabello,1,1,101.4,1,1,fuzzy,0.97,False
+2026-09-05 18:00,Stabaek,Moss,2,3,101.4,2,3,exato,1.0,False
+2026-08-22 20:00,Botafogo PB,Guarani,3,1,101.4,3,1,exato,1.0,False
+2026-08-28 19:00,Drogheda,Dundalk,2,3,101.5,2,3,exato,1.0,False
+2026-08-19 15:00,FK Vrsac,FK Dubocica,2,1,101.5,2,1,fuzzy,0.86,False
+2026-09-01 13:00,Bandirmaspor,Antalyaspor,0,1,101.5,0,1,exato,1.0,False
+2026-08-19 22:30,Fortaleza EC,Sao Bernardo,1,1,101.6,1,1,fuzzy,0.95,False
+2026-08-29 12:00,Annecy,Metz,1,1,101.6,1,1,exato,1.0,False
+2026-09-12 19:00,Gremio,Vasco da Gama,1,2,101.6,1,2,exato,1.0,False
+2026-08-19 22:30,Avai,Sport Recife,1,1,101.6,2,1,exato,1.0,False
+2026-09-12 19:00,Sunderland,Arsenal,0,2,101.6,0,2,exato,1.0,False
+2026-08-26 17:00,Petrojet,El Geish,2,3,101.6,2,3,fuzzy,0.93,False
+2026-09-05 15:00,IK Brage,Sundsvall,0,1,101.6,0,1,fuzzy,0.92,False
+2026-08-26 17:00,Odds BK,Kongsvinger,0,1,101.6,0,1,fuzzy,0.83,False
+2026-09-12 19:00,Ciudad de Bolivar,CA Central Norte,0,0,101.6,0,0,exato,1.0,False
+2026-08-29 12:00,Rotherham,Chesterfield,2,1,101.6,2,1,exato,1.0,False
+2026-08-29 15:15,Strasbourg,Lens,2,1,101.6,2,1,exato,1.0,False
+2026-08-26 17:00,Stromsgodset,Hodd,3,1,101.6,3,1,exato,1.0,False
+2026-08-22 08:00,CSM Slatina,Metalul Buzau,2,0,101.7,2,0,exato,1.0,False
+2026-09-03 23:00,Puerto Cabello,Deportivo La Guaira,1,1,101.8,1,1,fuzzy,0.82,False
+2026-09-01 17:00,FK Teleoptik Zemun,Vozdovac,1,2,101.8,1,2,fuzzy,0.86,False
+2026-08-22 18:30,FC Zurich,FC Basel,1,2,101.8,1,2,fuzzy,0.85,False
+2026-08-22 18:30,Almagro BA,CA Colegiales,0,0,101.8,0,0,fuzzy,0.89,False
+2026-08-22 18:30,Nueva Chicago,CA Atlanta,0,1,101.8,0,1,fuzzy,0.83,False
+2026-09-05 14:00,Odds BK,Stromsgodset,1,1,101.8,1,1,fuzzy,0.83,False
+2026-09-01 20:00,Envigado,Union Magdalena,0,1,101.8,0,1,fuzzy,0.92,False
+2026-08-27 17:50,Al-Jndal,Al-Saqer FC,1,1,101.8,1,1,fuzzy,0.9,False
+2026-08-22 18:30,Defensores de Belgrano,Almirante Brown,0,1,101.8,0,2,fuzzy,0.89,False
+2026-08-25 17:30,Marumo Gallants FC,TS Galaxy FC,2,3,101.8,2,3,fuzzy,0.91,False
+2026-08-25 17:30,Orlando Pirates (SA),Sekhukhune United,2,0,101.8,2,0,fuzzy,0.85,False
+2026-08-25 17:30,Kruger United FC,Durban City,0,2,101.8,0,2,fuzzy,0.96,False
+2026-09-03 23:00,Gremio,Internacional,3,1,101.8,3,1,exato,1.0,False
+2026-09-04 22:00,CA Platense,Deportivo Riestra,1,1,101.9,1,1,fuzzy,0.83,False
+2026-08-22 11:30,Solihull Moors,Southend,1,3,101.9,1,3,exato,1.0,False
+2026-08-28 22:30,Goias,Sao Bernardo,2,1,101.9,2,1,exato,1.0,False
+2026-08-24 23:00,Botafogo FR,Athletico-PR,2,3,101.9,2,3,fuzzy,0.95,False
+2026-08-22 11:30,Forest Green,Boreham Wood,0,3,101.9,0,3,exato,1.0,False
+2026-09-03 19:00,Cagliari,Verona,1,2,101.9,1,2,exato,1.0,False
+2026-08-22 11:30,Eastleigh,Scunthorpe,3,2,101.9,3,2,exato,1.0,False
+2026-09-02 18:45,Barnsley,Blackpool,2,1,101.9,2,1,exato,1.0,False
+2026-08-23 09:00,Sagamihara,Kanazawa,2,0,102.0,2,1,exato,1.0,False
+2026-09-04 18:00,Grenoble,Annecy,1,2,102.0,1,2,exato,1.0,False
+2026-08-29 14:30,Arouca,Maritimo,2,1,102.0,2,1,exato,1.0,False
+2026-08-24 16:30,Bologna,Lazio,0,1,102.0,0,1,exato,1.0,False
+2026-09-04 19:00,Sandefjord,Viking,1,1,102.0,1,1,exato,1.0,False
+2026-08-25 16:00,Unirea Slobozia,FC Metaloglobus Bucuresti,1,1,102.0,1,2,fuzzy,0.93,False
+2026-08-29 14:30,Alverca,Santa Clara,1,1,102.0,1,1,exato,1.0,False
+2026-09-04 17:30,Aarau,Rapperswil-Jona,3,2,102.0,3,2,exato,1.0,False
+2026-08-16 23:00,CF America,Atletico San Luis,3,0,102.1,3,0,fuzzy,0.8,False
+2026-09-04 17:00,FK Novi Pazar,Zeleznicar Pancevo,2,0,102.1,2,0,fuzzy,0.95,False
+2026-09-05 09:00,Sagamihara,Nagano Parceiro,1,1,102.1,1,1,fuzzy,0.8,False
+2026-09-05 10:00,Tokushima,Iwaki SC,1,0,102.1,1,0,fuzzy,0.92,False
+2026-08-22 15:30,Mura,Koper,0,1,102.1,0,1,exato,1.0,False
+2026-09-04 16:30,Hannover,Karlsruhe,2,2,102.1,2,2,fuzzy,0.93,False
+2026-08-29 16:15,Kortrijk,Charleroi,1,3,102.1,1,3,exato,1.0,False
+2026-09-04 16:00,Abha,Al-Ettifaq,0,1,102.1,0,1,exato,1.0,False
+2026-09-05 12:00,Shandong Taishan,Shenzhen Peng City,1,1,102.1,1,1,fuzzy,0.86,False
+2026-08-23 12:00,Yverdon Sport,Aarau,2,1,102.1,2,1,fuzzy,0.87,False
+2026-09-04 17:00,Basaksehir,Galatasaray,2,3,102.1,2,3,exato,1.0,False
+2026-09-04 10:30,Cheongju FC,Seoul E-Land FC,0,2,102.2,0,2,fuzzy,0.9,False
+2026-08-23 13:30,Monagas,Portuguesa FC,0,0,102.2,0,0,fuzzy,0.95,False
+2026-08-24 23:30,San Luis,Santiago Wanderers,0,1,102.3,0,1,fuzzy,0.87,False
+2026-09-12 19:00,Guarani (Par),Cerro Porteno,1,1,102.4,1,1,exato,1.0,False
+2026-08-23 23:00,OHiggins,Palestino,0,1,102.4,0,1,exato,1.0,False
+2026-09-12 19:00,Cordoba,Almeria,0,2,102.4,0,2,exato,1.0,False
+2026-08-23 23:00,Quindio,Envigado,1,0,102.4,1,0,exato,1.0,False
+2026-08-21 20:00,Alianza Atletico,Sporting Cristal,3,1,102.5,3,1,fuzzy,0.9,False
+2026-08-24 19:15,Feirense,Porto B,0,1,102.5,0,1,fuzzy,0.93,False
+2026-08-21 20:00,Academia Anzoategui FC,Trujillanos,0,0,102.5,0,0,fuzzy,0.88,False
+2026-08-24 19:15,Gil Vicente,Casa Pia,2,0,102.5,2,0,exato,1.0,False
+2026-08-17 18:00,FK Novi Pazar,Vojvodina,2,0,102.5,2,0,fuzzy,0.95,False
+2026-08-22 18:45,Siroki Brijeg,Radnik Bijeljina,2,1,102.6,2,1,exato,1.0,False
+2026-08-22 18:45,Le Mans,Brest,2,2,102.6,2,2,exato,1.0,False
+2026-08-29 11:30,Nanjing City,Guangxi Hengchen,0,2,102.6,0,2,exato,1.0,False
+2026-08-17 16:00,Pirata FC,Union Comercio,1,2,102.7,1,2,fuzzy,0.93,False
+2026-09-02 19:00,Burnley,Middlesbrough,1,1,102.7,1,1,exato,1.0,False
+2026-09-03 19:00,Real Sociedad,Celta Vigo,0,0,102.7,0,0,exato,1.0,False
+2026-09-02 17:40,Al-Ula FC,Al-Raed (KSA),2,0,102.7,2,0,fuzzy,0.82,False
+2026-09-05 08:00,Concordia Chiajna,Afumati,1,2,102.8,1,2,fuzzy,0.86,False
+2026-08-22 20:30,Aguilas Doradas,Millonarios,1,1,102.8,1,1,fuzzy,0.83,False
+2026-08-22 17:30,Valencia,Celta Vigo,0,0,102.8,0,0,exato,1.0,False
+2026-09-02 17:00,Ceramica Cleopatra,Modern Sport FC,2,0,102.8,2,0,fuzzy,0.96,False
+2026-08-22 17:30,Maccabi Haifa,Hapoel Ramat Gan,2,1,102.8,2,1,fuzzy,0.94,False
+2026-08-23 17:00,Verona,Ascoli,1,2,102.8,1,2,exato,1.0,False
+2026-09-05 14:00,Strommen,Bryne,2,0,102.8,2,0,exato,1.0,False
+2026-08-23 17:00,CD Castellon,Sabadell,0,0,102.8,0,0,fuzzy,0.95,False
+2026-08-22 17:30,Sturm Graz,SC Austria Lustenau,1,1,102.8,1,1,fuzzy,0.85,False
+2026-08-22 11:00,Dalian Kun City FC,Wuxi Wugou,2,1,102.8,2,1,fuzzy,0.96,False
+2026-08-23 17:00,IA Akranes,Hafnarfjordur,1,1,102.8,1,1,fuzzy,0.94,False
+2026-08-23 16:00,Septemvri,CSKA 1948 Sofia,1,0,102.9,1,0,fuzzy,0.89,False
+2026-08-23 16:00,La Serena,Cobresal,3,3,102.9,3,3,exato,1.0,False
+2026-08-23 20:15,Union Comercio,Carlos Mannucci,0,0,103.0,0,0,exato,1.0,False
+2026-09-02 10:00,Shimizu,FC Tokyo,1,1,103.0,1,1,fuzzy,0.85,False
+2026-08-27 18:30,Celta Vigo,Osasuna,1,2,103.1,1,2,exato,1.0,False
+2026-08-23 23:30,Real Tomayapo,Always Ready,1,1,103.1,1,1,fuzzy,0.9,False
+2026-08-22 22:30,Santa Cruz PE,SER Caxias do Sul,2,0,103.1,2,0,fuzzy,0.84,False
+2026-08-28 23:30,Novorizontino,Sport Recife,2,1,103.1,2,1,exato,1.0,False
+2026-08-28 23:30,Nautico PE,Athletic Club,2,1,103.1,2,1,fuzzy,0.94,False
+2026-08-25 18:00,Al-Shabab (KSA),Al Riyadh SC,3,3,103.1,3,3,fuzzy,0.87,False
+2026-08-29 16:30,Fiorentina,Frosinone,0,3,103.2,0,3,exato,1.0,False
+2026-08-19 23:30,Cuiaba,Operario PR,1,0,103.3,1,0,exato,1.0,False
+2026-08-24 17:00,Celta Vigo B,FC Andorra,3,2,103.3,4,2,fuzzy,0.94,False
+2026-09-01 17:30,KR Reykjavik,Vikingur Reykjavik,0,1,103.3,1,1,exato,1.0,False
+2026-08-17 18:30,Batman Petrolspor,Boluspor,2,0,103.3,2,0,exato,1.0,False
+2026-08-17 18:30,Samsunspor,Goztepe,3,3,103.3,3,3,exato,1.0,False
+2026-08-20 20:30,Real Santander,Barranquilla,2,2,103.3,2,2,exato,1.0,False
+2026-08-28 17:50,Dhamk,Al Orubah,0,0,103.3,0,0,fuzzy,0.8,False
+2026-09-03 22:00,Estudiantes de Merida,Universidad de Venezuela,1,1,103.3,1,1,fuzzy,0.82,False
+2026-08-19 23:30,Columbus,CF Montreal,1,2,103.3,1,2,fuzzy,0.9,False
+2026-08-22 14:00,Bromley,Cambridge Utd,1,1,103.4,1,1,exato,1.0,False
+2026-08-22 14:00,Wigan,Leyton Orient,0,2,103.4,0,2,exato,1.0,False
+2026-08-22 14:00,Stevenage,Oxford Utd,0,2,103.4,1,2,exato,1.0,False
+2026-08-22 14:00,Jaro,AC Oulu,0,1,103.4,0,1,exato,1.0,False
+2026-08-22 14:00,Crewe,Northampton,1,0,103.4,1,0,exato,1.0,False
+2026-08-22 14:00,Everton,Crystal Palace,2,0,103.4,2,0,exato,1.0,False
+2026-09-04 22:30,Criciuma,Cuiaba,2,0,103.4,2,0,exato,1.0,False
+2026-09-03 18:45,Hibernian,Hearts,1,3,103.4,1,3,exato,1.0,False
+2026-08-22 14:00,Shrewsbury,Barnet,1,3,103.4,1,3,exato,1.0,False
+2026-08-22 14:00,Derby,Cardiff,2,2,103.4,2,2,exato,1.0,False
+2026-08-23 20:30,New England Revolution,New York City,1,1,103.5,1,1,exato,1.0,False
+2026-08-23 20:30,Delfin,Aucas,0,1,103.5,0,1,exato,1.0,False
+2026-08-28 12:00,Shenzhen Peng City,Shanghai Port FC,0,1,103.5,0,1,fuzzy,0.82,False
+2026-08-23 20:30,Melgar,Alianza Lima,1,1,103.5,1,1,fuzzy,0.9,False
+2026-08-22 19:00,Empoli,US Cremonese,1,0,103.6,1,0,fuzzy,0.95,False
+2026-08-23 18:30,Goztepe,Genclerbirligi,0,1,103.6,0,1,exato,1.0,False
+2026-08-22 19:00,Giana Erminio,Albinoleffe,1,2,103.6,1,2,exato,1.0,False
+2026-08-19 11:35,Shanghai Port FC,Dalian Yingbo,1,1,103.6,1,1,fuzzy,0.96,False
+2026-09-02 16:00,Udinese,Venezia,2,2,103.6,2,1,exato,1.0,True
+2026-09-04 18:00,Pau,Sochaux,1,1,103.6,1,1,fuzzy,0.88,False
+2026-09-04 17:00,Lyon,Auxerre,3,1,103.6,3,1,exato,1.0,False
+2026-08-22 19:00,Calcio Avellino SSD,Arezzo,1,2,103.6,1,2,fuzzy,0.82,False
+2026-08-22 19:00,Magallanes,Club Deportes Santa Cruz,1,0,103.6,1,0,fuzzy,0.84,False
+2026-08-22 19:00,Lecco,Arzignanochiampo,0,0,103.6,0,0,fuzzy,0.86,False
+2026-08-23 18:30,Panaitolikos,Asteras Tripolis,3,1,103.6,3,1,fuzzy,0.93,False
+2026-08-22 19:00,Benevento,Modena,1,2,103.6,1,2,exato,1.0,False
+2026-09-02 17:00,Hapoel Be'er Sheva,Hapoel Haifa,2,1,103.6,2,2,fuzzy,0.9,False
+2026-08-26 16:00,Al Faisaly ( KSA ),Al-Fateh (KSA),1,1,103.6,1,1,fuzzy,0.84,False
+2026-08-22 03:00,Club Atletico La Paz,Cruz Azul Hidalgo,1,0,103.7,1,1,fuzzy,0.93,False
+2026-09-05 11:30,Nantong Zhiyun F.C,Guangdong GZ-Power FC,1,1,103.7,1,1,fuzzy,0.93,False
+2026-09-05 10:00,Yongin FC,Suwon FC,1,1,103.7,1,1,fuzzy,0.93,False
+2026-08-29 12:45,Orleans,La Roche-sur-Yon VF,0,1,103.8,0,1,fuzzy,0.82,False
+2026-08-27 19:00,Barcelona,Athletic Bilbao,2,0,103.8,2,0,fuzzy,0.89,False
+2026-08-29 12:45,Villefranche Beaujolais,Rouen,0,2,103.8,0,2,fuzzy,0.85,False
+2026-08-27 23:10,Llaneros FC,Millonarios,0,2,103.8,0,2,fuzzy,0.94,False
+2026-09-04 13:30,Tanta,FC Masar,0,1,103.8,0,1,fuzzy,0.92,False
+2026-08-17 23:00,Guarani,Ypiranga RS,2,2,103.9,2,2,fuzzy,0.9,False
+2026-08-29 14:00,Cambridge Utd,Huddersfield,1,2,104.0,1,2,exato,1.0,False
+2026-09-12 19:00,CD Gualberto Villarroel,Nacional Potosi,0,3,104.0,0,3,exato,1.0,False
+2026-08-29 14:00,Leyton Orient,Barnsley,1,3,104.0,1,3,exato,1.0,False
+2026-08-28 18:00,Celik Zenica,Fk Velez Mostar,3,0,104.0,3,0,fuzzy,0.96,False
+2026-09-12 19:00,Manta FC,Aucas,0,0,104.0,0,0,exato,1.0,False
+2026-08-28 18:00,Al Nassr,Al-Taawoun Buraidah,2,1,104.0,2,1,fuzzy,0.82,False
+2026-08-25 22:00,Deportivo Madryn,Godoy Cruz,2,0,104.1,2,0,exato,1.0,False
+2026-09-03 19:30,Rayo Zuliano,Carabobo FC,3,3,104.1,4,3,fuzzy,0.94,False
+2026-09-03 17:00,Al Ahly Cairo,Smouha,1,0,104.2,1,0,fuzzy,0.85,False
+2026-08-20 18:00,Crvena Zvezda,Plzen,3,0,104.2,3,0,fuzzy,0.83,False
+2026-09-05 08:00,Ramnicu-Valcea,CSM Resita,1,2,104.3,1,2,exato,1.0,False
+2026-09-03 13:30,El Mansurah,Kahraba Ismailia,1,0,104.3,2,0,fuzzy,0.93,False
+2026-09-02 17:00,Fatih Karagumruk Istanbul,Kayserispor,1,1,104.3,1,1,fuzzy,0.8,False
+2026-09-03 13:30,Haras El Hodood,El Entag El Harby,2,1,104.3,2,1,exato,1.0,False
+2026-09-04 17:30,Marumo Gallants FC,Polokwane City,2,2,104.3,2,2,fuzzy,0.88,False
+2026-09-02 18:30,Siroki Brijeg,Sarajevo,1,2,104.3,1,2,fuzzy,0.94,False
+2026-09-04 18:00,Al-Shabab (KSA),Al-Hilal,0,2,104.4,0,2,fuzzy,0.92,False
+2026-09-04 18:00,Almere City,Jong Ajax Amsterdam,0,1,104.4,0,1,fuzzy,0.82,False
+2026-09-05 09:00,FC Gifu,Kanazawa,0,1,104.4,0,1,fuzzy,0.9,False
+2026-09-04 18:00,London City Lionesses,Man Utd (W),2,0,104.4,2,1,fuzzy,0.82,False
+2026-08-17 19:15,Afturelding,HK Kopavogur,2,2,104.4,2,2,fuzzy,0.95,False
+2026-09-02 13:00,Sassuolo,Frosinone,1,1,104.5,1,1,exato,1.0,False
+2026-09-05 10:00,Ehime,Kitakyushu,3,2,104.5,4,2,fuzzy,0.86,False
+2026-09-05 10:00,Fukuoka,Mito,1,1,104.5,1,1,fuzzy,0.85,False
+2026-08-23 21:00,Antofagasta,Deportes Temuco,3,1,104.5,3,1,exato,1.0,False
+2026-08-23 03:00,Cruz Azul,Atlas,0,2,104.5,0,2,exato,1.0,False
+2026-09-05 10:00,Kagoshima Utd,FC Ryukyu,2,1,104.5,2,1,fuzzy,0.93,False
+2026-09-04 16:00,Omonia 29th May,Karmiotissa Polemidion,2,2,104.5,2,2,fuzzy,0.84,False
+2026-09-05 10:00,Cheonan City,Hwaseong FC,1,1,104.5,1,1,fuzzy,0.94,False
+2026-09-04 13:30,El Daklyeh,Pharco FC,0,0,104.6,0,0,fuzzy,0.93,False
+2026-09-05 18:00,Cerrito,Paysandu FC,1,2,104.6,1,2,exato,1.0,False
+2026-08-22 15:00,Athletic Bilbao,Sevilla,1,3,104.6,1,3,fuzzy,0.89,False
+2026-08-22 15:00,Oviedo,Leganes,0,1,104.6,0,1,exato,1.0,False
+2026-09-02 10:00,Cerezo Osaka,Kashiwa,2,0,104.6,2,0,fuzzy,0.85,False
+2026-09-01 18:00,Al-Hilal,Al Ahli,3,0,104.6,3,0,fuzzy,0.93,False
+2026-09-02 10:00,Yokohama FM,Kyoto,1,1,104.6,1,1,fuzzy,0.88,False
+2026-09-02 10:00,Jef Utd Chiba,Okayama,1,1,104.6,1,2,fuzzy,0.81,False
+2026-08-25 22:30,Juventude,CRB,2,1,104.7,2,1,exato,1.0,False
+2026-08-23 21:05,Deportivo Pasto,Llaneros FC,0,1,104.7,0,1,fuzzy,0.81,False
+2026-08-22 10:00,Tochigi SC,Kitakyushu,2,2,104.8,2,2,fuzzy,0.86,False
+2026-08-22 10:00,Tegevajaro Miyazaki,Shonan,0,0,104.8,0,0,fuzzy,0.8,False
+2026-08-22 10:00,Albirex Niigata,Fujieda Myfc,1,0,104.8,1,0,exato,1.0,False
+2026-08-17 19:30,Almeria,Eldense,3,0,104.8,3,0,exato,1.0,False
+2026-08-22 13:30,Luneburg,Werder Bremen,0,3,104.8,0,3,fuzzy,0.85,False
+2026-08-22 10:00,Kyoto,Mito,1,3,104.8,1,3,exato,1.0,False
+2026-09-02 21:30,Deportivo Cuenca,Guayaquil City,1,0,104.9,1,0,fuzzy,0.88,False
+2026-09-03 17:30,Hapoel Tel Aviv,Beitar Jerusalem,3,0,104.9,3,0,exato,1.0,False
+2026-09-03 23:00,Nautico PE,Botafogo SP,1,0,104.9,1,0,fuzzy,0.94,False
+2026-09-02 22:00,Coquimbo Unido,Univ de Concepcion,1,0,104.9,1,0,fuzzy,0.83,False
+2026-09-02 22:30,Flamengo,Mirassol,2,0,104.9,2,0,fuzzy,0.94,False
+2026-09-02 18:00,Bohemians 1905,FK Jablonec,1,1,105.0,1,1,fuzzy,0.85,False
+2026-09-03 18:30,Lech Poznan,Jagiellonia Bialystock,2,1,105.0,2,1,fuzzy,0.84,False
+2026-09-04 23:30,New York City,Nashville SC,0,0,105.0,0,0,exato,1.0,False
+2026-09-03 19:00,Univ Catolica (Ecu),Aucas,1,1,105.0,1,1,fuzzy,0.88,False
+2026-09-04 22:00,CSD Rangers,Deportes Temuco,1,0,105.0,1,0,fuzzy,0.91,False
+2026-08-22 23:30,Charlotte FC,DC Utd,3,1,105.1,3,1,fuzzy,0.83,False
+2026-08-22 23:30,FC Cincinnati,Seattle Sounders,1,1,105.1,1,1,exato,1.0,False
+2026-08-21 17:00,Abo Qair Semads,National Bank,1,0,105.1,1,0,fuzzy,0.83,False
+2026-08-26 10:30,FC Anyang,Incheon Utd,2,1,105.1,2,1,fuzzy,0.84,False
+2026-08-23 19:00,Vojvodina,Zeleznicar Pancevo,1,0,105.2,1,0,exato,1.0,False
+2026-08-22 19:30,Sporting Lisbon,Alverca,3,1,105.2,3,1,fuzzy,0.83,False
+2026-08-23 19:00,Maringa,Barra FC,2,1,105.2,2,1,fuzzy,0.94,False
+2026-08-23 19:00,Universidad de Chile,Colo Colo,1,2,105.2,1,2,fuzzy,0.81,False
+2026-08-23 19:00,Brusque FC,Amazonas FC,1,1,105.2,1,1,fuzzy,0.88,False
+2026-08-23 19:00,CA Temperley,FC Midland,2,1,105.2,2,1,fuzzy,0.89,False
+2026-09-04 19:15,Porto,Moreirense,2,1,105.3,2,1,fuzzy,0.92,False
+2026-08-21 14:00,Wadi Degla,ZED FC,0,0,105.3,0,0,fuzzy,0.88,False
+2026-08-20 18:30,Panathinaikos,Hradec Kralove,2,1,105.3,2,2,fuzzy,0.9,False
+2026-09-04 20:15,Alianza Atletico,UTC Cajamarca,3,2,105.3,3,2,fuzzy,0.83,False
+2026-08-29 10:00,Portimonense,Leixoes,0,2,105.4,0,2,exato,1.0,False
+2026-08-26 18:30,Patronato,CA Atlanta,2,0,105.4,2,0,fuzzy,0.83,False
+2026-08-22 23:40,Inter Miami CF,Toronto FC,1,2,105.4,1,2,fuzzy,0.95,False
+2026-08-23 21:30,Santos,Mirassol,1,1,105.4,1,1,exato,1.0,False
+2026-08-29 13:30,RB Leipzig,Mgladbach,3,0,105.4,3,0,fuzzy,0.86,False
+2026-08-29 10:00,Yokohama FC,Tosu,2,2,105.4,2,2,fuzzy,0.81,False
+2026-08-23 21:30,Nacional (Uru),Progreso,1,0,105.4,1,0,fuzzy,0.92,False
+2026-08-24 18:00,Al-Ittihad,Al-Hazm (KSA),3,2,105.5,3,2,fuzzy,0.88,False
+2026-08-23 16:30,Club Brugge,Cercle Brugge,1,0,105.7,1,0,fuzzy,0.9,False
+2026-08-23 16:30,Frosinone,Juventus,0,1,105.7,0,1,exato,1.0,False
+2026-08-28 11:35,Shanghai Shenhua,Shandong Taishan,2,3,105.8,2,3,exato,1.0,False
+2026-08-21 16:00,Waldhof Mannheim,Kaiserslautern,0,0,105.8,0,1,fuzzy,0.85,False
+2026-08-29 17:00,Sampdoria,Juve Stabia,1,2,105.9,1,2,exato,1.0,False
+2026-08-29 17:00,Boston River,Cerro,1,1,105.9,1,1,fuzzy,0.92,False
+2026-08-29 16:00,Trencin,Ruzomberok,2,1,105.9,2,1,exato,1.0,False
+2026-08-29 17:00,Academico de Viseu,Porto,0,3,105.9,0,3,fuzzy,0.88,False
+2026-08-22 21:30,Internacional,Atletico MG,0,0,105.9,0,0,exato,1.0,False
+2026-09-01 14:00,El Geish,ZED FC,0,1,105.9,0,1,fuzzy,0.8,False
+2026-09-01 14:00,Ghazl El Mahallah,ENPPI,0,0,105.9,0,0,exato,1.0,False
+2026-08-23 14:45,VVV Venlo,De Graafschap,2,1,105.9,2,1,fuzzy,0.88,False
+2026-08-23 14:00,El Gounah,Modern Sport FC,0,1,106.0,1,1,fuzzy,0.93,False
+2026-08-28 18:45,Aldershot,Harrogate Town,3,1,106.1,3,1,fuzzy,0.91,False
+2026-09-01 18:45,Accrington,Grimsby,2,2,106.1,2,2,exato,1.0,False
+2026-08-28 18:45,Tamworth FC,Worthing,2,2,106.1,3,2,fuzzy,0.94,False
+2026-08-29 09:00,Mito,FC Machida,1,1,106.2,1,1,fuzzy,0.94,False
+2026-08-20 19:00,Rayo Vallecano,Alaves,1,1,106.3,1,1,exato,1.0,False
+2026-08-24 18:30,Livorno,Sassari Torres,2,1,106.4,2,1,fuzzy,0.82,False
+2026-09-01 19:00,Torino,AC Monza,0,1,106.4,0,1,fuzzy,0.92,False
+2026-08-29 16:05,Al-Kholood Club,Al Ahli,3,1,106.5,3,1,fuzzy,0.84,False
+2026-08-22 20:00,Volta Redonda,Floresta EC,1,2,106.7,1,2,exato,1.0,False
+2026-08-23 22:30,Coritiba,Corinthians,2,1,106.9,2,1,exato,1.0,False
+2026-08-23 10:30,Cheongju FC,Gyeongnam,1,1,106.9,1,1,fuzzy,0.94,False
+2026-08-26 17:00,National Bank,Zamalek,0,2,106.9,0,3,fuzzy,0.91,False
+2026-08-22 12:00,Beijing Guoan,Yunnan Yukun,3,3,107.0,3,3,exato,1.0,False
+2026-08-22 18:30,Patronato,Gimnasia Jujuy,3,3,107.2,3,3,exato,1.0,False
+2026-08-23 15:00,Atletico Madrid,Villarreal,2,2,107.3,2,2,fuzzy,0.89,False
+2026-08-24 19:00,Salernitana,Sorrento,1,2,107.3,1,2,exato,1.0,False
+2026-08-27 18:00,St Gallen,FC Nordsjaelland,2,3,107.3,2,3,fuzzy,0.84,False
+2026-08-17 18:00,FC Liege,Francs Borains,1,2,107.6,0,0,fuzzy,0.97,True
+2026-08-29 12:00,Verl,Fortuna Koln,1,2,107.7,1,2,exato,1.0,False
+2026-08-28 13:30,Al Nasr Cairo,Haras El Hodood,0,0,107.7,0,0,fuzzy,0.85,False
+2026-08-21 13:30,Dayrout,Maleyeit Kafr El Zayiat,0,2,107.7,0,2,exato,1.0,False
+2026-08-28 13:30,FC Masar,Dayrout,3,0,107.7,4,0,fuzzy,0.92,False
+2026-08-22 11:30,Kidderminster,Aldershot,1,1,108.0,1,1,exato,1.0,False
+2026-08-22 11:30,Luton,Notts Co,2,2,108.0,2,2,fuzzy,0.89,False
+2026-08-23 17:00,Al Ahly Cairo,ENPPI,3,2,108.2,3,2,fuzzy,0.85,False
+2026-08-25 18:00,Al-Ettifaq,Al Nassr,2,3,108.4,2,3,exato,1.0,False
+2026-08-24 17:00,Farense,Felgueiras,1,1,108.5,1,1,fuzzy,0.94,False
+2026-08-21 17:50,Al-Wahda (KSA),Al-Adalh,1,1,108.5,1,1,fuzzy,0.82,False
+2026-08-19 23:40,Toronto FC,Charlotte FC,3,3,108.6,3,3,fuzzy,0.95,False
+2026-08-27 23:00,Internacional,Gremio,0,0,108.7,0,0,exato,1.0,False
+2026-08-19 19:00,Atletico Madrid,Malaga,2,0,108.8,2,0,fuzzy,0.89,False
+2026-08-22 19:00,Pescara,Pesaro,2,0,108.9,2,0,fuzzy,0.9,False
+2026-08-23 10:00,Kochi United,Kamatamare Sanuki,2,1,109.0,2,1,fuzzy,0.88,False
+2026-08-22 14:00,Port Vale,Tranmere,1,1,109.1,1,1,exato,1.0,False
+2026-08-17 19:00,Cardiff,Wrexham,1,1,109.2,1,1,exato,1.0,False
+2026-08-28 20:30,Mushuc Runa,Delfin,1,0,109.3,1,0,exato,1.0,False
+2026-08-20 18:00,Vikingur Reykjavik,Borac Banja Luka,1,3,109.4,1,3,fuzzy,0.91,False
+2026-08-17 19:15,Palermo,Lecce,2,0,109.5,2,0,exato,1.0,False
+2026-08-22 03:10,Queretaro,Toluca,1,2,109.6,1,2,exato,1.0,False
+2026-08-29 14:00,Walsall,Accrington,3,2,109.7,3,2,exato,1.0,False
+2026-08-20 13:30,La Viena FC,Kahraba Ismailia,1,1,110.1,1,1,fuzzy,0.92,False
+2026-08-22 23:30,Orlando City,Real Salt Lake,2,1,110.2,2,1,exato,1.0,False
+2026-08-22 23:30,CF Montreal,LA Galaxy,2,2,110.2,2,2,fuzzy,0.83,False
+2026-09-02 17:00,Abo Qair Semads,Al Ittihad (EGY),0,2,110.2,0,2,fuzzy,0.85,False
+2026-09-03 13:30,La Viena FC,Team FC,0,1,110.2,0,1,fuzzy,0.94,False
+2026-09-04 22:00,Belgrano,CA Huracan,1,1,110.3,1,1,fuzzy,0.94,False
+2026-09-04 19:00,Betis,Real Madrid,1,0,110.3,1,0,exato,1.0,False
+2026-09-02 23:00,Charleston Battery,Hartford Athletic FC,1,1,110.3,1,2,fuzzy,0.84,False
+2026-08-29 10:30,Gimpo Citizen,Suwon Bluewings,1,3,110.4,1,4,fuzzy,0.82,False
+2026-09-05 16:00,Brann,Lillestrom,1,2,110.4,1,2,exato,1.0,False
+2026-09-12 19:00,Brown de Adrogue,San Martin de Burzaco,0,2,110.6,0,2,exato,1.0,False
+2026-08-28 14:00,ENPPI,Wadi Degla,1,3,110.9,1,3,exato,1.0,False
+2026-08-18 03:00,Pachuca,Puebla,2,3,112.1,2,3,exato,1.0,False
+2026-08-16 23:00,North Carolina (W),Houston Dash (W),2,3,112.2,2,3,fuzzy,0.9,False
+2026-08-23 23:00,Atlanta Utd,Kansas City,2,1,112.6,2,1,fuzzy,0.86,False
+2026-08-19 23:30,New York Red Bulls,Nashville SC,0,1,113.5,0,1,exato,1.0,False
+2026-08-19 23:40,Philadelphia,Inter Miami CF,2,2,113.69999999999999,2,2,fuzzy,0.87,False
+2026-08-22 03:00,FC Juarez,CF America,1,2,114.30000000000001,1,2,fuzzy,0.83,False
+2026-09-02 23:00,CA Colegiales,FC Midland,2,0,115.30000000000001,3,0,fuzzy,0.89,False
+2026-09-05 15:30,Vasteras SK,Sirius,0,1,115.4,0,1,exato,1.0,False
+2026-09-12 18:45,Lorient,Toulouse,2,2,115.6,2,2,exato,1.0,False
+2026-08-21 18:00,Acassuso,Godoy Cruz,0,0,119.4,0,1,exato,1.0,False
+2026-08-17 03:00,Tijuana,Cruz Azul,2,1,120.5,2,1,fuzzy,0.89,False
+2026-08-28 19:00,Sportivo Luqueno,Rubio Nu,1,1,122.1,2,1,fuzzy,0.88,False
+2026-08-22 15:30,Piast Gliwice,Legia Warsaw,0,1,124.6,1,1,fuzzy,0.81,False
+2026-08-20 18:45,Bastia,Versailles 78 FC,1,1,126.4,2,3,fuzzy,0.92,False
+2026-08-24 22:30,Sport Recife,America MG,3,0,126.80000000000001,3,0,exato,1.0,False
+2026-08-21 13:30,Ismaily,FC Masar,0,1,129.6,1,3,fuzzy,0.85,False
+2026-08-28 13:30,Pharco FC,El Mansurah,2,0,129.6,2,0,fuzzy,0.88,False
+2026-09-04 10:00,FC Kolos Kovalivka 2,Lokomotiv Kiev,0,0,130.2,1,0,fuzzy,0.81,False
+2026-09-04 15:00,Polissya Zhytomyr,FK Kudrivka,2,1,130.2,5,1,fuzzy,0.94,False
+2026-08-22 23:10,Santa Fe,America de Cali S.A,0,0,130.2,0,0,fuzzy,0.96,False
+2026-08-29 12:30,Livyi Bereg Kyiv,Karpaty,1,0,130.7,1,1,fuzzy,0.81,False
+2026-08-28 18:45,Holywell Town,Caernarfon Town,1,2,131.9,3,5,fuzzy,0.82,False
+2026-08-16 23:15,Barracas Central,Rosario Central,0,1,132.9,0,1,exato,1.0,False
+2026-08-19 23:40,Orlando City,Chicago Fire,1,1,134.1,1,2,exato,1.0,False
+2026-08-28 20:00,Comerciantes Unidos,FC Cajamarca,1,1,134.2,2,3,exato,1.0,False
