@@ -325,6 +325,69 @@ def _linha(nome, rows, largura=6):
     return "%-*s %3d  %3dG/%2dR %s  %+7.2fu%s" % (largura, nome, n, g, r, wr, pnl, p)
 
 
+def _cfg():
+    import json
+    p = os.path.join(ROOT, "banca_config.json")
+    try:
+        return json.load(open(p, encoding="utf-8"))
+    except Exception:
+        return dict(banca_rs=2500.0, liability_rs=50.0, n_min_escalar=100, metodos_com_dinheiro=[])
+
+
+def _boot_dia(v, dias, B=10000):
+    mm = {k: v[dias == k] for k in pd.unique(dias)}; ks = list(mm)
+    if len(ks) < 6: return np.nan, np.nan, len(ks)
+    rng = np.random.default_rng(11); r = np.empty(B)
+    for i in range(B): r[i] = np.concatenate([mm[ks[j]] for j in rng.integers(0, len(ks), len(ks))]).mean()
+    return np.percentile(r, 2.5), np.percentile(r, 97.5), len(ks)
+
+
+def _ledger_0x0():
+    """Forward ao vivo do Lay 0x0 (DASHBOARD/forward_0x0/ledger_forward_0x0.csv), no mesmo formato."""
+    p = os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "forward_0x0", "ledger_forward_0x0.csv")
+    if not os.path.exists(p): return []
+    d = pd.read_csv(p, encoding="utf-8-sig")
+    d = d[(d["status"] == "LIQUIDADO") & (pd.to_numeric(d["na_regra"], errors="coerce") == 1)]
+    return [dict(Data=r["Data"], Metodo="Lay 0x0 XGB", status="LIQUIDADO",
+                 resultado="GREEN" if int(float(r["target"])) == 1 else "RED",
+                 pnl_u=float(r["pnl_liab"]), break_even=float(r["break_even"])) for _, r in d.iterrows()]
+
+
+def bloco_gestao(rows):
+    """Gestao com dinheiro real: por metodo, P&L em R$ na liability configurada, IC95 (bloco-dia),
+    drawdown e o gatilho de escala. Regra: ESCALAR so com piso do IC95 > 0 e N >= n_min; REDUZIR se
+    o teto do IC95 < 0; MANTER no resto."""
+    c = _cfg(); liab = float(c["liability_rs"]); banca = float(c["banca_rs"]); nmin = int(c["n_min_escalar"])
+    todos = [r for r in rows if r["status"] == "LIQUIDADO"] + _ledger_0x0()
+    out = ["", "<b>GESTÃO — banca R$%.0f · liability R$%.0f por aposta</b>" % (banca, liab), "<pre>"]
+    out.append("%-6s %4s %6s %8s %-16s %s" % ("método", "N", "WR-BE", "R$ acum", "IC95 ROI", "gatilho"))
+    for m in ORDEM + ["Lay 0x0 XGB"]:
+        g = [r for r in todos if r["Metodo"] == m]
+        if not g: continue
+        v = np.array([float(r["pnl_u"]) for r in g]); dias = np.array([r["Data"] for r in g])
+        wr = np.mean([r["resultado"] == "GREEN" for r in g]); be = np.mean([float(r["break_even"]) for r in g])
+        lo, hi, nk = _boot_dia(v, dias)
+        if np.isfinite(hi) and hi < 0: gat = "REDUZIR"
+        elif np.isfinite(lo) and lo > 0 and len(g) >= nmin: gat = "ESCALAR"
+        elif not np.isfinite(lo): gat = "manter (%dd)" % nk
+        else: gat = "manter"
+        ic = ("[%+.1f,%+.1f]" % (100 * lo, 100 * hi)) if np.isfinite(lo) else "IC indef."
+        dinheiro = "$" if m in c.get("metodos_com_dinheiro", []) else " "
+        out.append("%-5s%s %4d %+5.1fpp %+8.0f %-16s %s" % (CURTO.get(m, "0x0"), dinheiro, len(g), 100 * (wr - be), v.sum() * liab, ic, gat))
+    # drawdown do portfolio (todos os metodos, por dia)
+    df = pd.DataFrame(todos)
+    if len(df):
+        df["pnl_u"] = pd.to_numeric(df["pnl_u"], errors="coerce")   # ledger vem como texto
+        s = df.groupby("Data")["pnl_u"].sum().sort_index().cumsum() * liab
+        pico = s.cummax(); dd = (s - pico); mdd = dd.min(); dd_atual = dd.iloc[-1]
+        pior_dia = (df.groupby("Data")["pnl_u"].sum() * liab).min()
+        out.append("-" * 50)
+        out.append("acumulado R$%+.0f | pico R$%+.0f | drawdown atual R$%.0f | máx R$%.0f" % (s.iloc[-1], pico.iloc[-1], dd_atual, mdd))
+        out.append("pior dia R$%.0f | banca aguenta %.0f dias como o pior" % (pior_dia, banca / abs(pior_dia) if pior_dia < 0 else 999))
+    out += ["</pre>", "<i>$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥%d.</i>" % nmin]
+    return out
+
+
 def montar_mensagem(L, hoje, rotulo="HOJE"):
     """Mensagem em HTML do Telegram (<b>, <i>, <pre>). `hoje` e o DIA DE REFERENCIA do relatorio
     (na rodada das 6h e o dia anterior, com todos os placares oficiais ja liquidados)."""
@@ -383,6 +446,7 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
             tag = "%+6.2fu" % pnl if n else "   --  "
             linhas.append("%s  %2d  %2dG/%2dR  %s%s" % (d[8:10] + "/" + d[5:7], n + pend, g, r_, tag, " *" if pend else ""))
         linhas.append("</pre>")
+    linhas += bloco_gestao(rows)
     n, g, r_, pnl, pend = _agg(rows)
     semp = sum(1 for r in rows if r["status"] == "SEM_PLACAR")
     if semp:

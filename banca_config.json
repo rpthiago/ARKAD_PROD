@@ -1,0 +1,8 @@
+{
+  "_doc": "Gestao do forward com dinheiro real. Edite banca e liability; o relatorio das 06:00 le daqui. Regra de escala: so sobe quando o piso do IC95 do metodo passa de zero (com N minimo e >=6 dias); desce se o teto cruzar zero.",
+  "banca_rs": 2500.0,
+  "liability_rs": 50.0,
+  "n_min_escalar": 100,
+  "metodos_com_dinheiro": ["Lay Draw (Fav<=1.40)", "Lay 0x0 XGB"],
+  "atualizado_em": "2026-09-12"
+}
