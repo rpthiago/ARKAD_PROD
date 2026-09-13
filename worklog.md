@@ -7,6 +7,16 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-13 · Antigravity · Estudo TOP 3 Menor Odd em Lay Home e Lay Draw (2026 Completo)
+
+- **Pergunta do usuário:** Avaliar se aplicar ranking diário TOP 3 por menor odd de lay (com desempate por horário) melhora o desempenho de Lay Home e Lay Draw no ano de 2026 completo, espelhando o estudo feito em Lay 2x2 e Lay 0x3.
+- **Achados empíricos (N=1.520 jogos em 2026 unificando FRESH3 + Sinais Aprovados):**
+  - **Lay Draw (Super Fav):** O TOP 3 por menor odd **deteriora o resultado**. No mercado de Match Odds, odd menor de empate seleciona partidas com menor expectativa de gols onde o empate é mais provável (a taxa de empates sobe de 14,19% para 15,80%). O ROI/liab cai de **+0,10%** (Todos, N=1.022) para **−0,48%** (TOP 3, N=500), virando o edge para negativo (−0,4 pp).
+  - **Lay Home (Fav Visitante):** Ambos permanecem positivos, mas a regra base ampla com todos os jogos entrega mais que o dobro de lucro líquido (+R$ 678,25 vs +R$ 321,31 sob liab R$100) com edge superior (+1,2 pp vs +0,9 pp).
+- **Decisão do usuário:** Decidido por unanimidade **não mexer**, mantendo as regras base amplas sem cortes artificiais de TOP 3 no 1X2.
+
+---
+
 ## 2026-09-12 · Claude · REVERSAO (decisao do Thiago: opcao A)
 
 Revertido tudo o que alterei nos arquivos do usuario: mestre (voltou a +12,89u, sem colunas
