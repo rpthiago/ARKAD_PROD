@@ -88,7 +88,7 @@ def nomes_do_coletor(home, away):
         return {}
     awk = r'BEGIN{FS=","} $4==h && $5==a {print $2"|"$9"|"$8}'
     try:
-        out = subprocess.run("tail -300000 %s | awk -v h=%s -v a=%s '%s'" % (csvp, json.dumps(home), json.dumps(away), awk),
+        out = subprocess.run("tail -1500000 %s | awk -v h=%s -v a=%s '%s'" % (csvp, json.dumps(home), json.dumps(away), awk),
                              shell=True, capture_output=True, text=True, timeout=60).stdout
     except Exception:
         return {}
@@ -105,9 +105,13 @@ def ingerir_mapa(reg, trading=None):
     if not os.path.exists(MAPA):
         return 0
     try:
+        if os.path.getsize(MAPA) == 0:
+            return 0                      # o coletor esta reescrevendo o mapa neste instante
         m = pd.read_csv(MAPA, dtype=str).fillna("")
     except Exception as e:
-        log("[mapa] erro: %s" % str(e)[:60]); return 0
+        if "No columns" not in str(e):
+            log("[mapa] erro: %s" % str(e)[:60])
+        return 0
     novos = 0
     for _, r in m.iterrows():
         if r["market_type"] not in TIPOS or not r["ko"]:
@@ -141,11 +145,31 @@ def gravar(row):
         w.writerow({c: row.get(c, "") for c in COLS})
 
 
-def _winner(book, nomes):
-    """Nome do runner WINNER de um book CLOSED (ou '' se nao houver)."""
+RUNNER_IDS = os.path.join(ROOT, "runner_ids.json")   # (market_type|selection_id) -> nome; ids sao fixos na Betfair
+
+
+def _mapa_global():
+    try:
+        return json.load(open(RUNNER_IDS, encoding="utf-8"))
+    except Exception:
+        return {}
+
+
+_GLOBAL = None
+
+
+def _winner(book, nomes, mtype=""):
+    """Nome do runner WINNER de um book CLOSED (ou '' se nao houver).
+    Ordem: nomes cacheados do jogo -> mapa global por tipo (CS/O-U/BTTS/HT tem id fixo; 58805 = The
+    Draw) -> 'id:N' (so o Match Odds de time sem cache cai aqui)."""
+    global _GLOBAL
+    if _GLOBAL is None:
+        _GLOBAL = _mapa_global()
     for r in (book.runners or []):
         if getattr(r, "status", "") == "WINNER":
-            return nomes.get(str(r.selection_id)) or ("id:%s" % r.selection_id)
+            sid = str(r.selection_id)
+            return (nomes.get(sid) or _GLOBAL.get("%s|%s" % (mtype, sid))
+                    or ("The Draw" if sid == "58805" else "id:%s" % sid))
     return ""
 
 
@@ -169,13 +193,20 @@ def passar_liquidacao(trading, reg, gravados):
             if t in TIPOS:
                 ids.append((k, t, mid))
     books = {}
+    falhas = 0
     for i in range(0, len(ids), 25):
         chunk = [mid for _, _, mid in ids[i:i + 25]]
         try:
             for b in trading.betting.list_market_book(market_ids=chunk):
                 books[b.market_id] = b
         except Exception as ex:
-            log("[book] erro no lote: %s" % str(ex)[:70])
+            falhas += 1
+            txt = " ".join(str(ex).split())
+            if falhas <= 2:
+                log("[book] erro no lote: %s" % txt[:300])
+            if "SESSION" in txt.upper() or "INVALID" in txt.upper() or falhas >= 3:
+                # sessao morta (ou algo sistemico): nao adianta insistir nos outros lotes
+                raise RuntimeError("SESSION_DEAD: " + txt[:120])
         time.sleep(0.4)
     liq = desist = 0
     for k, e, ko in alvo:
@@ -205,7 +236,7 @@ def passar_liquidacao(trading, reg, gravados):
                     nomes[mid] = pt[t]
         def win(t):
             mid = mids.get(t); b = books.get(mid) if mid else None
-            return _winner(b, nomes.get(mid, {})) if (b is not None and getattr(b, "status", "") == "CLOSED") else ""
+            return _winner(b, nomes.get(mid, {}), t) if (b is not None and getattr(b, "status", "") == "CLOSED") else ""
         cs = win("CORRECT_SCORE")
         mm = RE_CS.match(cs or "")
         row = dict(settled_ts=agora.strftime("%Y-%m-%d %H:%M"), ko=e["ko"], home=e["home"], away=e["away"],
@@ -237,14 +268,18 @@ def main():
     while True:
         t0 = time.time()
         try:
+            try:
+                trading.keep_alive()          # sessao da Betfair expira sem isso
+            except Exception as ex:
+                log("keep_alive falhou (%s) -> re-login" % str(ex)[:60]); trading = C.login()
             n = ingerir_mapa(reg, trading)
             liq, des = passar_liquidacao(trading, reg, gravados)
             salvar_registro(reg)
             pend = sum(1 for e in reg.values() if e.get("status") == "PENDENTE")
             log("[passagem] mapa +%d mercados | liquidados %d | desistidos %d | pendentes %d" % (n, liq, des, pend))
         except Exception as ex:
-            log("[erro] %s" % str(ex)[:120])
-            if "SESSION" in str(ex).upper():
+            log("[erro] %s" % str(ex)[:160])
+            if "SESSION" in str(ex).upper() or "INVALID" in str(ex).upper():
                 try: trading = C.login(); log("re-login ok")
                 except Exception as ex2: log("re-login falhou: %s" % str(ex2)[:80])
         if a.once:
