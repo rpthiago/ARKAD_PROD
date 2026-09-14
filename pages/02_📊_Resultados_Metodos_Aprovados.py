@@ -219,7 +219,13 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
 
         # Dedup inteligente mantendo a versão mais recente
         if not df_all.empty and "Jogo" in df_all.columns:
-            df_all = df_all.drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last").reset_index(drop=True)
+            # a linha COM resultado vence a linha sem (planilha do dia vazia x ledger liquidado)
+            _res = df_all.get("Resultado", pd.Series("", index=df_all.index)).astype(str).str.upper()
+            _plc = df_all.get("Placar", pd.Series("", index=df_all.index)).astype(str).str.strip()
+            df_all["_tem_res"] = (_res.isin(["GREEN", "RED"]) | _plc.str.match(r"^\d+\s*[x\-]\s*\d+$", na=False)).astype(int)
+            df_all = (df_all.sort_values("_tem_res", kind="stable")
+                            .drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last")
+                            .drop(columns="_tem_res").reset_index(drop=True))
             
     if df_all.empty:
         files = sorted(FOLDER.rglob("*.xlsx"))
@@ -324,6 +330,8 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
             return "🔴 RED"
         elif "FORA_DA_FAIXA" in res or "FORA_DA_FAIXA" in st_txt:
             return "⚪ FORA_DA_FAIXA"
+        elif st_txt in ("ADIADO", "DUPLICADO", "SEM_PLACAR") or res in ("ADIADO", "DUPLICADO", "SEM_PLACAR"):
+            return "⚪ " + (st_txt if st_txt in ("ADIADO", "DUPLICADO", "SEM_PLACAR") else res)   # fora da conta: nao e pendente
         elif "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
             return "⚪ SKIP"
             
