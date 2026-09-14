@@ -13,7 +13,7 @@ import numpy as np
 import pandas as pd
 
 # Ligas com histórico de desequilíbrio, alta taxa de 2x2 ou agrupamento de reds
-BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND', 'NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']
+BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND']
 
 def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """

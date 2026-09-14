@@ -94,13 +94,13 @@
 - [x] Forward gap 21/08→02/09 reconstruído com placar real (odd lay real).
 - [x] CLV framework construído (métrica-mãe) + picks diários do 0x0 no Telegram.
 - [x] worklog.md + tasks.md criados (coordenação Claude↔Antigravity).
-- [x] PRD_SISTEMA_ARKAD.md consolidado: especificação técnica do SaaS, 5 métodos nucleares + 2 zebras, protocolo "Verification Before Completion".
-- [x] Blacklist de Ligas Implementada: NETHERLANDS 1 e SWEDEN 1 banidas de todos os módulos (evitou 8 reds, +4,90u / R$ 654 salvos em Ago/Set; WR histórico cronicamente abaixo do break-even).
-- [x] Integração de Lay 0x2 Zebra e Lay 2x0 Zebra com Micro-Liability (R$ 25 a R$ 50) nos scanners, relatórios diários e painel de resultados.
-- [x] Simulação Financeira de Agosto e Setembro (561 jogos, +11,67u raw, +14,84u sem Holanda/Suécia, retorno de +95% a +128% da banca com gestão de 5% de liability).
+- [x] PRD_SISTEMA_ARKAD.md consolidado (v2.1.0): especificação técnica do SaaS, 5 métodos nucleares oficiais, zebras em quarentena stake-zero, protocolo "Verification Before Completion".
+- [x] Conciliação do Ledger Oficial (`forward_5metodos_ledger.csv`): 828 liquidados (636 nos 5 métodos oficiais, +9,79u de lucro; +10,53u total). Fonte única da verdade.
+- [x] Integridade do Forward Preservada: Reversão da exclusão de ligas no coletor (`relatorio_forward_5metodos.py`) e scanners para proteger a regra base congelada de 270+ jogos.
 
 ## ☠️ ARQUIVADO — testado e MORTO (não re-testar; ver Hall of Shame)
 
+- [x] **Blacklist Ad-Hoc de Ligas (Holanda 1 / Suécia 1)** (Auditada por Claude: teste de permutação 5.000 iterações entre 65 ligas dá mediana +4,16u e P(>=obs) = 0,49. Em qualquer amostra, as 2 piores concentram reds por variância pura. No histórico de 3.326 jogos, 22 de 39 operaram abaixo do BE e ambas foram positivas em 2024. Arquivado como Garden of Forking Paths / Data Dredging).
 - [x] **Constantes de odds** (busca exaustiva 3.722 combos, 0 sobrevivem OOS — beco estrutural).
 - [x] **K_edge / Cross-Market Index** (= C4 reciclado; bootstrap p=0,24; garimpo).
 - [x] **Dutching de Correct Score** (−10,2% mediana, 97% dos jogos — paga k spreads).

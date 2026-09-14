@@ -48,8 +48,6 @@ except Exception:
     except Exception:
         avaliar_jogos_lay_2x2_grade = None
 
-# Ligas bloqueadas por auditoria forense (excesso de empates e instabilidade defensiva)
-BLACKLIST_LIGAS_PORTFOLIO = ['NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']
 
 # Estilização visual moderna
 st.markdown("""
@@ -126,7 +124,6 @@ st.sidebar.markdown("""
 * 🟡 **Lay 2x0 Zebra (Micro-Liability)** (WR 97.6% | ROI +2.6% | R$ 25-50 fixo)
 """)
 st.sidebar.info("💡 **Micro-Liability & Circuit Breaker:** Para os métodos de Zebra (0x2 e 2x0), a liability por entrada é travada entre R$ 25 e R$ 50 para proteção patrimonial. Se ocorrerem 3 reds em 40 jogos, o método é pausado automaticamente.")
-st.sidebar.warning("🚫 **Ligas Bloqueadas no Radar:** Holanda 1 (Eredivisie) e Suécia 1 (Allsvenskan) estão bloqueadas para proteção patrimonial contra variância.")
 
 # ── Tabs Principais ──
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -211,9 +208,6 @@ with tab1:
         try:
             res_0x3 = avaliar_jogos_lay_0x3_grade(df, top_n=3)
             for s in res_0x3:
-                l_s = str(s.get("league", "")).upper()
-                if any(b in l_s for b in BLACKLIST_LIGAS_PORTFOLIO):
-                    continue
                 sinais.append({
                     "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
                     "Home": s["home"], "Away": s["away"], "Método": "Lay 0x3 Top 3 (Aprovado)",
@@ -228,9 +222,6 @@ with tab1:
         try:
             res_2x2 = avaliar_jogos_lay_2x2_grade(df, top_n=3)
             for s in res_2x2:
-                l_s = str(s.get("league", "")).upper()
-                if any(b in l_s for b in BLACKLIST_LIGAS_PORTFOLIO):
-                    continue
                 sinais.append({
                     "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
                     "Home": s["home"], "Away": s["away"], "Método": "Lay 2x2 Top 3 (Aprovado)",
@@ -243,14 +234,10 @@ with tab1:
         
         for _, r in df.iterrows():
             i = r.name
-            liga = str(r.get("League", "N/A"))
-            liga_upper = liga.upper()
-            if any(b in liga_upper for b in BLACKLIST_LIGAS_PORTFOLIO):
-                continue
-                
             h, a = str(r["Home"]), str(r["Away"])
             jogo = f"{h} x {a}"
             hora = str(r.get("Time", "15:00"))[:5]
+            liga = str(r.get("League", "N/A"))
             
             # 1. Lay 0x1 Super Favorito Mandante (Odd_H_Back <= 1.90 | 5.0 <= Lay 0x1 <= 15.0)
             if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.90 and pd.notna(l01.get(i)) and 5.0 <= l01[i] <= 15.0:

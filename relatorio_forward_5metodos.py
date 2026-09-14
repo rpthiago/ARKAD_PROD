@@ -100,9 +100,6 @@ def sinais_do_dia(ds):
     out = []
 
     def add(metodo, r, odd, fav):
-        liga_s = str(r.get("League", "")).upper()
-        if any(b in liga_s for b in ["NETHERLANDS 1", "EREDIVISIE", "SWEDEN 1", "ALLSVENSKAN"]):
-            return
         out.append(dict(Data=ds, Metodo=metodo, Liga=str(r.get("League", "")), Home=str(r.get("Home", "")),
                         Away=str(r.get("Away", "")), Hora=str(r.get("Time", ""))[:5],
                         Odd_Lay=round(odd, 2), Odd_Fav=round(fav, 2) if fav else ""))

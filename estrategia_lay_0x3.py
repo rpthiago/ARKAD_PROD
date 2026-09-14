@@ -13,9 +13,6 @@ import os
 import numpy as np
 import pandas as pd
 
-# Ligas com histórico de instabilidade defensiva ou alto índice de goleadas
-BLACKLIST_LIGAS_0X3 = ['NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']
-
 def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """
     Avalia a grade diária da Betfair para entradas em Lay 0x3 com Trava Top 3 Menor Odd.
@@ -27,10 +24,6 @@ def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
     candidatos = []
     
     for idx, row in df_dia.iterrows():
-        liga = str(row.get("League", row.get("Div", "Liga Externa")))
-        liga_upper = liga.upper()
-        if any(b in liga_upper for b in BLACKLIST_LIGAS_0X3):
-            continue
             
         odd_h = float(row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H') or 0.0)
         odd_a = float(row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A') or 0.0)

@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Auditoria Forense do Claude: Reversão da Blacklist (Permutação p=0.49), Conciliação do Ledger Oficial (+9.79u) e Quarentena Stake-Zero das Zebras
+
+- **Solicitação do usuário (Feedback / Auditoria do Claude):**
+  1. *Blacklist Holanda/Suécia:* Achada post-hoc olhando resultados ("achar antes de testar"). Teste de permutação de Claude com 5.000 iterações em 65 ligas provou que retirar as 2 piores rende +4,16u na mediana com $P(\ge \text{obs}) = 0,49$ (ruído puro). Além disso, o filtro no `add()` do `relatorio_forward_5metodos.py` corrompia a regra base congelada de 270 jogos.
+  2. *Divergência da Simulação vs Ledger:* A simulação anterior misturou o ledger com planilhas de backtest. O livro-razão oficial e soberano é o `forward_5metodos_ledger.csv` (828 liquidados, 636 oficiais, +9,79u).
+  3. *Zebras 0x2/2x0 e Over 4.5:* Zebras nunca passaram por forward e vêm de regime anterior descontinuado; devem operar em stake zero absoluto. Over 4.5 (34/34) é 100% até o 1º red (odd 19.3), exigindo liability travada em no máx 5%.
+- **Ações Imediatas Executadas:**
+  1. **Reversão Completa da Exclusão de Ligas:** Removido o filtro hardcoded de `relatorio_forward_5metodos.py` (linha 103), `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `estrategia_lay_0x3.py` e `estrategia_lay_2x2.py`. O forward volta a registrar e capturar 100% dos sinais da regra congelada sem truncamentos.
+  2. **Conciliação Soberana dos Dados (Ledger Oficial):**
+     - Lay Draw (Fav <= 1.40): 267 jogos | 233G / 34R | WR 87,3% | BE 86,1% | +4,42u
+     - Lay Home (Fav Fora <= 1.65): 129 jogos | 112G / 17R | WR 86,8% | BE 86,6% | +0,61u
+     - Lay 2x2 Top 3: 119 jogos | 115G / 4R | WR 96,6% | BE 94,5% | +2,70u
+     - Lay 0x3 Top 3: 87 jogos | 84G / 3R | WR 96,6% | BE 96,3% | +0,30u
+     - Lay Over 4.5: 34 jogos | 34G / 0R | WR 100,0% | BE 95,1% | +1,76u
+     - *Total 5 Métodos Nucleares:* **636 jogos | 578G / 58R | WR 90,9% | +9,79u** (+10,53u com ampla).
+  3. **Quarentena Stake-Zero das Zebras:** Atualizado o `PRD_SISTEMA_ARKAD.md` (v2.1.0) proibindo alocação de dinheiro real em Lay 0x2 e 2x0 Zebra. Mantidos apenas em observação (`stake: 0.0`).
+  4. **Atualização Documental:** `PRD_SISTEMA_ARKAD.md` e `tasks.md` alinhados com o veredito da permutação e Hall of Shame.
+- **Arquivos modificados:** `relatorio_forward_5metodos.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `estrategia_lay_0x3.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `PRD_SISTEMA_ARKAD.md`, `tasks.md`, `worklog.md`.
+
+---
+
 ## 2026-09-14 · Antigravity · Criação do PRD_SISTEMA_ARKAD.md e Consolidação de Gestão de Risco & Protocolo de Verificação
 
 - **Solicitação do usuário:** "vamos fazer o plano de ação depois escrever tudo em prompt para o claude saber tb"
