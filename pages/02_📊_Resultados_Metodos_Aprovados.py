@@ -422,9 +422,13 @@ if isinstance(filtro_data, (list, tuple)) and len(filtro_data) == 2:
     df_filt = df_filt[(df_filt["Data"].dt.date >= filtro_data[0]) & (df_filt["Data"].dt.date <= filtro_data[1])]
 
 # ── Métricas Consolidadas (KPIs) ──
-df_liq = df_filt[df_filt["Status"].isin(["🟢 GREEN", "🔴 RED"])].copy()
+# KPIs do topo: a Ampla (Paralelo) tem os MESMOS jogos do 0x3 Top 3 e as Zebras sao observacao -> fora do total
+_fora_total = df_filt["Método"].astype(str).str.contains("Paralelo|Zebra|Micro-Liability", na=False)
+if _fora_total.any():
+    st.caption("ℹ️ KPIs do topo excluem **Lay 0x3 (Regra Ampla - Paralelo)** — mesmos jogos do 0x3 Top 3 — e as Zebras (observação). Elas seguem nas abas por método.")
+df_liq = df_filt[~_fora_total & df_filt["Status"].isin(["🟢 GREEN", "🔴 RED"])].copy()
 
-total_jogos = len(df_filt)
+total_jogos = int((~_fora_total).sum())
 jogos_liq = len(df_liq)
 greens = (df_liq["Status"] == "🟢 GREEN").sum()
 reds = (df_liq["Status"] == "🔴 RED").sum()

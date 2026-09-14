@@ -50,6 +50,13 @@ M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA = (
     "Lay 2x0 Zebra (Micro-Liability)"
 )
 ORDEM = [M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA]
+# Fora do TOTAL/ACUMULADO/gestao: a Ampla contem os MESMOS jogos do 0x3 Top 3 (somar dobra o jogo);
+# as zebras sao observacao (stake zero). Aparecem como linha propria, marcadas com "*".
+FORA_DO_TOTAL = {M_0X3_AMPLA, M_0X2_ZEBRA, M_2X0_ZEBRA}
+
+
+def na_conta(rows):
+    return [r for r in rows if r["Metodo"] not in FORA_DO_TOTAL]
 CURTO = {
     M_0X3: "0x3", M_0X3_AMPLA: "0x3-Ampla", M_2X2: "2x2", M_DRAW: "Draw",
     M_HOME: "Home", M_O45: "Ov4.5", M_0X2_ZEBRA: "0x2-Zeb", M_2X0_ZEBRA: "2x0-Zeb"
@@ -553,7 +560,7 @@ def bloco_gestao(rows):
     drawdown e o gatilho de escala. Regra: ESCALAR so com piso do IC95 > 0 e N >= n_min; REDUZIR se
     o teto do IC95 < 0; MANTER no resto."""
     c = _cfg(); liab = float(c["liability_rs"]); banca = float(c["banca_rs"]); nmin = int(c["n_min_escalar"])
-    todos = [r for r in rows if r["status"] == "LIQUIDADO"] + _ledger_0x0()
+    todos = [r for r in na_conta(rows) if r["status"] == "LIQUIDADO"] + _ledger_0x0()
     out = ["", "<b>GESTÃO — banca R$%.0f · liability R$%.0f por aposta</b>" % (banca, liab), "<pre>"]
     out.append("%-6s %4s %6s %8s %-16s %s" % ("método", "N", "WR-BE", "R$ acum", "IC95 ROI", "gatilho"))
     for m in ORDEM + ["Lay 0x0 XGB"]:
@@ -597,7 +604,7 @@ def bloco_marcos(rows):
     except Exception:
         return []
     hoje = date.today(); out = ["", "<b>PRAZOS PRÉ-REGISTRADOS</b>", "<pre>"]
-    todos = [r for r in rows if r["status"] == "LIQUIDADO"] + _ledger_0x0()
+    todos = [r for r in na_conta(rows) if r["status"] == "LIQUIDADO"] + _ledger_0x0()
     for m in M:
         if "data" in m:
             d = datetime.strptime(m["data"], "%Y-%m-%d").date(); falta = (d - hoje).days
@@ -622,12 +629,12 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
         out = ["<b>%s</b>" % titulo, "<pre>"]
         tem = False
         for m in ORDEM:
-            ln = _linha(CURTO[m], [r for r in sub if r["Metodo"] == m])
+            ln = _linha(CURTO[m] + ("*" if m in FORA_DO_TOTAL else ""), [r for r in sub if r["Metodo"] == m], largura=10)
             if ln: out.append(ln); tem = True
         if not tem:
             out.append("sem sinais")
         else:
-            out.append("-" * 34); out.append(_linha("TOTAL", sub))
+            out.append("-" * 38); out.append(_linha("TOTAL", na_conta(sub), largura=10) or "TOTAL      sem sinais na conta")
         out.append("</pre>")
         return out
 
@@ -662,7 +669,7 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
         linhas += [""] + bloco("%s — por método" % nomes.get(mes[5:], mes), sub)
         linhas += ["<b>%s — por dia</b>" % nomes.get(mes[5:], mes), "<pre>"]
         for d in sorted({r["Data"] for r in sub}):
-            n, g, r_, pnl, pend = _agg([r for r in sub if r["Data"] == d])
+            n, g, r_, pnl, pend = _agg(na_conta([r for r in sub if r["Data"] == d]))
             if n == 0 and pend == 0:
                 continue
             tag = "%+6.2fu" % pnl if n else "   --  "
@@ -670,14 +677,15 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
         linhas.append("</pre>")
     linhas += bloco_gestao(rows)
     linhas += bloco_marcos(rows)
-    n, g, r_, pnl, pend = _agg(rows)
+    n, g, r_, pnl, pend = _agg(na_conta(rows))
     semp = sum(1 for r in rows if r["status"] == "SEM_PLACAR")
     if semp:
         linhas += ["", "<i>%d sinais de ligas sem placar em nenhuma base ficam fora da conta.</i>" % semp]
     ini = min(x["Data"] for x in rows) if rows else "----------"
-    linhas += ["", "<b>ACUMULADO desde %s/%s:</b> %d liq · %dG/%dR · WR %.1f%% · <b>%+.2fu</b> (R$ %+.0f)%s"
+    linhas += ["", "<b>ACUMULADO desde %s/%s (5 métodos):</b> %d liq · %dG/%dR · WR %.1f%% · <b>%+.2fu</b> (R$ %+.0f)%s"
                % (ini[8:10], ini[5:7], n, g, r_, (100.0 * g / n) if n else 0, pnl, pnl * LIAB_RS,
-                  (" · %d pendentes (*)" % pend) if pend else "")]
+                  (" · %d pendentes (*)" % pend) if pend else ""),
+               "<i>* 0x3-Ampla tem os mesmos jogos do 0x3 Top 3 e as zebras são observação: fora do TOTAL e do ACUMULADO.</i>"]
     return "\n".join(linhas)
 
 
