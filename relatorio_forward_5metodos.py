@@ -412,7 +412,19 @@ def atualizar(desde, ate):
         print("  %s: %d sinais (%d novos)" % (ds, len(s), n))
     print("sinais novos incorporados: %d" % novos)
 
-    pend = [r for r in L.values() if r.get("status") != "LIQUIDADO" and r.get("status") != "FORA_DA_FAIXA_KO"]
+    # dedup: o feed lista o mesmo jogo em dois dias quando o KO cai perto da meia-noite UTC.
+    # Mantem a PRIMEIRA data; a repetida (ainda nao liquidada) vira DUPLICADO, fora da conta.
+    vistos = {}
+    for k in sorted(L, key=lambda k: L[k]["Data"]):
+        r = L[k]
+        if r.get("status") == "DUPLICADO": continue
+        kk = (r["Metodo"], canon(r["Home"]), canon(r["Away"]))
+        d0 = vistos.get(kk)
+        if d0 and 0 < (datetime.strptime(r["Data"], "%Y-%m-%d") - datetime.strptime(d0, "%Y-%m-%d")).days <= 1 and r.get("status") != "LIQUIDADO":
+            r["status"] = "DUPLICADO"; r["resultado"] = ""; r["pnl_u"] = ""; r["pnl_rs"] = ""
+        else:
+            vistos.setdefault(kk, r["Data"])
+    pend = [r for r in L.values() if r.get("status") not in ("LIQUIDADO", "FORA_DA_FAIXA_KO", "DUPLICADO", "SEM_PLACAR")]
     if pend:
         P = placares(); idx = _por_dia(P); agora = datetime.now().strftime("%Y-%m-%d %H:%M"); liq = 0
         ko_odds = _odds_ko_coletor()
