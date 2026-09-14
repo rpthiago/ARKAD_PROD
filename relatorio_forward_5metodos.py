@@ -286,6 +286,21 @@ def placares():
             print("  placares b365 (%s): +%d" % (os.path.basename(os.path.dirname(p)), len(out) - n0))
         except Exception as e:
             print("  [b365] %s" % str(e)[:60])
+    # ultima fonte: planilha manual do Thiago (Data, Mandante, Visitante, Gols_M, Gols_V). So entra onde
+    # oficial/Betfair/b365 nao tem; fonte_placar='manual' fica gravada para auditoria.
+    for man in (os.path.join(ROOT, "placares_manuais.xlsx"), os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "placares_manuais.xlsx")):
+        if not os.path.exists(man): continue
+        try:
+            mx = pd.read_excel(man); n0 = len(out)
+            mx["_d"] = pd.to_datetime(mx["Data"], errors="coerce").dt.strftime("%Y-%m-%d")
+            for _, x in mx.iterrows():
+                gm, gv = pd.to_numeric(x.get("Gols_M"), errors="coerce"), pd.to_numeric(x.get("Gols_V"), errors="coerce")
+                if pd.isna(x["_d"]) or pd.isna(gm) or pd.isna(gv): continue
+                k = (x["_d"], canon(x.get("Mandante")), canon(x.get("Visitante")))
+                if k not in out: out[k] = (int(gm), int(gv), "manual")
+            print("  placares manuais (%s): +%d" % (os.path.basename(os.path.dirname(man)), len(out) - n0))
+        except Exception as e:
+            print("  [manual] %s" % str(e)[:60])
     return out
 
 
