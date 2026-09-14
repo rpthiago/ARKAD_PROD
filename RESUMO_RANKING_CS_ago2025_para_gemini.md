@@ -1,5 +1,10 @@
 # Resumo — 7 mercados de Correct Score × ranking por menor odd, janela ago/2025 → set/2026
 
+> ⚠️ **CORREÇÃO 13/09 (ler antes):** a base tem três regimes de odd de lay em Correct Score e os ROIs
+> agregados aqui misturam regimes incomparáveis. Toda a força estatística de CS vem de jan-abr/2026.
+> Ver `CORRECAO_REGIME_ODD_CS_para_gemini.md`.
+
+
 > Cole abaixo da linha no Gemini. Relatório completo (30 meses, mecanismo por posição, coletor):
 > `AUDITORIA_RANKING_CS_7MERCADOS_para_gemini.md`. Reproduzível: `auditar_ranking_cs.py`.
 > Tabela integral (3 janelas × 4 cortes × 7 métodos): `varredura_over/auditoria_ranking_cs_2026-09-13.csv`.

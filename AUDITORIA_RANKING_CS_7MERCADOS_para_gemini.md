@@ -1,5 +1,10 @@
 # AUDITORIA INDEPENDENTE — 7 mercados remanescentes de Correct Score × ranking diário por menor odd
 
+> ⚠️ **CORREÇÃO 13/09 (ler antes):** a base tem três regimes de odd de lay em Correct Score e os ROIs
+> agregados aqui misturam regimes incomparáveis. Toda a força estatística de CS vem de jan-abr/2026.
+> Ver `CORRECAO_REGIME_ODD_CS_para_gemini.md`.
+
+
 > Executada em 2026-09-13. Reproduzível: `auditar_ranking_cs.py` (base) e o bloco operacional em
 > `varredura_over/`. Tabelas: `varredura_over/auditoria_ranking_cs_2026-09-13.csv` (+ `_apostas.csv`, uma linha por aposta).
 

@@ -1,5 +1,10 @@
 # AUDITORIA — Lay 2x2 e Lay 0x3 com ranking TOP 3 por menor odd
 
+> ⚠️ **CORREÇÃO 13/09 (ler antes):** a base tem três regimes de odd de lay em Correct Score e os ROIs
+> agregados aqui misturam regimes incomparáveis. Toda a força estatística de CS vem de jan-abr/2026.
+> Ver `CORRECAO_REGIME_ODD_CS_para_gemini.md`.
+
+
 > Executada em 2026-09-13. Reproduzível: `auditar_top3_cs.py` (base + ledger) e
 > `auditar_top3_cs_operacional.py` (coletor). Tabelas em `varredura_over/auditoria_top3_cs_2026-09-13*.csv`.
 
