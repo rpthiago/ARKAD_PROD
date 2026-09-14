@@ -305,6 +305,20 @@ def placares():
             k = (md.group(1), canon(h), canon(a))
             if k not in out: out[k] = (int(m.group(1)), int(m.group(2)), "planilha_dia")
     print("  placares das planilhas do dia (%d arquivos): +%d" % (n_arq, len(out) - n0))
+    # base mestre (pagina 02): coluna Placar "NxM" preenchida pelo Thiago — mesmo placar nao e digitado duas vezes.
+    n0 = len(out)
+    try:
+        mm = pd.read_csv(os.path.join(ROOT, "metodos_aprovados", "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv"),
+                         dtype=str, encoding="utf-8-sig", keep_default_na=False)
+        for _, x in mm.iterrows():
+            m = _re.match(r"^\s*(\d+)\s*[xX\-]\s*(\d+)\s*$", str(x.get("Placar", "")).strip())
+            dd = str(x.get("Data", ""))[:10]
+            if not m or not _re.match(r"^\d{4}-\d{2}-\d{2}$", dd): continue
+            k = (dd, canon(x.get("Home", "")), canon(x.get("Away", "")))
+            if k not in out: out[k] = (int(m.group(1)), int(m.group(2)), "base_mestre")
+        print("  placares da base mestre (pagina 02): +%d" % (len(out) - n0))
+    except Exception as e:
+        print("  [base mestre] %s" % str(e)[:60])
     # ultima fonte: planilha manual do Thiago (Data, Mandante, Visitante, Gols_M, Gols_V). So entra onde
     # oficial/Betfair/b365 nao tem; fonte_placar='manual' fica gravada para auditoria.
     for man in (os.path.join(ROOT, "placares_manuais.xlsx"), os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "placares_manuais.xlsx")):
