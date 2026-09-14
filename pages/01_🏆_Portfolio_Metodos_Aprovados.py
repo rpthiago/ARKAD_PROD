@@ -21,11 +21,32 @@ st.set_page_config(
 )
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from futpythontrader_client import get_daily_dataframe
-from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
-from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
+try:
+    from futpythontrader_client import get_daily_dataframe
+except Exception:
+    import importlib
+    get_daily_dataframe = getattr(importlib.import_module("futpythontrader_client"), "get_daily_dataframe", None)
+
+try:
+    from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
+except Exception:
+    try:
+        import importlib
+        avaliar_jogos_lay_0x3_grade = getattr(importlib.import_module("estrategia_lay_0x3"), "avaliar_jogos_lay_0x3_grade", None)
+    except Exception:
+        avaliar_jogos_lay_0x3_grade = None
+
+try:
+    from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
+except Exception:
+    try:
+        import importlib
+        avaliar_jogos_lay_2x2_grade = getattr(importlib.import_module("estrategia_lay_2x2"), "avaliar_jogos_lay_2x2_grade", None)
+    except Exception:
+        avaliar_jogos_lay_2x2_grade = None
 
 # Estilização visual moderna
 st.markdown("""
