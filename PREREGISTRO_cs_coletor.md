@@ -55,3 +55,15 @@ linha para leitura, mas **não** é célula.
 - Não mudar faixas, cortes, dimensão ou N mínimo depois de ver resultado.
 - Não somar células. Não "ler" o 12/10 antes do 12/10.
 - Não usar a base histórica da apicomunidade para "reforçar" uma célula — foi exatamente o erro que este estudo corrige.
+
+---
+
+## Snapshot 1 — 2026-09-13 (coletor 16/08 → 13/09)
+
+4.913 jogos com CS no KO; 2.168 com placar (314 oficial, 1.854 bases); **26.594 apostas, 2.159 jogos, 27 dias**.
+**54 células com N ≥ 50 · BH sobre M=54 · 0 PASSA, 4 REPROVA, 50 INCONCLUSIVO.** Melhor p = 0,061 (0-0 · fav ≤1,40 ·
+Todos: N=112, 2 reds, +2,12%, IC [−0,7; +4,1]). Por runner sem favoritismo (Todos), a taxa real de cada placar fica
+entre −1,7pp e +0,1pp do break-even: 0-3 +0,11pp · 3-2 +0,08pp · 2-2 −0,62pp · 1-1 −1,62pp · 0-0 −1,58pp ·
+Any Other Home −0,10pp · Any Other Away −0,73pp. Tabela: `varredura_over/cs_coletor_2026-09-13.csv`.
+Reprovadas: 1-1 (fav >1,80, Todos, N=1.506, −2,32%, IC [−4,4; −0,5]); 0-2 (fav 1,40-1,80, N=145, −5,87%).
+Próximo snapshot: 2026-10-12.

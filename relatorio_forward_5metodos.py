@@ -39,10 +39,31 @@ LIAB_RS = 100.0
 LEDGER = os.path.join(ROOT, "metodos_aprovados", "forward_5metodos_ledger.csv")
 INICIO_PADRAO = "2026-08-01"
 
-M_0X3, M_2X2, M_DRAW, M_HOME, M_O45 = ("Lay 0x3 Top 3", "Lay 2x2 Top 3", "Lay Draw (Fav<=1.40)",
-                                       "Lay Home/DC X2 (FavVis<=1.65)", "Lay Over 4.5 (Under Pesado)")
-ORDEM = [M_0X3, M_2X2, M_DRAW, M_HOME, M_O45]
-CURTO = {M_0X3: "0x3", M_2X2: "2x2", M_DRAW: "Draw", M_HOME: "Home", M_O45: "Ov4.5"}
+M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA = (
+    "Lay 0x3 Top 3",
+    "Lay 0x3 (Regra Ampla)",
+    "Lay 2x2 Top 3",
+    "Lay Draw (Fav<=1.40)",
+    "Lay Home/DC X2 (FavVis<=1.65)",
+    "Lay Over 4.5 (Under Pesado)",
+    "Lay 0x2 Zebra (Micro-Liability)",
+    "Lay 2x0 Zebra (Micro-Liability)"
+)
+ORDEM = [M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA]
+CURTO = {
+    M_0X3: "0x3", M_0X3_AMPLA: "0x3-Ampla", M_2X2: "2x2", M_DRAW: "Draw",
+    M_HOME: "Home", M_O45: "Ov4.5", M_0X2_ZEBRA: "0x2-Zeb", M_2X0_ZEBRA: "2x0-Zeb"
+}
+LIMITES_ODD = {
+    M_0X3: (14.0, 35.0),
+    M_0X3_AMPLA: (14.0, 35.0),
+    M_2X2: (8.0, 20.0),
+    M_DRAW: (4.5, 10.0),
+    M_HOME: (2.0, 10.0),
+    M_O45: (4.0, 20.0),
+    M_0X2_ZEBRA: (5.0, 25.0),
+    M_2X0_ZEBRA: (5.0, 25.0),
+}
 COLS = ["Data", "Metodo", "Liga", "Home", "Away", "Hora", "Odd_Lay", "Odd_Fav", "status",
         "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar"]
 
@@ -89,10 +110,24 @@ def sinais_do_dia(ds):
             for s in fn(df, top_n=3):
                 odd = _num(s.get("odd_lay"))
                 if odd:
-                    add(nome, {"League": s.get("league"), "Home": s.get("home"), "Away": s.get("away"),
-                               "Time": s.get("hora")}, odd, 0.0)
+                    lo, hi = LIMITES_ODD[nome]
+                    if lo <= odd <= hi:
+                        add(nome, {"League": s.get("league"), "Home": s.get("home"), "Away": s.get("away"),
+                                   "Time": s.get("hora")}, odd, 0.0)
         except Exception as e:
             print("  [%s erro] %s" % (nome, str(e)[:60]))
+
+    # 1b. Lay 0x3 Regra Ampla (sem TOP 3) — Pré-registro em forward paralelo (Recomendação Claude / Antigravity)
+    try:
+        for s in avaliar_jogos_lay_0x3_grade(df, top_n=None):
+            odd = _num(s.get("odd_lay"))
+            if odd:
+                lo, hi = LIMITES_ODD[M_0X3_AMPLA]
+                if lo <= odd <= hi:
+                    add(M_0X3_AMPLA, {"League": s.get("league"), "Home": s.get("home"), "Away": s.get("away"),
+                                      "Time": s.get("hora")}, odd, 0.0)
+    except Exception as e:
+        print("  [%s erro] %s" % (M_0X3_AMPLA, str(e)[:60]))
 
     oh_b = pd.to_numeric(df.get("Odd_H_Back"), errors="coerce")
     oa_b = pd.to_numeric(df.get("Odd_A_Back"), errors="coerce")
@@ -100,6 +135,8 @@ def sinais_do_dia(ds):
     od_l = pd.to_numeric(df.get("Odd_D_Lay"), errors="coerce")
     u25_b = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
     o45_l = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
+    l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
+    l20 = pd.to_numeric(df.get("Odd_CS_2x0_Lay"), errors="coerce")
     for i, r in df.iterrows():
         h, a = oh_b.get(i), oa_b.get(i)
         # 3. Lay Draw — simetrico
@@ -112,16 +149,24 @@ def sinais_do_dia(ds):
         # 5. Lay Over 4.5 em jogo under
         if pd.notna(u25_b.get(i)) and u25_b[i] <= 1.50 and pd.notna(o45_l.get(i)) and 4.0 <= o45_l[i] <= 20.0:
             add(M_O45, r, float(o45_l[i]), float(u25_b[i]))
+        # 6. Lay 0x2 Zebra (Mandante Fav <= 1.45 | 5.0 <= Lay 0x2 <= 25.0)
+        if pd.notna(h) and h <= 1.45 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
+            add(M_0X2_ZEBRA, r, float(l02[i]), float(h))
+        # 7. Lay 2x0 Zebra (Visitante Fav <= 1.45 | 5.0 <= Lay 2x0 <= 25.0)
+        if pd.notna(a) and a <= 1.45 and pd.notna(l20.get(i)) and 5.0 <= l20[i] <= 25.0:
+            add(M_2X0_ZEBRA, r, float(l20[i]), float(a))
     return out
 
 
 # ------------------------------------------------------------------ 2. liquidacao
 def red_do_metodo(m, gh, ga):
-    if m == M_0X3:  return gh == 0 and ga == 3
+    if m in (M_0X3, M_0X3_AMPLA): return gh == 0 and ga == 3
     if m == M_2X2:  return gh == 2 and ga == 2
     if m == M_DRAW: return gh == ga
     if m == M_HOME: return gh > ga
     if m == M_O45:  return (gh + ga) >= 5
+    if m == M_0X2_ZEBRA: return gh == 0 and ga == 2
+    if m == M_2X0_ZEBRA: return gh == 2 and ga == 0
     raise ValueError(m)
 
 
@@ -243,6 +288,23 @@ def achar_placar(P, idx, d, home, away):
     return None
 
 
+def _odds_ko_coletor():
+    """Lê cs_pre.csv (se existir) para obter as odds de lay reais executadas nos 15 minutos pré-KO."""
+    t_csv = os.path.join(os.environ.get("TEMP", "."), "var", "cs_pre.csv")
+    if not os.path.exists(t_csv):
+        return {}
+    try:
+        d = pd.read_csv(t_csv, header=None, names=["ts", "ko", "home", "away", "mtk", "runner", "back", "back_size", "lay", "lay_size"], low_memory=False)
+        for c in ("mtk", "lay"): d[c] = pd.to_numeric(d[c], errors="coerce")
+        d = d.dropna(subset=["mtk", "lay"])
+        w = d[(d.mtk >= -5) & (d.mtk <= 15)].sort_values("mtk")
+        w["dia"] = w.ko.str[:10]
+        w["k"] = w.dia + "|" + w.home.map(canon) + "|" + w.away.map(canon) + "|" + w.runner
+        return w.groupby("k")["lay"].first().to_dict()
+    except Exception:
+        return {}
+
+
 # ------------------------------------------------------------------ 3. ledger
 def carregar():
     L = {}
@@ -261,11 +323,13 @@ def gravar(L):
 
 def atualizar(desde, ate):
     L = carregar()
-    dias_no_ledger = {r["Data"] for r in L.values()}
-    # incremental: busca so os dias sem nenhum sinal no ledger + os 2 ultimos (feed pode completar)
+    metodos_por_dia = {}
+    for r in L.values():
+        metodos_por_dia.setdefault(r["Data"], set()).add(r["Metodo"])
+    # incremental: busca so os dias sem nenhum sinal no ledger + dias que faltam M_0X3_AMPLA + os 2 ultimos (feed pode completar)
     d0 = datetime.strptime(desde, "%Y-%m-%d").date(); d1 = datetime.strptime(ate, "%Y-%m-%d").date()
     alvo = [d0 + timedelta(i) for i in range((d1 - d0).days + 1)]
-    alvo = [d for d in alvo if d.isoformat() not in dias_no_ledger or (d1 - d).days <= 1]
+    alvo = [d for d in alvo if d.isoformat() not in metodos_por_dia or M_0X3_AMPLA not in metodos_por_dia.get(d.isoformat(), set()) or M_0X2_ZEBRA not in metodos_por_dia.get(d.isoformat(), set()) or M_2X0_ZEBRA not in metodos_por_dia.get(d.isoformat(), set()) or (d1 - d).days <= 1]
     novos = 0
     for d in alvo:
         ds = d.isoformat(); s = sinais_do_dia(ds)
@@ -283,14 +347,37 @@ def atualizar(desde, ate):
         print("  %s: %d sinais (%d novos)" % (ds, len(s), n))
     print("sinais novos incorporados: %d" % novos)
 
-    pend = [r for r in L.values() if r.get("status") != "LIQUIDADO"]
+    pend = [r for r in L.values() if r.get("status") != "LIQUIDADO" and r.get("status") != "FORA_DA_FAIXA_KO"]
     if pend:
         P = placares(); idx = _por_dia(P); agora = datetime.now().strftime("%Y-%m-%d %H:%M"); liq = 0
+        ko_odds = _odds_ko_coletor()
         for r in pend:
             sc = achar_placar(P, idx, r["Data"], r["Home"], r["Away"])
             if sc is None:
                 continue
             gh, ga, fonte = sc; odd = float(r["Odd_Lay"])
+            lo, hi = LIMITES_ODD.get(r["Metodo"], (1.0, 1000.0))
+
+            # Item 4: Verificação de executabilidade no KO (Item 4 da Auditoria)
+            # 1. Checa odd gravada no sinal
+            if odd < lo or odd > hi:
+                r.update(gols_H=gh, gols_A=ga, placar="%d-%d" % (gh, ga), resultado="FORA_DA_FAIXA",
+                         pnl_u=0.0, pnl_rs=0.0, status="FORA_DA_FAIXA_KO",
+                         liquidado_em=agora, fonte_placar=fonte)
+                continue
+
+            # 2. Se houver captura no coletor perto do KO, checa se a odd derivou para fora da faixa no KO
+            runner = "2 - 2" if "2x2" in r["Metodo"] else ("0 - 3" if "0x3" in r["Metodo"] else ("0 - 2" if "0x2" in r["Metodo"] else ("2 - 0" if "2x0" in r["Metodo"] else None)))
+            if runner:
+                k_ko = str(r["Data"]) + "|" + canon(r["Home"]) + "|" + canon(r["Away"]) + "|" + runner
+                if k_ko in ko_odds:
+                    odd_ko = ko_odds[k_ko]
+                    if odd_ko < lo or odd_ko > hi:
+                        r.update(gols_H=gh, gols_A=ga, placar="%d-%d" % (gh, ga), resultado="FORA_DA_FAIXA",
+                                 pnl_u=0.0, pnl_rs=0.0, status="FORA_DA_FAIXA_KO",
+                                 liquidado_em=agora, fonte_placar=fonte + ":ko_fora(%.1f)" % odd_ko)
+                        continue
+
             red = red_do_metodo(r["Metodo"], gh, ga)
             pnl = -1.0 if red else (1 - COMISSAO) / (odd - 1)
             r.update(gols_H=gh, gols_A=ga, placar="%d-%d" % (gh, ga), resultado="RED" if red else "GREEN",
@@ -301,8 +388,9 @@ def atualizar(desde, ate):
         for r in L.values():
             if r["status"] == "PENDENTE" and r["Data"] < corte:
                 r["status"] = "SEM_PLACAR"          # jogo nao existe em nenhuma base -> fora da conta
-        print("liquidados agora: %d | pendentes: %d | sem placar (>7d, fora da conta): %d"
+        print("liquidados agora: %d | pendentes: %d | fora da faixa KO: %d | sem placar (>7d, fora da conta): %d"
               % (liq, sum(1 for r in L.values() if r["status"] == "PENDENTE"),
+                 sum(1 for r in L.values() if r["status"] == "FORA_DA_FAIXA_KO"),
                  sum(1 for r in L.values() if r["status"] == "SEM_PLACAR")))
     gravar(L)
     return L
@@ -388,6 +476,29 @@ def bloco_gestao(rows):
     return out
 
 
+def bloco_marcos(rows):
+    """Prazos pre-registrados (marcos.json): contagem regressiva por data e progresso de N por metodo.
+    Existe para que nada seja 'lido antes da hora' — o relatorio so mostra quando chega."""
+    import json
+    p = os.path.join(ROOT, "marcos.json")
+    try:
+        M = json.load(open(p, encoding="utf-8"))["marcos"]
+    except Exception:
+        return []
+    hoje = date.today(); out = ["", "<b>PRAZOS PRÉ-REGISTRADOS</b>", "<pre>"]
+    todos = [r for r in rows if r["status"] == "LIQUIDADO"] + _ledger_0x0()
+    for m in M:
+        if "data" in m:
+            d = datetime.strptime(m["data"], "%Y-%m-%d").date(); falta = (d - hoje).days
+            tag = "HOJE" if falta == 0 else ("faltam %dd" % falta if falta > 0 else "VENCIDO há %dd" % -falta)
+            out.append("%-12s %-10s %s" % (tag, m["data"], m["nome"][:52]))
+        elif "metodo" in m:
+            n = sum(1 for r in todos if r["Metodo"] == m["metodo"])
+            out.append("%-12s N=%4d/%-4d %s" % ("%3.0f%%" % (100.0 * n / m["n_alvo"]), n, m["n_alvo"], m["nome"][:52]))
+    out.append("</pre>")
+    return out
+
+
 def montar_mensagem(L, hoje, rotulo="HOJE"):
     """Mensagem em HTML do Telegram (<b>, <i>, <pre>). `hoje` e o DIA DE REFERENCIA do relatorio
     (na rodada das 6h e o dia anterior, com todos os placares oficiais ja liquidados)."""
@@ -447,6 +558,7 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
             linhas.append("%s  %2d  %2dG/%2dR  %s%s" % (d[8:10] + "/" + d[5:7], n + pend, g, r_, tag, " *" if pend else ""))
         linhas.append("</pre>")
     linhas += bloco_gestao(rows)
+    linhas += bloco_marcos(rows)
     n, g, r_, pnl, pend = _agg(rows)
     semp = sum(1 for r in rows if r["status"] == "SEM_PLACAR")
     if semp:
