@@ -1,11 +1,40 @@
 {
   "_doc": "Marcos pre-registrados. O relatorio das 06:00 mostra a contagem regressiva e o progresso de N. Nao ler resultado antes da data.",
   "marcos": [
-    {"nome": "H-extra Over 1.5 / 1 gol / fav>1.80 / min 25-85 — 1o julgamento", "data": "2026-10-12", "doc": "PREREGISTRO_varredura_over_inplay.md"},
-    {"nome": "Varredura Over in-play — snapshot 2", "data": "2026-10-12", "doc": "PREREGISTRO_varredura_over_inplay.md"},
-    {"nome": "CS no coletor (19 runners) — snapshot 2", "data": "2026-10-12", "doc": "PREREGISTRO_cs_coletor.md"},
-    {"nome": "CS no coletor — snapshot 3", "data": "2026-11-12", "doc": "PREREGISTRO_cs_coletor.md"},
-    {"nome": "Lay Draw (Fav<=1.40) — N para o IC95 descolar de zero", "metodo": "Lay Draw (Fav<=1.40)", "n_alvo": 270},
-    {"nome": "Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09)", "metodo": "Lay 0x0 XGB", "n_alvo": 1476}
+    {
+      "nome": "H-extra Over 1.5 / 1 gol / fav>1.80 / min 25-85 — 1o julgamento",
+      "data": "2026-10-12",
+      "doc": "PREREGISTRO_varredura_over_inplay.md"
+    },
+    {
+      "nome": "Varredura Over in-play — snapshot 2",
+      "data": "2026-10-12",
+      "doc": "PREREGISTRO_varredura_over_inplay.md"
+    },
+    {
+      "nome": "CS no coletor (19 runners) — snapshot 2",
+      "data": "2026-10-12",
+      "doc": "PREREGISTRO_cs_coletor.md"
+    },
+    {
+      "nome": "Lay 2x2 apos o 1o gol — snapshot 2",
+      "data": "2026-10-12",
+      "doc": "PREREGISTRO_lay2x2_apos_gol.md"
+    },
+    {
+      "nome": "CS no coletor — snapshot 3",
+      "data": "2026-11-12",
+      "doc": "PREREGISTRO_cs_coletor.md"
+    },
+    {
+      "nome": "Lay Draw (Fav<=1.40) — N para o IC95 descolar de zero",
+      "metodo": "Lay Draw (Fav<=1.40)",
+      "n_alvo": 270
+    },
+    {
+      "nome": "Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09)",
+      "metodo": "Lay 0x0 XGB",
+      "n_alvo": 1476
+    }
   ]
 }
