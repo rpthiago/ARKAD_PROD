@@ -50,3 +50,16 @@ P&L: liability 1u, comissão 5%. GREEN 0,95/(odd−1), RED −1. RED = FT exatam
 
 - Não mudar janelas, faixa, estado ou favoritismo depois de ver resultado. Não somar células.
 - Estado nunca pelo CS de menor lay. Nenhum guard dependente do resultado.
+
+---
+
+## Primeiro olhar — 2026-09-13 (coletor 16/08 → 13/09; declarado como primeiro olhar, não julgamento)
+
+1.647 apostas, 874 jogos, 27 dias (placar: 126 oficial, 748 bases). A odd de lay do 2-2 cai depois do 1º gol:
+mediana 19,0 pré-KO → 17,0 no instante (queda mediana 2,0 pontos).
+**12 células com N ≥ 50 · BH sobre 12 · 12 INCONCLUSIVAS.** Melhor p = 0,025 (1-0 mandante marcou · 25-40 · fav
+>1,80: N=76, 1 red, +3,27%, IC [−0,0; +4,7]).
+Agregado 1 gol: N=1.647, 95 reds, red 5,77% vs BE-red 5,81% → **+0,04pp, ROI +0,04%**.
+Por janela: 10-25 −1,02pp (N=619) · 25-40 −0,08pp (495) · 46-60 +1,49pp (375) · 60-75 +1,16pp (158).
+Com divisão casa/fora conhecida (N=479): mandante marcou +1,46pp, visitante marcou +1,34pp.
+Tabela: `varredura_over/lay2x2_apos_gol_2026-09-13.csv`. Snapshot 2: 2026-10-12, só com KO ≥ 14/09.
