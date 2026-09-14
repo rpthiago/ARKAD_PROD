@@ -9,6 +9,7 @@
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
 - [ ] **Lay 0x0 XGBoost — confirmar o edge (PRIORIDADE 1).**
+  - [x] Integrado oficialmente nas páginas centrais do Streamlit: `pages/01` (Radar e Auditoria 2026) e `pages/02` (Resultados e Curva de Equity unificada com 97 jogos forward).
   - [ ] Acumular forward até **N ≥ 300** (hoje 46) via `ARKAD_Forward_0x0` (semanal).
   - [ ] Medir **CLV** dos picks reais (`clv_0x0_log.csv` / `ARKAD_CLV_0x0`). **Aprova se CLV+ mediano E %CLV+ > 50%.**
   - [ ] Calibrar fuso do `Time` do feed no CLV (conferir 1º fechamento real).

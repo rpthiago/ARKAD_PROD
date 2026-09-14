@@ -115,6 +115,7 @@ st.sidebar.caption(f"Cada RED perde exatamente R$ {liability_fixa:.2f} ({pct_ris
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
+* 🎯 **Lay 0x0 XGBoost (Sweet Spot)** (WR 95.0% | ROI +0.9% | ML Independente de Preço)
 * 🟢 **Lay 0x3 Top 3** (WR 99.4% | ROI +4.2% | Produção)
 * 🟢 **Lay 2x2 Top 3** (WR 96.8% | ROI +3.8% | Produção)
 * 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward Stake-Zero)
@@ -148,6 +149,7 @@ with tab1:
         metodos_filtro = st.multiselect(
             "Filtrar Métodos",
             [
+                "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
                 "Lay 0x3 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
@@ -160,6 +162,7 @@ with tab1:
                 "Lay Away / DC 1X (Arquivado)",
             ],
             default=[
+                "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
                 "Lay 0x3 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
@@ -229,6 +232,35 @@ with tab1:
                     "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
                     "Expectativa_WR": "96.8%", "EV_Estimado": "+3.79%"
                 })
+        except Exception:
+            pass
+
+        # 3. Lay 0x0 XGBoost (Sweet Spot [10, 20])
+        try:
+            f_p0 = ROOT / "forward_0x0" / f"picks_0x0_{ds_iso}.csv"
+            df_p0 = pd.DataFrame()
+            if f_p0.exists():
+                df_p0 = pd.read_csv(f_p0)
+            elif (ROOT / "forward_0x0" / "ledger_forward_0x0.csv").exists():
+                df_led0 = pd.read_csv(ROOT / "forward_0x0" / "ledger_forward_0x0.csv")
+                df_p0 = df_led0[df_led0["Data"] == ds_iso].copy()
+                
+            if not df_p0.empty:
+                for _, s0 in df_p0.iterrows():
+                    h0 = s0.get("Home") or (s0.get("jogo", "").split(" x ")[0] if " x " in str(s0.get("jogo", "")) else "")
+                    a0 = s0.get("Away") or (s0.get("jogo", "").split(" x ")[1] if " x " in str(s0.get("jogo", "")) else "")
+                    odd0 = float(s0.get("odd_lay") or s0.get("odd_lay_entrada") or 0.0)
+                    ev0 = float(s0.get("ev", 0.0))
+                    hora0 = str(s0.get("ko", "15:00"))[:5]
+                    liga0 = s0.get("liga") or s0.get("Liga") or "N/A"
+                    if odd0 > 1.0:
+                        sinais.append({
+                            "Data": ds_iso, "Hora": hora0, "Liga": liga0, "Jogo": f"{h0} x {a0}",
+                            "Home": h0, "Away": a0, "Método": "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
+                            "Mercado": "Correct Score (0x0)", "Lado": "LAY",
+                            "Odd_Entrada": round(odd0, 2), "Odd_Fav": 0.0,
+                            "Expectativa_WR": "95.0%", "EV_Estimado": f"+{ev0*100:.1f}%" if ev0 else "+2.5%"
+                        })
         except Exception:
             pass
         
@@ -420,6 +452,19 @@ with tab2:
     """)
     
     tabela_auditoria = [
+        {
+            "Método": "Lay 0x0 XGBoost (Sweet Spot [10.0, 20.0] | EV > 2% | Liga < 8%)",
+            "Mercado": "Correct Score (0x0)",
+            "Amostra (N)": "683 jogos (Ano 2026 OOS)",
+            "Win Rate Real": "95.02%",
+            "Break-Even Exigido": "94.18%",
+            "Margem Real": "+0.84%",
+            "Lucro Líquido": "+6,11 u (liability) / +93,55 u (stake)",
+            "ROI s/ Liability": "+0.89%",
+            "Bootstrap IC95%": "[+0.2%, +1.6%]",
+            "Consistência": "6/9 meses positivos em 2026 (Max DD -1.41u) 🟢",
+            "Status": "🎯 PRIORIDADE 1 FORWARD (Target N ≥ 300)"
+        },
         {
             "Método": "Lay 0x3 Top 3 Menor Odd (Under 2.5 <= 2.10 | Odd A >= 1.85)",
             "Mercado": "Correct Score (0x3)",

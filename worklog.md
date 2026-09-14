@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Integração Oficial do Lay 0x0 XGBoost no Portfólio (Página 01) e Resultados (Página 02)
+
+- **Solicitação do usuário:** "pode colocar ele tb no Portfólio de Métodos em Validação Forward — ARKAD e nos Resultados dos Métodos em Validação Forward — ARKAD"
+- **Feito:**
+  1. **Página 01 (`pages/01_🏆_Portfolio_Metodos_Aprovados.py`):**
+     - Adicionado Lay 0x0 XGBoost nos Métodos Ativos da Sidebar.
+     - Integrado no scanner da Aba 1 (`escanear_api_unificada`), coletando picks do dia de `forward_0x0/picks_0x0_{data}.csv` ou `ledger_forward_0x0.csv` com odds reais de Lay Betfair e dimensionamento de risco.
+     - Adicionado no multiselect de filtros e na lista padrão.
+     - Adicionada a linha de auditoria forense do ano 2026 completo na Aba 2 (N=683, WR 95.02%, BE 94.18%, +6.11u liability / +93.55u stake).
+  2. **Página 02 (`pages/02_📊_Resultados_Metodos_Aprovados.py`):**
+     - Atualizada a opção de rádio da Sidebar para incluir Lay 0x0 no Portfólio e adicionada opção exclusiva `"🎯 Apenas Lay 0x0 XGBoost (Forward)"`.
+     - Integrado o carregamento de dados forward (desde 01/08/2026) unificando `lay_0x0_real_oos_bets_xgb.csv` e `forward_0x0/ledger_forward_0x0.csv` (total de 97 jogos forward, 90 Greens, 5 Reds, 2 Pendentes, +0.42u em liability).
+     - Atualizada a normalização `_norm_metodo` e o auto-settlement por placar `_calc_status` (0x0 = RED, qualquer gol = GREEN).
+     - Integração total nos KPIs superiores, curva de equity consolidada e tabelas desdobradas por método e por data.
+  3. **Verificação Técnica:**
+     - Sintaxe verificada com `python -m py_compile`.
+     - Execução simulada confirmou 972 jogos no portfólio consolidado sem nenhum erro de runtime.
+- **Arquivos modificados/criados:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `lay_0x0_real_oos_bets_xgb.csv`, `tasks.md`, `worklog.md`.
+
+---
+
 ## 2026-09-14 · Antigravity · Reativação da Página de Sinais Lay 0x0 XGBoost no Streamlit e Sincronização do forward_0x0
 
 - **Solicitação do usuário:** "reative essa página no Streamlit agora"
