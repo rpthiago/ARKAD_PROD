@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Criação do PRD_SISTEMA_ARKAD.md e Consolidação de Gestão de Risco & Protocolo de Verificação
+
+- **Solicitação do usuário:** "vamos fazer o plano de ação depois escrever tudo em prompt para o claude saber tb"
+- **Feito:**
+  1. **Criação do PRD Formal (`PRD_SISTEMA_ARKAD.md`):**
+     - Especificação de produto do ARKAD como SaaS quantitativo para a Betfair Exchange.
+     - Documentação formal dos 5 Métodos Nucleares (`Lay Draw Fav <= 1.40`, `Lay Home Fav Fora <= 1.65`, `Lay Over 4.5 Under Pesado`, `Lay 2x2 Top 3`, `Lay 0x3 Top 3`) e dos 2 Métodos Zebra com Micro-Liability (`Lay 0x2 Zebra` e `Lay 2x0 Zebra`).
+     - Formalização da Blacklist de Ligas (`NETHERLANDS 1`, `EREDIVISIE`, `SWEDEN 1`, `ALLSVENSKAN`, `SERBIA 1`, `IRELAND 1`, `TURKEY 1`, `SCOTLAND 2/3/4`).
+     - Engenharia de Sizing por Capital em Risco (Liability) com comissão real Betfair de 5%: alocação em 5% para Core, 5-7.5% para Cauda Longa / CS, Micro-Liability (R$ 25 - R$ 50) para Zebras, Stop Loss Diário de 15% e Circuit Breaker de 2 reds por método.
+     - Protocolo de Garantia de Qualidade "Verification Before Completion" (py_compile, integridade de dados, git status, sincronização de logs).
+  2. **Atualização do `tasks.md`:** Registradas as conclusões do PRD, da blacklist de ligas e das simulações de Ago/Set.
+  3. **Preparação do Prompt de Alinhamento para o Claude:** Síntese detalhada de todos os números, conclusões empíricas e arquiteturais para sincronização multi-agente.
+- **Arquivos modificados/criados:** `PRD_SISTEMA_ARKAD.md`, `tasks.md`, `worklog.md`.
+
+---
+
 ## 2026-09-14 · Antigravity · Simulação Forward Ago/Set (5%/15%) e Implementação da Blacklist de Holanda 1 (Eredivisie) e Suécia 1 (Allsvenskan)
 
 - **Solicitação do usuário:**

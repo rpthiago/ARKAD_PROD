@@ -94,6 +94,10 @@
 - [x] Forward gap 21/08→02/09 reconstruído com placar real (odd lay real).
 - [x] CLV framework construído (métrica-mãe) + picks diários do 0x0 no Telegram.
 - [x] worklog.md + tasks.md criados (coordenação Claude↔Antigravity).
+- [x] PRD_SISTEMA_ARKAD.md consolidado: especificação técnica do SaaS, 5 métodos nucleares + 2 zebras, protocolo "Verification Before Completion".
+- [x] Blacklist de Ligas Implementada: NETHERLANDS 1 e SWEDEN 1 banidas de todos os módulos (evitou 8 reds, +4,90u / R$ 654 salvos em Ago/Set; WR histórico cronicamente abaixo do break-even).
+- [x] Integração de Lay 0x2 Zebra e Lay 2x0 Zebra com Micro-Liability (R$ 25 a R$ 50) nos scanners, relatórios diários e painel de resultados.
+- [x] Simulação Financeira de Agosto e Setembro (561 jogos, +11,67u raw, +14,84u sem Holanda/Suécia, retorno de +95% a +128% da banca com gestão de 5% de liability).
 
 ## ☠️ ARQUIVADO — testado e MORTO (não re-testar; ver Hall of Shame)
 
