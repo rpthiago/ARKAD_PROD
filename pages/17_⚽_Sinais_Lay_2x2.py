@@ -16,8 +16,8 @@ if ROOT_DIR not in sys.path:
 from metodo_lay2x2_strategy import validar_entrada_lay2x2, calcular_resultado_lay2x2, ODD_LAY_2X2_MIN, ODD_LAY_2X2_MAX, ODD_UNDER25_MAX
 from futpythontrader_client import get_daily_dataframe
 
-# Ligas com histórico de desequilíbrio e alta taxa de 2x2
-BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND']
+# Ligas com histórico de desequilíbrio, alta taxa de 2x2 ou agrupamento de reds
+BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND', 'NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']
 
 # Configura a página do Streamlit
 st.set_page_config(

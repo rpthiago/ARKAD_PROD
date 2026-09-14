@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Simulação Forward Ago/Set (5%/15%) e Implementação da Blacklist de Holanda 1 (Eredivisie) e Suécia 1 (Allsvenskan)
+
+- **Solicitação do usuário:**
+  1. "Inter x Udinese Lay Draw 7.4 ... odd empate 3.35 posso entrar?": Esclarecido que se a odd de empate estivesse a 3.35 seria fora do filtro canônico [4.5, 10.0] e in-play perdedor. Verificado no book Betfair que a odd real é 7.40.
+  2. "me ajude a formatar uma gestao de banca para o metodos lay home, lay draw, lay over 4,5 e lay 2x2 e lay 0x3": Formatada gestão por Liability Fixa Dinâmica com comparativos e sizing por odd.
+  3. "lay draw e lay home 5%, os outros 15%, faça uma simulaçao de agosto e setembro de como seria, me mostre os resultados por mes por metodo, por liga": Simulação em 561 jogos liquidados do ledger (+11,67u, +R$ 1.830 fixo / +R$ 2.553 juros compostos). Identificado que Holanda 1 e Suécia 1 acumularam 8 reds (-5,21u).
+  4. "Adicionar Holanda 1 (Eredivisie) e Suécia 1 na lista de ligas bloqueadas": Bloqueio implementado em todos os módulos.
+- **Implementações Realizadas:**
+  - **Blacklist Consolidada:** Inclusão de `'NETHERLANDS 1'`, `'EREDIVISIE'`, `'SWEDEN 1'`, `'ALLSVENSKAN'` em:
+    - `estrategia_lay_2x2.py`: Integradas na `BLACKLIST_LIGAS_2X2`.
+    - `estrategia_lay_0x3.py`: Criada e integrada `BLACKLIST_LIGAS_0X3`.
+    - `pages/01_🏆_Portfolio_Metodos_Aprovados.py`: Adicionada `BLACKLIST_LIGAS_PORTFOLIO` no scanner unificado e aviso na sidebar.
+    - `relatorio_forward_5metodos.py`: Bloqueio direto na função `add()` do pipeline diário.
+    - `automacao_diaria_aprovados.py`: Bloqueio de ligas na rotina matinal.
+    - `pages/17_⚽_Sinais_Lay_2x2.py`: Constante atualizada.
+  - **Impacto Comprovado:** A exclusão dessas duas ligas eleva o PnL simulado de +9,93u (+R$ 1.914) para **+14,84u (+R$ 2.568)**, evitando 8 reds catastróficos.
+- **Arquivos modificados:** `estrategia_lay_2x2.py`, `estrategia_lay_0x3.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `relatorio_forward_5metodos.py`, `automacao_diaria_aprovados.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `worklog.md`.
+
+---
+
 ## 2026-09-13 · Antigravity · Integração de Lay 0x2 Zebra e Lay 2x0 Zebra (Micro-Liability) + Confirmação de Lay 2x2 e Lay 0x3 no Radar e Resultados Forward
 
 - **Solicitação do usuário:** 

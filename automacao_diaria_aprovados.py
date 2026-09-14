@@ -64,10 +64,14 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     
     for idx in range(len(df_games)):
         r = df_games.iloc[idx]
+        liga = str(r.get("League", r.get("Liga", "N/A")))
+        liga_upper = liga.upper()
+        if any(b in liga_upper for b in ['NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']):
+            continue
+            
         h, a = str(r.get("Home", "Casa")), str(r.get("Away", "Fora"))
         jogo = f"{h} x {a}"
         hora = str(r.get("Time", r.get("Hora", "15:00")))[:5]
-        liga = str(r.get("League", r.get("Liga", "N/A")))
         
         # 1. Lay 0x1 Super Fav Mandante (Odd_H_Back <= 1.90 | 5.0 <= Lay 0x1 <= 15.0)
         if oh_back.iloc[idx] <= 1.90 and 5.0 <= l01.iloc[idx] <= 15.0:

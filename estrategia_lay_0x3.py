@@ -13,6 +13,9 @@ import os
 import numpy as np
 import pandas as pd
 
+# Ligas com histórico de instabilidade defensiva ou alto índice de goleadas
+BLACKLIST_LIGAS_0X3 = ['NETHERLANDS 1', 'EREDIVISIE', 'SWEDEN 1', 'ALLSVENSKAN']
+
 def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """
     Avalia a grade diária da Betfair para entradas em Lay 0x3 com Trava Top 3 Menor Odd.
@@ -24,6 +27,11 @@ def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
     candidatos = []
     
     for idx, row in df_dia.iterrows():
+        liga = str(row.get("League", row.get("Div", "Liga Externa")))
+        liga_upper = liga.upper()
+        if any(b in liga_upper for b in BLACKLIST_LIGAS_0X3):
+            continue
+            
         odd_h = float(row.get('Odd_H_Back') or row.get('Odd_H_FT_Back') or row.get('Odd_H_FT') or row.get('Odd_H') or 0.0)
         odd_a = float(row.get('Odd_A_Back') or row.get('Odd_A_FT_Back') or row.get('Odd_A_FT') or row.get('Odd_A') or 0.0)
         odd_u25 = float(row.get('Odd_Under25_FT_Back') or row.get('Odd_Under25_FT') or row.get('Odd_Under25') or 0.0)
@@ -36,7 +44,6 @@ def avaliar_jogos_lay_0x3_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
         if 0.0 < odd_u25 <= 2.10 and 14.0 <= odd_0x3 <= 35.0 and (odd_a >= 1.85 or odd_a == 0.0):
             home = str(row.get("Home", row.get("Home_Team", "")))
             away = str(row.get("Away", row.get("Away_Team", "")))
-            liga = str(row.get("League", row.get("Div", "Liga Externa")))
             tm = str(row.get("Time", row.get("horario", "15:00")))[:5]
             bloco_hora = tm[:2]
             
