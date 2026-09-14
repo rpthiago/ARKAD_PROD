@@ -26,9 +26,9 @@ FOLDER = ROOT / "metodos_aprovados"
 st.title("📊 Resultados dos Métodos em Validação Forward — ARKAD")
 st.warning("""
 🚨 **STATUS DE GOVERNANÇA (02/09/2026): EM VALIDAÇÃO FORWARD (Stake-Zero)**
-* **Avaliação Científica:** O resultado do forward recente (+12,27u em 189 jogos de 13 dias) é **promissor**, mas NÃO aprovado.
-* **Intervalos de Confiança (Bootstrap Bloco-Dia):** Lay Draw IC95% `[−1,8%; +11,8%]` e Lay Home IC95% `[−0,7%; +13,6%]` **ainda cruzam o zero**, antes mesmo da correção de False Discovery Rate (FDR) contra ~45 hipóteses.
-* **Governança:** A autoridade canônica é o ledger `forward_oculto/`. Status de dinheiro real bloqueado até acumular $N \ge 400$ apostas ou 5 fins de semana com dados limpos e IC pós-FDR estritamente excluindo zero.
+* **Portfólio em Validação:** 5 métodos oficiais acompanhados em forward — **Lay 0x3 Top 3**, **Lay 2x2 Top 3**, **Lay Draw Super Fav**, **Lay Home Fav Visitante** e **Lay Over 4.5 Under Pesado**.
+* **Critério Científico:** Odds de LAY reais executáveis na Betfair Exchange e liquidação desacoplada.
+* **Governança:** A autoridade canônica é o ledger forward. Status de dinheiro real bloqueado até acumular $N \\ge 400$ apostas ou 5 fins de semana com dados limpos e IC pós-FDR estritamente excluindo zero.
 """)
 st.markdown(
     "Acompanhamento e auditoria dos sinais diários gerados e liquidados a partir da pasta "
@@ -54,7 +54,9 @@ st.sidebar.header("📁 Fonte dos Dados")
 fonte_dados = st.sidebar.radio(
     "Selecione a Base",
     options=[
-        "👑 Tríade em Validação Forward (Odds de Lay Reais Betfair)",
+        "👑 Portfólio em Validação Forward (5 Métodos: Lay 0x3, 2x2 + Tríade)",
+        "👑 Apenas Tríade (Draw, Home, Over 4.5)",
+        "📜 Ledger Oficial 5 Métodos (forward_5metodos_ledger.csv)",
         "📁 Todas as Planilhas Diárias (Inclui Legado)"
     ],
     index=0
@@ -96,17 +98,33 @@ def _ler_excel_seguro(path):
 
 
 @st.cache_data(ttl=60, show_spinner=False)
-def carregar_dados_aprovados(modo="oficial"):
+def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Métodos: Lay 0x3, 2x2 + Tríade)"):
     if not FOLDER.exists():
         return pd.DataFrame()
         
     df_all = pd.DataFrame()
-    if "Tríade" in modo:
-        # Priorizar CSV para evitar qualquer problema de formato/lock em Linux/Windows
-        f_csv = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv"
-        f_xlsx = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
-        f_gap = ROOT / "forward_oculto" / "gap_2108_0209.csv"
-        
+    f_csv = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv"
+    f_xlsx = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
+    f_ledger = FOLDER / "forward_5metodos_ledger.csv"
+    f_gap = ROOT / "forward_oculto" / "gap_2108_0209.csv"
+    
+    if "Ledger Oficial" in modo:
+        if f_ledger.exists():
+            try:
+                df_l = pd.read_csv(f_ledger, encoding="utf-8-sig")
+                for c in list(df_l.columns):
+                    if "todo" in c.lower(): df_l.rename(columns={c: "Método"}, inplace=True)
+                df_l["Jogo"] = df_l["Home"].astype(str) + " x " + df_l["Away"].astype(str)
+                df_l["Odd_Entrada"] = df_l["Odd_Lay"]
+                df_l["Placar"] = df_l["placar"].fillna("").astype(str).str.replace("-", "x")
+                df_l["Resultado"] = df_l["resultado"]
+                df_l["Lado"] = "LAY"
+                df_l["1/0"] = df_l["resultado"].map({"GREEN": 1.0, "RED": 0.0})
+                df_all = df_l
+            except Exception:
+                df_all = pd.DataFrame()
+    elif "Portfólio" in modo or "Tríade" in modo:
+        # 1. Carregar Base Mestre
         if f_csv.exists():
             try:
                 df_all = pd.read_csv(f_csv, encoding="utf-8-sig")
@@ -120,13 +138,45 @@ def carregar_dados_aprovados(modo="oficial"):
         if df_all.empty and f_xlsx.exists():
             df_all = _ler_excel_seguro(f_xlsx)
             
-        # Carregar e concatenar novas planilhas diárias (ex: 2026-09-03 em diante)
+        for c in list(df_all.columns):
+            if "todo" in c.lower(): df_all.rename(columns={c: "Método"}, inplace=True)
+
+        # 2. Se for Portfólio Completo, incorporar Lay 2x2 e Lay 0x3 do ledger histórico
+        if "Portfólio" in modo and f_ledger.exists():
+            try:
+                df_l = pd.read_csv(f_ledger, encoding="utf-8-sig")
+                for c in list(df_l.columns):
+                    if "todo" in c.lower(): df_l.rename(columns={c: "Método"}, inplace=True)
+                sub_23 = df_l[df_l["Método"].isin(["Lay 2x2 Top 3", "Lay 0x3 Top 3"])].copy()
+                sub_23["Método"] = sub_23["Método"].apply(
+                    lambda m: "Lay 2x2 Top 3 (Aprovado)" if "2x2" in str(m) else "Lay 0x3 Top 3 (Aprovado)"
+                )
+                sub_23["Jogo"] = sub_23["Home"].astype(str) + " x " + sub_23["Away"].astype(str)
+                sub_23["Odd_Entrada"] = sub_23["Odd_Lay"]
+                sub_23["Placar"] = sub_23["placar"].fillna("").astype(str).str.replace("-", "x")
+                sub_23["Resultado"] = sub_23["resultado"]
+                sub_23["Mercado"] = sub_23["Método"].apply(
+                    lambda m: "Correct Score (2x2)" if "2x2" in str(m) else "Correct Score (0x3)"
+                )
+                sub_23["Lado"] = "LAY"
+                sub_23["1/0"] = sub_23["resultado"].map({"GREEN": 1.0, "RED": 0.0})
+                df_all = pd.concat([df_all, sub_23], ignore_index=True)
+            except Exception:
+                pass
+                
+        # 3. Carregar e concatenar novas planilhas diárias (ex: 2026-09-03 em diante)
         novas_planilhas = sorted([f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx") if "Odds_Reais" not in f.name])
         for f_novo in novas_planilhas:
             df_n = _ler_excel_seguro(f_novo)
             if df_n is not None and not df_n.empty:
+                for c in list(df_n.columns):
+                    if "todo" in c.lower(): df_n.rename(columns={c: "Método"}, inplace=True)
                 df_all = pd.concat([df_all, df_n], ignore_index=True)
                 
+        # Se modo for estritamente Apenas Tríade, filtrar 2x2 e 0x3
+        if "Apenas Tríade" in modo and not df_all.empty and "Método" in df_all.columns:
+            df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3", na=False)].reset_index(drop=True)
+
         # Dedup inteligente mantendo a versão mais recente
         if not df_all.empty and "Jogo" in df_all.columns:
             df_all = df_all.drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last").reset_index(drop=True)
@@ -142,6 +192,8 @@ def carregar_dados_aprovados(modo="oficial"):
                 continue
             df = _ler_excel_seguro(f)
             if df is not None and not df.empty:
+                for c in list(df.columns):
+                    if "todo" in c.lower(): df.rename(columns={c: "Método"}, inplace=True)
                 df["_Arquivo"] = f.name
                 dfs.append(df)
                 
@@ -149,13 +201,14 @@ def carregar_dados_aprovados(modo="oficial"):
             return pd.DataFrame()
         df_all = pd.concat(dfs, ignore_index=True)
         
-    # Normalização segura de colunas
-    # Corrigir encoding quebrado se houver (ex: Mtodo -> Método)
-    for c in list(df_all.columns):
-        if "todo" in c.lower():
-            df_all.rename(columns={c: "Método"}, inplace=True)
+    # Normalização segura de colunas e deduplicação de nomes
+    cols = []
+    for c in df_all.columns:
+        cols.append("Método" if "todo" in str(c).lower() else c)
+    df_all.columns = cols
+    df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
             
-    df_all["Data"] = pd.to_datetime(df_all.get("Data"), errors="coerce")
+    df_all["Data"] = pd.to_datetime(df_all.get("Data"), errors="coerce", dayfirst=True)
     df_all["Hora"] = df_all.get("Hora", "15:00").astype(str).str[:5]
     
     # 1. Normalização de Odd de Entrada
@@ -177,6 +230,10 @@ def carregar_dados_aprovados(modo="oficial"):
             return "Lay Over 4.5 FT (Under Pesado)"
         elif "Draw" in m_str:
             return "Lay Draw (Fav <= 1.40)"
+        elif "2x2" in m_str:
+            return "Lay 2x2 Top 3 (Aprovado)"
+        elif "0x3" in m_str:
+            return "Lay 0x3 Top 3 (Aprovado)"
         elif "Under 0.5" in m_str:
             return "Lay Under 0.5 FT (Fav)"
         elif "0x1" in m_str:
@@ -221,10 +278,10 @@ def carregar_dados_aprovados(modo="oficial"):
         elif "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
             return "⚪ SKIP"
             
-        # 4. Auto-Settlement Inteligente por Placar (ex: "2x0", "1x3", "0x0")
-        plc = str(r.get("Placar", "")).strip().lower()
+        # 4. Auto-Settlement Inteligente por Placar (ex: "2x0", "1x3", "0x0", "2-1")
+        plc = str(r.get("Placar", "")).strip().lower().replace("-", "x")
         met = str(r.get("Método", ""))
-        if "x" in plc and plc != "vs":
+        if "x" in plc and plc != "vs" and "?" not in plc:
             partes = plc.split("x")
             try:
                 gh = int(partes[0].strip())
@@ -235,6 +292,20 @@ def carregar_dados_aprovados(modo="oficial"):
                     return "🟢 GREEN" if ga >= gh else "🔴 RED"
                 elif "Over 4.5" in met:
                     return "🟢 GREEN" if (gh + ga) <= 4 else "🔴 RED"
+                elif "2x2" in met:
+                    return "🔴 RED" if (gh == 2 and ga == 2) else "🟢 GREEN"
+                elif "0x3" in met:
+                    return "🔴 RED" if (gh == 0 and ga == 3) else "🟢 GREEN"
+                elif "0x1" in met:
+                    return "🔴 RED" if (gh == 0 and ga == 1) else "🟢 GREEN"
+                elif "Under 0.5" in met:
+                    return "🔴 RED" if (gh == 0 and ga == 0) else "🟢 GREEN"
+                elif "Away" in met or "1X" in met:
+                    return "🔴 RED" if (ga > gh) else "🟢 GREEN"
+                elif "0x2" in met:
+                    return "🔴 RED" if (gh == 0 and ga == 2) else "🟢 GREEN"
+                elif "2x0" in met:
+                    return "🔴 RED" if (gh == 2 and ga == 0) else "🟢 GREEN"
             except Exception:
                 pass
                 
@@ -359,12 +430,14 @@ with tab_metodo:
             wr_m = (w_m / n_m * 100) if n_m > 0 else 0.0
             pnl_m_u = g["PnL_u"].sum()
             pnl_m_rs = g["PnL_Reais"].sum()
+            roi_m = (pnl_m_u / n_m * 100) if n_m > 0 else 0.0
             res_m.append({
                 "Método": m,
                 "Total Jogos": n_m,
                 "Greens": w_m,
                 "Reds": r_m,
                 "Win Rate %": f"{wr_m:.1f}%",
+                "ROI %": f"{roi_m:+.2f}%",
                 "Lucro Líquido (u)": round(pnl_m_u, 3),
                 "Lucro Líquido (R$)": f"R$ {pnl_m_rs:+.2f}"
             })

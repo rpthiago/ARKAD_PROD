@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-13 · Antigravity · Inclusão de Lay 2x2 e Lay 0x3 no Painel de Resultados Forward (Página 02)
+
+- **Solicitação do usuário:** "coloque o lay 2x2 e lay 0x3 nos Resultados dos Métodos em Validação Forward — ARKAD".
+- **Diagnóstico do problema:**
+  1. A página `02_📊_Resultados_Metodos_Aprovados.py` carregava apenas a Tríade histórica (`Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv` de 21/08 a 09/09), ignorando o histórico de Lay 2x2 e 0x3 existente no ledger oficial (`forward_5metodos_ledger.csv`).
+  2. As planilhas diárias recentes geradas a partir de 10/09 continham sinais de Lay 2x2 e 0x3 com placar preenchido, mas a rotina `_calc_status` não possuía regras para Correct Score (`2x2` e `0x3`), deixando-os indefinidamente travados como `⏳ PENDENTE` com PnL `0.0`.
+  3. A normalização `_norm_metodo` não padronizava `Lay 2x2 Top 3 (Aprovado)` e `Lay 0x3 Top 3 (Aprovado)`.
+- **Implementações realizadas:**
+  - **`carregar_dados_aprovados`:**
+    - Opção padrão definida como: `"👑 Portfólio em Validação Forward (5 Métodos: Lay 0x3, 2x2 + Tríade)"` (584 jogos no total, sendo 506 liquidados: 461 Greens / 45 Reds, PnL +8.67u).
+    - Incorporação automática dos registros de Lay 2x2 e Lay 0x3 do ledger oficial (`forward_5metodos_ledger.csv`) concatenados com a base mestre e com as planilhas diárias mais recentes (`keep="last"` garantindo prevalência dos ajustes manuais).
+    - Opções adicionais mantidas e clarificadas no rádio da sidebar: `"👑 Apenas Tríade (Draw, Home, Over 4.5)"`, `"📜 Ledger Oficial 5 Métodos (forward_5metodos_ledger.csv)"` e `"📁 Todas as Planilhas Diárias (Inclui Legado)"`.
+    - Blindagem contra colunas duplicadas de `Método`/`Mtodo` pós-concatenação (`~df_all.columns.duplicated()`).
+  - **`_calc_status`:** Adicionadas regras de auto-liquidação por placar para Lay 2x2 (`RED` se `2-2`, senão `GREEN`) e Lay 0x3 (`RED` se `0-3`, senão `GREEN`), com suporte a formatos `2x1` e `2-1`.
+  - **`_norm_metodo`:** Padronização canônica para `Lay 2x2 Top 3 (Aprovado)` e `Lay 0x3 Top 3 (Aprovado)`.
+  - **Métricas:** Adicionada coluna `ROI %` no comparativo por método na aba `🎯 Desempenho por Método`.
+- **Arquivos modificados:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-13 · Antigravity · Estudo TOP 3 Menor Odd em Lay Home e Lay Draw (2026 Completo)
 
 - **Pergunta do usuário:** Avaliar se aplicar ranking diário TOP 3 por menor odd de lay (com desempate por horário) melhora o desempenho de Lay Home e Lay Draw no ano de 2026 completo, espelhando o estudo feito em Lay 2x2 e Lay 0x3.
