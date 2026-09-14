@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Reativação da Página de Sinais Lay 0x0 XGBoost no Streamlit e Sincronização do forward_0x0
+
+- **Solicitação do usuário:** "reative essa página no Streamlit agora"
+- **Feito:**
+  1. **Criação da Página Oficial (`pages/09_🎯_Sinais_Lay_0x0_XGBoost.py`):**
+     - Interface moderna integrada ao Streamlit com 3 Abas:
+       - Aba 1: Sinais do dia com busca interativa, cálculo de dimensionamento por Kelly 0.25 fracionário e links diretos para a Betfair Exchange.
+       - Aba 2: Livro-Razão (Ledger Forward Oficial) conectado a `forward_0x0/ledger_forward_0x0.csv` e `clv_0x0_log.csv`, exibindo Win Rate, PnL e CLV mediano.
+       - Aba 3: Engenharia do modelo e critérios congelados (Odd 10.0 a 20.0, EV > 2%, Liga 0x0 < 8%, Mkt < 10%).
+  2. **Sincronização de Arquivos do Modelo e Logs:**
+     - Copiada a pasta `forward_0x0/` com `ledger_forward_0x0.csv`, `clv_0x0_log.csv`, `gerar_picks_dia.py` e scripts de automação para o repositório principal `ARKAD_PROD`.
+     - Integrado `treinar_lay_0x0_rf_v2.py` e `PREREGISTRO_lay0x0_xgb_forward.md` para assegurar autonomia no deploy do Streamlit Cloud.
+- **Arquivos modificados/criados:** `pages/09_🎯_Sinais_Lay_0x0_XGBoost.py`, `forward_0x0/`, `treinar_lay_0x0_rf_v2.py`, `PREREGISTRO_lay0x0_xgb_forward.md`, `worklog.md`.
+
+---
+
 ## 2026-09-14 · Antigravity · Auditoria Forense do Claude: Reversão da Blacklist (Permutação p=0.49), Conciliação do Ledger Oficial (+9.79u) e Quarentena Stake-Zero das Zebras
 
 - **Solicitação do usuário (Feedback / Auditoria do Claude):**

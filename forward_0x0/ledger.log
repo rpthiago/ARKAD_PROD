@@ -1,0 +1,224 @@
+ledger atual: 6 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 0
+ledger gravado: ledger_forward_0x0.csv (6 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 6 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 0
+ledger gravado: ledger_forward_0x0.csv (6 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 6 linhas (6 liquidadas)
+picks novos incorporados: 2
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 243889 | base ate 2026-09-05
+  + 1 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 243889 | base ate 2026-09-05
+  + 1 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 245224 | base ate 2026-09-12
+  + 0 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 245224 | base ate 2026-09-12
+  + 0 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 245224 | base ate 2026-09-12
+  + 0 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 245224 | base ate 2026-09-12
+  + 0 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro

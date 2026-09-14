@@ -1,0 +1,157 @@
+===== 07/09/2026  9:00:00,83 ===== 
+Baixando Betfair...
+Carregando b365 + features 0x0...
+  Base rate Lay 0x0 (>=1 gol): 91.7%
+Casando odds lay reais da Betfair (pode demorar)...
+  2024-03: 80 bets
+  2024-04: 253 bets
+  2024-05: 204 bets
+  2024-06: 96 bets
+  2024-07: 123 bets
+  2024-08: 239 bets
+  2024-09: 216 bets
+  2024-10: 198 bets
+  2024-11: 183 bets
+  2024-12: 198 bets
+  2025-01: 192 bets
+  2025-02: 248 bets
+  2025-03: 331 bets
+  2025-04: 222 bets
+  2025-05: 386 bets
+  2025-06: 121 bets
+  2025-07: 160 bets
+  2025-08: 416 bets
+  2025-09: 295 bets
+  2025-10: 328 bets
+  2025-11: 329 bets
+  2025-12: 221 bets
+  2026-01: 351 bets
+  2026-02: 426 bets
+  2026-03: 400 bets
+  2026-04: 367 bets
+  2026-05: 303 bets
+  2026-06: 29 bets
+  2026-07: 124 bets
+  2026-08: 193 bets
+
+Done! 7232 apostas OOS (XGBoost) salvas em lay_0x0_real_oos_bets_xgb.csv
+=== LAY 0x0 XGBOOST — regra congelada (liga<0.08 & mkt<0.10 & 10<=lay<=20 & ev>0.02) ===
+universo OOS: 2024-03-16 -> 2026-08-20 | N pos-regra=1947
+
+BACKTEST:
+  OOS completo                       N=1947 WR=95.1% ROI= +17.3% IC95=[+3.5%,+29.9%] p=0.0092 lay_med=16.0
+  OOS ago/2025+ (janela pre-reg)     N=1129 WR=95.3% ROI= +21.0% IC95=[+5.3%,+36.2%] p=0.0036 lay_med=16.5
+    H1 (1a metade)                   N=565  WR=95.6% ROI= +25.6% IC95=[+11.4%,+39.9%] p=0.0000 lay_med=16.0
+    H2 (2a metade)                   N=564  WR=95.0% ROI= +16.4% IC95=[-12.0%,+41.8%] p=0.1406 lay_med=16.5
+
+FORWARD (>= 2026-08-03, pre-registrado):
+  forward                            N=46   WR=95.7% ROI= +34.3% IC95=[+34.3%,+34.3%] p=0.0000 lay_med=17.8
+  por mes:
+    2026-08: N=46 ROI=+34.3% (44G/2R)
+  CRITERIO pre-registrado (piso IC95 > +2%): piso=+34.3% -> APROVA
+historico forward 0x0 atualizado: N=46 ROI=+34.3% (base ate 2026-08-20)
+===== 14/09/2026  9:00:00,98 ===== 
+Baixando Betfair...
+Carregando b365 + features 0x0...
+  Base rate Lay 0x0 (>=1 gol): 91.7%
+Casando odds lay reais da Betfair (pode demorar)...
+  2024-03: 75 bets
+  2024-04: 230 bets
+  2024-05: 201 bets
+  2024-06: 103 bets
+  2024-07: 119 bets
+  2024-08: 252 bets
+  2024-09: 215 bets
+  2024-10: 192 bets
+  2024-11: 189 bets
+  2024-12: 201 bets
+  2025-01: 206 bets
+  2025-02: 250 bets
+  2025-03: 335 bets
+  2025-04: 211 bets
+  2025-05: 369 bets
+  2025-06: 127 bets
+  2025-07: 169 bets
+  2025-08: 392 bets
+  2025-09: 292 bets
+  2025-10: 333 bets
+  2025-11: 337 bets
+  2025-12: 221 bets
+  2026-01: 333 bets
+  2026-02: 401 bets
+  2026-03: 411 bets
+  2026-04: 374 bets
+  2026-05: 310 bets
+  2026-06: 29 bets
+  2026-07: 123 bets
+  2026-08: 346 bets
+  2026-09: 15 bets
+
+Done! 7361 apostas OOS (XGBoost) salvas em lay_0x0_real_oos_bets_xgb.csv
+ledger atual: 8 linhas (6 liquidadas)
+picks novos incorporados: 0
+pendentes de liquidacao: 2
+carregando base b365 para os placares...
+  placares disponiveis: 245224 | base ate 2026-09-12
+  + 0 placares da planilha manual (so onde a b365 nao chegou)
+liquidados agora: 0 | ainda pendentes: 2
+ledger gravado: ledger_forward_0x0.csv (8 linhas)
+
+==========================================================================
+FORWARD AO VIVO do Lay 0x0 — so picks enviados, so dentro da regra congelada
+==========================================================================
+N=6 | 5G/1R | WR=83.33% vs break-even medio 94.19% -> gap -10.86 pp
+LIABILITY=1u: soma -0.691 u | ROI -11.51%
+STAKE=1u    : soma -10.750 u | ROI -179.17%
+
+por pick:
+  data        jogo                                  odd placar     res   pnl_liab
+  2026-08-15  Blackpool x Wycombe                 14.50 1-1      GREEN    +0.0704
+  2026-08-15  Mjallby x Sirius                    20.00 4-3      GREEN    +0.0500
+  2026-08-15  Pogon Siedlce x Polonia Warszawa    17.50 1-0      GREEN    +0.0576
+  2026-08-15  Politehnica Timisoara x Unirea Slo  16.00 1-0      GREEN    +0.0633
+  2026-08-15  Reading x Luton                     15.00 3-4      GREEN    +0.0679
+  2026-09-09  Hradec Kralove x Plzen              16.50 0-0        RED    -1.0000
+
+pendentes (sem placar na base ainda):
+   2026-09-12 AIK x Vasteras SK @ 16.5
+   2026-09-12 Leyton Orient x Wycombe @ 17.5
+
+progresso: 6 de 1476 apostas (0.4%) — ver EMENDA no pre-registro
+=== LAY 0x0 XGBOOST — regra congelada (liga<0.08 & mkt<0.10 & 10<=lay<=20 & ev>0.02) ===
+universo OOS: 2024-03-16 -> 2026-09-05 | N pos-regra=2009
+comissao 5% | decisao na convencao LIABILITY=1u | bootstrap de bloco exige nk>=6 meses
+
+BACKTEST:
+  OOS completo                     N=2009  WR= 95.17% BE= 94.04% gap=+1.14pp lay_med=16.0
+                                     LIABILITY=1u ROI= +1.21%  IC95=[+0.44%,+1.90%] p=0.0020 nk=31
+                                     STAKE=1u     ROI=+17.47%  IC95=[+5.67%,+27.97%] p=0.0029 nk=31
+  OOS ago/2025+ (janela pre-reg)   N=1165  WR= 95.54% BE= 94.11% gap=+1.43pp lay_med=16.5
+                                     LIABILITY=1u ROI= +1.52%  IC95=[+0.60%,+2.36%] p=0.0014 nk=14
+                                     STAKE=1u     ROI=+22.39%  IC95=[+8.78%,+34.55%] p=0.0015 nk=14
+    H1 (1a metade)                 N=584   WR= 95.89% BE= 94.03% gap=+1.86pp lay_med=16.5
+                                     LIABILITY=1u ROI= +1.99%  IC95=[+0.64%,+3.24%] p=0.0019 nk=7
+                                     STAKE=1u     ROI=+29.02%  IC95=[+9.14%,+47.21%] p=0.0014 nk=7
+    H2 (2a metade)                 N=581   WR= 95.18% BE= 94.19% gap=+0.99pp lay_med=16.5
+                                     LIABILITY=1u ROI= +1.05%  IC95=[-0.27%,+1.96%] p=0.0478 nk=8
+                                     STAKE=1u     ROI=+15.72%  IC95=[-5.13%,+28.50%] p=0.0519 nk=8
+
+RECORTE RECENTE DA SIMULACAO (>= 2026-08-03) — NAO e o forward, e referencia:
+  simulacao ago/2026+              N=85    WR= 95.29% BE= 94.31% gap=+0.98pp lay_med=17.0
+                                     LIABILITY=1u ROI= +1.01%  IC INDEFINIDO (nk=2 blocos < 6 minimo)
+                                     STAKE=1u     ROI=+22.88%  IC INDEFINIDO (nk=2 blocos < 6 minimo)
+    2026-08: N=79   ROI=  +0.62% (75G/4R)
+    2026-09: N=6    ROI=  +6.21% (6G/0R)
+
+FORWARD AO VIVO (pre-registrado) — ledger dos picks enviados:
+  ledger: 8 picks enviados | 6 liquidados na regra | 0 fora da regra | 2 pendentes
+  forward ao vivo                  N=6     WR= 83.33% BE= 94.19% gap=-10.86pp
+                                     LIABILITY=1u ROI=-11.51%  IC INDEFINIDO (nk=2 blocos < 6 minimo)
+                                     STAKE=1u     ROI=-179.17%  IC INDEFINIDO (nk=2 blocos < 6 minimo)
+
+  CRITERIO (emenda 2026-09-10) — LIABILITY=1u, decisao de 3 vias:
+    N=6 de 1476 minimo (0.4%) | blocos=2 de 6 minimo
+    -> INCONCLUSIVO: IC INDEFINIDO (nk=2 blocos < 6 minimo). Sem IC nao ha decisao possivel.
+    (para 80% de poder o N e 3012; ver PREREGISTRO_lay0x0_xgb_forward.md)
+historico do forward atualizado: N=6 (5G/1R) | WR 83.33% vs BE 94.19% (gap -10.86pp)
+  ROI liability=-11.51% | ROI stake=-179.17% | pendentes=2 | fora da regra=0
