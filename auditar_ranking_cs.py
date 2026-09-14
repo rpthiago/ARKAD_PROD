@@ -54,7 +54,7 @@ def main():
         print("%s  |  %s em %d-%d  |  qualificados: %d (%.1f/dia em %d dias)" % (nome, col, lo, hi, len(q), q.groupby("Date").size().mean(), q.Date.nunique()))
         print("=" * 118)
         print("  %-9s %-6s %6s %5s %4s %6s %6s %6s %7s %6s %7s %-18s %6s" % ("periodo", "corte", "N", "G", "R", "red%", "WR", "BE", "edge", "odd", "ROI", "IC95 ROI", "P<=0"))
-        for per, sub in [("completo", q), ("2026", q[q.Date >= "2026-01-01"])]:
+        for per, sub in [("completo", q), ("ago/2025+", q[q.Date >= "2025-08-01"]), ("2026", q[q.Date >= "2026-01-01"])]:
             for ctag, k in CORTES:
                 s = sub if k is None else sub[sub["rank"] <= k]
                 if len(s) == 0:
