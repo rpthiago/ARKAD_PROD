@@ -40,6 +40,8 @@ Esta página monitora em **tempo real** as oportunidades quantitativas do métod
 > ⚠️ **REGRAS DO MERCADO:** A aposta ganha (**GREEN**) se a partida terminar com **qualquer placar diferente de 2x2**. O único placar perdedor (**RED**) é o placar exato de `2 x 2`.
 """)
 
+st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score 2-2 tem spread alargado de manhã cedo. A execução recomendada pela auditoria ocorre nos **15 a 60 minutos anteriores ao Kickoff**, momento em que o spread cai para **~13%** e a liquidez atinge o pico (R$ 180 a R$ 240 no melhor lay). Se no momento do KO a odd tiver saído da faixa [8.0, 20.0], o sinal é cancelado (*Fora da Faixa no KO*). Mantido estritamente o critério **Top 3 Menor Odd**.")
+
 # Métricas no Topo
 m1, m2, m3, m4 = st.columns(4)
 with m1:

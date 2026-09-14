@@ -135,25 +135,26 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
             })
 
         # 6. Lay 0x2 / 2x0 Zebra (Super Fav Mandante H_Back <= 1.45 ou Super Fav Visitante A_Back <= 1.45)
+        liab_micro = min(liability_fixa, 50.0)
         if oh_back.iloc[idx] <= 1.45 and 5.0 <= l02.iloc[idx] <= 25.0:
             odd_e = round(float(l02.iloc[idx]), 2)
-            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            stake_sug = round(liab_micro / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
-                "Método": "Lay 0x2 Zebra", "Mercado": "CS (0x2)", "Lado": "LAY",
+                "Método": "Lay 0x2 Zebra (Micro-Liability)", "Mercado": "CS (0x2)", "Lado": "LAY",
                 "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
-                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+                "Risco_Red_R$": liab_micro, "Resultado": "PENDENTE"
             })
         elif oa_back.iloc[idx] <= 1.45 and 5.0 <= l20.iloc[idx] <= 25.0:
             odd_e = round(float(l20.iloc[idx]), 2)
-            stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+            stake_sug = round(liab_micro / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
-                "Método": "Lay 2x0 Zebra", "Mercado": "CS (2x0)", "Lado": "LAY",
+                "Método": "Lay 2x0 Zebra (Micro-Liability)", "Mercado": "CS (2x0)", "Lado": "LAY",
                 "Odd_Entrada": odd_e, "Odd_Fav": round(float(oa_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
-                "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+                "Risco_Red_R$": liab_micro, "Resultado": "PENDENTE"
             })
 
         # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)

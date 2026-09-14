@@ -54,9 +54,9 @@ st.sidebar.header("📁 Fonte dos Dados")
 fonte_dados = st.sidebar.radio(
     "Selecione a Base",
     options=[
-        "👑 Portfólio em Validação Forward (5 Métodos: Lay 0x3, 2x2 + Tríade)",
+        "👑 Portfólio em Validação Forward (Lay 0x3, 2x2, Tríade + Zebras 0x2/2x0)",
         "👑 Apenas Tríade (Draw, Home, Over 4.5)",
-        "📜 Ledger Oficial 5 Métodos (forward_5metodos_ledger.csv)",
+        "📜 Ledger Oficial Forward (forward_5metodos_ledger.csv)",
         "📁 Todas as Planilhas Diárias (Inclui Legado)"
     ],
     index=0
@@ -141,26 +141,66 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
         for c in list(df_all.columns):
             if "todo" in c.lower(): df_all.rename(columns={c: "Método"}, inplace=True)
 
-        # 2. Se for Portfólio Completo, incorporar Lay 2x2 e Lay 0x3 do ledger histórico
+        # 2. Se for Portfólio Completo, incorporar Lay 2x2, Lay 0x3 e Zebras do ledger oficial
         if "Portfólio" in modo and f_ledger.exists():
             try:
                 df_l = pd.read_csv(f_ledger, encoding="utf-8-sig")
                 for c in list(df_l.columns):
                     if "todo" in c.lower(): df_l.rename(columns={c: "Método"}, inplace=True)
-                sub_23 = df_l[df_l["Método"].isin(["Lay 2x2 Top 3", "Lay 0x3 Top 3"])].copy()
-                sub_23["Método"] = sub_23["Método"].apply(
-                    lambda m: "Lay 2x2 Top 3 (Aprovado)" if "2x2" in str(m) else "Lay 0x3 Top 3 (Aprovado)"
+                alvos_ledger = [
+                    "Lay 2x2 Top 3", "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)",
+                    "Lay 0x2 Zebra (Micro-Liability)", "Lay 2x0 Zebra (Micro-Liability)"
+                ]
+                sub_l = df_l[df_l["Método"].isin(alvos_ledger)].copy()
+                def _map_m(m):
+                    m_str = str(m)
+                    if "2x2" in m_str: return "Lay 2x2 Top 3 (Aprovado)"
+                    if "ampla" in m_str.lower(): return "Lay 0x3 (Regra Ampla - Paralelo)"
+                    if "0x3" in m_str: return "Lay 0x3 Top 3 (Aprovado)"
+                    if "0x2" in m_str: return "Lay 0x2 Zebra (Micro-Liability)"
+                    if "2x0" in m_str: return "Lay 2x0 Zebra (Micro-Liability)"
+                    return m_str
+                sub_l["Método"] = sub_l["Método"].apply(_map_m)
+                sub_l["Jogo"] = sub_l["Home"].astype(str) + " x " + sub_l["Away"].astype(str)
+                sub_l["Odd_Entrada"] = sub_l["Odd_Lay"]
+                sub_l["Placar"] = sub_l["placar"].fillna("").astype(str).str.replace("-", "x")
+                sub_l["Resultado"] = sub_l["resultado"]
+                def _map_mercado(m):
+                    if "2x2" in m: return "Correct Score (2x2)"
+                    if "0x3" in m: return "Correct Score (0x3)"
+                    if "0x2" in m: return "Correct Score (0x2)"
+                    if "2x0" in m: return "Correct Score (2x0)"
+                    return "Outro"
+                sub_l["Mercado"] = sub_l["Método"].apply(_map_mercado)
+                sub_l["Lado"] = "LAY"
+                sub_l["1/0"] = sub_l["resultado"].map({"GREEN": 1.0, "RED": 0.0})
+                df_all = pd.concat([df_all, sub_l], ignore_index=True)
+            except Exception:
+                pass
+
+        # 2b. Incorporar histórico auditado oficial de Zebras (0x2 e 2x0) da varredura
+        f_audit = ROOT / "varredura_over" / "auditoria_ranking_cs_2026-09-13_apostas.csv"
+        if "Portfólio" in modo and f_audit.exists():
+            try:
+                df_a = pd.read_csv(f_audit)
+                s_zeb = df_a[df_a["metodo"].str.contains("0x2|2x0", na=False)].copy()
+                s_zeb["Data"] = pd.to_datetime(s_zeb["Date"], errors="coerce")
+                s_zeb["Hora"] = "15:00"
+                s_zeb["Liga"] = s_zeb["League"].fillna("N/A")
+                s_zeb["Jogo"] = s_zeb["Home"].astype(str) + " x " + s_zeb["Away"].astype(str)
+                s_zeb["Método"] = s_zeb["metodo"].apply(
+                    lambda m: "Lay 0x2 Zebra (Micro-Liability)" if "0x2" in str(m) else "Lay 2x0 Zebra (Micro-Liability)"
                 )
-                sub_23["Jogo"] = sub_23["Home"].astype(str) + " x " + sub_23["Away"].astype(str)
-                sub_23["Odd_Entrada"] = sub_23["Odd_Lay"]
-                sub_23["Placar"] = sub_23["placar"].fillna("").astype(str).str.replace("-", "x")
-                sub_23["Resultado"] = sub_23["resultado"]
-                sub_23["Mercado"] = sub_23["Método"].apply(
-                    lambda m: "Correct Score (2x2)" if "2x2" in str(m) else "Correct Score (0x3)"
+                s_zeb["Mercado"] = s_zeb["metodo"].apply(
+                    lambda m: "Correct Score (0x2)" if "0x2" in str(m) else "Correct Score (2x0)"
                 )
-                sub_23["Lado"] = "LAY"
-                sub_23["1/0"] = sub_23["resultado"].map({"GREEN": 1.0, "RED": 0.0})
-                df_all = pd.concat([df_all, sub_23], ignore_index=True)
+                s_zeb["Lado"] = "LAY"
+                s_zeb["Odd_Entrada"] = s_zeb["odd"]
+                s_zeb["Odd_Fav"] = s_zeb.apply(lambda r: r["oh"] if "0x2" in str(r["metodo"]) else r["oa"], axis=1)
+                s_zeb["Placar"] = s_zeb["gh"].astype(str) + "x" + s_zeb["ga"].astype(str)
+                s_zeb["Resultado"] = s_zeb["is_red"].apply(lambda r: "RED" if r == 1 else "GREEN")
+                s_zeb["1/0"] = s_zeb["is_red"].apply(lambda r: 0.0 if r == 1 else 1.0)
+                df_all = pd.concat([df_all, s_zeb], ignore_index=True)
             except Exception:
                 pass
                 
@@ -173,9 +213,9 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
                     if "todo" in c.lower(): df_n.rename(columns={c: "Método"}, inplace=True)
                 df_all = pd.concat([df_all, df_n], ignore_index=True)
                 
-        # Se modo for estritamente Apenas Tríade, filtrar 2x2 e 0x3
+        # Se modo for estritamente Apenas Tríade, filtrar 2x2, 0x3 e Zebras
         if "Apenas Tríade" in modo and not df_all.empty and "Método" in df_all.columns:
-            df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3", na=False)].reset_index(drop=True)
+            df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3|Zebra|0x2|2x0", na=False)].reset_index(drop=True)
 
         # Dedup inteligente mantendo a versão mais recente
         if not df_all.empty and "Jogo" in df_all.columns:
@@ -233,13 +273,17 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
         elif "2x2" in m_str:
             return "Lay 2x2 Top 3 (Aprovado)"
         elif "0x3" in m_str:
+            if "ampla" in m_str.lower() or "sem ranking" in m_str.lower():
+                return "Lay 0x3 (Regra Ampla - Paralelo)"
             return "Lay 0x3 Top 3 (Aprovado)"
         elif "Under 0.5" in m_str:
             return "Lay Under 0.5 FT (Fav)"
         elif "0x1" in m_str:
             return "Lay 0x1 Super Fav"
-        elif "0x2" in m_str or "2x0" in m_str:
-            return "Lay 0x2 / 2x0 Zebra"
+        elif "0x2" in m_str:
+            return "Lay 0x2 Zebra (Micro-Liability)"
+        elif "2x0" in m_str:
+            return "Lay 2x0 Zebra (Micro-Liability)"
         elif "Under 1.5" in m_str:
             return "Lay Under 1.5 FT (XGBoost)"
         return m_str
@@ -254,6 +298,7 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
         res = str(r.get("Resultado", "")).upper().strip()
         r_num = r.get("1/0")
         gr = r.get("Green")
+        st_txt = str(r.get("status", "")).upper()
         
         # 1. Se tem 1/0 explícito preenchido
         if pd.notna(r_num):
@@ -275,6 +320,8 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
             return "🟢 GREEN"
         elif res == "RED":
             return "🔴 RED"
+        elif "FORA_DA_FAIXA" in res or "FORA_DA_FAIXA" in st_txt:
+            return "⚪ FORA_DA_FAIXA"
         elif "SKIP" in res or str(r.get("Status_Odd", "")).upper() == "ODD_INVALIDA_SKIP":
             return "⚪ SKIP"
             
@@ -326,7 +373,11 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
         return 0.0
         
     df_all["PnL_u"] = df_all.apply(_calc_pnl_u, axis=1)
-    df_all["PnL_Reais"] = df_all["PnL_u"] * stake_base
+    def _calc_pnl_rs(r):
+        met = str(r.get("Método", ""))
+        liab = min(stake_base, 50.0) if ("Zebra" in met or "Micro-Liability" in met) else stake_base
+        return round(float(r.get("PnL_u", 0.0)) * liab, 2)
+    df_all["PnL_Reais"] = df_all.apply(_calc_pnl_rs, axis=1)
     
     return df_all.sort_values(["Data", "Método"]).reset_index(drop=True)
 

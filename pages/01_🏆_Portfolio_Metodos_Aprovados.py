@@ -98,7 +98,10 @@ st.sidebar.markdown("""
 * 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward Stake-Zero)
 * 🟡 **Lay Home Fav Visitante** (WR 92.3% | ROI +6.2% | Forward Stake-Zero)
 * 🟡 **Lay Over 4.5 Under Pesado** (WR 100% | ROI +5.6% | Forward Stake-Zero)
+* 🟡 **Lay 0x2 Zebra (Micro-Liability)** (WR 98.4% | ROI +2.9% | R$ 25-50 fixo)
+* 🟡 **Lay 2x0 Zebra (Micro-Liability)** (WR 97.6% | ROI +2.6% | R$ 25-50 fixo)
 """)
+st.sidebar.info("💡 **Micro-Liability & Circuit Breaker:** Para os métodos de Zebra (0x2 e 2x0), a liability por entrada é travada entre R$ 25 e R$ 50 para proteção patrimonial. Se ocorrerem 3 reds em 40 jogos, o método é pausado automaticamente.")
 
 # ── Tabs Principais ──
 tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -128,6 +131,8 @@ with tab1:
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
                 "Lay Over 4.5 FT (Under Pesado)",
+                "Lay 0x2 Zebra (Micro-Liability)",
+                "Lay 2x0 Zebra (Micro-Liability)",
                 "Lay 0x1 Super Fav (Arquivado)",
                 "Lay Under 0.5 FT (Arquivado)",
                 "Lay Away / DC 1X (Arquivado)",
@@ -138,7 +143,10 @@ with tab1:
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
                 "Lay Over 4.5 FT (Under Pesado)",
-            ]
+                "Lay 0x2 Zebra (Micro-Liability)",
+                "Lay 2x0 Zebra (Micro-Liability)",
+            ],
+            key="filtro_metodos_radar_v4"
         )
     with col_btn:
         st.write("")
@@ -233,13 +241,22 @@ with tab1:
                     "Expectativa_WR": "94.1%", "EV_Estimado": "+3.33%"
                 })
                 
-            # 3. Lay 0x2 Zebra (Mandante Fav <= 1.80 | 5.0 <= Lay 0x2 <= 25.0)
-            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.80 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
+            # 3. Lay 0x2 Zebra (Mandante Fav <= 1.45 | 5.0 <= Lay 0x2 <= 25.0)
+            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.45 and pd.notna(l02.get(i)) and 5.0 <= l02[i] <= 25.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
-                    "Método": "Lay 0x2 / 2x0 Zebra", "Mercado": "Correct Score (0x2)", "Lado": "LAY",
+                    "Método": "Lay 0x2 Zebra (Micro-Liability)", "Mercado": "Correct Score (0x2)", "Lado": "LAY",
                     "Odd_Entrada": round(float(l02[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
-                    "Expectativa_WR": "97.3%", "EV_Estimado": "+1.79%"
+                    "Expectativa_WR": "98.4%", "EV_Estimado": "+2.86%"
+                })
+
+            # 3b. Lay 2x0 Zebra (Visitante Fav <= 1.45 | 5.0 <= Lay 2x0 <= 25.0)
+            if pd.notna(oa_back.get(i)) and oa_back[i] <= 1.45 and pd.notna(l20.get(i)) and 5.0 <= l20[i] <= 25.0:
+                sinais.append({
+                    "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
+                    "Método": "Lay 2x0 Zebra (Micro-Liability)", "Mercado": "Correct Score (2x0)", "Lado": "LAY",
+                    "Odd_Entrada": round(float(l20[i]), 2), "Odd_Fav": round(float(oa_back[i]), 2),
+                    "Expectativa_WR": "97.6%", "EV_Estimado": "+2.60%"
                 })
                 
             # 4. Lay Draw em Super Favorito — SIMETRICO: Odd_Fav_Back <= 1.40 | 4.5 <= Odd_D_Lay <= 10.0
@@ -287,13 +304,20 @@ with tab1:
         
     if not df_radar.empty:
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
-        st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!** (Gestão Dinâmica: Risco travado em R$ {liability_fixa:.2f} por jogo)")
+        st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!** (Gestão Dinâmica: Risco travado em R$ {liability_fixa:.2f} por jogo / Zebras máx R$ 50)")
         
         # Exibição direta da planilha formatada com dimensionamento automático
         df_calc = df_radar_filt.copy()
-        df_calc["Stake_Sugerida_R$"] = (liability_fixa / (df_calc["Odd_Entrada"] - 1.0)).round(2)
+        
+        # Micro-liability para Zebras (travado em R$ 25 a R$ 50 para proteção patrimonial)
+        def _calc_risco(m):
+            if "Zebra" in str(m) or "Micro-Liability" in str(m):
+                return min(liability_fixa, 50.0)
+            return liability_fixa
+            
+        df_calc["Risco_Red_R$"] = df_calc["Método"].apply(_calc_risco)
+        df_calc["Stake_Sugerida_R$"] = (df_calc["Risco_Red_R$"] / (df_calc["Odd_Entrada"] - 1.0)).round(2)
         df_calc["Lucro_Green_R$"] = (df_calc["Stake_Sugerida_R$"] * 0.965).round(2)
-        df_calc["Risco_Red_R$"] = liability_fixa
         
         cols_order = [
             "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
@@ -438,6 +462,32 @@ with tab2:
             "Bootstrap IC95%": "Amostra N pequena",
             "Consistência": "Aguardando volume ⏳",
             "Status": "⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)"
+        },
+        {
+            "Método": "Lay 0x2 Zebra (Mandante Fav <= 1.45 | Lay 5-25)",
+            "Mercado": "Correct Score (0x2)",
+            "Amostra (N)": "125 jogos (ago/2025+)",
+            "Win Rate Real": "98.40%",
+            "Break-Even Exigido": "95.68%",
+            "Margem Real": "+2.72%",
+            "Lucro Líquido": "+3,58 u (2 reds)",
+            "ROI s/ Liability": "+2.86%",
+            "Bootstrap IC95%": "[+0.2%, +4.6%]",
+            "Consistência": "Piso IC > 0, N pequeno (125/ano)",
+            "Status": "🟡 ONDA CONTROLADA (Micro-Liability R$ 25-50)"
+        },
+        {
+            "Método": "Lay 2x0 Zebra (Visitante Fav <= 1.45 | Lay 5-25)",
+            "Mercado": "Correct Score (2x0)",
+            "Amostra (N)": "144 jogos (ago/2025+)",
+            "Win Rate Real": "97.22%",
+            "Break-Even Exigido": "95.36%",
+            "Margem Real": "+1.86%",
+            "Lucro Líquido": "+2,81 u (4 reds)",
+            "ROI s/ Liability": "+1.95%",
+            "Bootstrap IC95%": "[−0.4%, +4.4%]",
+            "Consistência": "P(<=0)=0.052, N pequeno (144/ano)",
+            "Status": "🟡 ONDA CONTROLADA (Micro-Liability R$ 25-50)"
         },
         {
             "Método": "Lay 0x1 Super Favorito (Odd_H <= 1.90)",

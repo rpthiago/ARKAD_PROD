@@ -30,6 +30,8 @@ Esta página monitora em **tempo real** as oportunidades do método **Lay 0x3 Vi
 > ⚠️ **IMPORTANTE (FULL MATCH):** A estratégia opera em **Full Match** (deixando a operação correr até o final da partida). O robô só toma Red se o placar final for exatamente 0x3 para o visitante.
 """)
 
+st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score apresenta spread aberto no início do dia (p90 150%). A execução recomendada pela auditoria ocorre nos **15 a 60 minutos anteriores ao Kickoff**, momento em que o spread colapsa para **13% a 18%** e a liquidez atinge o pico (R$ 160 a R$ 200 no melhor lay). Se no momento do KO a odd tiver saído da faixa [14.0, 35.0], o sinal deve ser descartado (*Fora da Faixa no KO*).")
+
 # Inicializa o estado de sessão
 if "sinais_lay0x3" not in st.session_state:
     st.session_state.sinais_lay0x3 = None
@@ -46,6 +48,17 @@ with col1:
         st.warning("⚠️ **FUTPYTHON_TOKEN** não está configurada nos Secrets do Streamlit Cloud! A coleta ao vivo usará as bases locais.")
     
     target_date = st.date_input("Data dos Jogos", value=date.today(), key="date_input_0x3")
+
+    st.markdown("### 🎯 Seleção do Método")
+    modo_sel_0x3 = st.radio(
+        "Modo de Operação",
+        [
+            "👑 Top 3 Menor Odd (Oficial)",
+            "⚡ Regra Ampla (Forward Paralelo - Todos os Jogos)"
+        ],
+        index=0,
+        key="modo_sel_0x3"
+    )
     
     st.markdown("### 💰 Calculadora de Gestão de Banca")
     banca_val = st.number_input("Saldo da Banca (R$)", min_value=10.0, value=1000.0, step=100.0, key="banca_0x3")
@@ -102,7 +115,7 @@ if gerar_btn:
                             "horario": tm,
                             "liga": liga,
                             "jogo": f"{home} x {away}",
-                            "metodo": "Lay 0x3 Correct Score",
+                            "metodo": "Lay 0x3 Top 3" if "Top 3" in modo_sel_0x3 else "Lay 0x3 Regra Ampla",
                             "odd_execucao": odd_0x3,
                             "mercado": "CS_0x3",
                             "lado": "lay",
@@ -110,36 +123,37 @@ if gerar_btn:
                         })
                         
             if sinais:
-                # Trava de Segurança: Top 3 Menor Odd com Desempate por Horário Distinto
-                # 1. Ordena primariamente por menor odd
-                # 2. Se houver empates de odd, prioriza horários diferentes dos já selecionados
-                # 3. Se não houver horário diferente para a mesma odd, seleciona normalmente
                 sinais_sorted = sorted(sinais, key=lambda x: x["odd_execucao"])
-                top3_sinais = []
-                horarios_usados = set()
-                
-                odds_unicas = sorted(list(set([s["odd_execucao"] for s in sinais_sorted])))
-                for o in odds_unicas:
-                    grupo = [s for s in sinais_sorted if s["odd_execucao"] == o]
+                if "Top 3" in modo_sel_0x3:
+                    # Trava de Segurança: Top 3 Menor Odd com Desempate por Horário Distinto
+                    top3_sinais = []
+                    horarios_usados = set()
                     
-                    # Passo A: Prioriza horários diferentes
-                    for s in grupo:
+                    odds_unicas = sorted(list(set([s["odd_execucao"] for s in sinais_sorted])))
+                    for o in odds_unicas:
+                        grupo = [s for s in sinais_sorted if s["odd_execucao"] == o]
+                        
+                        # Passo A: Prioriza horários diferentes
+                        for s in grupo:
+                            if len(top3_sinais) == 3: break
+                            h = s.get("horario", "")
+                            if h not in horarios_usados:
+                                top3_sinais.append(s)
+                                horarios_usados.add(h)
                         if len(top3_sinais) == 3: break
-                        h = s.get("horario", "")
-                        if h not in horarios_usados:
-                            top3_sinais.append(s)
-                            horarios_usados.add(h)
-                    if len(top3_sinais) == 3: break
-                    
-                    # Passo B: Se ainda faltam vagas nessa mesma odd, preenche com os demais
-                    for s in grupo:
+                        
+                        # Passo B: Se ainda faltam vagas nessa mesma odd, preenche com os demais
+                        for s in grupo:
+                            if len(top3_sinais) == 3: break
+                            if s not in top3_sinais:
+                                top3_sinais.append(s)
+                                horarios_usados.add(s.get("horario", ""))
                         if len(top3_sinais) == 3: break
-                        if s not in top3_sinais:
-                            top3_sinais.append(s)
-                            horarios_usados.add(s.get("horario", ""))
-                    if len(top3_sinais) == 3: break
-                    
-                sinais = top3_sinais
+                        
+                    sinais = top3_sinais
+                else:
+                    # Regra Ampla sem ranking (ordena por odd apenas para visualização)
+                    sinais = sinais_sorted
                 
             st.session_state.sinais_lay0x3 = sinais
             st.session_state.sinais_date_0x3 = target_date

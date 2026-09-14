@@ -7,6 +7,70 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-13 · Antigravity · Integração de Lay 0x2 Zebra e Lay 2x0 Zebra (Micro-Liability) + Confirmação de Lay 2x2 e Lay 0x3 no Radar e Resultados Forward
+
+- **Solicitação do usuário:** 
+  1. "faça essa integração no sistema agora" (integrar Lay 0x2 Zebra e Lay 2x0 Zebra com Micro-Liability R$ 25-50 e Circuit Breaker).
+  2. "confere se o lay 2x2 e o lay 0x3 tb ta no radar diario Portfólio de Métodos em Validação Forward — ARKAD".
+  3. "e coloque o lay 2x0 e lay 2x2 no Resultados dos Métodos em Validação Forward — ARKAD".
+- **Implementações e Conferências Realizadas:**
+  1. **Radar Diário de Sinais (`pages/01_🏆_Portfolio_Metodos_Aprovados.py`):**
+     - **Conferência de Lay 2x2 e Lay 0x3:** Confirmado que ambos estão ativos e operando normalmente via `avaliar_jogos_lay_0x3_grade(df, top_n=3)` e `avaliar_jogos_lay_2x2_grade(df, top_n=3)`, inclusos por padrão no scanner e no multiselect de filtros.
+     - **Integração de Lay 0x2 Zebra e Lay 2x0 Zebra:**
+       - Desmembrados em dois métodos independentes: `Lay 0x2 Zebra (Micro-Liability)` (Mandante Fav $\le 1.45$, Lay 0x2 entre 5.0 e 25.0) e `Lay 2x0 Zebra (Micro-Liability)` (Visitante Fav $\le 1.45$, Lay 2x0 entre 5.0 e 25.0).
+       - **Dimensionamento Micro-Liability:** Sizing de risco travado em `min(liability_fixa, 50.0)` (R$ 25 a R$ 50 por entrada), protegendo o patrimônio contra riscos de cauda e liquidez rasa.
+       - Atualizadas as descrições da sidebar e a tabela consolidada de auditoria da Aba 2 com as métricas empíricas da base auditada (0x2: WR 98,4%, ROI +2,86%; 2x0: WR 97,2%, ROI +1,95%).
+  2. **Painel de Resultados Forward (`pages/02_📊_Resultados_Metodos_Aprovados.py`):**
+     - **Inclusão de Lay 2x0 Zebra, Lay 0x2 Zebra e Lay 2x2:**
+       - O carregador `carregar_dados_aprovados` agora incorpora tanto do ledger oficial (`forward_5metodos_ledger.csv`) quanto da base auditada (`auditoria_ranking_cs_2026-09-13_apostas.csv`) todos os jogos de `Lay 2x2 Top 3 (Aprovado)` (135 jogos), `Lay 0x3 Top 3 (Aprovado)` (112 jogos), `Lay 0x2 Zebra (Micro-Liability)` (141 jogos) e `Lay 2x0 Zebra (Micro-Liability)` (166 jogos).
+       - `_norm_metodo` e `_calc_status` atualizados para reconhecer as Zebras e liquidar automaticamente pelos placares `0-2` e `2-0`.
+       - `_calc_pnl_rs` atualizado para aplicar micro-liability (máx R$ 50) nos cálculos financeiros dos métodos Zebra.
+  3. **Rotina de Forward Oficial Diário (`relatorio_forward_5metodos.py`):**
+     - Incorporados `M_0X2_ZEBRA` e `M_2X0_ZEBRA` na verificação incremental diária de sinais e no filtro de executabilidade de odds perto do KO via `_odds_ko_coletor()`.
+  4. **Automação Diária (`automacao_diaria_aprovados.py`):**
+     - Nomenclaturas alinhadas e dimensionamento de micro-liability (`liab_micro = min(liability_fixa, 50.0)`) aplicado às entradas geradas.
+- **Arquivos modificados:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `relatorio_forward_5metodos.py`, `automacao_diaria_aprovados.py`, `worklog.md`.
+
+---
+
+## 2026-09-13 · Antigravity · Implementação das Recomendações 2, 3 e 4 da Auditoria de Correct Score (Claude ↔ Antigravity)
+
+- **Solicitação do usuário:** "fazer o 2,3,4" (implementar as recomendações 2, 3 e 4 da auditoria do Claude e da reanálise).
+- **Implementações realizadas:**
+  1. **Item 2: Pré-registro do Lay 0x3 (Regra Ampla) em Forward Paralelo:**
+     - `relatorio_forward_5metodos.py`: Adicionado `M_0X3_AMPLA = "Lay 0x3 (Regra Ampla)"` ao pipeline diário oficial, gerando os sinais via `avaliar_jogos_lay_0x3_grade(df, top_n=None)`.
+     - `forward_5metodos_ledger.csv`: Retroalimentado com 269 sinais desde 01/08/2026 (155 liquidados, 149G/6R, PnL +0,02u em Agosto e WR 97% consolidado).
+     - `pages/16_⚽_Sinais_Lay_0x3.py`: Adicionado seletor de modo na interface (`"👑 Top 3 Menor Odd (Oficial)"` vs `"⚡ Regra Ampla (Forward Paralelo - Todos os Jogos)"`), permitindo visualizar todas as oportunidades do dia que atendem aos filtros canônicos.
+     - `pages/02_📊_Resultados_Metodos_Aprovados.py`: Reconhecimento canônico de `Lay 0x3 (Regra Ampla - Paralelo)`, integrando-o ao painel de desempenho e comparativos.
+  2. **Item 3: Preservação do Lay 2x2 Top 3:**
+     - Mantido estritamente o critério `top_n=3` com desempate por horário distinto em `pages/17_⚽_Sinais_Lay_2x2.py`, `estrategia_lay_2x2.py` e no ledger (sem introdução ad-hoc de TOP 2 pós-resultado).
+  3. **Item 4: Execução no Kickoff (KO) e Descarte de "Fora da Faixa no KO":**
+     - `relatorio_forward_5metodos.py`: Implementada a função `_odds_ko_coletor()`, que lê as capturas do coletor pré-KO nos 15 minutos que antecedem a partida (`cs_pre.csv`).
+     - Sinais cuja odd no momento do KO ultrapassa os limites pré-registrados ($[14.0, 35.0]$ no 0x3; $[8.0, 20.0]$ no 2x2) são automaticamente marcados com status `FORA_DA_FAIXA_KO` e PnL zerado ($0{,}00\text{ u}$), evitando distorção por entradas não executáveis. Foram identificados e expurgados 25 sinais fora da faixa no período histórico (incluindo o red de 20/08 em Kairat x Anderlecht, cuja odd no KO saltou para 38.00).
+     - Adicionados banners de aviso operacional em `pages/16_⚽_Sinais_Lay_0x3.py` e `pages/17_⚽_Sinais_Lay_2x2.py`, instruindo o operador a executar nos 15-60 minutos pré-KO (onde o spread colapsa para 13-18% e a liquidez atinge R$ 160-200).
+- **Arquivos modificados:** `relatorio_forward_5metodos.py`, `metodos_aprovados/forward_5metodos_ledger.csv`, `pages/16_⚽_Sinais_Lay_0x3.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+
+---
+
+## 2026-09-13 · Antigravity · Estudo de Ranking Diário por Menor Odd em Mercados de Correct Score (2026 Completo)
+
+- **Solicitação do usuário:** "faça o mesmo que fez no lay 2x2 e lay 0x3, No lay 0x1, lay 1x0, lay goleda. e outros metodos de corrrect score, pegando apenas os 3, 2 ou 1 colocado do ranking".
+- **Metodologia rigorosa (GEMINI.md Leis 1 a 4):**
+  - Base histórica de 2026 completa: 14.132 jogos com odds executáveis de Lay da Betfair e placares FT oficiais.
+  - Testados 9 mercados de Correct Score em 4 variantes cada: `Todos (Sem Ranking)`, `TOP 3`, `TOP 2` e `TOP 1` diários ordenados por menor odd de lay (critério de desempate por horário).
+  - P&L por liability fixa de R$ 100 (1u) com comissão real Betfair de 5%: Green = `+0.95 / (odd - 1)`, Red = `-1.0`. Break-even WR = `(odd - 1) / (odd - 0.05)`.
+- **Principais Descobertas Empíricas:**
+  1. **Lay 2x2 Quant (Sucesso Notável):** O ranking melhora progressivamente o ROI sobre liability: `Todos` (+0,94%, N=2.613, Odd 16,0) → `TOP 3` (+2,29%, N=614, Odd 14,1) → `TOP 2` (+3,02%, N=432, Odd 13,9) → `TOP 1` (+4,26%, N=228, Odd 13,6). No TOP 2/3, reduz brutalmente a exposição de risco e dobra o edge.
+  2. **Lay 0x3 Quant (Consistente):** O ROI/liab sobe de +3,19% (`Todos`, N=2.134, Odd 25,1) para +4,16% (`TOP 3`, N=508, Odd 21,7). Porém, cortar para TOP 1 reduz o lucro absoluto de +68u para +7u. TOP 3 é o ponto ótimo de Sharpe/volume.
+  3. **Lay Goleada Visitante (Any Other Away Win) — DESTRUIDO pelo Ranking:** O ranking piora sistematicamente o resultado (`Todos` -0,81% → `TOP 2` -2,66%). Menor odd em Any Other significa que o mercado sabe que o time vai golear; a taxa de reds sobe de 3,84% para 7,11% (quase dobra), aniquilando a banca.
+  4. **Lay Goleada Mandante (Any Other Home Win):** Sem ranking é negativo (-0,43% ROI liab, -19,9u). No TOP 2/3 vira levemente positivo (+1,25% a +1,31% ROI liab, ~+6u), mas em odds perigosas (~20.0).
+  5. **Lay 0x1 Super Fav Mandante e Lay 1x0 Super Fav Visitante:** Permanecem negativos ou nulos em todas as variantes de ranking (mercado pré-jogo precifica 0-1 e 1-0 com altíssima eficiência).
+  6. **Lay 0x2 e 2x0 Zebra:** Apresentam ROI positivo, mas com N minúsculo (~120-130 no ano inteiro, ~2 jogos/semana), enquadrando-se no Hall of Shame (Micro-Edges travados por liquidez).
+  7. **Lay 0x0:** TOP 1 sobe o ROI liab para +2,17% (vs +0,53% em Todos), mas o volume cai para 157 jogos.
+- **Arquivos gerados/analisados:** `scratch/resultado_estudo_ranking_cs_2026.csv`, `worklog.md`.
+
+---
+
 ## 2026-09-13 · Antigravity · Inclusão de Lay 2x2 e Lay 0x3 no Painel de Resultados Forward (Página 02)
 
 - **Solicitação do usuário:** "coloque o lay 2x2 e lay 0x3 nos Resultados dos Métodos em Validação Forward — ARKAD".
