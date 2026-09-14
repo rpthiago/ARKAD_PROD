@@ -215,12 +215,43 @@ def _placares_oficiais():
         d = pd.read_csv(CACHE_FT, dtype=str).fillna("")
     except Exception:
         return out
+    OFICIAL_CAT.clear()
     for _, r in d.iterrows():
-        if r.get("status") != "LIQUIDADO" or not r.get("gh") or not r.get("ga"):
-            continue          # "Any Other ..." fica sem gh/ga: nao entra aqui (so mo/ou winners)
-        out[(r["ko"][:10], canon(r["home"]), canon(r["away"]))] = (int(float(r["gh"])), int(float(r["ga"])), "betfair_oficial")
-    print("  placares OFICIAIS (VPS): %d" % len(out))
+        if r.get("status") != "LIQUIDADO":
+            continue
+        chaves = [(r["ko"][:10], canon(r["home"]), canon(r["away"]))]
+        try:
+            kodt = datetime.strptime(r["ko"], "%Y-%m-%d %H:%M")
+            if kodt.hour < 6:           # KO em UTC antes das 06:00 = noite do dia anterior no feed (data local)
+                chaves.append(((kodt - timedelta(days=1)).strftime("%Y-%m-%d"), canon(r["home"]), canon(r["away"])))
+        except Exception:
+            pass
+        for k in chaves:
+          if r.get("gh") and r.get("ga"):
+            out.setdefault(k, (int(float(r["gh"])), int(float(r["ga"])), "betfair_oficial"))
+          elif r.get("cs_winner"):
+            # "Any Other Home/Away Win / Draw": sem placar exato, mas o vencedor do Match Odds e o CS
+            # categorico bastam para Lay Draw, Lay Home e os lays de placar exato (que viram GREEN).
+            OFICIAL_CAT.setdefault(k, dict(cs=r["cs_winner"], mo=r.get("mo_winner", ""), home=r["home"], away=r["away"],
+                                           ou35=r.get("ou35", "")))
+    print("  placares OFICIAIS (VPS): %d exatos + %d por categoria (Any Other)" % (len(out), len(OFICIAL_CAT)))
     return out
+
+
+OFICIAL_CAT = {}
+
+
+def liquidar_por_categoria(metodo, cat):
+    """Resultado a partir de cs_winner categorico ('Any Other Home Win' etc.) + vencedor do Match Odds.
+    Devolve True (RED), False (GREEN) ou None (nao decidivel sem placar exato)."""
+    cs, mo = cat["cs"], cat["mo"]
+    if metodo == M_DRAW: return (mo == "The Draw") if mo else (True if cs == "Any Other Draw" else (False if cs.startswith("Any Other") else None))
+    if metodo == M_HOME: return (mo == cat["home"]) if mo else (True if cs == "Any Other Home Win" else (False if cs.startswith("Any Other") else None))
+    if metodo in (M_0X3, M_0X3_AMPLA, M_2X2, M_0X2_ZEBRA, M_2X0_ZEBRA):
+        return False if cs.startswith("Any Other") else None        # goleada != placar exato do lay
+    if metodo == M_O45:
+        return None                                               # 4-0 (GREEN) e 4-1 (RED) sao ambos "Any Other"
+    return None
 
 
 def placares():
@@ -354,6 +385,19 @@ def atualizar(desde, ate):
         for r in pend:
             sc = achar_placar(P, idx, r["Data"], r["Home"], r["Away"])
             if sc is None:
+                cat = OFICIAL_CAT.get((r["Data"], canon(r["Home"]), canon(r["Away"])))
+                red_cat = liquidar_por_categoria(r["Metodo"], cat) if cat else None
+                if red_cat is None:
+                    continue
+                odd = float(r["Odd_Lay"]); lo, hi = LIMITES_ODD.get(r["Metodo"], (1.0, 1000.0))
+                if odd < lo or odd > hi:
+                    r.update(placar=cat["cs"], resultado="FORA_DA_FAIXA", pnl_u=0.0, pnl_rs=0.0, status="FORA_DA_FAIXA_KO",
+                             liquidado_em=agora, fonte_placar="betfair_oficial:cat"); continue
+                pnl = -1.0 if red_cat else (1 - COMISSAO) / (odd - 1)
+                r.update(gols_H="", gols_A="", placar=cat["cs"].replace("Any Other ", "AO "), resultado="RED" if red_cat else "GREEN",
+                         pnl_u=round(pnl, 5), pnl_rs=round(pnl * LIAB_RS, 2), status="LIQUIDADO", liquidado_em=agora,
+                         fonte_placar="betfair_oficial:cat")
+                liq += 1
                 continue
             gh, ga, fonte = sc; odd = float(r["Odd_Lay"])
             lo, hi = LIMITES_ODD.get(r["Metodo"], (1.0, 1000.0))
@@ -476,6 +520,10 @@ def bloco_gestao(rows):
     return out
 
 
+def _esc(t):
+    return str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
 def bloco_marcos(rows):
     """Prazos pre-registrados (marcos.json): contagem regressiva por data e progresso de N por metodo.
     Existe para que nada seja 'lido antes da hora' — o relatorio so mostra quando chega."""
@@ -491,10 +539,10 @@ def bloco_marcos(rows):
         if "data" in m:
             d = datetime.strptime(m["data"], "%Y-%m-%d").date(); falta = (d - hoje).days
             tag = "HOJE" if falta == 0 else ("faltam %dd" % falta if falta > 0 else "VENCIDO há %dd" % -falta)
-            out.append("%-12s %-10s %s" % (tag, m["data"], m["nome"][:52]))
+            out.append("%-12s %-10s %s" % (tag, m["data"], _esc(m["nome"][:52])))
         elif "metodo" in m:
             n = sum(1 for r in todos if r["Metodo"] == m["metodo"])
-            out.append("%-12s N=%4d/%-4d %s" % ("%3.0f%%" % (100.0 * n / m["n_alvo"]), n, m["n_alvo"], m["nome"][:52]))
+            out.append("%-12s N=%4d/%-4d %s" % ("%3.0f%%" % (100.0 * n / m["n_alvo"]), n, m["n_alvo"], _esc(m["nome"][:52])))
     out.append("</pre>")
     return out
 
@@ -533,14 +581,14 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
             tag = "★" if fonte == "betfair_oficial" else "b"
             linhas.append("%s %s %-5s %-30s @%-5.2f %-4s %s %+6.2f" % (
                 r["Hora"], tag, CURTO[r["Metodo"]],
-                ("%s x %s" % (r["Home"], r["Away"]))[:30], float(r["Odd_Lay"]), r["placar"],
+                _esc(("%s x %s" % (r["Home"], r["Away"]))[:30]), float(r["Odd_Lay"]), r["placar"],
                 "G" if r["resultado"] == "GREEN" else "R", float(r["pnl_u"])))
         linhas += ["</pre>", "<i>★ = placar oficial da liquidação Betfair (VPS) · b = base histórica</i>"]
     pend_hoje = [r for r in rows if r["Data"] == hoje_s and r["status"] == "PENDENTE"]
     if pend_hoje:
         linhas += ["", "<b>AINDA SEM PLACAR em %s (%d) — entram quando liquidar</b>" % (hoje.strftime("%d/%m"), len(pend_hoje)), "<pre>"]
         for r in sorted(pend_hoje, key=lambda r: (r["Hora"], r["Metodo"])):
-            linhas.append("%s %-5s %-30s @%.2f" % (r["Hora"], CURTO[r["Metodo"]], ("%s x %s" % (r["Home"], r["Away"]))[:30], float(r["Odd_Lay"])))
+            linhas.append("%s %-5s %-30s @%.2f" % (r["Hora"], CURTO[r["Metodo"]], _esc(("%s x %s" % (r["Home"], r["Away"]))[:30]), float(r["Odd_Lay"])))
         linhas.append("</pre>")
 
     meses = sorted({r["Data"][:7] for r in rows}, reverse=True)
