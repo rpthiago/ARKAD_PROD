@@ -36,8 +36,26 @@ st.markdown(
 )
 
 # ── Sidebar ──
-st.sidebar.header("⚙️ Configurações de Banca & Stake")
-stake_base = st.sidebar.number_input("Valor da Stake Base (R$)", min_value=10.0, value=100.0, step=10.0)
+st.sidebar.header("⚙️ Configurações de Banca & Gestão")
+banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
+
+tipo_gestao = st.sidebar.selectbox(
+    "Modelo de Gestão de Risco (Liability)",
+    options=[
+        "🎯 Diferenciada (15% em 0x3, 2x2, Over 4.5 | 5% em Home, Draw, 0x0)",
+        "⚖️ Uniforme (5% Fixa para Todos)",
+        "🛡️ Conservadora (2.5% Fixa para Todos)"
+    ],
+    index=0
+)
+
+if "Diferenciada" in tipo_gestao:
+    st.sidebar.markdown(f"""
+    **Alocação de Liability por Entrada:**
+    * 🟣 **15% da Banca (R$ {banca_total * 0.15:,.2f}):** Lay 0x3, Lay 2x2 e Lay Over 4.5
+    * 🔵 **5% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
+    * ⚪ **Micro-Liability (R$ 25 - R$ 50):** Zebras 0x2 e 2x0 (Observação)
+    """)
 
 st.sidebar.markdown("---")
 st.sidebar.header("📉 Taxa de Comissão Betfair")
@@ -451,9 +469,24 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
         return 0.0
         
     df_all["PnL_u"] = df_all.apply(_calc_pnl_u, axis=1)
+    def _calc_liab_rs(met):
+        m_str = str(met)
+        if "Diferenciada" in tipo_gestao:
+            if "0x3" in m_str or "2x2" in m_str or "Over 4.5" in m_str:
+                return round(banca_total * 0.15, 2)
+            elif "Home" in m_str or "X2" in m_str or "Draw" in m_str or "0x0" in m_str:
+                return round(banca_total * 0.05, 2)
+            elif "Zebra" in m_str or "Micro-Liability" in m_str:
+                return min(round(banca_total * 0.025, 2), 50.0)
+            return round(banca_total * 0.05, 2)
+        elif "Conservadora" in tipo_gestao:
+            return round(banca_total * 0.025, 2)
+        else:
+            return min(50.0, round(banca_total * 0.05, 2)) if ("Zebra" in m_str or "Micro-Liability" in m_str) else round(banca_total * 0.05, 2)
+
+    df_all["Liability_R$"] = df_all["Método"].apply(_calc_liab_rs)
     def _calc_pnl_rs(r):
-        met = str(r.get("Método", ""))
-        liab = min(stake_base, 50.0) if ("Zebra" in met or "Micro-Liability" in met) else stake_base
+        liab = _calc_liab_rs(r.get("Método", ""))
         return round(float(r.get("PnL_u", 0.0)) * liab, 2)
     df_all["PnL_Reais"] = df_all.apply(_calc_pnl_rs, axis=1)
     
@@ -511,7 +544,11 @@ kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
 kpi1.metric("Total de Jogos", f"{total_jogos} partidas", f"{jogos_liq} liquidadas")
 kpi2.metric("Greens / Taxa de Acerto", f"{greens} ({win_rate:.1f}%)", f"{reds} reds")
 kpi3.metric("Lucro Líquido (Unidades)", f"{pnl_total_u:+.2f} u", delta=f"{pnl_total_u:+.2f} u")
-kpi4.metric(f"Lucro em R$ (Stake R$ {stake_base:.0f})", f"R$ {pnl_total_rs:+.2f}", delta=f"R$ {pnl_total_rs:+.2f}")
+kpi4.metric(
+    f"Lucro em R$ (Banca R$ {banca_total:,.0f})",
+    f"R$ {pnl_total_rs:+,.2f}",
+    delta=f"{(pnl_total_rs / banca_total) * 100:+.1f}% sobre banca" if banca_total > 0 else ""
+)
 kpi5.metric("Pendentes / Ao Vivo", f"{pendentes} jogos")
 st.markdown("---")
 
@@ -530,7 +567,7 @@ with tab_geral:
     
     cols_exibir = [
         "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
-        "Odd_Entrada", "Odd_Fav", "Placar", "Status", "PnL_u", "PnL_Reais"
+        "Odd_Entrada", "Odd_Fav", "Placar", "Status", "Liability_R$", "PnL_u", "PnL_Reais"
     ]
     cols_disponiveis = [c for c in cols_exibir if c in df_filt.columns]
     
@@ -564,15 +601,19 @@ with tab_metodo:
             pnl_m_u = g["PnL_u"].sum()
             pnl_m_rs = g["PnL_Reais"].sum()
             roi_m = (pnl_m_u / n_m * 100) if n_m > 0 else 0.0
+            liab_ex = g["Liability_R$"].iloc[0] if "Liability_R$" in g.columns else (banca_total * 0.05)
+            pct_ex = (liab_ex / banca_total * 100) if banca_total > 0 else 5.0
             res_m.append({
                 "Método": m,
+                "% Banca (Risco)": f"{pct_ex:.1f}%",
+                "Liability / Entrada": f"R$ {liab_ex:,.2f}",
                 "Total Jogos": n_m,
                 "Greens": w_m,
                 "Reds": r_m,
                 "Win Rate %": f"{wr_m:.1f}%",
-                "ROI %": f"{roi_m:+.2f}%",
+                "ROI s/ Liability": f"{roi_m:+.2f}%",
                 "Lucro Líquido (u)": round(pnl_m_u, 3),
-                "Lucro Líquido (R$)": f"R$ {pnl_m_rs:+.2f}"
+                "Lucro Líquido (R$)": f"R$ {pnl_m_rs:+,.2f}"
             })
         st.dataframe(pd.DataFrame(res_m), use_container_width=True, hide_index=True)
     else:
@@ -636,13 +677,13 @@ with tab_comparativo:
         n_base = len(df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])])
         w_base = (df_base["Status"] == "🟢 GREEN").sum()
         pnl_base_u = df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
-        pnl_base_rs = pnl_base_u * stake_base
+        pnl_base_rs = pnl_base_u * (banca_total * 0.05)
         wr_base = (w_base / n_base * 100) if n_base > 0 else 0
         
         n_ref = len(df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])])
         w_ref = (df_ref["Status"] == "🟢 GREEN").sum()
         pnl_ref_u = df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
-        pnl_ref_rs = pnl_ref_u * stake_base
+        pnl_ref_rs = pnl_ref_u * (banca_total * 0.05)
         wr_ref = (w_ref / n_ref * 100) if n_ref > 0 else 0
         
         diff_n = n_ref - n_base

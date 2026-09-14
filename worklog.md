@@ -7,6 +7,23 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-14 · Antigravity · Implementação da Gestão de Risco Diferenciada na Página 02 (15% em 0x3/2x2/Over 4.5 e 5% em Home/Draw/0x0)
+
+- **Solicitação do usuário:** "vamos de 5% entao, ficando assim 15% para lay 0x3 , lay 2x2 e lay over 4,5, 5%, lay home, lay draw e agora lay 0x0, coloquei isso nos Resultados dos Métodos em Validação Forward — ARKAD"
+- **Feito:**
+  1. **Página 02 (`pages/02_📊_Resultados_Metodos_Aprovados.py`):**
+     - Substituído `stake_base` simples pelo controle `banca_total` (padrão R$ 2.000) e seletor `tipo_gestao` com alocação diferenciada por método.
+     - **Regra de Liability Implementada:**
+       - 🟣 **15% da Banca:** Lay 0x3 Top 3 (e Regra Ampla), Lay 2x2 Top 3 e Lay Over 4.5 FT.
+       - 🔵 **5% da Banca:** Lay Home / DC X2, Lay Draw e Lay 0x0 XGBoost.
+       - ⚪ **Micro-Liability (R$ 25 - R$ 50):** Zebras 0x2 e 2x0 (Observação).
+     - Atualizada a função `_calc_pnl_rs` e a coluna `Liability_R$` para cada partida de acordo com o método.
+     - Adicionadas as colunas `% Banca (Risco)` e `Liability / Entrada` na tabela de Desempenho por Método (Aba 2) e na Planilha Jogo a Jogo (Aba 1).
+     - Atualizado o KPI consolidado do topo (`kpi4`) exibindo o lucro financeiro acumulado proporcional à alocação de banca real (R$ +1.576,56 em 614 jogos liquidados numa banca de R$ 2.000).
+- **Arquivos modificados:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-14 · Antigravity · Integração Oficial do Lay 0x0 XGBoost no Portfólio (Página 01) e Resultados (Página 02)
 
 - **Solicitação do usuário:** "pode colocar ele tb no Portfólio de Métodos em Validação Forward — ARKAD e nos Resultados dos Métodos em Validação Forward — ARKAD"
