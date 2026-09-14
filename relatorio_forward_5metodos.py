@@ -286,6 +286,25 @@ def placares():
             print("  placares b365 (%s): +%d" % (os.path.basename(os.path.dirname(p)), len(out) - n0))
         except Exception as e:
             print("  [b365] %s" % str(e)[:60])
+    # planilhas do dia (pagina 01/02): coluna Placar "NxM" preenchida pelo Thiago; data = nome do arquivo.
+    import glob as _glob, re as _re
+    n0 = len(out); n_arq = 0
+    for f in sorted(_glob.glob(os.path.join(ROOT, "metodos_aprovados", "Sinais_Metodos_Aprovados_20*.xlsx"))):
+        if "Odds_Reais" in f: continue
+        md = _re.search(r"(\d{4}-\d{2}-\d{2})", f)
+        if not md: continue
+        try:
+            d = pd.read_excel(f); n_arq += 1
+        except Exception:
+            continue          # aberta no Excel ou corrompida: pula
+        for _, x in d.iterrows():
+            j = str(x.get("Jogo", ""))
+            m = _re.match(r"^\s*(\d+)\s*[xX\-]\s*(\d+)\s*$", str(x.get("Placar", "")).strip())
+            if " x " not in j or not m: continue
+            h, a = [t.strip() for t in j.split(" x ", 1)]
+            k = (md.group(1), canon(h), canon(a))
+            if k not in out: out[k] = (int(m.group(1)), int(m.group(2)), "planilha_dia")
+    print("  placares das planilhas do dia (%d arquivos): +%d" % (n_arq, len(out) - n0))
     # ultima fonte: planilha manual do Thiago (Data, Mandante, Visitante, Gols_M, Gols_V). So entra onde
     # oficial/Betfair/b365 nao tem; fonte_placar='manual' fica gravada para auditoria.
     for man in (os.path.join(ROOT, "placares_manuais.xlsx"), os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "placares_manuais.xlsx")):
