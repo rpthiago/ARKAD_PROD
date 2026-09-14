@@ -249,6 +249,8 @@ def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Mé
     df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
             
     df_all["Data"] = pd.to_datetime(df_all.get("Data"), errors="coerce", dayfirst=True)
+    # Forward comeca em 01/08/2026: nada anterior entra nesta pagina (o bloco 2b traz backtest 2024-26 das zebras)
+    df_all = df_all[df_all["Data"] >= pd.Timestamp("2026-08-01")].reset_index(drop=True)
     df_all["Hora"] = df_all.get("Hora", "15:00").astype(str).str[:5]
     
     # 1. Normalização de Odd de Entrada
