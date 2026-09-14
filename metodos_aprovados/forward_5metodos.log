@@ -298,3 +298,263 @@ divergencias planilha x base: 5
   mestre | 2026-08-30 | Plzen x Slovacko | planilha: GREEN (2x0) | base: RED (1-1, betfair)
   mestre | 2026-08-30 | AIK x Hammarby | planilha: GREEN (0x0) | base: RED (3-2, betfair)
   mestre | 2026-08-30 | Hodd x Stabaek | planilha: GREEN (1x2) | base: RED (2-1, betfair)
+===== 14/09/2026  6:00:01,77 ===== 
+2026-09-14 06:00:04.838 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+=== forward 5 metodos: 2026-08-01 -> 2026-09-14 ===
+  2026-08-01: 32 sinais (0 novos)
+  2026-08-02: 30 sinais (0 novos)
+  2026-08-03: 13 sinais (0 novos)
+  2026-08-04: 7 sinais (0 novos)
+  2026-08-05: 3 sinais (0 novos)
+  2026-08-06: 21 sinais (0 novos)
+  2026-08-07: 21 sinais (0 novos)
+  2026-08-08: 42 sinais (0 novos)
+  2026-08-09: 31 sinais (0 novos)
+  2026-08-10: 11 sinais (0 novos)
+  2026-08-11: 12 sinais (0 novos)
+  2026-08-12: 11 sinais (0 novos)
+  2026-08-13: 16 sinais (0 novos)
+  2026-08-14: 21 sinais (0 novos)
+  2026-08-15: 38 sinais (0 novos)
+  2026-08-16: 28 sinais (0 novos)
+  2026-08-17: 11 sinais (0 novos)
+  2026-08-18: 3 sinais (0 novos)
+  2026-08-19: 13 sinais (0 novos)
+  2026-08-20: 18 sinais (0 novos)
+  2026-08-21: 23 sinais (0 novos)
+  2026-08-22: 52 sinais (0 novos)
+  2026-08-23: 39 sinais (0 novos)
+  2026-08-24: 15 sinais (0 novos)
+  2026-08-25: 17 sinais (0 novos)
+  2026-08-26: 22 sinais (0 novos)
+  2026-08-27: 29 sinais (0 novos)
+  2026-08-28: 21 sinais (0 novos)
+  2026-08-29: 43 sinais (0 novos)
+  2026-08-30: 49 sinais (0 novos)
+  2026-08-31: 21 sinais (0 novos)
+  2026-09-01: 15 sinais (0 novos)
+  2026-09-02: 21 sinais (0 novos)
+  2026-09-03: 12 sinais (0 novos)
+  2026-09-04: 19 sinais (0 novos)
+  2026-09-05: 38 sinais (0 novos)
+  2026-09-06: 37 sinais (0 novos)
+  2026-09-07: 15 sinais (0 novos)
+  2026-09-08: 16 sinais (0 novos)
+  2026-09-09: 19 sinais (0 novos)
+  2026-09-10: 7 sinais (0 novos)
+  2026-09-11: 19 sinais (0 novos)
+  2026-09-12: 50 sinais (0 novos)
+  2026-09-13: 45 sinais (0 novos)
+  2026-09-14: 17 sinais (17 novos)
+sinais novos incorporados: 17
+  placares OFICIAIS (VPS): 318
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+liquidados agora: 0 | pendentes: 92 | fora da faixa KO: 25 | sem placar (>7d, fora da conta): 237
+
+ARKAD — Forward 5 Métodos
+jogos de 13/09/2026 · liability 1u = R$100 · comissão 5%
+
+ONTEM 13/09
+
+0x3      2    2G/ 0R 100%    +0.08u (1 pend)
+0x3-Ampla   8    8G/ 0R 100%    +0.31u (2 pend)
+2x2      5    5G/ 0R 100%    +0.30u
+Draw     9    9G/ 0R 100%    +1.43u (7 pend)
+Home     6    5G/ 1R  83%    -0.32u (3 pend)
+Ov4.5    3    3G/ 0R 100%    +0.15u
+----------------------------------
+TOTAL   33   32G/ 1R  97%    +1.95u (13 pend)
+
+
+RESULTADOS de 13/09 (33 liquidados)
+
+04:30 ★ 0x3-Ampla Jeonnam Dragons x Gimpo Citize @28.00 2-2  G  +0.04
+06:30 ★ 2x2   Urawa x Okayama                @17.50 1-2  G  +0.06
+07:15 ★ 2x2   Wisla Plock x Cracovia Krakow  @16.50 3-1  G  +0.06
+08:30 ★ 0x3-Ampla Shijiazhuang Gongfu FC x Shenz @26.00 0-0  G  +0.04
+08:30 ★ Draw  Club Brugge x Antwerp          @7.60  3-1  G  +0.14
+09:00 ★ Draw  Hammarby x Brommapojkarna      @9.00  3-1  G  +0.12
+10:00 ★ 0x3-Ampla Calcio Avellino SSD x Palermo  @26.00 1-1  G  +0.04
+10:00 ★ 2x2   Calcio Avellino SSD x Palermo  @17.00 1-1  G  +0.06
+11:00 ★ 2x2   Genk x Gent                    @16.50 1-1  G  +0.06
+11:45 ★ Home  Botev Vratsa x PFC Levski Sofi @9.20  0-0  G  +0.12
+12:00 ★ 0x3-Ampla Cesar Vallejo Moquegua x Sport @25.00 1-2  G  +0.04
+12:00 ★ 0x3   Cesar Vallejo Moquegua x Sport @25.00 1-2  G  +0.04
+12:00 ★ Home  Raufoss x Odds BK              @7.00  2-1  R  -1.00
+13:00 ★ Home  Asteras Tripolis x AEK Athens  @9.80  1-1  G  +0.11
+13:30 ★ Ov4.5 Getafe x Deportivo             @20.00 1-1  G  +0.05
+14:00 ★ Draw  FK IMT Novi Beograd x Crvena Z @6.40  0-1  G  +0.18
+14:00 ★ Draw  Galatasaray x Kocaelispor      @6.40  1-0  G  +0.18
+14:15 ★ 2x2   RAAL La Louviere x Kortrijk    @17.00 3-0  G  +0.06
+14:30 ★ 0x3-Ampla FC Hunedoara x Universitatea C @22.00 0-1  G  +0.05
+14:30 ★ 0x3   FC Hunedoara x Universitatea C @22.00 0-1  G  +0.05
+14:30 ★ Home  Hapoel Petach Tikva x Hapoel B @7.00  0-2  G  +0.16
+14:45 ★ Ov4.5 Tigre x Rosario Central        @19.50 0-1  G  +0.05
+15:00 ★ 0x3-Ampla Al Riyadh SC x Al-Kholood Club @27.00 2-0  G  +0.04
+15:00 ★ Draw  Hajduk Split x Slaven Belupo   @7.00  1-0  G  +0.16
+15:30 ★ Draw  Panathinaikos x Panaitolikos   @6.60  3-0  G  +0.17
+15:45 ★ Draw  Brest x Paris St-G             @7.40  0-1  G  +0.15
+16:00 ★ Home  Deportivo Pereira x Atletico B @7.40  1-3  G  +0.15
+16:30 ★ 0x3-Ampla Rayo Zuliano x Portuguesa FC   @26.00 1-1  G  +0.04
+16:30 ★ Home  Famalicao x Sporting Lisbon    @7.40  1-1  G  +0.15
+17:30 ★ Draw  Flamengo x Corinthians         @6.20  2-1  G  +0.18
+19:15 ★ Ov4.5 CA Independiente x San Lorenzo @20.00 1-1  G  +0.05
+19:30 ★ Draw  Vancouver Whitecaps x Austin F @7.00  1-2  G  +0.16
+20:00 ★ 0x3-Ampla Libertad FC x Independiente (E @27.00 2-3  G  +0.04
+
+★ = placar oficial da liquidação Betfair (VPS) · b = base histórica
+
+AINDA SEM PLACAR em 13/09 (13) — entram quando liquidar
+
+05:00 Draw  Chindia Targoviste x CSC 1599  @6.60
+09:30 Draw  Viking x Kristiansund          @6.60
+10:00 0x3-Ampla Zlin x Hradec Kralove          @27.00
+10:30 Draw  RB Leipzig x Hamburger SV      @6.40
+11:15 Draw  Levante x Barcelona            @9.80
+11:45 Home  PEC Zwolle x Feyenoord         @6.80
+12:00 Draw  Stromsgodset x Sandnes Ulf     @6.80
+12:00 Home  Moss x Haugesund               @5.40
+15:00 Draw  PSV x Sparta Rotterdam         @9.40
+16:00 Draw  Always Ready x Guabira         @9.60
+21:00 Home  Real Tomayapo x Bolivar        @6.40
+22:15 0x3-Ampla Cucuta Deportivo x Millonarios @22.00
+22:15 0x3   Cucuta Deportivo x Millonarios @25.00
+
+
+SETEMBRO — por método
+
+0x3     22   21G/ 1R  95%    -0.19u (11 pend)
+0x3-Ampla  40   38G/ 2R  95%    -0.59u (24 pend)
+2x2     34   34G/ 0R 100%    +2.00u (10 pend)
+Draw    63   58G/ 5R  92%    +4.30u (30 pend)
+Home    31   26G/ 5R  84%    -1.15u (17 pend)
+Ov4.5   10   10G/ 0R 100%    +0.51u
+----------------------------------
+TOTAL  200  187G/13R  94%    +4.89u (92 pend)
+
+SETEMBRO — por dia
+
+01/09  13  13G/ 0R   +1.12u
+02/09  15  15G/ 0R   +1.33u
+03/09   8   8G/ 0R   +0.53u
+04/09  16  15G/ 1R   +0.79u
+05/09  26  23G/ 3R   -0.81u
+06/09  26  23G/ 3R   -0.19u
+07/09  14  11G/ 0R   +0.76u *
+08/09  14   8G/ 0R   +0.75u *
+09/09  19  16G/ 0R   +1.30u *
+10/09   7   3G/ 2R   -1.67u *
+11/09  20  13G/ 2R   -0.35u *
+12/09  51   7G/ 1R   -0.62u *
+13/09  46  32G/ 1R   +1.95u *
+14/09  17   0G/ 0R     --   *
+
+
+AGOSTO — por método
+
+0x3     49   47G/ 2R  96%    -0.16u
+0x3-Ampla 116  112G/ 4R  97%    +0.02u
+2x2     70   66G/ 4R  94%    -0.19u
+Draw   163  142G/21R  87%    +2.93u
+Home    82   71G/11R  87%    +0.13u
+Ov4.5   23   23G/ 0R 100%    +1.20u
+----------------------------------
+TOTAL  503  461G/42R  92%    +3.94u
+
+AGOSTO — por dia
+
+01/08  28  25G/ 3R   -0.78u
+02/08  22  21G/ 1R   +1.45u
+03/08  10  10G/ 0R   +0.76u
+04/08   2   2G/ 0R   +0.28u
+05/08   3   2G/ 1R   -0.78u
+06/08   8   8G/ 0R   +0.80u
+07/08  13  12G/ 1R   +0.99u
+08/08  33  31G/ 2R   +0.53u
+09/08  24  21G/ 3R   -0.54u
+10/08   8   7G/ 1R   -0.69u
+11/08   4   4G/ 0R   +0.53u
+12/08   4   3G/ 1R   -0.78u
+13/08  10   9G/ 1R   +0.07u
+14/08  11  11G/ 0R   +0.81u
+15/08  30  27G/ 3R   -0.65u
+16/08  14  11G/ 3R   -2.00u
+17/08  10  10G/ 0R   +0.68u
+18/08   2   2G/ 0R   +0.11u
+19/08   9   9G/ 0R   +0.87u
+20/08  10   7G/ 3R   -2.33u
+21/08  18  18G/ 0R   +1.86u
+22/08  43  40G/ 3R   +1.02u
+23/08  29  28G/ 1R   +2.03u
+24/08  11  11G/ 0R   +0.61u
+25/08  12  12G/ 0R   +1.13u
+26/08  16  15G/ 1R   +0.49u
+27/08  15  13G/ 2R   -0.41u
+28/08  16  16G/ 0R   +2.04u
+29/08  31  28G/ 3R   -0.35u
+30/08  39  32G/ 7R   -3.29u
+31/08  18  16G/ 2R   -0.50u
+
+
+GESTÃO — banca R$2500 · liability R$50 por aposta
+
+método    N  WR-BE  R$ acum IC95 ROI         gatilho
+0x3      71  -0.5pp      -17 [-6.2,+3.9]      manter
+0x3-Ampla   156  -0.4pp      -28 [-3.8,+2.6]      manter
+2x2     104  +1.6pp      +91 [-2.7,+4.9]      manter
+Draw $  226  +2.7pp     +362 [-2.6,+8.3]      manter
+Home    113  -0.6pp      -51 [-6.3,+4.4]      manter
+Ov4.5    33  +4.9pp      +85 [+5.1,+5.2]      manter
+0x0  $    6 -10.9pp      -35 IC indef.        manter (2d)
+--------------------------------------------------
+acumulado R$+407 | pico R$+442 | drawdown atual R$-35 | máx R$-207
+pior dia R$-165 | banca aguenta 15 dias como o pior
+
+$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥100.
+
+PRAZOS PRÉ-REGISTRADOS
+
+faltam 28d   2026-10-12 H-extra Over 1.5 / 1 gol / fav>1.80 / min 25-85 — 1o
+faltam 28d   2026-10-12 Varredura Over in-play — snapshot 2
+faltam 28d   2026-10-12 CS no coletor (19 runners) — snapshot 2
+faltam 28d   2026-10-12 Lay 2x2 apos o 1o gol — snapshot 2
+faltam 59d   2026-11-12 CS no coletor — snapshot 3
+ 84%         N= 226/270  Lay Draw (Fav<=1.40) — N para o IC95 descolar de zer
+  0%         N=   6/1476 Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09
+
+
+237 sinais de ligas sem placar em nenhuma base ficam fora da conta.
+
+ACUMULADO desde 01/08: 703 liq · 648G/55R · WR 92.2% · +8.83u (R$ +883) · 92 pendentes (*)
+
+(7064 caracteres)
+telegram parte 1/2: OK 
+telegram parte 2/2: FALHOU Erro Telegram: Bad Request: can't parse entities: Unsupported start tag "=1.40)" at byte offset 2918
+2026-09-14 06:00:44.871 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+  placares OFICIAIS (VPS): 318
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+divergencias planilha x base: 0
