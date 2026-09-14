@@ -427,7 +427,7 @@ def atualizar(desde, ate):
             perde = a if (a.get("status") != "LIQUIDADO" and b.get("status") == "LIQUIDADO") else b
             if perde.get("status") == "LIQUIDADO": continue
             perde["status"] = "DUPLICADO"; perde["resultado"] = ""; perde["pnl_u"] = ""; perde["pnl_rs"] = ""
-    pend = [r for r in L.values() if r.get("status") not in ("LIQUIDADO", "FORA_DA_FAIXA_KO", "DUPLICADO", "SEM_PLACAR")]
+    pend = [r for r in L.values() if r.get("status") not in ("LIQUIDADO", "FORA_DA_FAIXA_KO", "DUPLICADO", "SEM_PLACAR", "ADIADO")]
     if pend:
         P = placares(); idx = _por_dia(P); agora = datetime.now().strftime("%Y-%m-%d %H:%M"); liq = 0
         ko_odds = _odds_ko_coletor()
