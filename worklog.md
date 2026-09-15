@@ -7,6 +7,20 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Claude · Varredura dos 43 mercados de lay só em 2026 (pré-registrada) + gap por período
+
+- **Pedido:** "montar esses mesmos métodos apenas olhando os jogos desse ano".
+- **Feito:** `varredura_over/gap_por_periodo_43_mercados_2026-09-15.csv` (gap WR−BE por mercado × 2024/2025/26jan-jul/26ago-set:
+  mediana −1,8 / −2,3 / −1,6 / −1,1pp; 26 de 39 mercados melhoram em ago–set → regime de odd da base, não edge).
+  `PREREGISTRO_varredura_lay_2026.md` commitado antes de rodar; harness ganhou `--desde/--ate/--tag` (grade inalterada).
+- **Resultado:** 2026 inteiro: 14 PASSA, todas CS e todas sustentadas só por jan–abr (mai–jul e ago–set ≈ 0 ou negativas).
+  Ago–set 2026: 0 PASSA / 17 REPROVA / 55 INCONCLUSIVO. Nenhum reprovado ressuscita em 2026.
+- **Também hoje:** Lay Draw por lado do favorito (casa/fora) e por ano: sem padrão; regra do portfólio negativa em 2024, 2025 e
+  jan–jul/26, +5% em ago–set (177) — o marco de 270 decide. Página 01: botão limpa cache, hora da captura (BR) presa ao cache.
+  Página 02/relatório: Ampla e zebras fora do TOTAL. Estoque de agosto sem placar zerado (base mestre virou fonte de placar).
+
+---
+
 ## 2026-09-14 · Antigravity · Implementação da Gestão de Risco Diferenciada na Página 02 (15% em 0x3/2x2/Over 4.5 e 5% em Home/Draw/0x0)
 
 - **Solicitação do usuário:** "vamos de 5% entao, ficando assim 15% para lay 0x3 , lay 2x2 e lay over 4,5, 5%, lay home, lay draw e agora lay 0x0, coloquei isso nos Resultados dos Métodos em Validação Forward — ARKAD"

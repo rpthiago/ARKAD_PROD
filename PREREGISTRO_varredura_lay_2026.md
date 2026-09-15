@@ -35,3 +35,22 @@ eram CS do regime jan–abr/2026 (`RELATORIO_VARREDURA_43_MERCADOS_E_REGIME_para
 - Não mexer em faixa, corte ou N mínimo depois de ver a tabela. Não somar células. Não escolher a janela depois
   de ver o resultado (a janela A é a decisão; a B é leitura).
 - Não usar odd de back. Não tratar "melhora do gap" como edge: edge é piso do IC95 > 0.
+
+---
+
+## Resultado — 2026-09-15 (rodado depois do commit 9574346)
+
+**Janela A (2026-01-01 → 05/09, 14.132 jogos): 165 células · BH sobre M=165 · 14 PASSA / 59 REPROVA / 92 INCONCLUSIVO.**
+As 14 PASSA são todas Correct Score (0x3 Todos/TOP3/TOP2/TOP1, 2x2 TOP1/2/3, 3x3 Todos/TOP1/2/3, 2x0 Todos, 1x3
+Todos/TOP3); 2 delas têm reds < 5 (3x3 TOP 1 e TOP 2) → INCONCLUSIVO pela guarda de cauda.
+Aberto por sub-período (ROI): **jan–abr +2,6% a +11,0% em todas; mai–jul −3,1% a +2,8%; ago–set −2,2% a +4,4%**,
+com N de 20 a 108 fora do jan–abr. Ex.: 0x3 Todos +3,98% (jan–abr, 4.237) → −0,54% (mai–jul, 743) → +0,23%
+(ago–set, 600); 2x0 Todos +4,25% → −0,64% → −1,73%; 1x3 Todos +2,59% → −1,73% → −1,16%.
+
+**Janela B (2026-08-01 → 05/09, 2.589 jogos): 72 células · 0 PASSA / 17 REPROVA / 55 INCONCLUSIVO.** Melhor p = 0,139
+(CS 1x2 TOP 3, N=108, +2,80%, IC [−2,3; +7,1]).
+
+**Leitura (registrada, não é veredito):** o "2026" que passa é o regime jan–abr de livro cheio de CS já documentado
+em `CORRECAO_REGIME_ODD_CS_para_gemini.md`; nenhum mercado de Match Odds, DC, O/U, BTTS ou HT passa em 2026; nenhuma
+célula passa na janela de agosto para cá. Nenhuma célula vira candidata a forward por este teste.
+Tabelas: `varredura_over/varredura_ranking_lay_2026-09-15_2026.csv` e `..._2026ago.csv`.
