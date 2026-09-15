@@ -558,3 +558,328 @@ If cross origin resource sharing is required, please disable server.enableXsrfPr
   placares base betfair: +52907 (ate 2026-09-05)
   placares b365 (DASHBOARD_ARKAD-1): +192317
 divergencias planilha x base: 0
+===== 15/09/2026  6:00:01,88 ===== 
+2026-09-15 06:00:05.228 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+=== forward 5 metodos: 2026-08-01 -> 2026-09-15 ===
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-01: 20 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-02: 21 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-03: 9 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-04: 5 sinais (0 novos)
+  2026-08-05: 3 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-06: 13 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-07: 17 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-08: 18 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-09: 24 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-10: 4 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-11: 10 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-12: 9 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-13: 14 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-14: 14 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-15: 18 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-16: 15 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-17: 7 sinais (0 novos)
+  2026-08-18: 3 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-19: 7 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-20: 11 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-21: 14 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-22: 30 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-23: 26 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-24: 7 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-25: 10 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-26: 14 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-27: 20 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-28: 17 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-29: 24 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-30: 36 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-08-31: 13 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-01: 8 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-02: 9 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-03: 6 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-04: 15 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-05: 24 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-06: 26 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-07: 8 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-08: 9 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-09: 11 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-10: 5 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-11: 15 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-12: 27 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-13: 31 sinais (0 novos)
+  [Lay 0x3 Top 3 erro] name 'liga' is not defined
+  [Lay 0x3 (Regra Ampla) erro] name 'liga' is not defined
+  2026-09-14: 10 sinais (0 novos)
+  2026-09-15: 10 sinais (10 novos)
+sinais novos incorporados: 10
+  placares OFICIAIS (VPS): 437 exatos + 66 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+  placares das planilhas do dia (12 arquivos): +99
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +145
+liquidados agora: 4 | pendentes: 10 | fora da faixa KO: 35 | sem placar (>7d, fora da conta): 0
+
+ARKAD — Forward 5 Métodos
+jogos de 14/09/2026 · liability 1u = R$100 · comissão 5%
+
+ONTEM 14/09
+
+0x3          4    4G/ 0R 100%    +0.14u
+0x3-Ampla*   5    5G/ 0R 100%    +0.16u
+2x2          5    5G/ 0R 100%    +0.29u
+Draw         6    6G/ 0R 100%    +0.98u
+Home         2    2G/ 0R 100%    +0.32u
+--------------------------------------
+TOTAL       17   17G/ 0R 100%    +1.73u
+
+
+RESULTADOS de 14/09 (22 liquidados)
+
+13:00 ★ 0x3-Ampla HNK Gorica x Varazdin          @30.00 2-2  G  +0.03
+13:00 ★ 0x3   HNK Gorica x Varazdin          @30.00 2-2  G  +0.03
+13:05 ★ Draw  Al-Ula FC x Jeddah Club        @7.40  3-0  G  +0.15
+13:30 ★ Draw  Como x Parma                   @6.80  2-1  G  +0.16
+13:30 ★ Home  Torino x Roma                  @7.00  0-2  G  +0.16
+14:00 ★ 0x3-Ampla Porto B x Vizela               @25.00 2-2  G  +0.04
+14:00 ★ 0x3-Ampla Zemun x Radnik Surdulica       @34.00 1-1  G  +0.03
+14:00 ★ 0x3   Porto B x Vizela               @25.00 2-2  G  +0.04
+14:00 ★ 2x2   Sporting Lisbon B x Lusitania  @18.00 1-2  G  +0.06
+14:00 ★ Home  Gaziantep FK x Fenerbahce      @6.80  0-0  G  +0.16
+14:20 ★ 2x2   Al Najma Club x Al-Raed (KSA)  @18.00 1-1  G  +0.06
+14:30 ★ Draw  Ludogorets x Septemvri         @7.80  2-1  G  +0.14
+14:45 ★ 2x2   Rio Ave x Club Football Estrel @18.00 3-3  G  +0.06
+15:30 b 0x3-Ampla Celta Vigo B x Eibar           @32.00 0-4  G  +0.03
+15:30 b 0x3   Celta Vigo B x Eibar           @32.00 0-4  G  +0.03
+15:45 ★ 2x2   Red Star x Metz                @16.50 1-0  G  +0.06
+15:45 b Draw  Inter x Udinese                @6.80  5-3  G  +0.16
+16:15 b Draw  Vikingur Reykjavik x Keflavik  @7.80  4-1  G  +0.14
+19:00 ★ 0x3-Ampla Torque x Liverpool Montevideo  @30.00 3-1  G  +0.03
+19:00 ★ 0x3   Torque x Liverpool Montevideo  @30.00 3-1  G  +0.03
+20:30 ★ 2x2   CSD Rangers x Deportes Iquique @17.50 1-2  G  +0.06
+22:00 ★ Draw  America de Cali S.A x Deportiv @5.20  0-1  G  +0.23
+
+★ = placar oficial da liquidação Betfair (VPS) · b = base histórica
+
+SETEMBRO — por método
+
+0x3         39   38G/ 1R  97%    +0.44u
+0x3-Ampla*  76   74G/ 2R  97%    +0.66u
+2x2         47   47G/ 0R 100%    +2.77u (2 pend)
+Draw       103   91G/12R  88%    +2.53u (5 pend)
+Home        50   44G/ 6R  88%    +0.95u (2 pend)
+Ov4.5       11   11G/ 0R 100%    +0.56u (1 pend)
+--------------------------------------
+TOTAL      250  231G/19R  92%    +7.24u (10 pend)
+
+SETEMBRO — por dia
+
+01/09  11  11G/ 0R   +1.16u
+02/09  12  12G/ 0R   +1.22u
+03/09   9   9G/ 0R   +0.84u
+04/09  18  17G/ 1R   +1.00u
+05/09  27  23G/ 4R   -1.14u
+06/09  29  27G/ 2R   +1.28u
+07/09  11  10G/ 1R   -0.28u
+08/09  12  12G/ 0R   +1.21u
+09/09  14  13G/ 1R   +0.38u
+10/09   6   4G/ 2R   -1.61u
+11/09  18  16G/ 2R   -0.08u
+12/09  30  25G/ 5R   -1.71u
+13/09  36  35G/ 1R   +3.25u
+14/09  17  17G/ 0R   +1.73u
+15/09  10   0G/ 0R     --   *
+
+
+AGOSTO — por método
+
+0x3         74   71G/ 3R  96%    -0.25u
+0x3-Ampla* 162  157G/ 5R  97%    +0.62u
+2x2         93   87G/ 6R  94%    -0.96u
+Draw       226  198G/28R  88%    +5.35u
+Home       103   90G/13R  87%    +1.02u
+Ov4.5       31   30G/ 1R  97%    +0.67u
+--------------------------------------
+TOTAL      527  476G/51R  90%    +5.83u
+
+AGOSTO — por dia
+
+01/08  24  21G/ 3R   -0.54u
+02/08  25  23G/ 2R   +1.13u
+03/08  11  11G/ 0R   +0.95u
+04/08   6   6G/ 0R   +0.53u
+05/08   3   2G/ 1R   -0.78u
+06/08  16  16G/ 0R   +1.89u
+07/08  19  18G/ 1R   +1.47u
+08/08  22  19G/ 3R   -0.62u
+09/08  28  25G/ 3R   +0.19u
+10/08   7   6G/ 1R   -0.71u
+11/08   8   6G/ 2R   -1.19u
+12/08   9   8G/ 1R   -0.20u
+13/08  14  12G/ 2R   -0.50u
+14/08  17  15G/ 2R   -0.32u
+15/08  21  20G/ 1R   +1.39u
+16/08  17  14G/ 3R   -1.33u
+17/08   9   9G/ 0R   +0.65u
+18/08   3   3G/ 0R   +0.16u
+19/08  10  10G/ 0R   +1.01u
+20/08  14  10G/ 4R   -2.91u
+21/08  16  15G/ 1R   +0.92u
+22/08  33  30G/ 3R   +1.08u
+23/08  29  28G/ 1R   +2.64u
+24/08  10  10G/ 0R   +1.06u
+25/08  12  12G/ 0R   +1.16u
+26/08  17  15G/ 2R   -0.35u
+27/08  23  21G/ 2R   +0.46u
+28/08  19  18G/ 1R   +1.33u
+29/08  27  24G/ 3R   -0.03u
+30/08  41  34G/ 7R   -2.36u
+31/08  17  15G/ 2R   -0.35u
+
+
+GESTÃO — banca R$2500 · liability R$50 por aposta
+
+método    N  WR-BE  R$ acum IC95 ROI         gatilho
+0x3     113  +0.2pp       +9 [-3.8,+3.0]      manter
+2x2     140  +1.2pp      +90 [-2.4,+4.3]      manter
+Draw $  329  +2.0pp     +394 [-1.8,+6.4]      manter
+Home    153  +1.2pp      +98 [-2.8,+5.5]      manter
+Ov4.5    42  +2.8pp      +61 [-3.2,+5.7]      manter
+0x0  $    6 -10.9pp      -35 IC indef.        manter (2d)
+--------------------------------------------------
+acumulado R$+619 | pico R$+619 | drawdown atual R$0 | máx R$-203
+pior dia R$-145 | banca aguenta 17 dias como o pior
+
+$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥100.
+
+PRAZOS PRÉ-REGISTRADOS
+
+faltam 27d   2026-10-12 H-extra Over 1.5 / 1 gol / fav&gt;1.80 / min 25-85 — 1o
+faltam 27d   2026-10-12 Varredura Over in-play — snapshot 2
+faltam 27d   2026-10-12 CS no coletor (19 runners) — snapshot 2
+faltam 27d   2026-10-12 Lay 2x2 apos o 1o gol — snapshot 2
+faltam 58d   2026-11-12 CS no coletor — snapshot 3
+122%         N= 329/270  Lay Draw (Fav&lt;=1.40) — N para o IC95 descolar de zer
+  0%         N=   6/1476 Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09
+
+
+ACUMULADO desde 01/08 (5 métodos): 777 liq · 707G/70R · WR 91.0% · +13.07u (R$ +1307) · 10 pendentes (*)
+* 0x3-Ampla tem os mesmos jogos do 0x3 Top 3 e as zebras são observação: fora do TOTAL e do ACUMULADO.
+
+(5597 caracteres)
+telegram parte 1/2: OK 
+telegram parte 2/2: OK 
+2026-09-15 06:00:41.452 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+  placares OFICIAIS (VPS): 437 exatos + 66 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+  placares das planilhas do dia (12 arquivos): +99
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +145
+divergencias planilha x base: 0
