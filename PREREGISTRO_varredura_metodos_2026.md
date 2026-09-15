@@ -43,3 +43,27 @@ de liga, stat, xG ou hora.
 - Uma célula que PASSA **não vira método**: vira candidata a forward na odd real do coletor, com pré-registro
   próprio e julgamento em jogos com KO ≥ data desse pré-registro (Lei 5).
 - Não usar odd de back para julgar lay nem vice-versa (Lei 1).
+
+---
+
+## Resultado — 2026-09-15 (rodado depois do commit 7592b8b)
+
+**Janela A (2026-01-01 → 05/09, 14.132 jogos): 6.018 células avaliadas, 5.995 com N ≥ 100 · BH sobre M=5.995 ·
+138 PASSA / 2.199 REPROVA / 3.577 INCONCLUSIVO / 81 INCONCLUSIVO (perdas<5).**
+- **As 138 PASSA são todas Correct Score** (109 lay, 29 back). **Zero PASSA** em Match Odds, dupla chance, O/U FT, O/U HT
+  e BTTS — em nenhum lado, nenhum favoritismo, nenhum contexto de gols, nenhum corte.
+- As 29 de **back** em CS são impossíveis de serem mercado real: Back 1x1 sem filtro dá +29% de ROI em 12.884 jogos
+  (jan–abr +62%, mai–jul −8,6%, ago–set −21,5%); Back 0x2 fav ≤1,40 fora +142%. É a odd de CS de jan–abr da base
+  (livro cheio / snapshot fora de mercado), não a Betfair — a mesma ressalva de `base-betfair-regime-odd-lay-cs`.
+- Das 138, só 21 têm ROI > 0 em mai–jul **e** ago–set, e nessas o N fora de jan–abr é de 1 a 81 jogos (odds 10–32:
+  "positivo" = nenhum red em 8 jogos). Únicas com N ≥ 50 fora de jan–abr: Lay 1x1 fav ≤1,40 TOP 3 (mai–jul N=153 +1,8%;
+  ago–set N=81 +3,4%) e Lay 1x1 fav ≤1,40 fav casa TOP 3 (128 +0,7%; 77 +3,1%).
+
+**Janela B (2026-08-01 → 05/09, 2.589 jogos): 4.326 avaliadas, 2.593 com N ≥ 100 · 0 PASSA / 594 REPROVA / 1.997
+INCONCLUSIVO / 2 (perdas<5).** Melhor p = 0,0005: Lay Under 2.5 com fav 1,40–1,80 (N=633, +10,0%, IC [+4,6; +15,4]) — em
+2026 inteiro a mesma célula dá −0,1% (N=3.364; jan–abr −2,2%, mai–jul −3,0%): oscilação de agosto, não edge.
+
+**Leitura (registrada, não é veredito):** cruzando 43 runners × lay/back × favoritismo × contexto de gols × lado do
+favorito × corte, só em 2026, o único lugar onde "passa" continua sendo o Correct Score de jan–abr da base — o mesmo
+regime já invalidado. Nenhuma célula vira candidata a forward. Tabelas: `varredura_over/varredura_metodos_2026-09-15_2026.csv`
+(5.995 linhas) e `..._2026ago.csv` (2.593).

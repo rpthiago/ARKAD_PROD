@@ -7,6 +7,17 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Claude · Varredura AMPLA de métodos só em 2026 (pré-registrada): 43 runners × lay/back × fav × gols × lado × corte
+
+- **Pedido:** "tem mais uma infinita possibilidade de métodos na Betfair" → grade de 8.256 células (`PREREGISTRO_varredura_metodos_2026.md`,
+  commit 7592b8b antes de rodar), harness `varredura_metodos_2026.py` (bootstrap bloco-dia vetorizado, BH sobre todas as células).
+- **2026 inteiro:** 5.995 células com N≥100 → 138 PASSA, **todas Correct Score** (109 lay + 29 back); zero em MO/DC/O-U/HT/BTTS.
+  Os back de CS que "passam" (+29% em 12.884 jogos) provam que a odd de CS de jan–abr da base não é mercado real.
+- **Ago–set 2026:** 2.593 células → 0 PASSA. Melhor: Lay Under 2.5 fav 1,40–1,80 +10% (633), que no ano dá −0,1%.
+- Nenhuma célula vira candidata a forward. Resultado escrito no pré-registro.
+
+---
+
 ## 2026-09-15 · Claude · Varredura dos 43 mercados de lay só em 2026 (pré-registrada) + gap por período
 
 - **Pedido:** "montar esses mesmos métodos apenas olhando os jogos desse ano".
