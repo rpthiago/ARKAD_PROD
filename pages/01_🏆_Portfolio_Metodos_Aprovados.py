@@ -178,15 +178,26 @@ with tab1:
         st.write("")
         btn_escanear = st.button("🔄 Escanear Portfólio Agora", type="primary", use_container_width=True)
         
+    def _agora_br():
+        from datetime import datetime as _dt
+        try:
+            from zoneinfo import ZoneInfo
+            return _dt.now(ZoneInfo("America/Sao_Paulo")).strftime("%H:%M:%S")
+        except Exception:
+            from datetime import timedelta as _td, timezone as _tz
+            return _dt.now(_tz(_td(hours=-3))).strftime("%H:%M:%S")
+
     @st.cache_data(ttl=600, show_spinner=False)
     def escanear_api_unificada(ds_iso):
+        """Devolve (df, hora_captura_BR). A hora vai junto com o resultado: quem ler do cache ve a hora real da consulta."""
+        capturado = _agora_br()
         try:
             df = get_daily_dataframe(source="betfair", date_str=ds_iso)
         except Exception:
-            return pd.DataFrame()
-            
+            return pd.DataFrame(), capturado
+
         if df is None or df.empty:
-            return pd.DataFrame()
+            return pd.DataFrame(), capturado
             
         sinais = []
         oh_back = pd.to_numeric(df.get("Odd_H_Back"), errors="coerce")
@@ -350,18 +361,15 @@ with tab1:
                     "Expectativa_WR": "86.1%", "EV_Estimado": "+3.31%"
                 })
                 
-        return pd.DataFrame(sinais)
-        
+        return pd.DataFrame(sinais), capturado
+
     ds_str = data_busca.strftime("%Y-%m-%d")
     # O botao forca nova consulta (limpa o cache de 10 min); sem clique, o resultado pode ter ate 10 min de idade.
-    from datetime import datetime as _dt
     if btn_escanear:
         escanear_api_unificada.clear()
-        st.session_state["ts_scan_01"] = _dt.now()
-    st.session_state.setdefault("ts_scan_01", _dt.now())
     with st.spinner(f"Consultando grade de {ds_str} na Betfair Exchange e aplicando filtros dos métodos aprovados..."):
-        df_radar = escanear_api_unificada(ds_str)
-    st.caption(f"🕒 Odds capturadas às **{st.session_state['ts_scan_01']:%H:%M:%S}** · cache de 10 min · "
+        df_radar, hora_captura = escanear_api_unificada(ds_str)
+    st.caption(f"🕒 Odds capturadas às **{hora_captura}** (horário de Brasília) · cache de 10 min · "
                "clique em **Escanear Portfólio Agora** para buscar odds novas.")
         
     if not df_radar.empty:
