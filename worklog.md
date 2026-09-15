@@ -7,6 +7,21 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Claude · Idea1 fechado (−3,0%) + Late Goal v2 com faixa medida + guarda feminino/reserva no oficial
+
+- **Idea1 Back Under min 10:** 120 pendentes nunca liquidados (04–09/09, antes do oficial); 57 resolvidos por base externa com
+  placar exato (fuzzy ≥0,80), 63 marcados `SemPlacar`. Total 1.254: **−3,00%** (Under 2.5 −4,2%; Under 3.5 −1,85%). Fechado.
+- **Late Goal:** v1 inviável (547 capturas, 0 na faixa 3,00–5,50). Medido no coletor: odd do Over aos 82–86' com diff 1 tem
+  mediana 2,10 (p25 1,87 / p75 2,38); liq mediana 333; spread 0,06. `PREREGISTRO_late_goal_v2.md` (faixa 1,50–2,60, liq≥200,
+  spread≤0,10), aplicado no `late_goal_capturar.py` da VPS (backup `.bak_v1_20260915`), serviço reiniciado. Primeiro olhar
+  declarado: 265 · −9,7% · IC [−23,4; +0,1]; Over 3.5 −17,6% com teto < 0. Julgamento KO ≥ 16/09, snapshot 12/10.
+- **Base de placares:** 583 oficiais desde 12/09; 112/116 sinais do ledger (≥13/09) liquidados pela Betfair (os 4 restantes
+  são "Any Other" ≥4 gols, placar exato veio da planilha). Guarda nova: jogos (W)/(Res)/U21 do oficial fora do casamento fuzzy.
+- **In-play, estado:** Radar HT morto por fluxo (último registro 08/09); Fav. dominante 3 sinais; xG-HT 460 jogos; grades de
+  13/09 lacradas até 12/10.
+
+---
+
 ## 2026-09-15 · Claude · Varredura AMPLA de métodos só em 2026 (pré-registrada): 43 runners × lay/back × fav × gols × lado × corte
 
 - **Pedido:** "tem mais uma infinita possibilidade de métodos na Betfair" → grade de 8.256 células (`PREREGISTRO_varredura_metodos_2026.md`,

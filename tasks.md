@@ -17,16 +17,20 @@
 - [ ] **Tríade base (Draw/Home/Over 4.5) — observar, não confirmado.**
   - [ ] 5 fins de semana limpos + bootstrap. Sinal atual: marginal; **CLV só 34%+ (não bate fechamento).**
   - [ ] Lay Home é o menos ruim (~+7% N=74); Draw esfriando; Over 4.5 N minúsculo.
-- [ ] **Under-limite est2/3 + Idea1 Back Under — observação/quase-morto.**
+- [x] **Idea1 Back Under (min 10) — FECHADO 15/09:** 1.254 liquidados (57 pendentes resolvidos por base externa com placar exato;
+        63 sem placar em liga sem base): **ROI −3,00%** (Under 2.5 −4,2% N=614 · Under 3.5 −1,85% N=640). Log liquidado em
+        `varredura_over/idea1_log_liquidado_2026-09-15.csv`; original na VPS com backup `.bak_20260915`.
+- [ ] **Under-limite est2/3 — observação/quase-morto.**
   - [ ] Deixar bater **N≥400** (hoje 371, ROI −3,40%, IC95 [−12,8; +6,1]) e aplicar o veredito
         CONGELADO. **NÃO re-recortar antes disso** (cortes vindos do próprio cohort = garimpo).
   - [x] Instrumentação (08/09): log agora grava `placar_entrada, gols_diff, placar_ok, lay, spread,
         lay_size, competicao`. Gatilho intocado.
   - [ ] **Coletor In-Play Minuto 78-83 (Under Limite):** `coletor_inplay_min80.py` implantado para capturar xG acumulado, chutes no alvo e toques na área aos 80' em `inplay_min80_log.csv` e medir empiricamente se a pressão aos 80' prediz gol tardio.
   - [ ] Considerar cortar est3 e Under 3.5 (os piores) dos loggers — **só depois do veredito**.
-- [ ] **Late Goal Desperation Hunter — stake-zero, pré-registro aberto 08/09.**
-  - [ ] Coorte PRIMÁRIA até **N=250** (morte antecipada: N≥80 com ROI<−10%, automática no liquidador).
-  - [ ] **Checar em 24h se a primária tem fluxo.** Banda odd 3,00-5,50 apareceu em só 3 de 360 sinais
+- [ ] **Late Goal v2 — stake-zero, `PREREGISTRO_late_goal_v2.md` (15/09).** v1 (08/09) encerrada por inviabilidade:
+        547 capturas em 8 dias, 0 na faixa 3,00-5,50 (2,2% das capturas). Odd real medida: mediana 2,10.
+  - [x] Faixa MEDIDA aplicada no capturador da VPS (1,50-2,60, liq>=200, spread<=0,10) em 15/09.
+  - [ ] Julgar só KO >= 16/09; snapshot 12/10. Primeiro olhar (declarado): 265 · −9,7% · IC [−23,4; +0,1]; Over 3.5 já com teto<0.
 - [ ] **Back Favorito Dominante In-Play (Stake Zero / Observação) — pré-registro aberto 08/09.**
   - [x] `PRE_REGISTRO_FAVORITO_DOMINANTE.md` congelado e calibrado com BE honesto e odd in-play Betfair real.
   - [x] Rastreador `tracker_favorito_dominante_inplay.py` corrigido por Claude e implantado na VPS como serviço systemd (log: `favorito_dominante_log.csv`).
