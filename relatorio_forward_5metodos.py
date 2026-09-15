@@ -220,6 +220,9 @@ def _placares_oficiais():
         return out
     try:
         d = pd.read_csv(CACHE_FT, dtype=str).fillna("")
+        # feminino / reserva / base ficam fora: "Aston Villa (W)" casaria (0,95) com "Aston Villa" no fuzzy
+        _jr = r"\(W\)|\(Res\)|\bU1\d\b|\bU2\d\b|Women|Reserves|Youth"
+        d = d[~(d["home"].str.contains(_jr, regex=True) | d["away"].str.contains(_jr, regex=True))]
     except Exception:
         return out
     OFICIAL_CAT.clear()
