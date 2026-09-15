@@ -65,8 +65,16 @@ def bh(p, q=0.05):
 
 
 def main():
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--desde", default=None, help="janela: so jogos com Date >= desde (ex.: 2026-01-01)")
+    ap.add_argument("--ate", default=None, help="janela: so jogos com Date <= ate")
+    ap.add_argument("--tag", default="", help="sufixo do arquivo de saida (ex.: 2026)")
+    a = ap.parse_args()
     b = pd.read_csv(BASE, low_memory=False)
     b["Date"] = pd.to_datetime(b["Date"], errors="coerce").dt.strftime("%Y-%m-%d")
+    if a.desde: b = b[b["Date"] >= a.desde]
+    if a.ate: b = b[b["Date"] <= a.ate]
     for c in ["Goals_H_FT", "Goals_A_FT", "Goals_H_HT", "Goals_A_HT"] + list(MERCADOS): b[c] = pd.to_numeric(b[c], errors="coerce")
     b = b.dropna(subset=["Date", "Goals_H_FT", "Goals_A_FT"])
     gh, ga = b.Goals_H_FT.astype(int), b.Goals_A_FT.astype(int); hh, ha = b.Goals_H_HT, b.Goals_A_HT
@@ -90,7 +98,7 @@ def main():
     T = pd.DataFrame(rows); T["BH_passa"] = bh(T.p.values)
     T["decisao"] = np.where(T.BH_passa & (T.IC_lo > 0), "PASSA", np.where(T.IC_hi < 0, "REPROVA", "INCONCLUSIVO"))
     T = T.sort_values("p")
-    snap = os.path.join(ROOT, "varredura_over", "varredura_ranking_lay_%s.csv" % datetime.now().strftime("%Y-%m-%d"))
+    snap = os.path.join(ROOT, "varredura_over", "varredura_ranking_lay_%s%s.csv" % (datetime.now().strftime("%Y-%m-%d"), ("_" + a.tag) if a.tag else ""))
     T.to_csv(snap, index=False, encoding="utf-8-sig")
     print("\n=== %d celulas com N>=%d | BH q=0,05 sobre M=%d | decisao: %s ===" % (len(T), N_MIN, len(T), T.decisao.value_counts().to_dict()))
     print("%-16s %-6s %7s %6s %6s %7s %7s %7s %6s %8s %-18s %-7s %s" % ("mercado", "corte", "N", "reds", "red%", "WR", "BE", "edge", "odd", "ROI", "IC95", "p", "decisao"))
