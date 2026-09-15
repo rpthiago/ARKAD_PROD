@@ -353,8 +353,16 @@ with tab1:
         return pd.DataFrame(sinais)
         
     ds_str = data_busca.strftime("%Y-%m-%d")
+    # O botao forca nova consulta (limpa o cache de 10 min); sem clique, o resultado pode ter ate 10 min de idade.
+    from datetime import datetime as _dt
+    if btn_escanear:
+        escanear_api_unificada.clear()
+        st.session_state["ts_scan_01"] = _dt.now()
+    st.session_state.setdefault("ts_scan_01", _dt.now())
     with st.spinner(f"Consultando grade de {ds_str} na Betfair Exchange e aplicando filtros dos métodos aprovados..."):
         df_radar = escanear_api_unificada(ds_str)
+    st.caption(f"🕒 Odds capturadas às **{st.session_state['ts_scan_01']:%H:%M:%S}** · cache de 10 min · "
+               "clique em **Escanear Portfólio Agora** para buscar odds novas.")
         
     if not df_radar.empty:
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
