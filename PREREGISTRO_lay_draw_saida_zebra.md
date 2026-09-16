@@ -43,3 +43,14 @@ P&L por 1u de responsabilidade: saída `S_in·(1 − O_in/O_out)`, `S_in = 1/(O_
 
 - Não mudar o gatilho (só o 1º gol, só zebra), não estimar odd de saída, não somar com a saída no gol do favorito.
 - Não transformar em regra de entrada ("entrar depois do gol da zebra"): −3,6% pela base (28% real vs 24,6% BE).
+
+---
+
+## Emenda 16/09 (antes de qualquer julgamento) — alternativa "sair no intervalo", só medida
+
+Pergunta do Thiago: é melhor sair no intervalo (esperando o empate/virada no 2º tempo) do que no gol? Base (N=565, zebra
+abriu no 1º tempo): no HT a zebra ainda está na frente em 56% (empate FT 36,3%), empatou em 30% (22,8%), favorito virou
+em 14% (7,8%). Coletor (N=21): odd do empate no intervalo 3,28 / 4,20 / 4,60 nesses estados (no gol: 3,75).
+EV por 1u de risco (entrada 6,6): sair no gol −0,136 · sair no intervalo −0,143 · segurar −0,161 — diferenças menores
+que a incerteza da taxa de empate. **Sem alerta novo.** O serviço passa a gravar `HT_ODD` (odd do empate na 1ª captura
+de 47–58 min de relógio + estado no HT) nos mesmos jogos, para a comparação pareada gol × intervalo × segurar em 12/10.

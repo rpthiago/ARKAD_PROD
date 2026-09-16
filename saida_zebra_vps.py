@@ -71,7 +71,7 @@ def sinais_lay_draw():
 
 class Estado:
     def __init__(self):
-        self.offset = 0; self.buf = {}; self.buf_t0 = {}; self.jogos = {}; self.feitos = set(); self.pend_out = {}
+        self.offset = 0; self.buf = {}; self.buf_t0 = {}; self.jogos = {}; self.feitos = set(); self.pend_out = {}; self.esperando_ht = {}
         if ESTADO.exists():
             try:
                 e = json.load(open(ESTADO, encoding="utf-8")); self.offset = int(e.get("offset", 0)); self.feitos = set(e.get("feitos", []))
@@ -97,7 +97,8 @@ def _fechar(E, k, J, chave, ts, mk, odd_in, ko_local):
     gravar([ko_local.strftime("%Y-%m-%d"), k[1], k[2], ko_local.strftime("%H:%M"), J.fav_pre[1], J.fav_pre[0], odd_in, "GOL_ZEBRA", min_gol, ob, ts, round(pnl, 5), "", "", "SAIDA"])
     tg("<b>SAÍDA Lay Draw · zebra marcou (%s')</b>\n%s x %s\nback no empate @<b>%.2f</b> (entrada lay %.2f) → fecha em %+.3fu por 1u de risco"
        % (min_gol, _esc(k[1]), _esc(k[2]), ob, odd_in, pnl))
-    E.feitos.add(chave); print("%s SAIDA %s x %s: gol zebra %s' | empate back %.2f | pnl %+.3f" % (datetime.now().strftime("%H:%M:%S"), k[1], k[2], min_gol, ob, pnl), flush=True)
+    E.feitos.add(chave); E.esperando_ht[chave] = (min_gol, odd_in)
+    print("%s SAIDA %s x %s: gol zebra %s' | empate back %.2f | pnl %+.3f" % (datetime.now().strftime("%H:%M:%S"), k[1], k[2], min_gol, ob, pnl), flush=True)
 
 
 def _flush(E, k, ts, mtk, mk, odd_in):
@@ -111,6 +112,15 @@ def _flush(E, k, ts, mtk, mk, odd_in):
     # saida pendente: esperando a primeira captura com preco no empate
     if chave in E.pend_out:
         _fechar(E, k, J, chave, ts, mk, odd_in, ko_local); return
+    # alternativa medida (sem alerta): odd do empate na 1a captura do intervalo (47-58 min de relogio), estado no HT
+    if chave in E.esperando_ht and 47 <= minuto <= 58:
+        ob, _ = C._preco(mk, "MATCH_ODDS", "The Draw", "back")
+        if ob is None: return
+        min_gol, oi = E.esperando_ht.pop(chave); s_in = 1.0 / (oi - 1.0); pnl = s_in * (1.0 - oi / ob)
+        est = "zebra_na_frente" if J.gols == 1 else ("empatou" if (J.gols == 2 and J.lado_gol.get(2) in ("empate2", None)) else "2+gols")
+        gravar([ko_local.strftime("%Y-%m-%d"), k[1], k[2], ko_local.strftime("%H:%M"), J.fav_pre[1], J.fav_pre[0], oi, "HT_ODD", min_gol, ob, ts, round(pnl, 5), "", est, "MEDIDA"])
+        return
+    if chave in E.esperando_ht and minuto > 58: E.esperando_ht.pop(chave, None)
     if chave in E.feitos: return
     if J.gols is not None and J.gols >= 1:
         lado = J.lado_gol.get(1)
