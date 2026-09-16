@@ -7,6 +7,19 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · Lay Draw: estudo "zebra marca 1º" + regra de saída pré-registrada e em serviço
+
+- **Base 2024–26 (3.503 sinais com minuto dos gols):** zebra marca 1º em 20,4% dos sinais → **28,0% terminam empatados** (favorito
+  1º: 7,8%; 0-0: 3,6%). Favorito em casa 29,4%; em casa a 1,33–1,40: **32,8%** (N=241). 200 dos 534 reds (37%) vêm desse cenário.
+- **Coletor:** odd de lay do empate logo após o gol da zebra: mediana 3,80 (pré 6,40) → BE 24,6%. Entrar aí é −3,6% (28% real).
+  Sair (back no empate) no cenário casa/1,33–1,40: −0,13u vs segurar −0,21u por 1u de risco; no método inteiro ≈ +0,5 a +1pp.
+- **`PREREGISTRO_lay_draw_saida_zebra.md`** (regra de saída, comparação pareada saída−hold, N≥100, KO ≥ 17/09, snapshot 12/10).
+  Primeiro olhar declarado: 21 casos, saída −0,124 vs hold −0,059 (só 4 empates). **`saida-zebra.service`** na VPS: alerta Telegram
+  no gol da zebra com a odd real de back do empate; `saida_zebra_ledger.csv`; bloco pareado no relatório das 06:00.
+- Core: referência pré-gol da odd do mandante agora também vem das capturas pré-KO (gols antes da 1ª captura in-play ficavam sem lado).
+
+---
+
 ## 2026-09-16 · Claude · Ledger do KO−10 (executável): serviço na VPS + Telegram + backfill desde 16/08 + bloco no relatório
 
 - **Motivo (Thiago):** "não posso fazer às 6 da manhã um jogo que começa às 15h" e "jogo sem odd aprovada não pode contar no controle".

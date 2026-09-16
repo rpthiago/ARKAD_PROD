@@ -650,6 +650,61 @@ def executavel_no_ko(r, kidx):
     return False
 
 
+# ------------------------------------------------------------------ 3c. saida no gol da zebra (Lay Draw) — pareado
+ZEBRA_LEDGER = os.path.join(ROOT, "metodos_aprovados", "saida_zebra_ledger.csv")
+
+
+def atualizar_zebra(LK):
+    """traz saida_zebra_ledger.csv da VPS, junta com o local e preenche pnl_hold pelo resultado FT do sinal no ledger KO."""
+    import subprocess
+    tmp = os.path.join(ROOT, "metodos_aprovados", ".cache_saida_zebra_vps.csv")
+    try:
+        subprocess.run(["scp", "-q", "-i", VPS_KEY, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=20",
+                        VPS + ":/home/ubuntu/betfair-collector/saida_zebra_ledger.csv", tmp], capture_output=True, timeout=90)
+    except Exception:
+        pass
+    Z = {}
+    cols = None
+    for f in (ZEBRA_LEDGER, tmp):
+        if os.path.exists(f):
+            for r in csv.DictReader(open(f, encoding="utf-8-sig")):
+                cols = cols or list(r.keys())
+                Z.setdefault("%s|%s|%s|%s" % (r["Data"], canon(r["Home"]), canon(r["Away"]), r["evento"]), r)
+    if not Z:
+        return []
+    ko = {chave(r["Data"], M_DRAW, r["Home"], r["Away"]): r for r in LK.values() if r["Metodo"] == M_DRAW} if LK else {}
+    for r in Z.values():
+        if r.get("status") == "SAIDA" and not r.get("pnl_hold"):
+            k = ko.get(chave(r["Data"], M_DRAW, r["Home"], r["Away"]))
+            if k and k.get("status") == "LIQUIDADO":
+                r["pnl_hold"] = k["pnl_u"]; r["resultado_ft"] = k["resultado"]
+    with open(ZEBRA_LEDGER, "w", newline="", encoding="utf-8-sig") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore"); w.writeheader(); w.writerows(sorted(Z.values(), key=lambda r: (r["Data"], r["Hora"])))
+    return list(Z.values())
+
+
+def bloco_zebra(Z, hoje_s):
+    if not Z: return []
+    ev = [r for r in Z if r.get("evento") == "GOL_ZEBRA"]
+    par = [r for r in ev if r.get("pnl_hold") not in ("", None)]
+    out = ["", "<b>LAY DRAW · saída no gol da zebra (pré-registro 16/09)</b>", "<pre>"]
+    hoje = [r for r in ev if r["Data"] == hoje_s]
+    for r in sorted(hoje, key=lambda r: r["Hora"]):
+        out.append("%s %-26s gol %3s' back@%-5s saída %+.3f%s" % (r["Hora"], _esc(("%s x %s" % (r["Home"], r["Away"]))[:26]), str(r.get("minuto_gol", ""))[:3],
+                   r.get("odd_out", ""), float(r["pnl_saida"] or 0), ("  hold %+.3f" % float(r["pnl_hold"])) if r.get("pnl_hold") else ""))
+    if par:
+        ds = sum(float(r["pnl_saida"]) for r in par); dh = sum(float(r["pnl_hold"]) for r in par)
+        out.append("-" * 44)
+        out.append("pareado N=%d: saída %+.2fu | segurar %+.2fu | dif %+.2fu (%+.3f/evento)" % (len(par), ds, dh, ds - dh, (ds - dh) / len(par)))
+        for lado in ("casa", "fora"):
+            pl = [r for r in par if r.get("fav_lado") == lado]
+            if pl: out.append("  fav %-4s N=%3d dif %+.2fu" % (lado, len(pl), sum(float(r["pnl_saida"]) - float(r["pnl_hold"]) for r in pl)))
+    n_ind = sum(1 for r in Z if r.get("evento") == "LADO_INDETERMINADO"); n_fav = sum(1 for r in Z if r.get("evento") == "GOL_FAV")
+    out.append("eventos: zebra %d · favorito 1º %d · lado indeterminado %d" % (len(ev), n_fav, n_ind))
+    out += ["</pre>", "<i>julgamento em KO ≥ 17/09, N ≥ 100 eventos, IC95 da diferença saída−segurar.</i>"]
+    return out
+
+
 # ------------------------------------------------------------------ 4. relatorio
 def _agg(rows):
     liq = [r for r in rows if r["status"] == "LIQUIDADO"]
@@ -757,7 +812,7 @@ def bloco_marcos(rows):
     return out
 
 
-def montar_mensagem(L, hoje, rotulo="HOJE", LK=None):
+def montar_mensagem(L, hoje, rotulo="HOJE", LK=None, ZR=None):
     """Mensagem em HTML do Telegram (<b>, <i>, <pre>). `hoje` e o DIA DE REFERENCIA do relatorio
     (na rodada das 6h e o dia anterior, com todos os placares oficiais ja liquidados)."""
     rows = list(L.values())
@@ -835,6 +890,7 @@ def montar_mensagem(L, hoje, rotulo="HOJE", LK=None):
             ln = _linha("fora", na_conta(kfora), largura=10)
             linhas += ["<pre>%s</pre>" % (ln or ""), "<i>fora = jogos que só a Betfair tem (ligas fora do feed, liquidez baixa): FORA da conta e da gestão.</i>"]
         linhas += ["<i>KO−10 = o que dava para apostar de verdade, 4–16 min antes do apito. A GESTÃO abaixo usa este ledger.</i>"]
+    linhas += bloco_zebra(ZR, hoje_s)
     linhas += bloco_gestao(kfeed if kfeed else rows)
     linhas += bloco_marcos(rows)
     n, g, r_, pnl, pend = _agg(na_conta(rows))
@@ -879,10 +935,14 @@ def main():
         LK = atualizar_ko()
     except Exception as e:
         print("  [ko] falhou: %s" % str(e)[:80]); LK = None
+    try:
+        ZR = atualizar_zebra(LK)
+    except Exception as e:
+        print("  [zebra] falhou: %s" % str(e)[:80]); ZR = None
     ref = datetime.strptime(a.ate, "%Y-%m-%d").date()
     if a.ontem:
         ref = ref - timedelta(days=1)
-    msg = montar_mensagem(L, ref, "ONTEM" if a.ontem else "HOJE", LK)
+    msg = montar_mensagem(L, ref, "ONTEM" if a.ontem else "HOJE", LK, ZR)
     print("\n" + re.sub(r"</?(b|i|pre)>", "", msg))
     print("\n(%d caracteres)" % len(msg))
     if not a.sem_telegram:

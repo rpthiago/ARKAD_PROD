@@ -118,7 +118,10 @@ class Jogo:
         if "MATCH_ODDS" in mk and mtk >= -5 and (self.fav_mtk is None or abs(mtk) < abs(self.fav_mtk)):
             h, _ = _preco(mk, "MATCH_ODDS", self.home, "back"); a, _ = _preco(mk, "MATCH_ODDS", self.away, "back")
             if h and a: self.fav_pre, self.fav_mtk = ((h, "casa") if h <= a else (a, "fora")), mtk
-        if minuto <= 0: return
+        if minuto <= 0:
+            h0, _ = _preco(mk, "MATCH_ODDS", self.home, "back")
+            if h0 is not None and not self.gols: self.odd_home_ref[0] = h0     # referência pré-gol também das capturas pré-KO
+            return
         g = self._gols(mk)
         if g is not None:
             if self.gols is not None and g < self.gols: g = self.gols          # gols não diminuem (linha ausente num passe)
