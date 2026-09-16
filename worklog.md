@@ -7,6 +7,16 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Claude · Suíte Trader In-Play (12e5502): deploy NÃO feito — 4 correções devolvidas ao Antigravity
+
+- Revisão antes de subir: (1) placar/minuto pelo CS de menor lay (`inplay_telemetry_engine.py:49-52`); (2) odd de entrada
+  do feed pré-jogo, não do coletor (`trader_inplay_engine.py:282`); (3) `liquidar_sinais` sem odd de saída nem P&L
+  (`tracker_trader_inplay.py:196-201`); (4) depende de `_placares_coletor_cache.csv`, inexistente na VPS → `--once` local = 0 sinais.
+- Thiago escolheu devolver (opção B). Critério de aceite em `CORRECOES_SUITE_TRADER_para_antigravity.md`; deploy (systemd
+  loop 60 s + cron --settle :40) fica pronto para rodar assim que a camada de dados ler o coletor e liquidar as duas pernas.
+
+---
+
 ## 2026-09-15 · Antigravity · Implementação da Suíte de Métodos Trader In-Play (4 Métodos) + Cockpit Streamlit
 
 - **Solicitação do usuário:** "Suíte de Métodos Trader In-Play — ARKAD: Implementação completa de 4 métodos de Sports Trading In-Play na Betfair Exchange com pré-registro formal, motor analítico com matemática de cashout/stop loss real e painel operacional interativo no Streamlit. [...] pode fazer"
