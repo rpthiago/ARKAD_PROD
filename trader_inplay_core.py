@@ -8,8 +8,9 @@ Entrada: capturas de UM jogo, em ordem de tempo. Cada captura = (ts, minuto, mk)
   mk[market_type][runner] = (back, back_size, lay, lay_size)   — só o que o coletor gravou; sem default.
 Fatos usados (nunca previsão):
   - gols já saídos: pelas linhas Over batidas (Over L <= 1,02) ou sumidas depois de vistas (gols_por_ou).
-  - quem marcou: pelos runners de Correct Score que a Betfair REMOVE quando ficam impossíveis
-    (1 gol: "0 - 1" ausente e "1 - 0" presente => mandante marcou; 2 gols: idem com "0 - 2"/"1 - 1"/"2 - 0").
+  - quem marcou: a Betfair NAO remove placares impossiveis do CS (medido 16/09), entao o lado vem da DIRECAO da
+    odd de back do mandante no Match Odds entre a ultima captura antes do gol e a primeira depois com preco:
+    caiu >= 10% => mandante marcou; subiu >= 10% => visitante marcou; senao indeterminado (espera a proxima).
   - odd de saída: a da PRIMEIRA captura depois do evento de saída em que o runner tem preço. Nunca estimada.
 P&L (stake-zero, unidade = 1u de risco): lay fechado em back: S_in = 1/(O_in-1); pnl = S_in*(1 - O_in/O_out).
 back fechado em lay: pnl = O_in/O_out - 1. Comissão 5% sobre lucro positivo.
@@ -18,9 +19,9 @@ COMISSAO = 0.05
 LINHAS = {"OVER_UNDER_05": 0.5, "OVER_UNDER_15": 1.5, "OVER_UNDER_25": 2.5, "OVER_UNDER_35": 3.5}
 
 # ---- regras congeladas (emenda 16/09: só o que o coletor mede) ----
-M1 = dict(id="M1_LTD", nome="LTD Trader", jan=(15, 25), fav_max=1.45, odd=(3.00, 4.20), liq=200, stop_min=68, obs_zebra_min=5)
-M2 = dict(id="M2_SWING_FAV", nome="Swing Fav em Desvantagem", jan=(20, 45), fav_max=1.35, odd=(2.10, 3.20), liq=200, stop_min=70)
-M3 = dict(id="M3_SCALP_U25", nome="Scalping Under 2.5 (55-62')", jan=(55, 62), gols_max=1, odd=(1.01, 20.0), liq=200, tp_ticks=3, cap_min=8)
+M1 = dict(id="M1_LTD", nome="LTD Trader", jan=(15, 25), fav_max=1.45, odd=(3.50, 9.50), liq=200, stop_min=68, obs_zebra_min=5)   # faixa MEDIDA 16/09: p5 3,60 / mediana 4,70 / p95 9,34
+M2 = dict(id="M2_SWING_FAV", nome="Swing Fav em Desvantagem", jan=(20, 45), fav_max=1.35, odd=(1.50, 6.00), liq=200, stop_min=70)   # faixa MEDIDA 16/09: p5 1,58 / mediana 2,16 / p75 2,94
+M3 = dict(id="M3_SCALP_U25", nome="Scalping Under 2.5 (55-62')", jan=(55, 62), gols_max=1, odd=(1.05, 2.30), liq=200, tp_ticks=3, cap_min=8)   # faixa MEDIDA 16/09: p5 1,08 / mediana 1,35 / p95 2,20
 METODOS = (M1, M2, M3)
 
 
@@ -76,7 +77,8 @@ class Jogo:
         self.fav_mtk = None
         self.vistas = set()            # linhas Over já vistas com preço
         self.gols = None               # gols já saídos (fato) na última captura, None = indefinido
-        self.lado_gol = {}             # n_gols -> "casa"/"fora"/"empate2" quando determinável
+        self.lado_gol = {}             # n_gols -> "casa"/"fora"/"empate2"/"casa2"/"fora2" quando determinável
+        self.odd_home_ref = {}         # n_gols -> última odd de back do mandante vista com esse nº de gols
         self.abertos = {}              # id_metodo -> trade aberto
         self.fechados = []
         self.feito = set()             # métodos já usados neste jogo (1 trade por jogo por método)
@@ -102,20 +104,17 @@ class Jogo:
         return None
 
     def _lado(self, mk, gols):
-        if gols == 1:
-            a, b = _cs_presente(mk, "1 - 0"), _cs_presente(mk, "0 - 1")
-            if a and not b: return "casa"
-            if b and not a: return "fora"
-        if gols == 2:
-            c20, c02, c11 = _cs_presente(mk, "2 - 0"), _cs_presente(mk, "0 - 2"), _cs_presente(mk, "1 - 1")
-            if c11 and not c20 and not c02: return "empate2"
-            if c20 and not c02 and not c11: return "casa2"
-            if c02 and not c20 and not c11: return "fora2"
+        """lado do gol n pela direcao da odd do mandante (ref = ultima odd vista com n-1 gols)."""
+        ref = self.odd_home_ref.get(gols - 1)
+        h, _ = _preco(mk, "MATCH_ODDS", self.home, "back")
+        if ref is None or h is None: return None
+        if h <= ref * 0.90: return "casa" if gols == 1 else ("empate2" if self.lado_gol.get(1) == "fora" else "casa2")
+        if h >= ref * 1.10: return "fora" if gols == 1 else ("fora2" if self.lado_gol.get(1) == "fora" else "empate2")
         return None
 
     # ---------- alimentação ----------
     def captura(self, ts, mtk, mk):
-        minuto = -mtk - 15
+        minuto = round(-mtk - 15, 1)
         if "MATCH_ODDS" in mk and mtk >= -5 and (self.fav_mtk is None or abs(mtk) < abs(self.fav_mtk)):
             h, _ = _preco(mk, "MATCH_ODDS", self.home, "back"); a, _ = _preco(mk, "MATCH_ODDS", self.away, "back")
             if h and a: self.fav_pre, self.fav_mtk = ((h, "casa") if h <= a else (a, "fora")), mtk
@@ -128,6 +127,9 @@ class Jogo:
             self.gols = g
             if g in (1, 2) and self.lado_gol.get(g) is None:
                 self.lado_gol[g] = self._lado(mk, g)
+            h, _ = _preco(mk, "MATCH_ODDS", self.home, "back")
+            if h is not None and (g not in (1, 2) or self.lado_gol.get(g) is not None or g == 0):
+                self.odd_home_ref[g] = h        # referência só depois de o lado deste gol estar resolvido (ou 0 gols)
         self.ult_min = minuto
         self._saidas(ts, minuto, mk)
         self._entradas(ts, minuto, mk)
