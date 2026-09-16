@@ -218,31 +218,83 @@ with tab1:
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
         l20 = pd.to_numeric(df.get("Odd_CS_2x0_Lay"), errors="coerce")
         
-        # 1. Lay 0x3 Top 3 Menor Odd (Método Aprovado Produção)
+        # 1. Lay 0x3 Top 3 Menor Odd (Método Aprovado Produção — idêntico à Página 16)
         try:
-            res_0x3 = avaliar_jogos_lay_0x3_grade(df, top_n=3)
-            for s in res_0x3:
-                sinais.append({
-                    "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
-                    "Home": s["home"], "Away": s["away"], "Método": "Lay 0x3 Top 3 (Aprovado)",
-                    "Mercado": "Correct Score (0x3)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
-                    "Expectativa_WR": "99.4%", "EV_Estimado": "+4.21%"
-                })
+            res_0x3 = None
+            if avaliar_jogos_lay_0x3_grade is not None:
+                try:
+                    res_0x3 = avaliar_jogos_lay_0x3_grade(df, top_n=3)
+                except Exception:
+                    res_0x3 = None
+            
+            # Fallback direto idêntico ao motor da Página 16 para imunidade a falhas de importação/cache
+            if not res_0x3:
+                sinais_0x3_raw = []
+                for _, row_0x3 in df.iterrows():
+                    o_a_0x3 = float(row_0x3.get('Odd_A_Back') or row_0x3.get('Odd_A_FT_Back') or row_0x3.get('Odd_A_FT') or row_0x3.get('Odd_A') or 0.0)
+                    o_u25_0x3 = float(row_0x3.get('Odd_Under25_FT_Back') or row_0x3.get('Odd_Under25_FT') or row_0x3.get('Odd_Under25') or 0.0)
+                    o_0x3_val = float(row_0x3.get('Odd_CS_0x3_Lay') or row_0x3.get('Odd_CS_0x3') or 0.0)
+                    
+                    if 0.0 < o_u25_0x3 <= 2.10 and 14.0 <= o_0x3_val <= 35.0 and (o_a_0x3 >= 1.85 or o_a_0x3 == 0.0):
+                        h_0x3 = str(row_0x3.get("Home", row_0x3.get("Home_Team", "")))
+                        a_0x3 = str(row_0x3.get("Away", row_0x3.get("Away_Team", "")))
+                        l_0x3 = str(row_0x3.get("League", row_0x3.get("Div", "Liga Externa")))
+                        tm_0x3 = str(row_0x3.get("Time", row_0x3.get("horario", "15:00")))[:5]
+                        sinais_0x3_raw.append({
+                            "hora": tm_0x3, "league": l_0x3, "home": h_0x3, "away": a_0x3, "odd_lay": o_0x3_val
+                        })
+                        
+                if sinais_0x3_raw:
+                    sinais_0x3_sorted = sorted(sinais_0x3_raw, key=lambda x: x["odd_lay"])
+                    top3_0x3 = []
+                    horarios_usados_0x3 = set()
+                    odds_unicas_0x3 = sorted(list(set([s["odd_lay"] for s in sinais_0x3_sorted])))
+                    for o in odds_unicas_0x3:
+                        grupo = [s for s in sinais_0x3_sorted if s["odd_lay"] == o]
+                        for s in grupo:
+                            if len(top3_0x3) == 3: break
+                            if s.get("hora", "") not in horarios_usados_0x3:
+                                top3_0x3.append(s)
+                                horarios_usados_0x3.add(s.get("hora", ""))
+                        if len(top3_0x3) == 3: break
+                        for s in grupo:
+                            if len(top3_0x3) == 3: break
+                            if s not in top3_0x3:
+                                top3_0x3.append(s)
+                                horarios_usados_0x3.add(s.get("hora", ""))
+                        if len(top3_0x3) == 3: break
+                    res_0x3 = top3_0x3
+                    
+            if res_0x3:
+                for s in res_0x3:
+                    sinais.append({
+                        "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
+                        "Home": s["home"], "Away": s["away"], "Método": "Lay 0x3 Top 3 (Aprovado)",
+                        "Mercado": "Correct Score (0x3)", "Lado": "LAY",
+                        "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
+                        "Expectativa_WR": "99.4%", "EV_Estimado": "+4.21%"
+                    })
         except Exception:
             pass
 
-        # 2. Lay 2x2 Top 3 Menor Odd (Método Aprovado Produção)
+        # 2. Lay 2x2 Top 3 Menor Odd (Método Aprovado Produção — idêntico à Página 17)
         try:
-            res_2x2 = avaliar_jogos_lay_2x2_grade(df, top_n=3)
-            for s in res_2x2:
-                sinais.append({
-                    "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
-                    "Home": s["home"], "Away": s["away"], "Método": "Lay 2x2 Top 3 (Aprovado)",
-                    "Mercado": "Correct Score (2x2)", "Lado": "LAY",
-                    "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
-                    "Expectativa_WR": "96.8%", "EV_Estimado": "+3.79%"
-                })
+            res_2x2 = None
+            if avaliar_jogos_lay_2x2_grade is not None:
+                try:
+                    res_2x2 = avaliar_jogos_lay_2x2_grade(df, top_n=3)
+                except Exception:
+                    res_2x2 = None
+            
+            if res_2x2:
+                for s in res_2x2:
+                    sinais.append({
+                        "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
+                        "Home": s["home"], "Away": s["away"], "Método": "Lay 2x2 Top 3 (Aprovado)",
+                        "Mercado": "Correct Score (2x2)", "Lado": "LAY",
+                        "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
+                        "Expectativa_WR": "96.8%", "EV_Estimado": "+3.79%"
+                    })
         except Exception:
             pass
 

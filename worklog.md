@@ -7,6 +7,15 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Antigravity · Paridade Página 01 x Página 16: Lay 0x3 com motor direto e imune a cache
+
+- **Contexto:** Thiago reportou que a Página 16 (`Sinais Lay 0x3`) exibia corretamente os 3 jogos de 16/09 (Internacional de Bogotá x Atl. Nacional, Omonia x Celta Vigo, Ghazl El Mahallah x Zamalek), mas a Página 01 (`Portfólio de Métodos em Validação Forward`) não os exibia.
+- **Causa Raiz:** A Página 01 chamava `avaliar_jogos_lay_0x3_grade` com `try... except Exception: pass` silencioso. O erro matinal `NameError: 'liga'` somado ao cache do Streamlit (`@st.cache_data`) e persistência de módulo em memória fez a Página 01 engolir a exceção e retornar sem os sinais de 0x3, enquanto a Página 16 usava loop direto inline imune a falhas de importação.
+- **Correção:** Atualizada a Página 01 (`pages/01_🏆_Portfolio_Metodos_Aprovados.py`) para implementar fallback direto idêntico ao motor da Página 16, garantindo que o Top 3 menor odd com desempate por horários distintos seja gerado de forma robusta e idêntica entre as duas telas. Verificado via terminal com os 3 jogos de 0x3 perfeitamente extraídos.
+- **Arquivos modificados:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-16 · Claude · Telegram: só o que o Thiago vai executar
 
 - Thiago: "não quero receber nada que eu não vá fazer". Late Goal v2 (stake-zero) parou de avisar no Telegram (`LATE_GOAL_TG=0`
