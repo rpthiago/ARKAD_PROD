@@ -1,252 +1,161 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-tracker_trader_inplay.py — Daemon Coletor e Logger In-Play dos 4 Métodos Trader.
+tracker_trader_inplay.py — daemon stake-zero dos métodos trader in-play (VPS).
+Autoridade: PREREGISTRO_SUITE_TRADER_INPLAY.md (+ emenda 16/09) e GEMINI.md. Núcleo: trader_inplay_core.py
+(o MESMO que roda no histórico em trader_inplay_olhar.py).
 
-Autoridade: PREREGISTRO_SUITE_TRADER_INPLAY.md & GEMINI.md
-Status: OBSERVACAO_STAKE_ZERO (stake: 0.0)
-
-Registra em tempo real todas as entradas e execuções dos 4 Métodos Trader:
-  1. LTD Trader Clássico (15'-25' 0-0)
-  2. Swing Trade: Fav em Desvantagem (20'-45' 0-1)
-  3. Scalping de Janela Morta (33'-38' HT ou 55'-62' FT)
-  4. Late Goal Trader (78'-84' diff 1 gol)
+Fonte ÚNICA: betfair_live_odds.csv do coletor, lido de forma incremental (offset persistido) — nunca o feed
+pré-jogo, nunca o Correct Score de menor lay como placar. Odd de entrada = primeira captura elegível da janela;
+odd de saída = primeira captura com preço depois do evento de saída. P&L das duas pernas com comissão 5%.
 
 Uso:
-  python tracker_trader_inplay.py --once        # Executa uma única varredura e encerra
-  python tracker_trader_inplay.py --loop 60     # Executa continuamente a cada 60s
-  python tracker_trader_inplay.py --settle      # Liquida partidas finalizadas no log
+  --once        uma passagem (lê o que há de novo no coletor) e sai
+  --loop 60     daemon: a cada 60 s lê o incremento do coletor e avança as máquinas de estado
+  --settle      (manual, com o serviço parado) fecha jogos sem captura há > 150 min: trades abertos viram
+                SEM_ODD_SAIDA (fora da conta). Com o daemon ativo isso já acontece a cada 30 min dentro dele.
+Log: trader_inplay_log.csv (stake 0.0, tipo_registro OBSERVACAO_STAKE_ZERO).
 """
-
-import os
-import sys
-import csv
-import json
-import time
-import argparse
-import unicodedata
-import re
-from datetime import datetime, timezone, date
+import os, sys, csv, json, time, argparse
+from datetime import datetime, timezone
 from pathlib import Path
-import pandas as pd
-import numpy as np
+AQUI = Path(__file__).resolve().parent; sys.path.insert(0, str(AQUI))
+import trader_inplay_core as C
 
-AQUI = Path(__file__).resolve().parent
-if str(AQUI) not in sys.path:
-    sys.path.insert(0, str(AQUI))
-
-from trader_inplay_engine import (
-    avaliar_ltd_trader,
-    avaliar_fav_desvantagem,
-    avaliar_scalping_under,
-    avaliar_late_goal_trader,
-    calcular_cashout_ltd,
-    calcular_cashout_back,
-    escanear_oportunidades_trader,
-    _canon
-)
-
-LOG_CSV = AQUI / "trader_inplay_log.csv"
-
-COLS_LOG = [
-    "timestamp_utc", "data", "hora", "home", "away", "liga",
-    "id_metodo", "nome_metodo", "mercado", "lado", "runner",
-    "minuto_entrada", "placar_entrada", "odd_entrada", "status_odd",
-    "faixa_alvo", "take_profit_regra", "stop_loss_regra",
-    "stake", "tipo_registro", "status",
-    "minuto_saida", "placar_saida", "odd_saida", "pnl_bruto", "pnl_liquido",
-    "roi_pct", "resultado", "motivo_saida"
-]
+COLETOR = Path(os.environ.get("ARKAD_COLETOR", "/home/ubuntu/betfair-collector/betfair_live_odds.csv"))
+LOG = AQUI / "trader_inplay_log.csv"
+ESTADO = AQUI / "trader_inplay_estado.json"          # offset do coletor (sobrevive a restart)
+MTYPES = {"MATCH_ODDS", "OVER_UNDER_05", "OVER_UNDER_15", "OVER_UNDER_25", "OVER_UNDER_35", "CORRECT_SCORE"}
+CS_RUNNERS = {"1 - 0", "0 - 1", "1 - 1", "2 - 0", "0 - 2"}
+COLS = ["timestamp_utc", "data", "ko", "home", "away", "id_metodo", "nome_metodo", "mercado", "lado", "runner", "fav_pre",
+        "minuto_entrada", "gols_entrada", "odd_entrada", "liq_entrada", "ts_entrada", "evento_saida", "minuto_saida", "gols_saida",
+        "odd_saida", "ts_saida", "pnl_u_risco", "resultado", "status", "stake", "tipo_registro"]
+GAP_S = 90
 
 
-def inicializar_log():
-    """Garante que o arquivo CSV de log exista com os cabeçalhos corretos."""
-    if not LOG_CSV.exists():
-        with open(LOG_CSV, mode="w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            writer.writerow(COLS_LOG)
-
-
-def carregar_chaves_registradas() -> set:
-    """Carrega chaves únicas de sinais já registrados para evitar duplicidade."""
-    if not LOG_CSV.exists():
-        return set()
+def _f(x):
     try:
-        df = pd.read_csv(LOG_CSV)
-        chaves = set()
-        for _, r in df.iterrows():
-            k = f"{str(r.get('data',''))[:10]}_{_canon(str(r.get('home','')))}_{_canon(str(r.get('away','')))}_{r.get('id_metodo','')}"
-            chaves.add(k)
-        return chaves
+        v = float(x); return v if v > 0 else None
     except Exception:
-        return set()
+        return None
 
 
-def obter_dados_inplay(data_str: str):
-    """
-    Obtém dataframe do dia e mapa de telemetria ao vivo.
-    """
-    df_jogos = None
-    try:
-        from futpythontrader_client import get_daily_dataframe
-        df_jogos = get_daily_dataframe(source="betfair", date_str=data_str)
-    except Exception:
-        df_jogos = None
+class Estado:
+    def __init__(self):
+        self.offset = 0; self.jogos = {}; self.buf = {}; self.buf_t0 = {}; self.ult_ts = {}
+        if ESTADO.exists():
+            try:
+                self.offset = int(json.load(open(ESTADO, encoding="utf-8")).get("offset", 0))
+            except Exception:
+                pass
 
-    if df_jogos is None or df_jogos.empty:
-        try:
-            import b365_data_utils
-            games_list = b365_data_utils.fetch_betfair_daily(data_str)
-            if games_list:
-                df_jogos = pd.DataFrame(games_list)
-        except Exception:
-            df_jogos = None
-
-    mapa_live = {}
-    try:
-        from inplay_telemetry_engine import InPlayTelemetryEngine
-        te = InPlayTelemetryEngine()
-        mapa_live = te._mapa_live
-    except Exception:
-        mapa_live = {}
-
-    return df_jogos, mapa_live
+    def salvar(self):
+        json.dump({"offset": self.offset, "salvo_em": datetime.now(timezone.utc).isoformat()}, open(ESTADO, "w", encoding="utf-8"))
 
 
-def executar_varredura():
-    """Executa uma rodada completa de escaneamento in-play e salva novos sinais."""
-    inicializar_log()
-    chaves_vistas = carregar_chaves_registradas()
-    hoje_str = date.today().strftime("%Y-%m-%d")
-
-    print(f"[{datetime.now().strftime('%H:%M:%S')}] Escaneando sinais in-play para {hoje_str}...")
-    df_jogos, mapa_live = obter_dados_inplay(hoje_str)
-
-    if df_jogos is None or df_jogos.empty:
-        print("  - Nenhum jogo retornado no feed para esta data.")
-        return 0
-
-    oportunidades = escanear_oportunidades_trader(df_jogos, mapa_live)
-    novos_sinais = 0
-
-    with open(LOG_CSV, mode="a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        for op in oportunidades:
-            # Apenas jogos ao vivo ou em janela ativa
-            if "AO VIVO" not in op.get("status_tempo", "") and "GATILHO" not in op.get("status_tempo", "") and "OPERAÇÃO" not in op.get("status_tempo", "") and "PRESSÃO" not in op.get("status_tempo", ""):
-                continue
-
-            data_jogo = str(op.get("data", hoje_str))[:10]
-            chave = f"{data_jogo}_{_canon(op['home'])}_{_canon(op['away'])}_{op['id_metodo']}"
-
-            if chave in chaves_vistas:
-                continue
-
-            ts_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
-            row = [
-                ts_utc,
-                data_jogo,
-                op.get("hora", ""),
-                op.get("home", ""),
-                op.get("away", ""),
-                op.get("liga", ""),
-                op.get("id_metodo", ""),
-                op.get("nome_metodo", ""),
-                op.get("mercado", ""),
-                op.get("lado", ""),
-                op.get("runner", ""),
-                op.get("minuto_atual", ""),
-                op.get("placar_atual", ""),
-                op.get("odd_atual", ""),
-                op.get("status_odd", ""),
-                op.get("faixa_odd_entrada", ""),
-                op.get("take_profit", ""),
-                op.get("stop_loss", ""),
-                0.0,  # stake: 0.0 obrigatória GEMINI.md
-                "OBSERVACAO_STAKE_ZERO",
-                "PENDENTE",  # status
-                "", "", "", 0.0, 0.0, 0.0, "EM_ABERTO", ""
-            ]
-            writer.writerow(row)
-            chaves_vistas.add(chave)
-            novos_sinais += 1
-            print(f"  🔥 SINAL REGISTRADO: [{op['nome_metodo']}] {op['jogo']} @ {op.get('minuto_atual')} ({op.get('placar_atual')}) Odd: {op.get('odd_atual')}")
-
-    print(f"  -> Total de novos sinais registrados: {novos_sinais}")
-    return novos_sinais
+def gravar(J, trades):
+    novo = not LOG.exists()
+    with open(LOG, "a", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        if novo: w.writerow(COLS)
+        for t in trades:
+            pnl = t.get("pnl")
+            w.writerow([datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"), J.ko[:10], J.ko, J.home, J.away, t["id"], t["nome"],
+                        t.get("mercado", ""), t.get("lado", ""), t.get("runner", ""), J.fav_pre[0] if J.fav_pre else "",
+                        t.get("min_in", ""), t.get("gols_in", ""), t.get("odd_in", ""), t.get("liq_in", ""), t.get("ts_in", ""),
+                        t.get("motivo", t.get("evento", "")), t.get("min_out", ""), t.get("gols_out", ""), t.get("odd_out", ""), t.get("ts_out", ""),
+                        "" if pnl is None else round(pnl, 5), ("" if pnl is None else ("GREEN" if pnl > 0 else "RED")), t["status"],
+                        0.0, "OBSERVACAO_STAKE_ZERO"])
 
 
-def liquidar_sinais():
-    """Liquida sinais pendentes com placares consolidados."""
-    if not LOG_CSV.exists():
-        print("Log inexistente para liquidar.")
-        return
+def _flush(E, k, ts, mtk, mk):
+    J = E.jogos.get(k)
+    if J is None:
+        J = E.jogos[k] = C.Jogo(k[0], k[1], k[2])
+    antes = len(J.fechados)
+    J.captura(ts, mtk, mk)
+    if len(J.fechados) > antes:
+        gravar(J, J.fechados[antes:])
+    E.ult_ts[k] = ts
 
-    df = pd.read_csv(LOG_CSV)
-    if df.empty or "status" not in df.columns:
-        return
 
-    pendentes = df[df["status"] == "PENDENTE"]
-    if pendentes.empty:
-        print("Nenhum sinal pendente para liquidar.")
-        return
+def passagem(E, verbose=True):
+    """lê o incremento do coletor desde o offset e alimenta as máquinas de estado."""
+    if not COLETOR.exists(): print("coletor não encontrado: %s" % COLETOR); return 0
+    tam = COLETOR.stat().st_size
+    if tam < E.offset: E.offset = 0                                  # arquivo rotacionado
+    n = 0
+    with open(COLETOR, "r", encoding="utf-8", errors="replace") as f:
+        f.seek(E.offset)
+        if E.offset == 0: f.readline()                                # cabeçalho
+        for line in f:
+            if not line.endswith("\n"): break                         # linha parcial: fica para a próxima
+            E.offset += len(line.encode("utf-8"))
+            p = line.rstrip("\n").split(",")
+            if len(p) < 13 or p[1] not in MTYPES: continue
+            if p[1] == "CORRECT_SCORE" and p[7] not in CS_RUNNERS: continue
+            try: mtk = float(p[6])
+            except Exception: continue
+            if mtk > 10 or mtk < -115: continue
+            k = (p[5], p[3], p[4]); ts = p[0]
+            try: te = datetime.strptime(ts[:19], "%Y-%m-%d %H:%M:%S").timestamp()
+            except Exception: continue
+            if k in E.buf and te - E.buf_t0[k] > GAP_S:
+                bts, bmtk, bmk = E.buf.pop(k); E.buf_t0.pop(k); _flush(E, k, bts, bmtk, bmk)
+            if k not in E.buf: E.buf[k] = (ts, mtk, {}); E.buf_t0[k] = te
+            E.buf[k][2].setdefault(p[1], {})[p[7]] = (_f(p[9]), _f(p[10]) or 0.0, _f(p[11]), _f(p[12]) or 0.0)
+            n += 1
+    # passes completos: quem não recebeu linha há > GAP_S segundos (relógio do coletor = UTC, igual ao da VPS)
+    agora = time.time()
+    for k in list(E.buf):
+        if agora - E.buf_t0[k] > GAP_S:
+            bts, bmtk, bmk = E.buf.pop(k); E.buf_t0.pop(k); _flush(E, k, bts, bmtk, bmk)
+    E.salvar()
+    if verbose:
+        ab = sum(len(J.abertos) for J in E.jogos.values())
+        print("%s linhas lidas %d | jogos em memória %d | trades abertos %d | offset %d" % (datetime.now().strftime("%H:%M:%S"), n, len(E.jogos), ab, E.offset), flush=True)
+    return n
 
-    print(f"Verificando liquidação de {len(pendentes)} sinais pendentes...")
-    # Telemetria para placares finais
-    mapa_live = {}
-    try:
-        from inplay_telemetry_engine import InPlayTelemetryEngine
-        te = InPlayTelemetryEngine()
-        mapa_live = te._mapa_live
-    except Exception:
-        pass
 
-    atualizados = 0
-    for idx, r in pendentes.iterrows():
-        dt = str(r["data"])[:10]
-        h = str(r["home"])
-        a = str(r["away"])
-        m_key = f"{dt}_{_canon(h)}_{_canon(a)}"
-        tele = mapa_live.get(m_key)
-
-        if tele and tele.get("placar_final") and tele.get("placar_final") != "N/A":
-            pf = tele["placar_final"]
-            metodo = r["id_metodo"]
-
-            # Exemplo de settlement básico
-            df.at[idx, "placar_saida"] = pf
-            df.at[idx, "status"] = "LIQUIDADO"
-            atualizados += 1
-
-    if atualizados > 0:
-        df.to_csv(LOG_CSV, index=False, encoding="utf-8")
-        print(f"✅ {atualizados} sinais liquidados com sucesso!")
-    else:
-        print("Partidas ainda em andamento ou aguardando apito final.")
+def settle(E):
+    """jogos sem captura há > 150 min: fecha (trades abertos -> SEM_ODD_SAIDA) e libera memória."""
+    agora = time.time(); n = 0
+    for k in list(E.jogos):
+        ts = E.ult_ts.get(k)
+        if ts is None: continue
+        try: te = datetime.strptime(ts[:19], "%Y-%m-%d %H:%M:%S").timestamp()
+        except Exception: te = 0
+        if agora - te > 150 * 60:
+            J = E.jogos.pop(k); antes = len(J.fechados); J.encerrar()
+            if len(J.fechados) > antes: gravar(J, J.fechados[antes:]); n += len(J.fechados) - antes
+            E.ult_ts.pop(k, None)
+    print("settle: %d trades sem odd de saída marcados; jogos em memória: %d" % (n, len(E.jogos)), flush=True)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Daemon Coletor In-Play dos 4 Métodos Trader ARKAD")
-    parser.add_argument("--once", action="store_true", help="Executa uma única varredura e sai")
-    parser.add_argument("--loop", type=int, default=0, help="Executa em loop a cada N segundos")
-    parser.add_argument("--settle", action="store_true", help="Liquida posições pendentes")
-    args = parser.parse_args()
-
-    if args.settle:
-        liquidar_sinais()
-        return
-
-    if args.once or args.loop == 0:
-        executar_varredura()
-        return
-
-    print(f"Iniciando Daemon In-Play (intervalo {args.loop}s)... Pressione Ctrl+C para encerrar.")
-    try:
-        while True:
-            executar_varredura()
-            time.sleep(args.loop)
-    except KeyboardInterrupt:
-        print("\nDaemon finalizado pelo operador.")
+    ap = argparse.ArgumentParser(); ap.add_argument("--once", action="store_true"); ap.add_argument("--loop", type=int, default=0); ap.add_argument("--settle", action="store_true")
+    a = ap.parse_args(); E = Estado()
+    if E.offset == 0 and COLETOR.exists():
+        E.offset = max(0, COLETOR.stat().st_size - 50 * 1024 * 1024)   # 1a partida: começa nos últimos ~50 MB (jogos em curso)
+        with open(COLETOR, "rb") as f: f.seek(E.offset); f.readline(); E.offset = f.tell()
+        print("primeira partida: offset em %d (últimos ~50 MB do coletor)" % E.offset, flush=True)
+    if a.settle:
+        # a liquidação de jogos parados roda DENTRO do daemon (a cada 30 min): um segundo processo lendo o mesmo
+        # offset roubaria linhas do daemon. Este modo só existe para uso manual com o serviço parado.
+        if os.system("systemctl is-active --quiet trader-inplay") == 0:
+            print("daemon ativo: settle já roda dentro dele a cada 30 min; nada a fazer."); return
+        passagem(E); settle(E); return
+    if a.once or a.loop <= 0:
+        passagem(E); return
+    print("=== TRADER IN-PLAY (stake-zero) === loop %ds | métodos: %s" % (a.loop, ", ".join(m["id"] for m in C.METODOS)), flush=True)
+    ult_settle = time.time()
+    while True:
+        try:
+            passagem(E)
+            if time.time() - ult_settle > 1800: settle(E); ult_settle = time.time()
+        except Exception as e:
+            print("erro na passagem: %s" % str(e)[:200], flush=True)
+        time.sleep(a.loop)
 
 
 if __name__ == "__main__":
