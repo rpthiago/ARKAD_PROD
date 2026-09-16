@@ -7,6 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · Bug: Lay 0x3 sem sinais desde 15/09 (NameError 'liga') + guarda de KO no ledger
+
+- Thiago viu um RED no Telegram (Stenhousemuir x Partick, Lay Home 15/09) que não estava no Streamlit. Não é erro: entrou às
+  06:00 de 15/09 dentro da regra (visitante 1,63; lay 6,6) e a odd andou antes do scan na página 01. Ledger = foto das 06:00.
+- Investigando, achei o bug: a reversão da blacklist (4276cfb) apagou `liga = ...` em `estrategia_lay_0x3.py` e deixou
+  `'League': liga` → `NameError` em toda rodada desde 15/09 06:00 → **zero sinais de 0x3 Top 3 / Ampla em 15/09** (buraco de
+  um dia no forward do 0x3; não recuperável sem look-ahead). Corrigido; 16/09 gerou 3 Top 3 + 3 Ampla.
+- Guarda nova em `sinais_do_dia.add()`: sinal só entra com **KO no futuro** — o re-escaneio dos 2 últimos dias nunca mais
+  adiciona jogo já jogado ("feed pode completar" era uma brecha de look-ahead).
+
+---
+
 ## 2026-09-16 · Antigravity · Sincronização Suíte Trader In-Play: Cockpit Streamlit, Harmonização de Log e Git Sync
 
 - **Sincronização com o Deploy VPS do Claude:** Alinhado `tracker_trader_inplay.py` ao núcleo unificado `trader_inplay_core.py` e à arquitetura de leitura incremental por offset na VPS (`trader-inplay.service`).

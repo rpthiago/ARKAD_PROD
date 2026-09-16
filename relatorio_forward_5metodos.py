@@ -107,6 +107,14 @@ def sinais_do_dia(ds):
     out = []
 
     def add(metodo, r, odd, fav):
+        # sinal so entra com KO no FUTURO: o re-escaneio dos ultimos dias nunca pode adicionar jogo ja jogado
+        try:
+            ko = datetime.strptime("%s %s" % (ds, str(r.get("Time", ""))[:5]), "%Y-%m-%d %H:%M")
+            if ko < datetime.now():
+                return
+        except Exception:
+            if ds < date.today().isoformat():
+                return
         out.append(dict(Data=ds, Metodo=metodo, Liga=str(r.get("League", "")), Home=str(r.get("Home", "")),
                         Away=str(r.get("Away", "")), Hora=str(r.get("Time", ""))[:5],
                         Odd_Lay=round(odd, 2), Odd_Fav=round(fav, 2) if fav else ""))
