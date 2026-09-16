@@ -7,6 +7,25 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · Suíte Trader In-Play: camada de dados reescrita (opção A), primeiro olhar e serviço na VPS
+
+- **VPS:** caiu de manhã (1 GB RAM; duas leituras minhas do coletor de 2 GB em paralelo). Thiago reiniciou pelo painel
+  (Reboot). E2.1.Micro Always Free — o aviso da cota A1 não se aplica. Lição: extrações no coletor só uma por vez, com `nice`
+  e scp com `-l` (limite de banda).
+- **Núcleo único** `trader_inplay_core.py` (histórico e live): estado pelas linhas O/U batidas; lado do gol pela direção da odd
+  do mandante no Match Odds (medido: a Betfair NÃO remove placares impossíveis do CS — "1 - 0" segue com preço num 0-1);
+  entrada na 1ª captura elegível; saída na 1ª captura com preço após o evento; P&L das duas pernas com comissão.
+- **Faixas medidas** (as supostas cobriam 26–32%): M1 3,50–9,50 · M2 1,50–6,00 · M3 1,05–2,30. Emenda:
+  `PREREGISTRO_SUITE_TRADER_INPLAY_EMENDA_2026-09-16.md`. M3 janela A inexistente (sem Under 1.5 HT no coletor); M4 = Late Goal v2.
+- **Primeiro olhar (16/08→16/09, declarado):** M1 93 fechados −1,0% [−5,2; +3,0] · M2 12 fechados −22,7% [−39,6; −3,5] ·
+  M3 1.873 fechados −2,5% [−3,5; −1,5]. Julgamento só KO ≥ 16/09, snapshot 12/10.
+- **Deploy:** `tracker_trader_inplay.py` lê o coletor de forma incremental (offset persistido); `trader-inplay.service`
+  (loop 60 s, Restart=always, nice 10, MemoryMax 250M) ativo às 11:43 UTC; log `trader_inplay_log.csv` com stake 0.0 /
+  OBSERVACAO_STAKE_ZERO verificado. Sem cron: o settle roda dentro do daemon a cada 30 min (um 2º processo lendo o mesmo
+  offset roubaria linhas). v1 do Antigravity arquivada em `_arquivados_11set/`.
+
+---
+
 ## 2026-09-15 · Claude · Suíte Trader In-Play (12e5502): deploy NÃO feito — 4 correções devolvidas ao Antigravity
 
 - Revisão antes de subir: (1) placar/minuto pelo CS de menor lay (`inplay_telemetry_engine.py:49-52`); (2) odd de entrada
