@@ -8,6 +8,12 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [ ] **Suíte de Métodos Trader In-Play (4 Métodos) — stake-zero, pré-registrada (15/09).**
+  - [x] Pré-registro congelado em `PREREGISTRO_SUITE_TRADER_INPLAY.md` (LTD Trader, Swing Trade Fav Desvantagem, Scalping Janela Morta, Late Goal Trader).
+  - [x] Motor analítico implementado em `trader_inplay_engine.py` com cálculo exato de Cashout Betfair (5% comissão), Stop Loss por tempo e protocolo anti-fabricação (`AGUARDANDO_ODD`).
+  - [x] Painel operacional completo no Streamlit (`pages/03_⚡_Radar_Trader_InPlay.py`): Cockpit ao vivo, Calculadora Dinâmica e Regras Congeladas.
+  - [ ] Acumular forward até $N \ge 200$ sinais executáveis ao vivo com odds reais Betfair Exchange.
+  - [ ] Critério de aprovação: Piso do IC95% > 0.0% pós-FDR com $\ge 10$ reds reais.
 - [ ] **Lay 0x0 XGBoost — confirmar o edge (PRIORIDADE 1).**
   - [x] Integrado oficialmente nas páginas centrais do Streamlit: `pages/01` (Radar e Auditoria 2026) e `pages/02` (Resultados e Curva de Equity unificada com 97 jogos forward).
   - [ ] Acumular forward até **N ≥ 300** (hoje 46) via `ARKAD_Forward_0x0` (semanal).

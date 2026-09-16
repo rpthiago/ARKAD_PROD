@@ -7,6 +7,31 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Antigravity · Implementação da Suíte de Métodos Trader In-Play (4 Métodos) + Cockpit Streamlit
+
+- **Solicitação do usuário:** "Suíte de Métodos Trader In-Play — ARKAD: Implementação completa de 4 métodos de Sports Trading In-Play na Betfair Exchange com pré-registro formal, motor analítico com matemática de cashout/stop loss real e painel operacional interativo no Streamlit. [...] pode fazer"
+- **Feito:**
+  1. **Governança e Pré-Registro (`PREREGISTRO_SUITE_TRADER_INPLAY.md`):**
+     - Regras congeladas para os 4 métodos trader: LTD Trader Clássico (15'-25' 0-0, saída no gol do fav), Swing Trade: Fav em Desvantagem (20'-45' 0-1, saída no 1-1), Scalping de Janela Morta (33'-38' HT ou 55'-62' FT, saída em 4-6 ticks), e Late Goal Trader (78'-84' diff 1 gol, Back Over Limite).
+     - Protocolo de decisão de 3 vias ($N \ge 200$, IC95% > 0.0%, FDR).
+     - Protocolo estrito de Stake-Zero (`stake: 0.0`) e flag `OBSERVACAO_STAKE_ZERO`.
+  2. **Motor Analítico & Telemetria In-Play (`trader_inplay_engine.py`):**
+     - Funções matemáticas reais de Cashout: `calcular_cashout_ltd`, `calcular_cashout_back`, `calcular_freebet_back` com desconto exato da comissão Betfair (5% sobre o lucro).
+     - Função `calcular_stop_loss_tempo` determinando status dinâmico (`CASHOUT_GREEN`, `MANTER`, `STOP_LOSS`) e contenção de perdas por minuto limite (68' no LTD e 70' no Fav Desvantagem).
+     - Avaliadores `avaliar_ltd_trader`, `avaliar_fav_desvantagem`, `avaliar_scalping_under`, `avaliar_late_goal_trader` sem qualquer fabricação de dados (marcados com `AGUARDANDO_ODD` quando a odd real in-play não estiver presente).
+     - Varredor consolidado `escanear_oportunidades_trader`.
+  3. **Painel Operacional no Streamlit (`pages/03_⚡_Radar_Trader_InPlay.py`):**
+     - **Aba 1 (Cockpit Ao Vivo):** Atualização sob demanda, filtros por método e status, cards ricos com barra de progresso temporal do jogo, placar, badge visual de status da odd, instruções diretas de entrada/saída e link direto para o mercado na Betfair Exchange.
+     - **Aba 2 (Calculadora Dinâmica):** Ferramenta interativa de simulação em tempo real para posições Back e Lay, comparativo lado a lado de Cashout Equilibrado vs Freebet (Stop-at-Zero) e memória de cálculo da Betfair.
+     - **Aba 3 (Regras Congeladas):** Exibição didática dos parâmetros matemáticos e diretrizes do pré-registro oficial.
+  4. **Testes Unitários Automatizados (`scratch/test_trader_engine.py`):**
+     - Verificados com sucesso: LTD Cashout Green (+21.38%), Back Cashout Green (+63.33%), Freebet (R$ 0 de risco, R$ 95 de lucro potencial no vencedor), Stop Loss por tempo (-30.0%) e salvaguarda anti-fabricação de dados (`AGUARDANDO_ODD`).
+  5. **Roadmap (`tasks.md`):**
+     - Registrado novo item ativo na seção de validação forward.
+- **Arquivos:** `PREREGISTRO_SUITE_TRADER_INPLAY.md`, `trader_inplay_engine.py`, `pages/03_⚡_Radar_Trader_InPlay.py`, `scratch/test_trader_engine.py`, `tasks.md`, `worklog.md`.
+
+---
+
 ## 2026-09-15 · Claude · Under "à frente" (folga de gols) in-play — testado, não inferido
 
 - Thiago cobrou: "sempre testar antes de achar". Eu tinha inferido do espelho. Testei: `teste_under_a_frente.py` — Back Under
