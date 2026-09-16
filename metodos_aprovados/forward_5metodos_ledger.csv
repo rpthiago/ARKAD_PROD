@@ -1063,13 +1063,30 @@
 2026-09-14,Lay Draw (Fav<=1.40),ICELAND 1,Vikingur Reykjavik,Keflavik,16:15,7.8,1.29,LIQUIDADO,4,1,4-1,GREEN,0.13971,13.97,0.8774,2026-09-14 18:30,planilha_dia:exato
 2026-09-14,Lay Home/DC X2 (FavVis<=1.65),TURKEY 1,Gaziantep FK,Fenerbahce,14:00,6.8,1.6,LIQUIDADO,0,0,0-0,GREEN,0.16379,16.38,0.8593,2026-09-14 18:30,betfair_oficial:exato
 2026-09-14,Lay Home/DC X2 (FavVis<=1.65),ITALY 1,Torino,Roma,13:30,7.0,1.58,LIQUIDADO,0,2,0-2,GREEN,0.15833,15.83,0.8633,2026-09-14 18:30,betfair_oficial:exato
-2026-09-15,Lay 2x2 Top 3,ENGLAND 5,Aldershot,Yeovil,15:45,20.0,,PENDENTE,,,,,,,0.9524,,
-2026-09-15,Lay 2x2 Top 3,SPAIN 1,Rayo Vallecano,Espanyol,14:00,18.0,,PENDENTE,,,,,,,0.9471,,
-2026-09-15,Lay Draw (Fav<=1.40),EGYPT 1,Al Ahly Cairo,Abo Qair Semads,14:00,7.2,1.23,PENDENTE,,,,,,,0.8671,,
-2026-09-15,Lay Draw (Fav<=1.40),GERMANY 3,Duisburg,TSV Havelse,14:00,10.0,1.3,PENDENTE,,,,,,,0.9045,,
-2026-09-15,Lay Draw (Fav<=1.40),SPAIN 1,Elche,Real Madrid,16:30,7.8,1.25,PENDENTE,,,,,,,0.8774,,
-2026-09-15,Lay Draw (Fav<=1.40),BRAZIL 2,Londrina,Ponte Preta,19:30,6.4,1.3,PENDENTE,,,,,,,0.8504,,
-2026-09-15,Lay Draw (Fav<=1.40),ENGLAND CUP,Reading,Brentford,16:00,6.6,1.33,PENDENTE,,,,,,,0.855,,
-2026-09-15,Lay Home/DC X2 (FavVis<=1.65),ENGLAND CUP,Ipswich,Arsenal,16:00,9.8,1.42,PENDENTE,,,,,,,0.9026,,
-2026-09-15,Lay Home/DC X2 (FavVis<=1.65),SCOTLAND 2,Stenhousemuir,Partick,15:45,6.6,1.63,PENDENTE,,,,,,,0.855,,
-2026-09-15,Lay Over 4.5 (Under Pesado),EGYPT 1,Al-Masry,Al Ittihad (EGY),14:00,18.0,1.48,PENDENTE,,,,,,,0.9471,,
+2026-09-15,Lay 2x2 Top 3,ENGLAND 5,Aldershot,Yeovil,15:45,20.0,,LIQUIDADO,1,1,1-1,GREEN,0.05,5.0,0.9524,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay 2x2 Top 3,COLOMBIA 2,Barranquilla,Independiente Yumbo,19:00,18.0,,LIQUIDADO,0,2,0-2,GREEN,0.05588,5.59,0.9471,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay 2x2 Top 3,POLAND 1,Korona Kielce,Gornik Zabrze,15:30,16.5,,LIQUIDADO,0,2,0-2,GREEN,0.06129,6.13,0.9422,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay 2x2 Top 3,SPAIN 1,Rayo Vallecano,Espanyol,14:00,18.0,,LIQUIDADO,2,1,2-1,GREEN,0.05588,5.59,0.9471,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Draw (Fav<=1.40),EGYPT 1,Al Ahly Cairo,Abo Qair Semads,14:00,7.2,1.23,LIQUIDADO,2,0,2-0,GREEN,0.15323,15.32,0.8671,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Draw (Fav<=1.40),GERMANY 3,Duisburg,TSV Havelse,14:00,10.0,1.3,LIQUIDADO,2,1,2-1,GREEN,0.10556,10.56,0.9045,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Draw (Fav<=1.40),SPAIN 1,Elche,Real Madrid,16:30,7.8,1.25,LIQUIDADO,2,3,2-3,GREEN,0.13971,13.97,0.8774,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Draw (Fav<=1.40),ENGLAND CUP,Ipswich,Arsenal,16:00,6.4,1.31,LIQUIDADO,2,4,2-4,GREEN,0.17593,17.59,0.8504,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Draw (Fav<=1.40),SWEDEN 2,Landskrona,Sundsvall,14:00,5.6,1.4,LIQUIDADO,4,0,4-0,GREEN,0.20652,20.65,0.8288,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Draw (Fav<=1.40),BRAZIL 2,Londrina,Ponte Preta,19:30,6.4,1.3,LIQUIDADO,6,0,6-0,GREEN,0.17593,17.59,0.8504,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Draw (Fav<=1.40),ENGLAND CUP,Reading,Brentford,16:00,6.6,1.33,LIQUIDADO,1,2,1-2,GREEN,0.16964,16.96,0.855,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Draw (Fav<=1.40),SCOTLAND 3,Ross Co,Queen of South,15:45,6.8,1.32,LIQUIDADO,8,0,8-0,GREEN,0.16379,16.38,0.8593,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Home/DC X2 (FavVis<=1.65),ENGLAND CUP,Ipswich,Arsenal,16:00,9.8,1.42,LIQUIDADO,2,4,2-4,GREEN,0.10795,10.8,0.9026,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Home/DC X2 (FavVis<=1.65),MEXICO 1,Puebla,Toluca,22:00,6.2,1.56,LIQUIDADO,0,1,0-1,GREEN,0.18269,18.27,0.8455,2026-09-16 06:00,planilha_dia:exato
+2026-09-15,Lay Home/DC X2 (FavVis<=1.65),SCOTLAND 2,Stenhousemuir,Partick,15:45,6.6,1.63,LIQUIDADO,1,0,1-0,RED,-1.0,-100.0,0.855,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Over 4.5 (Under Pesado),EGYPT 1,Al-Masry,Al Ittihad (EGY),14:00,18.0,1.48,LIQUIDADO,0,2,0-2,GREEN,0.05588,5.59,0.9471,2026-09-16 06:00,betfair_oficial:exato
+2026-09-15,Lay Over 4.5 (Under Pesado),COPA LIBERTADORES,CA Platense,Fluminense,19:00,20.0,1.47,LIQUIDADO,2,1,2-1,GREEN,0.05,5.0,0.9524,2026-09-16 06:00,betfair_oficial:exato
+2026-09-16,Lay 2x2 Top 3,ENGLAND 5,Altrincham,Hartlepool,15:45,18.0,,PENDENTE,,,,,,,0.9471,,
+2026-09-16,Lay 2x2 Top 3,SPAIN 1,Deportivo,Sevilla,14:00,18.5,,PENDENTE,,,,,,,0.9485,,
+2026-09-16,Lay 2x2 Top 3,VENEZUELA 1,Metropolitanos,Caracas,20:30,19.0,,PENDENTE,,,,,,,0.9499,,
+2026-09-16,Lay Draw (Fav<=1.40),CHILE 1,Coquimbo Unido,Huachipato,18:00,10.0,1.12,PENDENTE,,,,,,,0.9045,,
+2026-09-16,Lay Draw (Fav<=1.40),EUROPA LEAGUE,Olympiakos,Jagiellonia Bialystock,16:00,5.9,1.34,PENDENTE,,,,,,,0.8376,,
+2026-09-16,Lay Draw (Fav<=1.40),BOSNIA 1,Sloga Doboj,Borac Banja Luka,13:00,6.2,1.3,PENDENTE,,,,,,,0.8455,,
+2026-09-16,Lay Home/DC X2 (FavVis<=1.65),SERBIA 2,FK Proleter Zrenjanin,FK Backa Topola,13:00,6.2,1.5,PENDENTE,,,,,,,0.8455,,
+2026-09-16,Lay Home/DC X2 (FavVis<=1.65),BULGARIA 1,Lokomotiv Sofia,CSKA Sofia,13:00,6.6,1.56,PENDENTE,,,,,,,0.855,,
+2026-09-16,Lay Over 4.5 (Under Pesado),SERBIA 2,FK Proleter Zrenjanin,FK Backa Topola,13:00,13.5,1.2,PENDENTE,,,,,,,0.9294,,
+2026-09-16,Lay Over 4.5 (Under Pesado),SERBIA 2,Vozdovac,FK Jedinstvo Ub,13:00,13.5,1.23,PENDENTE,,,,,,,0.9294,,

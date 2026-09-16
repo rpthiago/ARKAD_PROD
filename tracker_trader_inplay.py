@@ -30,7 +30,71 @@ CS_RUNNERS = {"1 - 0", "0 - 1", "1 - 1", "2 - 0", "0 - 2"}
 COLS = ["timestamp_utc", "data", "ko", "home", "away", "id_metodo", "nome_metodo", "mercado", "lado", "runner", "fav_pre",
         "minuto_entrada", "gols_entrada", "odd_entrada", "liq_entrada", "ts_entrada", "evento_saida", "minuto_saida", "gols_saida",
         "odd_saida", "ts_saida", "pnl_u_risco", "resultado", "status", "stake", "tipo_registro"]
+LOG_CSV = LOG
 GAP_S = 90
+
+
+def carregar_log(caminho=None):
+    """Carrega o log trader in-play normalizando colunas para consumo no Streamlit."""
+    import pandas as pd
+    p = Path(caminho) if caminho else LOG
+    if not p.exists():
+        return pd.DataFrame()
+    try:
+        df = pd.read_csv(p, encoding="utf-8")
+        if df.empty:
+            return df
+
+        nome_map = {
+            "M1_LTD": "LTD Trader Clássico",
+            "M2_SWING_FAV": "Swing Trade: Fav em Desvantagem",
+            "M3_SCALP_U25": "Scalping de Janela Morta",
+            "LATE_GOAL": "Late Goal Trader (Over Limite)",
+        }
+        if "id_metodo" in df.columns:
+            df["nome_metodo"] = df.apply(lambda r: nome_map.get(str(r.get("id_metodo")), r.get("nome_metodo")), axis=1)
+
+        def _norm_st(st):
+            s = str(st).upper()
+            if s in ["FECHADO", "LIQUIDADO"]:
+                return "LIQUIDADO"
+            if s in ["ABERTO", "PENDENTE"]:
+                return "PENDENTE"
+            return s
+
+        if "status" in df.columns:
+            df["status"] = df["status"].apply(_norm_st)
+
+        if "pnl_u_risco" in df.columns:
+            if "pnl_liquido" not in df.columns:
+                df["pnl_liquido"] = df["pnl_u_risco"] * 100.0
+            else:
+                df["pnl_liquido"] = df["pnl_liquido"].fillna(df["pnl_u_risco"] * 100.0)
+
+            if "roi_pct" not in df.columns:
+                df["roi_pct"] = df["pnl_u_risco"] * 100.0
+            else:
+                df["roi_pct"] = df["roi_pct"].fillna(df["pnl_u_risco"] * 100.0)
+
+        if "motivo_saida" not in df.columns and "evento_saida" in df.columns:
+            df["motivo_saida"] = df["evento_saida"]
+        elif "motivo_saida" in df.columns and "evento_saida" in df.columns:
+            df["motivo_saida"] = df["motivo_saida"].fillna(df["evento_saida"])
+
+        if "capture_ts_in" not in df.columns and "ts_entrada" in df.columns:
+            df["capture_ts_in"] = df["ts_entrada"]
+        if "capture_ts_out" not in df.columns and "ts_saida" in df.columns:
+            df["capture_ts_out"] = df["ts_saida"]
+
+        if "placar_entrada" not in df.columns and "gols_entrada" in df.columns:
+            df["placar_entrada"] = df["gols_entrada"].apply(lambda g: "" if pd.isna(g) else f"{int(g)}g")
+        if "placar_saida" not in df.columns and "gols_saida" in df.columns:
+            df["placar_saida"] = df["gols_saida"].apply(lambda g: "" if pd.isna(g) else f"{int(g)}g")
+
+        return df
+    except Exception as e:
+        print(f"Erro ao carregar log: {e}")
+        return pd.DataFrame()
 
 
 def _f(x):
