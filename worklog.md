@@ -7,6 +7,15 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · Telegram: só o que o Thiago vai executar
+
+- Thiago: "não quero receber nada que eu não vá fazer". Late Goal v2 (stake-zero) parou de avisar no Telegram (`LATE_GOAL_TG=0`
+  em `late_goal_capturar.py`, serviço reiniciado); continua gravando o log para o julgamento de 12/10.
+- Regra daqui em diante: Telegram só para (1) sinais do KO−10 dos 5 métodos (`sinais-ko`), (2) saída no gol da zebra do Lay Draw
+  (`saida-zebra`), (3) relatório das 06:00. Todo método em observação (trader in-play, xG-HT, min80, Late Goal) só grava log.
+
+---
+
 ## 2026-09-16 · Claude · Lay Draw: estudo "zebra marca 1º" + regra de saída pré-registrada e em serviço
 
 - **Base 2024–26 (3.503 sinais com minuto dos gols):** zebra marca 1º em 20,4% dos sinais → **28,0% terminam empatados** (favorito
