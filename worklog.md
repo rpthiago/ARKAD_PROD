@@ -7,6 +7,16 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-15 · Claude · Under "à frente" (folga de gols) in-play — testado, não inferido
+
+- Thiago cobrou: "sempre testar antes de achar". Eu tinha inferido do espelho. Testei: `teste_under_a_frente.py` — Back Under
+  (gols+1).5 e (gols+2).5, estado pelas linhas O/U batidas, odd real do coletor, 5 janelas × 3 favoritismos, placar oficial/bases.
+- Coletor 16/08→13/09: 15.070 apostas, 2.209 jogos, 27 dias. **27 células: 0 PASSA / 3 REPROVA / 24 INCONCLUSIVO.**
+  Folga 2 (tomar 2 gols): N=5.820, WR 73,6% vs BE 74,5% (−0,85pp), ROI −0,93%, IC [−4,2; +2,2]. Folga 1: N=9.250, −4,5%, IC [−8,6; −0,8].
+  Gap negativo em 26 das 27 células. Tabela `varredura_over/under_a_frente_olhar_2026-09-15.csv`. Declarado como olhar.
+
+---
+
 ## 2026-09-15 · Claude · Idea1 fechado (−3,0%) + Late Goal v2 com faixa medida + guarda feminino/reserva no oficial
 
 - **Idea1 Back Under min 10:** 120 pendentes nunca liquidados (04–09/09, antes do oficial); 57 resolvidos por base externa com
