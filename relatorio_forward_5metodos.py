@@ -524,7 +524,7 @@ def atualizar(desde, ate):
 # ------------------------------------------------------------------ 3b. ledger do KO-10 (executavel)
 KO_LEDGER = os.path.join(ROOT, "metodos_aprovados", "forward_ko_ledger.csv")
 KO_COLS = ["Data", "Metodo", "Liga", "Home", "Away", "Hora", "Odd_Lay", "Odd_Fav", "liq_lay", "min_to_ko", "ts_captura", "origem",
-           "status", "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar", "universo"]
+           "status", "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar", "universo", "no_0600"]
 FEED_CACHE = os.path.join(ROOT, "metodos_aprovados", ".cache_feed_jogos.csv")
 
 
@@ -931,6 +931,19 @@ def main():
     a = ap.parse_args()
     print("=== forward 5 metodos: %s -> %s ===" % (a.desde, a.ate))
     L = atualizar(a.desde, a.ate)
+    # lista das 06:00 de hoje -> VPS, para o alerta do KO marcar "novo no KO" / "06:00"
+    try:
+        import subprocess
+        hoje_s = date.today().isoformat(); f06 = os.path.join(ROOT, "metodos_aprovados", ".sinais_0600_hoje.csv")
+        with open(f06, "w", newline="", encoding="utf-8") as fh:
+            w = csv.writer(fh); w.writerow(["Data", "Metodo", "Home", "Away"])
+            for r in L.values():
+                if r["Data"] == hoje_s: w.writerow([r["Data"], r["Metodo"], r["Home"], r["Away"]])
+        subprocess.run(["scp", "-q", "-i", VPS_KEY, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=20", f06,
+                        VPS + ":/home/ubuntu/betfair-collector/sinais_0600.csv"], capture_output=True, timeout=60)
+        print("  lista das 06:00 de hoje enviada para a VPS (%d sinais)" % sum(1 for r in L.values() if r["Data"] == hoje_s))
+    except Exception as e:
+        print("  [sinais_0600] %s" % str(e)[:60])
     try:
         LK = atualizar_ko()
     except Exception as e:

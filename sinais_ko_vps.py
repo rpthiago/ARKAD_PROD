@@ -20,7 +20,34 @@ ENVF = AQUI / "alerta.env"
 MTYPES = {"MATCH_ODDS", "OVER_UNDER_25", "OVER_UNDER_45", "CORRECT_SCORE"}
 CS_RUNNERS = {"0 - 3", "2 - 2"}
 COLS = ["Data", "Metodo", "Liga", "Home", "Away", "Hora", "Odd_Lay", "Odd_Fav", "liq_lay", "min_to_ko", "ts_captura", "origem",
-        "status", "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar"]
+        "status", "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar", "universo", "no_0600"]
+S0600 = AQUI / "sinais_0600.csv"       # lista das 06:00 do dia (Data, Metodo, Home, Away no nome do feed), enviada pelo relatorio
+
+
+def _canon(t):
+    import unicodedata, re
+    t = unicodedata.normalize("NFKD", str(t)).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]", "", t)
+
+
+def sinais_0600():
+    out = {}
+    if not S0600.exists(): return out
+    for r in csv.DictReader(open(S0600, encoding="utf-8")):
+        out.setdefault((r["Data"], r["Metodo"]), []).append((_canon(r["Home"]), _canon(r["Away"])))
+    return out
+
+
+def estava_nas_0600(s06, data, metodo, home, away):
+    """True/False, ou None se nao ha lista das 06:00 para esse dia."""
+    from difflib import SequenceMatcher
+    if not any(d == data for d, _ in s06): return None
+    h, a = _canon(home), _canon(away)
+    for ch, ca in s06.get((data, metodo), []):
+        if (ch, ca) == (h, a): return True
+        rh, ra = SequenceMatcher(None, h, ch).ratio(), SequenceMatcher(None, a, ca).ratio()
+        if min(rh, ra) >= 0.60 and max(rh, ra) >= 0.80: return True
+    return False
 GAP_S = 90
 
 
@@ -75,17 +102,21 @@ def _flush(E, k, ts, mtk, mk, comp):
     if not sinais: return
     # hora local do KO (Brasilia = UTC-3) para o ledger casar com o das 06:00 (feed em hora local)
     kodt = datetime.strptime(ko, "%Y-%m-%d %H:%M") - timedelta(hours=3)
-    novo = not LEDGER.exists()
+    novo = not LEDGER.exists(); s06 = sinais_0600(); dstr = kodt.strftime("%Y-%m-%d")
+    tags = {}
     with open(LEDGER, "a", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
         if novo: w.writerow(COLS)
         for metodo, odd, liq, fav in sinais:
             be = (odd - 1) / (odd - 0.05)
-            w.writerow([kodt.strftime("%Y-%m-%d"), metodo, comp, home, away, kodt.strftime("%H:%M"), round(odd, 2), round(fav, 2) if fav else "",
-                        round(liq, 0), round(mtk, 1), ts, "live", "PENDENTE", "", "", "", "", "", "", round(be, 4), "", ""])
+            e6 = estava_nas_0600(s06, dstr, metodo, home, away); tags[metodo] = e6
+            w.writerow([dstr, metodo, comp, home, away, kodt.strftime("%H:%M"), round(odd, 2), round(fav, 2) if fav else "",
+                        round(liq, 0), round(mtk, 1), ts, "live", "PENDENTE", "", "", "", "", "", "", round(be, 4), "", "", "",
+                        "" if e6 is None else ("sim" if e6 else "nao")])
     linhas = ["<b>KO−10 · %s</b> %s x %s" % (kodt.strftime("%H:%M"), _esc(home), _esc(away)), "<i>%s</i>" % _esc(comp)]
     for metodo, odd, liq, fav in sinais:
-        linhas.append("• <b>%s</b> — lay @<b>%.2f</b> (liq %.0f) · fav %.2f" % (_esc(metodo), odd, liq, fav or 0))
+        e6 = tags.get(metodo); tag = "" if e6 is None else ("  ✔ 06:00" if e6 else "  ⚠ <b>novo no KO</b>")
+        linhas.append("• <b>%s</b> — lay @<b>%.2f</b> (liq %.0f) · fav %.2f%s" % (_esc(metodo), odd, liq, fav or 0, tag))
     tg("\n".join(linhas))
     print("%s SINAL %s x %s: %s" % (datetime.now().strftime("%H:%M:%S"), home, away, ", ".join("%s@%.2f" % (m, o) for m, o, _, _ in sinais)), flush=True)
 
