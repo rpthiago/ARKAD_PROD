@@ -7,6 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Antigravity · Sincronização Suíte Trader In-Play: Cockpit Streamlit, Harmonização de Log e Git Sync
+
+- **Sincronização com o Deploy VPS do Claude:** Alinhado `tracker_trader_inplay.py` ao núcleo unificado `trader_inplay_core.py` e à arquitetura de leitura incremental por offset na VPS (`trader-inplay.service`).
+- **Harmonização do Cockpit Streamlit (`pages/03_⚡_Radar_Trader_InPlay.py`):**
+  - Implementado `carregar_log()` resiliente e unificado, suportando tanto o schema incremental da VPS (`pnl_u_risco`, status `FECHADO`, `FORA_DA_FAIXA`, `SEM_ODD_SAIDA`) quanto colunas legadas.
+  - Normalização visual dos badges de status, tratamento robusto de valores numéricos/NaN e expansão dos filtros operacionais.
+  - Verificação de carregamento concluída com sucesso (79 linhas auditadas: 65 liquidadas, 1 pendente, 13 fora da faixa).
+- **Limpeza & Git:** Scripts temporários de medição arquivados em `_arquivados_11set/`; liquidação do ledger dos 5 métodos de 15/09 incorporada; branch `main` 100% comitada e sincronizada com `origin/main`.
+- **Arquivos:** `pages/03_⚡_Radar_Trader_InPlay.py`, `tracker_trader_inplay.py`, `trader_inplay_log.csv`, `PREREGISTRO_SUITE_TRADER_INPLAY.md`, `worklog.md`.
+
+---
+
 ## 2026-09-16 · Claude · Suíte Trader In-Play: camada de dados reescrita (opção A), primeiro olhar e serviço na VPS
 
 - **VPS:** caiu de manhã (1 GB RAM; duas leituras minhas do coletor de 2 GB em paralelo). Thiago reiniciou pelo painel
