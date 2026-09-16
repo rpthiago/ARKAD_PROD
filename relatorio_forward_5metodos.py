@@ -521,6 +521,135 @@ def atualizar(desde, ate):
     return L
 
 
+# ------------------------------------------------------------------ 3b. ledger do KO-10 (executavel)
+KO_LEDGER = os.path.join(ROOT, "metodos_aprovados", "forward_ko_ledger.csv")
+KO_COLS = ["Data", "Metodo", "Liga", "Home", "Away", "Hora", "Odd_Lay", "Odd_Fav", "liq_lay", "min_to_ko", "ts_captura", "origem",
+           "status", "gols_H", "gols_A", "placar", "resultado", "pnl_u", "pnl_rs", "break_even", "liquidado_em", "fonte_placar", "universo"]
+FEED_CACHE = os.path.join(ROOT, "metodos_aprovados", ".cache_feed_jogos.csv")
+
+
+def _feed_jogos(ds):
+    """jogos (canon home, canon away) do feed apicomunidade no dia ds — cache local por dia."""
+    cache = {}
+    if os.path.exists(FEED_CACHE):
+        for r in csv.DictReader(open(FEED_CACHE, encoding="utf-8")):
+            cache.setdefault(r["Data"], set()).add((r["h"], r["a"]))
+    if ds in cache and (ds < date.today().isoformat() or len(cache[ds]) > 0):
+        return cache[ds]
+    try:
+        import b365_data_utils as B
+        g = B.fetch_betfair_daily(ds); df = pd.DataFrame(g) if isinstance(g, list) else g
+        jogos = set((canon(h), canon(a)) for h, a in zip(df["Home"], df["Away"])) if df is not None and not df.empty else set()
+    except Exception:
+        return cache.get(ds, set())
+    if ds < date.today().isoformat() or jogos:
+        with open(FEED_CACHE, "a", newline="", encoding="utf-8") as fh:
+            w = csv.writer(fh)
+            if os.path.getsize(FEED_CACHE) == 0 if os.path.exists(FEED_CACHE) else True: w.writerow(["Data", "h", "a"])
+            for h, a in jogos: w.writerow([ds, h, a])
+    return jogos
+
+
+def _no_feed(r, jogos):
+    from difflib import SequenceMatcher
+    h, a = canon(r["Home"]), canon(r["Away"])
+    if (h, a) in jogos: return True
+    for fh, fa in jogos:
+        rh, ra = SequenceMatcher(None, h, fh).ratio(), SequenceMatcher(None, a, fa).ratio()
+        if min(rh, ra) >= 0.60 and max(rh, ra) >= 0.80: return True
+    return False
+
+
+def _ko_carregar():
+    L = {}
+    if os.path.exists(KO_LEDGER):
+        for r in csv.DictReader(open(KO_LEDGER, encoding="utf-8-sig")):
+            L[chave(r["Data"], r["Metodo"], r["Home"], r["Away"])] = r
+    return L
+
+
+def _ko_gravar(L):
+    rows = sorted(L.values(), key=lambda r: (r["Data"], r["Hora"], r["Metodo"], r["Home"]))
+    with open(KO_LEDGER, "w", newline="", encoding="utf-8-sig") as fh:
+        w = csv.DictWriter(fh, fieldnames=KO_COLS, extrasaction="ignore"); w.writeheader(); w.writerows(rows)
+
+
+def atualizar_ko():
+    """(1) traz as linhas 'live' novas do servico sinais-ko da VPS; (2) liquida com o MESMO placar do ledger das 06:00.
+    Sinal de KO ja passado sem placar em 7 dias -> SEM_PLACAR (fora da conta)."""
+    import subprocess
+    L = _ko_carregar(); n0 = len(L)
+    tmp = os.path.join(ROOT, "metodos_aprovados", ".cache_forward_ko_vps.csv")
+    try:
+        subprocess.run(["scp", "-q", "-i", VPS_KEY, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=20",
+                        VPS + ":/home/ubuntu/betfair-collector/forward_ko_ledger.csv", tmp], capture_output=True, timeout=90)
+    except Exception as e:
+        print("  [ko] scp falhou (%s) - usa o ledger local" % str(e)[:50])
+    if os.path.exists(tmp):
+        for r in csv.DictReader(open(tmp, encoding="utf-8")):
+            k = chave(r["Data"], r["Metodo"], r["Home"], r["Away"])
+            if k not in L:
+                L[k] = {c: r.get(c, "") for c in KO_COLS}
+    print("  ledger KO: %d sinais (%d novos da VPS)" % (len(L), len(L) - n0))
+    sem_univ = [r for r in L.values() if not r.get("universo")]
+    if sem_univ:
+        por_dia = {}
+        for r in sem_univ: por_dia.setdefault(r["Data"], []).append(r)
+        for ds, rs in sorted(por_dia.items()):
+            jogos = _feed_jogos(ds)
+            for r in rs: r["universo"] = ("feed" if _no_feed(r, jogos) else "fora") if jogos else ""
+        print("  ledger KO: universo preenchido em %d linhas" % sum(1 for r in sem_univ if r.get("universo")))
+    pend = [r for r in L.values() if r["status"] == "PENDENTE"]
+    if pend:
+        P = placares(); idx = _por_dia(P); agora = datetime.now().strftime("%Y-%m-%d %H:%M"); liq = 0
+        for r in pend:
+            try:
+                ko = datetime.strptime(r["Data"] + " " + r["Hora"], "%Y-%m-%d %H:%M")
+            except Exception:
+                ko = datetime.now()
+            if ko > datetime.now() - timedelta(hours=2):
+                continue
+            sc = achar_placar(P, idx, r["Data"], r["Home"], r["Away"])
+            red = None; placar = ""; fonte = ""
+            if sc is not None:
+                gh, ga, fonte = sc; red = red_do_metodo(r["Metodo"], gh, ga); placar = "%d-%d" % (gh, ga)
+                r.update(gols_H=gh, gols_A=ga)
+            else:
+                cat = OFICIAL_CAT.get((r["Data"], canon(r["Home"]), canon(r["Away"])))
+                if cat:
+                    red = liquidar_por_categoria(r["Metodo"], cat)
+                    if red is not None: placar = cat["cs"].replace("Any Other ", "AO "); fonte = "betfair_oficial:cat"
+            if red is None:
+                if ko < datetime.now() - timedelta(days=7): r["status"] = "SEM_PLACAR"
+                continue
+            odd = float(r["Odd_Lay"]); pnl = -1.0 if red else (1 - COMISSAO) / (odd - 1)
+            r.update(placar=placar, resultado="RED" if red else "GREEN", pnl_u=round(pnl, 5), pnl_rs=round(pnl * LIAB_RS, 2),
+                     status="LIQUIDADO", liquidado_em=agora, fonte_placar=fonte); liq += 1
+        print("  ledger KO: liquidados agora %d | pendentes %d" % (liq, sum(1 for r in L.values() if r["status"] == "PENDENTE")))
+    _ko_gravar(L)
+    return L
+
+
+def _ko_indice(LK):
+    idx = {}
+    for r in LK.values():
+        idx.setdefault((r["Data"], r["Metodo"]), []).append((canon(r["Home"]), canon(r["Away"])))
+    return idx
+
+
+def executavel_no_ko(r, kidx):
+    """o sinal das 06:00 tinha odd aprovada no KO-10? (exato -> fuzzy entre nomes Betfair e nomes do feed)"""
+    from difflib import SequenceMatcher
+    if not kidx: return None
+    cands = kidx.get((r["Data"], r["Metodo"]), [])
+    h, a = canon(r["Home"]), canon(r["Away"])
+    for ch, ca in cands:
+        if (ch, ca) == (h, a): return True
+        rh, ra = SequenceMatcher(None, h, ch).ratio(), SequenceMatcher(None, a, ca).ratio()
+        if min(rh, ra) >= 0.60 and max(rh, ra) >= 0.80: return True
+    return False
+
+
 # ------------------------------------------------------------------ 4. relatorio
 def _agg(rows):
     liq = [r for r in rows if r["status"] == "LIQUIDADO"]
@@ -628,10 +757,12 @@ def bloco_marcos(rows):
     return out
 
 
-def montar_mensagem(L, hoje, rotulo="HOJE"):
+def montar_mensagem(L, hoje, rotulo="HOJE", LK=None):
     """Mensagem em HTML do Telegram (<b>, <i>, <pre>). `hoje` e o DIA DE REFERENCIA do relatorio
     (na rodada das 6h e o dia anterior, com todos os placares oficiais ja liquidados)."""
     rows = list(L.values())
+    krows = list(LK.values()) if LK else []
+    kidx = _ko_indice(LK) if LK else {}
     hoje_s = hoje.isoformat()
     linhas = ["<b>ARKAD — Forward 5 Métodos</b>",
               "<i>jogos de %s · liability 1u = R$%.0f · comissão 5%%</i>" % (hoje.strftime("%d/%m/%Y"), LIAB_RS), ""]
@@ -660,11 +791,13 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
         for r in rec:
             fonte = str(r.get("fonte_placar", "")).split(":")[0]
             tag = "★" if fonte == "betfair_oficial" else "b"
-            linhas.append("%s %s %-5s %-30s @%-5.2f %-4s %s %+6.2f" % (
+            ex = executavel_no_ko(r, kidx)
+            exs = "" if ex is None else (" ✔" if ex else " ✘KO")
+            linhas.append("%s %s %-5s %-30s @%-5.2f %-4s %s %+6.2f%s" % (
                 r["Hora"], tag, CURTO[r["Metodo"]],
                 _esc(("%s x %s" % (r["Home"], r["Away"]))[:30]), float(r["Odd_Lay"]), r["placar"],
-                "G" if r["resultado"] == "GREEN" else "R", float(r["pnl_u"])))
-        linhas += ["</pre>", "<i>★ = placar oficial da liquidação Betfair (VPS) · b = base histórica</i>"]
+                "G" if r["resultado"] == "GREEN" else "R", float(r["pnl_u"]), exs))
+        linhas += ["</pre>", "<i>★ = placar oficial Betfair (VPS) · b = base · ✔ = tinha odd aprovada no KO−10 · ✘KO = só às 06:00, não executável</i>"]
     pend_hoje = [r for r in rows if r["Data"] == hoje_s and r["status"] == "PENDENTE"]
     if pend_hoje:
         linhas += ["", "<b>AINDA SEM PLACAR em %s (%d) — entram quando liquidar</b>" % (hoje.strftime("%d/%m"), len(pend_hoje)), "<pre>"]
@@ -686,7 +819,23 @@ def montar_mensagem(L, hoje, rotulo="HOJE"):
             tag = "%+6.2fu" % pnl if n else "   --  "
             linhas.append("%s  %2d  %2dG/%2dR  %s%s" % (d[8:10] + "/" + d[5:7], n + pend, g, r_, tag, " *" if pend else ""))
         linhas.append("</pre>")
-    linhas += bloco_gestao(rows)
+    # ---- KO-10: o ledger EXECUTAVEL (odd de lay real do coletor 4-16 min antes do apito) ----
+    kfeed = [r for r in krows if r.get("universo") == "feed"]
+    kfora = [r for r in krows if r.get("universo") == "fora"]
+    if krows:
+        kh = [r for r in kfeed if r["Data"] == hoje_s]
+        linhas += [""] + bloco("KO−10 (executável, universo do feed) — %s" % hoje.strftime("%d/%m"), kh)
+        for mes in sorted({r["Data"][:7] for r in kfeed}, reverse=True)[:2]:
+            linhas += bloco("KO−10 — %s por método" % nomes.get(mes[5:], mes), [r for r in kfeed if r["Data"][:7] == mes])
+        n, g, r_, pnl, pend = _agg(na_conta(kfeed))
+        ini = min(x["Data"] for x in krows)
+        linhas += ["<b>KO−10 ACUMULADO desde %s/%s (feed):</b> %d liq · %dG/%dR · WR %.1f%% · <b>%+.2fu</b> (R$ %+.0f)%s"
+                   % (ini[8:10], ini[5:7], n, g, r_, (100.0 * g / n) if n else 0, pnl, pnl * LIAB_RS, (" · %d pend" % pend) if pend else "")]
+        if kfora:
+            ln = _linha("fora", na_conta(kfora), largura=10)
+            linhas += ["<pre>%s</pre>" % (ln or ""), "<i>fora = jogos que só a Betfair tem (ligas fora do feed, liquidez baixa): FORA da conta e da gestão.</i>"]
+        linhas += ["<i>KO−10 = o que dava para apostar de verdade, 4–16 min antes do apito. A GESTÃO abaixo usa este ledger.</i>"]
+    linhas += bloco_gestao(kfeed if kfeed else rows)
     linhas += bloco_marcos(rows)
     n, g, r_, pnl, pend = _agg(na_conta(rows))
     semp = sum(1 for r in rows if r["status"] == "SEM_PLACAR")
@@ -726,10 +875,14 @@ def main():
     a = ap.parse_args()
     print("=== forward 5 metodos: %s -> %s ===" % (a.desde, a.ate))
     L = atualizar(a.desde, a.ate)
+    try:
+        LK = atualizar_ko()
+    except Exception as e:
+        print("  [ko] falhou: %s" % str(e)[:80]); LK = None
     ref = datetime.strptime(a.ate, "%Y-%m-%d").date()
     if a.ontem:
         ref = ref - timedelta(days=1)
-    msg = montar_mensagem(L, ref, "ONTEM" if a.ontem else "HOJE")
+    msg = montar_mensagem(L, ref, "ONTEM" if a.ontem else "HOJE", LK)
     print("\n" + re.sub(r"</?(b|i|pre)>", "", msg))
     print("\n(%d caracteres)" % len(msg))
     if not a.sem_telegram:

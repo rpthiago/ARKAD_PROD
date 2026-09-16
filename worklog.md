@@ -7,6 +7,23 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · Ledger do KO−10 (executável): serviço na VPS + Telegram + backfill desde 16/08 + bloco no relatório
+
+- **Motivo (Thiago):** "não posso fazer às 6 da manhã um jogo que começa às 15h" e "jogo sem odd aprovada não pode contar no controle".
+- **Feito:** `sinais_ko_core.py` (as 5 regras + Ampla sobre uma captura do coletor; TOP 3 = entre os elegíveis do dia até aquele KO),
+  `sinais_ko_vps.py` (serviço `sinais-ko`, loop 60 s, avalia cada jogo UMA vez na 1ª captura a 4–16 min do KO, grava
+  `forward_ko_ledger.csv` e manda alerta no Telegram), `sinais_ko_backfill.py` (mesmo núcleo sobre o coletor 16/08→16/09: 1.448
+  sinais). Coletor passou a gravar OVER_UNDER_45 (Lay Over 4.5 só existe no KO a partir de hoje). Relatório das 06:00: traz as linhas
+  live da VPS, liquida com o mesmo placar, marca cada resultado das 06:00 com ✔/✘KO, bloco KO−10 por dia/mês, GESTÃO passa a usar o KO.
+- **Universo:** cada linha do KO ganha `universo=feed/fora` (jogo existe no feed apicomunidade do dia). "fora" = ligas que só a Betfair
+  tem (Butão, Geórgia, Tailândia…; liquidez 69–290) — fora da conta e da gestão.
+- **Números (16/08→15/09, universo feed, sem Ampla):** KO−10 **524 liq · 474G/50R · +1,99u** (ago +3,84 · set −1,84) vs ledger 06:00
+  no mesmo período +13,98u. Nos jogos presentes nos DOIS ledgers o P&L é igual (ago +5,6 vs +5,6; set +4,6 vs +4,8); a diferença vem
+  dos sinais que só existem no KO (odd entrou na regra depois das 06:00), especialmente 2x2 (set −3,84u) e Home (−1,31u).
+- Stenhousemuir x Partick (15/09) tinha odd aprovada no KO (✔): red legítimo também no executável.
+
+---
+
 ## 2026-09-16 · Claude · Bug: Lay 0x3 sem sinais desde 15/09 (NameError 'liga') + guarda de KO no ledger
 
 - Thiago viu um RED no Telegram (Stenhousemuir x Partick, Lay Home 15/09) que não estava no Streamlit. Não é erro: entrou às
