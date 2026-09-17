@@ -7,6 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-16 · Claude · KO−10: TOP 3 corrigido (conjunto do dia local, avaliados + próximos); ledger KO refeito
+
+- Thiago viu "Lay 2x2 Top 3" para Santa Tecla x FAS (22h BRT, odd 18,5, liq 158). Causa: TOP 3 no KO era "entre os já
+  avaliados até agora" com dia em UTC → 22h BRT = 01h UTC, dia novo, 1º elegível vira TOP 3 sozinho.
+- Correção: `sinais_ko_core.candidatos()` (elegibilidade sem ranking) + conjunto do dia LOCAL = odds de KO dos já avaliados +
+  odd atual dos elegíveis que ainda vão começar (coletor vê ~6 h à frente); TOP 3 = 3 menores desse conjunto no instante.
+  Backfill refeito com a mesma semântica (0x3 Top 3 168→92, 2x2 310→127; Ampla/Draw/Home iguais). Live rows mantidas.
+- KO−10 refeito (feed, sem Ampla, 16/08→15/09): **422 liq · 380G/42R · +5,74u** (ago +3,43 · set +2,31). 2x2 KO ainda negativo
+  (−1,91u em 74) vs 06:00 +2,25u — a diferença 06:00×KO agora está concentrada no 2x2 e no Home.
+
+---
+
 ## 2026-09-16 · Antigravity · Paridade Página 01 x Página 16: Lay 0x3 com motor direto e imune a cache
 
 - **Contexto:** Thiago reportou que a Página 16 (`Sinais Lay 0x3`) exibia corretamente os 3 jogos de 16/09 (Internacional de Bogotá x Atl. Nacional, Omonia x Celta Vigo, Ghazl El Mahallah x Zamalek), mas a Página 01 (`Portfólio de Métodos em Validação Forward`) não os exibia.

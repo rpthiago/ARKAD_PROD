@@ -75,6 +75,8 @@ def tg(msg):
 class Estado:
     def __init__(self):
         self.offset = 0; self.buf = {}; self.buf_t0 = {}; self.avaliados = set(); self.top3 = {}; self.dia_top3 = None
+        self.proximos = {}      # dia_local -> {(ko,home,away): {metodo: odd}} odds atuais dos elegiveis que ainda vao comecar
+        self.avaliados_odd = {} # dia_local -> {metodo: [odds no KO dos ja avaliados]}
         if ESTADO.exists():
             try:
                 e = json.load(open(ESTADO, encoding="utf-8")); self.offset = int(e.get("offset", 0))
@@ -92,16 +94,28 @@ def _esc(t): return str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">
 
 def _flush(E, k, ts, mtk, mk, comp):
     ko, home, away = k
+    kodt = datetime.strptime(ko, "%Y-%m-%d %H:%M") - timedelta(hours=3)   # hora LOCAL (Brasilia) do KO
+    dia = kodt.strftime("%Y-%m-%d")
+    if mtk > K.JANELA_KO[1]:
+        # ainda vai comecar: guarda a odd atual dos elegiveis para o conjunto do dia local (ranking TOP 3)
+        c = K.candidatos(mk, home, away, comp)
+        E.proximos.setdefault(dia, {})[k] = {m: o for m, o in c.items() if o}
+        return
     if not (K.JANELA_KO[0] <= mtk <= K.JANELA_KO[1]): return
     chave = "%s|%s|%s" % k
     if chave in E.avaliados: return
     E.avaliados.add(chave)
-    dia = ko[:10]                                                     # dia do KO (UTC) para o ranking TOP 3
-    if E.dia_top3 != dia: E.top3 = {}; E.dia_top3 = dia
-    sinais = K.avaliar(mk, home, away, comp, E.top3)
+    E.proximos.get(dia, {}).pop(k, None)
+    # conjunto do dia local = odds no KO dos ja avaliados + odd atual dos proximos (sem este jogo)
+    conj = {}
+    for m in (K.M_0X3, K.M_2X2):
+        conj[m] = list(E.avaliados_odd.get(dia, {}).get(m, [])) + [o for g in E.proximos.get(dia, {}).values() for mm, o in g.items() if mm == m]
+    sinais = K.avaliar(mk, home, away, comp, conj)
+    c = K.candidatos(mk, home, away, comp)
+    for m, o in c.items():
+        if o: E.avaliados_odd.setdefault(dia, {}).setdefault(m, []).append(o)
+    for d in [d for d in list(E.proximos) if d < dia]: E.proximos.pop(d, None); E.avaliados_odd.pop(d, None)
     if not sinais: return
-    # hora local do KO (Brasilia = UTC-3) para o ledger casar com o das 06:00 (feed em hora local)
-    kodt = datetime.strptime(ko, "%Y-%m-%d %H:%M") - timedelta(hours=3)
     novo = not LEDGER.exists(); s06 = sinais_0600(); dstr = kodt.strftime("%Y-%m-%d")
     tags = {}
     with open(LEDGER, "a", newline="", encoding="utf-8") as f:
@@ -136,7 +150,7 @@ def passagem(E):
             if p[1] == "CORRECT_SCORE" and p[7] not in CS_RUNNERS: continue
             try: mtk = float(p[6])
             except Exception: continue
-            if mtk < K.JANELA_KO[0] - 1 or mtk > K.JANELA_KO[1] + 1: continue     # so perto do KO
+            if mtk < K.JANELA_KO[0] - 1 or mtk > 400: continue     # perto do KO (avalia) ou ate ~6h antes (conjunto do dia)
             k = (p[5], p[3], p[4]); ts = p[0]
             try: te = datetime.strptime(ts[:19], "%Y-%m-%d %H:%M:%S").timestamp()
             except Exception: continue

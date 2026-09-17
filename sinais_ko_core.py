@@ -6,8 +6,9 @@ ao vivo + Telegram) e no preenchimento historico (sinais_ko_backfill.py). Regras
 relatorio_forward_5metodos.sinais_do_dia / estrategia_lay_0x3 / estrategia_lay_2x2 — nao reinterpretadas.
 
 Entrada: mk[market_type][runner] = (back, back_size, lay, lay_size)  (so o que o coletor gravou; sem default).
-TOP 3 (0x3 e 2x2): "3 menores odds do dia" nao existe no KO; aqui = entre os elegiveis do dia ja avaliados ate este
-KO (inclusive), a odd deste jogo esta entre as 3 menores. Registrado como definicao do ledger do KO.
+TOP 3 (0x3 e 2x2): no KO, o conjunto do dia LOCAL (Brasilia) = elegiveis ja avaliados (odd do KO deles) + elegiveis que
+ainda vao comecar (odd atual, o coletor ve ~6 h a frente). Este jogo e TOP 3 se a sua odd esta entre as 3 menores desse
+conjunto no instante. (Corrigido 16/09: antes era "entre os ja avaliados", com dia em UTC — jogo das 22h BRT virava TOP 3 sozinho.)
 """
 JANELA_KO = (4.0, 16.0)          # minutos antes do KO em que a captura vale (coletor passa a cada ~5 min)
 LIQ_MIN = 0.0                    # liquidez gravada, nao filtra (igual ao ledger das 06:00)
@@ -23,9 +24,27 @@ def _p(mk, mt, runner, lado):
     return (v if (v is not None and v > 1.0) else None), (sz or 0.0)
 
 
+def candidatos(mk, home, away, competicao):
+    """elegibilidade SEM ranking: {M_0X3: odd | None, M_2X2: odd | None} (para o conjunto do dia)."""
+    a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
+    u25, _ = _p(mk, "OVER_UNDER_25", "Under 2.5 Goals", "back")
+    l03, _ = _p(mk, "CORRECT_SCORE", "0 - 3", "lay"); l22, _ = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
+    c = {M_0X3: None, M_2X2: None}
+    if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85): c[M_0X3] = l03
+    if l22 and 8.0 <= l22 <= 20.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
+        if not any(b in str(competicao or "").upper() for b in BLACKLIST_2X2): c[M_2X2] = l22
+    return c
+
+
+def e_top3(odd, odds_dia):
+    """odd esta entre as 3 menores do conjunto (que ja inclui a propria odd)?"""
+    return odd in sorted(list(odds_dia))[:3]
+
+
 def avaliar(mk, home, away, competicao, top3_dia):
     """Devolve lista de sinais [(metodo, odd_lay, liq, odd_fav)] para este jogo nesta captura.
-    top3_dia: dict metodo -> lista de odds dos elegiveis do dia ja vistos (mutado aqui)."""
+    top3_dia: dict metodo -> lista de odds do CONJUNTO do dia local (avaliados + proximos); a odd deste jogo e
+    acrescentada aqui antes do teste."""
     out = []
     h, _ = _p(mk, "MATCH_ODDS", home, "back"); a, _ = _p(mk, "MATCH_ODDS", away, "back")
     dl, dls = _p(mk, "MATCH_ODDS", "The Draw", "lay"); hl, hls = _p(mk, "MATCH_ODDS", home, "lay")

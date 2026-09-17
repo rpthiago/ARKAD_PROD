@@ -27,8 +27,43 @@ def main():
     if os.path.exists(LEDGER):
         L = pd.read_csv(LEDGER, dtype=str).fillna("")
         existentes = set(zip(L.Data, L.Metodo, L.Home, L.Away))
-    top3 = {}; dia_top3 = None; rows = []
+    # passo 1: captura de KO de cada jogo e candidatos (0x3 / 2x2 sem ranking) por dia LOCAL
+    jogos = []
     for (ko, h, aw), g in d.groupby(["ko", "home", "away"], sort=False):
+        comp = str(g.comp.iloc[0]) if pd.notna(g.comp.iloc[0]) else ""
+        passes, cur, t0 = [], None, None
+        for r in g.itertuples():
+            if cur is None or r.te - t0 > GAP_S:
+                if cur is not None: passes.append(cur)
+                cur = (r.ts, r.mtk, {}); t0 = r.te
+            cur[2].setdefault(r.mtype, {})[r.runner] = (None if np.isnan(r.back) else r.back, 0 if np.isnan(r.bsz) else r.bsz,
+                                                         None if np.isnan(r.lay) else r.lay, 0 if np.isnan(r.lsz) else r.lsz)
+        if cur is not None: passes.append(cur)
+        passes = [p for p in passes if K.JANELA_KO[0] <= p[1] <= K.JANELA_KO[1]]
+        if not passes: continue
+        ts, mtk, mk = passes[0]
+        kodt = datetime.strptime(ko, "%Y-%m-%d %H:%M") - timedelta(hours=3)
+        jogos.append((kodt.strftime("%Y-%m-%d"), ko, h, aw, comp, ts, mtk, mk, K.candidatos(mk, h, aw, comp)))
+    cand_dia = {}
+    for dia, ko, h, aw, comp, ts, mtk, mk, c in jogos:
+        for m, o in c.items():
+            if o: cand_dia.setdefault(dia, {}).setdefault(m, []).append(o)
+    rows = []
+    # passo 2: avalia com o conjunto do dia local (TOP 3 = 3 menores odds de KO entre os elegiveis do dia)
+    for dia, ko, h, aw, comp, ts, mtk, mk, c in jogos:
+        conj = {m: [o for o in cand_dia.get(dia, {}).get(m, [])] for m in (K.M_0X3, K.M_2X2)}
+        for m, o in c.items():
+            if o and o in conj[m]: conj[m].remove(o)          # avaliar() acrescenta a propria odd
+        sinais = K.avaliar(mk, h, aw, comp, conj)
+        kodt = datetime.strptime(ko, "%Y-%m-%d %H:%M") - timedelta(hours=3)
+        for metodo, odd, liq, fav in sinais:
+            key = (kodt.strftime("%Y-%m-%d"), metodo, h, aw)
+            if key in existentes: continue
+            be = (odd - 1) / (odd - 0.05)
+            rows.append([kodt.strftime("%Y-%m-%d"), metodo, comp, h, aw, kodt.strftime("%H:%M"), round(odd, 2), round(fav, 2) if fav else "",
+                         round(liq, 0), round(mtk, 1), ts, "backfill", "PENDENTE", "", "", "", "", "", "", round(be, 4), "", "", "", ""])
+    if False:
+      for (ko, h, aw), g in d.groupby(["ko", "home", "away"], sort=False):
         comp = str(g.comp.iloc[0]) if pd.notna(g.comp.iloc[0]) else ""
         # passes (linhas a < GAP_S s), so os dentro da janela; avalia a PRIMEIRA (a mais longe do KO dentro da janela)
         passes, cur, t0 = [], None, None
