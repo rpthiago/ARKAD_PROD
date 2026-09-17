@@ -1208,3 +1208,303 @@ If cross origin resource sharing is required, please disable server.enableXsrfPr
   placares manuais (ARKAD_PROD): +167
   placares manuais (DASHBOARD_ARKAD-1): +145
 divergencias planilha x base: 0
+===== 17/09/2026  6:00:02,05 ===== 
+2026-09-17 06:00:07.885 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+=== forward 5 metodos: 2026-08-01 -> 2026-09-17 ===
+  2026-08-01: 0 sinais (0 novos)
+  2026-08-02: 0 sinais (0 novos)
+  2026-08-03: 0 sinais (0 novos)
+  2026-08-04: 0 sinais (0 novos)
+  2026-08-05: 0 sinais (0 novos)
+  2026-08-06: 0 sinais (0 novos)
+  2026-08-07: 0 sinais (0 novos)
+  2026-08-08: 0 sinais (0 novos)
+  2026-08-09: 0 sinais (0 novos)
+  2026-08-10: 0 sinais (0 novos)
+  2026-08-11: 0 sinais (0 novos)
+  2026-08-12: 0 sinais (0 novos)
+  2026-08-13: 0 sinais (0 novos)
+  2026-08-14: 0 sinais (0 novos)
+  2026-08-15: 0 sinais (0 novos)
+  2026-08-16: 0 sinais (0 novos)
+  2026-08-17: 0 sinais (0 novos)
+  2026-08-18: 0 sinais (0 novos)
+  2026-08-19: 0 sinais (0 novos)
+  2026-08-20: 0 sinais (0 novos)
+  2026-08-21: 0 sinais (0 novos)
+  2026-08-22: 0 sinais (0 novos)
+  2026-08-23: 0 sinais (0 novos)
+  2026-08-24: 0 sinais (0 novos)
+  2026-08-25: 0 sinais (0 novos)
+  2026-08-26: 0 sinais (0 novos)
+  2026-08-27: 0 sinais (0 novos)
+  2026-08-28: 0 sinais (0 novos)
+  2026-08-29: 0 sinais (0 novos)
+  2026-08-30: 0 sinais (0 novos)
+  2026-08-31: 0 sinais (0 novos)
+  2026-09-01: 0 sinais (0 novos)
+  2026-09-02: 0 sinais (0 novos)
+  2026-09-03: 0 sinais (0 novos)
+  2026-09-04: 0 sinais (0 novos)
+  2026-09-05: 0 sinais (0 novos)
+  2026-09-06: 0 sinais (0 novos)
+  2026-09-07: 0 sinais (0 novos)
+  2026-09-08: 0 sinais (0 novos)
+  2026-09-09: 0 sinais (0 novos)
+  2026-09-10: 0 sinais (0 novos)
+  2026-09-11: 0 sinais (0 novos)
+  2026-09-12: 0 sinais (0 novos)
+  2026-09-13: 0 sinais (0 novos)
+  2026-09-14: 0 sinais (0 novos)
+  2026-09-15: 0 sinais (0 novos)
+  2026-09-16: 0 sinais (0 novos)
+  2026-09-17: 4 sinais (4 novos)
+sinais novos incorporados: 4
+  placares OFICIAIS (VPS): 658 exatos + 99 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+  placares das planilhas do dia (14 arquivos): +103
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +145
+liquidados agora: 3 | pendentes: 5 | fora da faixa KO: 35 | sem placar (>7d, fora da conta): 0
+  lista das 06:00 de hoje enviada para a VPS (4 sinais)
+  ledger KO: 1216 sinais (1 novos da VPS)
+  ledger KO: universo preenchido em 1 linhas
+  placares OFICIAIS (VPS): 658 exatos + 99 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+  placares das planilhas do dia (14 arquivos): +103
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +145
+  ledger KO: liquidados agora 6 | pendentes 73
+
+ARKAD — Forward 5 Métodos
+jogos de 16/09/2026 · liability 1u = R$100 · comissão 5%
+
+ONTEM 16/09
+
+0x3          3    3G/ 0R 100%    +0.14u
+0x3-Ampla*   3    3G/ 0R 100%    +0.14u
+2x2          5    5G/ 0R 100%    +0.27u
+Draw         2    2G/ 0R 100%    +0.38u (1 pend)
+Home         2    2G/ 0R 100%    +0.35u
+Ov4.5        2    2G/ 0R 100%    +0.15u
+--------------------------------------
+TOTAL       14   14G/ 0R 100%    +1.29u (1 pend)
+
+
+RESULTADOS de 16/09 (17 liquidados)
+
+13:00 ★ Draw  Sloga Doboj x Borac Banja Luka @6.20  1-2  G  +0.18 ✘KO
+13:00 ★ Home  FK Proleter Zrenjanin x FK Bac @6.20  1-1  G  +0.18 ✘KO
+13:00 ★ Home  Lokomotiv Sofia x CSKA Sofia   @6.60  0-2  G  +0.17 ✔
+13:00 ★ Ov4.5 FK Proleter Zrenjanin x FK Bac @13.50 1-1  G  +0.08 ✘KO
+13:00 ★ Ov4.5 Vozdovac x FK Jedinstvo Ub     @13.50 1-0  G  +0.08 ✘KO
+13:45 ★ 0x3-Ampla Omonia x Celta Vigo            @21.00 1-0  G  +0.05 ✔
+13:45 ★ 0x3   Omonia x Celta Vigo            @21.00 1-0  G  +0.05 ✔
+14:00 ★ 0x3-Ampla Ghazl El Mahallah x Zamalek    @22.00 0-1  G  +0.05 ✔
+14:00 ★ 0x3   Ghazl El Mahallah x Zamalek    @22.00 0-1  G  +0.05 ✔
+14:00 ★ 2x2   Deportivo x Sevilla            @18.50 0-1  G  +0.05 ✔
+14:00 ★ 2x2   Hansa Rostock x Stuttgart II   @18.00 3-2  G  +0.06 ✘KO
+15:45 ★ 2x2   Altrincham x Hartlepool        @18.00 2-1  G  +0.06 ✘KO
+16:00 ★ Draw  Olympiakos x Jagiellonia Bialy @5.90  2-1  G  +0.19 ✔
+18:00 ★ 2x2   Portuguesa FC x Estudiantes de @18.00 2-1  G  +0.06 ✘KO
+20:30 ★ 2x2   Metropolitanos x Caracas       @19.00 3-0  G  +0.05 ✘KO
+22:20 ★ 0x3-Ampla Internacional de Bogot x Atlet @22.00 2-3  G  +0.05 ✔
+22:20 ★ 0x3   Internacional de Bogot x Atlet @22.00 2-3  G  +0.05 ✔
+
+★ = placar oficial Betfair (VPS) · b = base · ✔ = tinha odd aprovada no KO−10 · ✘KO = só às 06:00, não executável
+
+AINDA SEM PLACAR em 16/09 (1) — entram quando liquidar
+
+18:00 Draw  Coquimbo Unido x Huachipato    @10.00
+
+
+SETEMBRO — por método
+
+0x3         42   41G/ 1R  98%    +0.57u
+0x3-Ampla*  79   77G/ 2R  97%    +0.80u
+2x2         56   56G/ 0R 100%    +3.27u
+Draw       113  101G/12R  89%    +4.20u (4 pend)
+Home        55   48G/ 7R  87%    +0.59u (1 pend)
+Ov4.5       15   15G/ 0R 100%    +0.82u
+--------------------------------------
+TOTAL      281  261G/20R  93%    +9.45u (5 pend)
+
+SETEMBRO — por dia
+
+01/09  11  11G/ 0R   +1.16u
+02/09  12  12G/ 0R   +1.22u
+03/09   9   9G/ 0R   +0.84u
+04/09  18  17G/ 1R   +1.00u
+05/09  27  23G/ 4R   -1.14u
+06/09  29  27G/ 2R   +1.28u
+07/09  11  10G/ 1R   -0.28u
+08/09  12  12G/ 0R   +1.21u
+09/09  14  13G/ 1R   +0.38u
+10/09   6   4G/ 2R   -1.61u
+11/09  18  16G/ 2R   -0.08u
+12/09  30  25G/ 5R   -1.71u
+13/09  36  35G/ 1R   +3.25u
+14/09  17  17G/ 0R   +1.73u
+15/09  17  16G/ 1R   +0.91u
+16/09  15  14G/ 0R   +1.29u *
+17/09   4   0G/ 0R     --   *
+
+
+AGOSTO — por método
+
+0x3         74   71G/ 3R  96%    -0.25u
+0x3-Ampla* 162  157G/ 5R  97%    +0.62u
+2x2         93   87G/ 6R  94%    -0.96u
+Draw       226  198G/28R  88%    +5.35u
+Home       103   90G/13R  87%    +1.02u
+Ov4.5       31   30G/ 1R  97%    +0.67u
+--------------------------------------
+TOTAL      527  476G/51R  90%    +5.83u
+
+AGOSTO — por dia
+
+01/08  24  21G/ 3R   -0.54u
+02/08  25  23G/ 2R   +1.13u
+03/08  11  11G/ 0R   +0.95u
+04/08   6   6G/ 0R   +0.53u
+05/08   3   2G/ 1R   -0.78u
+06/08  16  16G/ 0R   +1.89u
+07/08  19  18G/ 1R   +1.47u
+08/08  22  19G/ 3R   -0.62u
+09/08  28  25G/ 3R   +0.19u
+10/08   7   6G/ 1R   -0.71u
+11/08   8   6G/ 2R   -1.19u
+12/08   9   8G/ 1R   -0.20u
+13/08  14  12G/ 2R   -0.50u
+14/08  17  15G/ 2R   -0.32u
+15/08  21  20G/ 1R   +1.39u
+16/08  17  14G/ 3R   -1.33u
+17/08   9   9G/ 0R   +0.65u
+18/08   3   3G/ 0R   +0.16u
+19/08  10  10G/ 0R   +1.01u
+20/08  14  10G/ 4R   -2.91u
+21/08  16  15G/ 1R   +0.92u
+22/08  33  30G/ 3R   +1.08u
+23/08  29  28G/ 1R   +2.64u
+24/08  10  10G/ 0R   +1.06u
+25/08  12  12G/ 0R   +1.16u
+26/08  17  15G/ 2R   -0.35u
+27/08  23  21G/ 2R   +0.46u
+28/08  19  18G/ 1R   +1.33u
+29/08  27  24G/ 3R   -0.03u
+30/08  41  34G/ 7R   -2.36u
+31/08  17  15G/ 2R   -0.35u
+
+
+KO−10 (executável, universo do feed) — 16/09
+
+0x3          3    3G/ 0R 100%    +0.13u
+0x3-Ampla*   3    3G/ 0R 100%    +0.13u (1 pend)
+2x2          2    2G/ 0R 100%    +0.12u
+Draw         2    2G/ 0R 100%    +0.39u
+Home         1    1G/ 0R 100%    +0.13u
+--------------------------------------
+TOTAL        8    8G/ 0R 100%    +0.77u
+
+KO−10 — SETEMBRO por método
+
+0x3         32   31G/ 1R  97%    +0.34u
+0x3-Ampla*  98   95G/ 3R  97%    +0.53u (6 pend)
+2x2         44   41G/ 3R  93%    -0.55u (4 pend)
+Draw       103   92G/11R  89%    +3.80u (1 pend)
+Home        54   46G/ 8R  85%    -1.18u (1 pend)
+--------------------------------------
+TOTAL      233  210G/23R  90%    +2.41u (6 pend)
+
+KO−10 — AGOSTO por método
+
+0x3         25   24G/ 1R  96%    -0.02u
+0x3-Ampla*  72   70G/ 2R  97%    +0.60u
+2x2         31   28G/ 3R  90%    -1.31u
+Draw       104   93G/11R  89%    +4.70u
+Home        31   27G/ 4R  87%    +0.06u
+--------------------------------------
+TOTAL      191  172G/19R  90%    +3.43u
+
+KO−10 ACUMULADO desde 16/08 (feed): 424 liq · 382G/42R · WR 90.1% · +5.84u (R$ +584) · 6 pend
+fora       102   93G/ 9R  91%    +2.22u (51 pend)
+fora = jogos que só a Betfair tem (ligas fora do feed, liquidez baixa): FORA da conta e da gestão.
+KO−10 = o que dava para apostar de verdade, 4–16 min antes do apito. A GESTÃO abaixo usa este ledger.
+
+LAY DRAW · saída no gol da zebra (pré-registro 16/09)
+
+14:00 Atletico Madrid x Osasuna  gol 18.' back@5.0   saída -0.037  hold +0.194
+16:00 Olympiakos x Jagiellonia B gol 8.7' back@3.45  saída -0.142  hold +0.198
+--------------------------------------------
+pareado N=2: saída -0.18u | segurar +0.39u | dif -0.57u (-0.285/evento)
+  fav casa N=  2 dif -0.57u
+eventos: zebra 2 · favorito 1º 3 · lado indeterminado 5
+
+julgamento em KO ≥ 17/09, N ≥ 100 eventos, IC95 da diferença saída−segurar.
+
+GESTÃO — banca R$2500 · liability R$50 por aposta
+
+método    N  WR-BE  R$ acum IC95 ROI         gatilho
+0x3      57  +0.5pp      +16 [-5.2,+4.3]      manter
+2x2      75  -2.3pp      -93 [-9.2,+3.2]      manter
+Draw $  207  +3.5pp     +425 [-0.9,+9.0]      manter
+Home     85  -0.9pp      -56 [-7.6,+4.4]      manter
+0x0  $    6 -10.9pp      -35 IC indef.        manter (2d)
+--------------------------------------------------
+acumulado R$+257 | pico R$+332 | drawdown atual R$-75 | máx R$-365
+pior dia R$-145 | banca aguenta 17 dias como o pior
+
+$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥100.
+
+PRAZOS PRÉ-REGISTRADOS
+
+faltam 25d   2026-10-12 H-extra Over 1.5 / 1 gol / fav&gt;1.80 / min 25-85 — 1o
+faltam 25d   2026-10-12 Varredura Over in-play — snapshot 2
+faltam 25d   2026-10-12 CS no coletor (19 runners) — snapshot 2
+faltam 25d   2026-10-12 Lay 2x2 apos o 1o gol — snapshot 2
+faltam 56d   2026-11-12 CS no coletor — snapshot 3
+126%         N= 339/270  Lay Draw (Fav&lt;=1.40) — N para o IC95 descolar de zer
+  0%         N=   6/1476 Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09
+
+
+ACUMULADO desde 01/08 (5 métodos): 808 liq · 737G/71R · WR 91.2% · +15.28u (R$ +1528) · 5 pendentes (*)
+* 0x3-Ampla tem os mesmos jogos do 0x3 Top 3 e as zebras são observação: fora do TOTAL e do ACUMULADO.
+
+(7478 caracteres)
+telegram parte 1/2: OK 
+telegram parte 2/2: OK 
+2026-09-17 06:00:56.439 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+  placares OFICIAIS (VPS): 658 exatos + 99 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +192317
+  placares das planilhas do dia (14 arquivos): +103
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +145
+divergencias planilha x base: 0

@@ -51,3 +51,9 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-09-16,Lay Draw (Fav<=1.40),AFC Champions League Two,Al Rayyan,Al Faisaly SC,15:15,5.9,1.37,452.0,11.3,2026-09-16 18:03:43,live,PENDENTE,,,,,,,0.8376,,
 2026-09-16,Lay Draw (Fav<=1.40),UEFA Europa League,Olympiakos,Jagiellonia Bialystock,16:00,5.8,1.36,2672.0,11.3,2026-09-16 18:48:43,live,PENDENTE,,,,,,,0.8348,,
 2026-09-16,Lay 0x3 (Regra Ampla),Spanish La Liga,Levante,Athletic Bilbao,16:30,29.0,2.1,242.0,11.3,2026-09-16 19:18:43,live,PENDENTE,,,,,,,0.9672,,
+2026-09-16,Lay 2x2 Top 3,Copa centroamericana,CS Cartagines,Deportivo Saprissa,21:30,20.0,2.5,162.0,11.2,2026-09-17 00:18:45,live,PENDENTE,,,,,,,0.9524,,,,nao
+2026-09-16,Lay 2x2 Top 3,Salvadoran Primera Division,Internacional Santa Tecla,CD Fas,22:00,18.5,2.9,158.0,11.2,2026-09-17 00:48:45,live,PENDENTE,,,,,,,0.9485,,,,nao
+2026-09-16,Lay 0x3 (Regra Ampla),Colombian Primera A,Internacional de Bogot,Atletico Nacional Medel,22:20,21.0,1.99,327.0,6.2,2026-09-17 01:13:45,live,PENDENTE,,,,,,,0.9547,,,,sim
+2026-09-16,Lay 0x3 Top 3,Colombian Primera A,Internacional de Bogot,Atletico Nacional Medel,22:20,21.0,1.99,327.0,6.2,2026-09-17 01:13:45,live,PENDENTE,,,,,,,0.9547,,,,sim
+2026-09-16,Lay 2x2 Top 3,Colombian Primera A,Internacional de Bogot,Atletico Nacional Medel,22:20,17.5,1.91,262.0,6.2,2026-09-17 01:13:45,live,PENDENTE,,,,,,,0.9456,,,,nao
+2026-09-17,Lay 2x2 Top 3,Copa centroamericana,Alianza FC (SLV),CD Motagua,00:15,20.0,2.3,96.0,11.2,2026-09-17 03:03:46,live,PENDENTE,,,,,,,0.9524,,,,
