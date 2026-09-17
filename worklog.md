@@ -7,6 +7,19 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-17 · Claude · Check-up do projeto: trader-inplay estava em crash-loop há ~33 h (pandas no python do sistema)
+
+- Rodada das 06:00 OK (Telegram 2/2, 4 sinais — quarta com poucos jogos), KO−10 e saída-zebra rodando, oficial liquidando
+  (115–161 jogos/dia), coletor no ciclo normal, backup semanal agendado. Repos sincronizados.
+- **Problema achado:** `trader-inplay.service` em "activating" com **8.977 reinícios**: uma versão do `tracker_trader_inplay.py`
+  enviada à VPS em 16/09 12:02 (fora do repo) importava `pandas` no topo; o serviço usa o python do sistema (sem pandas).
+  Redeploy da versão do repo (import preguiçoso dentro de `carregar_log`) → ativo; ao subir leu a cauda do coletor e recuperou
+  parte dos trades de 16–17/09 (54/56/58 linhas por dia). Buraco parcial de ~33 h no forward da suíte trader.
+- Regra: todo deploy na VPS = arquivo do repo + `py_compile` com o python do serviço + `systemctl is-active` depois. md5 dos 5
+  módulos conferidos iguais ao repo.
+
+---
+
 ## 2026-09-16 · Claude · KO−10: TOP 3 corrigido (conjunto do dia local, avaliados + próximos); ledger KO refeito
 
 - Thiago viu "Lay 2x2 Top 3" para Santa Tecla x FAS (22h BRT, odd 18,5, liq 158). Causa: TOP 3 no KO era "entre os já
