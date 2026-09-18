@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-stop_diario.py — STOP RED (−10% ou 2 reds) e STOP GREEN (+10%) do dia, com alerta no Telegram.
+stop_diario.py — STOP RED (−10% da banca no dia) e STOP GREEN (+10%), com alerta no Telegram.
 FONTE (requisito do Thiago): a grade da pagina 01 = metodos_aprovados/Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx
 (os jogos que ele executa). NAO usa o ledger do KO-10 nem o das 06:00.
 Liquidacao: placar oficial da Betfair (placares_ft.csv da VPS, via scp) -> categoria Any Other -> coluna Placar da
@@ -24,7 +24,7 @@ CFG = os.path.join(ROOT, "banca_stop.json")
 CACHE_FT = os.path.join(PASTA, ".cache_placares_ft.csv")
 VPS = "ubuntu@163.176.59.215"; VPS_KEY = os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key")
 PCT = {"Draw": 0.05, "Home": 0.05, "0x0": 0.05, "2x2": 0.10, "0x3": 0.10, "Over 4.5": 0.10}
-STOP_RED_PCT, STOP_RED_N, STOP_GREEN_PCT = 0.10, 2, 0.10
+STOP_RED_PCT, STOP_GREEN_PCT = 0.10, 0.10      # 19/09: trava de "2 reds" removida (teste do Gemini: deixava R$253 na mesa sem reduzir o DD)
 COMISSAO = 0.05; DUR_MIN = 115           # jogo dura ~115 min do KO ao apito
 
 
@@ -151,7 +151,7 @@ def montar(tipo, D, agora):
     restantes = [l for l in D["linhas"] if l["res"] is None and l["ko"] > ult]
     dt = datetime.strptime(D["dia"], "%Y-%m-%d").strftime("%d/%m/%Y")
     if tipo == "RED":
-        m = ["🚨 <b>ARKAD — ALERTA: STOP RED DIÁRIO (−10% ou 2 reds)</b>", "Data: %s | Horário: %s BRT" % (dt, agora.strftime("%H:%M")), "",
+        m = ["🚨 <b>ARKAD — ALERTA: STOP RED DIÁRIO (−10% da Banca)</b>", "Data: %s | Horário: %s BRT" % (dt, agora.strftime("%H:%M")), "",
              "⚠️ O limite diário de perda foi atingido!",
              "• Saldo Realizado do Dia: <b>−R$ %.2f (%+.1f%%)</b>" % (abs(D["pnl"]), 100 * D["pct"]),
              "• Placar do Dia: %d Greens / %d Reds" % (D["greens"], D["reds"]),
@@ -186,7 +186,7 @@ def main():
     for l in D["linhas"]:
         print("   %s %-9s %-34s @%-5.2f %s" % (l["hora"], l["k"], l["jogo"][:34], l["odd"], ("%s %s R$%+.0f" % (l["placar"], "RED" if l["res"] else "GREEN", l["pnl"])) if l["res"] is not None else "—"))
     disparar = None
-    if not e["RED"] and D["liq"] and (D["pct"] <= -STOP_RED_PCT or D["reds"] >= STOP_RED_N): disparar = "RED"
+    if not e["RED"] and D["liq"] and D["pct"] <= -STOP_RED_PCT: disparar = "RED"
     elif not e["GREEN"] and D["liq"] and D["pct"] >= STOP_GREEN_PCT: disparar = "GREEN"
     if disparar:
         msg = montar(disparar, D, agora); print("\n" + re.sub(r"</?(b|i)>", "", msg))
