@@ -1098,7 +1098,25 @@
 2026-09-16,Lay Home/DC X2 (FavVis<=1.65),BULGARIA 1,Lokomotiv Sofia,CSKA Sofia,13:00,6.6,1.56,LIQUIDADO,0,2,0-2,GREEN,0.16964,16.96,0.855,2026-09-16 16:37,betfair_oficial:exato
 2026-09-16,Lay Over 4.5 (Under Pesado),SERBIA 2,FK Proleter Zrenjanin,FK Backa Topola,13:00,13.5,1.2,LIQUIDADO,1,1,1-1,GREEN,0.076,7.6,0.9294,2026-09-16 16:37,betfair_oficial:exato
 2026-09-16,Lay Over 4.5 (Under Pesado),SERBIA 2,Vozdovac,FK Jedinstvo Ub,13:00,13.5,1.23,LIQUIDADO,1,0,1-0,GREEN,0.076,7.6,0.9294,2026-09-16 16:37,betfair_oficial:exato
-2026-09-17,Lay Draw (Fav<=1.40),ESTONIA 1,FCI Tallinn,Tammeka Tartu,13:00,8.2,1.25,PENDENTE,,,,,,,0.8834,,
-2026-09-17,Lay Draw (Fav<=1.40),EUROPA LEAGUE,Juventus,NEC Nijmegen,16:00,7.8,1.24,PENDENTE,,,,,,,0.8774,,
-2026-09-17,Lay Draw (Fav<=1.40),SOUTH AFRICA 1,Orlando Pirates (SA),Durban City,14:30,5.9,1.35,PENDENTE,,,,,,,0.8376,,
-2026-09-17,Lay Home/DC X2 (FavVis<=1.65),EUROPA LEAGUE,OFI,Hoffenheim,13:45,9.2,1.42,PENDENTE,,,,,,,0.8962,,
+2026-09-17,Lay Draw (Fav<=1.40),ESTONIA 1,FCI Tallinn,Tammeka Tartu,13:00,8.2,1.25,LIQUIDADO,6,0,6-0,GREEN,0.13194,13.19,0.8834,2026-09-18 06:00,planilha_dia:exato
+2026-09-17,Lay Draw (Fav<=1.40),EUROPA LEAGUE,Juventus,NEC Nijmegen,16:00,7.8,1.24,LIQUIDADO,5,0,5-0,GREEN,0.13971,13.97,0.8774,2026-09-18 06:00,planilha_dia:exato
+2026-09-17,Lay Draw (Fav<=1.40),SOUTH AFRICA 1,Orlando Pirates (SA),Durban City,14:30,5.9,1.35,LIQUIDADO,2,0,2-0,GREEN,0.19388,19.39,0.8376,2026-09-18 06:00,betfair_oficial:exato
+2026-09-17,Lay Home/DC X2 (FavVis<=1.65),EUROPA LEAGUE,OFI,Hoffenheim,13:45,9.2,1.42,LIQUIDADO,2,0,2-0,RED,-1.0,-100.0,0.8962,2026-09-18 06:00,betfair_oficial:exato
+2026-09-18,Lay 0x3 Top 3,FINLAND 1,AC Oulu,FC Inter Turku,13:00,24.0,,PENDENTE,,,,,,,0.9603,,
+2026-09-18,Lay 0x3 Top 3,BULGARIA 1,Slavia Sofia,CSKA 1948 Sofia,14:00,26.0,,PENDENTE,,,,,,,0.9634,,
+2026-09-18,Lay 0x3 Top 3,CHINA 1,Yanbian Longding,Guangdong GZ-Power FC,07:00,30.0,,PENDENTE,,,,,,,0.9683,,
+2026-09-18,Lay 0x3 (Regra Ampla),FINLAND 1,AC Oulu,FC Inter Turku,13:00,24.0,,PENDENTE,,,,,,,0.9603,,
+2026-09-18,Lay 0x3 (Regra Ampla),CZECH 1,Prostejov,Dukla Prague,13:00,32.0,,PENDENTE,,,,,,,0.9703,,
+2026-09-18,Lay 0x3 (Regra Ampla),BULGARIA 1,Slavia Sofia,CSKA 1948 Sofia,14:00,26.0,,PENDENTE,,,,,,,0.9634,,
+2026-09-18,Lay 0x3 (Regra Ampla),CHINA 1,Yanbian Longding,Guangdong GZ-Power FC,07:00,30.0,,PENDENTE,,,,,,,0.9683,,
+2026-09-18,Lay 2x2 Top 3,ITALY 2,Juve Stabia,Cesena,15:30,17.0,,PENDENTE,,,,,,,0.944,,
+2026-09-18,Lay 2x2 Top 3,FRANCE 2,Reims,Montpellier,15:00,17.0,,PENDENTE,,,,,,,0.944,,
+2026-09-18,Lay 2x2 Top 3,GERMANY 2,Wolfsburg,SV Darmstadt,13:30,17.5,,PENDENTE,,,,,,,0.9456,,
+2026-09-18,Lay Draw (Fav<=1.40),PERU 1,Alianza Lima,Asociacion Deportiva Tarma,22:00,6.6,1.29,PENDENTE,,,,,,,0.855,,
+2026-09-18,Lay Draw (Fav<=1.40),WALES 1,Ammanford AFC,Penybont FC,15:45,8.4,1.21,PENDENTE,,,,,,,0.8862,,
+2026-09-18,Lay Draw (Fav<=1.40),ISRAEL 1,Hapoel Tel Aviv,Hapoel Petach Tikva,09:45,5.8,1.35,PENDENTE,,,,,,,0.8348,,
+2026-09-18,Lay Draw (Fav<=1.40),CZECH 1,MFK Karvina,H Slavia Kromeriz,13:00,6.8,1.36,PENDENTE,,,,,,,0.8593,,
+2026-09-18,Lay Draw (Fav<=1.40),UKRAINE 1,Polissya Zhytomyr,Kryvbas Krivyi Rih,09:30,6.4,1.32,PENDENTE,,,,,,,0.8504,,
+2026-09-18,Lay Draw (Fav<=1.40),AUSTRIA 1,Rapid Vienna,WSG Wattens,14:30,5.9,1.4,PENDENTE,,,,,,,0.8376,,
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),CYPRUS 1,Omonia 29th May,AEK Larnaca,14:00,8.8,1.45,PENDENTE,,,,,,,0.8914,,
+2026-09-18,Lay Over 4.5 (Under Pesado),UKRAINE 1,Chernomorets Odesa,Obolon-Brovar Kiev,07:00,20.0,1.48,PENDENTE,,,,,,,0.9524,,
