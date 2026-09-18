@@ -7,6 +7,20 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-18 · Claude · Stop Red / Stop Green diário sobre a grade da página 01 (Telegram)
+
+- **Auditoria do circuit breaker (pedido via Antigravity), nos jogos reais da página 02 (648, 51 reds):** sem stop 5/15% R$4.935
+  (+147%) maxDD 46,6%; stop −10% +169% maxDD 39,2% (P=0,09 sob o nulo de resultados embaralhados; red-após-red no dia 9,4% vs
+  6,8%, P=0,11); sizing 5/7,5% maxDD 28,8%; 5/5% 26,2%; teto de exposição 20% pula 365 jogos com 15%. maxDD típico (embaralhado):
+  5% 26,5% (p95 38,6%) · 10% 47,2% (62,2%) · 15% 67,9% (83,3%). Recomendação: sizing ≤10%, stop opcional, sem teto com 15%.
+- **Implementado `stop_diario.py`** (requisito: fonte = `Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`, a grade que o Thiago executa;
+  NÃO usa ledgers): liquida pelo oficial da VPS (scp, categoria Any Other, Placar da planilha como fallback), sizing 5% Draw/Home/0x0
+  e 10% 2x2/0x3/Over, banca = R$2.000 compostos com os jogos reais da página 02 até ontem (ou `banca_fixa` em `banca_stop.json`).
+  Gatilhos: RED ≤ −10% do dia ou ≥ 2 reds; GREEN ≥ +10%; um alerta de cada por dia (estado em json); lista os jogos com KO após
+  a liquidação que disparou. Tarefa `ARKAD_Stop_Diario` a cada 5 min (06:10–23:55). Teste em 18/09: 12/13 liquidados, +8,0%, sem gatilho.
+
+---
+
 ## 2026-09-17 · Claude · Check-up do projeto: trader-inplay estava em crash-loop há ~33 h (pandas no python do sistema)
 
 - Rodada das 06:00 OK (Telegram 2/2, 4 sinais — quarta com poucos jogos), KO−10 e saída-zebra rodando, oficial liquidando
