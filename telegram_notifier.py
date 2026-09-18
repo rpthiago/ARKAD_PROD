@@ -35,8 +35,21 @@ def salvar_config_telegram(bot_token, chat_id):
         pass
     return True
 
+# 18/09/2026 (Thiago): so DOIS remetentes podem falar no Telegram — o relatorio das 06:00 e o stop diario.
+# Qualquer outro script que chame este modulo e silenciado (retorna False) e so grava no seu log.
+REMETENTES_PERMITIDOS = ("relatorio_forward_5metodos.py", "stop_diario.py")
+
+
+def _remetente_permitido():
+    import sys, os
+    return os.path.basename(sys.argv[0] or "") in REMETENTES_PERMITIDOS
+
+
 def enviar_mensagem_telegram(texto, parse_mode="Markdown"):
     """Envia uma mensagem de texto formatada para o Telegram."""
+    if not _remetente_permitido():
+        print("[telegram silenciado 18/09] remetente nao permitido: %s" % (__import__("sys").argv[0]))
+        return False, "silenciado"
     token, chat_id = carregar_config_telegram()
     if not token or not chat_id:
         print("[!] Telegram não configurado (adicione token e chat_id).")
@@ -62,6 +75,8 @@ def enviar_mensagem_telegram(texto, parse_mode="Markdown"):
 
 def enviar_documento_telegram(caminho_arquivo, legenda=""):
     """Envia um arquivo (planilha Excel, PDF) como documento para o Telegram."""
+    if not _remetente_permitido():
+        return False, "silenciado"
     token, chat_id = carregar_config_telegram()
     if not token or not chat_id:
         return False, "Token ou Chat ID ausente."

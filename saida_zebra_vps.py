@@ -36,7 +36,11 @@ def _f(x):
         return None
 
 
+TG_ON = os.environ.get("ARKAD_TG_ALERTAS", "0") == "1"   # 18/09 (Thiago): so o relatorio das 06:00 e o stop diario avisam; aqui so ledger
+
+
 def tg(msg):
+    if not TG_ON: return
     tok = chat = None
     if ENVF.exists():
         for ln in open(ENVF):
