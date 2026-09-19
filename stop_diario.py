@@ -115,6 +115,28 @@ def banca_do_dia(dia):
 # ------------------------------------------------------------------ dia
 def avaliar_dia(dia, agora, of):
     f = os.path.join(PASTA, "Sinais_Metodos_Aprovados_%s.xlsx" % dia)
+    if not os.path.exists(f):
+        # a planilha do dia nao existe (ninguem gerou/baixou): escreve-a com as MESMAS regras da pagina 01
+        # (relatorio_forward_5metodos.sinais_do_dia, odds do feed agora), no formato da planilha da pagina 01.
+        # 19/09: o stop ficou o dia inteiro em "sem planilha" porque a grade so existia quando alguem a salvava.
+        try:
+            import relatorio_forward_5metodos as RF
+            import io as _io, contextlib
+            nomes = {RF.M_0X3: "Lay 0x3 Top 3 (Aprovado)", RF.M_2X2: "Lay 2x2 Top 3 (Aprovado)", RF.M_DRAW: "Lay Draw (Fav <= 1.40)",
+                     RF.M_HOME: "Lay Home / DC X2 (Fav Visitante <= 1.65)", RF.M_O45: "Lay Over 4.5 FT (Under Pesado)"}
+            # grade das 06:00 = as mesmas regras da pagina 01 no feed das 06:00 (o ledger guarda os sinais do dia
+            # com Data==dia); sinais_do_dia() so aceita KO futuro, entao serve apenas se ainda for cedo.
+            sig = [r for r in RF.carregar().values() if r["Data"] == dia]
+            if not sig:
+                with contextlib.redirect_stdout(_io.StringIO()):
+                    sig = RF.sinais_do_dia(dia) or []
+            rows = [dict(Data=dia, Hora=x["Hora"], Liga=x["Liga"], Jogo="%s x %s" % (x["Home"], x["Away"]), Home=x["Home"], Away=x["Away"],
+                         **{"Método": nomes[x["Metodo"]]}, Mercado="", Lado="LAY", Odd_Entrada=x["Odd_Lay"], Odd_Fav=x["Odd_Fav"], Placar="", Resultado="PENDENTE", Status="⏳ PENDENTE")
+                    for x in sig if x["Metodo"] in nomes]
+            pd.DataFrame(rows).to_excel(f, index=False)
+            print("  planilha do dia gerada agora (%s): %d sinais" % (datetime.now().strftime("%H:%M"), len(rows)))
+        except Exception as e:
+            print("  gerar planilha falhou: %s" % str(e)[:80])
     if not os.path.exists(f): return None
     g = pd.read_excel(f)
     col_m = [c for c in g.columns if "todo" in c.lower()][0]
