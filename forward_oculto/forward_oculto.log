@@ -228,3 +228,35 @@ Lay_Over45:
   base                   N=12   WR=100.0% ROI/liab=  +5.6% lay_med=18.50
 
 pendentes (aguardando placar da base): 310
+dia 2026-09-19 | jogos no feed=296 | sinais=35 {'Lay_Away': 9, 'Lay_Draw': 12, 'Lay_Home': 7, 'CONTROLE_Pressao_Draw': 6, 'Lay_Over45': 1} | novos gravados=35
+liquidados agora: 0
+
+=== ACUMULADO (liquidado) ===
+Lay_Draw:
+  base                   N=119  WR=90.8% ROI/liab=  +5.8% lay_med=6.60
+  FILTRADO (refinado)    N=46   WR=87.0% ROI/liab=  +4.0% lay_med=6.20
+Lay_Home:
+  base                   N=65   WR=92.3% ROI/liab=  +6.2% lay_med=7.20
+  FILTRADO (refinado)    N=33   WR=90.9% ROI/liab=  +6.7% lay_med=6.40
+Lay_Away [OBSERVACAO]:
+  base                   N=7    WR=85.7% ROI/liab=  -2.9% lay_med=11.00
+Lay_Over45:
+  base                   N=12   WR=100.0% ROI/liab=  +5.6% lay_med=18.50
+
+pendentes (aguardando placar da base): 345
+dia 2026-09-20 | jogos no feed=211 | sinais=76 {'Lay_Away': 16, 'Lay_Draw': 24, 'CONTROLE_Pressao_Draw': 20, 'Lay_Home': 11, 'Lay_Over45': 4, 'CONTROLE_Pressao_Home': 1} | novos gravados=76
+liquidados agora: 0
+
+=== ACUMULADO (liquidado) ===
+Lay_Draw:
+  base                   N=119  WR=90.8% ROI/liab=  +5.8% lay_med=6.60
+  FILTRADO (refinado)    N=46   WR=87.0% ROI/liab=  +4.0% lay_med=6.20
+Lay_Home:
+  base                   N=65   WR=92.3% ROI/liab=  +6.2% lay_med=7.20
+  FILTRADO (refinado)    N=33   WR=90.9% ROI/liab=  +6.7% lay_med=6.40
+Lay_Away [OBSERVACAO]:
+  base                   N=7    WR=85.7% ROI/liab=  -2.9% lay_med=11.00
+Lay_Over45:
+  base                   N=12   WR=100.0% ROI/liab=  +5.6% lay_med=18.50
+
+pendentes (aguardando placar da base): 421

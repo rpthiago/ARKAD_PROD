@@ -1,19 +1,53 @@
 Data,Metodo,Home,Away
-2026-09-18,Lay 0x3 Top 3,AC Oulu,FC Inter Turku
-2026-09-18,Lay 0x3 Top 3,Slavia Sofia,CSKA 1948 Sofia
-2026-09-18,Lay 0x3 Top 3,Yanbian Longding,Guangdong GZ-Power FC
-2026-09-18,Lay 2x2 Top 3,Juve Stabia,Cesena
-2026-09-18,Lay 2x2 Top 3,Reims,Montpellier
-2026-09-18,Lay 2x2 Top 3,Wolfsburg,SV Darmstadt
-2026-09-18,Lay 0x3 (Regra Ampla),AC Oulu,FC Inter Turku
-2026-09-18,Lay 0x3 (Regra Ampla),Slavia Sofia,CSKA 1948 Sofia
-2026-09-18,Lay 0x3 (Regra Ampla),Yanbian Longding,Guangdong GZ-Power FC
-2026-09-18,Lay 0x3 (Regra Ampla),Prostejov,Dukla Prague
-2026-09-18,Lay Over 4.5 (Under Pesado),Chernomorets Odesa,Obolon-Brovar Kiev
-2026-09-18,Lay Draw (Fav<=1.40),Polissya Zhytomyr,Kryvbas Krivyi Rih
-2026-09-18,Lay Draw (Fav<=1.40),Hapoel Tel Aviv,Hapoel Petach Tikva
-2026-09-18,Lay Draw (Fav<=1.40),MFK Karvina,H Slavia Kromeriz
-2026-09-18,Lay Home/DC X2 (FavVis<=1.65),Omonia 29th May,AEK Larnaca
-2026-09-18,Lay Draw (Fav<=1.40),Rapid Vienna,WSG Wattens
-2026-09-18,Lay Draw (Fav<=1.40),Ammanford AFC,Penybont FC
-2026-09-18,Lay Draw (Fav<=1.40),Alianza Lima,Asociacion Deportiva Tarma
+2026-09-20,Lay 0x3 Top 3,Gremio,SE Palmeiras
+2026-09-20,Lay 0x3 Top 3,NK Bravo,Olimpija
+2026-09-20,Lay 2x2 Top 3,Valencia,Real Sociedad
+2026-09-20,Lay 2x2 Top 3,Frosinone,Como
+2026-09-20,Lay 2x2 Top 3,Inter Miami CF,San Diego FC
+2026-09-20,Lay 0x3 (Regra Ampla),Gremio,SE Palmeiras
+2026-09-20,Lay 0x3 (Regra Ampla),NK Bravo,Olimpija
+2026-09-20,Lay 0x3 (Regra Ampla),Llaneros FC,Atletico Nacional Medellin
+2026-09-20,Lay 0x3 (Regra Ampla),Nice,Lille
+2026-09-20,Lay 0x3 (Regra Ampla),Fiorentina,Napoli
+2026-09-20,Lay 0x3 (Regra Ampla),San Lorenzo,Boca Juniors
+2026-09-20,Lay 0x3 (Regra Ampla),FK Kudrivka,Kolos Kovalyovka
+2026-09-20,Lay 0x3 (Regra Ampla),Pogon Siedlce,Arka Gdynia
+2026-09-20,Lay 0x3 (Regra Ampla),Academia Anzoategui FC,Caracas
+2026-09-20,Lay 0x3 (Regra Ampla),Golden Arrows,Kaizer Chiefs
+2026-09-20,Lay 0x3 (Regra Ampla),Santa Clara,Braga
+2026-09-20,Lay Draw (Fav<=1.40),Feyenoord,FC Utrecht
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Antwerp,Union St Gilloise
+2026-09-20,Lay Draw (Fav<=1.40),Hartberg,LASK Linz
+2026-09-20,Lay Draw (Fav<=1.40),Az Alkmaar,SC Telstar
+2026-09-20,Lay Draw (Fav<=1.40),Man City,Sunderland
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Frosinone,Como
+2026-09-20,Lay Draw (Fav<=1.40),Marumo Gallants FC,Orlando Pirates (SA)
+2026-09-20,Lay Over 4.5 (Under Pesado),Milford,Durban City
+2026-09-20,Lay Draw (Fav<=1.40),Ponte Preta,CRB
+2026-09-20,Lay Draw (Fav<=1.40),Trans Narva,FCI Tallinn
+2026-09-20,Lay Draw (Fav<=1.40),Levadiakos,Olympiakos
+2026-09-20,Lay Draw (Fav<=1.40),Fenerbahce,Eyupspor
+2026-09-20,Lay Draw (Fav<=1.40),Degerfors,Hammarby
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Lokomotiv Plovdiv,CSKA Sofia
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Siroki Brijeg,Borac Banja Luka
+2026-09-20,Lay Draw (Fav<=1.40),NFC Volos,AEK Athens
+2026-09-20,Lay Draw (Fav<=1.40),Haugesund,Strommen
+2026-09-20,Lay Draw (Fav<=1.40),Kongsvinger,Hodd
+2026-09-20,Lay Draw (Fav<=1.40),Raufoss,Stromsgodset
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Raufoss,Stromsgodset
+2026-09-20,Lay Draw (Fav<=1.40),Stabaek,Sogndal
+2026-09-20,Lay Draw (Fav<=1.40),Omonia,Digenis Ypsona
+2026-09-20,Lay Draw (Fav<=1.40),Kalamata,Panathinaikos
+2026-09-20,Lay Draw (Fav<=1.40),Crvena Zvezda,Radnicki Nis
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Brann,Bodo Glimt
+2026-09-20,Lay Draw (Fav<=1.40),Dinamo Zagreb,Lokomotiva
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Panaitolikos,PAOK
+2026-09-20,Lay Draw (Fav<=1.40),Sport Huancayo,UTC Cajamarca
+2026-09-20,Lay Draw (Fav<=1.40),Lech Poznan,Radomiak Radom
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Marseille,Paris St-G
+2026-09-20,Lay Draw (Fav<=1.40),AC Milan,Lecce
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Sportivo San Lorenzo,Olimpia
+2026-09-20,Lay Over 4.5 (Under Pesado),CA Platense,Newells
+2026-09-20,Lay Draw (Fav<=1.40),Flamengo,Red Bull Bragantino
+2026-09-20,Lay Draw (Fav<=1.40),Toluca,Santos Laguna
+2026-09-20,Lay Over 4.5 (Under Pesado),Velez Sarsfield,Tigre

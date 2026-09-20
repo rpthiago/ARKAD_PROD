@@ -97,3 +97,124 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-09-17,Lay Draw (Fav<=1.40),CONMEBOL Copa Libertadores,Flamengo,Independiente (Ecu),21:30,6.4,1.3,1788.0,14.7,2026-09-18 00:15:16,live,PENDENTE,,,,,,,0.8504,,,,nao
 2026-09-18,Lay Draw (Fav<=1.40),Bangladesh Premier League,PWD Sports Club,Dhaka Abahani,06:00,7.4,1.26,187.0,14.9,2026-09-18 08:45:08,live,PENDENTE,,,,,,,0.8707,,,,
 2026-09-18,Lay Draw (Fav<=1.40),Bangladesh Premier League,Fortis FC Limited,Chattogram City,06:00,5.7,1.38,468.0,14.9,2026-09-18 08:45:08,live,PENDENTE,,,,,,,0.8319,,,,
+2026-09-18,Lay 0x3 (Regra Ampla),Chinese League 1,Yanbian Longding,Guangdong GZ-Power FC,07:00,28.0,2.02,323.0,14.9,2026-09-18 09:45:08,live,PENDENTE,,,,,,,0.966,,,,sim
+2026-09-18,Lay 0x3 Top 3,Chinese League 1,Yanbian Longding,Guangdong GZ-Power FC,07:00,28.0,2.02,323.0,14.9,2026-09-18 09:45:08,live,PENDENTE,,,,,,,0.966,,,,sim
+2026-09-18,Lay 2x2 Top 3,Kazakhstan Premier League,Okzhetpes,Zhenys,08:00,17.0,2.44,179.0,14.9,2026-09-18 10:45:08,live,PENDENTE,,,,,,,0.944,,,,nao
+2026-09-18,Lay 2x2 Top 3,Vietnamese National Cup,Binh Dinh,Ho Chi Minh City FC,08:00,18.0,2.46,127.0,14.9,2026-09-18 10:45:08,live,PENDENTE,,,,,,,0.9471,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Ukrainian Premier League,Polissya Zhytomyr,Kryvbas Krivyi Rih,09:30,6.6,1.31,195.0,14.8,2026-09-18 12:15:12,live,PENDENTE,,,,,,,0.855,,,,sim
+2026-09-18,Lay Draw (Fav<=1.40),Israeli Premier League,Hapoel Tel Aviv,Hapoel Petach Tikva,09:45,5.4,1.38,463.0,9.8,2026-09-18 12:35:09,live,PENDENTE,,,,,,,0.8224,,,,sim
+2026-09-18,Lay 0x3 (Regra Ampla),Egyptian 2nd Division,Dayrout,El Entag El Harby,10:30,21.0,1.65,82.0,14.8,2026-09-18 13:15:10,live,PENDENTE,,,,,,,0.9547,,,,nao
+2026-09-18,Lay 0x3 Top 3,Egyptian 2nd Division,Dayrout,El Entag El Harby,10:30,21.0,1.65,82.0,14.8,2026-09-18 13:15:10,live,PENDENTE,,,,,,,0.9547,,,,nao
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),Azerbaijan Premier League,FK Qabala,Neftchi Baku,10:30,6.8,1.55,294.0,14.8,2026-09-18 13:15:10,live,PENDENTE,,,,,,,0.8593,,,,nao
+2026-09-18,Lay Over 4.5 (Under Pesado),Republic of North Macedonian Soccer,Shkendija,KF Bashkimi Kumanovo,11:00,18.0,1.25,87.0,14.8,2026-09-18 13:45:10,live,PENDENTE,,,,,,,0.9471,,,,nao
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),UAE Division 1,City FC,Al-Arabi Umm Quwain,11:40,7.6,1.5,94.0,14.8,2026-09-18 14:25:10,live,PENDENTE,,,,,,,0.8742,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Kazakhstan Premier League,FK Aktobe,FK Ulytau Zhezkazgan,12:00,5.8,1.36,314.0,14.8,2026-09-18 14:45:10,live,PENDENTE,,,,,,,0.8348,,,,nao
+2026-09-18,Lay Over 4.5 (Under Pesado),Algerian Ligue 1,JS El Biar,JS Saoura,12:00,19.0,1.5,78.0,14.8,2026-09-18 14:45:10,live,PENDENTE,,,,,,,0.9499,,,,nao
+2026-09-18,Lay Over 4.5 (Under Pesado),Algerian Ligue 1,USM Khenchela,ES Ben Aknoun,12:00,19.5,1.5,82.0,14.8,2026-09-18 14:45:10,live,PENDENTE,,,,,,,0.9512,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Algerian Ligue 2,US Chaouia,Beni Oualbane,12:00,6.4,1.27,108.0,14.8,2026-09-18 14:45:10,live,PENDENTE,,,,,,,0.8504,,,,nao
+2026-09-18,Lay 0x3 (Regra Ampla),Finnish Veikkausliiga,AC Oulu,FC Inter Turku,13:00,23.0,1.82,87.0,14.8,2026-09-18 15:45:10,live,PENDENTE,,,,,,,0.9586,,,,sim
+2026-09-18,Lay 0x3 Top 3,Finnish Veikkausliiga,AC Oulu,FC Inter Turku,13:00,23.0,1.82,87.0,14.8,2026-09-18 15:45:10,live,PENDENTE,,,,,,,0.9586,,,,sim
+2026-09-18,Lay Draw (Fav<=1.40),Czech 2 Liga,MFK Karvina,H Slavia Kromeriz,13:00,6.6,1.34,581.0,14.8,2026-09-18 15:45:10,live,PENDENTE,,,,,,,0.855,,,,sim
+2026-09-18,Lay 2x2 Top 3,German Bundesliga 2,Wolfsburg,SV Darmstadt,13:30,17.0,1.54,518.0,14.8,2026-09-18 16:15:11,live,PENDENTE,,,,,,,0.944,,,,sim
+2026-09-18,Lay Draw (Fav<=1.40),German Frauen-Bundesliga,FSV Mainz 05 (W),Eintracht Frankfurt (W),13:30,9.0,1.21,104.0,14.8,2026-09-18 16:15:11,live,PENDENTE,,,,,,,0.8939,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),German Frauen-Bundesliga,Hoffenheim (W),Wolfsburg (W),13:30,7.2,1.36,242.0,14.8,2026-09-18 16:15:11,live,PENDENTE,,,,,,,0.8671,,,,nao
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),German Frauen-Bundesliga,Hoffenheim (W),Wolfsburg (W),13:30,9.2,1.36,153.0,14.8,2026-09-18 16:15:11,live,PENDENTE,,,,,,,0.8962,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Cypriot 1st Division,Omonia 29th May,AEK Larnaca,14:00,5.7,1.37,110.0,14.8,2026-09-18 16:45:11,live,PENDENTE,,,,,,,0.8319,,,,nao
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),French Premiere Ligue,Strasbourg (W),Paris FC (W),14:00,7.0,1.58,90.0,14.8,2026-09-18 16:45:11,live,PENDENTE,,,,,,,0.8633,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Faroe Premier League,Klaksvikar Itrottarfelag,Skala,14:30,9.6,1.17,233.0,14.8,2026-09-18 17:15:11,live,PENDENTE,,,,,,,0.9005,,,,nao
+2026-09-18,Lay 2x2 Top 3,French Ligue 2,Annecy,Dijon,15:00,17.0,2.28,315.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.944,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),English WSL,Man City (W),Liverpool (W),15:00,7.0,1.31,118.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.8633,,,,nao
+2026-09-18,Lay 0x3 (Regra Ampla),Croatian HNL,Rudes,Slaven Belupo,15:00,26.0,2.08,104.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.9634,,,,nao
+2026-09-18,Lay 0x3 Top 3,Croatian HNL,Rudes,Slaven Belupo,15:00,26.0,2.08,104.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.9634,,,,nao
+2026-09-18,Lay 2x2 Top 3,French Ligue 2,Laval,Sochaux,15:00,17.0,2.56,251.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.944,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Algerian Ligue 1,MC Alger,MB Rouissat,15:00,4.9,1.36,76.0,14.8,2026-09-18 17:45:11,live,PENDENTE,,,,,,,0.8041,,,,nao
+2026-09-18,Lay 0x3 (Regra Ampla),Scottish Championship,Queens Park,Ayr,15:30,29.0,1.83,115.0,14.8,2026-09-18 18:15:12,live,PENDENTE,,,,,,,0.9672,,,,nao
+2026-09-18,Lay 2x2 Top 3,Italian Serie B,Juve Stabia,Cesena,15:30,15.5,2.42,177.0,14.8,2026-09-18 18:15:12,live,PENDENTE,,,,,,,0.9385,,,,sim
+2026-09-18,Lay 0x3 (Regra Ampla),Irish Division 1,Finn Harps,Longford,15:45,34.0,2.1,294.0,9.7,2026-09-18 18:35:15,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Welsh Premiership,Ammanford AFC,Penybont FC,15:45,8.2,1.19,171.0,9.7,2026-09-18 18:35:15,live,PENDENTE,,,,,,,0.8834,,,,sim
+2026-09-18,Lay Home/DC X2 (FavVis<=1.65),Portuguese Cup,Real Massama,Academica,16:30,10.0,1.41,69.0,14.8,2026-09-18 19:15:12,live,PENDENTE,,,,,,,0.9045,,,,nao
+2026-09-18,Lay 2x2 Top 3,Brazilian Serie B,Ceara SC Fortaleza,Novorizontino,20:30,18.5,2.54,120.0,14.7,2026-09-18 23:15:15,live,PENDENTE,,,,,,,0.9485,,,,nao
+2026-09-18,Lay 2x2 Top 3,Brazilian Serie B,Sao Bernardo,Atletico GO,21:00,19.0,2.78,162.0,14.7,2026-09-18 23:45:15,live,PENDENTE,,,,,,,0.9499,,,,nao
+2026-09-18,Lay Draw (Fav<=1.40),Peruvian Primera Division,Alianza Lima,Asociacion Deportiva Tarma,22:00,7.0,1.26,229.0,14.7,2026-09-19 00:45:15,live,PENDENTE,,,,,,,0.8633,,,,sim
+2026-09-18,Lay 2x2 Top 3,Mexican Liga MX,Puebla,Atlante,22:00,17.0,2.52,240.0,14.7,2026-09-19 00:45:15,live,PENDENTE,,,,,,,0.944,,,,nao
+2026-09-18,Lay 0x3 (Regra Ampla),Panamanian Premier League,San Francisco FC,Arabe Unido,22:30,34.0,1.64,69.0,14.7,2026-09-19 01:15:15,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-18,Lay 0x3 Top 3,Panamanian Premier League,San Francisco FC,Arabe Unido,22:30,34.0,1.64,69.0,14.7,2026-09-19 01:15:15,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Romanian Liga II,CSM Satu Mare,CS Afumati,05:00,32.0,1.99,134.0,14.9,2026-09-19 07:45:07,live,PENDENTE,,,,,,,0.9703,,,,
+2026-09-19,Lay 0x3 (Regra Ampla),Chinese League 2,Xian Chongde Ronghai,Guizhou Zhucheng Athletic,05:00,29.0,1.61,402.0,14.9,2026-09-19 07:45:07,live,PENDENTE,,,,,,,0.9672,,,,
+2026-09-19,Lay 0x3 Top 3,Chinese League 2,Xian Chongde Ronghai,Guizhou Zhucheng Athletic,05:00,29.0,1.61,402.0,14.9,2026-09-19 07:45:07,live,PENDENTE,,,,,,,0.9672,,,,
+2026-09-19,Lay Draw (Fav<=1.40),Vietnamese National Cup,Dong Tam Long An,Bac Ninh FC,06:00,5.4,1.4,99.0,14.9,2026-09-19 08:45:07,live,PENDENTE,,,,,,,0.8224,,,,
+2026-09-19,Lay 0x3 (Regra Ampla),Japanese Football League,ReinMeer Aomori,Honda FC,06:00,29.0,1.7,246.0,14.9,2026-09-19 08:45:07,live,PENDENTE,,,,,,,0.9672,,,,
+2026-09-19,Lay 0x3 (Regra Ampla),Japanese J League,Nagasaki,Cerezo Osaka,06:30,32.0,2.08,536.0,14.8,2026-09-19 09:15:08,live,PENDENTE,,,,,,,0.9703,,,,sim
+2026-09-19,Lay Over 4.5 (Under Pesado),Indian Calcutta Premier Division,Coal India,SC East Bengal (Res),06:30,6.0,1.21,135.0,14.8,2026-09-19 09:15:08,live,PENDENTE,,,,,,,0.8403,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Japanese J League 2,Albirex Niigata,Iwata,07:00,29.0,1.8,383.0,14.8,2026-09-19 09:45:09,live,PENDENTE,,,,,,,0.9672,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Cambodian Premier League,Tiffy Army FC,Nagaworld FC,08:00,10.0,1.2,190.0,14.8,2026-09-19 10:45:10,live,PENDENTE,,,,,,,0.9045,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),English Sky Bet League 2,Rochdale,Oldham,08:30,25.0,2.1,136.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9619,,,,sim
+2026-09-19,Lay 0x3 Top 3,English Sky Bet League 2,Rochdale,Oldham,08:30,25.0,2.1,136.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9619,,,,sim
+2026-09-19,Lay 2x2 Top 3,English Sky Bet Championship,Stoke,Sheff Utd,08:30,16.5,2.4,402.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9422,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),English WSL,Charlton (W),London City Lionesses,08:30,7.4,1.24,303.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.8707,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Chinese League 2,Hangzhou Linping Wuyue,Shanghai Port B,08:30,34.0,1.7,110.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-19,Lay 2x2 Top 3,English Sky Bet League 1,Burton Albion,Mansfield,08:30,16.5,2.72,464.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9422,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Thai League 1,Pattani FC,Prachuap,08:30,27.0,1.8,118.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9647,,,,nao
+2026-09-19,Lay 0x3 Top 3,Thai League 1,Pattani FC,Prachuap,08:30,27.0,1.8,118.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9647,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Chinese League 1,Meizhou Hakka,Shijiazhuang Gongfu FC,08:30,32.0,1.88,74.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.9703,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Singapore Premier League,Courts Young Lions,Geylang International,08:30,6.4,1.56,612.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.8504,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Thai League 2,Muangthong Utd,JL Chiangmai United,08:30,5.8,1.4,78.0,14.8,2026-09-19 11:15:10,live,PENDENTE,,,,,,,0.8348,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),French Ligue 2,Boulogne,Nantes,09:00,26.0,1.77,161.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.9634,,,,nao
+2026-09-19,Lay 0x3 Top 3,French Ligue 2,Boulogne,Nantes,09:00,26.0,1.77,161.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.9634,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Spanish Segunda Division,Sociedad B,Mallorca,09:00,26.0,1.94,377.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.9634,,,,sim
+2026-09-19,Lay 0x3 Top 3,Spanish Segunda Division,Sociedad B,Mallorca,09:00,26.0,1.94,377.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.9634,,,,sim
+2026-09-19,Lay 2x2 Top 3,French Ligue 2,Guingamp,Red Star,09:00,16.5,2.58,170.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.9422,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Indonesian Super League,Bhayangkara FC,Adhyaksa FC,09:00,7.4,1.26,222.0,14.8,2026-09-19 11:45:10,live,PENDENTE,,,,,,,0.8707,,,,nao
+2026-09-19,Lay 2x2 Top 3,Italian Serie B,Carrarese,Benevento,10:00,16.5,2.44,338.0,14.8,2026-09-19 12:45:11,live,PENDENTE,,,,,,,0.9422,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Latvian Virsliga,FK Jelgava,FK Riga,10:00,7.2,1.28,294.0,14.8,2026-09-19 12:45:11,live,PENDENTE,,,,,,,0.8671,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Uzbekistan Super League,Mash al Mubarek,Pakhtakor,10:00,8.0,1.21,130.0,14.8,2026-09-19 12:45:11,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),UAE League Cup,Hatta,Al Ahli (UAE),10:30,8.8,1.42,174.0,14.8,2026-09-19 13:15:11,live,PENDENTE,,,,,,,0.8914,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),English National League,Gateshead,Southend,11:00,6.8,1.56,76.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8593,,,,sim
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Scottish League One,Cove Rangers,Ross Co,11:00,7.8,1.48,201.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8774,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Scottish Championship,Morton,Dunfermline,11:00,8.0,1.51,71.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Turkish 1 Lig,Sariyer G.K.,Boluspor,11:00,6.6,1.29,70.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.855,,,,sim
+2026-09-19,Lay 0x3 (Regra Ampla),Finnish Veikkausliiga,VPS,KuPS,11:00,25.0,1.86,644.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.9619,,,,sim
+2026-09-19,Lay 0x3 Top 3,Finnish Veikkausliiga,VPS,KuPS,11:00,25.0,1.86,644.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.9619,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Scottish League One,Hamilton,Queen of South,11:00,5.5,1.39,294.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8257,,,,sim
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Norwegian Eliteserien,Kristiansund,Rosenborg,11:00,5.6,1.62,713.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8288,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Swedish Division 1,Ariana FC,Utsiktens,11:00,9.0,1.27,70.0,14.8,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.8939,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),English Sky Bet League 2,Gillingham,Bristol Rovers,11:00,27.0,1.98,78.0,14.7,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.9647,,,,sim
+2026-09-19,Lay 0x3 (Regra Ampla),English Sky Bet Championship,Lincoln,Swansea,11:00,34.0,1.8,262.0,14.7,2026-09-19 13:45:11,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Portuguese Primeira Liga,CD Nacional Funchal,Famalicao,11:30,24.0,1.76,447.0,14.7,2026-09-19 14:15:11,live,PENDENTE,,,,,,,0.9603,,,,sim
+2026-09-19,Lay 0x3 Top 3,Portuguese Primeira Liga,CD Nacional Funchal,Famalicao,11:30,24.0,1.76,447.0,14.7,2026-09-19 14:15:11,live,PENDENTE,,,,,,,0.9603,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Uzbekistan Super League,Bunyodkor,Buxoro FK,12:15,34.0,1.98,297.0,9.6,2026-09-19 15:05:17,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Swedish Allsvenskan,Orgryte,Sirius,12:30,7.6,1.47,1649.0,14.7,2026-09-19 15:15:16,live,PENDENTE,,,,,,,0.8742,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Norwegian Eliteserien,Molde,Aalesunds,13:00,6.4,1.39,1079.0,14.7,2026-09-19 15:45:16,live,PENDENTE,,,,,,,0.8504,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),English WSL,Arsenal (W),Man Utd (W),13:30,8.0,1.23,145.0,14.7,2026-09-19 16:15:16,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Israeli Premier League,Maccabi Netanya,Maccabi Tel Aviv,14:00,6.0,1.57,254.0,14.7,2026-09-19 16:45:16,live,PENDENTE,,,,,,,0.8403,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Israeli Premier League,Maccabi Haifa,Ironi Tiberias,14:00,6.8,1.32,170.0,14.7,2026-09-19 16:45:16,live,PENDENTE,,,,,,,0.8593,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Dutch Eredivisie,Ajax,Excelsior,15:00,8.0,1.25,1623.0,14.7,2026-09-19 17:45:17,live,PENDENTE,,,,,,,0.8805,,,,sim
+2026-09-19,Lay 0x3 (Regra Ampla),Polish Ekstraklasa,LKP Motor Lublin,Gornik Zabrze,15:15,32.0,2.02,353.0,9.7,2026-09-19 18:05:17,live,PENDENTE,,,,,,,0.9703,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Slovakian Super League,KFC Komarno,Slovan Bratislava,15:30,6.8,1.52,367.0,14.7,2026-09-19 18:15:17,live,PENDENTE,,,,,,,0.8593,,,,sim
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),Uruguayan Primera Division,Cerro,Penarol,15:30,8.0,1.59,133.0,14.7,2026-09-19 18:15:17,live,PENDENTE,,,,,,,0.8805,,,,sim
+2026-09-19,Lay 2x2 Top 3,French Ligue 1,Le Mans,Lorient,15:45,16.0,2.62,333.0,9.7,2026-09-19 18:35:17,live,PENDENTE,,,,,,,0.9404,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Irish Premier Division,Sligo Rovers,St Patricks,15:45,6.0,1.35,1162.0,9.7,2026-09-19 18:35:17,live,PENDENTE,,,,,,,0.8403,,,,sim
+2026-09-19,Lay 0x3 (Regra Ampla),Spanish Segunda Division,Cadiz,Girona,16:00,25.0,1.87,586.0,14.7,2026-09-19 18:45:18,live,PENDENTE,,,,,,,0.9619,,,,sim
+2026-09-19,Lay 0x3 Top 3,Spanish Segunda Division,Cadiz,Girona,16:00,25.0,1.87,586.0,14.7,2026-09-19 18:45:18,live,PENDENTE,,,,,,,0.9619,,,,nao
+2026-09-19,Lay Draw (Fav<=1.40),Spanish La Liga,Sevilla,Barcelona,16:00,7.2,1.3,9753.0,14.7,2026-09-19 18:45:18,live,PENDENTE,,,,,,,0.8671,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Colombian Primera A,Millonarios,Boyaca Chico,16:00,6.6,1.27,413.0,14.7,2026-09-19 18:45:18,live,PENDENTE,,,,,,,0.855,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Portuguese Primeira Liga,Sporting Lisbon,Arouca,16:30,9.2,1.18,3901.0,14.7,2026-09-19 19:15:18,live,PENDENTE,,,,,,,0.8962,,,,sim
+2026-09-19,Lay Draw (Fav<=1.40),Peruvian Primera Division,Sporting Cristal,Atletico Grau,17:30,5.8,1.36,308.0,14.7,2026-09-19 20:15:18,live,PENDENTE,,,,,,,0.8348,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Salvadoran Primera Division,CD Cacahuatique,CD Fas,18:00,24.0,1.92,106.0,14.7,2026-09-19 20:45:18,live,PENDENTE,,,,,,,0.9603,,,,nao
+2026-09-19,Lay 0x3 Top 3,Salvadoran Primera Division,CD Cacahuatique,CD Fas,18:00,24.0,1.92,106.0,14.7,2026-09-19 20:45:18,live,PENDENTE,,,,,,,0.9603,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Brazilian Serie A,Remo,Santos,18:30,34.0,2.06,1482.0,14.7,2026-09-19 21:15:18,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-19,Lay Over 4.5 (Under Pesado),Mexican Liga Premier,Calor de San Pedro,Ciervos FC,18:30,7.4,1.4,127.0,14.7,2026-09-19 21:15:18,live,PENDENTE,,,,,,,0.8707,,,,nao
+2026-09-19,Lay Home/DC X2 (FavVis<=1.65),US MLS,Kansas City,Philadelphia,21:30,5.9,1.57,3001.0,14.7,2026-09-20 00:15:20,live,PENDENTE,,,,,,,0.8376,,,,sim
+2026-09-19,Lay 2x2 Top 3,US MLS,Kansas City,Philadelphia,21:30,15.0,1.57,195.0,14.7,2026-09-20 00:15:20,live,PENDENTE,,,,,,,0.9365,,,,nao
+2026-09-19,Lay 0x3 (Regra Ampla),Colombian Primera A,Deportivo Pasto,Once Caldas,22:15,32.0,1.73,460.0,9.6,2026-09-20 01:05:20,live,PENDENTE,,,,,,,0.9703,,,,nao
+2026-09-20,Lay 0x3 (Regra Ampla),South Korean K2 League,Ansan Greeners FC,Cheongju FC,04:30,28.0,1.92,127.0,14.9,2026-09-20 07:15:07,live,PENDENTE,,,,,,,0.966,,,,
+2026-09-20,Lay 2x2 Top 3,South Korean K2 League,Yongin FC,Gyeongnam,04:30,17.5,2.42,177.0,14.9,2026-09-20 07:15:07,live,PENDENTE,,,,,,,0.9456,,,,
+2026-09-20,Lay Draw (Fav<=1.40),Hong Kong 1st Division League,Resources Capital FC,South China,04:30,7.2,1.32,612.0,14.9,2026-09-20 07:15:07,live,PENDENTE,,,,,,,0.8671,,,,
+2026-09-20,Lay Draw (Fav<=1.40),Hong Kong 1st Division League,Citizen AA,Lucky Mile,04:30,8.6,1.26,153.0,14.9,2026-09-20 07:15:07,live,PENDENTE,,,,,,,0.8889,,,,
+2026-09-20,Lay 0x3 (Regra Ampla),Japanese J League,G-Osaka,Kobe,05:00,26.0,2.02,560.0,14.9,2026-09-20 07:45:07,live,PENDENTE,,,,,,,0.9634,,,,
+2026-09-20,Lay 0x3 Top 3,Japanese J League,G-Osaka,Kobe,05:00,26.0,2.02,560.0,14.9,2026-09-20 07:45:07,live,PENDENTE,,,,,,,0.9634,,,,
+2026-09-20,Lay 0x3 (Regra Ampla),Japanese Football League,Yokohama SCC,Briobecca Urayasu SC,05:00,26.0,1.94,261.0,14.9,2026-09-20 07:45:07,live,PENDENTE,,,,,,,0.9634,,,,
+2026-09-20,Lay 0x3 Top 3,Japanese Football League,Yokohama SCC,Briobecca Urayasu SC,05:00,26.0,1.94,261.0,14.9,2026-09-20 07:45:07,live,PENDENTE,,,,,,,0.9634,,,,
+2026-09-20,Lay 0x3 (Regra Ampla),Indonesian Championship,Deltras Sidoarjo,PS Barito Putera,05:30,34.0,1.85,165.0,14.9,2026-09-20 08:15:08,live,PENDENTE,,,,,,,0.972,,,,
+2026-09-20,Lay Draw (Fav<=1.40),Cambodian Premier League,Kirivong Sok Sen Chey,Angkor Tiger FC,05:45,9.8,1.23,192.0,9.8,2026-09-20 08:35:08,live,PENDENTE,,,,,,,0.9026,,,,
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Bhutan Premier League,Tensung FC,Drukpa FC,06:00,7.2,1.44,152.0,14.8,2026-09-20 08:45:08,live,PENDENTE,,,,,,,0.8671,,,,
