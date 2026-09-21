@@ -261,7 +261,7 @@ def escanear_jogos(df_raw, metodos_ativos):
             odd_lay = float(l0x0.iloc[idx])
             if odd_lay == 0.0:
                 odd_lay = float(lu05.iloc[idx])
-            if f_val <= 1.40 and ((7.0 <= odd_lay <= 18.0) or (8.0 <= odd_lay <= 25.0)):
+            if f_val <= 1.40 and 7.0 <= odd_lay <= 18.0:
                 be = ((odd_lay - 1.0) / (odd_lay - (1.0 - fator_comissao))) * 100.0
                 oportunidades.append({
                     'Data': dt, 'Hora': tm, 'Liga': lg, 'Home': h, 'Away': a,

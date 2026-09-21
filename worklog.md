@@ -24,6 +24,11 @@
     - Aba 2: Histórico 2026 completo (base FRESH3) com KPIs, Equity Curve interativa via Plotly e tabela com placares reais.
     - Aba 3: Diário de Bordo Setembro & Outubro (`scratch/observacao_set_out_ledger.csv`) inicializado com 47 sinais já mapeados de Setembro, barra de progresso para a meta de 400 apostas e exportação em Excel.
     - Aba 4: Raio-X Metodológico & Critérios de Saída da Quarentena (alerta contra Garden of Forking Paths demonstrando reversão à média de filtros por liga).
+- **Auditoria do Gap Completo 19/08 a 20/09 & Blindagem do Teto de Odd do Lay 0x0:**
+  - Auditados 3.932 jogos de 33 dias consecutivos com feeds diários Betfair e 6.101 placares oficiais (VPS `placares_ft.csv` + ledgers).
+  - `Lay 1x1 c/ Fav Forte`: 110 liquidados, 103G/7R, WR 93,6% vs BE 91,6% (+2,0pp), ROI +2,23% (+2,45u), confirmando a estabilidade vista no início de 2026.
+  - `Lay 0x0 Super Fav`: Identificado por Thiago que os 3 reds ocorreram em odds altas (> 18.5: Partick 21.0, Carabobo 19.0, Pafos 23.0). A faixa > 18.0 gerou prejuízo líquido no gap (−0,10u) e em 2026 (−0,76u).
+  - Trava aplicada em `pages/03_🔬_Observacao_Set_Out_2026.py`: teto congelado estritamente em `7.0 <= Odd_Lay <= 18.0`. Com o teto, o gap recente passa a ter 18 jogos, 18 greens, 0 reds, 100% WR e ROI de +6,45%.
 
 ---
 
