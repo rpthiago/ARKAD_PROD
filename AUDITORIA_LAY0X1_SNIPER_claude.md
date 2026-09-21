@@ -20,11 +20,17 @@ Scripts: `varredura_over/audit_sniper_2026_fresh3.csv`, `varredura_over/audit_sn
 | Threshold vizinho Lay 8–20 | 1.469 | 94,15% | 94,31% | −0,16 pp | −2,39 | −0,16% | [−1,5, +1,2] | **inverte** |
 | Stop Red 2 reds/dia (2026) | 551 | — | — | — | +5,61 | +1,02% | maxDD 4,06u | irrelevante (2 dias com ≥2 reds) |
 | Stop Red 1 red/dia (2026) | 516 | — | — | — | +4,28 | +0,83% | maxDD **4,92u** | piora P&L e DD |
-| **Odd real KO−10 (coletor), 16/08→20/09** | 161 | 89,44% | 93,62% | **−4,18 pp** | **−7,17** | **−4,46%** | [−11,1, +0,7] · P(≤0)=0,95 | reprova na odd executável |
-| idem, liquidez ≥ 200 no lay | 93 | 87,10% | 93,65% | −6,55 pp | −6,49 | −6,98% | [−14,6, **−0,3**] · P=0,98 | teto do IC < 0 |
+| Odd real KO−10 (coletor), 16/08→20/09 — *informativo, base diferente* | 161 | 89,44% | 93,62% | −4,18 pp | −7,17 | −4,46% | [−11,1, +0,7] · P(≤0)=0,95 | não julga; mostra a odd da tela |
+| idem, liquidez ≥ 200 no lay — *informativo* | 93 | 87,10% | 93,65% | −6,55 pp | −6,49 | −6,98% | [−14,6, −0,3] · P=0,98 | idem |
 | Feed da API (odd da manhã), 19/08→21/09 | 135 | 92,59% | 93,6% | −1,0 pp | −1,43 | −1,06% | — | o "28/1" não reproduz |
 
-**Veredito final: 3 — REPROVADO / ARQUIVADO.**
+**Veredito final (base da API, a base em que a regra foi especificada): 2 — WATCHLIST STAKE-ZERO no feed da API, sem dinheiro.**
+Não é 1: o piso do IC95 não é positivo em nenhuma janela (2026 P(≤0)=0,14; 3 anos P=0,22), vizinhos encolhem/invertem, blacklist não ajuda.
+Não é 3 pela base da API sozinha: ela não reprova, só não aprova. Observar no feed diário da API (`scratch/feed_arquivo`), stake 0, até N≥400,
+com placar oficial — e o feed já acumula 135 liquidados a −1,06% (19/08→21/09), o que precisa ser reconciliado com o "N=29, 28/1" do gap.
+
+**Nota de método (Thiago, 21/09): a validação tem que ficar numa base só.** A regra nasceu na base da API; o coletor da VPS tem 5 semanas e não
+é base para validar método. Os números do coletor abaixo (odd real de KO−10) ficam como INFORMAÇÃO sobre a odd executável — não como julgamento.
 
 ## Bloco 1 — Reprodução e integridade
 - Reproduz exatamente: 2024 N=343 −1,37u; 2025 N=454 +2,16u; 2026 N=558, 30 reds, +6,08u, ROI +1,09%, odd mediana 15,0. O P&L está sobre a
@@ -69,9 +75,11 @@ Scripts: `varredura_over/audit_sniper_2026_fresh3.csv`, `varredura_over/audit_sn
 - O "gap" do Antigravity, na odd que existe na tela no KO, é −3,9% (N=159).
 
 ## Conclusão
-1. Na odd de fechamento da base o método é ruído com sinal positivo: +1 pp de margem sobre um BE de 93,6%, IC cruza zero em todas as janelas, edge encolhe e
+0. Julgamento na base da API (única base válida para esta regra): NÃO aprovado; watchlist stake-zero no feed da API. O restante desta conclusão
+   separa o que é da base da API (itens 1, 3, 4) do que é informação do coletor (item 2).
+1. Na odd de fechamento da base da API o método é ruído com sinal positivo: +1 pp de margem sobre um BE de 93,6%, IC cruza zero em todas as janelas, edge encolhe e
    inverte nos vizinhos, dois meses carregam o ano, a faixa de odd é um artefato de regime do livro de CS.
 2. Na odd executável (coletor, KO−10, 161 jogos reais) o método **perde 4,5%** e, com a liquidez que uma aposta de verdade exige, o **teto do IC é negativo**.
 3. Blacklist e stops não mudam nada (a blacklist reduz o lucro; o stop de 1 red aumenta o drawdown).
-4. Isso é o mesmo Lay 0x1 já arquivado (`lay0x1-reprovado-todas-as-rotas`) com cortes novos. Não vai para watchlist: a observação que a watchlist faria já
-   está feita — 161 jogos na odd real, 5 semanas — e reprovou. Registrar como morto (Lei 8) e não re-testar.
+4. É o mesmo Lay 0x1 já arquivado (`lay0x1-reprovado-todas-as-rotas`) com cortes novos. Fica em watchlist stake-zero no feed da API por decisão de
+   método (uma base só); a expectativa declarada, pelo que a base da API mostra em 2024-25 e no feed de ago-set, é REPROVA ao chegar em N=400.
