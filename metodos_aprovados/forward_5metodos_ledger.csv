@@ -1162,55 +1162,61 @@
 2026-09-19,Lay Home/DC X2 (FavVis<=1.65),VENEZUELA 1,Zamora FC,Metropolitanos,17:00,3.75,1.53,PENDENTE,,,,,,,0.7432,,
 2026-09-19,Lay Home/DC X2 (FavVis<=1.65),UKRAINE 1,Zorya,Dynamo Kiev,09:30,6.2,1.63,LIQUIDADO,0,2,0-2,GREEN,0.18269,18.27,0.8455,2026-09-20 06:00,betfair_oficial:exato
 2026-09-19,Lay Over 4.5 (Under Pesado),VENEZUELA 1,Zamora FC,Metropolitanos,17:00,18.0,1.27,PENDENTE,,,,,,,0.9471,,
-2026-09-20,Lay 0x3 Top 3,BRAZIL 1,Gremio,SE Palmeiras,11:00,23.0,,PENDENTE,,,,,,,0.9586,,
-2026-09-20,Lay 0x3 Top 3,SLOVENIA 1,NK Bravo,Olimpija,10:00,26.0,,PENDENTE,,,,,,,0.9634,,
-2026-09-20,Lay 0x3 (Regra Ampla),VENEZUELA 1,Academia Anzoategui FC,Caracas,17:00,29.0,,PENDENTE,,,,,,,0.9672,,
-2026-09-20,Lay 0x3 (Regra Ampla),UKRAINE 1,FK Kudrivka,Kolos Kovalyovka,07:00,29.0,,PENDENTE,,,,,,,0.9672,,
-2026-09-20,Lay 0x3 (Regra Ampla),ITALY 1,Fiorentina,Napoli,07:30,28.0,,PENDENTE,,,,,,,0.966,,
-2026-09-20,Lay 0x3 (Regra Ampla),SOUTH AFRICA 1,Golden Arrows,Kaizer Chiefs,10:00,30.0,,PENDENTE,,,,,,,0.9683,,
-2026-09-20,Lay 0x3 (Regra Ampla),BRAZIL 1,Gremio,SE Palmeiras,11:00,23.0,,PENDENTE,,,,,,,0.9586,,
-2026-09-20,Lay 0x3 (Regra Ampla),COLOMBIA 1,Llaneros FC,Atletico Nacional Medellin,22:15,26.0,,PENDENTE,,,,,,,0.9634,,
-2026-09-20,Lay 0x3 (Regra Ampla),SLOVENIA 1,NK Bravo,Olimpija,10:00,26.0,,PENDENTE,,,,,,,0.9634,,
-2026-09-20,Lay 0x3 (Regra Ampla),FRANCE 1,Nice,Lille,12:15,27.0,,PENDENTE,,,,,,,0.9647,,
-2026-09-20,Lay 0x3 (Regra Ampla),POLAND 2,Pogon Siedlce,Arka Gdynia,09:30,29.0,,PENDENTE,,,,,,,0.9672,,
-2026-09-20,Lay 0x3 (Regra Ampla),ARGENTINA 1,San Lorenzo,Boca Juniors,14:45,28.0,,PENDENTE,,,,,,,0.966,,
-2026-09-20,Lay 0x3 (Regra Ampla),PORTUGAL 1,Santa Clara,Braga,14:00,32.0,,PENDENTE,,,,,,,0.9703,,
-2026-09-20,Lay 2x2 Top 3,ITALY 1,Frosinone,Como,10:00,17.0,,PENDENTE,,,,,,,0.944,,
-2026-09-20,Lay 2x2 Top 3,USA 1,Inter Miami CF,San Diego FC,20:00,17.0,,PENDENTE,,,,,,,0.944,,
-2026-09-20,Lay 2x2 Top 3,SPAIN 1,Valencia,Real Sociedad,16:00,16.5,,PENDENTE,,,,,,,0.9422,,
-2026-09-20,Lay Draw (Fav<=1.40),ITALY 1,AC Milan,Lecce,15:45,6.4,1.29,PENDENTE,,,,,,,0.8504,,
-2026-09-20,Lay Draw (Fav<=1.40),NETHERLANDS 1,Az Alkmaar,SC Telstar,09:30,7.6,1.27,PENDENTE,,,,,,,0.8742,,
-2026-09-20,Lay Draw (Fav<=1.40),SERBIA 1,Crvena Zvezda,Radnicki Nis,14:00,9.8,1.17,PENDENTE,,,,,,,0.9026,,
-2026-09-20,Lay Draw (Fav<=1.40),SWEDEN 1,Degerfors,Hammarby,11:30,6.2,1.35,PENDENTE,,,,,,,0.8455,,
-2026-09-20,Lay Draw (Fav<=1.40),CROATIA 1,Dinamo Zagreb,Lokomotiva,15:00,8.4,1.22,PENDENTE,,,,,,,0.8862,,
-2026-09-20,Lay Draw (Fav<=1.40),TURKEY 1,Fenerbahce,Eyupspor,11:00,9.2,1.19,PENDENTE,,,,,,,0.8962,,
-2026-09-20,Lay Draw (Fav<=1.40),NETHERLANDS 1,Feyenoord,FC Utrecht,07:15,6.6,1.31,PENDENTE,,,,,,,0.855,,
-2026-09-20,Lay Draw (Fav<=1.40),BRAZIL 1,Flamengo,Red Bull Bragantino,18:30,5.7,1.39,PENDENTE,,,,,,,0.8319,,
-2026-09-20,Lay Draw (Fav<=1.40),AUSTRIA 1,Hartberg,LASK Linz,09:30,6.4,1.33,PENDENTE,,,,,,,0.8504,,
-2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Haugesund,Strommen,12:00,6.6,1.38,PENDENTE,,,,,,,0.855,,
-2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,Kalamata,Panathinaikos,13:30,6.2,1.33,PENDENTE,,,,,,,0.8455,,
-2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Kongsvinger,Hodd,12:00,7.4,1.3,PENDENTE,,,,,,,0.8707,,
-2026-09-20,Lay Draw (Fav<=1.40),POLAND 1,Lech Poznan,Radomiak Radom,15:15,6.2,1.39,PENDENTE,,,,,,,0.8455,,
-2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,Levadiakos,Olympiakos,11:00,5.6,1.35,PENDENTE,,,,,,,0.8288,,
-2026-09-20,Lay Draw (Fav<=1.40),ENGLAND 1,Man City,Sunderland,10:00,6.0,1.35,PENDENTE,,,,,,,0.8403,,
-2026-09-20,Lay Draw (Fav<=1.40),SOUTH AFRICA 1,Marumo Gallants FC,Orlando Pirates (SA),10:00,5.2,1.39,PENDENTE,,,,,,,0.8155,,
-2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,NFC Volos,AEK Athens,12:00,6.2,1.35,PENDENTE,,,,,,,0.8455,,
-2026-09-20,Lay Draw (Fav<=1.40),CYPRUS 1,Omonia,Digenis Ypsona,13:00,8.8,1.23,PENDENTE,,,,,,,0.8914,,
-2026-09-20,Lay Draw (Fav<=1.40),BRAZIL 2,Ponte Preta,CRB,11:00,6.4,1.34,PENDENTE,,,,,,,0.8504,,
-2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Raufoss,Stromsgodset,12:00,7.4,1.32,PENDENTE,,,,,,,0.8707,,
-2026-09-20,Lay Draw (Fav<=1.40),PERU 1,Sport Huancayo,UTC Cajamarca,15:00,5.9,1.36,PENDENTE,,,,,,,0.8376,,
-2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Stabaek,Sogndal,12:00,7.2,1.36,PENDENTE,,,,,,,0.8671,,
-2026-09-20,Lay Draw (Fav<=1.40),MEXICO 1,Toluca,Santos Laguna,21:00,7.6,1.29,PENDENTE,,,,,,,0.8742,,
-2026-09-20,Lay Draw (Fav<=1.40),ESTONIA 1,Trans Narva,FCI Tallinn,11:00,8.4,1.24,PENDENTE,,,,,,,0.8862,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BELGIUM 1,Antwerp,Union St Gilloise,08:30,6.0,1.61,PENDENTE,,,,,,,0.8403,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),NORWAY 1,Brann,Bodo Glimt,14:15,5.1,1.64,PENDENTE,,,,,,,0.8119,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),ITALY 1,Frosinone,Como,10:00,6.6,1.56,PENDENTE,,,,,,,0.855,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BULGARIA 1,Lokomotiv Plovdiv,CSKA Sofia,11:45,8.0,1.58,PENDENTE,,,,,,,0.8805,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),FRANCE 1,Marseille,Paris St-G,15:45,7.2,1.47,PENDENTE,,,,,,,0.8671,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),GREECE 1,Panaitolikos,PAOK,15:00,7.4,1.57,PENDENTE,,,,,,,0.8707,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),NORWAY 2,Raufoss,Stromsgodset,12:00,9.8,1.32,PENDENTE,,,,,,,0.9026,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BOSNIA 1,Siroki Brijeg,Borac Banja Luka,12:00,7.2,1.59,PENDENTE,,,,,,,0.8671,,
-2026-09-20,Lay Home/DC X2 (FavVis<=1.65),PARAGUAY 1,Sportivo San Lorenzo,Olimpia,16:00,9.6,1.43,PENDENTE,,,,,,,0.9005,,
-2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,CA Platense,Newells,17:00,19.5,1.48,PENDENTE,,,,,,,0.9512,,
-2026-09-20,Lay Over 4.5 (Under Pesado),SOUTH AFRICA 1,Milford,Durban City,10:00,19.5,1.5,PENDENTE,,,,,,,0.9512,,
-2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Velez Sarsfield,Tigre,21:30,20.0,1.47,PENDENTE,,,,,,,0.9524,,
+2026-09-20,Lay 0x3 Top 3,BRAZIL 1,Gremio,SE Palmeiras,11:00,23.0,,LIQUIDADO,0,0,0-0,GREEN,0.04318,4.32,0.9586,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 Top 3,SLOVENIA 1,NK Bravo,Olimpija,10:00,26.0,,LIQUIDADO,2,1,2-1,GREEN,0.038,3.8,0.9634,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),VENEZUELA 1,Academia Anzoategui FC,Caracas,17:00,29.0,,LIQUIDADO,1,1,1-1,GREEN,0.03393,3.39,0.9672,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),UKRAINE 1,FK Kudrivka,Kolos Kovalyovka,07:00,29.0,,LIQUIDADO,2,3,2-3,GREEN,0.03393,3.39,0.9672,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),ITALY 1,Fiorentina,Napoli,07:30,28.0,,LIQUIDADO,1,1,1-1,GREEN,0.03519,3.52,0.966,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),SOUTH AFRICA 1,Golden Arrows,Kaizer Chiefs,10:00,30.0,,LIQUIDADO,0,0,0-0,GREEN,0.03276,3.28,0.9683,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),BRAZIL 1,Gremio,SE Palmeiras,11:00,23.0,,LIQUIDADO,0,0,0-0,GREEN,0.04318,4.32,0.9586,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),COLOMBIA 1,Llaneros FC,Atletico Nacional Medellin,22:15,26.0,,LIQUIDADO,2,0,2-0,GREEN,0.038,3.8,0.9634,2026-09-21 06:00,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),SLOVENIA 1,NK Bravo,Olimpija,10:00,26.0,,LIQUIDADO,2,1,2-1,GREEN,0.038,3.8,0.9634,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),FRANCE 1,Nice,Lille,12:15,27.0,,LIQUIDADO,2,1,2-1,GREEN,0.03654,3.65,0.9647,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),POLAND 2,Pogon Siedlce,Arka Gdynia,09:30,29.0,,LIQUIDADO,2,1,2-1,GREEN,0.03393,3.39,0.9672,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),ARGENTINA 1,San Lorenzo,Boca Juniors,14:45,28.0,,LIQUIDADO,0,2,0-2,GREEN,0.03519,3.52,0.966,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 0x3 (Regra Ampla),PORTUGAL 1,Santa Clara,Braga,14:00,32.0,,LIQUIDADO,0,0,0-0,GREEN,0.03065,3.06,0.9703,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 2x2 Top 3,ITALY 1,Frosinone,Como,10:00,17.0,,LIQUIDADO,2,0,2-0,GREEN,0.05937,5.94,0.944,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay 2x2 Top 3,USA 1,Inter Miami CF,San Diego FC,20:00,17.0,,LIQUIDADO,2,2,2-2,RED,-1.0,-100.0,0.944,2026-09-21 06:00,betfair_oficial:exato
+2026-09-20,Lay 2x2 Top 3,SPAIN 1,Valencia,Real Sociedad,16:00,16.5,,LIQUIDADO,2,3,2-3,GREEN,0.06129,6.13,0.9422,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),ITALY 1,AC Milan,Lecce,15:45,6.4,1.29,LIQUIDADO,3,0,3-0,GREEN,0.17593,17.59,0.8504,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),NETHERLANDS 1,Az Alkmaar,SC Telstar,09:30,7.6,1.27,LIQUIDADO,1,0,1-0,GREEN,0.14394,14.39,0.8742,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),SERBIA 1,Crvena Zvezda,Radnicki Nis,14:00,9.8,1.17,LIQUIDADO,3,0,3-0,GREEN,0.10795,10.8,0.9026,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),SWEDEN 1,Degerfors,Hammarby,11:30,6.2,1.35,LIQUIDADO,0,1,0-1,GREEN,0.18269,18.27,0.8455,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),CROATIA 1,Dinamo Zagreb,Lokomotiva,15:00,8.4,1.22,LIQUIDADO,3,2,3-2,GREEN,0.12838,12.84,0.8862,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),TURKEY 1,Fenerbahce,Eyupspor,11:00,9.2,1.19,LIQUIDADO,8,0,8-0,GREEN,0.11585,11.59,0.8962,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),NETHERLANDS 1,Feyenoord,FC Utrecht,07:15,6.6,1.31,LIQUIDADO,5,0,5-0,GREEN,0.16964,16.96,0.855,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),BRAZIL 1,Flamengo,Red Bull Bragantino,18:30,5.7,1.39,LIQUIDADO,2,1,2-1,GREEN,0.20213,20.21,0.8319,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),AUSTRIA 1,Hartberg,LASK Linz,09:30,6.4,1.33,LIQUIDADO,3,3,3-3,RED,-1.0,-100.0,0.8504,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Haugesund,Strommen,12:00,6.6,1.38,LIQUIDADO,4,2,4-2,GREEN,0.16964,16.96,0.855,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,Kalamata,Panathinaikos,13:30,6.2,1.33,LIQUIDADO,0,1,0-1,GREEN,0.18269,18.27,0.8455,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Kongsvinger,Hodd,12:00,7.4,1.3,LIQUIDADO,5,1,5-1,GREEN,0.14844,14.84,0.8707,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),POLAND 1,Lech Poznan,Radomiak Radom,15:15,6.2,1.39,LIQUIDADO,5,1,5-1,GREEN,0.18269,18.27,0.8455,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,Levadiakos,Olympiakos,11:00,5.6,1.35,LIQUIDADO,0,1,0-1,GREEN,0.20652,20.65,0.8288,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),ENGLAND 1,Man City,Sunderland,10:00,6.0,1.35,LIQUIDADO,5,3,5-3,GREEN,0.19,19.0,0.8403,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),SOUTH AFRICA 1,Marumo Gallants FC,Orlando Pirates (SA),10:00,5.2,1.39,LIQUIDADO,0,2,0-2,GREEN,0.22619,22.62,0.8155,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),GREECE 1,NFC Volos,AEK Athens,12:00,6.2,1.35,LIQUIDADO,1,2,1-2,GREEN,0.18269,18.27,0.8455,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),CYPRUS 1,Omonia,Digenis Ypsona,13:00,8.8,1.23,LIQUIDADO,4,1,4-1,GREEN,0.12179,12.18,0.8914,2026-09-20 21:44,planilha_dia:exato
+2026-09-20,Lay Draw (Fav<=1.40),BRAZIL 2,Ponte Preta,CRB,11:00,6.4,1.34,LIQUIDADO,1,0,1-0,GREEN,0.17593,17.59,0.8504,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Raufoss,Stromsgodset,12:00,7.4,1.32,LIQUIDADO,0,2,0-2,GREEN,0.14844,14.84,0.8707,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),PERU 1,Sport Huancayo,UTC Cajamarca,15:00,5.9,1.36,LIQUIDADO,3,2,3-2,GREEN,0.19388,19.39,0.8376,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),NORWAY 2,Stabaek,Sogndal,12:00,7.2,1.36,LIQUIDADO,2,1,2-1,GREEN,0.15323,15.32,0.8671,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),MEXICO 1,Toluca,Santos Laguna,21:00,7.6,1.29,LIQUIDADO,2,3,2-3,GREEN,0.14394,14.39,0.8742,2026-09-21 06:00,betfair_oficial:exato
+2026-09-20,Lay Draw (Fav<=1.40),ESTONIA 1,Trans Narva,FCI Tallinn,11:00,8.4,1.24,LIQUIDADO,1,1,1-1,RED,-1.0,-100.0,0.8862,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BELGIUM 1,Antwerp,Union St Gilloise,08:30,6.0,1.61,LIQUIDADO,0,2,0-2,GREEN,0.19,19.0,0.8403,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),NORWAY 1,Brann,Bodo Glimt,14:15,5.1,1.64,LIQUIDADO,2,1,2-1,RED,-1.0,-100.0,0.8119,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),ITALY 1,Frosinone,Como,10:00,6.6,1.56,LIQUIDADO,2,0,2-0,RED,-1.0,-100.0,0.855,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BULGARIA 1,Lokomotiv Plovdiv,CSKA Sofia,11:45,8.0,1.58,LIQUIDADO,1,1,1-1,GREEN,0.13571,13.57,0.8805,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),FRANCE 1,Marseille,Paris St-G,15:45,7.2,1.47,LIQUIDADO,1,2,1-2,GREEN,0.15323,15.32,0.8671,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),GREECE 1,Panaitolikos,PAOK,15:00,7.4,1.57,LIQUIDADO,1,3,1-3,GREEN,0.14844,14.84,0.8707,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),NORWAY 2,Raufoss,Stromsgodset,12:00,9.8,1.32,LIQUIDADO,0,2,0-2,GREEN,0.10795,10.8,0.9026,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),BOSNIA 1,Siroki Brijeg,Borac Banja Luka,12:00,7.2,1.59,LIQUIDADO,2,3,2-3,GREEN,0.15323,15.32,0.8671,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Home/DC X2 (FavVis<=1.65),PARAGUAY 1,Sportivo San Lorenzo,Olimpia,16:00,9.6,1.43,LIQUIDADO,0,3,0-3,GREEN,0.11047,11.05,0.9005,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,CA Platense,Newells,17:00,19.5,1.48,LIQUIDADO,0,1,0-1,GREEN,0.05135,5.14,0.9512,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Over 4.5 (Under Pesado),SOUTH AFRICA 1,Milford,Durban City,10:00,19.5,1.5,LIQUIDADO,1,1,1-1,GREEN,0.05135,5.14,0.9512,2026-09-20 21:44,betfair_oficial:exato
+2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Velez Sarsfield,Tigre,21:30,20.0,1.47,LIQUIDADO,3,2,3-2,RED,-1.0,-100.0,0.9524,2026-09-21 06:00,betfair_oficial:exato
+2026-09-21,Lay 0x3 Top 3,URUGUAY 1,Central Espanol,Torque,19:30,27.0,,PENDENTE,,,,,,,0.9647,,
+2026-09-21,Lay 0x3 (Regra Ampla),URUGUAY 1,Central Espanol,Torque,19:30,27.0,,PENDENTE,,,,,,,0.9647,,
+2026-09-21,Lay 2x2 Top 3,ROMANIA 1,Otelul Galati,FC Hunedoara,12:00,18.5,,PENDENTE,,,,,,,0.9485,,
+2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Aldosivi,Atl Tucuman,14:30,19.0,1.49,PENDENTE,,,,,,,0.9499,,
+2026-09-21,Lay Over 4.5 (Under Pesado),ECUADOR 1,Barcelona (Ecu),Independiente (Ecu),21:30,11.0,1.27,PENDENTE,,,,,,,0.9132,,
+2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Lanus,Estudiantes,21:15,18.5,1.5,PENDENTE,,,,,,,0.9485,,

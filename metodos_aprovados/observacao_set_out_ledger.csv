@@ -1,0 +1,48 @@
+﻿Data,Hora,Metodo,Liga,Home,Away,Odd_Lay,Odd_Fav,Placar,Resultado,PnL_u,Status
+2026-09-08,14:00:00,Lay 1x1 c/ Fav Forte,EGYPT 1,Zamalek,Abo Qair Semads,11.5,1.43,,,0.0,PENDENTE
+2026-09-11,13:30:00,Lay 1x1 c/ Fav Forte,SERBIA 1,Zeleznicar Pancevo,Macva Sabac,12.0,1.42,2-0,GREEN,0.08636363636363636,LIQUIDADO
+2026-09-11,15:45:00,Lay 1x1 c/ Fav Forte,IRELAND 2,Cork City,Cobh Ramblers,12.0,1.49,,,0.0,PENDENTE
+2026-09-12,11:00:00,Lay 1x1 c/ Fav Forte,SCOTLAND 2,Dunfermline,Queens Park,10.5,1.49,,,0.0,PENDENTE
+2026-09-12,12:30:00,Lay 1x1 c/ Fav Forte,SWEDEN 1,IFK Goteborg,Halmstads,12.0,1.47,,,0.0,PENDENTE
+2026-09-12,13:30:00,Lay 1x1 c/ Fav Forte,SPAIN 1,Athletic Bilbao,Elche,11.5,1.44,,,0.0,PENDENTE
+2026-09-12,14:45:00,Lay 1x1 c/ Fav Forte,ARGENTINA 1,Independiente Rivadavia,Aldosivi,10.5,1.46,,,0.0,PENDENTE
+2026-09-12,20:00:00,Lay 1x1 c/ Fav Forte,MEXICO 1,Toluca,Atlas,11.5,1.5,,,0.0,PENDENTE
+2026-09-13,09:30:00,Lay 1x1 c/ Fav Forte,UKRAINE 1,Polissya Zhytomyr,Livyi Bereg Kyiv,11.5,1.45,,,0.0,PENDENTE
+2026-09-13,10:00:00,Lay 1x1 c/ Fav Forte,FRANCE 1,Lille,ESTAC Troyes,12.0,1.45,,,0.0,PENDENTE
+2026-09-13,11:45:00,Lay 1x1 c/ Fav Forte,BULGARIA 1,Botev Vratsa,PFC Levski Sofia,11.5,1.5,0-0,GREEN,0.09047619047619047,LIQUIDADO
+2026-09-13,12:00:00,Lay 1x1 c/ Fav Forte,CROATIA 1,NK Istra,Rudes,11.5,1.5,,,0.0,PENDENTE
+2026-09-13,13:00:00,Lay 1x1 c/ Fav Forte,GREECE 1,Asteras Tripolis,AEK Athens,11.5,1.41,1-1,RED,-1.0,LIQUIDADO
+2026-09-13,15:00:00,Lay 1x1 c/ Fav Forte,SAUDI ARABIA 1,Al Draih,Abha,12.0,1.46,,,0.0,PENDENTE
+2026-09-13,16:00:00,Lay 1x1 c/ Fav Forte,PARAGUAY 1,Olimpia,Sportivo Luqueno,11.0,1.49,,,0.0,PENDENTE
+2026-09-13,17:30:00,Lay 1x1 c/ Fav Forte,CHILE 1,Colo Colo,Deportes Concepcion,11.5,1.46,,,0.0,PENDENTE
+2026-09-13,18:05:00,Lay 1x1 c/ Fav Forte,COLOMBIA 1,Atletico Nacional Medellin,Aguilas Doradas,10.5,1.48,,,0.0,PENDENTE
+2026-09-13,19:30:00,Lay 1x1 c/ Fav Forte,URUGUAY 1,Penarol,Albion FC,10.0,1.5,,,0.0,PENDENTE
+2026-09-14,09:30:00,Lay 1x1 c/ Fav Forte,UKRAINE 1,Dynamo Kiev,FC Epicentr Dunaivtsi,12.0,1.42,,,0.0,PENDENTE
+2026-09-14,14:00:00,Lay 1x1 c/ Fav Forte,SWEDEN 1,Sirius,Degerfors,11.5,1.48,,,0.0,PENDENTE
+2026-09-14,14:00:00,Lay 1x1 c/ Fav Forte,TURKEY 2,Kayserispor,Istanbulspor,11.0,1.47,,,0.0,PENDENTE
+2026-09-14,16:45:00,Lay 1x1 c/ Fav Forte,PORTUGAL 1,Braga,Estoril Praia,11.5,1.47,,,0.0,PENDENTE
+2026-09-14,20:00:00,Lay 1x1 c/ Fav Forte,BRAZIL 1,Bahia,Remo,11.0,1.46,,,0.0,PENDENTE
+2026-09-14,21:15:00,Lay 1x1 c/ Fav Forte,ARGENTINA 1,Instituto,Estudiantes Rio Cuarto,11.0,1.44,,,0.0,PENDENTE
+2026-09-14,22:00:00,Lay 0x0 Super Fav,COLOMBIA 1,America de Cali S.A,Deportivo Pasto,17.5,1.4,0-1,GREEN,0.05757575757575757,LIQUIDADO
+2026-09-15,16:00:00,Lay 1x1 c/ Fav Forte,ENGLAND CUP,Ipswich,Arsenal,12.0,1.42,2-4,GREEN,0.08636363636363636,LIQUIDADO
+2026-09-16,14:00:00,Lay 1x1 c/ Fav Forte,SPAIN 1,Atletico Madrid,Osasuna,10.5,1.42,,,0.0,PENDENTE
+2026-09-16,13:00:00,Lay 0x0 Super Fav,BOSNIA 1,Sloga Doboj,Borac Banja Luka,14.0,1.37,1-2,GREEN,0.07307692307692307,LIQUIDADO
+2026-09-17,14:30:00,Lay 0x0 Super Fav,SOUTH AFRICA 1,Orlando Pirates (SA),Durban City,14.5,1.35,2-0,GREEN,0.07037037037037036,LIQUIDADO
+2026-09-18,14:00:00,Lay 1x1 c/ Fav Forte,CYPRUS 1,Omonia 29th May,AEK Larnaca,12.0,1.45,1-2,GREEN,0.08636363636363636,LIQUIDADO
+2026-09-18,14:00:00,Lay 1x1 c/ Fav Forte,CYPRUS 1,Pafos FC,A.E.L.,12.0,1.39,,,0.0,PENDENTE
+2026-09-18,16:00:00,Lay 1x1 c/ Fav Forte,IRELAND 1,Bohemians,Drogheda,12.0,1.44,,,0.0,PENDENTE
+2026-09-18,18:00:00,Lay 1x1 c/ Fav Forte,COLOMBIA 1,Aguilas Doradas,Deportivo Pereira,12.0,1.45,,,0.0,PENDENTE
+2026-09-18,19:30:00,Lay 1x1 c/ Fav Forte,BRAZIL 2,Vila Nova,America MG,10.5,1.47,,,0.0,PENDENTE
+2026-09-19,16:00:00,Lay 1x1 c/ Fav Forte,BRAZIL 1,Atletico MG,Chapecoense,12.0,1.39,1-1,RED,-1.0,LIQUIDADO
+2026-09-19,17:30:00,Lay 1x1 c/ Fav Forte,PERU 1,Sporting Cristal,Atletico Grau,11.5,1.45,,,0.0,PENDENTE
+2026-09-19,20:30:00,Lay 1x1 c/ Fav Forte,BRAZIL 1,Vasco da Gama,Coritiba,11.0,1.48,,,0.0,PENDENTE
+2026-09-20,04:30:00,Lay 1x1 c/ Fav Forte,SOUTH KOREA 1,Jeonbuk Motors,Gwangju FC,11.0,1.44,,,0.0,PENDENTE
+2026-09-20,09:30:00,Lay 1x1 c/ Fav Forte,UKRAINE 1,Karpaty,Veres Rivne,11.0,1.5,,,0.0,PENDENTE
+2026-09-20,10:00:00,Lay 1x1 c/ Fav Forte,SOUTH AFRICA 1,Marumo Gallants FC,Orlando Pirates (SA),11.0,1.41,0-2,GREEN,0.095,LIQUIDADO
+2026-09-20,11:30:00,Lay 1x1 c/ Fav Forte,PORTUGAL 1,Guimaraes,Moreirense,10.5,1.49,,,0.0,PENDENTE
+2026-09-20,12:00:00,Lay 1x1 c/ Fav Forte,NORWAY 1,Tromso,Ham-Kam,11.5,1.49,,,0.0,PENDENTE
+2026-09-20,13:30:00,Lay 1x1 c/ Fav Forte,SPAIN 2,Almeria,Celta Vigo B,12.0,1.47,,,0.0,PENDENTE
+2026-09-20,15:00:00,Lay 1x1 c/ Fav Forte,BOSNIA 1,Sarajevo,Sloga Doboj,10.5,1.48,,,0.0,PENDENTE
+2026-09-20,15:00:00,Lay 1x1 c/ Fav Forte,PERU 1,Sport Huancayo,UTC Cajamarca,12.0,1.41,3-2,GREEN,0.08636363636363636,LIQUIDADO
+2026-09-20,19:15:00,Lay 1x1 c/ Fav Forte,ARGENTINA 1,Belgrano,Estudiantes Rio Cuarto,10.5,1.47,,,0.0,PENDENTE
+2026-09-20,11:00:00,Lay 0x0 Super Fav,GREECE 1,Levadiakos,Olympiakos,16.0,1.35,0-1,GREEN,0.06333333333333332,LIQUIDADO

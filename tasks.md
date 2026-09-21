@@ -8,10 +8,15 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [x] **Laboratório de Observação Setembro/Outubro (Página 03 do Streamlit) — stake-zero (21/09).**
+  - [x] Criada página dedicada (`pages/03_🔬_Observacao_Set_Out_2026.py`) para monitoramento prospectivo dos 5 métodos em quarentena/resgate durante Setembro e Outubro/2026.
+  - [x] Arquivada a página anterior `pages/03_⚡_Radar_Trader_InPlay.py` para `pages_arquivadas/`.
+  - [x] Radar do dia integrado à API Betfair Cloud (`get_daily_dataframe("betfair")`) e diário de bordo persistente em `scratch/observacao_set_out_ledger.csv`.
+  - [ ] Acumular forward até $N \ge 400$ apostas em Set/Out para deliberar sobre saída da quarentena.
 - [ ] **Suíte de Métodos Trader In-Play (4 Métodos) — stake-zero, pré-registrada (15/09).**
   - [x] Pré-registro congelado em `PREREGISTRO_SUITE_TRADER_INPLAY.md` (LTD Trader, Swing Trade Fav Desvantagem, Scalping Janela Morta, Late Goal Trader).
   - [x] Motor analítico implementado em `trader_inplay_engine.py` com cálculo exato de Cashout Betfair (5% comissão), Stop Loss por tempo e protocolo anti-fabricação (`AGUARDANDO_ODD`).
-  - [x] Painel operacional completo no Streamlit (`pages/03_⚡_Radar_Trader_InPlay.py`): Cockpit ao vivo, Calculadora Dinâmica e Regras Congeladas.
+  - [x] Painel arquivado em `pages_arquivadas/03_⚡_Radar_Trader_InPlay.py` mantendo motor e logs ativos.
   - [ ] Acumular forward até $N \ge 200$ sinais executáveis ao vivo com odds reais Betfair Exchange.
   - [ ] Critério de aprovação: Piso do IC95% > 0.0% pós-FDR com $\ge 10$ reds reais.
 - [ ] **Lay 0x0 XGBoost — confirmar o edge (PRIORIDADE 1).**

@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-21 · Antigravity · Laboratório de Observação Setembro/Outubro no Streamlit (Página 03)
+
+- **Criação da Página Streamlit de Observação (`pages/03_🔬_Observacao_Set_Out_2026.py`):**
+  - Implementada nova página dedicada no Streamlit para acompanhamento rigoroso dos 5 métodos em quarentena/resgate durante Setembro e Outubro de 2026.
+  - Arquivada a página anterior `pages/03_⚡_Radar_Trader_InPlay.py` para `pages_arquivadas/` conforme solicitado pelo usuário.
+  - Métodos integrados:
+    1. `Lay 1x1 c/ Fav Forte` (`Fav <= 1.50`, `Odd Lay 6.0 a 12.0`) — N=824 em 2026 com ROI +2,28% (+18,8u) e +1,64% em Ago-Set (2024/2025 foram −1,8% por comissão).
+    2. `Lay 0x0 Super Fav` (`Fav <= 1.40`, `Odd Lay 7.0 a 18.0` ou Under 0.5 FT `8.0 a 25.0`) — ROI +3,75% em 2026 e +6,04% em Ago-Set (positivo no agregado de 3 anos: +3,84u).
+    3. `Lay 2x0 Zebra Mandante` (`Fav Visitante <= 1.70`, `Odd Lay 6.0 a 25.0`) — ROI +7,63% (+29,0u) em N=380 jogos (WR 98,7% vs BE 91,2%).
+    4. `Lay 0x2 Zebra Visitante` (`Fav Mandante <= 1.70`, `Odd Lay 6.0 a 25.0`) — ROI +3,31% (+20,9u) em N=632 jogos (WR 98,3% vs BE 95,3%).
+    5. `Lay 0x3 Zebra Visitante` (`Fav Mandante <= 1.60`, `Odd Lay 15.0 a 50.0`) — ROI +4,55% (+9,5u) em N=209 jogos.
+  - **Governança Estrita (GEMINI.md):** Status oficial **OBSERVAÇÃO STAKE-ZERO (`stake: 0.0`)**. Capital real 100% protegido. Simulação teórica em unidades (1u = R$ 50/R$ 100).
+  - **4 Abas Funcionais:**
+    - Aba 1: Radar do Dia com escaneamento na API Cloud da Betfair (`get_daily_dataframe("betfair")`) e fallback local, tabela com horários, odds, cálculo de Break-Even, download em Excel e botão de integração ao diário de bordo com 1 clique.
+    - Aba 2: Histórico 2026 completo (base FRESH3) com KPIs, Equity Curve interativa via Plotly e tabela com placares reais.
+    - Aba 3: Diário de Bordo Setembro & Outubro (`scratch/observacao_set_out_ledger.csv`) inicializado com 47 sinais já mapeados de Setembro, barra de progresso para a meta de 400 apostas e exportação em Excel.
+    - Aba 4: Raio-X Metodológico & Critérios de Saída da Quarentena (alerta contra Garden of Forking Paths demonstrando reversão à média de filtros por liga).
+
+---
+
 ## 2026-09-18 · Claude · Stop Red / Stop Green diário sobre a grade da página 01 (Telegram)
 
 - **Auditoria do circuit breaker (pedido via Antigravity), nos jogos reais da página 02 (648, 51 reds):** sem stop 5/15% R$4.935
