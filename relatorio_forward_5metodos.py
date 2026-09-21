@@ -750,13 +750,46 @@ def _ledger_0x0():
                  pnl_u=float(r["pnl_liab"]), break_even=float(r["break_even"])) for _, r in d.iterrows()]
 
 
+def _rows_pagina02():
+    """Jogos REAIS da pagina 02 (Resultados dos Metodos em Validacao Forward) no formato de linha do ledger.
+    E o que o Thiago executou; a GESTAO do relatorio usa isto (21/09), nao o ledger do KO-10."""
+    try:
+        src = open(os.path.join(ROOT, "pages", "02_📊_Resultados_Metodos_Aprovados.py"), encoding="utf-8").read()
+        cut = src.index("df_raw = carregar_dados_aprovados")
+        ns = {"__file__": os.path.join(ROOT, "pages", "02.py")}
+        import io as _io, contextlib
+        with contextlib.redirect_stdout(_io.StringIO()), contextlib.redirect_stderr(_io.StringIO()):
+            exec(compile(src[:cut], "p02", "exec"), ns)
+            df = ns["carregar_dados_aprovados"]("👑 Portfólio em Validação Forward (Lay 0x0 XGBoost, 0x3, 2x2, Tríade + Zebras)")
+        d = df[df.Status.isin(["🟢 GREEN", "🔴 RED"]) & ~df["Método"].astype(str).str.contains("Paralelo|Zebra|Micro")].copy()
+        d["odd"] = pd.to_numeric(d.Odd_Entrada, errors="coerce"); d = d.dropna(subset=["odd"])
+        def nome(m):
+            m = str(m)
+            for k, v in (("0x3", M_0X3), ("2x2", M_2X2), ("Over 4.5", M_O45), ("0x0", "Lay 0x0 XGB"), ("Draw", M_DRAW), ("Home", M_HOME)):
+                if k in m: return v
+            return None
+        d["Metodo"] = d["Método"].map(nome); d = d.dropna(subset=["Metodo"])
+        out = []
+        for r in d.itertuples():
+            red = r.Status == "🔴 RED"
+            out.append(dict(Data=r.Data.strftime("%Y-%m-%d"), Metodo=r.Metodo, status="LIQUIDADO", resultado="RED" if red else "GREEN",
+                            pnl_u=(-1.0 if red else (1 - COMISSAO) / (r.odd - 1)), break_even=(r.odd - 1) / (r.odd - COMISSAO)))
+        return out
+    except Exception as e:
+        print("  [pagina02] %s" % str(e)[:80]); return None
+
+
 def bloco_gestao(rows):
     """Gestao com dinheiro real: por metodo, P&L em R$ na liability configurada, IC95 (bloco-dia),
     drawdown e o gatilho de escala. Regra: ESCALAR so com piso do IC95 > 0 e N >= n_min; REDUZIR se
     o teto do IC95 < 0; MANTER no resto."""
     c = _cfg(); liab = float(c["liability_rs"]); banca = float(c["banca_rs"]); nmin = int(c["n_min_escalar"])
-    todos = [r for r in na_conta(rows) if r["status"] == "LIQUIDADO"] + _ledger_0x0()
-    out = ["", "<b>GESTÃO — banca R$%.0f · liability R$%.0f por aposta</b>" % (banca, liab), "<pre>"]
+    p02 = _rows_pagina02()
+    if p02:
+        todos = p02; fonte = "jogos reais (página 02)"
+    else:
+        todos = [r for r in na_conta(rows) if r["status"] == "LIQUIDADO"] + _ledger_0x0(); fonte = "ledger"
+    out = ["", "<b>GESTÃO — %s · banca R$%.0f · liability R$%.0f por aposta</b>" % (fonte, banca, liab), "<pre>"]
     out.append("%-6s %4s %6s %8s %-16s %s" % ("método", "N", "WR-BE", "R$ acum", "IC95 ROI", "gatilho"))
     for m in ORDEM + ["Lay 0x0 XGB"]:
         g = [r for r in todos if r["Metodo"] == m]
@@ -781,7 +814,7 @@ def bloco_gestao(rows):
         out.append("-" * 50)
         out.append("acumulado R$%+.0f | pico R$%+.0f | drawdown atual R$%.0f | máx R$%.0f" % (s.iloc[-1], pico.iloc[-1], dd_atual, mdd))
         out.append("pior dia R$%.0f | banca aguenta %.0f dias como o pior" % (pior_dia, banca / abs(pior_dia) if pior_dia < 0 else 999))
-    out += ["</pre>", "<i>$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥%d.</i>" % nmin]
+    out += ["</pre>", "<i>$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥%d. Fonte: os jogos que você fez (página 02), liability fixa R$%.0f — o composto por %% está no stop diário.</i>" % (nmin, liab)]
     return out
 
 
