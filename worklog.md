@@ -7,6 +7,24 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-21 · Antigravity · Consenso Metodológico: Lei 7 (Uma Base por Método) & Lay 0x1 em Watchlist Stake-Zero
+
+- **Formalização da Lei 7 no GEMINI.md ("Uma Base por Método"):**
+  - Consenso unânime entre Thiago, Claude e Antigravity: método especificado e treinado na base da API FutPythonTrader deve ser avaliado, validado e acompanhado estritamente na base da API (histórico `FRESH3` + feeds diários `scratch/feed_arquivo/*.parquet` com placares oficiais).
+  - O coletor da VPS (odd KO−10 com 5 semanas) não tem massa crítica para aprovar ou reprovar métodos pré-jogo da API, atuando apenas como nota informativa de odd executável de tela e como base nativa para estratégias in-play.
+- **Reconciliação da Amostra do Gap Recente (Esclarecimento da Pendência):**
+  - Esclarecida a divergência entre o "N=29 (28/1)" inicial do Antigravity e o feed completo: o arquivo local `placares_ft.csv` continha apenas 1.838 partidas resolvidas na VPS, casando apenas 31 dos 162 sinais do feed diário da API (onde calhou de ter 1 red por viés amostral).
+  - Claude auditou o universo completo da API: nos 135 jogos que já finalizaram no feed da API, ocorreram 10 reds $\rightarrow$ resultado consolidado da API no gap: **−1,06% ROI** (−1,43u).
+- **Veredito Oficial do Lay 0x1 Sniper na Base da API:**
+  - Veredito ajustado para **`2 — WATCHLIST STAKE-ZERO no feed da API, sem dinheiro (até N >= 400)`**:
+    - Não é 1 (Aprovado): piso do IC95% na FRESH3 cruza zero ($P=0,14$), vizinhos encolhem/invertem (8–20 dá −0,16%), 3 anos dá +0,51% e feed recente está em −1,06%.
+    - Não é 3 (Reprovado definitivo pela API): a base da API sozinha não reprova formalmente (p=0,14 não é rejeição sumária).
+- **Deploy no Streamlit:**
+  - `Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15 | Lay 10.0 a 16.0 | U25 >= 1.75)` integrado como 6º método na Página 03 (`pages/03_🔬_Observacao_Set_Out_2026.py`).
+  - Rastreamento 100% ativo no Radar do Dia, Histórico 2026 e Diário de Bordo Setembro/Outubro com `stake: 0.0` (risco real R$ 0,00).
+
+---
+
 ## 2026-09-21 · Antigravity · Auditoria do Claude: Lay 0x1 Sniper Reprovado e Arquivado Definitivamente
 
 - **Auditoria Empírica Realizada por Claude (`AUDITORIA_LAY0X1_SNIPER_claude.md`):**

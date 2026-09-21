@@ -9,10 +9,10 @@
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
 - [x] **Laboratório de Observação Setembro/Outubro (Página 03 do Streamlit) — stake-zero (21/09).**
-  - [x] Criada página dedicada (`pages/03_🔬_Observacao_Set_Out_2026.py`) para monitoramento prospectivo dos 5 métodos em quarentena/resgate durante Setembro e Outubro/2026.
+  - [x] Criada página dedicada (`pages/03_🔬_Observacao_Set_Out_2026.py`) para monitoramento prospectivo dos 6 métodos em quarentena/resgate durante Setembro e Outubro/2026 (incluindo Lay 0x1 Sniper no feed da API — Lei 7).
   - [x] Arquivada a página anterior `pages/03_⚡_Radar_Trader_InPlay.py` para `pages_arquivadas/`.
   - [x] Radar do dia integrado à API Betfair Cloud (`get_daily_dataframe("betfair")`) e diário de bordo persistente em `scratch/observacao_set_out_ledger.csv`.
-  - [ ] Acumular forward até $N \ge 400$ apostas em Set/Out para deliberar sobre saída da quarentena.
+  - [ ] Acumular forward até $N \ge 400$ apostas em Set/Out para deliberar sobre saída da quarentena ou reprovação definitiva.
 - [ ] **Suíte de Métodos Trader In-Play (4 Métodos) — stake-zero, pré-registrada (15/09).**
   - [x] Pré-registro congelado em `PREREGISTRO_SUITE_TRADER_INPLAY.md` (LTD Trader, Swing Trade Fav Desvantagem, Scalping Janela Morta, Late Goal Trader).
   - [x] Motor analítico implementado em `trader_inplay_engine.py` com cálculo exato de Cashout Betfair (5% comissão), Stop Loss por tempo e protocolo anti-fabricação (`AGUARDANDO_ODD`).
@@ -127,7 +127,6 @@
 - [x] **Lay Away, Lay Under 0.5, Lay 0x1 (pré-jogo)** (mortos no scan + histórico).
 - [x] **Filtros refinados do scan** (18 holders Lay Home = overfit, flipam no forward).
 - [x] **CS suite: Lay 2x2/0x3/2x0/0x2/1x0** (cauda gorda, liability, margem navalha).
-- [x] **Lay 0x1 Sniper / Cortes Estritos de Odd (2026)** (Auditado empiricamente por Claude em 21/09: reprodução exata em FRESH3 dá +1,09% mas IC95 [−0,8%, +2,9%] com P=0,14 cruza zero; na odd executável real de KO−10 do coletor [16/08→20/09, N=161] o resultado real foi **−4,46% ROI** [17 reds, WR 89,4% vs BE 93,6%], caindo para **−6,98% ROI** com liq ≥ 200 com teto do IC95 estritamente < 0; vizinho Lay 8–20 inverte para −0,16%; blacklist de ligas foi overfit post-hoc que reduziu o lucro; stops diários não ajudam e stop 1 red aumenta maxDD para 4,92u. Arquivado em definitivo — Lei 8).
 - [x] **xG 12 jogos como filtro de veto no Lay 0x0 (`sum_xg12 >= 2.80`)** (auditado por Claude: pico isolado de 2 cortes numa curva negativa de 2.20 a 3.50; inverte no split temporal da odd real [+0,92% treino vs −0,17% OOS]; p=0,669 controlado pelo preço; IC95 engole zero. ARQUIVADO como filtro ativo; mantido apenas K=12 como escolha física de engenharia de features futuras).
 
 ## 🧭 NORTE (a filosofia que sobrou de tudo)

@@ -7,6 +7,7 @@ Central de monitoramento de métodos antigos em quarentena / resgate para valida
   3. Lay 2x0 Zebra Mandante (Fav Visitante <= 1.70 | Odd Lay 6.0 a 25.0)
   4. Lay 0x2 Zebra Visitante (Fav Mandante <= 1.70 | Odd Lay 6.0 a 25.0)
   5. Lay 0x3 Zebra Visitante (Fav Mandante <= 1.60 | Odd Lay 15.0 a 50.0)
+  6. Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15 | Odd Lay 10.0 a 16.0 | U25 >= 1.75)
 
 GOVERNANÇA: STAKE ZERO (Risco Real R$ 0,00). 100% odds reais de Lay da Betfair.
 Apenas observação para verificar se os resultados de 2026 se sustentam em Setembro e Outubro.
@@ -118,7 +119,8 @@ metodos_disponiveis = [
     "Lay 0x0 Super Fav (Fav <= 1.40)",
     "Lay 2x0 Zebra Mandante (Fav Visitante <= 1.70)",
     "Lay 0x2 Zebra Visitante (Fav Mandante <= 1.70)",
-    "Lay 0x3 Zebra Visitante (Fav Mandante <= 1.60)"
+    "Lay 0x3 Zebra Visitante (Fav Mandante <= 1.60)",
+    "Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15)"
 ]
 
 metodos_selecionados = st.sidebar.multiselect(
@@ -162,7 +164,7 @@ def carregar_historico_fresh3():
         'Date', 'Time', 'League', 'Home', 'Away', 'Goals_H_FT', 'Goals_A_FT',
         'Odd_H_Back', 'Odd_A_Back', 'Odd_D_Back',
         'Odd_CS_1x1_Lay', 'Odd_CS_0x0_Lay', 'Odd_CS_2x0_Lay', 'Odd_CS_0x2_Lay', 'Odd_CS_0x3_Lay',
-        'Odd_Under05_FT_Lay'
+        'Odd_CS_0x1_Lay', 'Odd_Under05_FT_Lay', 'Odd_Under25_FT_Back'
     ]
     try:
         df = pd.read_csv(FRESH3_PATH, usecols=cols, low_memory=False)
@@ -223,7 +225,9 @@ def escanear_jogos(df_raw, metodos_ativos):
     l2x0 = pd.to_numeric(df.get('Odd_CS_2x0_Lay', df.get('Odd_CS_2x0', 0)), errors='coerce').fillna(0)
     l0x2 = pd.to_numeric(df.get('Odd_CS_0x2_Lay', df.get('Odd_CS_0x2', 0)), errors='coerce').fillna(0)
     l0x3 = pd.to_numeric(df.get('Odd_CS_0x3_Lay', df.get('Odd_CS_0x3', 0)), errors='coerce').fillna(0)
+    l0x1 = pd.to_numeric(df.get('Odd_CS_0x1_Lay', df.get('Odd_CS_0x1', 0)), errors='coerce').fillna(0)
     lu05 = pd.to_numeric(df.get('Odd_Under05_FT_Lay', df.get('Odd_Under05_Lay', 0)), errors='coerce').fillna(0)
+    lu25 = pd.to_numeric(df.get('Odd_Under25_FT_Back', df.get('Odd_Under25_Back', df.get('Odd_U25_Back', 0))), errors='coerce').fillna(0)
 
     oportunidades = []
 
@@ -317,6 +321,23 @@ def escanear_jogos(df_raw, metodos_ativos):
                     'Mercado': 'Correct Score (0x3)', 'Lado': 'LAY',
                     'Odd_Lay': odd_lay, 'Odd_Fav': h_odd, 'Break_Even_%': round(be, 1),
                     'Regra': f"Super Mandante {h_odd:.2f} <= 1.60 | Odd Lay {odd_lay:.1f}",
+                    'Risco_Nominal': 0.0,
+                    'Stake_Teorica_R$': stake_teorica,
+                    'Liability_Teorica_R$': round(stake_teorica * (odd_lay - 1.0), 2)
+                })
+
+        # 6. Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15 | Lay 10.0 a 16.0)
+        if "Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15)" in metodos_ativos:
+            odd_lay = float(l0x1.iloc[idx])
+            u25_val = float(lu25.iloc[idx])
+            if 1.55 <= h_odd <= 2.15 and 10.0 <= odd_lay <= 16.0 and (u25_val >= 1.75 or u25_val == 0.0):
+                be = ((odd_lay - 1.0) / (odd_lay - (1.0 - fator_comissao))) * 100.0
+                oportunidades.append({
+                    'Data': dt, 'Hora': tm, 'Liga': lg, 'Home': h, 'Away': a,
+                    'Jogo': f"{h} x {a}", 'Método': 'Lay 0x1 Sniper',
+                    'Mercado': 'Correct Score (0x1)', 'Lado': 'LAY',
+                    'Odd_Lay': odd_lay, 'Odd_Fav': h_odd, 'Break_Even_%': round(be, 1),
+                    'Regra': f"Fav Mandante {h_odd:.2f} [1.55-2.15] | Lay {odd_lay:.1f} | U25 {u25_val:.2f}",
                     'Risco_Nominal': 0.0,
                     'Stake_Teorica_R$': stake_teorica,
                     'Liability_Teorica_R$': round(stake_teorica * (odd_lay - 1.0), 2)
@@ -520,6 +541,17 @@ with tab_historico:
                 sub['odd_lay'] = sub['Odd_CS_0x3_Lay']
                 sub['metodo'] = nome_m
                 return sub
+            elif nome_m == "Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15)":
+                u25 = pd.to_numeric(df_in.get('Odd_Under25_FT_Back', 0), errors='coerce').fillna(0)
+                sub = df_in[
+                    (df_in['oh'] >= 1.55) & (df_in['oh'] <= 2.15) &
+                    (df_in['Odd_CS_0x1_Lay'] >= 10.0) & (df_in['Odd_CS_0x1_Lay'] <= 16.0) &
+                    ((u25 >= 1.75) | (u25 == 0.0))
+                ].copy()
+                sub['is_red'] = (sub['gh'] == 0) & (sub['ga'] == 1)
+                sub['odd_lay'] = sub['Odd_CS_0x1_Lay']
+                sub['metodo'] = nome_m
+                return sub
             return pd.DataFrame()
 
         df_filtrado_mes = df_26[df_26['Month'].isin(sel_meses)]
@@ -720,6 +752,18 @@ with tab_raiox:
                     <br>• Lay 0x3: N=209 | <b>WR 99,5% vs BE 96,1% (+3,4 pp)</b> | <b>ROI +4,55% (+9,5u)</b>.
                 </li>
                 <li><b>Critério de Aprovação:</b> Seguir na cesta de micro-liability.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
+        <div class="card-observacao">
+            <h4>6. Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15 | Lay 10.0 a 16.0)</h4>
+            <ul>
+                <li><b>Tese Quantitativa:</b> Mandantes moderadamente favoritos (1.55 a 2.15) com filtro anti-under (U25 >= 1.75) têm volume para evitar derrota magra por 0x1 sem gols marcados.</li>
+                <li><b>Desempenho 2026 (Base API FRESH3):</b> N=558 | <b>WR 94,6% vs BE 93,6% (+1,0 pp)</b> | <b>ROI +1,09% (+6,08u)</b>.</li>
+                <li><b>O Risco Oculto:</b> 3 anos na API dá +0,51% (margem fina). Feed recente de ago-set da API acumula 135 jogos com 10 reds a −1,06%. Odd real executável no coletor (KO−10) perde −4,5% pelo spread.</li>
+                <li><b>Critério de Aprovação:</b> Observar no feed da API até N >= 400. Se sustentar ROI > 0, avalia-se viabilidade. Se convergir para negativo, reprovação definitiva.</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
