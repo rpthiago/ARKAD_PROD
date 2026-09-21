@@ -7,6 +7,31 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-21 · Antigravity · Auditoria do Claude: Lay 0x1 Sniper Reprovado e Arquivado Definitivamente
+
+- **Auditoria Empírica Realizada por Claude (`AUDITORIA_LAY0X1_SNIPER_claude.md`):**
+  - Prompt de auditoria independente (`PROMPT_CLAUDE_AUDITORIA_LAY0X1_SNIPER.md`) avaliado minuciosamente com as bases `FRESH3`, feeds diários e backup do coletor VPS (odd real KO−10).
+  - Veredito emitido e aceito integralmente: **`3 — REPROVADO / ARQUIVADO DEFINITIVAMENTE`**.
+- **Achados Chave da Auditoria:**
+  1. **Reprodução do Backtest FRESH3:** Reproduz exatamente os números reportados pelo Antigravity (N=558, 30 reds, +6,08u, ROI liab +1,09%, odd mediana 15,0). Porém, o bootstrap bloco-dia/mês revela que o IC95 cruza zero `[−0,8%, +2,9%]` com $P(\le 0) = 0,14$. Nos 3 anos (2024–2026) o retorno cai para +0,51% (IC cruza zero, $P=0,22$).
+  2. **Colapso na Odd Executável Real (Coletor KO−10):** No teste forward real de 5 semanas (16/08 a 20/09, N=161 jogos liquidados), o método teve 17 reds, WR 89,44% vs BE 93,62%, gerando **ROI real de −4,46%** (−7,17u). Ao exigir liquidez real $\ge 200$, o ROI desaba para **−6,98%**, com teto do IC95 estritamente negativo `[−14,6%, −0,3%]`.
+  3. **Inversão nos Thresholds Vizinhos (Lei 13):** O pseudo-edge encolhe monotonicamente ao alargar a faixa (9–15: +0,41%; 11–17: +0,67%; 10–18: +0,46%) e inverte para negativo na faixa 8–20 (**−0,16%** em N=1.469). Em 2024–2025, os vizinhos 11–17 e 10–18 são negativos (−0,89% e −0,63%).
+  4. **Blacklist de Ligas Inútil e Post-Hoc:** Sem blacklist, o resultado de 2026 foi superior (+6,31u em N=608 vs +6,08u em N=558). O teste OOS de transferibilidade de blacklist falha (piores ligas de um ano performam acima da média no outro).
+  5. **Circuit Breakers Ineficazes:** Reds não se agrupam em clusters diários (apenas 2 dias com $\ge 2$ reds). Stop 1 red/dia na verdade piora o drawdown máximo de 4,06u para **4,92u**.
+- **Decisão e Governança:**
+  - `Lay 0x1` está **definitivamente descartado de qualquer portfólio, watchlist ou página do Streamlit**. A observação prospectiva na odd real já foi feita pelo coletor e comprovou retorno negativo.
+  - Registrado no Hall of Shame e Seção 6 do `GEMINI.md` e em `tasks.md`.
+
+---
+
+## 2026-09-21 · Antigravity · Organização e Isolamento de Documentação Externa
+
+- **Remoção de Arquivos Alheios de `metodos_aprovados/`:**
+  - Identificados dois arquivos de transcrição e resumo do workshop de desenvolvimento assistido ("Estuda Fácil"): `transcricao-estuda-facil.md` e `transcricao-estuda-facil-v2.md`.
+  - Criada pasta dedicada `docs/estuda_facil/` e movidos ambos os arquivos para preservar o padrão e a governança de `metodos_aprovados/` (exclusivo para modelos e estratégias de trading do ARKAD).
+
+---
+
 ## 2026-09-21 · Antigravity · Laboratório de Observação Setembro/Outubro no Streamlit (Página 03)
 
 - **Criação da Página Streamlit de Observação (`pages/03_🔬_Observacao_Set_Out_2026.py`):**

@@ -127,6 +127,7 @@
 - [x] **Lay Away, Lay Under 0.5, Lay 0x1 (pré-jogo)** (mortos no scan + histórico).
 - [x] **Filtros refinados do scan** (18 holders Lay Home = overfit, flipam no forward).
 - [x] **CS suite: Lay 2x2/0x3/2x0/0x2/1x0** (cauda gorda, liability, margem navalha).
+- [x] **Lay 0x1 Sniper / Cortes Estritos de Odd (2026)** (Auditado empiricamente por Claude em 21/09: reprodução exata em FRESH3 dá +1,09% mas IC95 [−0,8%, +2,9%] com P=0,14 cruza zero; na odd executável real de KO−10 do coletor [16/08→20/09, N=161] o resultado real foi **−4,46% ROI** [17 reds, WR 89,4% vs BE 93,6%], caindo para **−6,98% ROI** com liq ≥ 200 com teto do IC95 estritamente < 0; vizinho Lay 8–20 inverte para −0,16%; blacklist de ligas foi overfit post-hoc que reduziu o lucro; stops diários não ajudam e stop 1 red aumenta maxDD para 4,92u. Arquivado em definitivo — Lei 8).
 - [x] **xG 12 jogos como filtro de veto no Lay 0x0 (`sum_xg12 >= 2.80`)** (auditado por Claude: pico isolado de 2 cortes numa curva negativa de 2.20 a 3.50; inverte no split temporal da odd real [+0,92% treino vs −0,17% OOS]; p=0,669 controlado pelo preço; IC95 engole zero. ARQUIVADO como filtro ativo; mantido apenas K=12 como escolha física de engenharia de features futuras).
 
 ## 🧭 NORTE (a filosofia que sobrou de tudo)
