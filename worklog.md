@@ -7,12 +7,13 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
-## 2026-09-22 · Antigravity · Página 02 Restrita Exclusivamente às Planilhas Diárias (`Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`)
+## 2026-09-22 · Antigravity · Página 02 Restrita Exclusivamente às Planilhas Diárias (`Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`) & Consolidação de Agosto/Setembro
 
 - **Feito:**
   - Auditada a divergência apontada pelo Thiago no dia **20/09/2026** entre a planilha oficial (`metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-20.xlsx`, com **41 jogos, 36 Greens e 5 Reds**) e o painel `pages/02_📊_Resultados_Metodos_Aprovados.py` (que exibia **55 jogos e 6 Reds** por injetar linhas paralelas de `forward_5metodos_ledger.csv`).
-  - Atendendo à diretriz explícita do Thiago, configurado `carregar_dados_aprovados` em `pages/02_📊_Resultados_Metodos_Aprovados.py` para carregar **exclusivamente** as planilhas diárias colocadas pelo usuário na pasta `metodos_aprovados/` no formato `Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx` (`FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx")`), sem misturar CSVs automáticos externos (`forward_5metodos_ledger.csv`, `Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv`, `auditoria_ranking_cs` ou `ledger_forward_0x0.csv`).
-  - Validado: o painel agora carrega exatamente os **21 arquivos `Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`** (307 jogos no total, sendo **41 jogos, 36 Greens e 5 Reds** em `2026-09-20`).
+  - Atendendo à diretriz explícita do Thiago, configurado `carregar_dados_aprovados` em `pages/02_📊_Resultados_Metodos_Aprovados.py` para carregar **exclusivamente** as planilhas diárias colocadas pelo usuário na pasta `metodos_aprovados/` no formato `Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx` (`FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx")`), sem misturar CSVs automáticos externos.
+  - Corrigido bug crítico em `pd.to_datetime(..., dayfirst=True)` na Página 02 que invertia mês e dia em datas ISO (`YYYY-MM-DD`) a partir de `2026-08-01` e transformava os dias $\ge 13$ em `NaT`.
+  - Validado o lote de **40 planilhas diárias** inseridas pelo Thiago (`01/08 a 20/08` e `03/09 a 22/09`): **577 jogos** carregados (**574 liquidados: 516 Greens, 58 Reds, WR 89,90%, +7,26u / +R$ 688,57** + 3 pendentes).
 - **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
 
 ---

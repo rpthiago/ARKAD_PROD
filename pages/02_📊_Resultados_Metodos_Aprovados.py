@@ -155,8 +155,12 @@ def carregar_dados_aprovados(modo="📁 Todas as Planilhas Diárias (Sinais_Meto
     df_all.columns = cols
     df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
             
-    df_all["Data"] = pd.to_datetime(df_all.get("Data"), errors="coerce", dayfirst=True)
-    # Forward comeca em 01/08/2026: nada anterior entra nesta pagina (o bloco 2b traz backtest 2024-26 das zebras)
+    df_all["Data"] = pd.to_datetime(df_all.get("Data"), format="ISO8601", errors="coerce")
+    # Fallback caso alguma planilha tenha data em DD/MM/YYYY
+    if df_all["Data"].isna().any():
+        _mask_na = df_all["Data"].isna()
+        df_all.loc[_mask_na, "Data"] = pd.to_datetime(df_all.loc[_mask_na, "_Arquivo"].str.extract(r"(\d{4}-\d{2}-\d{2})")[0], errors="coerce")
+    # Forward comeca em 01/08/2026: nada anterior entra nesta pagina
     df_all = df_all[df_all["Data"] >= pd.Timestamp("2026-08-01")].reset_index(drop=True)
     df_all["Hora"] = df_all.get("Hora", "15:00").astype(str).str[:5]
     
