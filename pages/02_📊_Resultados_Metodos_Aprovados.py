@@ -42,9 +42,9 @@ banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value
 tipo_gestao = st.sidebar.selectbox(
     "Modelo de Gestão de Risco (Liability)",
     options=[
-        "🎯 Diferenciada (15% em 0x3, 2x2, Over 4.5 | 5% em Home, Draw, 0x0)",
-        "⚖️ Uniforme (5% Fixa para Todos)",
-        "🛡️ Conservadora (2.5% Fixa para Todos)"
+        "🎯 Diferenciada (10% em 0x3, 2x2, Over 4.5 | 5.0% em Home, Draw, 0x0)",
+        "⚖️ Uniforme (5.0% Fixa para Todos)",
+        "🔥 Uniforme (10.0% Fixa para Todos)"
     ],
     index=0
 )
@@ -52,9 +52,8 @@ tipo_gestao = st.sidebar.selectbox(
 if "Diferenciada" in tipo_gestao:
     st.sidebar.markdown(f"""
     **Alocação de Liability por Entrada:**
-    * 🟣 **15% da Banca (R$ {banca_total * 0.15:,.2f}):** Lay 0x3, Lay 2x2 e Lay Over 4.5
-    * 🔵 **5% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
-    * ⚪ **Micro-Liability (R$ 25 - R$ 50):** Zebras 0x2 e 2x0 (Observação)
+    * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 0x3, Lay 2x2 e Lay Over 4.5
+    * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
     """)
 
 st.sidebar.markdown("---")
@@ -115,7 +114,12 @@ def _ler_excel_seguro(path):
 
 
 @st.cache_data(ttl=60, show_spinner=False)
-def carregar_dados_aprovados(modo="📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)"):
+def carregar_dados_aprovados(
+    modo="📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)",
+    banca_total=2000.0,
+    tipo_gestao="🎯 Diferenciada (10% em 0x3, 2x2, Over 4.5 | 5.0% em Home, Draw, 0x0)",
+    fator_comissao=0.965
+):
     if not FOLDER.exists():
         return pd.DataFrame()
 
@@ -296,16 +300,14 @@ def carregar_dados_aprovados(modo="📁 Todas as Planilhas Diárias (Sinais_Meto
         m_str = str(met)
         if "Diferenciada" in tipo_gestao:
             if "0x3" in m_str or "2x2" in m_str or "Over 4.5" in m_str:
-                return round(banca_total * 0.15, 2)
+                return round(banca_total * 0.10, 2)
             elif "Home" in m_str or "X2" in m_str or "Draw" in m_str or "0x0" in m_str:
                 return round(banca_total * 0.05, 2)
-            elif "Zebra" in m_str or "Micro-Liability" in m_str:
-                return min(round(banca_total * 0.025, 2), 50.0)
             return round(banca_total * 0.05, 2)
-        elif "Conservadora" in tipo_gestao:
-            return round(banca_total * 0.025, 2)
+        elif "10.0%" in tipo_gestao:
+            return round(banca_total * 0.10, 2)
         else:
-            return min(50.0, round(banca_total * 0.05, 2)) if ("Zebra" in m_str or "Micro-Liability" in m_str) else round(banca_total * 0.05, 2)
+            return round(banca_total * 0.05, 2)
 
     df_all["Liability_R$"] = df_all["Método"].apply(_calc_liab_rs)
     def _calc_pnl_rs(r):
@@ -315,7 +317,12 @@ def carregar_dados_aprovados(modo="📁 Todas as Planilhas Diárias (Sinais_Meto
     
     return df_all.sort_values(["Data", "Método"]).reset_index(drop=True)
 
-df_raw = carregar_dados_aprovados(modo=fonte_dados)
+df_raw = carregar_dados_aprovados(
+    modo=fonte_dados,
+    banca_total=banca_total,
+    tipo_gestao=tipo_gestao,
+    fator_comissao=fator_comissao
+)
 
 if df_raw.empty:
     st.warning("Nenhuma planilha encontrada na pasta `metodos_aprovados/`.")
