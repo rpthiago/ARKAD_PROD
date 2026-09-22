@@ -72,11 +72,9 @@ st.sidebar.header("📁 Fonte dos Dados")
 fonte_dados = st.sidebar.radio(
     "Selecione a Base",
     options=[
-        "👑 Portfólio em Validação Forward (Lay 0x0 XGBoost, 0x3, 2x2, Tríade + Zebras)",
-        "🎯 Apenas Lay 0x0 XGBoost (Forward)",
+        "📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)",
         "👑 Apenas Tríade (Draw, Home, Over 4.5)",
-        "📜 Ledger Oficial Forward (forward_5metodos_ledger.csv)",
-        "📁 Todas as Planilhas Diárias (Inclui Legado)"
+        "🎯 Apenas Top 3 CS (Lay 2x2 e Lay 0x3)"
     ],
     index=0
 )
@@ -117,217 +115,38 @@ def _ler_excel_seguro(path):
 
 
 @st.cache_data(ttl=60, show_spinner=False)
-def carregar_dados_aprovados(modo="👑 Portfólio em Validação Forward (5 Métodos: Lay 0x3, 2x2 + Tríade)"):
+def carregar_dados_aprovados(modo="📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)"):
     if not FOLDER.exists():
         return pd.DataFrame()
-        
-    df_all = pd.DataFrame()
-    f_csv = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.csv"
-    f_xlsx = FOLDER / "Sinais_Metodos_Aprovados_Odds_Reais_Betfair.xlsx"
-    f_ledger = FOLDER / "forward_5metodos_ledger.csv"
-    f_gap = ROOT / "forward_oculto" / "gap_2108_0209.csv"
-    
-    if "Ledger Oficial" in modo:
-        if f_ledger.exists():
-            try:
-                df_l = pd.read_csv(f_ledger, encoding="utf-8-sig")
-                for c in list(df_l.columns):
-                    if "todo" in c.lower(): df_l.rename(columns={c: "Método"}, inplace=True)
-                df_l["Jogo"] = df_l["Home"].astype(str) + " x " + df_l["Away"].astype(str)
-                df_l["Odd_Entrada"] = df_l["Odd_Lay"]
-                df_l["Placar"] = df_l["placar"].fillna("").astype(str).str.replace("-", "x")
-                df_l["Resultado"] = df_l["resultado"]
-                df_l["Lado"] = "LAY"
-                df_l["1/0"] = df_l["resultado"].map({"GREEN": 1.0, "RED": 0.0})
-                df_all = df_l
-            except Exception:
-                df_all = pd.DataFrame()
-    elif "Portfólio" in modo or "Tríade" in modo or "0x0" in modo:
-        if "Apenas Lay 0x0" not in modo:
-            # 1. Carregar Base Mestre
-            if f_csv.exists():
-                try:
-                    df_all = pd.read_csv(f_csv, encoding="utf-8-sig")
-                except Exception:
-                    df_all = pd.DataFrame()
-            if df_all.empty and f_gap.exists():
-                try:
-                    df_all = pd.read_csv(f_gap, encoding="utf-8")
-                except Exception:
-                    df_all = pd.DataFrame()
-            if df_all.empty and f_xlsx.exists():
-                df_all = _ler_excel_seguro(f_xlsx)
-                
-            for c in list(df_all.columns):
-                if "todo" in c.lower(): df_all.rename(columns={c: "Método"}, inplace=True)
 
-            # 2. Se for Portfólio Completo, incorporar Lay 2x2, Lay 0x3 e Zebras do ledger oficial
-            if "Portfólio" in modo and f_ledger.exists():
-                try:
-                    df_l = pd.read_csv(f_ledger, encoding="utf-8-sig")
-                    for c in list(df_l.columns):
-                        if "todo" in c.lower(): df_l.rename(columns={c: "Método"}, inplace=True)
-                    alvos_ledger = [
-                        "Lay 2x2 Top 3", "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)",
-                        "Lay 0x2 Zebra (Micro-Liability)", "Lay 2x0 Zebra (Micro-Liability)"
-                    ]
-                    sub_l = df_l[df_l["Método"].isin(alvos_ledger)].copy()
-                    def _map_m(m):
-                        m_str = str(m)
-                        if "2x2" in m_str: return "Lay 2x2 Top 3 (Aprovado)"
-                        if "ampla" in m_str.lower(): return "Lay 0x3 (Regra Ampla - Paralelo)"
-                        if "0x3" in m_str: return "Lay 0x3 Top 3 (Aprovado)"
-                        if "0x2" in m_str: return "Lay 0x2 Zebra (Micro-Liability)"
-                        if "2x0" in m_str: return "Lay 2x0 Zebra (Micro-Liability)"
-                        return m_str
-                    sub_l["Método"] = sub_l["Método"].apply(_map_m)
-                    sub_l["Jogo"] = sub_l["Home"].astype(str) + " x " + sub_l["Away"].astype(str)
-                    sub_l["Odd_Entrada"] = sub_l["Odd_Lay"]
-                    sub_l["Placar"] = sub_l["placar"].fillna("").astype(str).str.replace("-", "x")
-                    sub_l["Resultado"] = sub_l["resultado"]
-                    def _map_mercado(m):
-                        if "2x2" in m: return "Correct Score (2x2)"
-                        if "0x3" in m: return "Correct Score (0x3)"
-                        if "0x2" in m: return "Correct Score (0x2)"
-                        if "2x0" in m: return "Correct Score (2x0)"
-                        return "Outro"
-                    sub_l["Mercado"] = sub_l["Método"].apply(_map_mercado)
-                    sub_l["Lado"] = "LAY"
-                    sub_l["1/0"] = sub_l["resultado"].map({"GREEN": 1.0, "RED": 0.0})
-                    df_all = pd.concat([df_all, sub_l], ignore_index=True)
-                except Exception:
-                    pass
+    # Carregar EXCLUSIVAMENTE os arquivos no formato Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx da pasta metodos_aprovados/
+    planilhas_diarias = sorted([
+        f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx")
+        if not f.name.startswith("~$") and "Odds_Reais" not in f.name
+    ])
+    if not planilhas_diarias:
+        return pd.DataFrame()
 
-            # 2b. Incorporar histórico auditado oficial de Zebras (0x2 e 2x0) da varredura
-            f_audit = ROOT / "varredura_over" / "auditoria_ranking_cs_2026-09-13_apostas.csv"
-            if "Portfólio" in modo and f_audit.exists():
-                try:
-                    df_a = pd.read_csv(f_audit)
-                    s_zeb = df_a[df_a["metodo"].str.contains("0x2|2x0", na=False)].copy()
-                    s_zeb["Data"] = pd.to_datetime(s_zeb["Date"], errors="coerce")
-                    s_zeb["Hora"] = "15:00"
-                    s_zeb["Liga"] = s_zeb["League"].fillna("N/A")
-                    s_zeb["Jogo"] = s_zeb["Home"].astype(str) + " x " + s_zeb["Away"].astype(str)
-                    s_zeb["Método"] = s_zeb["metodo"].apply(
-                        lambda m: "Lay 0x2 Zebra (Micro-Liability)" if "0x2" in str(m) else "Lay 2x0 Zebra (Micro-Liability)"
-                    )
-                    s_zeb["Mercado"] = s_zeb["metodo"].apply(
-                        lambda m: "Correct Score (0x2)" if "0x2" in str(m) else "Correct Score (2x0)"
-                    )
-                    s_zeb["Lado"] = "LAY"
-                    s_zeb["Odd_Entrada"] = s_zeb["odd"]
-                    s_zeb["Odd_Fav"] = s_zeb.apply(lambda r: r["oh"] if "0x2" in str(r["metodo"]) else r["oa"], axis=1)
-                    s_zeb["Placar"] = s_zeb["gh"].astype(str) + "x" + s_zeb["ga"].astype(str)
-                    s_zeb["Resultado"] = s_zeb["is_red"].apply(lambda r: "RED" if r == 1 else "GREEN")
-                    s_zeb["1/0"] = s_zeb["is_red"].apply(lambda r: 0.0 if r == 1 else 1.0)
-                    df_all = pd.concat([df_all, s_zeb], ignore_index=True)
-                except Exception:
-                    pass
-                    
-            # 3. Carregar e concatenar novas planilhas diárias (ex: 2026-09-03 em diante)
-            novas_planilhas = sorted([f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx") if "Odds_Reais" not in f.name])
-            for f_novo in novas_planilhas:
-                df_n = _ler_excel_seguro(f_novo)
-                if df_n is not None and not df_n.empty:
-                    for c in list(df_n.columns):
-                        if "todo" in c.lower(): df_n.rename(columns={c: "Método"}, inplace=True)
-                    df_all = pd.concat([df_all, df_n], ignore_index=True)
-                    
-            # Se modo for estritamente Apenas Tríade, filtrar 2x2, 0x3 e Zebras
-            if "Apenas Tríade" in modo and not df_all.empty and "Método" in df_all.columns:
-                df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3|Zebra|0x2|2x0", na=False)].reset_index(drop=True)
+    dfs = []
+    for f_novo in planilhas_diarias:
+        df_n = _ler_excel_seguro(f_novo)
+        if df_n is not None and not df_n.empty:
+            for c in list(df_n.columns):
+                if "todo" in str(c).lower():
+                    df_n.rename(columns={c: "Método"}, inplace=True)
+            df_n["_Arquivo"] = f_novo.name
+            dfs.append(df_n)
 
-        # 4. Incorporar Lay 0x0 XGBoost (Sweet Spot [10, 20])
-        f_fwd_0x0 = ROOT / "forward_0x0" / "ledger_forward_0x0.csv"
-        f_xgb_bets = ROOT / "lay_0x0_real_oos_bets_xgb.csv"
-        df_0x0_all = pd.DataFrame()
-        
-        if f_xgb_bets.exists():
-            try:
-                df_x = pd.read_csv(f_xgb_bets)
-                df_x["Date"] = pd.to_datetime(df_x["Date"], errors="coerce")
-                c_fwd = (
-                    (df_x["Date"] >= "2026-08-01") & 
-                    (df_x["liga_0x0_rate"] < 0.08) & 
-                    (df_x["mkt_prob_0x0"] < 0.10) & 
-                    (df_x["odd_lay"] >= 10.0) & 
-                    (df_x["odd_lay"] <= 20.0) & 
-                    (df_x["ev"] > 0.02)
-                )
-                sub_x = df_x[c_fwd].copy()
-                sub_x["Data"] = sub_x["Date"]
-                sub_x["Hora"] = "15:00"
-                sub_x["Liga"] = sub_x["League"].fillna("N/A")
-                sub_x["Jogo"] = sub_x["Home"].astype(str) + " x " + sub_x["Away"].astype(str)
-                sub_x["Método"] = "Lay 0x0 XGBoost (Sweet Spot [10, 20])"
-                sub_x["Mercado"] = "Correct Score (0x0)"
-                sub_x["Lado"] = "LAY"
-                sub_x["Odd_Entrada"] = sub_x["odd_lay"]
-                sub_x["Odd_Fav"] = 0.0
-                sub_x["Placar"] = sub_x["target"].apply(lambda t: "1x0" if t == 1 else "0x0")
-                sub_x["Resultado"] = sub_x["target"].apply(lambda t: "GREEN" if t == 1 else "RED")
-                sub_x["1/0"] = sub_x["target"].astype(float)
-                df_0x0_all = sub_x
-            except Exception:
-                pass
+    if not dfs:
+        return pd.DataFrame()
 
-        if f_fwd_0x0.exists():
-            try:
-                df_led0 = pd.read_csv(f_fwd_0x0)
-                df_led0["Data"] = pd.to_datetime(df_led0["Data"], errors="coerce")
-                df_led0["Hora"] = df_led0["ko"].fillna("15:00").astype(str).str[:5]
-                df_led0["Liga"] = df_led0["liga"].fillna("N/A")
-                df_led0["Jogo"] = df_led0["Home"].astype(str) + " x " + df_led0["Away"].astype(str)
-                df_led0["Método"] = "Lay 0x0 XGBoost (Sweet Spot [10, 20])"
-                df_led0["Mercado"] = "Correct Score (0x0)"
-                df_led0["Lado"] = "LAY"
-                df_led0["Odd_Entrada"] = df_led0["odd_lay_entrada"]
-                df_led0["Odd_Fav"] = 0.0
-                df_led0["Placar"] = df_led0["placar"].fillna("vs").astype(str).str.replace("-", "x")
-                df_led0["Resultado"] = df_led0["target"].map({1.0: "GREEN", 0.0: "RED", 1: "GREEN", 0: "RED"}).fillna("PENDENTE")
-                df_led0["1/0"] = df_led0["target"]
-                
-                df_0x0_all = pd.concat([df_0x0_all, df_led0], ignore_index=True)
-                if not df_0x0_all.empty:
-                    df_0x0_all = df_0x0_all.drop_duplicates(subset=["Data", "Home", "Away"], keep="last")
-            except Exception:
-                pass
+    df_all = pd.concat(dfs, ignore_index=True)
 
-        if not df_0x0_all.empty:
-            if "Apenas Lay 0x0" in modo:
-                df_all = df_0x0_all
-            elif "Portfólio" in modo:
-                df_all = pd.concat([df_all, df_0x0_all], ignore_index=True)
-
-        # Dedup inteligente mantendo a versão mais recente
-        if not df_all.empty and "Jogo" in df_all.columns:
-            # a linha COM resultado vence a linha sem (planilha do dia vazia x ledger liquidado)
-            _res = df_all.get("Resultado", pd.Series("", index=df_all.index)).astype(str).str.upper()
-            _plc = df_all.get("Placar", pd.Series("", index=df_all.index)).astype(str).str.strip()
-            df_all["_tem_res"] = (_res.isin(["GREEN", "RED"]) | _plc.str.match(r"^\d+\s*[x\-]\s*\d+$", na=False)).astype(int)
-            df_all = (df_all.sort_values("_tem_res", kind="stable")
-                            .drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last")
-                            .drop(columns="_tem_res").reset_index(drop=True))
-            
-    if df_all.empty:
-        files = sorted(FOLDER.rglob("*.xlsx"))
-        if not files:
-            return pd.DataFrame()
-        
-        dfs = []
-        for f in files:
-            if f.name.startswith("~$") or "Odds_Reais" in f.name:
-                continue
-            df = _ler_excel_seguro(f)
-            if df is not None and not df.empty:
-                for c in list(df.columns):
-                    if "todo" in c.lower(): df.rename(columns={c: "Método"}, inplace=True)
-                df["_Arquivo"] = f.name
-                dfs.append(df)
-                
-        if not dfs:
-            return pd.DataFrame()
-        df_all = pd.concat(dfs, ignore_index=True)
+    # Filtros opcionais da barra lateral (sempre restritos às planilhas diárias carregadas)
+    if "Apenas Tríade" in modo and "Método" in df_all.columns:
+        df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3|Zebra|0x2|2x0|0x0", na=False)].reset_index(drop=True)
+    elif "Apenas Top 3 CS" in modo and "Método" in df_all.columns:
+        df_all = df_all[df_all["Método"].astype(str).str.contains("2x2|0x3", na=False)].reset_index(drop=True)
         
     # Normalização segura de colunas e deduplicação de nomes
     cols = []
