@@ -123,10 +123,22 @@ metodos_disponiveis = [
     "Lay 0x1 Sniper (Fav Mandante 1.55 a 2.15)"
 ]
 
+def rotulo_status_metodo(m):
+    if "Zebra" in m:
+        return f"💤 {m} — [DORMENTE: N=0 desde Mai/26]"
+    if "Sniper" in m:
+        return f"🎯 {m} — [Feed: −1,06% | N=135]"
+    if "1x1" in m:
+        return f"⚖️ {m} — [Feed: −1,20% | N=105]"
+    if "0x0" in m:
+        return f"⭐ {m} — [Feed: +6,50% | Já no XGB]"
+    return m
+
 metodos_selecionados = st.sidebar.multiselect(
     "Métodos Ativos em Observação",
     options=metodos_disponiveis,
     default=metodos_disponiveis,
+    format_func=rotulo_status_metodo,
     help="Selecione quais métodos devem ser rastreados no radar diário e nos relatórios."
 )
 
@@ -479,10 +491,13 @@ with tab_radar:
 # TAB 2: HISTÓRICO CONSOLIDADO 2026 (BASE FRESH3)
 # ==============================================================================
 with tab_historico:
-    st.subheader("📊 Performance Auditada dos 5 Métodos em 2026 (Base FRESH3)")
+    st.subheader("📊 Performance Auditada dos Métodos em 2026 (Base FRESH3)")
     st.markdown("""
     Explore os dados históricos de 2026 (Janeiro a Agosto) com as **odds reais de Lay da Betfair**, 
     desconto da comissão e resultado real apurado jogo a jogo:
+    """)
+    st.warning("""
+    ⚠️ **Nota de Auditoria Independente (21/09/2026):** A varredura completa dos 43 mercados revelou que **65% do volume de 2026 está concentrado em Jan–Abr** (8.393 jogos), período em que a API gravou o livro de Correct Score comprimido (spreads colapsados e odds de back irreais). Nos meses seguintes (**Mai–Ago**) e no **feed diário de Setembro**, métodos de cauda como Lay 1x1, Lay 0x1 e Zebras colapsaram para negativo ou N=0. Use o filtro de meses abaixo para verificar o comportamento isolado fora de Jan–Abr.
     """)
 
     df_hist_raw = carregar_historico_fresh3()
@@ -732,26 +747,24 @@ with tab_raiox:
     with col_rx2:
         st.markdown("""
         <div class="card-observacao">
-            <h4>3. Lay 2x0 Zebra Mandante (Fav Visitante <= 1.70 | Odd Lay 6.0 a 25.0)</h4>
+            <h4>3. Lay 2x0 Zebra Mandante (Fav Visitante <= 1.70 | Odd Lay 6.0 a 25.0) 💤 [DORMENTE]</h4>
             <ul>
                 <li><b>Tese Quantitativa:</b> Zebras mandantes dificilmente vencem um visitante super favorito por 2x0 limpo sem levar gol.</li>
-                <li><b>Desempenho 2026:</b> N=380 | <b>WR 98,7% vs BE 91,7% (+7,0 pp)</b> | <b>ROI +7,63% (+29,0u)</b>. Apenas 5 reds no ano inteiro!</li>
-                <li><b>Perfil de Risco:</b> Micro-liability com retorno assimétrico positivo.</li>
-                <li><b>Critério de Aprovação:</b> Manter taxa de reds abaixo de 1,5% em 100 novas operações.</li>
+                <li><b>Auditoria 21/09:</b> Dos 380 jogos de 2026, <b>379 ocorreram em Jan–Abr</b>. Em Mai–Jul houve N=1 e em <b>Ago–Set houve N=0</b> (zero sinais no feed recente).</li>
+                <li><b>Por que adormeceu:</b> A odd de lay entre 6.0 e 25.0 com visitante ≤1.70 só existiu no formato de gravação comprimido de Jan–Abr. No mercado ao vivo real, essa odd fica em 18–40+, fora do filtro.</li>
+                <li><b>Status:</b> Mantido apenas como registro histórico; sem geração ativa de sinais.</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
         <div class="card-observacao">
-            <h4>4 & 5. Lay 0x2 e 0x3 Zebra Visitante (Fav Mandante <= 1.60/1.70)</h4>
+            <h4>4 & 5. Lay 0x2 e 0x3 Zebra Visitante (Fav Mandante <= 1.60/1.70) 💤 [DORMENTE]</h4>
             <ul>
-                <li><b>Tese Quantitativa:</b> Zebras visitantes sob pressão total de um mandante forte quase nunca goleiam por 0x2 ou 0x3 fora de casa.</li>
-                <li><b>Desempenho 2026:</b> 
-                    <br>• Lay 0x2: N=632 | <b>WR 98,3% vs BE 95,3% (+3,0 pp)</b> | <b>ROI +3,31% (+20,9u)</b>.
-                    <br>• Lay 0x3: N=209 | <b>WR 99,5% vs BE 96,1% (+3,4 pp)</b> | <b>ROI +4,55% (+9,5u)</b>.
-                </li>
-                <li><b>Critério de Aprovação:</b> Seguir na cesta de micro-liability.</li>
+                <li><b>Tese Quantitativa:</b> Zebras visitantes quase nunca vencem por 0x2 ou 0x3 fora de casa contra mandantes pesados.</li>
+                <li><b>Auditoria 21/09:</b> Todos os sinais de 2026 (N=632 no 0x2 e N=209 no 0x3) ocorreram exclusivamente em Jan–Abr. Desde Maio/2026 geraram <b>N=0 sinais</b>.</li>
+                <li><b>Diagnóstico:</b> Mesma causa do 2x0: odds baixas de CS decorriam do regime de gravação antigo da API.</li>
+                <li><b>Status:</b> Em quarentena dormente. Se o mercado real não oferece a odd na faixa, o método não opera.</li>
             </ul>
         </div>
         """, unsafe_allow_html=True)

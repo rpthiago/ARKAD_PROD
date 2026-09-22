@@ -7,6 +7,35 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-21 · Antigravity · Auditoria de Claude dos 43 Mercados & Revelação do Regime Anômalo de CS em 2026
+
+- **Feito:**
+  - Recebido e integrado o relatório de auditoria empírica de Claude (`AUDITORIA_VARREDURA_43_MERCADOS_claude.md`, commit `1b8f600`).
+  - Atualizado `GEMINI.md` com 3 novos itens no Hall of Shame e novas diretrizes de validação temporal para mercados de Correct Score.
+  - Atualizado `tasks.md` registrando a reprovação definitiva de `Back 0x2 Super Fav Visitante`, o descarte de `Lay 3x3 Geral` e o encerramento da varredura dos 43 mercados.
+- **Achados Chave da Auditoria Conjunta:**
+  1. **A Descoberta Central — "2026" na Base da API é um Regime de Gravação de CS, Não Mudança de Mercado:**
+     - 65% do volume de 2026 na `FRESH3` está concentrado em Jan–Abr (8.393 jogos vs apenas 1.180 em Ago–Set, com só 6 jogos de ligas grandes).
+     - Em Jan–Abr/2026, a API registrou um livro de Correct Score anômalo: spread do 3x3 caiu de 24 para 2,2; 8,6% dos jogos registraram Back 1x1 > 25 (evento de 12%); Lay 3x3 ≤ 50 disponível em 29% dos jogos (vs 2–5% normal).
+     - Spreads de 1X2 e Over/Under mantiveram-se inalterados (1,03–1,07), provando que o fenômeno é exclusivo do formato de gravação da API, não de mercado.
+  2. **Varredura Ampla dos 43 Mercados (Os "7 Verdes" Iniciais):**
+     - Todos os 5 mercados amplos positivos em 2026 (Lay 0x3, Lay 2x0, Lay 3x3, Lay 1x3, Back 1x1) foram verdes unicamente em Jan–Abr. Em 2024, 2025, Mai–Jul, Ago–Set e no feed recente (21/08→21/09), todos operam estritamente no vermelho. Não há alpha cego em caudas de CS.
+  3. **Back 0x2 Super Fav Visitante (`Odd_A <= 1.40`, Back 6–20) — REPROVADO:**
+     - O suposto +194% de Jan–Abr vinha de odds fantasmas em livros vazios de Lay (63u dos 94u de lucro concentrados em 5 jogos como Paralimni x AEL Back 12 / Lay 130).
+     - No feed oficial recente da API (21/08→21/09), o método gerou **−38,6% de ROI** (N=49, 3 acertos). O espelho Lay 0x2 também perde (−6,3%), comprovando overround.
+  4. **Lay 3x3 Geral (`Odd_Lay 15–50`) — DESCARTE:**
+     - 2.186 dos 2.413 jogos de 2026 ocorreram em Jan–Abr. Fora desse período, o retorno é negativo em todas as janelas (2024 −0,45%, 2025 −0,51%, Mai–Jul −0,13%, Ago–Set −1,12%, feed −1,79%). Liability extrema de 33–45u torna o risco inaceitável.
+  5. **Diagnóstico da Página 03 do Streamlit:**
+     - A suíte de Zebras (Lay 2x0, 0x2, 0x3 Zebra) gerou **N=0 sinais desde maio de 2026** (odds baixas de Lay eram exclusivas da compressão de Jan–Abr).
+     - Lay 1x1 está em −1,2% no feed recente (3 anos 0,00%). Lay 0x1 Sniper está em −1,1% no feed recente.
+     - O único método consistente fora de Jan–Abr é o Lay 0x0 Super Fav (+6,5% no feed recente, 0 reds), que já pertence ao modelo nuclear `Lay 0x0 XGBoost` (Páginas 01 e 02).
+- **Próximos Passos:**
+  - Ajustar visualização e status dos métodos na Página 03 do Streamlit (indicar métodos inativos com N=0 nos últimos 60 dias).
+  - Manter foco estrito nos métodos com mecanismo causal e validação forward real (Lay 0x0 XGBoost e Portfólio Nuclear).
+- **Arquivos:** `GEMINI.md`, `tasks.md`, `worklog.md`, `AUDITORIA_VARREDURA_43_MERCADOS_claude.md`.
+
+---
+
 ## 2026-09-21 · Antigravity · Consenso Metodológico: Lei 7 (Uma Base por Método) & Lay 0x1 em Watchlist Stake-Zero
 
 - **Formalização da Lei 7 no GEMINI.md ("Uma Base por Método"):**

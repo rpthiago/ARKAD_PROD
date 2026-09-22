@@ -128,6 +128,9 @@
 - [x] **Filtros refinados do scan** (18 holders Lay Home = overfit, flipam no forward).
 - [x] **CS suite: Lay 2x2/0x3/2x0/0x2/1x0** (cauda gorda, liability, margem navalha).
 - [x] **xG 12 jogos como filtro de veto no Lay 0x0 (`sum_xg12 >= 2.80`)** (auditado por Claude: pico isolado de 2 cortes numa curva negativa de 2.20 a 3.50; inverte no split temporal da odd real [+0,92% treino vs −0,17% OOS]; p=0,669 controlado pelo preço; IC95 engole zero. ARQUIVADO como filtro ativo; mantido apenas K=12 como escolha física de engenharia de features futuras).
+- [x] **Back 0x2 Super Fav Visitante (`Odd_A <= 1.40`, Back 6–20)** (Auditado por Claude e Antigravity: os +194% de Jan–Abr/26 eram odds fantasmas de livros de Lay vazios [ex: Back 12 / Lay 130]; no feed real da API deu −38,6% de ROI em N=49; espelho Lay 0x2 também perde −6,3% comprovando overround. REPROVADO / ARQUIVADO).
+- [x] **Lay 3x3 Geral (`Odd_Lay 15–50`)** (Auditado por Claude e Antigravity: positivo unicamente em Jan–Abr/26 devido ao registro anômalo de CS na API [29% dos jogos com lay <= 50 vs 2-5% normal]; fora de Jan–Abr é sistematicamente negativo em todas as janelas [2024 −0,45%, 2025 −0,51%, mai-jul −0,13%, ago-set −1,12%, feed −1,79%]; liability 33-45u inaceitável. DESCARTE / ARQUIVADO).
+- [x] **Varredura Ampla dos 43 Mercados em 2026** (Auditada por Claude: todos os 5 mercados amplos positivos em 2026 [Lay 0x3, Lay 2x0, Lay 3x3, Lay 1x3, Back 1x1] decorrem unicamente do regime de gravação anômalo da API em Jan–Abr/26; fora dessa janela todos são estritamente negativos e confirmam ausência de alpha pré-jogo ingênuo. ARQUIVADO).
 
 ## 🧭 NORTE (a filosofia que sobrou de tudo)
 

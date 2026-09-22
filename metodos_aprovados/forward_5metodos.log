@@ -2830,3 +2830,359 @@ If cross origin resource sharing is required, please disable server.enableXsrfPr
   placares manuais (ARKAD_PROD): +167
   placares manuais (DASHBOARD_ARKAD-1): +133
 divergencias planilha x base: 0
+===== 22/09/2026  6:00:02,18 ===== 
+2026-09-22 06:00:03.556 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+2026-09-22 06:01:32.425 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.425 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Session state does not function when running a script without `streamlit run`
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-22 06:01:32.626 No runtime found, using MemoryCacheStorageManager
+2026-09-22 06:01:32.626 No runtime found, using MemoryCacheStorageManager
+=== forward 5 metodos: 2026-08-01 -> 2026-09-22 ===
+  2026-08-01: 0 sinais (0 novos)
+  2026-08-02: 0 sinais (0 novos)
+  2026-08-03: 0 sinais (0 novos)
+  2026-08-04: 0 sinais (0 novos)
+  2026-08-05: 0 sinais (0 novos)
+  2026-08-06: 0 sinais (0 novos)
+  2026-08-07: 0 sinais (0 novos)
+  2026-08-08: 0 sinais (0 novos)
+  2026-08-09: 0 sinais (0 novos)
+  2026-08-10: 0 sinais (0 novos)
+  2026-08-11: 0 sinais (0 novos)
+  2026-08-12: 0 sinais (0 novos)
+  2026-08-13: 0 sinais (0 novos)
+  2026-08-14: 0 sinais (0 novos)
+  2026-08-15: 0 sinais (0 novos)
+  2026-08-16: 0 sinais (0 novos)
+  2026-08-17: 0 sinais (0 novos)
+  2026-08-18: 0 sinais (0 novos)
+  2026-08-19: 0 sinais (0 novos)
+  2026-08-20: 0 sinais (0 novos)
+  2026-08-21: 0 sinais (0 novos)
+  2026-08-22: 0 sinais (0 novos)
+  2026-08-23: 0 sinais (0 novos)
+  2026-08-24: 0 sinais (0 novos)
+  2026-08-25: 0 sinais (0 novos)
+  2026-08-26: 0 sinais (0 novos)
+  2026-08-27: 0 sinais (0 novos)
+  2026-08-28: 0 sinais (0 novos)
+  2026-08-29: 0 sinais (0 novos)
+  2026-08-30: 0 sinais (0 novos)
+  2026-08-31: 0 sinais (0 novos)
+  2026-09-01: 0 sinais (0 novos)
+  2026-09-02: 0 sinais (0 novos)
+  2026-09-03: 0 sinais (0 novos)
+  2026-09-04: 0 sinais (0 novos)
+  2026-09-05: 0 sinais (0 novos)
+  2026-09-06: 0 sinais (0 novos)
+  2026-09-07: 0 sinais (0 novos)
+  2026-09-08: 0 sinais (0 novos)
+  2026-09-09: 0 sinais (0 novos)
+  2026-09-10: 0 sinais (0 novos)
+  2026-09-11: 0 sinais (0 novos)
+  2026-09-12: 0 sinais (0 novos)
+  2026-09-13: 0 sinais (0 novos)
+  2026-09-14: 0 sinais (0 novos)
+  2026-09-15: 0 sinais (0 novos)
+  2026-09-16: 0 sinais (0 novos)
+  2026-09-17: 0 sinais (0 novos)
+  2026-09-18: 0 sinais (0 novos)
+  2026-09-19: 0 sinais (0 novos)
+  2026-09-20: 0 sinais (0 novos)
+  2026-09-21: 0 sinais (0 novos)
+  2026-09-22: 1 sinais (1 novos)
+sinais novos incorporados: 1
+  placares OFICIAIS (VPS): 1640 exatos + 243 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +193444
+  placares das planilhas do dia (20 arquivos): +114
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +133
+liquidados agora: 5 | pendentes: 4 | fora da faixa KO: 35 | sem placar (>7d, fora da conta): 0
+  lista das 06:00 de hoje enviada para a VPS (1 sinais)
+  ledger KO: 1475 sinais (20 novos da VPS)
+  ledger KO: universo preenchido em 20 linhas
+  placares OFICIAIS (VPS): 1640 exatos + 243 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +193444
+  placares das planilhas do dia (20 arquivos): +114
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +133
+  ledger KO: liquidados agora 19 | pendentes 19
+
+ARKAD — Forward 5 Métodos
+jogos de 21/09/2026 · liability 1u = R$100 · comissão 5%
+
+ONTEM 21/09
+
+0x3          1    1G/ 0R 100%    +0.04u
+0x3-Ampla*   1    1G/ 0R 100%    +0.04u
+2x2          1    1G/ 0R 100%    +0.05u
+Ov4.5        2    2G/ 0R 100%    +0.11u (1 pend)
+--------------------------------------
+TOTAL        4    4G/ 0R 100%    +0.20u (1 pend)
+
+
+RESULTADOS de 21/09 (5 liquidados)
+
+12:00 ★ 2x2   Otelul Galati x FC Hunedoara   @18.50 2-3  G  +0.05 ✘KO
+14:30 ★ Ov4.5 Aldosivi x Atl Tucuman         @19.00 1-0  G  +0.05 ✘KO
+19:30 ★ 0x3-Ampla Central Espanol x Torque       @27.00 AO Away Win G  +0.04 ✔
+19:30 ★ 0x3   Central Espanol x Torque       @27.00 AO Away Win G  +0.04 ✔
+21:15 ★ Ov4.5 Lanus x Estudiantes            @18.50 2-1  G  +0.05 ✘KO
+
+★ = placar oficial Betfair (VPS) · b = base · ✔ = tinha odd aprovada no KO−10 · ✘KO = só às 06:00, não executável
+
+AINDA SEM PLACAR em 21/09 (1) — entram quando liquidar
+
+21:30 Ov4.5 Barcelona (Ecu) x Independient @11.00
+
+
+SETEMBRO — por método
+
+0x3         51   49G/ 2R  96%    -0.11u
+0x3-Ampla* 107  104G/ 3R  97%    +0.75u
+2x2         66   65G/ 1R  98%    +2.81u
+Draw       159  141G/18R  89%    +4.77u (1 pend)
+Home        76   65G/11R  86%    -0.67u (1 pend)
+Ov4.5       21   20G/ 1R  95%    +0.08u (2 pend)
+--------------------------------------
+TOTAL      373  340G/33R  91%    +6.87u (4 pend)
+
+SETEMBRO — por dia
+
+01/09  11  11G/ 0R   +1.16u
+02/09  12  12G/ 0R   +1.22u
+03/09   9   9G/ 0R   +0.84u
+04/09  18  17G/ 1R   +1.00u
+05/09  27  23G/ 4R   -1.14u
+06/09  29  27G/ 2R   +1.28u
+07/09  11  10G/ 1R   -0.28u
+08/09  12  12G/ 0R   +1.21u
+09/09  14  13G/ 1R   +0.38u
+10/09   6   4G/ 2R   -1.61u
+11/09  18  16G/ 2R   -0.08u
+12/09  30  25G/ 5R   -1.71u
+13/09  36  35G/ 1R   +3.25u
+14/09  17  17G/ 0R   +1.73u
+15/09  17  16G/ 1R   +0.91u
+16/09  15  15G/ 0R   +1.40u
+17/09   4   3G/ 1R   -0.53u
+18/09  14  14G/ 0R   +1.49u
+19/09  30  22G/ 6R   -2.79u *
+20/09  41  35G/ 6R   -1.04u
+21/09   5   4G/ 0R   +0.20u *
+22/09   1   0G/ 0R     --   *
+
+
+AGOSTO — por método
+
+0x3         74   71G/ 3R  96%    -0.25u
+0x3-Ampla* 162  157G/ 5R  97%    +0.62u
+2x2         93   87G/ 6R  94%    -0.96u
+Draw       226  198G/28R  88%    +5.35u
+Home       103   90G/13R  87%    +1.02u
+Ov4.5       31   30G/ 1R  97%    +0.67u
+--------------------------------------
+TOTAL      527  476G/51R  90%    +5.83u
+
+AGOSTO — por dia
+
+01/08  24  21G/ 3R   -0.54u
+02/08  25  23G/ 2R   +1.13u
+03/08  11  11G/ 0R   +0.95u
+04/08   6   6G/ 0R   +0.53u
+05/08   3   2G/ 1R   -0.78u
+06/08  16  16G/ 0R   +1.89u
+07/08  19  18G/ 1R   +1.47u
+08/08  22  19G/ 3R   -0.62u
+09/08  28  25G/ 3R   +0.19u
+10/08   7   6G/ 1R   -0.71u
+11/08   8   6G/ 2R   -1.19u
+12/08   9   8G/ 1R   -0.20u
+13/08  14  12G/ 2R   -0.50u
+14/08  17  15G/ 2R   -0.32u
+15/08  21  20G/ 1R   +1.39u
+16/08  17  14G/ 3R   -1.33u
+17/08   9   9G/ 0R   +0.65u
+18/08   3   3G/ 0R   +0.16u
+19/08  10  10G/ 0R   +1.01u
+20/08  14  10G/ 4R   -2.91u
+21/08  16  15G/ 1R   +0.92u
+22/08  33  30G/ 3R   +1.08u
+23/08  29  28G/ 1R   +2.64u
+24/08  10  10G/ 0R   +1.06u
+25/08  12  12G/ 0R   +1.16u
+26/08  17  15G/ 2R   -0.35u
+27/08  23  21G/ 2R   +0.46u
+28/08  19  18G/ 1R   +1.33u
+29/08  27  24G/ 3R   -0.03u
+30/08  41  34G/ 7R   -2.36u
+31/08  17  15G/ 2R   -0.35u
+
+
+KO−10 (executável, universo do feed) — 21/09
+
+0x3          1    1G/ 0R 100%    +0.05u
+0x3-Ampla*   1    1G/ 0R 100%    +0.05u
+2x2          1    1G/ 0R 100%    +0.05u
+Draw         2    1G/ 1R  50%    -0.85u
+Ov4.5        1    1G/ 0R 100%    +0.05u
+--------------------------------------
+TOTAL        5    4G/ 1R  80%    -0.70u
+
+KO−10 — SETEMBRO por método
+
+0x3         47   46G/ 1R  98%    +0.96u
+0x3-Ampla* 137  134G/ 3R  98%    +1.94u (1 pend)
+2x2         71   66G/ 5R  93%    -1.02u
+Draw       148  133G/15R  90%    +6.65u
+Home        70   60G/10R  86%    -1.02u
+Ov4.5        3    2G/ 1R  67%    -0.90u
+--------------------------------------
+TOTAL      339  307G/32R  91%    +4.67u
+
+KO−10 — AGOSTO por método
+
+0x3         25   24G/ 1R  96%    -0.02u
+0x3-Ampla*  72   70G/ 2R  97%    +0.60u
+2x2         31   28G/ 3R  90%    -1.31u
+Draw       104   93G/11R  89%    +4.70u
+Home        31   27G/ 4R  87%    +0.06u
+--------------------------------------
+TOTAL      191  172G/19R  90%    +3.43u
+
+KO−10 ACUMULADO desde 16/08 (feed): 530 liq · 479G/51R · WR 90.4% · +8.10u (R$ +810)
+fora       194  172G/22R  89%    -1.02u (18 pend)
+fora = jogos que só a Betfair tem (ligas fora do feed, liquidez baixa): FORA da conta e da gestão.
+KO−10 = o que dava para apostar de verdade, 4–16 min antes do apito. A GESTÃO abaixo usa este ledger.
+
+LAY DRAW · saída no gol da zebra (pré-registro 16/09)
+
+--------------------------------------------
+pareado N=16: saída -3.63u | segurar -0.73u | dif -2.91u (-0.182/evento)
+  fav casa N=  7 dif +1.40u
+  fav fora N=  9 dif -4.31u
+eventos: zebra 19 · favorito 1º 26 · lado indeterminado 43
+
+julgamento em KO ≥ 17/09, N ≥ 100 eventos, IC95 da diferença saída−segurar.
+
+GESTÃO — jogos reais (página 02) · banca R$2500 · liability R$50 por aposta
+
+método    N  WR-BE  R$ acum IC95 ROI         gatilho
+0x3     128  -0.2pp      -11 [-4.0,+3.0]      manter
+2x2     166  +1.3pp     +115 [-1.8,+4.1]      manter
+Draw $  274  +2.5pp     +394 [-1.9,+7.5]      manter
+Home    130  +0.4pp      +23 [-5.5,+6.2]      manter
+Ov4.5    26  +5.4pp      +74 [+5.3,+6.2]      manter
+0x0  $   95  +0.4pp      +21 [-5.2,+5.0]      manter
+--------------------------------------------------
+acumulado R$+615 | pico R$+677 | drawdown atual R$-62 | máx R$-311
+pior dia R$-145 | banca aguenta 17 dias como o pior
+
+$ = com dinheiro real. ESCALAR só quando o piso do IC95 passar de zero com N≥100. Fonte: os jogos que você fez (página 02), liability fixa R$50 — o composto por % está no stop diário.
+
+PRAZOS PRÉ-REGISTRADOS
+
+faltam 20d   2026-10-12 H-extra Over 1.5 / 1 gol / fav&gt;1.80 / min 25-85 — 1o
+faltam 20d   2026-10-12 Varredura Over in-play — snapshot 2
+faltam 20d   2026-10-12 CS no coletor (19 runners) — snapshot 2
+faltam 20d   2026-10-12 Lay 2x2 apos o 1o gol — snapshot 2
+faltam 51d   2026-11-12 CS no coletor — snapshot 3
+143%         N= 385/270  Lay Draw (Fav&lt;=1.40) — N para o IC95 descolar de zer
+  1%         N=   8/1476 Lay 0x0 XGB — N minimo do pre-registro (emenda 10/09
+
+
+ACUMULADO desde 01/08 (5 métodos): 900 liq · 816G/84R · WR 90.7% · +12.70u (R$ +1270) · 4 pendentes (*)
+* 0x3-Ampla tem os mesmos jogos do 0x3 Top 3 e as zebras são observação: fora do TOTAL e do ACUMULADO.
+
+(6764 caracteres)
+telegram parte 1/2: OK 
+telegram parte 2/2: OK 
+2026-09-22 06:01:43.472 
+Warning: the config option 'server.enableCORS=false' is not compatible with
+'server.enableXsrfProtection=true'.
+As a result, 'server.enableCORS' is being overridden to 'true'.
+
+More information:
+In order to protect against CSRF attacks, we send a cookie with each request.
+To do so, we must specify allowable origins, which places a restriction on
+cross-origin resource sharing.
+
+If cross origin resource sharing is required, please disable server.enableXsrfProtection.
+            
+  placares OFICIAIS (VPS): 1640 exatos + 243 por categoria (Any Other)
+  placares base betfair: +52907 (ate 2026-09-05)
+  placares b365 (DASHBOARD_ARKAD-1): +193444
+  placares das planilhas do dia (20 arquivos): +114
+  placares da base mestre (pagina 02): +72
+  placares manuais (ARKAD_PROD): +167
+  placares manuais (DASHBOARD_ARKAD-1): +133
+divergencias planilha x base: 0

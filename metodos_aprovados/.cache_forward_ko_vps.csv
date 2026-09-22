@@ -296,3 +296,23 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-09-20,Lay 0x3 (Regra Ampla),Colombian Primera A,Llaneros FC,Atletico Nacional Medellin,22:15,22.0,1.99,509.0,9.5,2026-09-21 01:05:30,live,PENDENTE,,,,,,,0.9567,,,,sim
 2026-09-20,Lay 0x3 Top 3,Colombian Primera A,Llaneros FC,Atletico Nacional Medellin,22:15,22.0,1.99,509.0,9.5,2026-09-21 01:05:30,live,PENDENTE,,,,,,,0.9567,,,,nao
 2026-09-20,Lay Home/DC X2 (FavVis<=1.65),Honduras Liga Nacional,Juticalpa,CD Marathon,22:30,7.8,1.53,641.0,14.5,2026-09-21 01:15:30,live,PENDENTE,,,,,,,0.8774,,,,nao
+2026-09-21,Lay Home/DC X2 (FavVis<=1.65),Uzbekistan 1st Division,Pakhtakor Tashkent II,FK Shortan Guzor,08:00,9.2,1.43,417.0,14.9,2026-09-21 10:45:08,live,PENDENTE,,,,,,,0.8962,,,,nao
+2026-09-21,Lay 0x3 (Regra Ampla),Greek Super League 2,Pyrgos AFC,Athlitiki Enosi Larissa,10:00,23.0,1.72,131.0,14.8,2026-09-21 12:45:09,live,PENDENTE,,,,,,,0.9586,,,,nao
+2026-09-21,Lay 0x3 Top 3,Greek Super League 2,Pyrgos AFC,Athlitiki Enosi Larissa,10:00,23.0,1.72,131.0,14.8,2026-09-21 12:45:09,live,PENDENTE,,,,,,,0.9586,,,,nao
+2026-09-21,Lay 0x3 (Regra Ampla),Greek Super League 2,Panthrakikos,Niki Volou,11:00,32.0,1.66,128.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.9703,,,,nao
+2026-09-21,Lay 0x3 Top 3,Greek Super League 2,Panthrakikos,Niki Volou,11:00,32.0,1.66,128.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.9703,,,,nao
+2026-09-21,Lay Draw (Fav<=1.40),Serbian First League,FK Backa Topola,FK Dubocica,11:00,9.8,1.24,241.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.9026,,,,nao
+2026-09-21,Lay Draw (Fav<=1.40),Republic of North Macedonian Soccer,FK Struga Trim-Lum,KF Arsimi 1973,11:00,6.8,1.29,166.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.8593,,,,nao
+2026-09-21,Lay 0x3 (Regra Ampla),Bulgarian B League,Sportist Svoge,Vihren Sandanski,11:00,21.0,1.84,151.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.9547,,,,nao
+2026-09-21,Lay 0x3 Top 3,Bulgarian B League,Sportist Svoge,Vihren Sandanski,11:00,21.0,1.84,151.0,14.8,2026-09-21 13:45:09,live,PENDENTE,,,,,,,0.9547,,,,nao
+2026-09-21,Lay Draw (Fav<=1.40),Friendlies International,Dominica,Anguilla,12:00,6.8,1.29,132.0,14.8,2026-09-21 14:45:09,live,PENDENTE,,,,,,,0.8593,,,,nao
+2026-09-21,Lay 2x2 Top 3,Georgian Umaglesi Liga,FC Rustavi,FC Iberia 1999,12:00,19.5,2.74,142.0,14.8,2026-09-21 14:45:09,live,PENDENTE,,,,,,,0.9512,,,,nao
+2026-09-21,Lay Draw (Fav<=1.40),Serbian First League,FK Javor Ivanjica,FK Proleter Zrenjanin,13:00,7.4,1.25,72.0,14.8,2026-09-21 15:45:09,live,PENDENTE,,,,,,,0.8707,,,,nao
+2026-09-21,Lay 0x3 (Regra Ampla),Georgian Umaglesi Liga,FC Spaeri,Dila Gori,14:00,24.0,2.06,150.0,14.8,2026-09-21 16:45:09,live,PENDENTE,,,,,,,0.9603,,,,nao
+2026-09-21,Lay 0x3 Top 3,Georgian Umaglesi Liga,FC Spaeri,Dila Gori,14:00,24.0,2.06,150.0,14.8,2026-09-21 16:45:09,live,PENDENTE,,,,,,,0.9603,,,,nao
+2026-09-21,Lay 2x2 Top 3,Ecuadorian Serie A,Manta FC,Orense Sporting Club,16:00,20.0,2.62,484.0,14.8,2026-09-21 18:45:10,live,PENDENTE,,,,,,,0.9524,,,,nao
+2026-09-21,Lay Over 4.5 (Under Pesado),Argentinian Primera Division,Barracas Central,Independiente Rivadavia,19:00,19.0,1.48,561.0,14.8,2026-09-21 21:45:10,live,PENDENTE,,,,,,,0.9499,,,,nao
+2026-09-21,Lay 0x3 (Regra Ampla),Uruguayan Primera Division,Central Espanol,Torque,19:30,21.0,1.72,318.0,14.8,2026-09-21 22:15:11,live,PENDENTE,,,,,,,0.9547,,,,sim
+2026-09-21,Lay 0x3 Top 3,Uruguayan Primera Division,Central Espanol,Torque,19:30,21.0,1.72,318.0,14.8,2026-09-21 22:15:11,live,PENDENTE,,,,,,,0.9547,,,,sim
+2026-09-21,Lay Draw (Fav<=1.40),Jamaican Premier League,Arnett Gardens FC,Dunbeholden FC,22:00,8.0,1.25,92.0,14.8,2026-09-22 00:45:11,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-22,Lay Draw (Fav<=1.40),Bhutan Premier League,RTC FC,Tsirang FC,06:00,8.6,1.24,175.0,14.9,2026-09-22 08:45:07,live,PENDENTE,,,,,,,0.8889,,,,

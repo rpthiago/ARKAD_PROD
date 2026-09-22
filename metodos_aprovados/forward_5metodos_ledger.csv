@@ -1214,9 +1214,10 @@
 2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,CA Platense,Newells,17:00,19.5,1.48,LIQUIDADO,0,1,0-1,GREEN,0.05135,5.14,0.9512,2026-09-20 21:44,betfair_oficial:exato
 2026-09-20,Lay Over 4.5 (Under Pesado),SOUTH AFRICA 1,Milford,Durban City,10:00,19.5,1.5,LIQUIDADO,1,1,1-1,GREEN,0.05135,5.14,0.9512,2026-09-20 21:44,betfair_oficial:exato
 2026-09-20,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Velez Sarsfield,Tigre,21:30,20.0,1.47,LIQUIDADO,3,2,3-2,RED,-1.0,-100.0,0.9524,2026-09-21 06:00,betfair_oficial:exato
-2026-09-21,Lay 0x3 Top 3,URUGUAY 1,Central Espanol,Torque,19:30,27.0,,PENDENTE,,,,,,,0.9647,,
-2026-09-21,Lay 0x3 (Regra Ampla),URUGUAY 1,Central Espanol,Torque,19:30,27.0,,PENDENTE,,,,,,,0.9647,,
-2026-09-21,Lay 2x2 Top 3,ROMANIA 1,Otelul Galati,FC Hunedoara,12:00,18.5,,PENDENTE,,,,,,,0.9485,,
-2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Aldosivi,Atl Tucuman,14:30,19.0,1.49,PENDENTE,,,,,,,0.9499,,
+2026-09-21,Lay 0x3 Top 3,URUGUAY 1,Central Espanol,Torque,19:30,27.0,,LIQUIDADO,,,AO Away Win,GREEN,0.03654,3.65,0.9647,2026-09-22 06:01,betfair_oficial:cat
+2026-09-21,Lay 0x3 (Regra Ampla),URUGUAY 1,Central Espanol,Torque,19:30,27.0,,LIQUIDADO,,,AO Away Win,GREEN,0.03654,3.65,0.9647,2026-09-22 06:01,betfair_oficial:cat
+2026-09-21,Lay 2x2 Top 3,ROMANIA 1,Otelul Galati,FC Hunedoara,12:00,18.5,,LIQUIDADO,2,3,2-3,GREEN,0.05429,5.43,0.9485,2026-09-22 06:01,betfair_oficial:exato
+2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Aldosivi,Atl Tucuman,14:30,19.0,1.49,LIQUIDADO,1,0,1-0,GREEN,0.05278,5.28,0.9499,2026-09-22 06:01,betfair_oficial:exato
 2026-09-21,Lay Over 4.5 (Under Pesado),ECUADOR 1,Barcelona (Ecu),Independiente (Ecu),21:30,11.0,1.27,PENDENTE,,,,,,,0.9132,,
-2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Lanus,Estudiantes,21:15,18.5,1.5,PENDENTE,,,,,,,0.9485,,
+2026-09-21,Lay Over 4.5 (Under Pesado),ARGENTINA 1,Lanus,Estudiantes,21:15,18.5,1.5,LIQUIDADO,2,1,2-1,GREEN,0.05429,5.43,0.9485,2026-09-22 06:01,betfair_oficial:exato
+2026-09-22,Lay Draw (Fav<=1.40),COLOMBIA 1,Ind Medellin,Jaguares de Cordoba,20:00,5.8,1.36,PENDENTE,,,,,,,0.8348,,
