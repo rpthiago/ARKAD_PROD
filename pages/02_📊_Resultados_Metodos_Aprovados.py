@@ -482,9 +482,65 @@ with tab_grafico:
         df_liq_sorted["PnL_Acum_u"] = df_liq_sorted["PnL_u"].cumsum()
         df_liq_sorted["PnL_Acum_Reais"] = df_liq_sorted["PnL_Reais"].cumsum()
         df_liq_sorted["Num_Jogo"] = range(1, len(df_liq_sorted) + 1)
-        
+
+        # Simulação do Cenário B7: Gestão Dinâmica (Juros Compostos 5%/10%) + Stop Red (-10%) & Stop Green (+10%)
+        def _hm_min(h):
+            try:
+                p = str(h).strip()[:5].split(":")
+                return int(p[0]) * 60 + int(p[1])
+            except Exception:
+                return 15 * 60
+
+        _df_b7 = df_liq.copy()
+        _df_b7["ko_min"] = _df_b7["Hora"].apply(_hm_min)
+        _df_b7["end_min"] = _df_b7["ko_min"] + 115
+        _df_b7["pct_liab"] = _df_b7["Método"].apply(
+            lambda m: 0.10 if ("0x3" in str(m) or "2x2" in str(m) or "Over 4.5" in str(m)) else 0.05
+        )
+        _df_b7 = _df_b7.sort_values(["Data", "ko_min", "Método"]).reset_index(drop=True)
+
+        _banca_comp = float(banca_total)
+        _rows_b7 = []
+        for _dt, _g in _df_b7.groupby(_df_b7["Data"].dt.strftime("%Y-%m-%d")):
+            _g = _g.sort_values("ko_min").copy()
+            _b_dia = _banca_comp
+            _g["liab_b7"] = _g["pct_liab"] * _b_dia
+            _g["pnl_b7_rs"] = _g["PnL_u"] * _g["liab_b7"]
+            _stop_t = 999999
+            for _t in sorted(_g["end_min"].unique()):
+                _done = _g[(_g["end_min"] <= _t) & (_g["ko_min"] < _stop_t)]
+                _pnl_now = _done["pnl_b7_rs"].sum()
+                if _pnl_now <= -0.10 * _b_dia or _pnl_now >= 0.10 * _b_dia:
+                    _stop_t = _t
+                    break
+            _kept = _g[_g["ko_min"] < _stop_t].copy()
+            _banca_comp += _kept["pnl_b7_rs"].sum()
+            _rows_b7.append(_kept)
+
+        if _rows_b7:
+            df_b7_res = pd.concat(_rows_b7, ignore_index=True)
+            df_b7_res["Num_Jogo"] = range(1, len(df_b7_res) + 1)
+            df_b7_res["Lucro_Acumulado_B7_R$"] = df_b7_res["pnl_b7_rs"].cumsum()
+            df_b7_res["Banca_Composta_B7_R$"] = float(banca_total) + df_b7_res["Lucro_Acumulado_B7_R$"]
+
+            st.markdown("#### 🏆 Cenário B7: Gestão Dinâmica (Juros Compostos 5%/10%) + Stop Red (-10%) & Stop Green (+10%)")
+            c_b7_1, c_b7_2, c_b7_3, c_b7_4 = st.columns(4)
+            _lucro_b7 = df_b7_res["Lucro_Acumulado_B7_R$"].iloc[-1]
+            _banca_fim_b7 = df_b7_res["Banca_Composta_B7_R$"].iloc[-1]
+            _gr_b7 = (df_b7_res["Status"] == "🟢 GREEN").sum()
+            _rd_b7 = (df_b7_res["Status"] == "🔴 RED").sum()
+            c_b7_1.metric("Banca Final (B7)", f"R$ {_banca_fim_b7:,.2f}", f"Início: R$ {banca_total:,.0f}")
+            c_b7_2.metric("Lucro Líquido (B7)", f"R$ {_lucro_b7:+,.2f}", f"{(_lucro_b7 / banca_total * 100):+.1f}% sobre banca")
+            c_b7_3.metric("Jogos Executados", f"{len(df_b7_res)} jogos", f"{len(df_liq) - len(df_b7_res)} cortados pelo Stop")
+            c_b7_4.metric("Win Rate (B7)", f"{(_gr_b7 / len(df_b7_res) * 100):.1f}%", f"{_gr_b7}G / {_rd_b7}R")
+
+            st.line_chart(df_b7_res.set_index("Num_Jogo")["Lucro_Acumulado_B7_R$"])
+            st.caption("Evolução do Lucro Acumulado (em R$) no Cenário B7 (Gestão Dinâmica Composta 5%/10% + Stop Diário -10%/+10%).")
+
+        st.markdown("---")
+        st.markdown("#### 📊 Curva de Lucro Acumulado — Banca Fixa Sem Stop (Referência)")
         st.line_chart(df_liq_sorted.set_index("Num_Jogo")["PnL_Acum_Reais"])
-        st.caption("Evolução do saldo financeiro acumulado (em R$) ao longo das apostas liquidadas.")
+        st.caption("Evolução do saldo financeiro acumulado (em R$) com Banca Fixa sem Stop.")
     else:
         st.info("Sem dados suficientes para gerar a curva de equity.")
 
