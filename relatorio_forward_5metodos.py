@@ -740,9 +740,14 @@ def _boot_dia(v, dias, B=10000):
 
 
 def _ledger_0x0():
-    """Forward ao vivo do Lay 0x0 (DASHBOARD/forward_0x0/ledger_forward_0x0.csv), no mesmo formato."""
-    p = os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "forward_0x0", "ledger_forward_0x0.csv")
-    if not os.path.exists(p): return []
+    """Forward ao vivo do Lay 0x0 (forward_0x0/ledger_forward_0x0.csv), no mesmo formato.
+    O .bat passou a gravar em ARKAD_PROD (23/09) e a copia do DASHBOARD ficou como fallback: se as
+    duas existirem, vale a que tem mais linhas (evita ler para sempre um ledger congelado)."""
+    cands = [c for c in (os.path.join(ROOT, "forward_0x0", "ledger_forward_0x0.csv"),
+                         os.path.join(os.path.dirname(ROOT), "DASHBOARD_ARKAD-1", "forward_0x0", "ledger_forward_0x0.csv"))
+             if os.path.exists(c)]
+    if not cands: return []
+    p = max(cands, key=lambda c: sum(1 for _ in open(c, encoding="utf-8-sig")))
     d = pd.read_csv(p, encoding="utf-8-sig")
     d = d[(d["status"] == "LIQUIDADO") & (pd.to_numeric(d["na_regra"], errors="coerce") == 1)]
     return [dict(Data=r["Data"], Metodo="Lay 0x0 XGB", status="LIQUIDADO",
