@@ -7,6 +7,21 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-23 · Antigravity · Estudo de Copas no `Lay Draw` (2024–2026 e 2026) & Regra Estrutural Anti-Overfit Aplicada na Página 01
+
+- **Feito:**
+  - Auditado o comportamento do método `Lay Draw (Fav <= 1.40 | Odd Lay 4.50 a 10.00)` em jogos de Copa vs. Ligas de Pontos Corridos na base completa da API (`FRESH3` + feeds diários 2024–2026) e no consolidado de 2026 (`Jan–Jul FRESH3` + `Ago–Set Planilhas Forward`, $N = 133$ copas em 2026).
+  - Validado estatisticamente (Teste Exato de Fisher $p = 0,0091$ e Teste de Permutação $p = 0,0022$) que, em Copas, a separação real está no **mando de campo do favorito**:
+    - **Copa Jogo Único — Favorito EM CASA (`Odd_H <= 1.40`):** $N=74$, 4 empates (`5,4%` vs `13,8%` BE), `ROI +9,80%`, Bootstrap IC95% `[+3,3%, +14,9%]` (exclui zero). Em 2026: `36G / 1R` (`97,3%` WR, `ROI +12,70%`).
+    - **Copa Jogo Único — Favorito FORA (`Odd_A <= 1.40`):** $N=46$, 10 empates (`21,7%` vs `13,1%` BE), `ROI −9,99%`. Somando todas as Copas com Favorito Fora ($N=58$): `20,7%` de empates e `ROI −8,64%` (`−5,01u`).
+    - **Seleções (`WORLD` / `NATIONS LEAGUE`):** `16,2%` de empates ($N=167$), `ROI −2,19%`.
+  - Para **evitar overfitting (Data Dredging por nome de campeonato)**, descartada a criação de blacklists nominais ad-hoc (`Conference`, `Libertadores`, `Sudamericana`) no código, adotando exclusivamente:
+    1. **No Código (`pages/01_🏆_Portfolio_Metodos_Aprovados.py` e `automacao_diaria_aprovados.py`):** Em Ligas regulares, mantém Favorito Casa ou Fora (`<= 1.40`); em Copas, exige obrigatoriamente **Favorito EM CASA (`Odd_H_Back <= 1.40`)** e bloqueia torneios de **Seleções (`WORLD` / `NATIONS LEAGUE`)**.
+    2. **Na Mesa (Regra de Regulamento):** Pular manualmente jogos de **volta de mata-mata** onde o favorito já venceu a ida e joga pelo empate no agregado.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-22 · Antigravity · Página 02 Restrita Exclusivamente às Planilhas Diárias (`Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`) & Consolidação de Agosto/Setembro
 
 - **Feito:**

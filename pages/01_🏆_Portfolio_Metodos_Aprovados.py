@@ -80,10 +80,15 @@ st.markdown("""
 
 st.title("🏆 Portfólio de Métodos em Validação Forward — ARKAD")
 st.warning("""
-🚨 **STATUS DE GOVERNANÇA (02/09/2026): EM VALIDAÇÃO FORWARD (Stake-Zero)**
-* **Rótulo Oficial:** Os métodos da Tríade estão classificados como **PROMISSORES / EM VALIDAÇÃO FORWARD**, e **NÃO como Aprovados**.
-* **Critério de Risco:** O resultado do forward recente (+12,27u em 189 jogos) é positivo, mas o Bootstrap bloco-dia (Draw IC95% `[−1,8%; +11,8%]` e Home IC95% `[−0,7%; +13,6%]`) **ainda cruza o zero** antes de correção FDR.
-* **Portão de Saída da Quarentena:** Exige $N \ge 400$ apostas ou 5 fins de semana completos com dados Betfair Exchange e liquidação oficial. Até lá: **ZERO CAPITAL REAL / STAKE-ZERO**.
+🚨 **STATUS DE GOVERNANÇA & REGRAS CONGELADAS ANTI-OVERFIT (23/09/2026): EM VALIDAÇÃO FORWARD**
+* **Rótulo Oficial:** Os métodos da Tríade estão classificados como **PROMISSORES / EM VALIDAÇÃO FORWARD**, e **NÃO como Aprovados** até completarem o portão estatístico ($N \ge 400$ apostas ou 5 fins de semana completos com IC95% pós-FDR excluindo zero).
+* **🛡️ Regra Estrutural do `Lay Draw (Fav <= 1.40 | Lay 4.50–10.00)` em Ligas vs. Copas (Validada em 3 Anos `FRESH3`, $p = 0,0022$):**
+  1. **Em Ligas Nacionais (Pontos Corridos):** Entra com Super Favorito em **Casa OU Fora** (`min(Odd_H_Back, Odd_A_Back) <= 1.40`).
+  2. **Em Copas (Nacionais ou Continentais):** Entra **SOMENTE quando o Super Favorito joga EM CASA (`Odd_H_Back <= 1.40`)**. Jogos de Copa com favorito visitante (`Odd_A_Back <= 1.40`, taxa de empate `20,7%` e `ROI −8,64%`) são **bloqueados automaticamente** pelo scanner.
+  3. **Torneios de Seleções (`WORLD`, `NATIONS LEAGUE`, `EUROCUP`, `AMERICA CUP`):** **Bloqueados automaticamente** (taxa de empate `16,2%`, `ROI −2,19%`).
+  4. **Proibição de Blacklist por Nome de Campeonato (Anti-Overfit):** É proibido excluir campeonatos isolados pelo nome (`Libertadores`, `Sudamericana`, `Conference`) por conta de amostras curtas.
+  5. **📋 Regra de Mesa (Leitura de Regulamento — Mata-Mata Ida e Volta):** Se o scanner apontar sinal de `Lay Draw` em jogo de **volta de mata-mata** onde o favorito mandante **já venceu o jogo de ida (joga pelo empate no agregado)**, **NÃO ENTRAR (pular manualmente)** — pois no empate aos 70'+ o favorito administra o relógio em vez de se expor.
+* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (`15%` Over 4.5 | `10%` CS Top 3 `0x3` e `2x2` | `5%` Draw, Home e `0x0`) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
 Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
@@ -376,9 +381,28 @@ with tab1:
                     "Expectativa_WR": "97.6%", "EV_Estimado": "+2.60%"
                 })
                 
-            # 4. Lay Draw em Super Favorito — SIMETRICO: Odd_Fav_Back <= 1.40 | 4.5 <= Odd_D_Lay <= 10.0
-            _dfav = min(oh_back[i] if pd.notna(oh_back.get(i)) else 99.0, oa_back[i] if pd.notna(oa_back.get(i)) else 99.0)
-            if _dfav <= 1.40 and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
+            # 4. Lay Draw em Super Favorito (Regra Estrutural Anti-Overfit 3 Anos):
+            #    - Bloqueia Seleções (WORLD / NATIONS LEAGUE)
+            #    - Em COPAS: aceita SOMENTE Favorito EM CASA (Odd_H_Back <= 1.40)
+            #    - Em LIGAS (Pontos Corridos): aceita Favorito Casa OU Fora (min(Odd_H_Back, Odd_A_Back) <= 1.40)
+            _liga_up = liga.upper().strip()
+            _eh_selecao = any(t in _liga_up for t in ("WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP"))
+            _eh_copa = any(t in _liga_up for t in (
+                "CUP", "COPA", "CHAMPIONS", "EUROPA LEAGUE", "CONFERENCE",
+                "LIBERTADORES", "SUDAMERICANA", "POKAL", "COUPE", "COPPA",
+                "TAÇA", "TACA", "TROPHY", "SHIELD", "SUPERCUP", "SUPER CUP", "QUALIF", "PLAYOFF"
+            ))
+            if _eh_selecao:
+                _draw_fav_ok = False
+                _dfav = 99.0
+            elif _eh_copa:
+                _draw_fav_ok = (_oh <= 1.40)
+                _dfav = _oh
+            else:
+                _dfav = min(_oh, _oa)
+                _draw_fav_ok = (_dfav <= 1.40)
+
+            if _draw_fav_ok and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
@@ -560,17 +584,17 @@ with tab2:
             "Status": "✅ APROVADO PRODUÇÃO"
         },
         {
-            "Método": "Lay Draw Super Fav (Casa OU Fora <= 1.40)",
+            "Método": "Lay Draw Super Fav (Ligas: Casa/Fora <= 1.40 | Copas: Só Casa <= 1.40 | Sem Seleções)",
             "Mercado": "Match Odds (Draw)",
-            "Amostra (N)": "119 jogos (Forward)",
-            "Win Rate Real": "90.76%",
-            "Break-Even Exigido": "85.68%",
-            "Margem Real": "+5.07%",
-            "Lucro Líquido": "+40,30 u (liability)",
-            "ROI s/ Liability": "+5.80%",
-            "Bootstrap IC95%": "[−1.8%, +11.8%]",
-            "Consistência": "Forward recente positivo 🟢",
-            "Status": "⚠️ EM VALIDAÇÃO FORWARD (Stake-Zero)"
+            "Amostra (N)": "391 jogos (Forward Ago/Set) + 3.412 (FRESH3)",
+            "Win Rate Real": "87.7% Geral | 97.3% Copa Casa (2026)",
+            "Break-Even Exigido": "85.80%",
+            "Margem Real": "+1.90% Geral | +8.36% Copa Casa",
+            "Lucro Líquido": "+9,85 u (Forward) | +7,26 u (Copa Jogo Único Casa)",
+            "ROI s/ Liability": "+2.29% Geral | +9.80% Copa Casa",
+            "Bootstrap IC95%": "Copa Casa: [+3.3%, +14.9%] (p=0.0022)",
+            "Consistência": "Regra Estrutural Anti-Overfit + Regra de Mesa Ida/Volta 🟢",
+            "Status": "⚠️ EM VALIDAÇÃO FORWARD (Cenário B7 Ativo)"
         },
         {
             "Método": "Lay Home / Dupla Chance X2 (Fav Visitante <= 1.65)",

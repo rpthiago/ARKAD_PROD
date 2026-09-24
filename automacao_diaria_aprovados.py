@@ -98,14 +98,31 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
             
-        # 3. Lay Draw em Super Fav — SIMETRICO (Odd_Fav_Back <= 1.40 | 4.5 <= Odd_D_Lay <= 10.0)
-        if fav_odd <= 1.40 and 4.5 <= od_lay.iloc[idx] <= 10.0:
+        # 3. Lay Draw em Super Fav (Regra Estrutural Anti-Overfit: Ligas Casa/Fora <= 1.40 | Copas só Casa <= 1.40 | Sem Seleções)
+        _liga_up = liga.upper().strip()
+        _eh_selecao = any(t in _liga_up for t in ("WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP"))
+        _eh_copa = any(t in _liga_up for t in (
+            "CUP", "COPA", "CHAMPIONS", "EUROPA LEAGUE", "CONFERENCE",
+            "LIBERTADORES", "SUDAMERICANA", "POKAL", "COUPE", "COPPA",
+            "TAÇA", "TACA", "TROPHY", "SHIELD", "SUPERCUP", "SUPER CUP", "QUALIF", "PLAYOFF"
+        ))
+        if _eh_selecao:
+            _draw_fav_ok = False
+            _dfav_draw = 99.0
+        elif _eh_copa:
+            _draw_fav_ok = (oh_back.iloc[idx] <= 1.40)
+            _dfav_draw = oh_back.iloc[idx]
+        else:
+            _draw_fav_ok = (fav_odd <= 1.40)
+            _dfav_draw = fav_odd
+
+        if _draw_fav_ok and 4.5 <= od_lay.iloc[idx] <= 10.0:
             odd_e = round(float(od_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
                 "Método": "Lay Draw Super Fav", "Mercado": "Draw", "Lado": "LAY",
-                "Odd_Entrada": odd_e, "Odd_Fav": round(float(fav_odd), 2),
+                "Odd_Entrada": odd_e, "Odd_Fav": round(float(_dfav_draw), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
