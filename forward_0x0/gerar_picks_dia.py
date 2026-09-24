@@ -36,6 +36,9 @@ def _tgcfg():
     return tok, chat
 
 def tg(msg):
+    # Telegram silenciado por regra do Thiago (21/09): so o relatorio das 06:00 e o stop diario
+    # falam no Telegram. Para religar apenas este script: ARKAD_TG_0X0=1.
+    if os.environ.get("ARKAD_TG_0X0", "0") != "1": return
     tok, chat = _tgcfg()
     if not (tok and chat): return
     u = "https://api.telegram.org/bot%s/sendMessage" % tok
