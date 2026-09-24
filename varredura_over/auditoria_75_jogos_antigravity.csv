@@ -1,0 +1,76 @@
+Data,Liga,Home,Away,odd_lay,p,EV,fonte_Odd_CS_0x0,casamento,universo,placar,fonte_placar,Resultado,PnL,Em_Claude
+2026-09-01,ENGLAND 2,Birmingham,Southampton,17.0,0.9536,0.1639,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-01),1x1,b365 + betfair,GREEN,0.0594,SIM
+2026-09-02,CROATIA 2,Opatija,Hrvace,15.0,0.9556,0.2859,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x0,b365 + betfair,GREEN,0.0679,NAO
+2026-09-02,SCOTLAND 1,Dundee FC,St Johnstone,15.5,0.9536,0.2334,b365 (12.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.0655,SIM
+2026-09-02,ENGLAND 3,Wigan,MK Dons,15.5,0.9495,0.1692,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-02),3x1,b365 + betfair,GREEN,0.0655,NAO
+2026-09-02,ENGLAND 2,West Brom,Charlton,14.5,0.9444,0.1459,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-02),1x1,b365 + betfair,GREEN,0.0704,SIM
+2026-09-02,SCOTLAND 1,Motherwell,Dundee Utd,19.5,0.9564,0.1019,b365 (15.0),EXATO,Base consolidada B365 + feed_diario (2026-09-02),3x0,b365 + betfair,GREEN,0.0514,SIM
+2026-09-02,JAPAN 1,Cerezo Osaka,Kashiwa Reysol,16.5,0.9472,0.0819,b365 (13.0),FUZZY (0.85),Base consolidada B365 + feed_diario (2026-09-02),2x0,b365 + betfair,GREEN,0.0613,SIM
+2026-09-02,BULGARIA 1,Slavia Sofia,Levski Sofia,15.0,0.9405,0.0601,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x2,b365 + betfair,GREEN,0.0679,NAO
+2026-09-02,ITALY CUP,Udinese,Venezia,14.0,0.936,0.0572,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x1,b365 + betfair,GREEN,0.0731,NAO
+2026-09-02,BELGIUM 1,St. Truiden,Royale Union SG,19.5,0.9523,0.0218,b365 (15.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),0x3,b365 + betfair,GREEN,0.0514,NAO
+2026-09-03,SWITZERLAND 1,Lugano,Servette,19.5,0.9606,0.1843,b365 (15.0),EXATO,Base consolidada B365 + feed_diario (2026-09-03),1x0,b365 + betfair,GREEN,0.0514,SIM
+2026-09-04,USA 1,New York City,Nashville SC,16.0,0.946,0.0881,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-04),0x0,b365 + betfair,RED,-1.0,SIM
+2026-09-05,ENGLAND 5,Hartlepool,Woking,15.0,0.9676,0.466,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-05,ENGLAND 5,Scunthorpe,Harrogate,19.0,0.9704,0.3885,b365 (15.0),FUZZY (0.91),Base consolidada B365 + feed_diario (2026-09-05),0x2,b365 + betfair,GREEN,0.0528,SIM
+2026-09-05,ENGLAND 5,Barrow,Sutton,15.0,0.9621,0.384,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),3x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-05,ITALY 2,Ascoli,Benevento,14.0,0.9567,0.3463,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x0,b365 + betfair,GREEN,0.0731,SIM
+2026-09-05,ENGLAND 5,Aldershot,FC Halifax,19.5,0.9648,0.2652,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x0,b365 + betfair,GREEN,0.0514,SIM
+2026-09-05,ENGLAND 2,Preston,Blackburn,13.5,0.942,0.1701,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),2x1,b365 + betfair,GREEN,0.076,SIM
+2026-09-05,ENGLAND 1,Fulham,Crystal Palace,13.5,0.9412,0.1585,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),2x3,b365 + betfair,GREEN,0.076,SIM
+2026-09-05,SCOTLAND 1,Dundee Utd,Falkirk,17.5,0.9536,0.1407,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x1,b365 + betfair,GREEN,0.0576,SIM
+2026-09-05,ENGLAND 3,Leicester,Oxford Utd,18.5,0.9554,0.1268,b365 (17.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),0x4,b365 + betfair,GREEN,0.0543,SIM
+2026-09-05,ENGLAND 2,West Brom,Watford,15.0,0.9443,0.1172,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-05,ENGLAND 1,Brentford,Sunderland,16.0,0.9472,0.1082,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x1,b365 + betfair,GREEN,0.0633,SIM
+2026-09-05,ENGLAND 1,Brighton,Leeds,16.0,0.9472,0.1082,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),1x1,b365 + betfair,GREEN,0.0633,SIM
+2026-09-05,ENGLAND 3,Reading,Blackpool,17.5,0.9517,0.1077,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),3x1,b365 + betfair,GREEN,0.0576,NAO
+2026-09-05,ENGLAND 3,Bradford City,Mansfield,15.0,0.9434,0.1039,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-05,ENGLAND 2,Portsmouth,Cardiff,19.0,0.9549,0.0946,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-05),2x0,b365 + betfair,GREEN,0.0528,SIM
+2026-09-05,USA 1,Columbus Crew,Colorado Rapids,16.0,0.9457,0.0846,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),3x0,b365 + betfair,GREEN,0.0633,NAO
+2026-09-05,ENGLAND 2,Sheffield Utd,Norwich,17.0,0.9486,0.0786,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x3,b365 + betfair,GREEN,0.0594,SIM
+2026-09-05,ENGLAND 3,Wigan,Stockport County,17.5,0.9495,0.0681,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),0x4,b365 + betfair,GREEN,0.0576,NAO
+2026-09-05,GERMANY 2,Kaiserslautern,Darmstadt,18.5,0.9522,0.0674,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),3x0,b365 + betfair,GREEN,0.0543,SIM
+2026-09-05,SWEDEN 1,Degerfors,Halmstad,14.5,0.9369,0.0385,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x0,b365 + betfair,GREEN,0.0704,NAO
+2026-09-05,GERMANY 2,SG Dynamo Dresden,Bochum,18.0,0.9491,0.0356,b365 (12.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x2,b365 + betfair,GREEN,0.0559,SIM
+2026-09-06,SPAIN 1,Malaga,Levante,13.0,0.9473,0.2676,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-06),0x0,b365 + betfair,RED,-1.0,SIM
+2026-09-06,SOUTH KOREA 2,Suwon Bluewings,Asan,18.5,0.9595,0.2035,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x0,b365 + betfair,GREEN,0.0543,NAO
+2026-09-06,GERMANY 1,Hamburger SV,Mainz,16.0,0.9524,0.1904,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-06),0x5,b365 + betfair,GREEN,0.0633,SIM
+2026-09-06,ENGLAND 1,Arsenal,Chelsea,16.5,0.9507,0.1389,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-06),2x1,b365 + betfair,GREEN,0.0613,SIM
+2026-09-06,NORWAY 1,Kristiansund,Tromso,18.0,0.9531,0.1089,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-06),2x0,b365 + betfair,GREEN,0.0559,SIM
+2026-09-06,BULGARIA 1,Lok. Sofia,Ludogorets,17.0,0.9495,0.0934,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x2,b365 + betfair,GREEN,0.0594,SIM
+2026-09-06,CZECH 1,Hradec Kralove,Sparta Prague,19.0,0.954,0.0778,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-06),2x1,b365 + betfair,GREEN,0.0528,SIM
+2026-09-06,CHILE 1,O'Higgins,Union La Calera,15.0,0.9399,0.0519,b365 (12.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x1,b365 + betfair,GREEN,0.0679,SIM
+2026-09-06,NETHERLANDS 2,Maastricht,Roda,19.0,0.9514,0.0291,b365 (12.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.0528,NAO
+2026-09-07,SWEDEN 1,Mjallby,Goteborg,18.5,0.964,0.2853,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x4,b365 + betfair,GREEN,0.0543,SIM
+2026-09-07,SWEDEN 2,Orebro,Ostersund,14.5,0.9386,0.0632,b365 (12.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),0x1,b365 + betfair,GREEN,0.0704,NAO
+2026-09-08,FINLAND 1,Lahti,Mariehamn,19.5,0.9564,0.1027,b365 (15.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x1,b365 + betfair,GREEN,0.0514,SIM
+2026-09-09,USA 1,Houston Dynamo,Real Salt Lake,18.5,0.9554,0.1268,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-09),2x1,b365 + betfair,GREEN,0.0543,SIM
+2026-09-09,CZECH 1,Hradec Kralove,Plzen,16.5,0.949,0.1107,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-09),0x0,b365 + betfair,RED,-1.0,SIM
+2026-09-09,USA 1,Austin FC,Colorado Rapids,15.5,0.9414,0.045,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.0655,NAO
+2026-09-09,SWEDEN 2,Sandviken,Oddevold,18.0,0.9495,0.0429,b365 (17.0),FUZZY (0.93),Base consolidada B365 + feed_diario (2026-09-09),0x1,b365 + betfair,GREEN,0.0559,NAO
+2026-09-10,SWEDEN 2,Ostersund,Brage,15.5,0.943,0.0692,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.0655,NAO
+2026-09-11,CZECH 2,Pribram,Ostrava B,19.5,0.9536,0.0479,b365 (15.0),FUZZY (0.82),Base consolidada B365 + feed_diario (2026-09-11),1x3,b365 + betfair,GREEN,0.0514,NAO
+2026-09-12,JAPAN 1,Gamba Osaka,FC Tokyo,19.0,0.9689,0.36,b365 (13.0),FUZZY (0.88),Base consolidada B365 + feed_diario (2026-09-12),0x2,b365 + betfair,GREEN,0.0528,SIM
+2026-09-12,ENGLAND 5,Woking,Altrincham,15.5,0.9577,0.2961,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-12),5x1,b365 + betfair,GREEN,0.0655,SIM
+2026-09-12,TURKEY 1,Eyupspor,Rizespor,14.5,0.9494,0.2186,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-12),0x2,b365 + betfair,GREEN,0.0704,SIM
+2026-09-12,FINLAND 1,Jaro,SJK,15.0,0.9494,0.1933,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-12),1x1,b365 + betfair,GREEN,0.0679,SIM
+2026-09-12,CZECH 1,Bohemians,Slovacko,15.0,0.9483,0.1767,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-12,ITALY 2,Catanzaro,Carrarese,15.0,0.9466,0.152,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-12),1x0,b365 + betfair,GREEN,0.0679,SIM
+2026-09-12,ROMANIA 2,CSC Dumbravita,CSM Slatina,16.5,0.9493,0.1167,b365 (11.0),FUZZY (0.96),Base consolidada B365 + feed_diario (2026-09-12),0x2,b365 + betfair,GREEN,0.0613,SIM
+2026-09-12,SCOTLAND CUP,Kilmarnock,Aberdeen,16.0,0.9473,0.1095,b365 (13.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.0633,NAO
+2026-09-12,ITALY 2,Cesena,Cremonese,13.0,0.9332,0.0846,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x2,b365 + betfair,GREEN,0.0792,SIM
+2026-09-13,ITALY 2,Avellino,Palermo,13.5,0.9462,0.227,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),1x1,b365 + betfair,GREEN,0.076,SIM
+2026-09-13,JAPAN 1,Urawa Reds,Okayama,16.0,0.9495,0.1439,b365 (11.0),FUZZY (0.86),Base consolidada B365 + feed_diario (2026-09-13),1x2,b365 + betfair,GREEN,0.0633,SIM
+2026-09-13,SWITZERLAND 1,Lausanne,Servette,16.0,0.9494,0.1427,b365 (11.0),EXATO,Base consolidada B365 + feed_diario (2026-09-13),0x1,b365 + betfair,GREEN,0.0633,SIM
+2026-09-13,SWEDEN 1,Elfsborg,Kalmar,16.0,0.9452,0.0764,b365 (11.0),FUZZY (0.93),Base consolidada B365 + feed_diario (2026-09-13),1x0,b365 + betfair,GREEN,0.0633,NAO
+2026-09-13,CZECH 1,Teplice,Slavia Prague,16.5,0.9462,0.0657,b365 (17.0),EXATO,Base consolidada B365 + feed_diario (2026-09-13),0x2,b365 + betfair,GREEN,0.0613,SIM
+2026-09-15,ENGLAND CUP,Peterborough,Barnsley,16.5,0.9704,0.4626,b365 (21.0),EXATO,Base consolidada B365 + feed_diario (2026-09-15),3x3,b365 + betfair,GREEN,0.0613,SIM
+2026-09-15,ENGLAND 5,Sutton,Eastleigh,15.0,0.9564,0.2987,b365 (11.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),2x1,b365 + betfair,GREEN,0.0679,SIM
+2026-09-15,ENGLAND 5,Boston Utd,Woking,18.5,0.963,0.2679,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-15),1x1,b365 + betfair,GREEN,0.0543,SIM
+2026-09-15,ENGLAND CUP,West Ham,Fulham,20.0,0.9622,0.1969,b365 (17.0),EXATO,Base consolidada B365 + feed_diario (2026-09-15),2x3,b365 + betfair,GREEN,0.05,NAO
+2026-09-15,SCOTLAND 1,Motherwell,Aberdeen,19.5,0.958,0.1323,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-15),0x4,b365 + betfair,GREEN,0.0514,SIM
+2026-09-16,ENGLAND 5,Altrincham,Hartlepool,15.5,0.9674,0.4465,b365 (12.0),EXATO,Base consolidada B365 + feed_diario (2026-09-16),2x1,b365 + betfair,GREEN,0.0655,SIM
+2026-09-16,ENGLAND 5,Kidderminster,Gateshead,18.5,0.9628,0.2635,b365 (13.0),EXATO,Base consolidada B365 + feed_diario (2026-09-16),1x0,b365 + betfair,GREEN,0.0543,SIM
+2026-09-16,SPAIN 1,Atl. Madrid,Osasuna,18.0,0.9536,0.1175,b365 (15.0),EXATO,Base consolidada B365 + cache_bf (.cache_base_betfair),4x0,b365 + betfair,GREEN,0.0559,SIM
+2026-09-19,ENGLAND 1,Tottenham,Aston Villa,17.0,0.953,0.157,b365 (15.0),EXATO,Endpoint diario ao vivo (picks_0x0_2026-09-19.csv),2x3,placares_ft (VPS) + betfair,GREEN,0.0594,SIM
+2026-09-20,DENMARK 1,Brondby,FC Copenhagen,18.5,0.952,0.065,b365 (15.0),EXATO,Endpoint diario ao vivo (picks_0x0_2026-09-20.csv),0x1,placares_ft (VPS) + betfair,GREEN,0.0543,SIM
