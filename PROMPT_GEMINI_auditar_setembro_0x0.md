@@ -38,9 +38,16 @@ Consequência medida em 19/09:
 | endpoint diário na manhã (o que existia para apostar) | 100 | **1** (Tottenham × Aston Villa) |
 | base consolidada, olhando em 24/09 | 399 featurizados | **5** |
 
-Os 4 sinais extras (Pardubice, Elgin City, Dundee, Alverca) **nunca estiveram disponíveis** na manhã de 19/09: eles só
-existem porque a base encheu depois. Contá-los num backtest é legítimo; contá-los como "jogos que eram para entrar"
-não é — e é a diferença entre 5 picks no log e 75 no relatório. **Diga qual universo você usou em cada um dos 75 jogos.**
+**Como o Thiago opera (corrige a definição de "executável"):** ele entra em BLOCOS — manhã, tarde e noite — e roda o
+gerador de novo em cada bloco para ver se a odd mudou e decidir se entra. Então o universo executável **não** é só o
+feed da manhã: é a união das consultas do dia, cada jogo com a odd da rodada em que ele apareceu, e sempre **antes do
+KO**. Um jogo de 21h que só entra na faixa 10-20 na consulta das 18h é executável; um jogo das 11h que só apareceu na
+base dois dias depois não é.
+
+Com essa definição, os 4 extras de 19/09 (Pardubice, Elgin City, Dundee, Alverca) só contam se estivessem em ALGUMA
+consulta do dia 19 antes do respectivo KO. Contá-los porque a base consolidada encheu depois é backtest, não execução —
+e é aí que 5 picks no log viram 75 no relatório. **Diga, para cada um dos 75, em que consulta do dia ele apareceria e
+se o KO ainda estava no futuro nessa hora.**
 
 ### 2. Linha duplicada quando a base consolidada já tem o dia
 Concatenar `hist` + feed diário duplica o mesmo jogo, porque as duas fontes trazem `Odd_CS_0x0` levemente diferente.
@@ -73,13 +80,22 @@ estável e, se não for, qual critério você usou (primeira chamada? maior resp
 1. **Tabela linha a linha dos seus 75 jogos** com: `Data, Liga, Home, Away, odd_lay, p, EV, fonte da Odd_CS_0x0
    (b365/Betfair), casamento (exato/fuzzy), universo (endpoint diário do dia / base consolidada), placar, fonte do
    placar, GREEN/RED`. Sem essa tabela não há como fechar a diferença.
-2. **Duas contas separadas, declaradas**: (a) *executável* — só jogos que estavam no feed da manhã do próprio dia;
-   (b) *retrospectiva* — tudo que a base mostra hoje. As duas são úteis, mas só (a) responde "quantos jogos eu
-   poderia ter feito em setembro".
+2. **Duas contas separadas, declaradas**: (a) *executável em blocos* — jogos que apareceriam em alguma das consultas
+   do próprio dia (manhã / tarde / noite), com KO ainda no futuro na hora da consulta, cada um com a odd daquela
+   consulta; (b) *retrospectiva* — tudo que a base consolidada mostra hoje. As duas são úteis, mas só (a) responde
+   "quantos jogos eu poderia ter feito em setembro".
 3. **Recontagem de setembro** em cada uma das duas contas, com N, greens, reds, WR, BE médio, margem em pp,
    P&L em liability 1u e ROI.
 4. Se, depois disso, os números continuarem diferentes dos do Claude, aponte o jogo específico em que discordamos —
    não a metodologia em geral.
+
+## Já corrigido no código (não precisa auditar, mas afeta a contagem daqui para frente)
+- O arquivo `picks_0x0_<dia>.csv` era **sobrescrito** a cada rodada: rodar de novo à tarde apagava os picks da manhã e
+  trocava a odd gravada pela da tarde. Agora o dia **acumula**, cada jogo com a odd da primeira consulta em que a regra
+  o aprovou, e o pick guarda o bloco (manhã/tarde/noite) e a hora.
+- Casamento da odd de lay agora é exato + por semelhança (antes só exato, perdia ~metade dos jogos do dia).
+- Pick só com KO no futuro.
+- `Odd_CS_0x0` volta a sair exclusivamente do b365.
 
 ## Contexto que não deve ser esquecido
 - Setembro tem N≈70. O pré-registro pede **1.476** apostas para decidir. Nenhuma das duas contas aprova ou reprova
