@@ -1237,3 +1237,37 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 24/09/2026  8:45:01,62 ===== 
+[*] Buscando fixtures para a data: 2026-09-24...
+2026-09-24 08:45:07.234 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 4 jogos obtidos da API Betfair para 2026-09-24!
+[SUCESSO] Feed diário gerado e enriquecido com 4 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-24.parquet (4 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

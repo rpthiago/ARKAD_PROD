@@ -15143,3 +15143,1533 @@ Traceback (most recent call last):
     col_m = [c for c in g.columns if "todo" in c.lower()][0]
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
 IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 224, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 205, in main
+    D = avaliar_dia(dia, agora, of)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\stop_diario.py", line 142, in avaliar_dia
+    col_m = [c for c in g.columns if "todo" in c.lower()][0]
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
