@@ -8,7 +8,7 @@ STAKE-ZERO por padrao: mostra sugestao, NAO aposta. Voce lanca o Lay 0-0 na mao.
 
   python gerar_picks_dia.py [YYYY-MM-DD]
 """
-import sys, os, warnings, unicodedata, re
+import sys, os, warnings, unicodedata, re, difflib
 warnings.filterwarnings("ignore")
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE)
@@ -47,7 +47,9 @@ def tg(msg):
         except Exception as e:
             print("[tg erro]", str(e)[:80])
 
-dia = sys.argv[1] if len(sys.argv) > 1 else datetime.now().strftime("%Y-%m-%d")
+import re as _re
+_datas = [a for a in sys.argv[1:] if _re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)]
+dia = _datas[0] if _datas else datetime.now().strftime("%Y-%m-%d")
 print("Carregando base + jogos do dia (%s)..." % dia)
 hist = B.load_b365_historical()
 hist["Date"] = pd.to_datetime(hist["Date"], errors="coerce")
@@ -63,7 +65,12 @@ if (today is None or len(today) < 10) and (bf_daily is not None and not bf_daily
         "Odd_Under05_FT_Back": "Odd_Under05_FT", "Odd_Under15_FT_Back": "Odd_Under15_FT",
         "Odd_Under25_FT_Back": "Odd_Under25_FT", "Odd_Under35_FT_Back": "Odd_Under35_FT",
         "Odd_BTTS_Yes_Back": "Odd_BTTS_Yes", "Odd_BTTS_No_Back": "Odd_BTTS_No",
-        "Odd_CS_0x0_Back": "Odd_CS_0x0",
+        # NAO mapear Odd_CS_0x0_Back -> Odd_CS_0x0: a feature mkt_prob_0x0 = 1/Odd_CS_0x0 foi TREINADA
+        # na odd de back do b365. A odd de back do 0x0 na Betfair e 1,18-1,27x a do b365 (medido em
+        # 79 jogos, 18-20/09/2026), o que baixa mkt_prob e faz o filtro congelado mkt<0.10 aprovar
+        # 84,8% dos jogos em vez de 69,6% (+15,2pp) — seria afrouxar a regra pre-registrada.
+        # O fallback da Betfair serve so para a GRADE de jogos do dia; sem odd de 0x0 do b365 o jogo
+        # nao gera sinal (mkt_prob fica NaN e o dropna dos features o retira), como sempre foi.
     }
     for c_src, c_dst in col_map_bf.items():
         if c_src in bf_mapped.columns and c_dst not in bf_mapped.columns:
@@ -75,6 +82,9 @@ if (today is None or len(today) < 10) and (bf_daily is not None and not bf_daily
 if today is None or today.empty:
     print("sem jogos no feed bet365/betfair para", dia); sys.exit()
 today = today.copy(); today["Date"] = pd.to_datetime(dia)
+_n0x0 = pd.to_numeric(today.get("Odd_CS_0x0"), errors="coerce").notna().sum() if "Odd_CS_0x0" in today.columns else 0
+print("  grade do dia: %d jogos | com odd de 0x0 do b365 (necessaria p/ mkt_prob): %d | sem: %d"
+      % (len(today), _n0x0, len(today) - _n0x0))
 comb = pd.concat([hist, today], ignore_index=True, sort=False)
 df, feats = T0x0.build_features(comb, "Odd_CS_0x0")
 df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
@@ -103,15 +113,52 @@ if bf is not None and not bf.empty:
         twinmap[k] = (_n(r,"Odd_Over05_FT_Back"), _n(r,"Odd_Under05_FT_Lay"))
         komap[k] = str(r.get("Time","") or "")
 
+# Os nomes do feed b365 e do feed Betfair divergem ("DC United" x "DC Utd", "Jeonbuk" x "Jeonbuk Motors"):
+# metade dos jogos do dia nao casava por igualdade e perdia a odd de lay (medido em 18-22/09/2026: em
+# 19/09 casavam 49 por nome exato e outros 47 so por semelhanca). Mesmo criterio do relatorio das 06:00:
+# cada lado >= 0.60 de semelhanca e a media dos dois >= 0.80.
+_LAYKEYS = list(laymap)
+def achar_chave(k):
+    """chave do feed Betfair para este jogo: exata primeiro, depois a mais parecida. -> (chave, tipo) ou (None, None)"""
+    if k in laymap: return k, "exato"
+    best, bs = None, 0.0
+    for kb in _LAYKEYS:
+        sh = difflib.SequenceMatcher(None, k[0], kb[0]).ratio()
+        if sh < 0.60: continue
+        sa = difflib.SequenceMatcher(None, k[1], kb[1]).ratio()
+        if sa < 0.60: continue
+        sc = (sh + sa) / 2
+        if sc > bs: bs, best = sc, kb
+    return (best, "fuzzy%.2f" % bs) if (best and bs >= 0.80) else (None, None)
+
+AGORA = datetime.now()
+RETRO = "--retro" in sys.argv          # so para backfill/diagnostico: aceita jogo com KO no passado
 rows = []
-funil = {"jogos": 0, "sem_odd_lay": 0, "sem_liga_ou_mkt": 0,
+funil = {"jogos": 0, "sem_odd_lay": 0, "sem_liga_ou_mkt": 0, "ko_passado": 0, "ko_desconhecido": 0,
+         "casou_exato": 0, "casou_fuzzy": 0,
          "reprova_liga": 0, "reprova_mkt": 0, "reprova_faixa_odd": 0, "reprova_ev": 0, "passou": 0}
 for _, r in live.iterrows():
     funil["jogos"] += 1
-    k = (canon(r["Home"]), canon(r["Away"]))
-    lay = laymap.get(k)
+    k0 = (canon(r["Home"]), canon(r["Away"]))
+    k, tipo = achar_chave(k0)
+    lay = laymap.get(k) if k else None
     if lay is None:
         funil["sem_odd_lay"] += 1
+        continue
+    funil["casou_exato" if tipo == "exato" else "casou_fuzzy"] += 1
+    # PRE-KO obrigatorio (Lei 9: o gerador so cria PENDENTE antes da bola rolar). Sem isto, rodar o
+    # botao do Streamlit a noite geraria "picks" de jogos ja encerrados e o liquidador os trataria
+    # como pre-registrados.
+    _hhmm = str(komap.get(k, ""))[:5]
+    if _hhmm and ":" in _hhmm:
+        try: _ko = datetime.strptime("%s %s" % (dia, _hhmm), "%Y-%m-%d %H:%M")
+        except Exception: _ko = None
+    else:
+        _ko = None
+    if _ko is None:
+        funil["ko_desconhecido"] += 1
+    elif _ko <= AGORA and not RETRO:
+        funil["ko_passado"] += 1
         continue
     p = float(r["p"]); ev = p*(1-COMM) - (1-p)*(lay-1)
     liga_rate = float(r.get("liga_0x0_rate")) if pd.notna(r.get("liga_0x0_rate")) else None
@@ -135,7 +182,7 @@ for _, r in live.iterrows():
                      odd_lay=round(lay,2), p=round(p,3), ev=round(ev,3),
                      liga_0x0=round(liga_rate,3), mkt_prob=round(mkt,3),
                      stake_pct_banca=round(stake_frac*100,2), link=link,
-                     home=r["Home"], away=r["Away"], ko=komap.get(k,""),
+                     home=r["Home"], away=r["Away"], ko=komap.get(k,""), casou=tipo,
                      over05_back=o05b, under05_lay=u05l))
 out = pd.DataFrame(rows).sort_values("ev", ascending=False) if rows else pd.DataFrame()
 # --- LOG DE CLV: grava a ENTRADA (gemeos CS_0x0 lay / Over0.5 back) p/ medir vs fechamento ---
@@ -168,6 +215,8 @@ if out.empty:
     print("Nenhum jogo bate a regra congelada hoje.")
     print("  funil: %d jogos do dia | sem odd de lay: %d | sem liga/mkt: %d" %
           (funil["jogos"], funil["sem_odd_lay"], funil["sem_liga_ou_mkt"]))
+    print("  casamento com o feed Betfair: %d exatos + %d por semelhanca | KO ja passado: %d | KO desconhecido: %d" %
+          (funil["casou_exato"], funil["casou_fuzzy"], funil["ko_passado"], funil["ko_desconhecido"]))
     print("  reprovados por  liga>=0.08: %d | mkt>=0.10: %d | odd fora de 10-20: %d | ev<=0.02: %d" %
           (funil["reprova_liga"], funil["reprova_mkt"],
            funil["reprova_faixa_odd"], funil["reprova_ev"]))
@@ -178,8 +227,8 @@ if out.empty:
         "➖➖➖➖➖",
         "Nenhum jogo bate a regra congelada hoje.",
         "",
-        "<b>Funil:</b> %d jogos do dia · %d sem odd de lay · %d sem liga/mkt" %
-        (funil["jogos"], funil["sem_odd_lay"], funil["sem_liga_ou_mkt"]),
+        "<b>Funil:</b> %d jogos do dia · %d sem odd de lay · %d sem liga/mkt · %d com KO ja passado" %
+        (funil["jogos"], funil["sem_odd_lay"], funil["sem_liga_ou_mkt"], funil["ko_passado"]),
         "Reprovados: liga %d · mkt %d · odd fora 10-20 %d · EV %d" %
         (funil["reprova_liga"], funil["reprova_mkt"],
          funil["reprova_faixa_odd"], funil["reprova_ev"]),
