@@ -7,6 +7,19 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-23 (noite) · Antigravity · Auditoria de Setembro do `Lay 0x0 XGBoost` (`72G/3R`) & Promoção para `10% Liability` no Cenário B7 (`Páginas 01 e 02`)
+
+- **Feito:**
+  - Auditada a performance de Setembro/2026 (`01/09 a 20/09`) do método `Lay 0x0 (Modelo Quantitativo XGBoost)` sob a regra estrita congelada (`Sweet Spot Lay [10.0, 20.0]`, `EV > 2%`, `Liga Draw < 8%`, `Odd_CS_0x0` da `b365` + casamento Fuzzy `0.60/0.80` com a `Odd_CS_0x0_Lay` real da Betfair Exchange + filtro `ko > agora`): **75 jogos qualificados (`72 Greens / 3 Reds`, `96,0% WR` vs `94,2% BE`, `+1,43u` sobre Liability / `+21,65u` sobre Stake)**.
+  - Simulado o impacto de `5%` vs `10%` vs `15%` de Liability no `Lay 0x0 XGBoost` dentro do **Cenário B7 Completo** (`Banca Inicial R$ 2.000,00`, `Stop Diário -10% / +10%`):
+    - **`5,0%`:** Banca Final `R$ 5.930,29` (`+196,5%`), Lucro `0x0`: `+R$ 276,40`, Max DD: `-30,96%`.
+    - **`10,0%` (Ponto Ótimo Adotado):** Banca Final **`R$ 6.113,80` (`+205,7%`)**, Lucro `0x0`: **`+R$ 513,30`**, **Max DD inalterado em `-30,96%`** (`1 RED = -10,0%`, cravando no Stop Diário de `-10%`).
+    - **`15,0%` (Rejeitado):** Embora suba para `R$ 6.335,21`, `1 RED` isolado tira `-15,0%` da banca (furando o Stop Diário de `-10%` em 50%) e piora o Max Drawdown para `-34,80%` (`+3,84 pp`).
+  - Atualizada a Gestão Diferenciada e o banner oficial de Governança em `pages/01_🏆_Portfolio_Metodos_Aprovados.py` e `pages/02_📊_Resultados_Metodos_Aprovados.py` para **`15%` Over 4.5 | `10%` `Lay 0x0 XGBoost`, `Lay 0x3 Top 3` e `Lay 2x2 Top 3` | `5%` `Lay Draw` e `Lay Home`**.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+
+---
+
 ## 2026-09-23 · Antigravity · Estudo de Copas no `Lay Draw` (2024–2026 e 2026) & Regra Estrutural Anti-Overfit Aplicada na Página 01
 
 - **Feito:**

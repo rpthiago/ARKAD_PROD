@@ -84,11 +84,14 @@ st.warning("""
 * **Rótulo Oficial:** Os métodos da Tríade estão classificados como **PROMISSORES / EM VALIDAÇÃO FORWARD**, e **NÃO como Aprovados** até completarem o portão estatístico ($N \ge 400$ apostas ou 5 fins de semana completos com IC95% pós-FDR excluindo zero).
 * **🛡️ Regra Estrutural do `Lay Draw (Fav <= 1.40 | Lay 4.50–10.00)` em Ligas vs. Copas (Validada em 3 Anos `FRESH3`, $p = 0,0022$):**
   1. **Em Ligas Nacionais (Pontos Corridos):** Entra com Super Favorito em **Casa OU Fora** (`min(Odd_H_Back, Odd_A_Back) <= 1.40`).
-  2. **Em Copas (Nacionais ou Continentais):** Entra **SOMENTE quando o Super Favorito joga EM CASA (`Odd_H_Back <= 1.40`)**. Jogos de Copa com favorito visitante (`Odd_A_Back <= 1.40`, taxa de empate `20,7%` e `ROI −8,64%`) são **bloqueados automaticamente** pelo scanner.
+  2. **Em Copas (Nacionais ou Continentais):** Entra **SOMENTE quando o Super Favorito joga EM CASA (`Odd_H_Back <= 1.40`)**. Jogos de Copa com favorito visitante (`Odd_A_Back <= 1.40`, taxa de empate `20,7%` e `ROI −8,64%)` são **bloqueados automaticamente** pelo scanner.
   3. **Torneios de Seleções (`WORLD`, `NATIONS LEAGUE`, `EUROCUP`, `AMERICA CUP`):** **Bloqueados automaticamente** (taxa de empate `16,2%`, `ROI −2,19%`).
   4. **Proibição de Blacklist por Nome de Campeonato (Anti-Overfit):** É proibido excluir campeonatos isolados pelo nome (`Libertadores`, `Sudamericana`, `Conference`) por conta de amostras curtas.
   5. **📋 Regra de Mesa (Leitura de Regulamento — Mata-Mata Ida e Volta):** Se o scanner apontar sinal de `Lay Draw` em jogo de **volta de mata-mata** onde o favorito mandante **já venceu o jogo de ida (joga pelo empate no agregado)**, **NÃO ENTRAR (pular manualmente)** — pois no empate aos 70'+ o favorito administra o relógio em vez de se expor.
-* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (`15%` Over 4.5 | `10%` CS Top 3 `0x3` e `2x2` | `5%` Draw, Home e `0x0`) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
+* **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
+  - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (`75` entradas em Setembro/2026: `72 Greens / 3 Reds`, `96,0% WR`).
+  - **Alocação de Risco (`10%` Liability):** Promovido do degrau de `5%` para **`10%` de Liability** (onde `1 RED = -10,0%` da banca, respeitando exatamente o Stop Diário de `-10%` e dobrando o lucro sem aumentar o Max Drawdown de `-30,96%`).
+* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x0 XGBoost`, `Lay 0x3 Top 3` e `Lay 2x2 Top 3`** | **`5%` `Lay Draw` e `Lay Home`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
 Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
@@ -99,11 +102,12 @@ estritamente com **odds de lay reais da Betfair Exchange** e ledger de paper tra
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
 perfil_stake = st.sidebar.selectbox("Risco Máx por Aposta (Liability)", [
+    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 0x0, 2x2, 0x3 | 5.0% em Home, Draw)",
     "Conservador (0.5% da banca)", 
     "Moderado (1.0% da banca)", 
     "Firme (2.0% da banca)", 
     "Agressivo / Alavancado (5.0% da banca)"
-], index=3)
+], index=0)
 
 if "0.5%" in perfil_stake:
     pct_risco = 0.005
@@ -115,8 +119,16 @@ else:
     pct_risco = 0.050
 
 liability_fixa = banca_total * pct_risco
-st.sidebar.success(f"🛡️ **Liability Fixa Máx (5%):** R$ {liability_fixa:.2f}")
-st.sidebar.caption(f"Cada RED perde exatamente R$ {liability_fixa:.2f} ({pct_risco*100:.1f}% da banca).")
+if "Diferenciada" in perfil_stake:
+    st.sidebar.success(
+        f"🛡️ **Gestão Diferenciada B7 Ativa:**\n"
+        f"- **15% (Over 4.5):** R$ {banca_total * 0.15:,.2f}\n"
+        f"- **10% (0x0, 2x2, 0x3):** R$ {banca_total * 0.10:,.2f}\n"
+        f"- **5% (Draw, Home):** R$ {banca_total * 0.05:,.2f}"
+    )
+else:
+    st.sidebar.success(f"🛡️ **Liability Fixa Máx ({pct_risco*100:.1f}%):** R$ {liability_fixa:.2f}")
+    st.sidebar.caption(f"Cada RED perde exatamente R$ {liability_fixa:.2f} ({pct_risco*100:.1f}% da banca).")
 st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
@@ -463,10 +475,18 @@ with tab1:
         # Exibição direta da planilha formatada com dimensionamento automático
         df_calc = df_radar_filt.copy()
         
-        # Micro-liability para Zebras (travado em R$ 25 a R$ 50 para proteção patrimonial)
+        # Dimensionamento de Liability por método (Diferenciada B7 ou Uniforme) + Micro-liability para Zebras
         def _calc_risco(m):
-            if "Zebra" in str(m) or "Micro-Liability" in str(m):
+            m_str = str(m)
+            if "Zebra" in m_str or "Micro-Liability" in m_str:
                 return min(liability_fixa, 50.0)
+            if "Diferenciada" in perfil_stake:
+                if "Over 4.5" in m_str:
+                    return round(banca_total * 0.15, 2)
+                elif "0x3" in m_str or "2x2" in m_str or "0x0" in m_str:
+                    return round(banca_total * 0.10, 2)
+                else:
+                    return round(banca_total * 0.05, 2)
             return liability_fixa
             
         df_calc["Risco_Red_R$"] = df_calc["Método"].apply(_calc_risco)
