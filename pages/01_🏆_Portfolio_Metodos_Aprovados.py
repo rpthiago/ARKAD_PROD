@@ -89,8 +89,8 @@ st.warning("""
   4. **Proibição de Blacklist por Nome de Campeonato (Anti-Overfit):** É proibido excluir campeonatos isolados pelo nome (`Libertadores`, `Sudamericana`, `Conference`) por conta de amostras curtas.
   5. **📋 Regra de Mesa (Leitura de Regulamento — Mata-Mata Ida e Volta):** Se o scanner apontar sinal de `Lay Draw` em jogo de **volta de mata-mata** onde o favorito mandante **já venceu o jogo de ida (joga pelo empate no agregado)**, **NÃO ENTRAR (pular manualmente)** — pois no empate aos 70'+ o favorito administra o relógio em vez de se expor.
 * **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
-  - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (`75` entradas em Setembro/2026: `72 Greens / 3 Reds`, `96,0% WR`).
-  - **Alocação de Risco (`10%` Liability):** Promovido do degrau de `5%` para **`10%` de Liability** (onde `1 RED = -10,0%` da banca, respeitando exatamente o Stop Diário de `-10%` e dobrando o lucro sem aumentar o Max Drawdown de `-30,96%`).
+  - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (Auditoria Set/2026: **Retrospectiva Limpa `70j: 66G / 4R`, `94,3% WR`, `+0,04u`** | **Ledger Ao Vivo `10j: 9G / 1R`, `−0,46u`**).
+  - **Alocação de Risco (`10%` Liability):** Configurado no degrau de **`10%` de Liability** (`1 RED = -10,0%` da banca, cravando no Stop Diário de `-10%`).
 * **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x0 XGBoost`, `Lay 0x3 Top 3` e `Lay 2x2 Top 3`** | **`5%` `Lay Draw` e `Lay Home`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
@@ -318,14 +318,10 @@ with tab1:
         # 3. Lay 0x0 XGBoost (Sweet Spot [10, 20])
         try:
             f_p0 = ROOT / "forward_0x0" / f"picks_0x0_{ds_iso}.csv"
-            if not f_p0.exists() and ds_iso >= date.today().strftime("%Y-%m-%d"):
-                import subprocess
-                _script_0x0 = ROOT / "forward_0x0" / "gerar_picks_dia.py"
-                if _script_0x0.exists():
-                    try:
-                        subprocess.run([sys.executable, str(_script_0x0), ds_iso], cwd=str(ROOT), timeout=45, check=False)
-                    except Exception:
-                        pass
+            # NAO rodar o motor XGBoost aqui: ele carrega a base b365 (244 MB em disco, ~590 MB em memoria)
+            # e treina o modelo. No Streamlit Cloud (1 GB) isso derruba o container inteiro ("Error running
+            # app") — e esta e a pagina em que o Thiago decide a entrada, ela nao pode cair. Os picks do dia
+            # sao gerados pelo robo local (o .bat rodar_0x0) e lidos daqui como arquivo.
             df_p0 = pd.DataFrame()
             if f_p0.exists():
                 df_p0 = pd.read_csv(f_p0)

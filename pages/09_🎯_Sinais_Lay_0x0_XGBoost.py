@@ -85,7 +85,14 @@ with tab1:
         if btn_buscar or df_picks.empty:
             import subprocess
             _script_0x0 = FORWARD_0X0_DIR / "gerar_picks_dia.py"
-            if _script_0x0.exists() and (btn_buscar or target_str >= date.today().strftime("%Y-%m-%d")):
+            # No Streamlit Cloud (1 GB de RAM) rodar o motor mata o container: a base b365 sozinha ocupa
+            # ~590 MB em memoria. Na nuvem a pagina so LE o arquivo de picks gerado pelo robo local.
+            _na_nuvem = str(ROOT).startswith("/mount/src") or bool(os.environ.get("STREAMLIT_SHARING_MODE"))
+            if _na_nuvem:
+                st.info("Os picks do dia sao gerados pelo robo local (forward_0x0\rodar_0x0.bat). "
+                        "Aqui na nuvem esta pagina apenas mostra o arquivo do dia — rodar o modelo XGBoost "
+                        "exigiria ~600 MB de RAM e derrubaria o app.")
+            if (not _na_nuvem) and _script_0x0.exists() and (btn_buscar or target_str >= date.today().strftime("%Y-%m-%d")):
                 with st.spinner(f"Rodando motor XGBoost Lay 0x0 para {target_str}..."):
                     try:
                         subprocess.run([sys.executable, str(_script_0x0), target_str], cwd=str(ROOT), timeout=60, check=False)
