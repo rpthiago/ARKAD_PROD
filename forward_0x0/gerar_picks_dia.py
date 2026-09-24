@@ -215,7 +215,14 @@ print("\n" + "="*70)
 print("PICKS LAY 0x0 XGBoost (regra congelada) — %s — OBSERVACAO/STAKE-ZERO" % dia)
 print("="*70)
 if out.empty:
+    _blk = "manha" if AGORA.hour < 12 else ("tarde" if AGORA.hour < 18 else "noite")
+    _ja = 0
+    if os.path.exists(picks_path):
+        try: _ja = len(pd.read_csv(picks_path))
+        except Exception: _ja = 0
     print("Nenhum jogo bate a regra congelada hoje.")
+    print("  0 pick(s) nesta rodada (%s), 0 novos no dia. Arquivo do dia: %s com %d pick(s)."
+          % (_blk, os.path.basename(picks_path), _ja))
     print("  funil: %d jogos do dia | sem odd de lay: %d | sem liga/mkt: %d" %
           (funil["jogos"], funil["sem_odd_lay"], funil["sem_liga_ou_mkt"]))
     print("  casamento com o feed Betfair: %d exatos + %d por semelhanca | KO ja passado: %d | KO desconhecido: %d" %
@@ -239,13 +246,32 @@ if out.empty:
         "<i>Esta mensagem confirma que o robô rodou. Se um dia ela não chegar às 5:30, aí sim algo quebrou.</i>",
     ]))
 else:
-    out.to_csv(picks_path, index=False)
+    # O Thiago entra em BLOCOS (manha, tarde, noite) e roda de novo para ver se a odd mudou. Por isso o
+    # arquivo do dia ACUMULA: cada jogo fica com a odd da PRIMEIRA vez que a regra o aprovou (foi essa a
+    # decisao), e as rodadas seguintes so acrescentam jogos novos — sem sobrescrever os anteriores.
+    out["bloco"] = "manha" if AGORA.hour < 12 else ("tarde" if AGORA.hour < 18 else "noite")
+    out["gerado_em"] = AGORA.strftime("%Y-%m-%d %H:%M")
+    novos_n = len(out)
+    if os.path.exists(picks_path):
+        try:
+            antes_df = pd.read_csv(picks_path)
+            juntos = pd.concat([antes_df, out], ignore_index=True, sort=False)
+            juntos = juntos.drop_duplicates(subset=["home", "away"], keep="first")
+            novos_n = len(juntos) - len(antes_df)
+            out_grav = juntos
+        except Exception as e:
+            print("  [aviso] nao consegui ler %s (%s); regravando so os desta rodada" % (os.path.basename(picks_path), str(e)[:60]))
+            out_grav = out
+    else:
+        out_grav = out
+    out_grav.to_csv(picks_path, index=False)
     for _, r in out.iterrows():
         print("• %-40s [%s]" % (r["jogo"][:40], r["liga"]))
         print("   Lay 0-0 @ %.2f | p=%.3f | EV=%+.3f | liga=%.3f mkt=%.3f | 0.25Kelly=%.2f%% banca"
               % (r["odd_lay"], r["p"], r["ev"], r["liga_0x0"], r["mkt_prob"], r["stake_pct_banca"]))
         print("   %s" % r["link"])
-    print("\n%d pick(s). Salvo em %s" % (len(out), os.path.basename(picks_path)))
+    print("\n%d pick(s) nesta rodada (%s), %d novos no dia. Arquivo do dia: %s com %d pick(s)."
+          % (len(out), out["bloco"].iloc[0], novos_n, os.path.basename(picks_path), len(out_grav)))
     # ---- Telegram (so quando ha pick) ----
     L = ["🎯 <b>PICKS LAY 0-0 (XGBoost) — %s</b>" % dia,
          "<i>observação / stake-zero (forward N&lt;300)</i>", "➖➖➖➖➖"]

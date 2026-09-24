@@ -61,8 +61,13 @@ com0x0 = num(g, r"com odd de 0x0 do b365 [^:]*: (\d+)")
 feat = num(g, r"jogos hoje featurizados=(\d+)")
 casou = int(num(g, r"casamento com o feed Betfair: (\d+) exatos", default="0") or 0) + int(num(g, r"exatos \+ (\d+) por semelhanca", default="0") or 0)
 ko_pass = num(g, r"KO ja passado: (\d+)", default="0")
-picks = num(g, r"(\d+) pick\(s\)\.", default=None)
-if picks is None: picks = "0" if "Nenhum jogo bate a regra" in g else "?"
+picks = num(g, r"(\d+) pick\(s\) nesta rodada", default=None)
+novos = num(g, r", (\d+) novos no dia", default="?")
+no_dia = num(g, r"com (\d+) pick\(s\)\.", default="?")
+bloco = num(g, r"nesta rodada \(([a-z]+)\)", default="?")
+if picks is None:
+    picks = "0" if "Nenhum jogo bate a regra" in g else "?"
+    novos, no_dia, bloco = "0", no_dia, "?"
 lig = num(q, r"ledger gravado: [^(]*\((\d+) linhas\)")
 fwd = re.search(r"N=(\d+) \| (\d+)G/(\d+)R \| WR=\s*([\d.]+)% vs break-even medio\s*([\d.]+)%", q)
 roi = num(q, r"LIABILITY=1u: soma [^|]*\| ROI\s*([+-]?[\d.]+%)", default="?")
@@ -72,6 +77,8 @@ linhas = ["", "=" * 78,
           "=" * 78,
           "  dia:    %s jogos na grade -> %s com odd de 0x0 do b365 -> %s com features -> %s casados com a Betfair -> %s pick(s)"
           % (grade, com0x0, feat, casou, picks),
+          "  rodada: bloco %s | %s pick(s) novos | o dia acumula %s pick(s) (voce entra em blocos: manha/tarde/noite)"
+          % (bloco, novos, no_dia),
           "          (descartados por KO ja passado: %s)" % ko_pass]
 if fwd:
     linhas.append("  forward: N=%s liquidadas (%sG/%sR) | WR %s%% vs BE %s%% | ROI liability %s | ledger %s linhas"
