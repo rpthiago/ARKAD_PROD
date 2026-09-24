@@ -1,6 +1,8 @@
 [server]
 headless = true
-enableCORS = false
+# enableCORS ficava false e o Streamlit avisava, em TODO script, que estava ignorando isso
+# (enableXsrfProtection=true vence). Declarado como o Streamlit ja fazia: tira o aviso dos logs.
+enableCORS = true
 
 [browser]
 gatherUsageStats = false
