@@ -42,7 +42,7 @@ banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value
 tipo_gestao = st.sidebar.selectbox(
     "Modelo de Gestão de Risco (Liability)",
     options=[
-        "🎯 Diferenciada (15% Over 4.5 | 10% em 0x0, 2x2, 0x3 | 5.0% em Home, Draw)",
+        "🎯 Diferenciada (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, 0x0)",
         "⚖️ Uniforme (5.0% Fixa para Todos)",
         "🔥 Uniforme (10.0% Fixa para Todos)"
     ],
@@ -53,8 +53,8 @@ if "Diferenciada" in tipo_gestao:
     st.sidebar.markdown(f"""
     **Alocação de Liability por Entrada:**
     * 🟡 **15.0% da Banca (R$ {banca_total * 0.15:,.2f}):** Lay Over 4.5 FT (Under Pesado — 97.8% WR)
-    * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 0x0 XGBoost, Lay 2x2 Top 3 e Lay 0x3 Top 3
-    * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home e Lay Draw
+    * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 2x2 Top 3 e Lay 0x3 Top 3
+    * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
     """)
 
 st.sidebar.markdown("---")
@@ -118,7 +118,7 @@ def _ler_excel_seguro(path):
 def carregar_dados_aprovados(
     modo="📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)",
     banca_total=2000.0,
-    tipo_gestao="🎯 Diferenciada (15% Over 4.5 | 10% em 0x0, 2x2, 0x3 | 5.0% em Home, Draw)",
+    tipo_gestao="🎯 Diferenciada (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, 0x0)",
     fator_comissao=0.965
 ):
     if not FOLDER.exists():
@@ -302,9 +302,9 @@ def carregar_dados_aprovados(
         if "Diferenciada" in tipo_gestao:
             if "Over 4.5" in m_str:
                 return round(banca_total * 0.15, 2)
-            elif "0x3" in m_str or "2x2" in m_str or "0x0" in m_str:
+            elif "0x3" in m_str or "2x2" in m_str:
                 return round(banca_total * 0.10, 2)
-            elif "Home" in m_str or "X2" in m_str or "Draw" in m_str:
+            elif "Home" in m_str or "X2" in m_str or "Draw" in m_str or "0x0" in m_str:
                 return round(banca_total * 0.05, 2)
             return round(banca_total * 0.05, 2)
         elif "10.0%" in tipo_gestao:
@@ -498,7 +498,7 @@ with tab_grafico:
         _df_b7["ko_min"] = _df_b7["Hora"].apply(_hm_min)
         _df_b7["end_min"] = _df_b7["ko_min"] + 115
         _df_b7["pct_liab"] = _df_b7["Método"].apply(
-            lambda m: 0.15 if "Over 4.5" in str(m) else (0.10 if ("0x3" in str(m) or "2x2" in str(m) or "0x0" in str(m)) else 0.05)
+            lambda m: 0.15 if "Over 4.5" in str(m) else (0.10 if ("0x3" in str(m) or "2x2" in str(m)) else 0.05)
         )
         _df_b7 = _df_b7.sort_values(["Data", "ko_min", "Método"]).reset_index(drop=True)
 

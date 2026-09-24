@@ -7,16 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
-## 2026-09-23 (noite) · Antigravity · Auditoria de Setembro do `Lay 0x0 XGBoost` (`72G/3R`) & Promoção para `10% Liability` no Cenário B7 (`Páginas 01 e 02`)
+## 2026-09-24 · Antigravity · Auditoria Forense Setembro `Lay 0x0 XGBoost` (`75` vs `70` 06h vs `65` Perto do KO) & Confirmação de `5,0% Liability` no Cenário B7 (`Páginas 01 e 02`)
 
 - **Feito:**
-  - Auditada a performance de Setembro/2026 (`01/09 a 20/09`) do método `Lay 0x0 (Modelo Quantitativo XGBoost)` sob a regra estrita congelada (`Sweet Spot Lay [10.0, 20.0]`, `EV > 2%`, `Liga Draw < 8%`, `Odd_CS_0x0` da `b365` + casamento Fuzzy `0.60/0.80` com a `Odd_CS_0x0_Lay` real da Betfair Exchange + filtro `ko > agora`): **75 jogos qualificados (`72 Greens / 3 Reds`, `96,0% WR` vs `94,2% BE`, `+1,43u` sobre Liability / `+21,65u` sobre Stake)**.
-  - Simulado o impacto de `5%` vs `10%` vs `15%` de Liability no `Lay 0x0 XGBoost` dentro do **Cenário B7 Completo** (`Banca Inicial R$ 2.000,00`, `Stop Diário -10% / +10%`):
-    - **`5,0%`:** Banca Final `R$ 5.930,29` (`+196,5%`), Lucro `0x0`: `+R$ 276,40`, Max DD: `-30,96%`.
-    - **`10,0%` (Ponto Ótimo Adotado):** Banca Final **`R$ 6.113,80` (`+205,7%`)**, Lucro `0x0`: **`+R$ 513,30`**, **Max DD inalterado em `-30,96%`** (`1 RED = -10,0%`, cravando no Stop Diário de `-10%`).
-    - **`15,0%` (Rejeitado):** Embora suba para `R$ 6.335,21`, `1 RED` isolado tira `-15,0%` da banca (furando o Stop Diário de `-10%` em 50%) e piora o Max Drawdown para `-34,80%` (`+3,84 pp`).
-  - Atualizada a Gestão Diferenciada e o banner oficial de Governança em `pages/01_🏆_Portfolio_Metodos_Aprovados.py` e `pages/02_📊_Resultados_Metodos_Aprovados.py` para **`15%` Over 4.5 | `10%` `Lay 0x0 XGBoost`, `Lay 0x3 Top 3` e `Lay 2x2 Top 3` | `5%` `Lay Draw` e `Lay Home`**.
-- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+  - Respondido integralmente o `PROMPT_GEMINI_auditar_setembro_0x0.md` em `AUDITORIA_SETEMBRO_0X0_RESPOSTA_GEMINI.md` e `varredura_over/auditoria_75_jogos_antigravity.csv`:
+    1. **Conta `b1` (Feed 06:00 AM do Claude):** **`70 sinais (66G / 4R, WR 94,29% vs BE 94,22%, P&L +0,04u, ROI +0,05%)`**. Demonstrado que o 4º RED (`14/09 Gaziantep × Fenerbahçe 0x0`) tinha `Odd_CS_0x0_Lay = 18,0` no feed das 06:00 AM (`Gaziantep FK`), mas `Odd_CS_0x0_Lay = 22,0` (`> 20,0`) na base Betfair perto do KO (`.cache_base_betfair.csv`, grafia `Gaziantep`).
+    2. **Operação em Blocos Perto do KO (Manhã, Tarde e Noite — `Hora = KO` + mesmo `p` diário do Claude):** **`65 sinais (62G / 3R, WR 95,38% vs BE 94,20%, P&L +0,80u, ROI +1,24%)`** — rodando no Bloco da Tarde (`14:00`), o `Gaziantep × Fenerbahçe` já estava em `Lay 22,0 > 20,0` e ficava de fora, evitando o 4º RED.
+    3. **Conta `a2` Executável no Limite de 100 Jogos/Dia do Endpoint B365:** **`29 sinais (27G / 2R, P&L −0,41u, ROI −1,43%)`** (`~9,7 apostas/semana` com o limite de 100 linhas vs `~22–23 apostas/semana` sem o limite).
+  - Re-executada a simulação completa do **Cenário B7** (`Banca Inicial R$ 2.000,00`, `Stop Diário -10% / +10%`) com os **horários reais (`ko_time`)** de cada partida:
+    - **`5,0%` Liability no `Lay 0x0` (Vencedor e Mantido):** **Banca Final `R$ 5.738,48` (`+186,92%`) e menor Max Drawdown (`-30,96%`)** em Operação em Blocos (`65j`), e **`R$ 5.498,00` (`-30,96%` DD)** no Feed 06:00 AM (`70j`).
+    - **`10,0%` Liability no `Lay 0x0`:** Cai para `R$ 5.667,65` (`-31,89%` DD) em Blocos e `R$ 5.255,00` (`-31,89%` DD) às 06:00 AM, porque um Red do `0x0` à tarde (`Málaga × Levante` às `13:30` ou `Hradec × Plzen` às `14:00`) bate `-10%` de uma só vez, acionando o Stop Loss Diário de `-10%` e bloqueando os Greens de `Over 4.5 (15%)`, `0x3 (10%)`, `2x2 (10%)` e `Draw (5%)` do resto do dia.
+  - Revertido o `Lay 0x0 XGBoost` para **`5,0%` de Liability** (`15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, 0x0`) em `pages/01_🏆_Portfolio_Metodos_Aprovados.py` e `pages/02_📊_Resultados_Metodos_Aprovados.py`.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `AUDITORIA_SETEMBRO_0X0_RESPOSTA_GEMINI.md`, `varredura_over/auditoria_75_jogos_antigravity.csv`, `worklog.md`.
 
 ---
 
