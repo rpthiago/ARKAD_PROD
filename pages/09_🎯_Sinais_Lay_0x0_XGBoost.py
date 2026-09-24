@@ -89,7 +89,7 @@ with tab1:
             # ~590 MB em memoria. Na nuvem a pagina so LE o arquivo de picks gerado pelo robo local.
             _na_nuvem = str(ROOT).startswith("/mount/src") or bool(os.environ.get("STREAMLIT_SHARING_MODE"))
             if _na_nuvem:
-                st.info("Os picks do dia sao gerados pelo robo local (forward_0x0\rodar_0x0.bat). "
+                st.info("Os picks do dia sao gerados pelo robo local (rodar_0x0.bat). "
                         "Aqui na nuvem esta pagina apenas mostra o arquivo do dia — rodar o modelo XGBoost "
                         "exigiria ~600 MB de RAM e derrubaria o app.")
             if (not _na_nuvem) and _script_0x0.exists() and (btn_buscar or target_str >= date.today().strftime("%Y-%m-%d")):
