@@ -306,6 +306,14 @@ with tab1:
         # 3. Lay 0x0 XGBoost (Sweet Spot [10, 20])
         try:
             f_p0 = ROOT / "forward_0x0" / f"picks_0x0_{ds_iso}.csv"
+            if not f_p0.exists() and ds_iso >= date.today().strftime("%Y-%m-%d"):
+                import subprocess
+                _script_0x0 = ROOT / "forward_0x0" / "gerar_picks_dia.py"
+                if _script_0x0.exists():
+                    try:
+                        subprocess.run([sys.executable, str(_script_0x0), ds_iso], cwd=str(ROOT), timeout=45, check=False)
+                    except Exception:
+                        pass
             df_p0 = pd.DataFrame()
             if f_p0.exists():
                 df_p0 = pd.read_csv(f_p0)

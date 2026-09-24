@@ -83,8 +83,20 @@ with tab1:
                 df_picks = pd.DataFrame()
                 
         if btn_buscar or df_picks.empty:
-            # Tenta buscar no ledger ou gerar
-            if LEDGER_FILE.exists():
+            import subprocess
+            _script_0x0 = FORWARD_0X0_DIR / "gerar_picks_dia.py"
+            if _script_0x0.exists() and (btn_buscar or target_str >= date.today().strftime("%Y-%m-%d")):
+                with st.spinner(f"Rodando motor XGBoost Lay 0x0 para {target_str}..."):
+                    try:
+                        subprocess.run([sys.executable, str(_script_0x0), target_str], cwd=str(ROOT), timeout=60, check=False)
+                    except Exception:
+                        pass
+            if picks_file.exists():
+                try:
+                    df_picks = pd.read_csv(picks_file)
+                except Exception:
+                    df_picks = pd.DataFrame()
+            if df_picks.empty and LEDGER_FILE.exists():
                 try:
                     df_l = pd.read_csv(LEDGER_FILE)
                     df_l_dia = df_l[df_l["Data"] == target_str].copy()

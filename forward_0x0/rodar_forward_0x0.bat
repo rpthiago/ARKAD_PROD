@@ -2,7 +2,7 @@
 REM Forward 0x0 XGBoost — regenera o OOS walk-forward (base atualizada) e analisa
 REM backtest + forward (>=03/08) + criterio pre-registrado. Roda 1x/semana pelo Agendador.
 set PY="C:\Users\thiag\anaconda3\envs\streamlit_env\python.exe"
-set DIR=C:\Users\thiag\OneDrive\Documentos\GitHub\DASHBOARD_ARKAD-1
+set DIR=C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD
 cd /d "%DIR%"
 set PYTHONIOENCODING=utf-8
 echo ===== %date% %time% ===== >> forward_0x0\forward_0x0.log

@@ -52,8 +52,28 @@ print("Carregando base + jogos do dia (%s)..." % dia)
 hist = B.load_b365_historical()
 hist["Date"] = pd.to_datetime(hist["Date"], errors="coerce")
 today = get_daily_dataframe("bet365", dia)
+bf_daily = get_daily_dataframe("betfair", dia)
+if (today is None or len(today) < 10) and (bf_daily is not None and not bf_daily.empty):
+    # Mapeia colunas _Back do feed Betfair para o schema da base historica (Odd_*_FT / Odd_CS_0x0)
+    bf_mapped = bf_daily.copy()
+    col_map_bf = {
+        "Odd_H_Back": "Odd_H_FT", "Odd_D_Back": "Odd_D_FT", "Odd_A_Back": "Odd_A_FT",
+        "Odd_Over05_FT_Back": "Odd_Over05_FT", "Odd_Over15_FT_Back": "Odd_Over15_FT",
+        "Odd_Over25_FT_Back": "Odd_Over25_FT", "Odd_Over35_FT_Back": "Odd_Over35_FT",
+        "Odd_Under05_FT_Back": "Odd_Under05_FT", "Odd_Under15_FT_Back": "Odd_Under15_FT",
+        "Odd_Under25_FT_Back": "Odd_Under25_FT", "Odd_Under35_FT_Back": "Odd_Under35_FT",
+        "Odd_BTTS_Yes_Back": "Odd_BTTS_Yes", "Odd_BTTS_No_Back": "Odd_BTTS_No",
+        "Odd_CS_0x0_Back": "Odd_CS_0x0",
+    }
+    for c_src, c_dst in col_map_bf.items():
+        if c_src in bf_mapped.columns and c_dst not in bf_mapped.columns:
+            bf_mapped[c_dst] = pd.to_numeric(bf_mapped[c_src], errors="coerce")
+    if today is None or today.empty:
+        today = bf_mapped
+    else:
+        today = pd.concat([today, bf_mapped], ignore_index=True).drop_duplicates(subset=["Home", "Away"], keep="first")
 if today is None or today.empty:
-    print("sem jogos no feed bet365 para", dia); sys.exit()
+    print("sem jogos no feed bet365/betfair para", dia); sys.exit()
 today = today.copy(); today["Date"] = pd.to_datetime(dia)
 comb = pd.concat([hist, today], ignore_index=True, sort=False)
 df, feats = T0x0.build_features(comb, "Odd_CS_0x0")

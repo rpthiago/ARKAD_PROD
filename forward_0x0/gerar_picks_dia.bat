@@ -1,7 +1,7 @@
 @echo off
 REM Picks do dia do Lay 0x0 XGBoost (regra congelada). Roda de manha. Salva picks_0x0_<data>.csv.
 set PY="C:\Users\thiag\anaconda3\envs\streamlit_env\python.exe"
-set DIR=C:\Users\thiag\OneDrive\Documentos\GitHub\DASHBOARD_ARKAD-1
+set DIR=C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD
 cd /d "%DIR%"
 set PYTHONIOENCODING=utf-8
 %PY% forward_0x0\gerar_picks_dia.py >> forward_0x0\picks_dia.log 2>&1
