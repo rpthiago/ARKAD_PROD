@@ -53,6 +53,7 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     ou05_lay = _get_series(df_games, ["Odd_Under05_FT_Lay", "Odd_Under05_Lay"], default=np.nan)
     
     ou25_back = _get_series(df_games, ["Odd_Under25_FT_Back", "Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
+    o25_back = _get_series(df_games, ["Odd_Over25_FT_Back", "Odd_Over25_Back", "Odd_Over25_FT", "Odd_Over25"])
     ou45_lay = _get_series(df_games, ["Odd_Over45_FT_Lay", "Odd_Over45_Lay"])
     
     l01 = _get_series(df_games, ["Odd_CS_0x1_Lay"])
@@ -139,13 +140,13 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 5. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H_Back <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
-        if oh_back.iloc[idx] <= 1.45 and 2.0 <= oa_lay.iloc[idx] <= 15.0:
+        # 5. Lay Away Fortaleza 1X em Super Fav Mandante + Jogo Controlado (Odd_H_Back <= 1.40 | Odd_Over25_FT_Back >= 1.75 | 4.5 <= Odd_A_Lay <= 15.0)
+        if oh_back.iloc[idx] <= 1.40 and 1.75 <= o25_back.iloc[idx] < 99.0 and 4.5 <= oa_lay.iloc[idx] <= 15.0:
             odd_e = round(float(oa_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
                 "Data": data_str, "Hora": hora, "Liga": liga, "Jogo": jogo,
-                "Método": "Lay Away Super Fav", "Mercado": "Match Odds (Away)", "Lado": "LAY",
+                "Método": "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
                 "Odd_Entrada": odd_e, "Odd_Fav": round(float(oh_back.iloc[idx]), 2),
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"

@@ -42,7 +42,7 @@ banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value
 tipo_gestao = st.sidebar.selectbox(
     "Modelo de Gestão de Risco (Liability)",
     options=[
-        "🎯 Diferenciada (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, 0x0)",
+        "🎯 Diferenciada (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, Away 1X, 0x0)",
         "⚖️ Uniforme (5.0% Fixa para Todos)",
         "🔥 Uniforme (10.0% Fixa para Todos)"
     ],
@@ -54,7 +54,7 @@ if "Diferenciada" in tipo_gestao:
     **Alocação de Liability por Entrada:**
     * 🟡 **15.0% da Banca (R$ {banca_total * 0.15:,.2f}):** Lay Over 4.5 FT (Under Pesado — 97.8% WR)
     * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 2x2 Top 3 e Lay 0x3 Top 3
-    * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
+    * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw, Lay Away Fortaleza 1X e Lay 0x0 XGBoost
     """)
 
 st.sidebar.markdown("---")
@@ -183,7 +183,7 @@ def carregar_dados_aprovados(
         if "0x0" in m_str:
             return "Lay 0x0 XGBoost (Sweet Spot [10, 20])"
         elif "Away" in m_str or "1X" in m_str:
-            return "Lay Away / DC 1X (Fav <= 1.45)"
+            return "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)"
         elif "Home" in m_str or "X2" in m_str:
             return "Lay Home / DC X2 (Fav Visitante <= 1.65)"
         elif "Over 4.5" in m_str or "Over45" in m_str:

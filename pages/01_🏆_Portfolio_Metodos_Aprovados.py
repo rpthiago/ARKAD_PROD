@@ -91,7 +91,7 @@ st.warning("""
 * **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
   - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (Auditoria Set/2026: **Operação em Blocos Perto do KO `65j: 62G / 3R`, `95,4% WR`, `+0,80u`** | **Conta `b1` 06:00 AM `70j: 66G / 4R`, `94,3% WR`, `+0,04u`**).
   - **Alocação de Risco (`5,0%` Liability):** Mantido no degrau de **`5,0%` de Liability** (`Banca Final R$ 5.738,48` e `Max DD -30,96%` no Cenário B7 com horários reais, evitando que um `0x0` isolado acione o Stop Diário de `-10%` e trave os Greens do restante do dia).
-* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x3 Top 3` e `Lay 2x2 Top 3`** | **`5%` `Lay Draw`, `Lay Home` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
+* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x3 Top 3` e `Lay 2x2 Top 3`** | **`5%` `Lay Draw`, `Lay Home`, `Lay Away Fortaleza 1X` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
 Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
@@ -102,7 +102,7 @@ estritamente com **odds de lay reais da Betfair Exchange** e ledger de paper tra
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
 perfil_stake = st.sidebar.selectbox("Risco Máx por Aposta (Liability)", [
-    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, 0x0)",
+    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3 | 5.0% em Home, Draw, Away 1X, 0x0)",
     "Conservador (0.5% da banca)", 
     "Moderado (1.0% da banca)", 
     "Firme (2.0% da banca)", 
@@ -124,7 +124,7 @@ if "Diferenciada" in perfil_stake:
         f"🛡️ **Gestão Diferenciada B7 Ativa:**\n"
         f"- **15% (Over 4.5):** R$ {banca_total * 0.15:,.2f}\n"
         f"- **10% (2x2, 0x3):** R$ {banca_total * 0.10:,.2f}\n"
-        f"- **5% (Draw, Home, 0x0):** R$ {banca_total * 0.05:,.2f}"
+        f"- **5% (Draw, Home, Away 1X, 0x0):** R$ {banca_total * 0.05:,.2f}"
     )
 else:
     st.sidebar.success(f"🛡️ **Liability Fixa Máx ({pct_risco*100:.1f}%):** R$ {liability_fixa:.2f}")
@@ -135,9 +135,10 @@ st.sidebar.markdown("""
 * 🎯 **Lay 0x0 XGBoost (Sweet Spot)** (WR 95.0% | ROI +0.9% | ML Independente de Preço)
 * 🟢 **Lay 0x3 Top 3** (WR 99.4% | ROI +4.2% | Produção)
 * 🟢 **Lay 2x2 Top 3** (WR 96.8% | ROI +3.8% | Produção)
-* 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward Stake-Zero)
-* 🟡 **Lay Home Fav Visitante** (WR 92.3% | ROI +6.2% | Forward Stake-Zero)
-* 🟡 **Lay Over 4.5 Under Pesado** (WR 100% | ROI +5.6% | Forward Stake-Zero)
+* 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward)
+* 🟡 **Lay Home Fav Visitante** (WR 92.3% | ROI +6.2% | Forward)
+* 🛡️ **Lay Away Fortaleza 1X** (WR 93.8% | ROI +3.1% | `Fav<=1.40` + `O25>=1.75`)
+* 🟡 **Lay Over 4.5 Under Pesado** (WR 100% | ROI +5.6% | Forward)
 * 🟡 **Lay 0x2 Zebra (Micro-Liability)** (WR 98.4% | ROI +2.9% | R$ 25-50 fixo)
 * 🟡 **Lay 2x0 Zebra (Micro-Liability)** (WR 97.6% | ROI +2.6% | R$ 25-50 fixo)
 """)
@@ -171,12 +172,12 @@ with tab1:
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)",
                 "Lay Over 4.5 FT (Under Pesado)",
                 "Lay 0x2 Zebra (Micro-Liability)",
                 "Lay 2x0 Zebra (Micro-Liability)",
                 "Lay 0x1 Super Fav (Arquivado)",
                 "Lay Under 0.5 FT (Arquivado)",
-                "Lay Away / DC 1X (Arquivado)",
             ],
             default=[
                 "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
@@ -184,11 +185,12 @@ with tab1:
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
+                "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)",
                 "Lay Over 4.5 FT (Under Pesado)",
                 "Lay 0x2 Zebra (Micro-Liability)",
                 "Lay 2x0 Zebra (Micro-Liability)",
             ],
-            key="filtro_metodos_radar_v4"
+            key="filtro_metodos_radar_v5"
         )
     with col_btn:
         st.write("")
@@ -229,6 +231,7 @@ with tab1:
         ou05_lay = pd.to_numeric(df.get("Odd_Under05_FT_Lay"), errors="coerce")
         
         ou25_back = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
+        o25_back = pd.to_numeric(df.get("Odd_Over25_FT_Back"), errors="coerce")
         o45_lay = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
         
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
@@ -435,13 +438,13 @@ with tab1:
                     "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
                 })
 
-            # 6. Lay Away / Dupla Chance 1X em Super Fav Mandante (Odd_H_Back <= 1.45 | 2.0 <= Odd_A_Lay <= 15.0)
-            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.45 and pd.notna(oa_lay.get(i)) and 2.0 <= oa_lay[i] <= 15.0:
+            # 6. Lay Away Fortaleza 1X em Super Fav Mandante + Jogo Controlado (Odd_H_Back <= 1.40 | Odd_Over25_FT_Back >= 1.75 | 4.5 <= Odd_A_Lay <= 15.0)
+            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.40 and pd.notna(o25_back.get(i)) and o25_back[i] >= 1.75 and pd.notna(oa_lay.get(i)) and 4.5 <= oa_lay[i] <= 15.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
-                    "Método": "Lay Away / DC 1X (Fav <= 1.45)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
+                    "Método": "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
                     "Odd_Entrada": round(float(oa_lay[i]), 2), "Odd_Fav": round(float(oh_back[i]), 2),
-                    "Expectativa_WR": "90.0%", "EV_Estimado": "+2.66%"
+                    "Expectativa_WR": "93.8%", "EV_Estimado": "+3.12%"
                 })
 
             # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
