@@ -99,7 +99,16 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
             
-        # 3. Lay Draw em Super Fav (Regra Estrutural Anti-Overfit: Ligas Casa/Fora <= 1.40 | Copas só Casa <= 1.40 | Sem Seleções)
+        # Trava Automática de Chaveamento (Kelly 2D: f_Draw* = 0% | f_Away* = 10%):
+        # Se o jogo aciona Lay Away Fortaleza 1X (Fav Mandante <= 1.40 + Over 2.5 >= 1.75 + Lay Away [4.5, 15.0]),
+        # o Lay Draw é bloqueado automaticamente para operar exclusivamente o Lay Away Fortaleza 1X (10% Liability).
+        _eh_lay_away_fortaleza = (
+            oh_back.iloc[idx] <= 1.40
+            and 1.75 <= o25_back.iloc[idx] < 99.0
+            and 4.5 <= oa_lay.iloc[idx] <= 15.0
+        )
+
+        # 3. Lay Draw em Super Fav (Regra Estrutural Anti-Overfit: Ligas Casa/Fora <= 1.40 | Copas só Casa <= 1.40 | Sem Seleções | Bloqueado se _eh_lay_away_fortaleza)
         _liga_up = liga.upper().strip()
         _eh_selecao = any(t in _liga_up for t in ("WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP"))
         _eh_copa = any(t in _liga_up for t in (
@@ -117,7 +126,7 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
             _draw_fav_ok = (fav_odd <= 1.40)
             _dfav_draw = fav_odd
 
-        if _draw_fav_ok and 4.5 <= od_lay.iloc[idx] <= 10.0:
+        if _draw_fav_ok and not _eh_lay_away_fortaleza and 4.5 <= od_lay.iloc[idx] <= 10.0:
             odd_e = round(float(od_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
@@ -141,7 +150,7 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
             })
 
         # 5. Lay Away Fortaleza 1X em Super Fav Mandante + Jogo Controlado (Odd_H_Back <= 1.40 | Odd_Over25_FT_Back >= 1.75 | 4.5 <= Odd_A_Lay <= 15.0)
-        if oh_back.iloc[idx] <= 1.40 and 1.75 <= o25_back.iloc[idx] < 99.0 and 4.5 <= oa_lay.iloc[idx] <= 15.0:
+        if _eh_lay_away_fortaleza:
             odd_e = round(float(oa_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({

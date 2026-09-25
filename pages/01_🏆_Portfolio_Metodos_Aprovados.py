@@ -88,6 +88,7 @@ st.warning("""
   3. **Torneios de Seleções (`WORLD`, `NATIONS LEAGUE`, `EUROCUP`, `AMERICA CUP`):** **Bloqueados automaticamente** (taxa de empate `16,2%`, `ROI −2,19%`).
   4. **Proibição de Blacklist por Nome de Campeonato (Anti-Overfit):** É proibido excluir campeonatos isolados pelo nome (`Libertadores`, `Sudamericana`, `Conference`) por conta de amostras curtas.
   5. **📋 Regra de Mesa (Leitura de Regulamento — Mata-Mata Ida e Volta):** Se o scanner apontar sinal de `Lay Draw` em jogo de **volta de mata-mata** onde o favorito mandante **já venceu o jogo de ida (joga pelo empate no agregado)**, **NÃO ENTRAR (pular manualmente)** — pois no empate aos 70'+ o favorito administra o relógio em vez de se expor.
+* **🔒 Trava Automática de Chaveamento (`Lay Away Fortaleza 1X` vs `Lay Draw`):** Quando a partida aciona **`Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)`**, o scanner **suprime automaticamente o `Lay Draw`** naquele jogo ($f_{\text{Draw}}^* = 0,00\% \mid f_{\text{Away}}^* = 10,00\%$ via Kelly Bivariado 2D — em jogos controlados com `Over 2.5 >= 1.75`, a taxa de empate sobe para `19,1%`, tornando o `Lay Draw` EV− enquanto o `Lay Away 1X` lucra no empate e entrega `93,8% WR`).
 * **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
   - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (Auditoria Set/2026: **Operação em Blocos Perto do KO `65j: 62G / 3R`, `95,4% WR`, `+0,80u`** | **Conta `b1` 06:00 AM `70j: 66G / 4R`, `94,3% WR`, `+0,04u`**).
   - **Alocação de Risco (`5,0%` Liability):** Mantido no degrau de **`5,0%` de Liability** (`Banca Final R$ 5.738,48` e `Max DD -30,96%` no Cenário B7 com horários reais, evitando que um `0x0` isolado acione o Stop Diário de `-10%` e trave os Greens do restante do dia).
@@ -400,10 +401,20 @@ with tab1:
                     "Expectativa_WR": "97.6%", "EV_Estimado": "+2.60%"
                 })
                 
+            # Trava Automática de Chaveamento (Kelly 2D: f_Draw* = 0% | f_Away* = 10%):
+            # Se o jogo aciona Lay Away Fortaleza 1X (Fav Mandante <= 1.40 + Over 2.5 >= 1.75 + Lay Away [4.5, 15.0]),
+            # o Lay Draw é bloqueado automaticamente para operar exclusivamente o Lay Away Fortaleza 1X (10% Liability).
+            _eh_lay_away_fortaleza = (
+                pd.notna(oh_back.get(i)) and oh_back[i] <= 1.40
+                and pd.notna(o25_back.get(i)) and o25_back[i] >= 1.75
+                and pd.notna(oa_lay.get(i)) and 4.5 <= oa_lay[i] <= 15.0
+            )
+
             # 4. Lay Draw em Super Favorito (Regra Estrutural Anti-Overfit 3 Anos):
             #    - Bloqueia Seleções (WORLD / NATIONS LEAGUE)
             #    - Em COPAS: aceita SOMENTE Favorito EM CASA (Odd_H_Back <= 1.40)
             #    - Em LIGAS (Pontos Corridos): aceita Favorito Casa OU Fora (min(Odd_H_Back, Odd_A_Back) <= 1.40)
+            #    - Bloqueado automaticamente se _eh_lay_away_fortaleza == True
             _liga_up = liga.upper().strip()
             _eh_selecao = any(t in _liga_up for t in ("WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP"))
             _eh_copa = any(t in _liga_up for t in (
@@ -421,7 +432,7 @@ with tab1:
                 _dfav = min(_oh, _oa)
                 _draw_fav_ok = (_dfav <= 1.40)
 
-            if _draw_fav_ok and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
+            if _draw_fav_ok and not _eh_lay_away_fortaleza and pd.notna(od_lay.get(i)) and 4.5 <= od_lay[i] <= 10.0:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Draw (Fav <= 1.40)", "Mercado": "Match Odds (Draw)", "Lado": "LAY",
@@ -439,7 +450,7 @@ with tab1:
                 })
 
             # 6. Lay Away Fortaleza 1X em Super Fav Mandante + Jogo Controlado (Odd_H_Back <= 1.40 | Odd_Over25_FT_Back >= 1.75 | 4.5 <= Odd_A_Lay <= 15.0)
-            if pd.notna(oh_back.get(i)) and oh_back[i] <= 1.40 and pd.notna(o25_back.get(i)) and o25_back[i] >= 1.75 and pd.notna(oa_lay.get(i)) and 4.5 <= oa_lay[i] <= 15.0:
+            if _eh_lay_away_fortaleza:
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Away Fortaleza 1X (Fav <= 1.40 | O25 >= 1.75)", "Mercado": "Match Odds (Away)", "Lado": "LAY",
