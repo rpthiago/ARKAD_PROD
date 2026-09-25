@@ -195,6 +195,24 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
+
+    # 8. Lay 3x0 Top 3 Menor Odd (Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 35] | Horário Distinto)
+    try:
+        from estrategia_lay_3x0 import avaliar_jogos_lay_3x0_grade
+        res_3x0 = avaliar_jogos_lay_3x0_grade(df_games, top_n=3, u25_max=1.75, odd_h_min=1.80)
+        if res_3x0:
+            for s3 in res_3x0:
+                odd_e = round(float(s3["odd_lay"]), 2)
+                stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+                sinais.append({
+                    "Data": data_str, "Hora": s3["hora"], "Liga": s3["league"], "Jogo": f"{s3['home']} x {s3['away']}",
+                    "Método": "Lay 3x0 Top 3 (Aprovado)", "Mercado": "Correct Score (3x0)", "Lado": "LAY",
+                    "Odd_Entrada": odd_e, "Odd_Fav": 0.0,
+                    "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                    "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+                })
+    except Exception:
+        pass
             
     df_sinais = pd.DataFrame(sinais)
     print(f"[+] Total de sinais oficiais qualificados: {len(df_sinais)}")
@@ -294,6 +312,8 @@ def liquidar_resultados_noite(data_str=None, enviar_telegram=True):
                 res = "RED" if (gh == 0 and ga == 2) else "GREEN"
             elif "2x0" in metodo:
                 res = "RED" if (gh == 2 and ga == 0) else "GREEN"
+            elif "3x0" in metodo:
+                res = "RED" if (gh == 3 and ga == 0) else "GREEN"
             elif "0x3" in metodo:
                 res = "RED" if (gh == 0 and ga == 3) else "GREEN"
             elif "2x2" in metodo:

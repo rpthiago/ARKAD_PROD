@@ -53,7 +53,7 @@ if "Diferenciada" in tipo_gestao:
     st.sidebar.markdown(f"""
     **Alocação de Liability por Entrada:**
     * 🟡 **15.0% da Banca (R$ {banca_total * 0.15:,.2f}):** Lay Over 4.5 FT (Under Pesado — 97.8% WR)
-    * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 2x2 Top 3, Lay 0x3 Top 3 e Lay Away Fortaleza 1X
+    * 🟣 **10.0% da Banca (R$ {banca_total * 0.10:,.2f}):** Lay 2x2 Top 3, Lay 0x3 Top 3, Lay 3x0 Top 3 e Lay Away Fortaleza 1X
     * 🔵 **5.0% da Banca (R$ {banca_total * 0.05:,.2f}):** Lay Home, Lay Draw e Lay 0x0 XGBoost
     """)
 
@@ -74,7 +74,7 @@ fonte_dados = st.sidebar.radio(
     options=[
         "📁 Todas as Planilhas Diárias (Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx)",
         "👑 Apenas Tríade (Draw, Home, Over 4.5)",
-        "🎯 Apenas Top 3 CS (Lay 2x2 e Lay 0x3)"
+        "🎯 Apenas Top 3 CS (Lay 2x2, Lay 0x3 e Lay 3x0)"
     ],
     index=0
 )
@@ -149,9 +149,9 @@ def carregar_dados_aprovados(
 
     # Filtros opcionais da barra lateral (sempre restritos às planilhas diárias carregadas)
     if "Apenas Tríade" in modo and "Método" in df_all.columns:
-        df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3|Zebra|0x2|2x0|0x0", na=False)].reset_index(drop=True)
+        df_all = df_all[~df_all["Método"].astype(str).str.contains("2x2|0x3|3x0|Zebra|0x2|2x0|0x0", na=False)].reset_index(drop=True)
     elif "Apenas Top 3 CS" in modo and "Método" in df_all.columns:
-        df_all = df_all[df_all["Método"].astype(str).str.contains("2x2|0x3", na=False)].reset_index(drop=True)
+        df_all = df_all[df_all["Método"].astype(str).str.contains("2x2|0x3|3x0", na=False)].reset_index(drop=True)
         
     # Normalização segura de colunas e deduplicação de nomes
     cols = []
@@ -192,6 +192,8 @@ def carregar_dados_aprovados(
             return "Lay Draw (Fav <= 1.40)"
         elif "2x2" in m_str:
             return "Lay 2x2 Top 3 (Aprovado)"
+        elif "3x0" in m_str:
+            return "Lay 3x0 Top 3 (Aprovado)"
         elif "0x3" in m_str:
             if "ampla" in m_str.lower() or "sem ranking" in m_str.lower():
                 return "Lay 0x3 (Regra Ampla - Paralelo)"
@@ -265,6 +267,8 @@ def carregar_dados_aprovados(
                     return "🟢 GREEN" if (gh + ga) <= 4 else "🔴 RED"
                 elif "2x2" in met:
                     return "🔴 RED" if (gh == 2 and ga == 2) else "🟢 GREEN"
+                elif "3x0" in met:
+                    return "🔴 RED" if (gh == 3 and ga == 0) else "🟢 GREEN"
                 elif "0x3" in met:
                     return "🔴 RED" if (gh == 0 and ga == 3) else "🟢 GREEN"
                 elif "0x1" in met:
@@ -302,7 +306,7 @@ def carregar_dados_aprovados(
         if "Diferenciada" in tipo_gestao:
             if "Over 4.5" in m_str:
                 return round(banca_total * 0.15, 2)
-            elif "0x3" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
+            elif "0x3" in m_str or "3x0" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
                 return round(banca_total * 0.10, 2)
             elif "Home" in m_str or "X2" in m_str or "Draw" in m_str or "0x0" in m_str:
                 return round(banca_total * 0.05, 2)

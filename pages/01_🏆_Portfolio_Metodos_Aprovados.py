@@ -48,6 +48,15 @@ except Exception:
     except Exception:
         avaliar_jogos_lay_2x2_grade = None
 
+try:
+    from estrategia_lay_3x0 import avaliar_jogos_lay_3x0_grade
+except Exception:
+    try:
+        import importlib
+        avaliar_jogos_lay_3x0_grade = getattr(importlib.import_module("estrategia_lay_3x0"), "avaliar_jogos_lay_3x0_grade", None)
+    except Exception:
+        avaliar_jogos_lay_3x0_grade = None
+
 
 # Estilização visual moderna
 st.markdown("""
@@ -92,7 +101,7 @@ st.warning("""
 * **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
   - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (Auditoria Set/2026: **Operação em Blocos Perto do KO `65j: 62G / 3R`, `95,4% WR`, `+0,80u`** | **Conta `b1` 06:00 AM `70j: 66G / 4R`, `94,3% WR`, `+0,04u`**).
   - **Alocação de Risco (`5,0%` Liability):** Mantido no degrau de **`5,0%` de Liability** (`Banca Final R$ 5.738,48` e `Max DD -30,96%` no Cenário B7 com horários reais, evitando que um `0x0` isolado acione o Stop Diário de `-10%` e trave os Greens do restante do dia).
-* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x3 Top 3`, `Lay 2x2 Top 3` e `Lay Away Fortaleza 1X`** | **`5%` `Lay Draw`, `Lay Home` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
+* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x3 Top 3`, `Lay 3x0 Top 3`, `Lay 2x2 Top 3` e `Lay Away Fortaleza 1X`** | **`5%` `Lay Draw`, `Lay Home` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
 Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
@@ -103,7 +112,7 @@ estritamente com **odds de lay reais da Betfair Exchange** e ledger de paper tra
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
 perfil_stake = st.sidebar.selectbox("Risco Máx por Aposta (Liability)", [
-    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3, Away 1X | 5.0% em Home, Draw, 0x0)",
+    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3, 3x0, Away 1X | 5.0% em Home, Draw, 0x0)",
     "Conservador (0.5% da banca)", 
     "Moderado (1.0% da banca)", 
     "Firme (2.0% da banca)", 
@@ -124,7 +133,7 @@ if "Diferenciada" in perfil_stake:
     st.sidebar.success(
         f"🛡️ **Gestão Diferenciada B7 Ativa:**\n"
         f"- **15% (Over 4.5):** R$ {banca_total * 0.15:,.2f}\n"
-        f"- **10% (2x2, 0x3, Away 1X):** R$ {banca_total * 0.10:,.2f}\n"
+        f"- **10% (2x2, 0x3, 3x0, Away 1X):** R$ {banca_total * 0.10:,.2f}\n"
         f"- **5% (Draw, Home, 0x0):** R$ {banca_total * 0.05:,.2f}"
     )
 else:
@@ -135,6 +144,7 @@ st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
 * 🎯 **Lay 0x0 XGBoost (Sweet Spot)** (WR 95.0% | ROI +0.9% | ML Independente de Preço)
 * 🟢 **Lay 0x3 Top 3** (WR 99.4% | ROI +4.2% | Produção)
+* 🟢 **Lay 3x0 Top 3** (WR 97.2% | ROI +1.0% | `U25<=1.75` + `H>=1.80`)
 * 🟢 **Lay 2x2 Top 3** (WR 96.8% | ROI +3.8% | Produção)
 * 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward)
 * 🟡 **Lay Home Fav Visitante** (WR 92.3% | ROI +6.2% | Forward)
@@ -170,6 +180,7 @@ with tab1:
             [
                 "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
                 "Lay 0x3 Top 3 (Aprovado)",
+                "Lay 3x0 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
@@ -183,6 +194,7 @@ with tab1:
             default=[
                 "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
                 "Lay 0x3 Top 3 (Aprovado)",
+                "Lay 3x0 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
                 "Lay Home / DC X2 (Fav Visitante <= 1.65)",
@@ -191,7 +203,7 @@ with tab1:
                 "Lay 0x2 Zebra (Micro-Liability)",
                 "Lay 2x0 Zebra (Micro-Liability)",
             ],
-            key="filtro_metodos_radar_v5"
+            key="filtro_metodos_radar_v6"
         )
     with col_btn:
         st.write("")
@@ -315,6 +327,26 @@ with tab1:
                         "Mercado": "Correct Score (2x2)", "Lado": "LAY",
                         "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
                         "Expectativa_WR": "96.8%", "EV_Estimado": "+3.79%"
+                    })
+        except Exception:
+            pass
+
+        # 2b. Lay 3x0 Top 3 Menor Odd (Espelho Assimétrico do 0x3 — Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 35])
+        try:
+            res_3x0 = None
+            if avaliar_jogos_lay_3x0_grade is not None:
+                try:
+                    res_3x0 = avaliar_jogos_lay_3x0_grade(df, top_n=3, u25_max=1.75, odd_h_min=1.80)
+                except Exception:
+                    res_3x0 = None
+            if res_3x0:
+                for s in res_3x0:
+                    sinais.append({
+                        "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
+                        "Home": s["home"], "Away": s["away"], "Método": "Lay 3x0 Top 3 (Aprovado)",
+                        "Mercado": "Correct Score (3x0)", "Lado": "LAY",
+                        "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
+                        "Expectativa_WR": "97.2%", "EV_Estimado": "+1.07%"
                     })
         except Exception:
             pass
@@ -493,7 +525,7 @@ with tab1:
             if "Diferenciada" in perfil_stake:
                 if "Over 4.5" in m_str:
                     return round(banca_total * 0.15, 2)
-                elif "0x3" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
+                elif "0x3" in m_str or "3x0" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
                     return round(banca_total * 0.10, 2)
                 else:
                     return round(banca_total * 0.05, 2)
