@@ -7,6 +7,23 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-28 · Antigravity · Integração do `Lay 3x0 Top 3 (Aprovado)` no ARKAD (Commit `1624740`) & Teste de Infraestrutura Offshore (Binance USDT TRC-20 / Asianconnect)
+
+- **Feito:**
+  1. **Integração do `Lay 3x0 Top 3 (Aprovado)` (Commit `1624740`):**
+     - Integrado o método aprovado (`Odd_Under25_FT_Back <= 1.75`, `Odd_H_Back >= 1.80`, `Odd_CS_3x0_Lay ∈ [14, 35]`, `Top 3 Menor Odd do Dia com Horários Distintos`) no Cenário B7 a **10.0% de Liability** em `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py` e `automacao_diaria_aprovados.py`.
+     - Re-processadas as 53 planilhas diárias oficiais (`metodos_aprovados/Sinais_Metodos_Aprovados_*.xlsx`): histórico forward validado com **60 Greens / 1 Red (98,36% WR)**.
+     - Concluído o estudo de liquidez em Over 2.5 HT (`integrar_3x0_e_estudar_liquidez_ht.py`): comprovado que 38,7% dos livros são rasos (`Spread > 1.25x`), e filtrar por livros densos (`Spread <= 1.16x` ou `Tier-1/2 com Spread <= 1.22x`) alavanca o ROI de `+0.99%` para `+2.89%` ($p = 0,0007$, bootstrap 10.000x exclui zero).
+  2. **Configuração e Teste de Estresse da Infraestrutura Offshore (Binance + Asianconnect):**
+     - Concluída a verificação KYC Nível 2 na **Binance** (UID: `1282084681`, aprovada com CNH brasileira).
+     - Testada a esteira financeira completa: Depósito em BRL via PIX (R$ 200) ➡️ Conversão a taxa zero para USDT ➡️ Saque via rede Tron (TRC-20) ➡️ Depósito no broker Asianconnect AMS (31,17 EUR / 35,50 USDT).
+     - Verificação biométrica e KYC na Asianconnect 100% aprovada com CNH brasileira.
+     - **Achado de Compliance:** A Asianconnect restringe a abertura de contas na **OrbitX** e **PIWI247** (Betfair white labels) para residentes com KYC brasileiro devido a cláusulas contratuais de licenciamento, oferecendo apenas sportsbooks (PS3838 / AsianOdds88) que não suportam operações de LAY (ARKAD).
+     - Testado com sucesso o procedimento de **Estorno/Saque Integral de Capital**: com suporte ao vivo (Sammy), o saque manual via TRC20 foi autorizado sem retenção de rollover, e **100% dos fundos (35.50923 USDT)** retornaram intactos para a carteira Binance do usuário em menos de 15 minutos.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `integrar_3x0_e_estudar_liquidez_ht.py`, `worklog.md`.
+
+---
+
 ## 2026-09-24 · Antigravity · Auditoria Forense Setembro `Lay 0x0 XGBoost` (`75` vs `70` 06h vs `65` Perto do KO) & Confirmação de `5,0% Liability` no Cenário B7 (`Páginas 01 e 02`)
 
 - **Feito:**
