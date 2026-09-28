@@ -1271,3 +1271,144 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 25/09/2026  8:45:02,21 ===== 
+[*] Buscando fixtures para a data: 2026-09-25...
+2026-09-25 08:45:08.875 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 22 jogos obtidos da API Betfair para 2026-09-25!
+[SUCESSO] Feed diário gerado e enriquecido com 22 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-25.parquet (22 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	PROMPT_CLAUDE_AUDITORIA_CHAVEAMENTO_E_COPAS.md
+	integrar_3x0_e_estudar_liquidez_ht.py
+	mineracao_noturna_360_arkad.py
+	mineracao_profunda_fase2_arkad.py
+	mineracao_profunda_fase2_resultados.csv
+	ranking_mineracao_noturna_360.csv
+	simulacao_b7_novos_metodos_noturna.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 26/09/2026  8:45:02,33 ===== 
+[*] Buscando fixtures para a data: 2026-09-26...
+2026-09-26 08:45:06.093 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 90 jogos obtidos da API Betfair para 2026-09-26!
+[SUCESSO] Feed diário gerado e enriquecido com 90 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-26.parquet (90 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	PROMPT_CLAUDE_AUDITORIA_CHAVEAMENTO_E_COPAS.md
+	integrar_3x0_e_estudar_liquidez_ht.py
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-26.xlsx
+	mineracao_noturna_360_arkad.py
+	mineracao_profunda_fase2_arkad.py
+	mineracao_profunda_fase2_resultados.csv
+	ranking_mineracao_noturna_360.csv
+	simulacao_b7_novos_metodos_noturna.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 27/09/2026  8:45:01,66 ===== 
+[*] Buscando fixtures para a data: 2026-09-27...
+2026-09-27 08:45:07.656 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 35 jogos obtidos da API Betfair para 2026-09-27!
+[SUCESSO] Feed diário gerado e enriquecido com 35 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-27.parquet (35 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	PROMPT_CLAUDE_AUDITORIA_CHAVEAMENTO_E_COPAS.md
+	integrar_3x0_e_estudar_liquidez_ht.py
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-26.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-27.xlsx
+	mineracao_noturna_360_arkad.py
+	mineracao_profunda_fase2_arkad.py
+	mineracao_profunda_fase2_resultados.csv
+	ranking_mineracao_noturna_360.csv
+	simulacao_b7_novos_metodos_noturna.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
