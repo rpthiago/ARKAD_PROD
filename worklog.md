@@ -7,7 +7,7 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
-## 2026-09-28 · Antigravity · Integração do `Lay 3x0 Top 3 (Aprovado)` no ARKAD (Commit `1624740`) & Teste de Infraestrutura Offshore (Binance USDT TRC-20 / Asianconnect)
+## 2026-09-28 · Antigravity · Integração do `Lay 3x0 Top 3 (Aprovado)` no ARKAD (Commit `1624740`), Configuração Offshore na BET-IBC (OrbitX) e VPN Windscribe
 
 - **Feito:**
   1. **Integração do `Lay 3x0 Top 3 (Aprovado)` (Commit `1624740`):**
@@ -20,6 +20,14 @@
      - Verificação biométrica e KYC na Asianconnect 100% aprovada com CNH brasileira.
      - **Achado de Compliance:** A Asianconnect restringe a abertura de contas na **OrbitX** e **PIWI247** (Betfair white labels) para residentes com KYC brasileiro devido a cláusulas contratuais de licenciamento, oferecendo apenas sportsbooks (PS3838 / AsianOdds88) que não suportam operações de LAY (ARKAD).
      - Testado com sucesso o procedimento de **Estorno/Saque Integral de Capital**: com suporte ao vivo (Sammy), o saque manual via TRC20 foi autorizado sem retenção de rollover, e **100% dos fundos (35.50923 USDT)** retornaram intactos para a carteira Binance do usuário em menos de 15 minutos.
+  3. **Abertura e Financiamento da OrbitX via BET-IBC (Maior Corretora Parceira Oficial OrbitX):**
+     - Submetido pedido de abertura de conta **OrbitX** na **BET-IBC** (`bet-ibc.com/pt-pt/open-orbitx-account/`).
+     - Realizado o depósito de **`35.26804 USDT`** via rede Tron (TRC-20) diretamente para a carteira da BET-IBC (`TPPdGaHf9xX9C7vJUXtEJiH7QWLKy1ypYr`), com confirmação na blockchain (TxID: `358ef088cd9888c9cf7fa3fc43c4e7f82aa4fd0cb15820891cb61f36d64430e8`).
+     - Submetidos os documentos oficiais de KYC: Carteira de Identidade Nacional (CIN / gov.br) com frente, verso e QR Code de autenticação Vio + Comprovante de Residência bancário do Banco Bradesco (28/08/2026).
+     - Atendimento com operador Andy no chat ao vivo confirmando que o pedido de criação de conta e crédito integral do saldo (sem desconto de taxas) está em processamento na fila padrão gratuita.
+  4. **Instalação e Configuração da VPN Windscribe (Chrome):**
+     - Instalada a extensão oficial da **Windscribe VPN** no Chrome.
+     - Identificado o acesso gratuito e ilimitado aos servidores da **Noruega (Norway)** e **Suíça (Switzerland)** para navegação limpa, com IP protegido e sem risco de bloqueios de operadoras locais / Anatel.
 - **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `automacao_diaria_aprovados.py`, `integrar_3x0_e_estudar_liquidez_ht.py`, `worklog.md`.
 
 ---
