@@ -508,3 +508,40 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-09-26,Lay Draw (Fav<=1.40),Mexican Liga MX Femenil,FC Juarez (W),Club Tijuana (W),22:06,5.6,1.39,270.0,15.7,2026-09-27 00:50:18,live,PENDENTE,,,,,,,0.8288,,,,nao
 2026-09-27,Lay Draw (Fav<=1.40),Hong Kong 2nd Division League,Fu Moon,Kwong Wah,04:30,8.0,1.3,119.0,14.9,2026-09-27 07:15:07,live,PENDENTE,,,,,,,0.8805,,,,
 2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Hong Kong 2nd Division League,Fu Moon,Kwong Wah,04:30,9.0,1.3,118.0,14.9,2026-09-27 07:15:07,live,PENDENTE,,,,,,,0.8939,,,,
+2026-09-27,Lay Draw (Fav<=1.40),Bulgarian B League,Vihren Sandanski,Nesebar,08:00,6.2,1.35,108.0,14.8,2026-09-27 10:45:09,live,PENDENTE,,,,,,,0.8455,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Friendlies International,China,New Zealand,08:35,30.0,1.71,92.0,14.8,2026-09-27 11:20:09,live,PENDENTE,,,,,,,0.9683,,,,nao
+2026-09-27,Lay 0x3 Top 3,Friendlies International,China,New Zealand,08:35,30.0,1.71,92.0,14.8,2026-09-27 11:20:09,live,PENDENTE,,,,,,,0.9683,,,,nao
+2026-09-27,Lay 2x2 Top 3,Spanish Segunda Division,Valladolid,Cordoba,09:00,16.5,2.48,638.0,14.8,2026-09-27 11:45:09,live,PENDENTE,,,,,,,0.9422,,,,sim
+2026-09-27,Lay 2x2 Top 3,Friendlies International,Seychelles,Sri Lanka,09:00,18.0,2.66,86.0,14.8,2026-09-27 11:45:09,live,PENDENTE,,,,,,,0.9471,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Norwegian 2nd Division,Eik-Tonsberg,Bjarg,09:30,7.6,1.29,70.0,14.7,2026-09-27 12:15:14,live,PENDENTE,,,,,,,0.8742,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Greek Super League 2,Panionios,Zakynthos,10:00,6.4,1.27,105.0,14.8,2026-09-27 12:45:09,live,PENDENTE,,,,,,,0.8504,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Uruguayan Primera Division,Central Espanol,Liverpool Montevideo,11:00,22.0,1.74,304.0,14.8,2026-09-27 13:45:10,live,PENDENTE,,,,,,,0.9567,,,,nao
+2026-09-27,Lay 0x3 Top 3,Uruguayan Primera Division,Central Espanol,Liverpool Montevideo,11:00,22.0,1.74,304.0,14.8,2026-09-27 13:45:10,live,PENDENTE,,,,,,,0.9567,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Belgian Cup,KFC Merelbeke,Eupen,11:00,9.4,1.44,205.0,14.8,2026-09-27 13:45:10,live,PENDENTE,,,,,,,0.8984,,,,nao
+2026-09-27,Lay 2x2 Top 3,Spanish Segunda Division,Mallorca,Almeria,11:15,17.0,2.12,261.0,9.8,2026-09-27 14:05:10,live,PENDENTE,,,,,,,0.944,,,,sim
+2026-09-27,Lay Draw (Fav<=1.40),Greek Super League 2,Panserraikos,Olympiacos B,12:00,8.0,1.21,232.0,14.8,2026-09-27 14:45:10,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-27,Lay Over 4.5 (Under Pesado),Ghanain Premier League,Asante Kotoko,Aduana FC,12:00,19.5,1.5,131.0,14.8,2026-09-27 14:45:10,live,PENDENTE,,,,,,,0.9512,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Gulf Cup Matches,Yemen,Qatar,12:55,6.6,1.32,416.0,14.8,2026-09-27 15:40:11,live,PENDENTE,,,,,,,0.855,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),UEFA Nations League,Serbia,Netherlands,13:00,8.4,1.44,4159.0,14.8,2026-09-27 15:45:11,live,PENDENTE,,,,,,,0.8862,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Bulgarian B League,FC Fratria,Spartak Pleven,13:00,5.6,1.37,88.0,14.8,2026-09-27 15:45:11,live,PENDENTE,,,,,,,0.8288,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Turkish 2 Lig,Adana Demirspor,Erbaaspor,13:00,6.8,1.28,69.0,14.8,2026-09-27 15:45:11,live,PENDENTE,,,,,,,0.8593,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Friendlies International,Malta,Liechtenstein,13:30,6.8,1.25,1353.0,14.8,2026-09-27 16:15:11,live,PENDENTE,,,,,,,0.8593,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Chilean Cup,Deportes Concepcion,Curico Unido,15:00,5.8,1.33,209.0,14.8,2026-09-27 17:45:12,live,PENDENTE,,,,,,,0.8348,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Gulf Cup Matches,Bahrain,UAE,15:00,8.2,1.56,159.0,14.8,2026-09-27 17:45:12,live,PENDENTE,,,,,,,0.8834,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Argentinian Campeonato Femenino,Unión de Santa Fe (W),Boca Juniors (W),15:00,5.3,1.39,144.0,14.8,2026-09-27 17:45:12,live,PENDENTE,,,,,,,0.819,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Colombian Primera B,Envigado,Atletico FC Cali,16:00,5.6,1.37,242.0,14.8,2026-09-27 18:45:13,live,PENDENTE,,,,,,,0.8288,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Argentinian Cup,Racing Club,Boca Juniors,17:00,22.0,1.68,154.0,14.8,2026-09-27 19:45:12,live,PENDENTE,,,,,,,0.9567,,,,sim
+2026-09-27,Lay 0x3 Top 3,Argentinian Cup,Racing Club,Boca Juniors,17:00,22.0,1.68,154.0,14.8,2026-09-27 19:45:12,live,PENDENTE,,,,,,,0.9567,,,,sim
+2026-09-27,Lay Over 4.5 (Under Pesado),Moroccan Botola Pro 1,Kawkab Marrakech,HUSA Agadir,17:00,17.5,1.5,151.0,14.8,2026-09-27 19:45:12,live,PENDENTE,,,,,,,0.9456,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Argentinian Primera Nacional,Racing Cordoba,Godoy Cruz,17:00,30.0,1.51,111.0,14.8,2026-09-27 19:45:12,live,PENDENTE,,,,,,,0.9683,,,,nao
+2026-09-27,Lay 0x3 Top 3,Argentinian Primera Nacional,Racing Cordoba,Godoy Cruz,17:00,30.0,1.51,111.0,14.8,2026-09-27 19:45:12,live,PENDENTE,,,,,,,0.9683,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Friendlies International,Bolivia,Paraguay,17:30,8.0,1.52,150.0,14.8,2026-09-27 20:15:13,live,PENDENTE,,,,,,,0.8805,,,,nao
+2026-09-27,Lay 2x2 Top 3,Jamaican Premier League,Molynes United FC,Tru-Juice FC,17:30,17.0,2.46,187.0,14.8,2026-09-27 20:15:13,live,PENDENTE,,,,,,,0.944,,,,nao
+2026-09-27,Lay Draw (Fav<=1.40),Jamaican Premier League,Portmore Utd,Humble Lions,17:30,7.2,1.28,99.0,14.8,2026-09-27 20:15:13,live,PENDENTE,,,,,,,0.8671,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Jamaican Premier League,Dunbeholden FC,Mount Pleasant FC,17:30,6.6,1.64,80.0,14.8,2026-09-27 20:15:13,live,PENDENTE,,,,,,,0.855,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),Panamanian Premier League,Union Cocle,Plaza Amador,18:00,6.4,1.63,116.0,14.7,2026-09-27 20:45:14,live,PENDENTE,,,,,,,0.8504,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Jamaican Premier League,Racing United FC,Montego Bay United,19:05,34.0,1.84,97.0,14.7,2026-09-27 21:50:14,live,PENDENTE,,,,,,,0.972,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Chilean Cup,Club Deportes Santa Cruz,OHiggins,20:00,30.0,1.91,97.0,14.7,2026-09-27 22:45:14,live,PENDENTE,,,,,,,0.9683,,,,nao
+2026-09-27,Lay 0x3 (Regra Ampla),Colombian Primera A,Fortaleza FC,Tolima,20:05,25.0,1.73,330.0,14.7,2026-09-27 22:50:14,live,PENDENTE,,,,,,,0.9619,,,,nao
+2026-09-27,Lay 0x3 Top 3,Colombian Primera A,Fortaleza FC,Tolima,20:05,25.0,1.73,330.0,14.7,2026-09-27 22:50:14,live,PENDENTE,,,,,,,0.9619,,,,nao
+2026-09-27,Lay Home/DC X2 (FavVis<=1.65),CONCACAF Nations League B,Dominica,Puerto Rico,21:00,6.6,1.62,122.0,14.7,2026-09-27 23:45:14,live,PENDENTE,,,,,,,0.855,,,,nao
