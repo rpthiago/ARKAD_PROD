@@ -23,6 +23,7 @@ HOST = "free-api-live-football-data.p.rapidapi.com"
 ALVOS = os.path.join(BASE, "alvos_xg.csv")
 SAIDA = os.path.join(BASE, "xg_ft_backfill.csv")
 SEEN = os.path.join(BASE, "xg_ft_seen.txt")
+LIGAS = os.path.join(BASE, "xg_ft_ligas.csv")   # liga -> tentativas/sucessos (aprende a pular)
 DIAS = os.path.join(BASE, "fotmob_dias")          # cache das listas por dia (1 chamada por dia, reusada)
 
 CAMPOS = [("expected_goals", "xg"), ("expected_goals_on_target", "xgot"),
@@ -179,13 +180,37 @@ def main():
     if novo: w.writeheader()
     fseen = open(SEEN, "a", encoding="utf-8")
     cota = Cota(a.reserva)
-    ok = semdado = nao_casou = 0
+    # LIGA SEM ESTATISTICA: dois casos, ambos inuteis e caros. (a) o jogo nao existe no matches-by-date
+    # (FA Cup de fase preliminar, Scotland 3, times nao-liga); (b) o jogo existe mas o all-stats vem
+    # vazio — medido em JAPAN 2, PORTUGAL 2, ENGLAND 5 e ARGENTINA 2: a API tem a partida e o placar,
+    # mas nao tem xG nem chutes dessas divisoes. Cada tentativa gasta uma chamada e nunca devolve nada. Aqui a liga e aprendida: apos MIN_TENT tentativas sem NENHUM
+    # sucesso, ela passa a ser pulada sem gastar chamada. Mesma ideia do fotmob_ligas.csv do xg-ht.
+    MIN_TENT = 8
+    ligas = {}
+    if os.path.exists(LIGAS):
+        with open(LIGAS, encoding="utf-8-sig") as f:
+            for r in csv.DictReader(f):
+                ligas[r["League"]] = [int(r["tentativas"]), int(r["sucessos"])]
+
+    def pular(lg):
+        t, s = ligas.get(lg, [0, 0])
+        return t >= MIN_TENT and s == 0
+
+    def grava_ligas():
+        with open(LIGAS, "w", newline="", encoding="utf-8") as f:
+            w2 = csv.writer(f); w2.writerow(["League", "tentativas", "sucessos"])
+            for k, (t, s) in sorted(ligas.items()): w2.writerow([k, t, s])
+
+    ok = semdado = nao_casou = puladas = 0
     dia_atual, jogos = None, []
     for r, ch in alvos:
         if ok + semdado >= a.max:
             print("  limite da rodada atingido."); break
         if cota.acabou():
             print("  COTA baixa (restam %s, reserva %d) — parando para nao afetar o xg-ht." % (cota.resta, a.reserva)); break
+        _lg = r.get("League", "")
+        if pular(_lg):
+            puladas += 1; fseen.write(ch + "\n"); continue
         if r["Data"] != dia_atual:
             dia_atual = r["Data"]; jogos = jogos_do_dia(dia_atual, key, cota)
             print("  %s: %d jogos na API" % (dia_atual, len(jogos)))
@@ -198,11 +223,13 @@ def main():
                 outro = (datetime.strptime(r["Data"], "%Y-%m-%d") + timedelta(days=desloc)).strftime("%Y-%m-%d")
                 j, tipo = achar_evento(jogos_do_dia(outro, key, cota), r["Home"], r["Away"], _gh, _ga)
                 if j: break
+        ligas.setdefault(_lg, [0, 0])[0] += 1          # tentativa nesta liga
         if not j:
             nao_casou += 1; fseen.write(ch + "\n"); continue
         st = stats(j["id"], key, cota); time.sleep(a.pausa)
         if not st:
             semdado += 1; fseen.write(ch + "\n"); continue
+        ligas[_lg][1] += 1                             # sucesso: a liga existe na API
         linha = dict(Data=r["Data"], Home=r["Home"], Away=r["Away"], League=r.get("League", ""), casou=tipo,
                      eventid=j["id"], liga_api=j.get("lid", ""), gh=j.get("gh", ""), ga=j.get("ga", ""),
                      coletado_em=datetime.now().strftime("%Y-%m-%d %H:%M"))
@@ -210,8 +237,11 @@ def main():
         w.writerow(linha); fh.flush(); fseen.write(ch + "\n"); fseen.flush(); ok += 1
         if ok % 25 == 0:
             print("   %d preenchidos | cota restante: %s" % (ok, cota.resta))
-    fh.close(); fseen.close()
-    print("\npreenchidos: %d | sem estatistica na API: %d | nome nao casou: %d" % (ok, semdado, nao_casou))
+    fh.close(); fseen.close(); grava_ligas()
+    print("\npreenchidos: %d | sem estatistica na API: %d | nome nao casou: %d | pulados (liga sem estatistica): %d"
+          % (ok, semdado, nao_casou, puladas))
+    ruins = [k for k, (t, s2) in sorted(ligas.items()) if t >= MIN_TENT and s2 == 0]
+    if ruins: print("ligas SEM ESTATISTICA na API (o jogo existe, mas nao ha xG/chutes; nao serao mais tentadas): %s" % ", ".join(ruins[:14]))
     print("chamadas usadas nesta rodada: %d | cota restante: %s de %s" % (cota.usadas, cota.resta, cota.limite))
     print("-> %s" % os.path.basename(SAIDA))
 

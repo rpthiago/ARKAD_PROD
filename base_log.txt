@@ -200,3 +200,19 @@ remote: warning: GH001: Large files detected. You may want to try Git Large File
 To https://github.com/rpthiago/ARKAD_PROD.git
    75beafe..e2c3e69  main -> main
 (fim) 
+ 
+===== 28/09/2026  8:00:01,10 ===== 
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 248219 linhas | data max 2026-09-24 | 235 MB
+b365_base_lean.csv sincronizada: 248219 linhas | data max 2026-09-24 | 67 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+[main ddce52a] update: base semanal 28/09/2026
+ 1 file changed, 1739 insertions(+)
+remote: warning: See https://gh.io/lfs for more information.        
+remote: warning: File b365_base_lean.csv is 66.57 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        
+remote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        
+To https://github.com/rpthiago/ARKAD_PROD.git
+   b6806f5..ddce52a  main -> main
+(fim) 

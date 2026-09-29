@@ -1412,3 +1412,30 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 28/09/2026  8:45:01,97 ===== 
+[*] Buscando fixtures para a data: 2026-09-28...
+2026-09-28 08:45:05.868 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 14 jogos obtidos da API Betfair para 2026-09-28!
+[SUCESSO] Feed diário gerado e enriquecido com 14 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-28.parquet (14 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
