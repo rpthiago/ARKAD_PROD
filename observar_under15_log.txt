@@ -1439,3 +1439,101 @@ Changes not staged for commit:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 29/09/2026  8:45:02,12 ===== 
+[*] Buscando fixtures para a data: 2026-09-29...
+2026-09-29 08:45:06.088 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 16 jogos obtidos da API Betfair para 2026-09-29!
+[SUCESSO] Feed diário gerado e enriquecido com 16 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-29.parquet (16 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   GEMINI.md
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	PREREGISTRO_eixo2_regressao_media_xg.md
+	PREREGISTRO_eixo3_processo_ht_vs_2t.md
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-29.xlsx
+	reliquidar_under_oficial.py
+	testar_eixo2_regressao_media_xg.py
+	testar_eixo3_processo_ht_vs_2t.py
+	under_alertas_log.csv
+	xg_ht_log.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 30/09/2026  8:45:01,72 ===== 
+[*] Buscando fixtures para a data: 2026-09-30...
+2026-09-30 08:45:07.513 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 11 jogos obtidos da API Betfair para 2026-09-30!
+[SUCESSO] Feed diário gerado e enriquecido com 11 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-09-30.parquet (11 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   GEMINI.md
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   metodos_aprovados/stop_diario.log
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	PREREGISTRO_eixo2_regressao_media_xg.md
+	PREREGISTRO_eixo3_processo_ht_vs_2t.md
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-29.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-30.xlsx
+	reliquidar_under_oficial.py
+	testar_eixo2_regressao_media_xg.py
+	testar_eixo3_processo_ht_vs_2t.py
+	under_alertas_log.csv
+	xg_ht_log.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

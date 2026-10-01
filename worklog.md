@@ -7,6 +7,68 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-09-30 · Antigravity · Confirmação Oficial da Comissão (5% BET-IBC) e Cancelamento da Tarefa de 5 Minutos no Agendador (`ARKAD_Stop_Diario`)
+
+- **Feito:**
+  1. **Confirmação Oficial da Taxa da Conta OrbitX (BET-IBC):**
+     - O suporte da BET-IBC (Mihaela) confirmou formalmente por escrito: a **taxa de comissão padrão da conta `btrodriguest` é de 5%** (idêntica ao parâmetro $c=0.05$ das regras do ARKAD).
+     - A dedução de 14% na aposta *Australia v Brazil* decorreu da sobretaxa obrigatória de licenciamento estadual australiano (Point of Consumption Tax - POCT) aplicada pela Betfair em eventos na jurisdição da Austrália. Mercados padrão europeus e sul-americanos operam estritamente a 5%.
+  2. **Cancelamento da Tarefa Agendada de 5 em 5 Minutos no Windows:**
+     - Identificada a tarefa agendada no Agendador de Tarefas do Windows: **`ARKAD_Stop_Diario`** (que executava `stop_diario.bat` com intervalo `PT5M` a cada 5 minutos).
+     - Desativada com sucesso via PowerShell (`Disable-ScheduledTask -TaskName "ARKAD_Stop_Diario"`). Estado atual: **`Disabled`**.
+     - Confirmado que não há processos Python residuais de `stop_diario` em execução.
+- **Arquivos:** `worklog.md`.
+
+---
+
+## 2026-09-29 · Antigravity · Ativação Oficial da OrbitX (€ 272.02), Auditoria de Taxas (BET-IBC) e Protocolo de Giro Seguro da Banca
+
+- **Feito:**
+  1. **Confirmação e Liquidação de Saldo na OrbitX (`btrodriguest`):**
+     - O depósito secundário de 283.29 USDT foi confirmado e creditado pela BET-IBC como **+€ 241.00**.
+     - Confirmado primeiro green ao vivo no extrato: aposta em *Australia v Brazil (Lay 2-2)* rendeu **+€ 7.00** ganhos (comissão −€ 0.98), consolidando a banca líquida oficial em **`€ 272.02`** (aprox. R$ 1.660).
+  2. **Auditoria Forense de Custos Operacionais Offshore (BET-IBC / OrbitX):**
+     - **Câmbio de Depósito (USDT ➡️ EUR):** Custo de ~8.1% (5% de taxa contratual de conversão + ~3% de spread comercial da mesa de câmbio da BET-IBC).
+     - **Comissão de Mercado:** 14.0% sobre o lucro da aposta ganha (−€ 0.98 sobre € 7.00), reflexo do markup de corretagem da BET-IBC / licenciamento regional.
+     - **Política de Saque:** Taxa de 2% (saque EUR) + 5% (conversão EUR ➡️ USDT) = ~7% total no saque, além da exigência de *turnover* (giro de 1x o valor depositado) para evitar taxa punitiva de AML.
+  3. **Alinhamento Estratégico com o Usuário (Protocolo de Preservação e Giro de Banca):**
+     - Descartado saque imediato para evitar taxas de saída precoces e atrito de turnover.
+     - Decisão de operar a banca de € 272.02 com foco estrito em métodos de **baixa liability e alta WR**:
+       * `Lay Home (Fav Fora <= 1.65)`: Liability de € 3.85 por aposta (€ 7.00 stake @ 1.55) = 1.4% de risco da banca.
+       * `Lay Over 4.5 FT`: Em odds curtas (3.80 a 5.00).
+       * Veto total em Lays de Correct Score de odds altas (15 a 35) até a banca ultrapassar € 350 - € 400.
+- **Arquivos:** `metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-29.xlsx`, `worklog.md`.
+
+---
+
+## 2026-09-28 · Antigravity · Conclusão do Desafio xG (`PROMPT_GEMINI_metodos_com_xg.md`: Eixos 1, 2 e 3), Descoberta Econométrica no Eixo 3 (p=0.0017) e Parâmetros OrbitX (€ 7.00 min stake)
+
+- **Feito:**
+  1. **Eixo 1 (Forense dos REDs do Forward vs xG Real):**
+     - Cruzados 1.249 sinais do forward oficial com 32.070 partidas de 2026 com stats reais (`scratch/detalhar_forense_reds.py`).
+     - Comprovado que 75% dos REDs de Lay Home foram derrotas de favoritos ultra-dominantes (ex.: Betis 0.93 vs Real Madrid 3.46 xG; Bromley 0.39 vs Huddersfield 2.73 xG) por pura variância pós-chute, e no Lay Draw o p-valor de xG rolling é 0.67-0.97 (ruído uniforme). Filtro pré-jogo de xG não salva os REDs sem eliminar greens.
+  2. **Eixo 2 (Regressão à Média em Finalização / Luck Fade):**
+     - Pré-registrado em `PREREGISTRO_eixo2_regressao_media_xg.md` e testado em `testar_eixo2_regressao_media_xg.py` ($N=8.347$ jogos 2026 com odds Betfair Lay).
+     - $\beta(\Delta \text{Luck}) = -0.0234, p = 0.3575$ no logit contra a Closing Line. H2-A (Lay Over 2.5) gerou $-10.13\%$ ROI ($-127\text{u}$ prejuízo). REPROVADO e arquivado.
+  3. **Eixo 3 (Processo do 1º Tempo vs 2º Tempo em 0-0 HT):**
+     - Pré-registrado em `PREREGISTRO_eixo3_processo_ht_vs_2t.md` e executado em `testar_eixo3_processo_ht_vs_2t.py` em 123.080 jogos (2024-2026), 45.619 com xG HT limpo (Lei 6 anti-zeros) e 13.514 em 0-0 HT.
+     - **Marco Econométrico:** O xG acumulado no 1T em 0-0 HT é estatisticamente significante contra a Closing Line pré-jogo de Over 2.5: $\beta = +0.1688, z = 3.143, p = \mathbf{0.0017}$ para $P(\ge 1\text{ Gol 2T})$, e $\beta = +0.1267, p = \mathbf{0.0049}$ para $2+$ gols.
+     - Estabilidade temporal comprovada: 2025 ($p = 0.0003$) e 2026 ($p = 0.0267$).
+     - Sub-hipótese 3-B: Favorito Mandante ($\le 1.50$) em 0-0 HT com alta pressão ($xG \ge 1.00$) vence 65.3% FT vs 56.0% com baixa pressão ($+9.3\text{ pp}$ de spread, $N=1.712$).
+    - **Veredito:** Fenômeno estatístico aprovado; aplicação de trading classificada como **WATCHLIST STAKE-ZERO IN-PLAY** no coletor VPS (`xg_ht_logger.py`), pendente de validação contra a odd real de intervalo da Betfair (Lei 7 / Hall of Shame).
+  4. **Parâmetros Operacionais da OrbitX (BET-IBC):**
+     - Identificada a restrição técnica crítica: **Backer's Stake Mínimo de € 7.00** (`EX013`).
+     - Em Lay de CS de odd alta (15 a 35), a liability mínima seria de € 105 a € 238 por aposta (proibitivo para banca de R$ 1.500 / € 275).
+     - Alinhada estratégia com o usuário: foco estrito em métodos de baixa liability (`Lay Home Fav Fora <= 1.65` com liability € 3.85 / 1.4% banca; `Lay Over 4.5 FT` e `Lay Draw <= 1.40` até odd 5.5).
+     - Confirmado depósito on-chain de 283.29 USDT para BET-IBC; aguardando liberação do saldo na conta OrbitX `btrodriguest`.
+  5. **Auditoria Adversarial do Claude (`AUDITORIA_EIXO3_claude.md`):**
+     - Reprodução exata 100% confirmada. Claude comprovou que o fenômeno físico é ultra-robusto: sobreviveu à exclusão de expulsões no 1T ($p=0.0054$), efeitos fixos de liga ($p=0.0107$) e erros agrupados por liga ($p=0.0047$). A independência de Poisson é refutada na prática.
+     - **O Golpe de Misericórdia no Trading Pré-Jogo:** Claude demonstrou que o mercado in-play da Betfair **NÃO é cego**. A correlação entre o xG do 1T e a odd in-play de Over 2.5 no intervalo é de **$-0.368$** (e $-0.399$ no favorito mandante). Quando controlado pela odd in-play do intervalo capturada na VPS ($N=239$), o coeficiente $\beta$ vira negativo ($-0.250, p=0.44$). O mercado já amassa a odd quando há pressão.
+     - Lição imortalizada no **Hall of Shame do `GEMINI.md`**: *"Miragem do Benchmark Pré-Jogo em Fenômeno In-Play"*.
+- **Arquivos:** `AUDITORIA_EIXO3_claude.md`, `GEMINI.md`, `PREREGISTRO_eixo3_processo_ht_vs_2t.md`, `testar_eixo3_processo_ht_vs_2t.py`, `worklog.md`.
+
+---
+
 ## 2026-09-28 · Antigravity · Integração do `Lay 3x0 Top 3 (Aprovado)` no ARKAD (Commit `1624740`), Configuração Offshore na BET-IBC (OrbitX) e VPN Windscribe
 
 - **Feito:**

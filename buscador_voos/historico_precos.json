@@ -1,0 +1,292 @@
+{
+  "BPS": {
+    "menor_preco_historico": 1263,
+    "maior_preco_historico": 1263,
+    "consultas": [
+      {
+        "ts": 1790813077.5814486,
+        "data": "2026-09-30 21:04",
+        "preco": 1263,
+        "direto": 1712,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      },
+      {
+        "ts": 1790814128.3686743,
+        "data": "2026-09-30 21:22",
+        "preco": 1263,
+        "direto": 1712,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 1263,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:22:08",
+    "ultimo_preco_direto": 1712
+  },
+  "SSA": {
+    "menor_preco_historico": 1465,
+    "maior_preco_historico": 1465,
+    "consultas": [
+      {
+        "ts": 1790813080.847357,
+        "data": "2026-09-30 21:04",
+        "preco": 1465,
+        "direto": 1812,
+        "nivel": "normal",
+        "cia": "LATAM",
+        "stops": 1
+      },
+      {
+        "ts": 1790814132.415574,
+        "data": "2026-09-30 21:22",
+        "preco": 1465,
+        "direto": 1812,
+        "nivel": "normal",
+        "cia": "LATAM",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 1465,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "LATAM",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:22:12",
+    "ultimo_preco_direto": 1812
+  },
+  "MCZ": {
+    "menor_preco_historico": 1578,
+    "maior_preco_historico": 1578,
+    "consultas": [
+      {
+        "ts": 1790813084.4140885,
+        "data": "2026-09-30 21:04",
+        "preco": 1578,
+        "direto": 3847,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 1578,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:04:44",
+    "ultimo_preco_direto": 3847
+  },
+  "FOR": {
+    "menor_preco_historico": 2122,
+    "maior_preco_historico": 2122,
+    "consultas": [
+      {
+        "ts": 1790813087.806383,
+        "data": "2026-09-30 21:04",
+        "preco": 2122,
+        "direto": 2724,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2122,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:04:47",
+    "ultimo_preco_direto": 2724
+  },
+  "REC": {
+    "menor_preco_historico": 1825,
+    "maior_preco_historico": 1825,
+    "consultas": [
+      {
+        "ts": 1790813090.9220212,
+        "data": "2026-09-30 21:04",
+        "preco": 1825,
+        "direto": 3454,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 1825,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:04:50",
+    "ultimo_preco_direto": 3454
+  },
+  "IOS": {
+    "menor_preco_historico": 2035,
+    "maior_preco_historico": 2035,
+    "consultas": [
+      {
+        "ts": 1790813094.2315211,
+        "data": "2026-09-30 21:04",
+        "preco": 2035,
+        "direto": 3461,
+        "nivel": "normal",
+        "cia": "LATAM",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2035,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "LATAM",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:04:54",
+    "ultimo_preco_direto": 3461
+  },
+  "JPA": {
+    "menor_preco_historico": 2355,
+    "maior_preco_historico": 2355,
+    "consultas": [
+      {
+        "ts": 1790813100.8029947,
+        "data": "2026-09-30 21:05",
+        "preco": 2355,
+        "direto": 5234,
+        "nivel": "normal",
+        "cia": "LATAM",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2355,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "LATAM",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:00",
+    "ultimo_preco_direto": 5234
+  },
+  "NAT": {
+    "menor_preco_historico": 2278,
+    "maior_preco_historico": 2278,
+    "consultas": [
+      {
+        "ts": 1790813103.9027464,
+        "data": "2026-09-30 21:05",
+        "preco": 2278,
+        "direto": 3838,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2278,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:03",
+    "ultimo_preco_direto": 3838
+  },
+  "AJU": {
+    "menor_preco_historico": 2493,
+    "maior_preco_historico": 2493,
+    "consultas": [
+      {
+        "ts": 1790813107.3543582,
+        "data": "2026-09-30 21:05",
+        "preco": 2493,
+        "direto": 4089,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2493,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:07",
+    "ultimo_preco_direto": 4089
+  },
+  "SLZ": {
+    "menor_preco_historico": 2128,
+    "maior_preco_historico": 2128,
+    "consultas": [
+      {
+        "ts": 1790813110.8648837,
+        "data": "2026-09-30 21:05",
+        "preco": 2128,
+        "direto": 3679,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2128,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:10",
+    "ultimo_preco_direto": 3679
+  },
+  "VDC": {
+    "menor_preco_historico": 1805,
+    "maior_preco_historico": 1805,
+    "consultas": [
+      {
+        "ts": 1790813113.9579935,
+        "data": "2026-09-30 21:05",
+        "preco": 1805,
+        "direto": 3204,
+        "nivel": "normal",
+        "cia": "LATAM",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 1805,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "LATAM",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:13",
+    "ultimo_preco_direto": 3204
+  },
+  "PNZ": {
+    "menor_preco_historico": 2619,
+    "maior_preco_historico": 2619,
+    "consultas": [
+      {
+        "ts": 1790813117.625872,
+        "data": "2026-09-30 21:05",
+        "preco": 2619,
+        "direto": null,
+        "nivel": "normal",
+        "cia": "Gol",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2619,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Gol",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:17"
+  },
+  "THE": {
+    "menor_preco_historico": 2514,
+    "maior_preco_historico": 2514,
+    "consultas": [
+      {
+        "ts": 1790813120.5336401,
+        "data": "2026-09-30 21:05",
+        "preco": 2514,
+        "direto": 3299,
+        "nivel": "normal",
+        "cia": "Azul",
+        "stops": 1
+      }
+    ],
+    "ultimo_preco": 2514,
+    "ultimo_nivel": "normal",
+    "ultima_cia": "Azul",
+    "ultimas_paradas": 1,
+    "ultima_atualizacao": "2026-09-30 21:05:20",
+    "ultimo_preco_direto": 3299
+  }
+}

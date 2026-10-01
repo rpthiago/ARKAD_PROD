@@ -1,0 +1,4 @@
+2026-09-30 21:22:03 [INFO]: --- INICIANDO CHECAGEM AGENDADA DE VOOS BH -> NORDESTE ---
+2026-09-30 21:22:03 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0JQUxoaEgoyMDI2LTEyLTI4agUSA0JQU3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-09-30 21:22:07 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0JQUxoaEgoyMDI2LTEyLTI4agUSA0JQU3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-09-30 21:22:10 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1NTQRoaEgoyMDI2LTEyLTI4agUSA1NTQXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200

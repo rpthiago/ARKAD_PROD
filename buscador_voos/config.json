@@ -1,0 +1,109 @@
+{
+  "origem": "CNF",
+  "origem_nome": "Belo Horizonte (Confins)",
+  "data_ida": "2026-12-21",
+  "data_volta": "2026-12-28",
+  "adultos": 1,
+  "classe": "economy",
+  "max_paradas_filtro": 1,
+  "destinos": [
+    {
+      "codigo": "BPS",
+      "cidade": "Porto Seguro",
+      "uf": "BA",
+      "emoji": "🏖️",
+      "preco_alvo": 1150
+    },
+    {
+      "codigo": "SSA",
+      "cidade": "Salvador",
+      "uf": "BA",
+      "emoji": "🏛️",
+      "preco_alvo": 1300
+    },
+    {
+      "codigo": "MCZ",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "emoji": "🌊",
+      "preco_alvo": 1400
+    },
+    {
+      "codigo": "FOR",
+      "cidade": "Fortaleza",
+      "uf": "CE",
+      "emoji": "🌴",
+      "preco_alvo": 1450
+    },
+    {
+      "codigo": "REC",
+      "cidade": "Recife",
+      "uf": "PE",
+      "emoji": "☀️",
+      "preco_alvo": 1550
+    },
+    {
+      "codigo": "IOS",
+      "cidade": "Ilhéus",
+      "uf": "BA",
+      "emoji": "🥥",
+      "preco_alvo": 1600
+    },
+    {
+      "codigo": "JPA",
+      "cidade": "João Pessoa",
+      "uf": "PB",
+      "emoji": "⛵",
+      "preco_alvo": 1700
+    },
+    {
+      "codigo": "NAT",
+      "cidade": "Natal",
+      "uf": "RN",
+      "emoji": "🏖️",
+      "preco_alvo": 1800
+    },
+    {
+      "codigo": "AJU",
+      "cidade": "Aracaju",
+      "uf": "SE",
+      "emoji": "🦐",
+      "preco_alvo": 1800
+    },
+    {
+      "codigo": "SLZ",
+      "cidade": "São Luís",
+      "uf": "MA",
+      "emoji": "🦀",
+      "preco_alvo": 1800
+    },
+    {
+      "codigo": "VDC",
+      "cidade": "Vitória da Conquista",
+      "uf": "BA",
+      "emoji": "☕",
+      "preco_alvo": 1500
+    },
+    {
+      "codigo": "PNZ",
+      "cidade": "Petrolina",
+      "uf": "PE",
+      "emoji": "🍇",
+      "preco_alvo": 1650
+    },
+    {
+      "codigo": "THE",
+      "cidade": "Teresina",
+      "uf": "PI",
+      "emoji": "☀️",
+      "preco_alvo": 2000
+    }
+  ],
+  "regras_alerta": {
+    "alerta_se_atingir_preco_alvo": true,
+    "alerta_se_nivel_google_baixo": true,
+    "alerta_se_queda_subita_reais": 150,
+    "cooldown_alerta_horas": 12
+  },
+  "intervalo_monitoramento_minutos": 180
+}
