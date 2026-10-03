@@ -509,15 +509,22 @@ with tab1:
         df_radar, hora_captura = escanear_api_unificada(ds_str)
     fonte_origem = "API Betfair (FutPythonTrader)"
     if df_radar.empty:
-        # Fallback de Resiliência: Verifica se existe planilha gerada do Coletor VPS ou ledger KO-10
+        # Fallback de Resiliência: Sincroniza e lê os sinais capturados pelo Coletor VPS (KO-10)
         planilha_dia = ROOT / "metodos_aprovados" / f"Sinais_Metodos_Aprovados_{ds_str}.xlsx"
-        if not planilha_dia.exists():
+        hoje_str = datetime.now().strftime("%Y-%m-%d")
+        
+        # Se for o dia de hoje, se o usuário clicou em escanear ou se a planilha não existe, atualiza direto da VPS
+        if btn_escanear or not planilha_dia.exists() or ds_str == hoje_str:
             try:
                 from sinais_dia_coletor import gerar_planilha_do_coletor
-                gerar_planilha_do_coletor(ds_str, sync_vps=True)
+                df_col = gerar_planilha_do_coletor(ds_str, sync_vps=True)
+                if not df_col.empty:
+                    df_radar = df_col
+                    fonte_origem = "Coletor Oficial Betfair (VPS KO−10)"
             except Exception:
                 pass
-        if planilha_dia.exists():
+                
+        if df_radar.empty and planilha_dia.exists():
             try:
                 df_plan = pd.read_excel(planilha_dia)
                 if not df_plan.empty:

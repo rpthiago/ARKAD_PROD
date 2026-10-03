@@ -7,6 +7,24 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-03 · Antigravity · Sincronização Contínua dos Sinais da VPS no Streamlit Local e Streamlit Cloud
+
+- **Problema Relatado:**
+  - O usuário recebeu alertas via Telegram ao vivo às 15:45 (Nations League: Suíça x Eslovênia, Macedônia do Norte x Escócia) e às 17:00 (Série B: Cuiabá x Ponte Preta; Série C: Floresta x Botafogo PB; Argentina B Metro: Liniers, Camioneros), mas ao abrir o Streamlit esses jogos não estavam listados.
+- **Causa Raiz Identificada:**
+  - **Localhost:** A planilha `Sinais_Metodos_Aprovados_2026-10-03.xlsx` havia sido gerada às 14:40 com 20 jogos. Tanto a Página 01 quanto a Página 04 verificavam `if not planilha_dia.exists()` e não re-sincronizavam o ledger da VPS se o arquivo já existisse, mantendo em memória o snapshot antigo de 20 jogos.
+  - **Streamlit Cloud:** O container do Streamlit Cloud não possui a chave SSH privada do usuário e não pode executar `scp` na VPS. Ele lê estritamente os arquivos versionados no repositório GitHub (`origin/main`). Como os sinais das 15:45 e 17:00 foram gerados diretamente pelo daemon `sinais-ko.service` na VPS, eles ainda não haviam sido comitados e enviados via `git push`.
+- **Feito:**
+  1. **Página 01 (`pages/01_🏆_Portfolio_Metodos_Aprovados.py`):**
+     - O fallback de resiliência agora detecta se a data consultada é a data de hoje (`ds_str == hoje_str`) ou se o botão "Escanear Grade do Dia" foi clicado. Nesses casos, executa sempre `gerar_planilha_do_coletor(ds_str, sync_vps=True)` para puxar imediatamente qualquer sinal novo que a VPS tenha adicionado.
+  2. **Página 04 (`pages/04_⚡_Radar_Jogos_do_Dia.py`):**
+     - Reduzido o TTL do cache de 120s para 60s e configurado `sincronizar_ledger_vps()` na carga inicial com tratamento gracioso de exceções.
+  3. **Automação dos 5 Blocos (`executar_radar_5_blocos.py`):**
+     - Adicionada rotina de auto-sync com o GitHub: ao consolidar a planilha de cada bloco, o script executa automaticamente `git add metodos_aprovados/`, `git commit` e `git push origin main`. Assim, as atualizações das 06:00, 10:30, 13:00, 15:30 e 18:30 sobem diretamente para o Streamlit Cloud sem depender de intervenção manual.
+  4. **Atualização & Validação:**
+     - Ledger e planilha `Sinais_Metodos_Aprovados_2026-10-03.xlsx` atualizados localmente com todos os 27 sinais qualificados do dia (incluindo Suíça x Eslovênia, Cuiabá x Ponte Preta, Camioneros x Dep. Laferrere, Floresta x Botafogo PB, etc.).
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `executar_radar_5_blocos.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `worklog.md`.
+
 ## 2026-10-03 · Antigravity · Migração e Resiliência: Ativação dos Alertas Telegram na VPS e Fallback Automático do Coletor Oficial Betfair
 
 - **Contexto & Diagnóstico da Falha da API FutPythonTrader:**

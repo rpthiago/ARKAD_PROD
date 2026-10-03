@@ -84,6 +84,16 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     df_dia.to_excel(excel_path, index=False)
     print(f"[+] Planilha consolidada atualizada: {excel_path.name}")
     
+    # Sincronização automática com GitHub / Streamlit Cloud
+    try:
+        import subprocess
+        subprocess.run(["git", "add", "metodos_aprovados/"], cwd=str(ROOT), capture_output=True, timeout=15)
+        subprocess.run(["git", "commit", "-m", f"chore(radar): auto-sync sinais {data_str} bloco {num_bloco}"], cwd=str(ROOT), capture_output=True, timeout=15)
+        subprocess.run(["git", "push", "origin", "main"], cwd=str(ROOT), capture_output=True, timeout=30)
+        print(f"[+] Sinais sincronizados com GitHub / Streamlit Cloud.")
+    except Exception as e:
+        print(f"[-] Aviso ao sincronizar com git: {e}")
+    
     # 4. Envia o boletim deste bloco no Telegram
     if enviar_telegram and not df_bloco.empty:
         msg_linhas = [

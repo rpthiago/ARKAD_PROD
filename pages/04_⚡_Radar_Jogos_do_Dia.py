@@ -153,10 +153,13 @@ ds_iso = data_selecionada.strftime("%Y-%m-%d")
 btn_sincronizar = st.sidebar.button("🔄 Sincronizar Odds da VPS Agora", type="primary", use_container_width=True)
 
 # ── Carregamento de Dados com Cache & Sincronização ──
-@st.cache_data(ttl=120)
+@st.cache_data(ttl=60)
 def carregar_dados_jogos(data_str, force_sync=False):
-    if force_sync:
+    # Tenta sempre buscar as odds mais frescas da VPS (executa em 2s via SCP)
+    try:
         sincronizar_ledger_vps()
+    except Exception:
+        pass
     df = gerar_planilha_do_coletor(data_str, sync_vps=False)
     return df
 
