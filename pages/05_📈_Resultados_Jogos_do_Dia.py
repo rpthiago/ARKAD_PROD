@@ -192,6 +192,9 @@ def carregar_e_processar_resultados(data_iso, forcar_sync=False):
     if df.empty:
         return pd.DataFrame()
         
+    # Exclusão definitiva do Lay 0x3
+    df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()
+        
     # Dimensionamento de Risco por Método
     def _calc_liab(m):
         m_str = str(m)

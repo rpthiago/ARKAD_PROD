@@ -131,6 +131,11 @@ def liquidar_planilha_dia(data_str=None, comissao=COMISSAO_PADRAO):
     if df.empty:
         return 0, 0
         
+    # Exclusão definitiva de Lay 0x3 (a pedido do usuário em 03/10/2026)
+    df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].reset_index(drop=True)
+    if df.empty:
+        return 0, 0
+        
     mapa = carregar_placares_oficiais()
     
     # Placares manuais / confirmados adicionais para jogos que terminaram mas ainda nao tiveram closed status

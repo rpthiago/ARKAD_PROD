@@ -7,6 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-03 · Antigravity · Expurgamento Completo do Método Lay 0x3 (Desativação Operacional Definitiva)
+
+- **Demanda do Usuário:**
+  - "Tira esse 0x3 nao irei fazer mais"
+- **Justificativa Técnica & Governança (GEMINI.md):**
+  - Alinhado com as Leis de Governança do GEMINI.md (*Risco de Cauda Excessivo em Lay de Odd Alta*, *Miragem de Correct Score* e *Expurgar 100% dos métodos reprovados de todo gerador de sinais*). O Lay 0x3 opera em odds de 14.00 a 35.00 com liability pesada (até 34x o retorno), e o evento 0x3 apresenta risco de cauda com assimetria desfavorável.
+- **Feito:**
+  1. **Motor de Sinais da VPS (`sinais_ko_core.py` & `sinais-ko.service`):**
+     - Desativada a geração de `Lay 0x3 Top 3` e `Lay 0x3 (Regra Ampla)` em `sinais_ko_core.py`.
+     - Arquivo copiado para a VPS via SCP e serviço `sinais-ko.service` reiniciado com sucesso.
+  2. **Pipeline de Coleta & Blocos:**
+     - Em `sinais_dia_coletor.py` e `executar_radar_5_blocos.py`, adicionado filtro estrito para descartar qualquer sinal de 0x3 de qualquer planilha diária e de alertas no Telegram.
+     - Em `liquidar_sinais_dia.py`, adicionado filtro para descartar 0x3 da liquidação e relatórios.
+  3. **Interface Streamlit:**
+     - Arquivo `pages/16_⚽_Sinais_Lay_0x3.py` movido para `estrategias_legado/` (desaparece da barra lateral do Streamlit).
+     - Em `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, o método foi removido dos filtros padrão e movido para a lista de arquivados.
+     - Em `pages/04_⚡_Radar_Jogos_do_Dia.py` e `pages/05_📈_Resultados_Jogos_do_Dia.py`, filtros aplicados para desconsiderar 0x3 em cards, tabelas e KPIs.
+  4. **Base Oficial de Hoje (`Sinais_Metodos_Aprovados_2026-10-03.xlsx`):**
+     - Expurgadas as 6 entradas de Lay 0x3 de hoje (incluindo o red de Chimbarongo x Club Malleco).
+     - Resultado da grade ativa do dia: 21 jogos, sendo 16 jogos finalizados com **16 GREENS (100% Win Rate)** e 5 partidas em andamento/pendentes.
+- **Arquivos:** `sinais_ko_core.py`, `/home/ubuntu/betfair-collector/sinais_ko_core.py` (VPS), `sinais_dia_coletor.py`, `executar_radar_5_blocos.py`, `liquidar_sinais_dia.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `pages/05_📈_Resultados_Jogos_do_Dia.py`, `estrategias_legado/16_⚽_Sinais_Lay_0x3.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03.xlsx`, `worklog.md`.
+
 ## 2026-10-03 · Antigravity · Liquidação Oficial dos Jogos Finalizados e Nova Página de Resultados Forward (Página 05)
 
 - **Demanda do Usuário:**

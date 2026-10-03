@@ -179,7 +179,6 @@ with tab1:
             "Filtrar Métodos",
             [
                 "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
-                "Lay 0x3 Top 3 (Aprovado)",
                 "Lay 3x0 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",
@@ -188,12 +187,12 @@ with tab1:
                 "Lay Over 4.5 FT (Under Pesado)",
                 "Lay 0x2 Zebra (Micro-Liability)",
                 "Lay 2x0 Zebra (Micro-Liability)",
+                "Lay 0x3 Top 3 (Arquivado)",
                 "Lay 0x1 Super Fav (Arquivado)",
                 "Lay Under 0.5 FT (Arquivado)",
             ],
             default=[
                 "Lay 0x0 XGBoost (Sweet Spot [10, 20])",
-                "Lay 0x3 Top 3 (Aprovado)",
                 "Lay 3x0 Top 3 (Aprovado)",
                 "Lay 2x2 Top 3 (Aprovado)",
                 "Lay Draw (Fav <= 1.40)",

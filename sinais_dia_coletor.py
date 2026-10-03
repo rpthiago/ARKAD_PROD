@@ -100,6 +100,11 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
     d = k[k.Data == dia].copy()
     if d.empty:
         return pd.DataFrame()
+        
+    # Exclusão definitiva do Lay 0x3 (a pedido do usuário em 03/10/2026)
+    d = d[~d.Metodo.str.contains("0x3", case=False, na=False)]
+    if d.empty:
+        return pd.DataFrame()
 
     if universo == "feed":
         d = d[d.universo.fillna("") != "fora"]

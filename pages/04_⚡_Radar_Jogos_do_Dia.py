@@ -191,6 +191,8 @@ with col_h2:
 # ── Processamento de Stakes & Risco ──
 if not df_raw.empty:
     df = df_raw.copy()
+    # Exclusão definitiva do Lay 0x3
+    df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()
     
     def _calcular_liability(metodo):
         m = str(metodo)

@@ -72,6 +72,9 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     except Exception as e:
         print(f"[-] Aviso ao liquidar jogos: {e}")
         
+    # Exclusão definitiva do Lay 0x3
+    df_dia = df_dia[~df_dia["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()
+        
     # 2. Filtra jogos pertencentes a esta janela ou pendentes
     df_dia["Hora_Str"] = df_dia["Hora"].astype(str).str[:5]
     df_bloco = df_dia[

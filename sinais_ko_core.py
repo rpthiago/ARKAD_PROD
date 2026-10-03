@@ -61,12 +61,12 @@ def avaliar(mk, home, away, competicao, top3_dia):
     # 5. Lay Over 4.5 em jogo under: Under 2.5 back <= 1.50 e 4.0 <= lay Over 4.5 <= 20
     if u25 and u25 <= 1.50 and o45l and 4.0 <= o45l <= 20.0:
         out.append((M_O45, o45l, o45s, u25))
-    # 1. Lay 0x3: Under 2.5 back <= 2.10, lay 0-3 em 14-35, visitante >= 1.85 (ou sem odd)
-    if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85):
-        out.append((M_0X3_AMPLA, l03, l03s, u25))
-        lst = top3_dia.setdefault(M_0X3, []); lst.append(l03)
-        if l03 in sorted(lst)[:3]:
-            out.append((M_0X3, l03, l03s, u25))
+    # 1. Lay 0x3: DESATIVADO DEFINITIVAMENTE a pedido do usuario em 03/10/2026 (cauda gorda / risco desnecessario)
+    # if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85):
+    #     out.append((M_0X3_AMPLA, l03, l03s, u25))
+    #     lst = top3_dia.setdefault(M_0X3, []); lst.append(l03)
+    #     if l03 in sorted(lst)[:3]:
+    #         out.append((M_0X3, l03, l03s, u25))
     # 2. Lay 2x2: lay 2-2 em 8-20, tendencia (Under 2.5 <= 2.00 ou H <= 1.55 ou A <= 1.60), fora da blacklist
     if l22 and 8.0 <= l22 <= 20.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
         comp = str(competicao or "").upper()
