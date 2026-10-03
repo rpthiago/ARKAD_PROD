@@ -62,6 +62,16 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
         print(f"[-] Nenhum sinal registrado para hoje até o momento.")
         return df_dia
         
+    # Liquidação automática dos jogos que já terminaram
+    try:
+        from liquidar_sinais_dia import liquidar_planilha_dia
+        liquidar_planilha_dia(data_str)
+        excel_path = ROOT / "metodos_aprovados" / f"Sinais_Metodos_Aprovados_{data_str}.xlsx"
+        if excel_path.exists():
+            df_dia = pd.read_excel(excel_path)
+    except Exception as e:
+        print(f"[-] Aviso ao liquidar jogos: {e}")
+        
     # 2. Filtra jogos pertencentes a esta janela ou pendentes
     df_dia["Hora_Str"] = df_dia["Hora"].astype(str).str[:5]
     df_bloco = df_dia[

@@ -7,6 +7,34 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-03 · Antigravity · Liquidação Oficial dos Jogos Finalizados e Nova Página de Resultados Forward (Página 05)
+
+- **Demanda do Usuário:**
+  - Auditar e registrar os resultados dos jogos de hoje que já terminaram.
+  - Criar uma nova página no Streamlit com os resultados no estilo oficial de *Resultados dos Métodos em Validação Forward — ARKAD*.
+- **Feito:**
+  1. **Rotina de Liquidação Oficial Desacoplada (`liquidar_sinais_dia.py`):**
+     - Sincroniza os placares oficiais da Betfair Exchange (`placares_ft.csv` na VPS, gerado pelo daemon `liquidador-betfair.service` que lê o runner `WINNER`).
+     - Aplica a matemática de LAY da Lei 4 (comissão 5%, P&L por liability/stake real).
+     - Atualiza os campos `Placar`, `Resultado` (GREEN/RED) e `Status` (`✅ LIQUIDADO`) na planilha diária e no `forward_ko_ledger.csv`.
+  2. **Auditoria e Liquidação dos Jogos de Hoje (2026-10-03):**
+     - Dos 27 sinais da grade:
+       - **22 jogos finalizados:** **20 GREENS** e **2 REDS** (Win Rate de **90,9%** no dia).
+       - **5 jogos pendentes/ao vivo:** partidas das 17:00 (Cuiabá x Ponte Preta, Floresta x Botafogo PB, Camioneros x Laferrere e Liniers x Excursionistas).
+  3. **Nova Página Oficial no Streamlit (`pages/05_📈_Resultados_Jogos_do_Dia.py`):**
+     - Criada página dedicada no estilo exato de *Resultados dos Métodos em Validação Forward — ARKAD*.
+     - Header com aviso de governança e rigor metodológico.
+     - 7 KPIs executivos no topo: Total Jogos, Liquidados, Greens, Reds, Win Rate %, P&L em R$, P&L em Unidades e Yield % sobre Liability.
+     - 4 Tabs detalhadas:
+       - *⚡ Visão por Horário & Blocos:* Cards customizados com placar oficial, borda verde/vermelha, stake, odd lay e P&L em R$.
+       - *📊 Desempenho por Método:* Tabela segmentada comparando Win Rate vs Break-even WR por estratégia.
+       - *📈 Curva de Equity Intraday:* Gráfico de linha interativo com a evolução do saldo acumulado jogo a jogo.
+       - *📋 Tabela Analítica Completa:* Grid formatado com exportação direta para Excel (`.xlsx`).
+     - Botão na barra lateral para atualização e liquidação em tempo real sob demanda.
+  4. **Auto-Liquidação no Pipeline dos 5 Blocos (`executar_radar_5_blocos.py`):**
+     - Integrada a chamada de `liquidar_planilha_dia()` antes de salvar a planilha de cada bloco, garantindo que o Agendador do Windows mantenha os resultados atualizados e sincronizados com o GitHub/Streamlit Cloud.
+- **Arquivos:** `liquidar_sinais_dia.py`, `pages/05_📈_Resultados_Jogos_do_Dia.py`, `executar_radar_5_blocos.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `worklog.md`.
+
 ## 2026-10-03 · Antigravity · Sincronização Contínua dos Sinais da VPS no Streamlit Local e Streamlit Cloud
 
 - **Problema Relatado:**

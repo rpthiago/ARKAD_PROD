@@ -165,3 +165,25 @@
 2026-10-03 12:31:00 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1BOWhoaEgoyMDI2LTEyLTI4agUSA1BOWnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
 2026-10-03 12:31:03 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1RIRRoaEgoyMDI2LTEyLTI4agUSA1RIRXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
 2026-10-03 12:31:06 [INFO]: Varredura concluída com sucesso. 13 destinos processados.
+2026-10-03 17:30:02 [INFO]: --- INICIANDO CHECAGEM AGENDADA DE VOOS BH -> NORDESTE ---
+2026-10-03 17:30:03 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0JQUxoaEgoyMDI2LTEyLTI4agUSA0JQU3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:07 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1NTQRoaEgoyMDI2LTEyLTI4agUSA1NTQXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:10 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA01DWhoaEgoyMDI2LTEyLTI4agUSA01DWnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:13 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA01DWhoaEgoyMDI2LTEyLTI4agUSA01DWnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:17 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0ZPUhoaEgoyMDI2LTEyLTI4agUSA0ZPUnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:20 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0ZPUhoaEgoyMDI2LTEyLTI4agUSA0ZPUnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:23 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1JFQxoaEgoyMDI2LTEyLTI4agUSA1JFQ3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:26 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1JFQxoaEgoyMDI2LTEyLTI4agUSA1JFQ3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:29 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0lPUxoaEgoyMDI2LTEyLTI4agUSA0lPU3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:32 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0lPUxoaEgoyMDI2LTEyLTI4agUSA0lPU3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:35 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0pQQRoaEgoyMDI2LTEyLTI4agUSA0pQQXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:39 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA05BVBoaEgoyMDI2LTEyLTI4agUSA05BVHIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:42 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA05BVBoaEgoyMDI2LTEyLTI4agUSA05BVHIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:46 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0FKVRoaEgoyMDI2LTEyLTI4agUSA0FKVXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:49 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA0FKVRoaEgoyMDI2LTEyLTI4agUSA0FKVXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:52 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1NMWhoaEgoyMDI2LTEyLTI4agUSA1NMWnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:53 [INFO]: Destino SLZ atingiu critério (PRECO_ALVO), mas está em cooldown (alertado há 2.2 horas por R$ 1796).
+2026-10-03 17:30:55 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1ZEQxoaEgoyMDI2LTEyLTI4agUSA1ZEQ3IFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:30:59 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1BOWhoaEgoyMDI2LTEyLTI4agUSA1BOWnIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:31:02 [INFO]: response: https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMjFqBRIDQ05GcgUSA1RIRRoaEgoyMDI2LTEyLTI4agUSA1RIRXIFEgNDTkZCAQFIAZgBAQ%3D%3D&hl=pt-BR&tfu=EgQIABABIgA&curr=BRL 200
+2026-10-03 17:31:05 [INFO]: Varredura concluída com sucesso. 13 destinos processados.
