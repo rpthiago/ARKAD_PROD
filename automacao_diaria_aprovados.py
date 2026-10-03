@@ -37,8 +37,43 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
         
     if df_games.empty:
         print(f"[-] Nenhum jogo retornado pela API da Betfair para {data_str}.")
+        print("[*] Acionando fallback de resiliência: sincronizando sinais da VPS (coletor KO-10)...")
+        try:
+            from sinais_dia_coletor import gerar_planilha_do_coletor
+            df_coletor = gerar_planilha_do_coletor(data_str, sync_vps=True)
+            if not df_coletor.empty:
+                print(f"[+] {len(df_coletor)} sinais carregados do coletor da VPS para {data_str}!")
+                if "Stake_Sugerida_R$" not in df_coletor.columns:
+                    df_coletor["Odd_Entrada"] = pd.to_numeric(df_coletor["Odd_Entrada"], errors="coerce")
+                    df_coletor["Risco_Red_R$"] = liability_fixa
+                    df_coletor["Stake_Sugerida_R$"] = (liability_fixa / (df_coletor["Odd_Entrada"] - 1.0)).round(2)
+                    df_coletor["Lucro_Green_R$"] = (df_coletor["Stake_Sugerida_R$"] * 0.955).round(2)
+                out_excel = ROOT / "metodos_aprovados" / f"Sinais_Metodos_Aprovados_{data_str}.xlsx"
+                df_coletor.to_excel(out_excel, index=False)
+                if enviar_telegram:
+                    msg_linhas = [
+                        f"🎯 *ARKAD — RADAR DE SINAIS DO DIA ({data_str})* [VPS KO−10]",
+                        f"💰 *Banca:* R$ {banca:,.2f} | 🛡️ *Risco Máx:* R$ {liability_fixa:.2f} ({risco_pct*100:.1f}%)",
+                        f"📊 *Total de Entradas (Coletor Oficial):* {len(df_coletor)} jogos\n",
+                        "━━━━━━━━━━━━━━━━━━━━━━━"
+                    ]
+                    for _, s in df_coletor.iterrows():
+                        msg_linhas.append(
+                            f"⏰ `{s.get('Hora', '')}` | 🏆 *{s.get('Liga', '')}*\n"
+                            f"⚽ *{s.get('Jogo', '')}*\n"
+                            f"📌 *{s.get('Método', '')}* (Odd Lay: `{float(s.get('Odd_Entrada') or 0):.2f}`)\n"
+                            f"💵 *Stake:* `R$ {float(s.get('Stake_Sugerida_R$') or 0):.2f}` ➔ *Lucro:* `+R$ {float(s.get('Lucro_Green_R$') or 0):.2f}`\n"
+                            "───────────────────────"
+                        )
+                    texto_telegram = "\n".join(msg_linhas)
+                    enviar_mensagem_telegram(texto_telegram)
+                    enviar_documento_telegram(out_excel, legenda=f"📥 Planilha de Sinais (VPS Coletor) — {data_str}")
+                    print("[+] Mensagem e planilha do coletor enviadas com sucesso no Telegram!")
+                return df_coletor
+        except Exception as e:
+            print(f"[-] Falha ao sincronizar com a VPS: {e}")
         return pd.DataFrame()
-        
+
     print(f"[+] Total de jogos brutos na grade da Betfair: {len(df_games)}")
     
     oh_back = _get_series(df_games, ["Odd_H_Back", "Odd_H_FT", "Odd_H"])
@@ -217,8 +252,26 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     df_sinais = pd.DataFrame(sinais)
     print(f"[+] Total de sinais oficiais qualificados: {len(df_sinais)}")
     
+    if df_sinais.empty:
+        print(f"[-] Nenhum sinal qualificado gerado a partir da grade da API para {data_str}.")
+        print("[*] Acionando fallback de resiliência: sincronizando sinais da VPS (coletor KO-10)...")
+        try:
+            from sinais_dia_coletor import gerar_planilha_do_coletor
+            df_coletor = gerar_planilha_do_coletor(data_str, sync_vps=True)
+            if not df_coletor.empty:
+                print(f"[+] {len(df_coletor)} sinais carregados do coletor da VPS para {data_str}!")
+                df_sinais = df_coletor
+        except Exception as e:
+            print(f"[-] Falha ao sincronizar com a VPS: {e}")
+
     if not df_sinais.empty:
-        df_sinais = df_sinais.sort_values(["Data", "Hora"]).reset_index(drop=True)
+        if "Stake_Sugerida_R$" not in df_sinais.columns:
+            df_sinais["Odd_Entrada"] = pd.to_numeric(df_sinais["Odd_Entrada"], errors="coerce")
+            df_sinais["Risco_Red_R$"] = liability_fixa
+            df_sinais["Stake_Sugerida_R$"] = (liability_fixa / (df_sinais["Odd_Entrada"] - 1.0)).round(2)
+            df_sinais["Lucro_Green_R$"] = (df_sinais["Stake_Sugerida_R$"] * 0.955).round(2)
+        if "Data" in df_sinais.columns and "Hora" in df_sinais.columns:
+            df_sinais = df_sinais.sort_values(["Data", "Hora"]).reset_index(drop=True)
         out_excel = ROOT / "metodos_aprovados" / f"Sinais_Metodos_Aprovados_{data_str}.xlsx"
         df_sinais.to_excel(out_excel, index=False)
         print(f"[+] Planilha matinal salva em: {out_excel.name}")

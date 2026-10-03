@@ -1,0 +1,266 @@
+{
+  "nome": "Radar de Milhas Smiles & Parceiras",
+  "versao": "1.1.0",
+  "descricao": "Monitor de passagens promocionais e sweet spots usando milhas Smiles (GOL para Nordeste e parceiras internacionais para Madri, Portugal, Londres, Turquia e Japão)",
+  
+  "cpm_referencia_reais": 15.50,
+  "cooldown_alerta_horas": 12,
+  "max_alertas_por_execucao": 6,
+  
+  "origens": {
+    "CNF": "Belo Horizonte (Confins)",
+    "GRU": "São Paulo (Guarulhos)",
+    "GIG": "Rio de Janeiro (Galeão)"
+  },
+  
+  "datas_monitoradas": {
+    "nordeste": [
+      {
+        "data_ida": "2026-12-21",
+        "data_volta": "2026-12-28",
+        "duracao_dias": 7,
+        "descricao": "Data Escolhida: Semana do Réveillon (21/12 a 28/12/2026)"
+      }
+    ],
+    "internacional": [
+      {
+        "data_ida": "2027-05-10",
+        "data_volta": "2027-05-20",
+        "duracao_dias": 10,
+        "descricao": "Viagem 10 dias (10/05 a 20/05/2027)"
+      },
+      {
+        "data_ida": "2027-05-20",
+        "data_volta": "2027-05-30",
+        "duracao_dias": 10,
+        "descricao": "Viagem 10 dias (20/05 a 30/05/2027)"
+      },
+      {
+        "data_ida": "2027-06-10",
+        "data_volta": "2027-06-20",
+        "duracao_dias": 10,
+        "descricao": "Viagem 10 dias (10/06 a 20/06/2027)"
+      },
+      {
+        "data_ida": "2027-03-10",
+        "data_volta": "2027-03-20",
+        "duracao_dias": 10,
+        "descricao": "Viagem 10 dias (10/03 a 20/03/2027)"
+      }
+    ]
+  },
+  
+  "destinos": {
+    "MAD": {
+      "tipo": "internacional",
+      "cidade": "Madri",
+      "pais": "Espanha",
+      "emoji": "🇪🇸",
+      "origens": ["GRU", "CNF", "GIG"],
+      "teto_milhas_trecho": 100000,
+      "teto_milhas_ida_volta": 200000,
+      "taxa_estimada_embarque_reais": 420.0,
+      "parceiras_principais": ["Air Europa", "Iberia", "LATAM", "Air France"]
+    },
+    "LIS": {
+      "tipo": "internacional",
+      "cidade": "Lisboa",
+      "pais": "Portugal",
+      "emoji": "🇵🇹",
+      "origens": ["CNF", "GRU", "GIG"],
+      "teto_milhas_trecho": 110000,
+      "teto_milhas_ida_volta": 220000,
+      "taxa_estimada_embarque_reais": 450.0,
+      "parceiras_principais": ["TAP Air Portugal", "Air Europa"]
+    },
+    "LHR": {
+      "tipo": "internacional",
+      "cidade": "Londres",
+      "pais": "Inglaterra",
+      "emoji": "🇬🇧",
+      "origens": ["GRU", "CNF", "GIG"],
+      "teto_milhas_trecho": 115000,
+      "teto_milhas_ida_volta": 230000,
+      "taxa_estimada_embarque_reais": 750.0,
+      "parceiras_principais": ["Air France", "KLM", "British Airways"]
+    },
+    "IST": {
+      "tipo": "internacional",
+      "cidade": "Istambul",
+      "pais": "Turquia",
+      "emoji": "🇹🇷",
+      "origens": ["GRU"],
+      "teto_milhas_trecho": 125000,
+      "teto_milhas_ida_volta": 250000,
+      "taxa_estimada_embarque_reais": 550.0,
+      "parceiras_principais": ["Turkish Airlines", "Qatar Airways", "Ethiopian Airlines"]
+    },
+    "NRT": {
+      "tipo": "internacional",
+      "cidade": "Tóquio (Narita)",
+      "pais": "Japão",
+      "emoji": "🇯🇵",
+      "origens": ["GRU"],
+      "teto_milhas_trecho": 160000,
+      "teto_milhas_ida_volta": 320000,
+      "taxa_estimada_embarque_reais": 680.0,
+      "parceiras_principais": ["Ethiopian Airlines", "Qatar Airways", "ANA", "American Airlines"]
+    },
+    "BPS": {
+      "tipo": "nordeste",
+      "cidade": "Porto Seguro",
+      "uf": "BA",
+      "pais": "Brasil",
+      "emoji": "🏖️",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 15000,
+      "teto_milhas_ida_volta": 28000,
+      "taxa_estimada_embarque_reais": 68.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "SSA": {
+      "tipo": "nordeste",
+      "cidade": "Salvador",
+      "uf": "BA",
+      "pais": "Brasil",
+      "emoji": "🏛️",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 16000,
+      "teto_milhas_ida_volta": 30000,
+      "taxa_estimada_embarque_reais": 70.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "MCZ": {
+      "tipo": "nordeste",
+      "cidade": "Maceió",
+      "uf": "AL",
+      "pais": "Brasil",
+      "emoji": "🌊",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 18000,
+      "teto_milhas_ida_volta": 35000,
+      "taxa_estimada_embarque_reais": 72.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "FOR": {
+      "tipo": "nordeste",
+      "cidade": "Fortaleza",
+      "uf": "CE",
+      "pais": "Brasil",
+      "emoji": "🌴",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 19000,
+      "teto_milhas_ida_volta": 36000,
+      "taxa_estimada_embarque_reais": 72.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "REC": {
+      "tipo": "nordeste",
+      "cidade": "Recife",
+      "uf": "PE",
+      "pais": "Brasil",
+      "emoji": "☀️",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 18000,
+      "teto_milhas_ida_volta": 35000,
+      "taxa_estimada_embarque_reais": 72.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "IOS": {
+      "tipo": "nordeste",
+      "cidade": "Ilhéus",
+      "uf": "BA",
+      "pais": "Brasil",
+      "emoji": "🥥",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 17000,
+      "teto_milhas_ida_volta": 32000,
+      "taxa_estimada_embarque_reais": 68.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "JPA": {
+      "tipo": "nordeste",
+      "cidade": "João Pessoa",
+      "uf": "PB",
+      "pais": "Brasil",
+      "emoji": "⛵",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 19000,
+      "teto_milhas_ida_volta": 36000,
+      "taxa_estimada_embarque_reais": 75.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "NAT": {
+      "tipo": "nordeste",
+      "cidade": "Natal",
+      "uf": "RN",
+      "pais": "Brasil",
+      "emoji": "🏖️",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 20000,
+      "teto_milhas_ida_volta": 38000,
+      "taxa_estimada_embarque_reais": 75.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "AJU": {
+      "tipo": "nordeste",
+      "cidade": "Aracaju",
+      "uf": "SE",
+      "pais": "Brasil",
+      "emoji": "🦐",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 18000,
+      "teto_milhas_ida_volta": 35000,
+      "taxa_estimada_embarque_reais": 70.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "SLZ": {
+      "tipo": "nordeste",
+      "cidade": "São Luís",
+      "uf": "MA",
+      "pais": "Brasil",
+      "emoji": "🦀",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 21000,
+      "teto_milhas_ida_volta": 40000,
+      "taxa_estimada_embarque_reais": 75.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "VDC": {
+      "tipo": "nordeste",
+      "cidade": "Vitória da Conquista",
+      "uf": "BA",
+      "pais": "Brasil",
+      "emoji": "☕",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 16000,
+      "teto_milhas_ida_volta": 30000,
+      "taxa_estimada_embarque_reais": 65.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "PNZ": {
+      "tipo": "nordeste",
+      "cidade": "Petrolina",
+      "uf": "PE",
+      "pais": "Brasil",
+      "emoji": "🍇",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 19000,
+      "teto_milhas_ida_volta": 36000,
+      "taxa_estimada_embarque_reais": 70.0,
+      "parceiras_principais": ["GOL"]
+    },
+    "THE": {
+      "tipo": "nordeste",
+      "cidade": "Teresina",
+      "uf": "PI",
+      "pais": "Brasil",
+      "emoji": "☀️",
+      "origens": ["CNF"],
+      "teto_milhas_trecho": 21000,
+      "teto_milhas_ida_volta": 40000,
+      "taxa_estimada_embarque_reais": 75.0,
+      "parceiras_principais": ["GOL"]
+    }
+  }
+}

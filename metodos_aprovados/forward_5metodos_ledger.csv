@@ -1252,5 +1252,8 @@
 2026-09-29,Lay 0x3 (Regra Ampla),COLOMBIA 1,Deportivo Pereira,Santa Fe,17:30,26.0,,LIQUIDADO,1,2,1-2,GREEN,0.038,3.8,0.9634,2026-09-30 06:00,betfair_oficial:exato
 2026-09-29,Lay 2x2 Top 3,COLOMBIA 1,Ind Medellin,Millonarios,22:05,17.5,,LIQUIDADO,2,2,2-2,RED,-1.0,-100.0,0.9456,2026-09-30 06:00,betfair_oficial:exato
 2026-09-29,Lay Draw (Fav<=1.40),BRAZIL 2,Botafogo SP,Ponte Preta,19:30,7.2,1.23,LIQUIDADO,2,0,2-0,GREEN,0.15323,15.32,0.8671,2026-09-30 06:00,betfair_oficial:exato
-2026-09-30,Lay 2x2 Top 3,URUGUAY 1,Torque,Penarol,20:00,19.0,,PENDENTE,,,,,,,0.9499,,
-2026-09-30,Lay Draw (Fav<=1.40),PARAGUAY CUP,Independiente FBC,Nacional (Par),17:00,7.0,1.39,PENDENTE,,,,,,,0.8633,,
+2026-09-30,Lay 2x2 Top 3,URUGUAY 1,Torque,Penarol,20:00,19.0,,LIQUIDADO,1,1,1-1,GREEN,0.05278,5.28,0.9499,2026-10-01 06:00,betfair_oficial:exato
+2026-09-30,Lay Draw (Fav<=1.40),PARAGUAY CUP,Independiente FBC,Nacional (Par),17:00,7.0,1.39,LIQUIDADO,2,2,2-2,RED,-1.0,-100.0,0.8633,2026-10-01 06:00,betfair_oficial:exato
+2026-10-01,Lay 2x2 Top 3,COLOMBIA 1,Internacional de Bogotá,Once Caldas,22:00,17.0,,PENDENTE,,,,,,,0.944,,
+2026-10-01,Lay 2x2 Top 3,USA 1,Seattle Sounders,Kansas City,22:30,17.5,,LIQUIDADO,2,1,2-1,GREEN,0.05758,5.76,0.9456,2026-10-02 06:00,betfair_oficial:exato
+2026-10-02,Lay Home/DC X2 (FavVis<=1.65),NETHERLANDS 2,Helmond Sport,Heracles,16:00,8.2,1.43,LIQUIDADO,2,2,2-2,GREEN,0.13194,13.19,0.8834,2026-10-03 11:18,betfair_oficial:exato

@@ -1107,3 +1107,130 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 01/10/2026 12:00:02,37 ===== 
+[PAUSADO] registro de sinais novos desligado (ver nota no topo do arquivo).
+          a liquidacao dos pendentes segue rodando.
+novos: 0 | liquidados: 0 | total 15 (pend 7, liq 8)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=8 | WR=100.0% | ROI/liability=+6.98%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=7 | WR=100.0% | ROI/liability=+7.00%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 02/10/2026 12:00:02,65 ===== 
+[PAUSADO] registro de sinais novos desligado (ver nota no topo do arquivo).
+          a liquidacao dos pendentes segue rodando.
+novos: 0 | liquidados: 0 | total 15 (pend 7, liq 8)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=8 | WR=100.0% | ROI/liability=+6.98%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=7 | WR=100.0% | ROI/liability=+7.00%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_voos/execucoes.log
+	modified:   buscador_voos/historico_precos.json
+	modified:   buscador_voos/main.py
+	modified:   buscador_voos/run_scheduled.py
+	modified:   buscador_voos/telegram_bot.py
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	buscador_milhas_smiles/
+	buscador_voos_internacional/
+	telegram_voos_config.json
+	test_pw.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 03/10/2026 12:00:02,43 ===== 
+[PAUSADO] registro de sinais novos desligado (ver nota no topo do arquivo).
+          a liquidacao dos pendentes segue rodando.
+novos: 0 | liquidados: 0 | total 15 (pend 7, liq 8)
+
+=== FORWARD IDEIA 2 (Super Favorito <= 1.80, Stake-Zero) ===
+TOTAL COMBINADO: N=8 | WR=100.0% | ROI/liability=+6.98%
+  🟢 Lay 0x1 (Mandante Fav <= 1.80): N=7 | WR=100.0% | ROI/liability=+7.00%
+  ⚠️ Lay 1x0 (Visitante Fav <= 1.80): N=1 | WR=100.0% | ROI/liability=+6.82%
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_voos/execucoes.log
+	modified:   buscador_voos/historico_precos.json
+	modified:   buscador_voos/main.py
+	modified:   buscador_voos/run_scheduled.py
+	modified:   buscador_voos/telegram_bot.py
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	buscador_milhas_smiles/
+	buscador_voos_internacional/
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-30_coletor.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-01_coletor.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-02_coletor.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03.xlsx
+	metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03_coletor.xlsx
+	telegram_voos_config.json
+	test_pw.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

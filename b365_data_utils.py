@@ -109,6 +109,18 @@ def fetch_b365_daily(date_str: str) -> pd.DataFrame:
 def fetch_betfair_daily(date_str: str) -> pd.DataFrame:
     from futpythontrader_client import get_daily_dataframe
     df = get_daily_dataframe("betfair", date_str)
+    if not df.empty and len(df) >= 20:
+        return _normalize_b365(df)
+        
+    # Se a API da Betfair retornar dados incompletos (< 20 jogos), tenta obter do coletor da VPS
+    try:
+        from sinais_dia_coletor import gerar_planilha_do_coletor
+        df_coletor = gerar_planilha_do_coletor(date_str, sync_vps=True)
+        if not df_coletor.empty:
+            return df_coletor
+    except Exception:
+        pass
+        
     if not df.empty:
         return _normalize_b365(df)
     return _fallback_day_from_historical("betfair", date_str)

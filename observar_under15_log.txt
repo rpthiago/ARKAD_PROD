@@ -1537,3 +1537,85 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 01/10/2026  8:45:01,80 ===== 
+[*] Buscando fixtures para a data: 2026-10-01...
+2026-10-01 08:45:06.374 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 6 jogos obtidos da API Betfair para 2026-10-01!
+[SUCESSO] Feed diário gerado e enriquecido com 6 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-10-01.parquet (6 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 02/10/2026  8:45:02,42 ===== 
+[*] Buscando fixtures para a data: 2026-10-02...
+2026-10-02 08:45:05.046 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[API] 22 jogos obtidos da API Betfair para 2026-10-02!
+[SUCESSO] Feed diário gerado e enriquecido com 22 jogos em: C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\scratch\feed_forward_diario.parquet
+[ARQUIVO] copia datada: feed_forward_diario_2026-10-02.parquet (22 jogos)
+
+[PAUSADO] observador do Under 1.5 nao roda (ver nota no topo do arquivo).
+          o feed foi gerado e arquivado; nenhum sinal novo sera registrado.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_voos/execucoes.log
+	modified:   buscador_voos/historico_precos.json
+	modified:   buscador_voos/main.py
+	modified:   buscador_voos/run_scheduled.py
+	modified:   buscador_voos/telegram_bot.py
+	modified:   forward_oculto/forward_oculto.log
+	modified:   forward_oculto/forward_oculto_log.csv
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/.cache_feed_jogos.csv
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/.cache_saida_zebra_vps.csv
+	modified:   metodos_aprovados/.sinais_0600_hoje.csv
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_5metodos_ledger.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/saida_zebra_ledger.csv
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	buscador_milhas_smiles/
+	buscador_voos_internacional/
+	telegram_voos_config.json
+	test_pw.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

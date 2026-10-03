@@ -7,6 +7,187 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-03 · Antigravity · Migração e Resiliência: Ativação dos Alertas Telegram na VPS e Fallback Automático do Coletor Oficial Betfair
+
+- **Contexto & Diagnóstico da Falha da API FutPythonTrader:**
+  - O endpoint de jogos do dia da API da comunidade (`jogos-do-dia/betfair/2026-10-03/`) congelou na madrugada às 05:00 com apenas 6 jogos (México e Japão), deixando 0 jogos da Europa para a grade de sábado (enquanto o endpoint da Bet365 tinha 94 jogos e FootyStats 112 jogos). Nenhum dos 6 cumpriu critérios, zerando a planilha matinal.
+  - Com as novas regulamentações (Portarias SPA/MF e restrições de rede/licenciamento), scrapers de terceiros não-oficiais tornaram-se pontos de falha crônicos e obsoletos.
+- **Feito:**
+  1. **Ativação dos Alertas Diretos no Telegram na VPS:**
+     - A VPS (`ubuntu@163.176.59.215`) já opera o coletor oficial direto da Betfair Exchange via `betfairlightweight` com certificados SSL dedicados e daemon `sinais-ko.service` monitorando 4-16 min antes do KO (KO−10).
+     - Atualizado `/etc/systemd/system/sinais-ko.service` com `Environment=ARKAD_TG_ALERTAS=1`.
+     - Testada e confirmada a entrega de mensagens no Telegram via bot oficial (`Status: 200`). O serviço foi reiniciado e passa a enviar alertas em tempo real 10 min antes de cada jogo.
+  2. **Fallback Automático e Resiliente no ARKAD:**
+     - Em `sinais_dia_coletor.py`, adicionada a função `sincronizar_ledger_vps()` (via SCP com timeout de 10s) e parser tolerante a linhas de 22 ou 24 colunas (`_ler_ledger_ko`).
+     - Em `automacao_diaria_aprovados.py`, adicionado fallback de resiliência: caso a API da Betfair retorne grade vazia ou 0 sinais qualificados, o sistema sincroniza automaticamente o ledger da VPS, processa as entradas do coletor e gera `Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`.
+     - Em `b365_data_utils.fetch_betfair_daily(date_str)`, caso a API retorne < 20 jogos, o coletor da VPS é consultado imediatamente.
+     - Em `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, quando a grade da API retornar vazia, o Streamlit carrega a planilha gerada do coletor da VPS, exibindo banner informativo explícito: `📡 Fonte de Resiliência Ativa: Coletor Oficial Betfair (VPS KO−10)`.
+  3. **Validação Operacional & Disparo no Telegram:**
+     - Sincronizados 15 sinais reais capturados pelo coletor da VPS para hoje (Noruega, Escócia, Inglaterra, Argélia, Tailândia, etc.).
+     - Planilha `Sinais_Metodos_Aprovados_2026-10-03.xlsx` gerada com sucesso e integrada ao dashboard.
+     - Ajustado `telegram_notifier.py` para permitir `automacao_diaria_aprovados.py` e parâmetro `force=True`.
+     - Disparada a grade consolidada e a planilha Excel completa no Telegram do usuário (`Status: 200`).
+  4. **Implementação da Operação em 5 Horários Estratégicos (Odds Reais por Bloco):**
+     - Em resposta à necessidade de avaliar as odds nos momentos em que a liquidez de cada mercado se consolida (evitando precificação distorcida de manhã para jogos da tarde), foi criado o pipeline em 5 blocos:
+       - **Bloco 1 (06:00):** Jogos matinais (06:30 - 10:30)
+       - **Bloco 2 (10:30):** Jogos Europa 1 (11:00 - 13:00 - Premier League, Championship, Escócia)
+       - **Bloco 3 (13:00):** Jogos Europa 2 (13:30 - 15:30 - Bundesliga, Serie A, La Liga)
+       - **Bloco 4 (15:30):** Jogos Tarde / Clássicos (16:00 - 18:00 - Europa e América do Sul)
+       - **Bloco 5 (18:30):** Jogos Noite Américas (19:00 - 23:30 - Brasileirão, Argentina, MLS)
+     - Criado `executar_radar_5_blocos.py` e `rotina_5_horarios.bat`.
+     - Criadas 5 tarefas no Agendador do Windows: `ARKAD_Radar_06h00`, `ARKAD_Radar_10h30`, `ARKAD_Radar_13h00`, `ARKAD_Radar_15h30`, `ARKAD_Radar_18h30`.
+     - Testada a execução do Bloco 2 (10:30 às 13:00) às 12:40: 7 jogos filtrados e boletim enviado com sucesso no Telegram.
+  5. **Nova Página Oficial no Streamlit (`pages/04_⚡_Radar_Jogos_do_Dia.py`):**
+     - Criada interface dedicada e moderna para visualização em tempo real dos jogos organizados pelos 5 Blocos de Horário.
+     - Inclui cards detalhados por partida com odd Lay de entrada, odd do favorito, liquidez da fila na Betfair, cálculo dinâmico de stake/risco, e status de liquidação.
+     - Tabs inteligentes com destaque para o "Bloco Atual" ativo no momento do relógio, filtros interativos, sincronização com a VPS em 1 clique e disparo sob demanda para o Telegram.
+- **Arquivos:** `pages/04_⚡_Radar_Jogos_do_Dia.py`, `sinais_dia_coletor.py`, `automacao_diaria_aprovados.py`, `b365_data_utils.py`, `telegram_notifier.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `executar_radar_5_blocos.py`, `rotina_5_horarios.bat`, `/etc/systemd/system/sinais-ko.service` (VPS), `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Eliminação Definitiva da Divergência em Voos Internacionais (Caso CNF ➔ MAD na TAP)
+
+- **Feito:**
+  1. **Diagnóstico da Divergência no Internacional (Feedback com Screenshot CNF-MAD):**
+     - O alerta prometeu 200.000 milhas ida e volta (100k por trecho) para Belo Horizonte (CNF) ➔ Madri (MAD), mas na tela ao vivo da Smiles a TAP cobrava **230.900 milhas SÓ NA IDA** (461.800 milhas ida e volta).
+     - **Causa Raiz:** O código usava a tabela estática teórica (`TABELA_SWEET_SPOTS`) para voos internacionais, assumindo cegamente que a tarifa award promocional de 100k estaria aberta, mesmo quando o voo em dinheiro no Google Flights custava R$ 5.703,00. Isso gerava a ilusão de que quanto mais cara a passagem pagante, maior era a "economia teórica", disparando um falso green.
+  2. **Registro de Campo (`observacoes_smiles.csv`):**
+     - Registrado o caso CNF-MAD: Preço Google Flights R$ 5.703,00 para 461.800 milhas reais cobradas na Smiles.
+     - Derivado o CPM real comercial praticado pela Smiles: **R$ 12,35 / milheiro** (consistente com o caso JPA de R$ 11,62/milheiro).
+  3. **Solução Definitiva: Precificação Dinâmica Unificada:**
+     - Assim como na GOL nacional, voos internacionais de parceiras foram indexados à tarifa real do Google Flights:
+       $$\text{Milhas Smiles} = \text{int}\left(\frac{\text{Preço Google Flights}}{13{,}50} \times 1000\right)$$
+     - Para CNF ➔ MAD (R$ 5.703), o modelo agora calcula **422.444 milhas** (erro de apenas ~8% vs os 461.800 reais na tela da Smiles, contra 130% de erro da tabela fixa).
+     - Como 422.444 milhas > teto de 200.000 milhas, o robô **descarta imediatamente o alerta**.
+     - Todos os 57 voos foram reavaliados e os 6 falsos alertas internacionais foram **100% eliminados**. O robô só disparará quando a passagem pagante estiver em patamares promocionais legítimos (abaixo de R$ 2.700 para Europa).
+- **Arquivos:** `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/main.py`, `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/observacoes_smiles.csv`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Implementação das Recomendações da Auditoria do Claude (AUDITORIA_buscador_milhas_smiles_claude.md)
+
+- **Feito:**
+  1. **Desacoplamento Rigoroso de Datas no Cache (`smiles_scanner.py` - Ponto 1.5):**
+     - Em `obter_preco_google_flights`, adicionada validação estrita que lê `buscador_voos/config.json` e só aceita o cache recente se `data_ida` e `data_volta` coincidirem 100% com o período requisitado.
+  2. **Expurgo de Preço Fabricado (Lei 3 GEMINI.md - Ponto 1.7):**
+     - Eliminada a fórmula arbitrária de fallback `price * 1.25` quando não havia voo GOL. Agora retorna `None` (`SKIP`), evitando sinais falsos.
+  3. **Multiplicador Round-Trip Award (Ponto 1.2):**
+     - Substituído o multiplicador empírico `1.92` por `2.0` (ida + volta = 2 trechos award).
+  4. **Transparência e Honestidade nos Alertas do Telegram (Ponto 2.4):**
+     - Rótulos explícitos discriminando `Milhas Estimadas (GOL Dinâmico)` vs `Milhas de Referência (Tabela Award Parceira)`.
+     - Timestamp da cotação em dinheiro do Google Flights (`(YYYY-MM-DD HH:mm)`).
+     - Rótulo de `Economia Teórica (se milhas a R$ 15,50/milheiro)` em vez de "Economia Real".
+     - Aviso de checagem de assento award adicionado em todos os alertas.
+  5. **Módulo de Verdade de Campo e Calibração (`observacoes.py` / `observacoes_smiles.csv` - Ponto 1.4 & 2.5):**
+     - Criado o coletor de verdade de campo para registrar o valor real cobrado na Smiles quando o usuário abrir o link.
+     - Relatório estatístico via `python -m buscador_milhas_smiles.observacoes --relatorio` calculando MAPE, viés e R$/milheiro empírico.
+     - Primeiro registro efetuado com os dados reais de JPA (Réveillon): R$ 11,62/milheiro real vs R$ 18,00 do modelo (erro -35,5%, confirmando que a Smiles cobrou ainda mais milhas que o previsto, fortalecendo a rejeição correta do alerta).
+- **Arquivos:** `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/main.py`, `buscador_milhas_smiles/observacoes.py`, `buscador_milhas_smiles/observacoes_smiles.csv`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Implementação da Opção 1: Precificação Dinâmica Smiles Indexada ao Google Flights e Eliminação da Divergência em JPA
+
+- **Feito:**
+  1. **Diagnóstico da Divergência em João Pessoa (JPA):**
+     - O alerta anterior usou estimativa estática de sweet-spot (34.944 milhas I/V), mas em voos nacionais da GOL a Smiles precifica dinamicamente em função da tarifa pagante em dinheiro. Em alta temporada (21/12 a 28/12/2026), o voo pagante custa R$ 1.940 a R$ 2.425, exigindo 50k a 83k milhas por trecho (mais de 100k I/V).
+  2. **Implementação da Opção 1 (Indexação Dinâmica à Tarifa em Dinheiro):**
+     - Em `smiles_scanner.py`, criada a função `obter_preco_google_flights` que lê em tempo real os caches consolidados (`buscador_voos/historico_precos.json` e `buscador_voos_internacional/historico_internacional.json`).
+     - Para voos GOL/Nordeste, a precificação em milhas passou a ser calculada por:
+       $$\text{Milhas Smiles} = \text{int}\left(\frac{\text{Preço GOL Pagante em R\$}}{18.00} \times 1000\right)$$
+     - Com isso, CNF ➔ JPA passa a ser cotado em **107.777 milhas** (muito acima do teto de 36.000 milhas). O falso alerta foi **100% eliminado**!
+  3. **Otimização de Escopo e Performance:**
+     - Destinos do Nordeste configurados exclusivamente com origem Confins (`CNF`), casando com a base do usuário e o cache local diário.
+     - Destinos internacionais (Madri, Lisboa, Londres, Istambul, Tóquio) sincronizados com as datas de amostragem (dias 10 e 20).
+     - Adicionado parâmetro `permitir_ao_vivo` (e CLI `--ao-vivo`) para garantir que execuções agendadas usem o cache recente instantâneo (< 0.2s para avaliar todos os 57 voos).
+  4. **Homologação e Agendador do Windows:**
+     - Tarefa `ARKAD_Buscador_Milhas_Smiles` reativada (`Enable-ScheduledTask`) com status **`Ready`**.
+     - Execução agendada validada via `run_scheduled.py` com exit code 0 e envio de apenas 6 oportunidades legítimas internacionais no Telegram.
+- **Arquivos:** `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/main.py`, `buscador_milhas_smiles/execucoes_smiles.log`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Refino de Destinos Smiles: Nordeste na Data Escolhida (21 a 28/12), Europa/Ásia e Expurgo de Miami
+
+- **Feito:**
+  1. **Expurgo de Miami (`MIA`):**
+     - Removido 100% de `config_smiles.json` e de `smiles_scanner.py`.
+  2. **Inclusão Completa dos Destinos do Nordeste:**
+     - Cadastradas as 13 cidades do Nordeste a partir de Confins (`CNF`) e Guarulhos (`GRU`): Porto Seguro (`BPS`), Salvador (`SSA`), Maceió (`MCZ`), Fortaleza (`FOR`), Recife (`REC`), Ilhéus (`IOS`), João Pessoa (`JPA`), Natal (`NAT`), Aracaju (`AJU`), São Luís (`SLZ`), Vitória da Conquista (`VDC`), Petrolina (`PNZ`) e Teresina (`THE`).
+     - Parametrizada a **data escolhida** oficial do Nordeste: **21/12/2026 a 28/12/2026** (Semana de Natal/Réveillon).
+  3. **Manutenção Estrita dos Destinos Internacionais Solicitados:**
+     - Madri (`MAD`), Portugal/Lisboa (`LIS`), Londres (`LHR`), Turquia/Istambul (`IST`) e Japão/Tóquio (`NRT`), em viagens de 10 dias.
+  4. **Proteção Anti-Spam e Rate Limiting no Telegram:**
+     - Implementado filtro que rankeia os candidatos pela maior economia financeira real (`economia_reais`), limitando o envio a no máximo 6 alertas por execução com pausa de 2 segundos entre mensagens para evitar bloqueios da API do Telegram.
+  5. **Validação ao Vivo:**
+     - Enviados testes de homologação no Telegram para rota internacional (Madri) e Nordeste (Porto Seguro na data do Réveillon).
+- **Arquivos:** `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/main.py`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Cadastro e Homologação do Buscador de Milhas Smiles no Agendador de Tarefas do Windows
+
+- **Feito:**
+  1. **Configuração de Execução Agendada Silenciosa (`run_scheduled.py`):**
+     - Adicionado logging em arquivo persistente (`buscador_milhas_smiles/execucoes_smiles.log`).
+     - Proteção contra `NoneType` em `sys.stdout` e `sys.stderr` para execução segura com `pythonw.exe`.
+  2. **Cadastro no Windows Task Scheduler (`ARKAD_Buscador_Milhas_Smiles`):**
+     - Criada a tarefa com PowerShell utilizando `C:\Users\thiag\anaconda3\envs\streamlit_env\pythonw.exe`.
+     - 3 gatilhos diários configurados: **09:45**, **14:45** e **20:45**.
+     - Configurações de resiliência: `AllowStartIfOnBatteries`, `DontStopIfGoingOnBatteries` e `StartWhenAvailable`.
+  3. **Teste de Execução On-Demand:**
+     - Disparada a tarefa manualmente via `Start-ScheduledTask`.
+     - Status: **`Ready`**, `LastRunTime: 02/10/2026 09:18:03`, `LastTaskResult: 0` (Sucesso).
+     - Avaliados 84 pares origem-destino em 1 segundo com sucesso.
+- **Arquivos:** `buscador_milhas_smiles/run_scheduled.py`, `buscador_milhas_smiles/execucoes_smiles.log`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Correção do tripType Smiles (Ida e Volta vs Somente Ida) e Envio de Alertas Separados
+
+- **Feito:**
+  1. **Diagnóstico do Feedback do Usuário:**
+     - O link anterior gerou `tripType=2` (devido a inversão na lógica ternária), fazendo com que a interface MFE da Smiles abrisse como "Somente Ida" para o dia 10/05/2027, fazendo parecer que os 188.928 milhas correspondiam a apenas um trecho.
+  2. **Correção dos Parâmetros Smiles (`smiles_url_builder.py`):**
+     - Alinhada a convenção do Single-SPA Smiles: `tripType=1` para **Ida e Volta** (`segments=2` com `returnDate`) e `tripType=2` para **Somente Ida** (`segments=1` e `returnDate=""`).
+  3. **Discriminação Transparente de Milhas e Links Duplos (`smiles_scanner.py` & `main.py`):**
+     - Emissão de Ida e Volta agora explicita claramente:
+       * `Milhas Necessárias: 188,928 milhas (TOTAL IDA E VOLTA)`
+       * `↳ (~98,400 milhas por trecho)`
+       * Link principal: Abre diretamente a pesquisa de **Ida e Volta** na Smiles.
+       * Link secundário: Atalho direto para quem prefere emitir apenas o trecho de **Somente Ida** (~98.400 milhas).
+     - Emissão de Somente Ida agora discrimina:
+       * `Milhas Necessárias: 98,400 milhas (SOMENTE IDA)`
+       * `Teto Agressivo: 100,000 milhas (Por Trecho)`
+       * Custo proporcional e link direto de trecho único.
+  4. **Validação ao Vivo no Telegram:**
+     - Enviados ao grupo de alertas do Telegram tanto o teste de Ida e Volta corrigido quanto o teste de Somente Ida.
+- **Arquivos:** `buscador_milhas_smiles/smiles_url_builder.py`, `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/main.py`, `worklog.md`.
+
+---
+
+## 2026-10-02 · Antigravity · Construção do Protótipo do Buscador de Milhas Smiles & Parceiras (GOL, Air Europa, TAP, etc.)
+
+- **Feito:**
+  1. **Engenharia Reversa e Mapeamento da Plataforma Smiles:**
+     - Analisada a aplicação React/Single-SPA (`/mfe/emissao-passagem`) e o bundle JavaScript de busca de voos (`smiles-flight-availability.js` e `smiles-react-flight-search.js`).
+     - Descoberta a convenção de parâmetros: `departureDate` em epoch timestamp (milissegundos) e campos `originAirport` / `destinationAirport`.
+     - Identificado o comportamento do Single-SPA unauthenticated: Redux saga trava em `memberNumber` nulo ao operar como guest sem sessão de usuário.
+     - Validadas rotas e patamares Sweet Spot em milhas com cias parceiras (Air Europa, TAP Air Portugal, Air France, KLM, Turkish, Ethiopian, American Airlines e GOL).
+  2. **Construção do Módulo `buscador_milhas_smiles/`:**
+     - `config_smiles.json`: Cadastro de origens (GRU, CNF, GIG), destinos internacionais e nacionais (MAD, LIS, LHR, IST, NRT, MIA, SSA) com tetos agressivos em milhas, taxas de embarque de referência e CPM base (R$ 15,50/milheiro).
+     - `smiles_url_builder.py`: Gerador de deep links diretos para a interface oficial da Smiles com rota, classe e datas pré-preenchidas para emissão com 1 clique.
+     - `smiles_scanner.py`: Motor de precificação em milhas, cálculo do valor financeiro real (CPM + taxas), benchmark contra tarifa pagante em dinheiro do Google Flights e cálculo de economia líquida.
+     - `historico_smiles.py`: Gestão de histórico (`historico_smiles.json`) com janela de cooldown (12h) para evitar alertas repetidos.
+     - `main.py`: CLI completo com suporte a `--test`, `--dry-run`, `--resumo`, `--origem`, `--destino`.
+     - Scripts de automação: `executar_check.bat`, `executar_resumo.bat`, `run_scheduled.py` e `README.md`.
+  3. **Homologação e Teste Telegram:**
+     - Teste de envio de alerta (`python -m buscador_milhas_smiles.main --test`) realizado com sucesso no grupo *Alertas de Voos ✈️* (`-5476328797`) via bot `@thiago_radar_voos_bot`.
+     - Formatação HTML e caracteres especiais perfeitamente sanitizados (`&amp;` nos URLs, evitando erros de parse).
+- **Arquivos:** `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/smiles_url_builder.py`, `buscador_milhas_smiles/smiles_scanner.py`, `buscador_milhas_smiles/historico_smiles.py`, `buscador_milhas_smiles/main.py`, `buscador_milhas_smiles/run_scheduled.py`, `buscador_milhas_smiles/executar_check.bat`, `buscador_milhas_smiles/executar_resumo.bat`, `buscador_milhas_smiles/README.md`, `worklog.md`.
+
+---
+
 ## 2026-09-30 · Antigravity · Confirmação Oficial da Comissão (5% BET-IBC) e Cancelamento da Tarefa de 5 Minutos no Agendador (`ARKAD_Stop_Diario`)
 
 - **Feito:**

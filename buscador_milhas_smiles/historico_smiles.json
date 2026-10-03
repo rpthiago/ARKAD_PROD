@@ -1,0 +1,68 @@
+{
+  "GRU_NRT_2027-05-20_2027-05-30": {
+    "origem": "GRU",
+    "destino": "NRT",
+    "data_ida": "2027-05-20",
+    "data_volta": "2027-05-30",
+    "menor_milhas": 309600,
+    "cia_aerea": "Ethiopian Airlines",
+    "custo_reais": 6118.8,
+    "ultimo_alerta": "2026-10-02T16:31:52.124919",
+    "total_alertas": 1
+  },
+  "GRU_NRT_2027-03-10_2027-03-20": {
+    "origem": "GRU",
+    "destino": "NRT",
+    "data_ida": "2027-03-10",
+    "data_volta": "2027-03-20",
+    "menor_milhas": 309600,
+    "cia_aerea": "Ethiopian Airlines",
+    "custo_reais": 6118.8,
+    "ultimo_alerta": "2026-10-02T16:31:55.012350",
+    "total_alertas": 1
+  },
+  "CNF_LIS_2027-05-20_2027-05-30": {
+    "origem": "CNF",
+    "destino": "LIS",
+    "data_ida": "2027-05-20",
+    "data_volta": "2027-05-30",
+    "menor_milhas": 217800,
+    "cia_aerea": "TAP Air Portugal",
+    "custo_reais": 4271.9,
+    "ultimo_alerta": "2026-10-02T16:31:57.894204",
+    "total_alertas": 1
+  },
+  "GRU_NRT_2027-05-10_2027-05-20": {
+    "origem": "GRU",
+    "destino": "NRT",
+    "data_ida": "2027-05-10",
+    "data_volta": "2027-05-20",
+    "menor_milhas": 309600,
+    "cia_aerea": "Ethiopian Airlines",
+    "custo_reais": 6118.8,
+    "ultimo_alerta": "2026-10-02T16:32:01.141222",
+    "total_alertas": 1
+  },
+  "CNF_MAD_2027-05-10_2027-05-20": {
+    "origem": "CNF",
+    "destino": "MAD",
+    "data_ida": "2027-05-10",
+    "data_volta": "2027-05-20",
+    "menor_milhas": 200000,
+    "cia_aerea": "Smiles / Parceira",
+    "custo_reais": 3940.0,
+    "ultimo_alerta": "2026-10-02T16:32:04.237413",
+    "total_alertas": 1
+  },
+  "CNF_MAD_2027-05-20_2027-05-30": {
+    "origem": "CNF",
+    "destino": "MAD",
+    "data_ida": "2027-05-20",
+    "data_volta": "2027-05-30",
+    "menor_milhas": 200000,
+    "cia_aerea": "Smiles / Parceira",
+    "custo_reais": 3940.0,
+    "ultimo_alerta": "2026-10-02T16:32:07.192104",
+    "total_alertas": 1
+  }
+}

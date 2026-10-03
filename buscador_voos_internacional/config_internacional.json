@@ -1,0 +1,81 @@
+{
+  "origens": [
+    {"codigo": "GRU", "nome": "São Paulo (Guarulhos)"},
+    {"codigo": "CNF", "nome": "Belo Horizonte (Confins)"},
+    {"codigo": "GIG", "nome": "Rio de Janeiro (Galeão)"}
+  ],
+  "duracao_viagem_dias": 10,
+  "destinos": [
+    {
+      "codigo": "MAD",
+      "cidade": "Madri",
+      "pais": "Espanha",
+      "emoji": "🇪🇸",
+      "preco_teto_alerta": 3200
+    },
+    {
+      "codigo": "BCN",
+      "cidade": "Barcelona",
+      "pais": "Espanha",
+      "emoji": "🇪🇸",
+      "preco_teto_alerta": 3300
+    },
+    {
+      "codigo": "LIS",
+      "cidade": "Lisboa",
+      "pais": "Portugal",
+      "emoji": "🇵🇹",
+      "preco_teto_alerta": 3200
+    },
+    {
+      "codigo": "OPO",
+      "cidade": "Porto",
+      "pais": "Portugal",
+      "emoji": "🇵🇹",
+      "preco_teto_alerta": 3200
+    },
+    {
+      "codigo": "LHR",
+      "cidade": "Londres",
+      "pais": "Inglaterra",
+      "emoji": "🇬🇧",
+      "preco_teto_alerta": 3500
+    },
+    {
+      "codigo": "IST",
+      "cidade": "Istambul",
+      "pais": "Turquia",
+      "emoji": "🇹🇷",
+      "preco_teto_alerta": 4500
+    },
+    {
+      "codigo": "NRT",
+      "cidade": "Tóquio (Narita)",
+      "pais": "Japão",
+      "emoji": "🇯🇵",
+      "preco_teto_alerta": 5500
+    },
+    {
+      "codigo": "HND",
+      "cidade": "Tóquio (Haneda)",
+      "pais": "Japão",
+      "emoji": "🇯🇵",
+      "preco_teto_alerta": 5500
+    }
+  ],
+  "meses_monitorados": [
+    {"ano": 2026, "mes": 11, "nome": "Novembro/2026"},
+    {"ano": 2027, "mes": 2, "nome": "Fevereiro/2027"},
+    {"ano": 2027, "mes": 3, "nome": "Março/2027"},
+    {"ano": 2027, "mes": 4, "nome": "Abril/2027"},
+    {"ano": 2027, "mes": 5, "nome": "Maio/2027"},
+    {"ano": 2027, "mes": 6, "nome": "Junho/2027"}
+  ],
+  "dias_saida_amostra": [10, 20],
+  "regras_alerta": {
+    "alerta_se_preco_abaixo_teto": true,
+    "alerta_se_nivel_google_baixo": false,
+    "queda_minima_alerta_reais": 500,
+    "cooldown_horas": 12
+  }
+}

@@ -12,10 +12,20 @@ from buscador_voos.flight_searcher import buscar_voo_rota, ResultadoBusca
 from buscador_voos.price_tracker import carregar_historico, avaliar_alerta, registrar_cotacao
 from buscador_voos.telegram_bot import enviar_mensagem
 
-# Configura encoding no Windows se necessário
-if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
+# Configura stdout/stderr com segurança para pythonw.exe (onde são None)
+if sys.stdout is None:
+    sys.stdout = open(os.devnull, "w", encoding="utf-8")
+elif getattr(sys.stdout, "encoding", None) and sys.stdout.encoding.lower() != "utf-8":
     try:
         sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
+if sys.stderr is None:
+    sys.stderr = open(os.devnull, "w", encoding="utf-8")
+elif getattr(sys.stderr, "encoding", None) and sys.stderr.encoding.lower() != "utf-8":
+    try:
+        sys.stderr.reconfigure(encoding="utf-8")
     except Exception:
         pass
 

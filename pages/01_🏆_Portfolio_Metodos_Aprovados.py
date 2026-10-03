@@ -507,10 +507,28 @@ with tab1:
         escanear_api_unificada.clear()
     with st.spinner(f"Consultando grade de {ds_str} na Betfair Exchange e aplicando filtros dos métodos aprovados..."):
         df_radar, hora_captura = escanear_api_unificada(ds_str)
-    st.caption(f"🕒 Odds capturadas às **{hora_captura}** (horário de Brasília) · cache de 10 min · "
-               "clique em **Escanear Portfólio Agora** para buscar odds novas.")
-        
+    fonte_origem = "API Betfair (FutPythonTrader)"
+    if df_radar.empty:
+        # Fallback de Resiliência: Verifica se existe planilha gerada do Coletor VPS ou ledger KO-10
+        planilha_dia = ROOT / "metodos_aprovados" / f"Sinais_Metodos_Aprovados_{ds_str}.xlsx"
+        if not planilha_dia.exists():
+            try:
+                from sinais_dia_coletor import gerar_planilha_do_coletor
+                gerar_planilha_do_coletor(ds_str, sync_vps=True)
+            except Exception:
+                pass
+        if planilha_dia.exists():
+            try:
+                df_plan = pd.read_excel(planilha_dia)
+                if not df_plan.empty:
+                    df_radar = df_plan
+                    fonte_origem = "Coletor Oficial Betfair (VPS KO−10)"
+            except Exception:
+                pass
+
     if not df_radar.empty:
+        if fonte_origem != "API Betfair (FutPythonTrader)":
+            st.info(f"📡 **Fonte de Resiliência Ativa: {fonte_origem}** — A API externa retornou dados incompletos para {ds_str}; exibindo as entradas capturadas diretamente na Betfair Exchange pela sua VPS.")
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
         st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!** (Gestão Dinâmica: Risco travado em R$ {liability_fixa:.2f} por jogo / Zebras máx R$ 50)")
         
