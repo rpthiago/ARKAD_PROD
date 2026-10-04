@@ -19,3 +19,10 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-03.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [+] Envio Telegram (Bloco 5 (18:30) — Noite Américas): False (Falha na requisição: Can't connect to HTTPS URL because the SSL module is not available.)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 1 (06:00) — Matinal — Data: 2026-10-04
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Total geral do dia: 7 jogos | Neste Bloco (06:00 às 10:30): 0 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-04.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[*] Nenhum jogo neste bloco (06:00 às 10:30). Sem envio de mensagem redundante.
