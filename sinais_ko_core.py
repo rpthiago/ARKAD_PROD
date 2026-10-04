@@ -41,6 +41,14 @@ RE_DIV_BAIXA = re.compile(
     re.IGNORECASE
 )
 
+RE_PERIFERICA = re.compile(
+    r"\b(BOLIVIA\w*|PANAMA\w*|JAMAICA\w*|GUATEMALA\w*|SALVADOR\w*|NICARAGUA\w*|COSTA RICA\w*|HONDURAS\w*|PARAGUA\w*|PERU\w*|VENEZUELA\w*|ECUADOR\w*|"
+    r"HONG KONG\w*|THAI\w*|INDONESIA\w*|INDIA\w*|SINGAPORE|CAMBODIA|BHUTAN|BANGLADESH|MONGOLIA|PHILIPPINES|VIETNAM|"
+    r"KENYA\w*|TANZANIA\w*|RWANDA\w*|UGANDA\w*|NIGERIA\w*|GHANA\w*|ZAMBIA\w*|ZIMBABWE\w*|ETHIOPIA\w*|ALGERI\w*|EGYPT\w*|"
+    r"FAROE|ESTONIA\w*|LATVIA\w*|LITHUANIA\w*|ARMENIA\w*|GEORGIA\w*|AZERBAIJAN\w*|KAZAKHSTAN\w*|UZBEKISTAN\w*|JORDAN\w*|KUWAIT\w*|OMAN\w*|LEBAN\w*|QATAR\w*|UAE\w*|SAUDI\w*|BAHRAIN\w*|CYPRUS|CYPRIOT\w*|MALTA|MALTESE\w*|MOLDOVA\w*|BELARUS\w*|KOSOVO\w*|ALBANIA\w*|MONTENEGR\w*|BOSNIA\w*|OTHER COMPETITIONS)\b",
+    re.IGNORECASE
+)
+
 
 def _p(mk, mt, runner, lado):
     r = mk.get(mt, {}).get(runner)
@@ -58,6 +66,8 @@ def eh_jogo_ignorado(home, away, competicao):
     if RE_SELECAO.search(comp):
         return True
     if RE_DIV_BAIXA.search(comp):
+        return True
+    if RE_PERIFERICA.search(comp):
         return True
     return False
 
