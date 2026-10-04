@@ -7,6 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-04 · Antigravity · Re-liquidação e Expurgamento das Ligas em Ontem (03/10) e Hoje (04/10)
+
+- **Demanda do Usuário:**
+  - "refaça os jogos de hj e de ontem nos resultados"
+- **Feito:**
+  1. **Expurgo Retroativo nos Resultados:**
+     - Aplicados os filtros estritos de ligas aprovadas em `liquidar_sinais_dia.py` (eliminando jogos femininos, seleções, copas com favorito fora e 3ª divisões de Hong Kong, Tailândia e Rep. Tcheca).
+     - Descartados 4 reds espúrios que haviam ocorrido em competições fora de escopo (ex.: Hong Kong 3rd e Frauen-Bundesliga).
+  2. **Re-liquidação Oficial de Ontem (2026-10-03):**
+     - Grade limpa: 19 jogos qualificados.
+     - **19 liquidados:** **17 GREENS e 2 REDS** (**89,5% Win Rate**).
+     - 0 jogos pendentes (Cuiabá 2-0, Liniers 1-0, Camioneros 1-2, Floresta 1-1, etc. devidamente liquidados).
+  3. **Re-liquidação Oficial de Hoje (2026-10-04):**
+     - Grade limpa: 16 jogos qualificados (de 34 brutos, 18 descartados por governança).
+     - **16 liquidados:** **13 GREENS e 3 REDS** (**81,2% Win Rate**).
+     - 0 jogos pendentes (todos encerrados e confirmados via Betfair oficial `placares_ft.csv`).
+  4. **Persistência & Sincronização:**
+     - Planilhas `Sinais_Metodos_Aprovados_2026-10-03.xlsx` e `Sinais_Metodos_Aprovados_2026-10-04.xlsx` atualizadas.
+     - `forward_ko_ledger.csv` sincronizado.
+     - Comitado e enviado via `git push origin main` para reflexo imediato no Streamlit Cloud.
+- **Arquivos:** `liquidar_sinais_dia.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-03.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-04.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `worklog.md`.
+
 ## 2026-10-04 · Antigravity · Implementação dos Filtros de Governança de Ligas na VPS (Expurgo de Seleções, Feminino e Divisões Periféricas)
 
 - **Demanda do Usuário:**
