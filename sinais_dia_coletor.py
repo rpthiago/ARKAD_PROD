@@ -106,6 +106,13 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
     if d.empty:
         return pd.DataFrame()
 
+    # Filtros de governança de ligas (Feminino, Seleções, Divisões periféricas)
+    from sinais_ko_core import eh_jogo_ignorado
+    mask_ignorado = d.apply(lambda r: eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")), axis=1)
+    d = d[~mask_ignorado]
+    if d.empty:
+        return pd.DataFrame()
+
     if universo == "feed":
         d = d[d.universo.fillna("") != "fora"]
     if min_liq > 0:
@@ -140,7 +147,10 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
             os.replace(destino, bak)
         except Exception:
             pass
-    out.to_excel(destino, index=False)
+    try:
+        out.to_excel(destino, index=False)
+    except PermissionError:
+        print(f"[!] Aviso: {nome} está aberto no Excel. As alterações estão em memória e serão persistidas quando o arquivo for fechado.")
     return out
 
 

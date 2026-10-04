@@ -7,6 +7,29 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-04 · Antigravity · Implementação dos Filtros de Governança de Ligas na VPS (Expurgo de Seleções, Feminino e Divisões Periféricas)
+
+- **Demanda do Usuário:**
+  - O usuário identificou que ligas/torneios desativados na API antiga estavam aparecendo na VPS. Confirmou a implementação imediata dos filtros de ligas (mantendo os métodos ativos por enquanto).
+- **Causa Raiz Identificada:**
+  - Na API antiga (`automacao_diaria_aprovados.py` e Página 01), existiam travas estritas de governança bloqueando Seleções (`NATIONS LEAGUE`, `WORLD CUP`, amistosos), Copas com favorito visitante e futebol feminino, além da cobertura natural da API Bet365 não contemplar divisões semi-profissionais.
+  - Na VPS (`sinais_ko_core.py`), o script original avaliava apenas as odds numéricas da Betfair, sem nenhum filtro de liga. Com o fallback da API para a VPS ativado no fim de semana, dezenas de jogos fora do padrão (Nations League, Feminino, Hong Kong 3ª Divisão, Thai League 3, Czech MSFL) vazaram para os alertas e planilhas.
+- **Feito:**
+  1. **Atualização do Motor de Sinais (`sinais_ko_core.py`):**
+     - Adicionados filtros regex robustos com limites de palavras (`\b`):
+       - `RE_FEMININO`: Bloqueia futebol feminino (`(W)`, `WOMEN`, `FEMININ`, `FRAUEN`, `WSL`, `LIGA F`, etc.).
+       - `RE_SELECAO`: Bloqueia seleções nacionais e amistosos internacionais (`NATIONS LEAGUE`, `WORLD CUP`, `EUROCUP`, `COPA AMERICA`, `FRIENDLIES`, `QUALIF`, `AFCON`, `CONCACAF`, etc.).
+       - `RE_DIV_BAIXA`: Bloqueia divisões amadoras e semi-profissionais (`3RD DIVISION`, `4TH DIVISION`, `TERCERA`, `MSFL`, `LEAGUE 3`, etc.).
+       - `RE_COPA`: Em torneios de mata-mata/copa, o método `Lay Draw` agora aceita **estritamente Super Favorito em Casa (`Odd_H <= 1.40`)**, bloqueando favorito visitante (alinhado à Lei de Governança do GEMINI.md).
+  2. **Deploy na VPS (`sinais-ko.service`):**
+     - `sinais_ko_core.py` enviado via SCP para `/home/ubuntu/betfair-collector/sinais_ko_core.py`.
+     - Reiniciado o serviço `sinais-ko.service` (`systemctl restart`), mantendo o daemon ativo e monitorando apenas jogos de ligas aprovadas.
+  3. **Pipeline Local (`sinais_dia_coletor.py`):**
+     - Integrado `eh_jogo_ignorado` na leitura do ledger para geração da planilha do dia, descartando automaticamente os jogos fora de governança.
+     - Tratamento gracioso de `PermissionError` para casos em que o Excel está aberto pelo usuário.
+     - Grade de hoje (2026-10-04) limpa de 34 para 17 jogos qualificados (50% de ruído expurgado).
+- **Arquivos:** `sinais_ko_core.py`, `/home/ubuntu/betfair-collector/sinais_ko_core.py` (VPS), `sinais_dia_coletor.py`, `worklog.md`.
+
 ## 2026-10-03 · Antigravity · Expurgamento Completo do Método Lay 0x3 (Desativação Operacional Definitiva)
 
 - **Demanda do Usuário:**

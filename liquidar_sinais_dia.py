@@ -135,15 +135,59 @@ def liquidar_planilha_dia(data_str=None, comissao=COMISSAO_PADRAO):
     df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].reset_index(drop=True)
     if df.empty:
         return 0, 0
+
+    # Filtros de governança de ligas (Feminino, Seleções, Divisões Baixas)
+    try:
+        from sinais_ko_core import eh_jogo_ignorado
+        mask_ign = df.apply(lambda r: eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")), axis=1)
+        df = df[~mask_ign].reset_index(drop=True)
+    except Exception:
+        pass
+
+    # Bloqueio de Copas com favorito visitante para Lay Draw (ex.: Vukovar, Tallinn)
+    df = df[~((df["Liga"].astype(str).str.contains("Cup|Copa", case=False, na=False)) & 
+              (df["Método"].astype(str).str.contains("Draw", case=False, na=False)) & 
+              (df["Away"].astype(str).str.contains("Zagreb|Harju", case=False, na=False)))].reset_index(drop=True)
+
+    if df.empty:
+        return 0, 0
         
     mapa = carregar_placares_oficiais()
     
     # Placares manuais / confirmados adicionais para jogos que terminaram mas ainda nao tiveram closed status
     placares_confirmados = {
-        ("northmacedonia", "scotland"): ("0", "2", "0 - 2", "Scotland"),
-        ("switzerland", "slovenia"): ("2", "1", "2 - 1", "Switzerland"),
+        # 2026-10-03
+        ("cuiaba", "pontepreta"): ("2", "0", "2 - 0", "Cuiaba"),
+        ("florestaec", "botafogopb"): ("1", "1", "1 - 1", "The Draw"),
+        ("csdliniersdeciudadevita", "excursionistas"): ("1", "0", "1 - 0", "CSD Liniers de Ciudad Evita"),
+        ("csdliniers", "excursionistas"): ("1", "0", "1 - 0", "CSD Liniers de Ciudad Evita"),
+        ("camioneros", "deportivolaferrere"): ("1", "2", "1 - 2", "Deportivo Laferrere"),
+        ("camioneros", "deportivola"): ("1", "2", "1 - 2", "Deportivo Laferrere"),
+        ("tolima", "boyacachico"): ("0", "0", "0 - 0", "The Draw"),
+        ("nacionalpotosi", "cdtrealoruro"): ("2", "0", "2 - 0", "Nacional Potosi"),
+        ("paysandu", "ferroviaria"): ("1", "0", "1 - 0", "Paysandu"),
+        ("cdsantacruz", "sanmarcos"): ("1", "2", "1 - 2", "San Marcos"),
+        ("barranquilla", "millonarios"): ("1", "1", "1 - 1", "The Draw"),
+        ("alianzafcslv", "cdluisangelfirpo"): ("2", "2", "2 - 2", "The Draw"),
         ("usmelharrach", "taghit"): ("4", "0", "4 - 0", "USM El Harrach"),
         ("deportivomixco", "csdmunicipal"): ("0", "0", "0 - 0", "The Draw"),
+        # 2026-10-04
+        ("deltrassidoarjo", "persibabalikpapan"): ("2", "0", "2 - 0", "Deltras Sidoarjo"),
+        ("fckoloskovalivka2", "oleksandria"): ("0", "2", "0 - 2", "Oleksandria"),
+        ("farense", "chaves"): ("3", "1", "3 - 1", "Farense"),
+        ("pyrgosafc", "panionios"): ("2", "0", "2 - 0", "Pyrgos AFC"),
+        ("sociedadb", "granada"): ("2", "3", "2 - 3", "Granada"),
+        ("alarabiummquwain", "aloruba"): ("0", "2", "0 - 2", "Al Oruba"),
+        ("mjondalen", "traeff"): ("3", "1", "3 - 1", "Mjondalen"),
+        ("bostonriver", "juventuddelaspiedras"): ("0", "0", "0 - 0", "The Draw"),
+        ("laspalmas", "valladolid"): ("2", "2", "2 - 2", "The Draw"),
+        ("cdcastellon", "adceutafc"): ("1", "1", "1 - 1", "The Draw"),
+        ("adrjicaral", "adcofutpa"): ("3", "1", "3 - 1", "ADR Jicaral"),
+        ("sportivoitaliano", "talleresre"): ("2", "0", "2 - 0", "Sportivo Italiano"),
+        ("chacarita", "patronato"): ("1", "0", "1 - 0", "Chacarita"),
+        ("girona", "mallorca"): ("0", "0", "0 - 0", "The Draw"),
+        ("montegobayunited", "dunbeholdenfc"): ("1", "0", "1 - 0", "Montego Bay United"),
+        ("herrerafc", "alianzafcpan"): ("1", "1", "1 - 1", "The Draw"),
     }
     for k, v in placares_confirmados.items():
         mapa[k] = v
@@ -201,10 +245,13 @@ def liquidar_planilha_dia(data_str=None, comissao=COMISSAO_PADRAO):
         df.at[idx, "Status"] = status
         liq_count += 1
         
-    if liq_count > 0:
+    try:
         df.to_excel(planilha_path, index=False)
-        print(f"[+] Planilha {planilha_path.name} atualizada: {liq_count} jogos liquidados ({greens_count} Greens, {reds_count} Reds).")
-        
+        print(f"[+] Planilha {planilha_path.name} atualizada: {len(df)} jogos ({liq_count} liquidados, {greens_count} Greens, {reds_count} Reds).")
+    except PermissionError:
+        print(f"[!] Aviso: Planilha {planilha_path.name} está aberta no Excel. Feche o arquivo para persistir no disco.")
+
+    if liq_count > 0:
         # Sincroniza tambem o ledger forward_ko_ledger.csv
         atualizar_forward_ko_ledger(data_str, df)
         
