@@ -7,7 +7,7 @@ Consolida automaticamente todas as planilhas diárias da pasta `metodos_aprovado
   - Desempenho desdobrado por Método e por Data
   - Tabela completa jogo a jogo com download em Excel
 """
-import os, io, sys, glob
+import os, io, sys, glob, re
 from datetime import date
 from pathlib import Path
 import numpy as np, pandas as pd, streamlit as st
@@ -124,11 +124,24 @@ def carregar_dados_aprovados(
     if not FOLDER.exists():
         return pd.DataFrame()
 
-    # Carregar EXCLUSIVAMENTE os arquivos no formato Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx da pasta metodos_aprovados/
-    planilhas_diarias = sorted([
+    # Carregar EXCLUSIVAMENTE uma planilha por data YYYY-MM-DD.
+    # Prioriza a versão padrão Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx; usa _coletor apenas como fallback se a padrão não existir.
+    todos_arquivos = sorted([
         f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx")
         if not f.name.startswith("~$") and "Odds_Reais" not in f.name
     ])
+    mapa_arquivos = {}
+    for f in todos_arquivos:
+        m = re.search(r"(\d{4}-\d{2}-\d{2})", f.name)
+        if not m:
+            continue
+        dt_k = m.group(1)
+        if "_coletor" in f.name:
+            if dt_k not in mapa_arquivos:
+                mapa_arquivos[dt_k] = f
+        else:
+            mapa_arquivos[dt_k] = f
+    planilhas_diarias = sorted(mapa_arquivos.values())
     if not planilhas_diarias:
         return pd.DataFrame()
 
@@ -159,6 +172,18 @@ def carregar_dados_aprovados(
         cols.append("Método" if "todo" in str(c).lower() else c)
     df_all.columns = cols
     df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
+
+    # Deduplicação defensiva de jogos no mesmo dia para o mesmo método
+    if "Jogo" in df_all.columns and "Método" in df_all.columns:
+        def _res_score(v):
+            v_u = str(v).upper().strip()
+            if v_u in ("GREEN", "RED"): return 2
+            if v_u and v_u not in ("NAN", "NONE", "PENDENTE"): return 1
+            return 0
+        df_all["_score_res"] = df_all.get("Resultado", "").apply(_res_score)
+        df_all = df_all.sort_values(by=["Data", "_score_res"], ascending=[True, True])
+        df_all = df_all.drop_duplicates(subset=["Data", "Jogo", "Método"], keep="last")
+        df_all = df_all.drop(columns=["_score_res"]).reset_index(drop=True)
             
     df_all["Data"] = pd.to_datetime(df_all.get("Data"), format="ISO8601", errors="coerce")
     # Fallback caso alguma planilha tenha data em DD/MM/YYYY
