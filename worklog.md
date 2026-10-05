@@ -7,6 +7,31 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-04 · Antigravity · Auditoria e Blindagem da Página 02 (Deduplicação e Eliminação de Pendentes Espúrios)
+
+- **Demanda do Usuário:**
+  - "Resultados dos Métodos em Validação Forward — ARKAD aqui ta tudo ok ?"
+- **Achados da Auditoria na Página 02:**
+  1. Havia carregamento concorrente de planilhas padrão (`Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx`) com arquivos gerados com sufixo `_coletor.xlsx`, causando duplicações nos dias 30/09, 03/10 e 04/10 e injetando sinais não liquidados como `⏳ PENDENTE`.
+  2. Planilhas de 01/10 e 02/10 existiam apenas como `_coletor.xlsx`.
+- **Feito:**
+  1. **Mapeamento Canônico de Planilhas:**
+     - Ajustado `carregar_dados_aprovados` em `pages/02_📊_Resultados_Metodos_Aprovados.py` para mapear estritamente uma única planilha por data (`YYYY-MM-DD`), priorizando sempre a versão canônica e usando `_coletor` apenas se não houver a padrão.
+  2. **Deduplicação Inteligente em Nível de Linha:**
+     - Implementada ordenação por resultado definitivo (`GREEN`/`RED` têm precedência sobre `PENDENTE`) e drop de duplicatas por `(Data, Jogo, Método)`.
+  3. **Geração Canônica de 01/10 e 02/10:**
+     - Geradas e liquidadas oficialmente as planilhas `Sinais_Metodos_Aprovados_2026-10-01.xlsx` (2G) e `Sinais_Metodos_Aprovados_2026-10-02.xlsx` (2G).
+  4. **Status Consolidado Perfeito:**
+     - Todos os últimos 5 dias agora têm **0 PENDENTES** e **0 DUPLICATAS**:
+       - 30/09: 1 jogo (1G / 0R) | P&L: +R$ 11,49
+       - 01/10: 2 jogos (2G / 0R) | P&L: +R$ 28,02
+       - 02/10: 2 jogos (2G / 0R) | P&L: +R$ 29,69
+       - 03/10: 15 jogos (14G / 1R) | P&L: +R$ 114,40
+       - 04/10: 11 jogos (8G / 3R) | P&L: −R$ 290,08
+     - Total Geral: **994 entradas liquidadas | 905 Greens e 89 Reds (91,05% WR) | P&L: +15,16u (+R$ 2.123,94)**.
+  5. Commits enviados para o repositório (`f81552f`).
+- **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-30.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-01.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-02.xlsx`, `worklog.md`.
+
 ## 2026-10-04 · Antigravity · Correção de NameError 'datetime' na Página 01 (Streamlit Cloud)
 
 - **Demanda do Usuário:**
