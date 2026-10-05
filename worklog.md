@@ -7,6 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-04 · Antigravity · Correção de NameError 'datetime' na Página 01 (Streamlit Cloud)
+
+- **Demanda do Usuário:**
+  - Relato de erro no Streamlit Cloud: `NameError: name 'datetime' is not defined` na linha 513 de `pages/01_🏆_Portfolio_Metodos_Aprovados.py`.
+- **Causa Raiz:**
+  - No topo da Página 01, o import continha apenas `from datetime import date, timedelta`. Na rotina de fallback de resiliência (KO-10), a chamada `datetime.now().strftime("%Y-%m-%d")` disparava `NameError` quando a grade da API vinha vazia.
+- **Feito:**
+  - Corrigido o import para `from datetime import date, timedelta, datetime`.
+  - Validado via `pyflakes` em todas as páginas para garantir ausência de referências indefinidas.
+  - Commit e push efetuados para o branch `main` (`a240d44`), restabelecendo o funcionamento imediato no Streamlit Cloud.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `worklog.md`.
+
 ## 2026-10-04 · Antigravity · Bloqueio de Ligas Periféricas/Cauda Longa e Auditoria Empírica (Ago–Out)
 
 - **Demanda do Usuário:**
