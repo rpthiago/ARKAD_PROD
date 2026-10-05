@@ -70,3 +70,11 @@
 [+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 2 (10:30) — Europa Principal 1 — Data: 2026-10-05
 [*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
 [-] Nenhum sinal registrado para hoje até o momento.
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 3 (13:00) — Europa Principal 2 — Data: 2026-10-05
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-05.xlsx atualizada: 1 jogos (0 liquidados, 0 Greens, 0 Reds).
+[+] Total geral do dia: 1 jogos | Neste Bloco (13:00 às 15:30): 1 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-05.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[+] Envio Telegram (Bloco 3 (13:00) — Europa Principal 2): False (Falha na requisição: Can't connect to HTTPS URL because the SSL module is not available.)
