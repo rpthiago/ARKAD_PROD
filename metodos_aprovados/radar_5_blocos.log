@@ -53,3 +53,20 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-04.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [+] Envio Telegram (Bloco 4 (15:30) — Tarde / Clássicos): False (Falha na requisição: Can't connect to HTTPS URL because the SSL module is not available.)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 5 (18:30) — Noite Américas — Data: 2026-10-04
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-04.xlsx atualizada: 31 jogos liquidados (24 Greens, 7 Reds).
+[+] forward_ko_ledger.csv atualizado com 31 jogos liquidados.
+[+] Total geral do dia: 34 jogos | Neste Bloco (18:00 às 23:59): 1 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-04.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[+] Envio Telegram (Bloco 5 (18:30) — Noite Américas): False (Falha na requisição: Can't connect to HTTPS URL because the SSL module is not available.)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 1 (06:00) — Matinal — Data: 2026-10-05
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[-] Nenhum sinal registrado para hoje até o momento.
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 2 (10:30) — Europa Principal 1 — Data: 2026-10-05
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[-] Nenhum sinal registrado para hoje até o momento.
