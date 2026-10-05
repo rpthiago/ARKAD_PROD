@@ -10,7 +10,7 @@ Reúne todos os métodos com edge matemático comprovado, IC95% positivo e 8/8 m
   6. Lay Under 1.5 FT (XGBoost EV >= 5% com Stop aos 75')
 """
 import os, io, sys
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from pathlib import Path
 import numpy as np, pandas as pd, streamlit as st
 
