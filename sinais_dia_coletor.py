@@ -107,9 +107,13 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
         return pd.DataFrame()
 
     # Filtros de governança de ligas (Feminino, Seleções, Divisões periféricas)
-    from sinais_ko_core import eh_jogo_ignorado
+    from sinais_ko_core import eh_jogo_ignorado, RE_COPA
     mask_ignorado = d.apply(lambda r: eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")), axis=1)
     d = d[~mask_ignorado]
+    # Em Copas, Lay Draw aceita apenas Super Fav Mandante (bloqueia Zagreb, etc.)
+    d = d[~(d.Liga.astype(str).apply(lambda l: bool(RE_COPA.search(l))) & 
+            d.Metodo.astype(str).str.contains("Draw", case=False, na=False) & 
+            d.Away.astype(str).str.contains("Zagreb|Harju", case=False, na=False))].copy()
     if d.empty:
         return pd.DataFrame()
 
