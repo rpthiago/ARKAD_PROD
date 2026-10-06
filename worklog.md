@@ -7,6 +7,56 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-06 · Antigravity · Auditoria dos Sinais Chineses (06/10), Bloqueio de 3ª Divisão e Deploy Causal na VPS
+
+- **Demanda do Usuário:**
+  - Consulta sobre 5 sinais gerados na madrugada/manhã de 06/10 envolvendo ligas chinesas:
+    1. 04:30 Chinese League 2 · Shanghai Second x Wenzhou Professional (Lay Over 4.5 FT)
+    2. 06:00 Chinese League 2 · Hubei Istar x Lanzhou Longyuan (Lay 2x2 Top 3)
+    3. 08:00 Chinese League 1 · Changchun Yatai x Yanbian Longding (Lay 2x2 Top 3)
+    4. 08:00 Chinese League 1 · Wuxi Wugou x Suzhou Dongwu (Lay 2x2 Top 3)
+    5. 08:30 Chinese League 2 · Guangdong Mingtu x Dalian Yingbo II (Lay Over 4.5 FT)
+- **Diagnóstico & Causa Raiz:**
+  1. **Violação do Teto Causal de Odd ($\le 14.00$) no Lay 2x2:**
+     - Os 3 jogos de Lay 2x2 entraram com odds de Lay gigantes: Hubei Istar (20.0), Changchun Yatai (19.0) e Wuxi Wugou (18.5).
+     - O jogo do Wuxi Wugou terminou em **2-2 (RED)**.
+     - Esse RED ocorreu porque o serviço `sinais-ko` na VPS ainda estava rodando o código anterior (com teto 20.0 e ranking matinal de Top 3).
+     - Com a nova regra causal homologada hoje (`ODD_LAY_2X2_MAX = 14.00`), **nenhum dos 3 jogos teria entrado**, e o RED teria sido completamente evitado!
+  2. **Violação de Governança de Ligas (3ª Divisão Chinesa):**
+     - "Chinese League 2" é a 3ª Divisão nacional da China (semiprofissional). O time Dalian Yingbo II é equipe reserva/B.
+     - A regex `RE_DIV_BAIXA` não continha o termo específico `CHINESE LEAGUE 2` (já que o padrão inglês usa o número 2 para o terceiro escalão chinês).
+- **Feito:**
+  1. **Atualização da Regex de Governança (`RE_DIV_BAIXA`):**
+     - Adicionado `CHINESE LEAGUE 2|CHINA LEAGUE TWO` em `sinais_ko_core.py` e `metodo_lay2x2_strategy.py`.
+  2. **Deploy Imediato na VPS:**
+     - Arquivo `sinais_ko_core.py` atualizado enviado para `/home/ubuntu/betfair-collector/sinais_ko_core.py` via SCP.
+     - Reiniciado o serviço `sinais-ko.service` com sucesso na VPS (PID 606793).
+- **Arquivos:** `sinais_ko_core.py`, `metodo_lay2x2_strategy.py`, `worklog.md`.
+
+## 2026-10-06 · Antigravity · Resolução do Bug Silencioso de SSL no Task Scheduler e Restabelecimento dos Alertas Telegram
+
+- **Demanda do Usuário:**
+  - "Nao estou recebendo nenhum alerta" (relato de ausência de alertas nos últimos dias).
+- **Diagnóstico & Causa Raiz:**
+  1. **Falha Silenciosa de OpenSSL no Windows Task Scheduler (`buscador_voos`):**
+     - O Windows Task Scheduler executa `pythonw.exe` em segundo plano com variáveis de ambiente restritas (`PATH` mínimo do Windows).
+     - No Anaconda no Windows (`C:\Users\thiag\anaconda3`), as DLLs de OpenSSL (`libssl-1_1-x64.dll` e `libcrypto-1_1-x64.dll`) residem em `C:\Users\thiag\anaconda3\Library\bin`. Sem ativação do Conda (`conda activate`), o Python 3.8+ não carregava o módulo nativo `_ssl.pyd`.
+     - Enquanto o `fast_flights` utiliza o client em Rust (`primp`) e buscava os voos normalmente via HTTP, o `requests` no `telegram_bot.py` falhava silenciosamente toda vez que um voo caía de preço e tentava enviar alerta ao Telegram:
+       `[ERROR]: Exceção ao enviar mensagem Telegram para -5476328797: Can't connect to HTTPS URL because the SSL module is not available.`
+     - **Alertas Perdidos no Período:** Fortaleza (FOR) a R$ 1.865 (hoje 08:00) e R$ 2.055 (ontem 21:30); Natal (NAT) ontem 17:30; São Luís (SLZ) a R$ 1.796 nos dias 03 a 05/10. Todos dispararam a regra de alerta, mas caíram nessa exceção do SSL.
+  2. **Buscador de Milhas Smiles (`buscador_milhas_smiles`):**
+     - Funcionando conforme o modelo após a auditoria de 02/10 (expurgo de tabelas fixas fantasmas). As 57 rotas avaliadas nos últimos dias estavam acima dos tetos agressivos promocionais, gerando 0 alertas por mérito matemático legítimo.
+  3. **Buscador Internacional (`buscador_voos_internacional`):**
+     - Executando normalmente (275 cotações avaliadas diariamente), com preços atuais (Europa > R$ 4.3k, Japão > R$ 5.9k) acima dos tetos de promoção.
+- **Feito:**
+  1. **Injeção Dinâmica Resiliente de DLLs OpenSSL:**
+     - Criada rotina `_configurar_dlls_anaconda()` que inspeciona `sys.prefix` e `sys.base_prefix`, adiciona `Library\bin` via `os.add_dll_directory` (Python 3.8+) e injeta no `PATH` antes de qualquer import de rede.
+     - Aplicado em: `buscador_voos/telegram_bot.py`, `buscador_voos/run_scheduled.py`, `buscador_voos/main.py`, `buscador_voos_internacional/run_scheduled.py`, `buscador_voos_internacional/main.py`, `buscador_milhas_smiles/run_scheduled.py`, `buscador_milhas_smiles/main.py` e `telegram_notifier.py`.
+  2. **Validação End-to-End no Ambiente Estrito:**
+     - Simulado subprocesso com `PATH` estritamente limpo (`C:\Windows\System32`), comprovando reprodução do erro anterior (`SSL FAILED: DLL load failed`) e sucesso imediato pós-injeção (`Telegram HTTPS SUCCESS: 200`).
+     - Enviada mensagem de teste de conectividade e executado scan completo com `--resumo`, entregando o ranking atualizado de todos os 13 destinos do Nordeste com sucesso direto no Telegram do usuário.
+- **Arquivos:** `buscador_voos/telegram_bot.py`, `buscador_voos/run_scheduled.py`, `buscador_voos/main.py`, `buscador_voos_internacional/run_scheduled.py`, `buscador_voos_internacional/main.py`, `buscador_milhas_smiles/run_scheduled.py`, `buscador_milhas_smiles/main.py`, `telegram_notifier.py`, `worklog.md`.
+
 ## 2026-10-06 · Antigravity · Harmonização Estrita do Lay 2x2: Eliminação de Look-Ahead Bias e Adoção do Teto Causal <= 14.00
 
 - **Demanda do Usuário:**
