@@ -21,12 +21,59 @@ ODD_UNDER25_MAX = 2.00
 STAKE_PADRAO = 100.0
 COMISSAO_BETFAIR = 0.05
 
+import re
+
+# Ligas com histórico de desequilíbrio e alta taxa de 2x2
+BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND', 'SERB', 'IRISH', 'TURK', 'SCOT']
+
+# Regexes de Governança de Ligas (Alinhadas com sinais_ko_core.py e GEMINI.md)
+RE_FEMININO = re.compile(
+    r"(\b(WOMEN|FEMININ\w*|FEMENIN\w*|FRAUEN|LADIES|WSL|W-LEAGUE|DAMALLSVENSKAN|PREMIERE LIGUE|LIGA F|DE LA REINA)\b|\(W\))",
+    re.IGNORECASE
+)
+
+RE_SELECAO = re.compile(
+    r"\b(NATIONS LEAGUE|WORLD CUP|EUROCUP|EURO CUP|UEFA EURO|AMERICA CUP|COPA AMERICA|FRIENDLIES|FRIENDLY|INTERNATIONALS?|QUALIF\w*|AFCON|AFRICA CUP|ASIAN CUP|CONCACAF|U23|U21|U20|U19)\b",
+    re.IGNORECASE
+)
+
+RE_DIV_BAIXA = re.compile(
+    r"\b(3RD DIVISION|4TH DIVISION|5TH DIVISION|3\. DIVISION|4\. DIVISION|TERCERA|MSFL|LEAGUE 3|LEAGUE THREE|LIGA 3|LIGA III|LIGA BET|LIGA ALEF|SECOND DIVISION B|MIZORAM|SHILLONG|BANGALORE)\b",
+    re.IGNORECASE
+)
+
+RE_PERIFERICA = re.compile(
+    r"\b(BOLIVIA\w*|PANAMA\w*|JAMAICA\w*|GUATEMALA\w*|SALVADOR\w*|NICARAGUA\w*|COSTA RICA\w*|HONDURAS\w*|PARAGUA\w*|PERU\w*|VENEZUELA\w*|ECUADOR\w*|"
+    r"HONG KONG\w*|THAI\w*|INDONESIA\w*|INDIA\w*|SINGAPORE|CAMBODIA|BHUTAN|BANGLADESH|MONGOLIA|PHILIPPINES|VIETNAM|"
+    r"KENYA\w*|TANZANIA\w*|RWANDA\w*|UGANDA\w*|NIGERIA\w*|GHANA\w*|ZAMBIA\w*|ZIMBABWE\w*|ETHIOPIA\w*|ALGERI\w*|EGYPT\w*|"
+    r"FAROE|ESTONIA\w*|LATVIA\w*|LITHUANIA\w*|ARMENIA\w*|GEORGIA\w*|AZERBAIJAN\w*|KAZAKHSTAN\w*|UZBEKISTAN\w*|JORDAN\w*|KUWAIT\w*|OMAN\w*|LEBAN\w*|QATAR\w*|UAE\w*|SAUDI\w*|BAHRAIN\w*|CYPRUS|CYPRIOT\w*|MALTA|MALTESE\w*|MOLDOVA\w*|BELARUS\w*|KOSOVO\w*|ALBANIA\w*|MONTENEGR\w*|BOSNIA\w*|OTHER COMPETITIONS)\b",
+    re.IGNORECASE
+)
+
+def eh_jogo_ignorado_governanca(liga: str = "", home: str = "", away: str = "") -> tuple[bool, str]:
+    """Verifica se o jogo deve ser ignorado por regras de governança ou blacklist de ligas."""
+    full = f"{liga} {home} {away}".upper()
+    if any(b in full for b in BLACKLIST_LIGAS_2X2):
+        return True, "Bloqueado por Blacklist 2x2 (Sérvia, Irlanda, Turquia, Escócia)"
+    if RE_FEMININO.search(full):
+        return True, "Bloqueado por Governança: Futebol Feminino"
+    if RE_SELECAO.search(full):
+        return True, "Bloqueado por Governança: Seleções / Torneio Internacional"
+    if RE_DIV_BAIXA.search(full):
+        return True, "Bloqueado por Governança: Divisão Baixa / Amadora"
+    if RE_PERIFERICA.search(full):
+        return True, "Bloqueado por Governança: Liga Periférica sem Liquidez"
+    return False, ""
+
 def validar_entrada_lay2x2(
     odd_lay_2x2: float,
     odd_under25: float = None,
     total_xg: float = None,
     odd_h: float = None,
-    odd_a: float = None
+    odd_a: float = None,
+    liga: str = None,
+    home: str = "",
+    away: str = ""
 ) -> tuple[bool, str]:
     """
     Valida se uma oportunidade atende aos critérios estritos da estratégia Lay 2x2.
@@ -42,6 +89,12 @@ def validar_entrada_lay2x2(
         
     if odd_lay_2x2 > ODD_LAY_2X2_MAX:
         return False, f"Odd Lay 2x2 ({odd_lay_2x2:.2f}) acima do teto de risco ({ODD_LAY_2X2_MAX:.2f})."
+
+    # Filtro de Ligas e Governança
+    if liga is not None:
+        ignorado, mot = eh_jogo_ignorado_governanca(str(liga), str(home), str(away))
+        if ignorado:
+            return False, mot
         
     # Filtro de Tendência Under / Estabilidade de Gols / Super Favoritismo
     passou_filtro_tendencia = False

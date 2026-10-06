@@ -132,23 +132,21 @@ if gerar_btn:
                     o_h = float(o_h) if pd.notna(o_h) else None
                     o_a = float(o_a) if pd.notna(o_a) else None
                     
+                    home = str(r.get("Home", r.get("Home_Team", "")))
+                    away = str(r.get("Away", r.get("Away_Team", "")))
+                    liga = str(r.get("League", r.get("Div", "Liga Externa")))
+                    
                     ok, motivo = validar_entrada_lay2x2(
                         odd_lay_2x2=o_2x2,
                         odd_under25=o_u25,
                         odd_h=o_h,
-                        odd_a=o_a
+                        odd_a=o_a,
+                        liga=liga,
+                        home=home,
+                        away=away
                     )
                     
                     if ok:
-                        home = str(r.get("Home", r.get("Home_Team", "")))
-                        away = str(r.get("Away", r.get("Away_Team", "")))
-                        liga = str(r.get("League", r.get("Div", "Liga Externa")))
-                        
-                        # Filtro de Ligas com histórico de desequilíbrio e alta taxa de 2x2
-                        liga_upper = liga.upper()
-                        if any(b in liga_upper for b in BLACKLIST_LIGAS_2X2):
-                            continue
-                            
                         tm = str(r.get("Time", r.get("horario", "15:00")))[:5]
                         
                         sinais.append({

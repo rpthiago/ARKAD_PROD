@@ -11,9 +11,7 @@ Regras Canônicas:
 import os
 import numpy as np
 import pandas as pd
-
-# Ligas com histórico de desequilíbrio, alta taxa de 2x2 ou agrupamento de reds
-BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND']
+from metodo_lay2x2_strategy import eh_jogo_ignorado_governanca, BLACKLIST_LIGAS_2X2
 
 def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3):
     """
@@ -65,9 +63,9 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
         away = str(row.get("Away", row.get("Away_Team", "")))
         liga = str(row.get("League", row.get("Div", "Liga Externa")))
         
-        # Filtro de Ligas com histórico de desequilíbrio e alta taxa de 2x2
-        liga_upper = liga.upper()
-        if any(b in liga_upper for b in BLACKLIST_LIGAS_2X2):
+        # Filtro de Ligas e Governança Oficial (Alinhado com metodo_lay2x2_strategy e sinais_ko_core)
+        ignorado, _ = eh_jogo_ignorado_governanca(liga, home, away)
+        if ignorado:
             continue
             
         tm = str(row.get("Time", row.get("horario", "15:00")))[:5]

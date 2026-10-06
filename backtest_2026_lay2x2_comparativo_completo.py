@@ -1,132 +1,207 @@
+# -*- coding: utf-8 -*-
+"""
+backtest_2026_lay2x2_comparativo_completo.py — Backtest Oficial & Comparativo Canônico do Lay 2x2 Quant
+ARKAD_PROD
+
+Objetivo:
+- Alinhar 100% o Backtest com as Regras Operacionais do Live (Lei 2 do GEMINI.md).
+- Utiliza exatamente as mesmas funções:
+    - validar_entrada_lay2x2() de metodo_lay2x2_strategy.py
+    - eh_jogo_ignorado_governanca() de metodo_lay2x2_strategy.py
+    - Trava Top 3 Menor Odd de Betfair
+- Compara a evolução de performance entre:
+    1. Bruto Original (Sem filtro de ligas e sem Top 3)
+    2. Com Blacklist 4 Ligas (Sérvia, Irlanda, Turquia, Escócia)
+    3. Com Blacklist + Governança Oficial (Sem Periféricas, Sem Seleções, Sem Feminino, Sem Div. Baixas)
+    4. LIVE CANÔNICO IDÊNTICO (Blacklist + Governança + Trava Top 3 Menor Odd)
+"""
+
+import os
 import sys
+import numpy as np
+import pandas as pd
+
 sys.stdout.reconfigure(encoding='utf-8')
-import pandas as pd, numpy as np
 
-print("=== INICIANDO BACKTEST EMPÍRICO 2026 COMPLETO — LAY 2X2 QUANT (SEM SUPOSIÇÕES) ===", flush=True)
+from metodo_lay2x2_strategy import (
+    validar_entrada_lay2x2,
+    eh_jogo_ignorado_governanca,
+    BLACKLIST_LIGAS_2X2,
+    calcular_resultado_lay2x2,
+    ODD_LAY_2X2_MIN,
+    ODD_LAY_2X2_MAX,
+    COMISSAO_BETFAIR
+)
 
-df_hist = pd.read_csv("Bases_de_Dados_API_FutPythonTrader_Bet365.csv", low_memory=False)
+print("=" * 80)
+print("=== BACKTEST CANÔNICO DO MÉTODO LAY 2X2 QUANT (100% ALINHADO AO LIVE) ===")
+print("=" * 80)
+
+# 1. Carrega base de dados canônica
+fpath = "Bases_de_Dados_API_FutPythonTrader_Betfair_FRESH.csv"
+if not os.path.exists(fpath):
+    fpath = "Bases_de_Dados_API_FutPythonTrader_Bet365.csv"
+
+print(f"\n[+] Carregando base de dados: {fpath}...")
+df_hist = pd.read_csv(fpath, low_memory=False)
 df_hist["d_str"] = pd.to_datetime(df_hist["Date"], errors='coerce').dt.strftime("%Y-%m-%d")
 
-df_2026 = df_hist[(df_hist["d_str"] >= "2026-01-01") & (df_hist["d_str"] <= "2026-08-20")].copy()
-print(f"[+] Total de jogos na base histórica de 2026: {len(df_2026):,} partidas", flush=True)
+# Mapeia colunas dinamicamente
+c_2x2 = [c for c in df_hist.columns if '2x2' in c.lower() and 'lay' in c.lower()]
+if not c_2x2:
+    c_2x2 = [c for c in df_hist.columns if '2x2' in c.lower()]
+c_2x2 = c_2x2[0]
 
-results_A = []  # Teto 14.00 + Strict Under 2.5 <= 2.00
-results_B = []  # Teto 20.00 + Strict Under 2.5 <= 2.00
-results_C = []  # Teto 20.00 + Com Favorito Claro (Antigo)
+c_u25 = [c for c in df_hist.columns if 'under25' in c.lower() and 'ht' not in c.lower()]
+c_u25 = c_u25[0] if c_u25 else None
 
-for idx, r in df_2026.iterrows():
-    o_2x2 = float(pd.to_numeric(r.get('Odd_CS_2x2_Lay') or r.get('Odd_CS_2x2'), errors='coerce') or 0.0)
-    o_u25 = float(pd.to_numeric(r.get('Odd_Under25_FT_Back') or r.get('Odd_Under25_FT') or r.get('Odd_Under25'), errors='coerce') or 0.0)
-    o_h = float(pd.to_numeric(r.get('Odd_H_Back') or r.get('Odd_H_FT') or r.get('Odd_H'), errors='coerce') or 0.0)
-    o_a = float(pd.to_numeric(r.get('Odd_A_Back') or r.get('Odd_A_FT') or r.get('Odd_A'), errors='coerce') or 0.0)
+c_h = [c for c in df_hist.columns if c.lower() in ['odd_h_back', 'odd_h_ft_back', 'odd_h', 'odd_h_ft']][0]
+c_a = [c for c in df_hist.columns if c.lower() in ['odd_a_back', 'odd_a_ft_back', 'odd_a', 'odd_a_ft']][0]
+c_gh = [c for c in df_hist.columns if 'goals_h_ft' in c.lower() or 'gols_h' in c.lower() or 'home_score' in c.lower()][0]
+c_ga = [c for c in df_hist.columns if 'goals_a_ft' in c.lower() or 'gols_a' in c.lower() or 'away_score' in c.lower()][0]
+c_liga = 'League' if 'League' in df_hist.columns else ('Liga' if 'Liga' in df_hist.columns else 'Div')
+
+df_hist["o_2x2"] = pd.to_numeric(df_hist[c_2x2], errors='coerce')
+df_hist["o_u25"] = pd.to_numeric(df_hist[c_u25], errors='coerce') if c_u25 else np.nan
+df_hist["o_h"] = pd.to_numeric(df_hist[c_h], errors='coerce')
+df_hist["o_a"] = pd.to_numeric(df_hist[c_a], errors='coerce')
+df_hist["gh"] = pd.to_numeric(df_hist[c_gh], errors='coerce')
+df_hist["ga"] = pd.to_numeric(df_hist[c_ga], errors='coerce')
+
+# Filtra partidas válidas finalizadas
+df_val = df_hist[df_hist["gh"].notna() & df_hist["ga"].notna() & (df_hist["o_2x2"] > 1.0)].copy()
+df_val["is_2x2"] = (df_val["gh"].astype(int) == 2) & (df_val["ga"].astype(int) == 2)
+
+print(f"[+] Total de jogos com odd Lay 2x2 e placar finalizado: {len(df_val):,}")
+
+# Filtragem de candidatos
+rows_candidatos = []
+for idx, r in df_val.iterrows():
+    o22 = r["o_2x2"]
+    ou25 = r["o_u25"]
+    oh = r["o_h"]
+    oa = r["o_a"]
+    liga = str(r.get(c_liga, ""))
+    home = str(r.get("Home", r.get("Home_Team", "")))
+    away = str(r.get("Away", r.get("Away_Team", "")))
+    d_str = r["d_str"]
+    is_red = r["is_2x2"]
     
-    gh = r.get("Goals_H_FT") if pd.notna(r.get("Goals_H_FT")) else r.get("Home_Score")
-    ga = r.get("Goals_A_FT") if pd.notna(r.get("Goals_A_FT")) else r.get("Away_Score")
-    
-    if pd.isna(gh) or pd.isna(ga) or o_2x2 <= 1.0:
+    # 1. Validação básica de odds e tendência
+    ok_base, _ = validar_entrada_lay2x2(o22, ou25, None, oh, oa, liga=None)
+    if not ok_base:
         continue
         
-    gh_i = int(float(gh)); ga_i = int(float(ga))
-    is_2x2 = (gh_i == 2 and ga_i == 2)
+    # Checagem de ligas
+    is_blacklist_2x2 = any(b in liga.upper() for b in BLACKLIST_LIGAS_2X2)
+    is_gov_ignorado, _ = eh_jogo_ignorado_governanca(liga, home, away)
     
-    # -------------------------------------------------------------
-    # CENÁRIO A: Teto 14.00 + Strict Under 2.5 <= 2.00
-    # -------------------------------------------------------------
-    if 8.0 <= o_2x2 <= 14.0 and 0.0 < o_u25 <= 2.00:
-        res = "GREEN" if not is_2x2 else "RED"
-        pnl = 95.0 if not is_2x2 else -(o_2x2 - 1.0) * 100.0
-        results_A.append({"Date": r["d_str"], "Home": r.get("Home"), "Away": r.get("Away"), "Odd_2x2": o_2x2, "Odd_U25": o_u25, "Resultado": res, "PnL": pnl})
+    rows_candidatos.append({
+        "Date": d_str,
+        "Year": d_str[:4] if pd.notna(d_str) else "",
+        "Month": d_str[:7] if pd.notna(d_str) else "",
+        "Home": home,
+        "Away": away,
+        "League": liga,
+        "Odd_2x2": o22,
+        "is_2x2": is_red,
+        "is_blacklist_2x2": is_blacklist_2x2,
+        "is_gov_ignorado": is_gov_ignorado
+    })
+
+df_cand = pd.DataFrame(rows_candidatos)
+print(f"[+] Total de oportunidades pré-qualificadas por mercado: {len(df_cand):,}")
+
+def processar_metricas(df_sub, nome, apply_top3=False):
+    if df_sub.empty:
+        return {"Cenário": nome, "N": 0}
         
-    # -------------------------------------------------------------
-    # CENÁRIO B: Teto 20.00 + Strict Under 2.5 <= 2.00
-    # -------------------------------------------------------------
-    if 8.0 <= o_2x2 <= 20.0 and 0.0 < o_u25 <= 2.00:
-        res = "GREEN" if not is_2x2 else "RED"
-        pnl = 95.0 if not is_2x2 else -(o_2x2 - 1.0) * 100.0
-        results_B.append({"Date": r["d_str"], "Home": r.get("Home"), "Away": r.get("Away"), "Odd_2x2": o_2x2, "Odd_U25": o_u25, "Resultado": res, "PnL": pnl})
-
-    # -------------------------------------------------------------
-    # CENÁRIO C: Teto 20.00 + Com Favorito Claro (Antigo)
-    # -------------------------------------------------------------
-    passou_c = (0.0 < o_u25 <= 2.00) or (o_h > 0 and o_h <= 1.75) or (o_a > 0 and o_a <= 1.75)
-    if 8.0 <= o_2x2 <= 20.0 and passou_c:
-        res = "GREEN" if not is_2x2 else "RED"
-        pnl = 95.0 if not is_2x2 else -(o_2x2 - 1.0) * 100.0
-        results_C.append({"Date": r["d_str"], "Home": r.get("Home"), "Away": r.get("Away"), "Odd_2x2": o_2x2, "Odd_U25": o_u25, "Resultado": res, "PnL": pnl})
-
-df_A = pd.DataFrame(results_A)
-df_B = pd.DataFrame(results_B)
-df_C = pd.DataFrame(results_C)
-
-print("\n" + "="*80, flush=True)
-print("=== COMPARATIVO OFICIAL DO ANO 2026 COMPLETO (JANEIRO A AGOSTO) ===", flush=True)
-print("="*80, flush=True)
-
-def calc_stats(df, nome):
-    if df.empty: return {}
-    tot = len(df)
-    grn = (df["Resultado"] == "GREEN").sum()
-    red = (df["Resultado"] == "RED").sum()
-    wr = (grn / tot) * 100.0
-    pnl = df["PnL"].sum()
-    max_odd_red = df[df["Resultado"] == "RED"]["Odd_2x2"].max() if red > 0 else 0.0
+    df_e = df_sub.copy()
+    if apply_top3:
+        # Ordena por Odd Lay menor dentro de cada dia e pega os top 3
+        df_e = df_e.sort_values(["Date", "Odd_2x2"], ascending=[True, True])
+        df_e = df_e.groupby("Date").head(3).reset_index(drop=True)
+        
+    tot = len(df_e)
+    reds = df_e["is_2x2"].sum()
+    greens = tot - reds
+    wr = (greens / tot) * 100.0
+    
+    # Break-even WR médio
+    be_wr = ((df_e["Odd_2x2"] - 1.0) / (df_e["Odd_2x2"] - COMISSAO_BETFAIR)).mean() * 100.0
+    
+    # P&L com Stake R$ 100
+    pnl_stake100 = np.where(~df_e["is_2x2"], 100.0 * (1.0 - COMISSAO_BETFAIR), -(df_e["Odd_2x2"] - 1.0) * 100.0).sum()
+    
+    # P&L com Responsabilidade Fixa R$ 200
+    stk_liab200 = 200.0 / (df_e["Odd_2x2"] - 1.0)
+    pnl_liab200 = np.where(~df_e["is_2x2"], stk_liab200 * (1.0 - COMISSAO_BETFAIR), -200.0).sum()
+    
+    # Yield e ROI sobre risco
+    yield_stake = (pnl_stake100 / (tot * 100.0)) * 100.0
+    total_liab = ((df_e["Odd_2x2"] - 1.0) * 100.0).sum()
+    roi_liab = (pnl_stake100 / total_liab) * 100.0
+    
+    # Max Drawdown (em R$ 200 de liability)
+    pnl_row = np.where(~df_e["is_2x2"], stk_liab200 * (1.0 - COMISSAO_BETFAIR), -200.0)
+    cum = np.cumsum(pnl_row)
+    peak = np.maximum.accumulate(cum)
+    dd = (cum - peak).min()
+    
     return {
         "Cenário": nome,
-        "Total Entradas": tot,
-        "Greens": grn,
-        "Reds": red,
+        "N (Jogos)": tot,
+        "Greens": greens,
+        "Reds": reds,
         "Win Rate %": f"{wr:.2f}%",
-        "Maior Odd em RED": max_odd_red,
-        "Lucro Acumulado R$": f"R$ {pnl:,.2f}"
+        "BE Win Rate %": f"{be_wr:.2f}%",
+        "Edge (WR - BE)": f"{wr - be_wr:+.2f}pp",
+        "P&L (Stake 100)": f"R$ {pnl_stake100:+,.2f}",
+        "P&L (Liab 200)": f"R$ {pnl_liab200:+,.2f}",
+        "Yield %": f"{yield_stake:+.2f}%",
+        "ROI Liab %": f"{roi_liab:+.2f}%",
+        "Max DD (R$)": f"R$ {dd:,.2f}"
     }
 
-summary = [
-    calc_stats(df_A, "Cenário A: Teto 14.00 + Strict Under 2.5 <= 2.00"),
-    calc_stats(df_B, "Cenário B: Teto 20.00 + Strict Under 2.5 <= 2.00"),
-    calc_stats(df_C, "Cenário C: Teto 20.00 + Com Favorito Claro (Antigo)")
-]
+# Executa para 2026
+df_cand_2026 = df_cand[df_cand["Year"] == "2026"].copy()
 
-df_sum = pd.DataFrame(summary)
-print(df_sum.to_string(index=False), flush=True)
+c1 = processar_metricas(df_cand_2026, "1. Bruto Original (Sem Filtro Ligas)", apply_top3=False)
+c2 = processar_metricas(df_cand_2026[~df_cand_2026["is_blacklist_2x2"]], "2. Com Blacklist 4 Ligas (Sérvia, Irlanda, Turquia, Escócia)", apply_top3=False)
+c3 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "3. Com Governança Completa (Sem Periféricas/Feminino)", apply_top3=False)
+c4 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "4. 100% IDÊNTICO AO LIVE (Ligas + Top 3 Menor Odd)", apply_top3=True)
 
-df_A["Mes"] = df_A["Date"].str[:7]
-df_B["Mes"] = df_B["Date"].str[:7]
-df_C["Mes"] = df_C["Date"].str[:7]
+df_comp_2026 = pd.DataFrame([c1, c2, c3, c4])
 
-print("\n=== DETALHAMENTO MÊS A MÊS EM 2026 — CENÁRIO A (TETO 14.00 STRICT) ===", flush=True)
-monthly_A = df_A.groupby("Mes").apply(lambda g: pd.Series({
-    "Entradas": len(g),
-    "Greens": (g["Resultado"]=="GREEN").sum(),
-    "Reds": (g["Resultado"]=="RED").sum(),
-    "Win Rate": f"{(g['Resultado']=='GREEN').mean()*100:.2f}%",
-    "PnL": f"R$ {g['PnL'].sum():,.2f}"
-})).reset_index()
-print(monthly_A.to_string(index=False), flush=True)
+print("\n" + "=" * 115)
+print("=== RESULTADOS COMPARATIVOS: LAY 2X2 NO ANO DE 2026 COMPLETO ===")
+print("=" * 115)
+print(df_comp_2026.to_string(index=False))
+print("=" * 115)
 
-print("\n=== DETALHAMENTO MÊS A MÊS EM 2026 — CENÁRIO B (TETO 20.00 STRICT) ===", flush=True)
-monthly_B = df_B.groupby("Mes").apply(lambda g: pd.Series({
-    "Entradas": len(g),
-    "Greens": (g["Resultado"]=="GREEN").sum(),
-    "Reds": (g["Resultado"]=="RED").sum(),
-    "Win Rate": f"{(g['Resultado']=='GREEN').mean()*100:.2f}%",
-    "PnL": f"R$ {g['PnL'].sum():,.2f}"
-})).reset_index()
-print(monthly_B.to_string(index=False), flush=True)
+# Detalhamento Mês a Mês do Cenário 4 (Live Oficial) em 2026
+df_live_2026 = df_cand_2026[~df_cand_2026["is_gov_ignorado"]].sort_values(["Date", "Odd_2x2"]).groupby("Date").head(3).reset_index(drop=True)
 
-print("\n=== DETALHAMENTO MÊS A MÊS EM 2026 — CENÁRIO C (TETO 20.00 COM FAVORITO) ===", flush=True)
-monthly_C = df_C.groupby("Mes").apply(lambda g: pd.Series({
-    "Entradas": len(g),
-    "Greens": (g["Resultado"]=="GREEN").sum(),
-    "Reds": (g["Resultado"]=="RED").sum(),
-    "Win Rate": f"{(g['Resultado']=='GREEN').mean()*100:.2f}%",
-    "PnL": f"R$ {g['PnL'].sum():,.2f}"
-})).reset_index()
-print(monthly_C.to_string(index=False), flush=True)
+monthly_records = []
+for mes, g in df_live_2026.groupby("Month"):
+    tot = len(g)
+    reds = g["is_2x2"].sum()
+    greens = tot - reds
+    wr = (greens / tot) * 100.0
+    pnl_s100 = np.where(~g["is_2x2"], 100.0 * (1.0 - COMISSAO_BETFAIR), -(g["Odd_2x2"] - 1.0) * 100.0).sum()
+    stk_l200 = 200.0 / (g["Odd_2x2"] - 1.0)
+    pnl_l200 = np.where(~g["is_2x2"], stk_l200 * (1.0 - COMISSAO_BETFAIR), -200.0).sum()
+    monthly_records.append({
+        "Mês": mes,
+        "Jogos": tot,
+        "Greens": greens,
+        "Reds": reds,
+        "Win Rate %": f"{wr:.2f}%",
+        "P&L Stake 100": f"R$ {pnl_s100:+,.2f}",
+        "P&L Liab 200": f"R$ {pnl_l200:+,.2f}"
+    })
 
-with pd.ExcelWriter("Backtest_2026_Lay2x2_Comparativo_Completo.xlsx") as writer:
-    df_sum.to_excel(writer, sheet_name="Resumo_Geral", index=False)
-    monthly_A.to_excel(writer, sheet_name="Mes_A_Teto14", index=False)
-    monthly_B.to_excel(writer, sheet_name="Mes_B_Teto20_Strict", index=False)
-    monthly_C.to_excel(writer, sheet_name="Mes_C_Teto20_Fav", index=False)
-
-print("\n[+] Planilha salva com sucesso: Backtest_2026_Lay2x2_Comparativo_Completo.xlsx", flush=True)
+df_monthly = pd.DataFrame(monthly_records)
+print("\n=== EVOLUÇÃO MENSAL EM 2026 — MÉTODO 100% IDÊNTICO AO LIVE (CENÁRIO 4) ===")
+print(df_monthly.to_string(index=False))
+print("=" * 115)

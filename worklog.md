@@ -7,6 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-06 · Antigravity · Harmonização Estrita do Lay 2x2 (Live == Backtest) e Teste de P&L
+
+- **Demanda do Usuário:**
+  - "Quero deixar o live e o backtest identicos. Depois faça o teste para ver o pl"
+- **Diagnóstico Prévio:**
+  - O backtest bruto antigo não continha filtro de ligas nem trava Top 3, aceitando cauda longa periférica. O operacional ao vivo (Página 17, Página 01 e VPS) possuía a `BLACKLIST_LIGAS_2X2` (Sérvia, Irlanda, Turquia, Escócia), a governança de ligas de 04/10 (sem futebol feminino, seleções, 3ª/4ª divisões e periféricas) e a Trava Top 3 Menor Odd.
+- **Feito:**
+  1. **Harmonização do Módulo Central (`metodo_lay2x2_strategy.py`):**
+     - Integradas as regras canônicas de `BLACKLIST_LIGAS_2X2` e `eh_jogo_ignorado_governanca()` diretamente na validação de entrada (`validar_entrada_lay2x2`).
+  2. **Alinhamento do Módulo Operacional (`estrategia_lay_2x2.py`):**
+     - Atualizada a grade para utilizar a governança centralizada unificada.
+  3. **Alinhamento da Interface Streamlit (`pages/17_⚽_Sinais_Lay_2x2.py`):**
+     - Passagem explícita de liga, home e away para a função canônica.
+  4. **Backtest Oficial Idêntico ao Live (`backtest_2026_lay2x2_comparativo_completo.py`):**
+     - Reescrito para usar os mesmos módulos e comparar a transição (Bruto -> Blacklist -> Governança -> Live Canônico com Top 3).
+- **Achados Empíricos do Teste (Ano 2026 Completo na Base Betfair Real FRESH):**
+  - **Cenário 1 (Bruto Original sem filtro):** $N = 2.235$ | 2.117G / 118R | WR 94,72% | BE 93,44% | Edge +1,28pp | P&L Stake R$ 100: +R$ 28.595,00 | P&L Liab R$ 200: +R$ 6.320,92 | Max DD: −R$ 1.562,37.
+  - **Cenário 2 (Com Blacklist 4 Ligas):** $N = 2.008$ | 1.906G / 102R | WR 94,92% | Edge +1,45pp | P&L Stake R$ 100: +R$ 29.910,00 | Elimina 16 reds e sobe o lucro.
+  - **Cenário 3 (Blacklist + Governança Global):** $N = 1.734$ | 1.641G / 93R | WR 94,64% | P&L Liab R$ 200: +R$ 4.339,55.
+  - **Cenário 4 (100% IDÊNTICO AO LIVE - Ligas + Top 3 Menor Odd):** $N = 485$ | **469 Greens / 16 Reds** | **WR 96,70%** (vs BE 92,43%) | **Edge Real: +4,27pp** | **P&L Stake R$ 100: +R$ 22.795,00** | **P&L Liab R$ 200: +R$ 4.568,84** | **Yield: +47,00%** | **Max Drawdown despenca de −R$ 1.562 para apenas −R$ 418,51 (−73% de risco de cauda)**.
+- **Arquivos:** `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `backtest_2026_lay2x2_comparativo_completo.py`, `worklog.md`.
+
 ## 2026-10-04 · Antigravity · Auditoria e Blindagem da Página 02 (Deduplicação e Eliminação de Pendentes Espúrios)
 
 - **Demanda do Usuário:**
