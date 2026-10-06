@@ -7,27 +7,25 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
-## 2026-10-06 · Antigravity · Harmonização Estrita do Lay 2x2 (Live == Backtest) e Teste de P&L
+## 2026-10-06 · Antigravity · Harmonização Estrita do Lay 2x2: Eliminação de Look-Ahead Bias e Adoção do Teto Causal <= 14.00
 
 - **Demanda do Usuário:**
-  - "Quero deixar o live e o backtest identicos. Depois faça o teste para ver o pl"
-- **Diagnóstico Prévio:**
-  - O backtest bruto antigo não continha filtro de ligas nem trava Top 3, aceitando cauda longa periférica. O operacional ao vivo (Página 17, Página 01 e VPS) possuía a `BLACKLIST_LIGAS_2X2` (Sérvia, Irlanda, Turquia, Escócia), a governança de ligas de 04/10 (sem futebol feminino, seleções, 3ª/4ª divisões e periféricas) e a Trava Top 3 Menor Odd.
+  1. "Quero deixar o live e o backtest identicos. Depois faça o teste para ver o pl"
+  2. "Mas temos um problema, ele pega os jogos 15 min antes e ja envia, nao tem como saber os tres melhores do dia" -> Usuário aprovou adotar o teto estrito causal <= 14.00.
+- **Diagnóstico & Identificação de Look-Ahead Bias:**
+  - O conceito de "Top 3 Menor Odd do Dia" dependia de clarividência temporal (às 10h da manhã não se conhecem as odds das 16h/21h). No backtest, isso agia como uma miragem que selecionava retrospectivamente as menores odds.
+  - Demonstramos empiricamente que o verdadeiro gerador de alpha do "Top 3" era operar odds baixas ($\le 14.00$).
 - **Feito:**
-  1. **Harmonização do Módulo Central (`metodo_lay2x2_strategy.py`):**
-     - Integradas as regras canônicas de `BLACKLIST_LIGAS_2X2` e `eh_jogo_ignorado_governanca()` diretamente na validação de entrada (`validar_entrada_lay2x2`).
-  2. **Alinhamento do Módulo Operacional (`estrategia_lay_2x2.py`):**
-     - Atualizada a grade para utilizar a governança centralizada unificada.
-  3. **Alinhamento da Interface Streamlit (`pages/17_⚽_Sinais_Lay_2x2.py`):**
-     - Passagem explícita de liga, home e away para a função canônica.
-  4. **Backtest Oficial Idêntico ao Live (`backtest_2026_lay2x2_comparativo_completo.py`):**
-     - Reescrito para usar os mesmos módulos e comparar a transição (Bruto -> Blacklist -> Governança -> Live Canônico com Top 3).
-- **Achados Empíricos do Teste (Ano 2026 Completo na Base Betfair Real FRESH):**
-  - **Cenário 1 (Bruto Original sem filtro):** $N = 2.235$ | 2.117G / 118R | WR 94,72% | BE 93,44% | Edge +1,28pp | P&L Stake R$ 100: +R$ 28.595,00 | P&L Liab R$ 200: +R$ 6.320,92 | Max DD: −R$ 1.562,37.
-  - **Cenário 2 (Com Blacklist 4 Ligas):** $N = 2.008$ | 1.906G / 102R | WR 94,92% | Edge +1,45pp | P&L Stake R$ 100: +R$ 29.910,00 | Elimina 16 reds e sobe o lucro.
-  - **Cenário 3 (Blacklist + Governança Global):** $N = 1.734$ | 1.641G / 93R | WR 94,64% | P&L Liab R$ 200: +R$ 4.339,55.
-  - **Cenário 4 (100% IDÊNTICO AO LIVE - Ligas + Top 3 Menor Odd):** $N = 485$ | **469 Greens / 16 Reds** | **WR 96,70%** (vs BE 92,43%) | **Edge Real: +4,27pp** | **P&L Stake R$ 100: +R$ 22.795,00** | **P&L Liab R$ 200: +R$ 4.568,84** | **Yield: +47,00%** | **Max Drawdown despenca de −R$ 1.562 para apenas −R$ 418,51 (−73% de risco de cauda)**.
-- **Arquivos:** `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `backtest_2026_lay2x2_comparativo_completo.py`, `worklog.md`.
+  1. **Adoção do Teto Causal Homologado (`ODD_LAY_2X2_MAX = 14.00`):**
+     - Atualizados `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py` e `sinais_ko_core.py`.
+     - O robô em KO−15 agora avalia de forma 100% causal e instantânea: se `8.00 <= Odd_Lay <= 14.00` e passar na governança/tendência, entra imediatamente sem depender de nenhum jogo futuro.
+  2. **Harmonização de Ligas e Governança:**
+     - `BLACKLIST_LIGAS_2X2` (Sérvia, Irlanda, Turquia, Escócia) + governança global (sem feminino, seleções, divisões inferiores e periféricas).
+  3. **Validação do Backtest Oficial Causal 2026 (`backtest_2026_lay2x2_comparativo_completo.py`):**
+     - Base Betfair Real FRESH: **$N = 591$ jogos** | **562 Greens / 29 Reds** | **Win Rate: 95,09%** (vs Break-Even de 91,47%) | **Edge Real: +3,62pp**.
+     - **P&L Stake R$ 100:** **+R$ 21.880,00** | **P&L Responsabilidade R$ 200:** **+R$ 4.737,92** | **Yield: +37,02%** | **Max Drawdown: −R$ 686,24**.
+     - O resultado causal supera a miragem do Top 3 em responsabilidade fixa (+R$ 4.737 vs +R$ 4.568) com total viabilidade prática e sem look-ahead.
+- **Arquivos:** `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `sinais_ko_core.py`, `backtest_2026_lay2x2_comparativo_completo.py`, `worklog.md`.
 
 ## 2026-10-04 · Antigravity · Auditoria e Blindagem da Página 02 (Deduplicação e Eliminação de Pendentes Espúrios)
 

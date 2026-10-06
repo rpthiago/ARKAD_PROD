@@ -137,11 +137,9 @@ def avaliar(mk, home, away, competicao, top3_dia):
     #     if l03 in sorted(lst)[:3]:
     #         out.append((M_0X3, l03, l03s, u25))
 
-    # 2. Lay 2x2: mantido temporariamente a pedido do usuario ("o metodo pode deixar por enquanto")
-    if l22 and 8.0 <= l22 <= 20.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
+    # 2. Lay 2x2 Causal: Teto homologado 8.0 a 14.0 (sem look-ahead bias)
+    if l22 and 8.0 <= l22 <= 14.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
         comp = str(competicao or "").upper()
         if not any(b in comp for b in BLACKLIST_2X2):
-            lst = top3_dia.setdefault(M_2X2, []); lst.append(l22)
-            if l22 in sorted(lst)[:3]:
-                out.append((M_2X2, l22, l22s, fav))
+            out.append((M_2X2, l22, l22s, fav))
     return out

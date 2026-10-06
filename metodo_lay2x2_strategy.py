@@ -16,7 +16,7 @@ import numpy as np
 
 # Parâmetros Padrão da Estratégia
 ODD_LAY_2X2_MIN = 8.00
-ODD_LAY_2X2_MAX = 20.00
+ODD_LAY_2X2_MAX = 14.00  # Teto estrito causal homologado (evita look-ahead bias e limita risco de cauda)
 ODD_UNDER25_MAX = 2.00
 STAKE_PADRAO = 100.0
 COMISSAO_BETFAIR = 0.05

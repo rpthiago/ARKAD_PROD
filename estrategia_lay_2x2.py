@@ -43,8 +43,8 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
         o_h = float(o_h) if pd.notna(o_h) else None
         o_a = float(o_a) if pd.notna(o_a) else None
         
-        # Validação de Faixa de Odd Lay 2x2 (8.00 a 20.00)
-        if o_2x2 < 8.00 or o_2x2 > 20.00:
+        # Validação de Faixa de Odd Lay 2x2 Causal (8.00 a 14.00)
+        if o_2x2 < 8.00 or o_2x2 > 14.00:
             continue
             
         # Filtro de Tendência Under / Favoritismo

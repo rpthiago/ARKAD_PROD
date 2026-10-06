@@ -166,21 +166,22 @@ def processar_metricas(df_sub, nome, apply_top3=False):
 # Executa para 2026
 df_cand_2026 = df_cand[df_cand["Year"] == "2026"].copy()
 
-c1 = processar_metricas(df_cand_2026, "1. Bruto Original (Sem Filtro Ligas)", apply_top3=False)
+c1 = processar_metricas(df_cand_2026, "1. Bruto Original (Sem Filtro Ligas, Odd 8-20)", apply_top3=False)
 c2 = processar_metricas(df_cand_2026[~df_cand_2026["is_blacklist_2x2"]], "2. Com Blacklist 4 Ligas (Sérvia, Irlanda, Turquia, Escócia)", apply_top3=False)
-c3 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "3. Com Governança Completa (Sem Periféricas/Feminino)", apply_top3=False)
-c4 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "4. 100% IDÊNTICO AO LIVE (Ligas + Top 3 Menor Odd)", apply_top3=True)
+c3 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "3. Com Governança Global (Odd 8-20, Sem Periféricas)", apply_top3=False)
+c4 = processar_metricas(df_cand_2026[(~df_cand_2026["is_gov_ignorado"]) & (df_cand_2026["Odd_2x2"] <= 14.0)], "4. LIVE OFICIAL CAUSAL (Governança + Teto Odd <= 14.00, Sem Lookahead)", apply_top3=False)
+c5 = processar_metricas(df_cand_2026[~df_cand_2026["is_gov_ignorado"]], "5. [Referência Comparativa] Top 3 Menor Odd (com lookahead)", apply_top3=True)
 
-df_comp_2026 = pd.DataFrame([c1, c2, c3, c4])
+df_comp_2026 = pd.DataFrame([c1, c2, c3, c4, c5])
 
-print("\n" + "=" * 115)
+print("\n" + "=" * 125)
 print("=== RESULTADOS COMPARATIVOS: LAY 2X2 NO ANO DE 2026 COMPLETO ===")
-print("=" * 115)
+print("=" * 125)
 print(df_comp_2026.to_string(index=False))
-print("=" * 115)
+print("=" * 125)
 
-# Detalhamento Mês a Mês do Cenário 4 (Live Oficial) em 2026
-df_live_2026 = df_cand_2026[~df_cand_2026["is_gov_ignorado"]].sort_values(["Date", "Odd_2x2"]).groupby("Date").head(3).reset_index(drop=True)
+# Detalhamento Mês a Mês do Cenário 4 (Live Oficial Causal com Teto 14.00) em 2026
+df_live_2026 = df_cand_2026[(~df_cand_2026["is_gov_ignorado"]) & (df_cand_2026["Odd_2x2"] <= 14.0)].sort_values(["Date", "Odd_2x2"]).reset_index(drop=True)
 
 monthly_records = []
 for mes, g in df_live_2026.groupby("Month"):
@@ -202,6 +203,6 @@ for mes, g in df_live_2026.groupby("Month"):
     })
 
 df_monthly = pd.DataFrame(monthly_records)
-print("\n=== EVOLUÇÃO MENSAL EM 2026 — MÉTODO 100% IDÊNTICO AO LIVE (CENÁRIO 4) ===")
+print("\n=== EVOLUÇÃO MENSAL EM 2026 — MÉTODO LIVE OFICIAL CAUSAL (TETO ODD <= 14.00) ===")
 print(df_monthly.to_string(index=False))
-print("=" * 115)
+print("=" * 125)

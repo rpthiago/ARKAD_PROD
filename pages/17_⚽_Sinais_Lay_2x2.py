@@ -35,12 +35,12 @@ Esta página monitora em **tempo real** as oportunidades quantitativas do métod
 2. **Tendência Under 2.5 / Favoritismo:** Odd Under 2.5 $\le {ODD_UNDER25_MAX:.2f}$ ou Total xG $\le 2.40$ ou Super Favorito em campo.
 3. **Filtro de Ligas de Risco:** Bloqueio automático das 4 ligas periféricas com histórico de desequilíbrio e alta taxa de 2-2 (Sérvia, Irlanda, Turquia, Escócia).
 4. **Desempenho Estatístico Comprovado:** Win Rate Histórico de **96.63%** com o filtro de liga.
-5. **Trava de Elite (Top 3 Menor Odd):** Exclusão de cauda longa e seleção dos 3 jogos com menor odd de lay no dia (reduz 77% da exposição e eleva o ROI).
+5. **Regra Causal Homologada:** Operação local em KO−15 sem viés de antecipação (look-ahead bias) com teto estrito de odd $\le 14.00$.
 
 > ⚠️ **REGRAS DO MERCADO:** A aposta ganha (**GREEN**) se a partida terminar com **qualquer placar diferente de 2x2**. O único placar perdedor (**RED**) é o placar exato de `2 x 2`.
 """)
 
-st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score 2-2 tem spread alargado de manhã cedo. A execução recomendada pela auditoria ocorre nos **15 a 60 minutos anteriores ao Kickoff**, momento em que o spread cai para **~13%** e a liquidez atinge o pico (R$ 180 a R$ 240 no melhor lay). Se no momento do KO a odd tiver saído da faixa [8.0, 20.0], o sinal é cancelado (*Fora da Faixa no KO*). Mantido estritamente o critério **Top 3 Menor Odd**.")
+st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score 2-2 atinge liquidez ótima nos **15 a 60 minutos anteriores ao Kickoff**. Se no momento do KO−15 a odd estiver na faixa causal **[8.00, 14.00]** e passar na governança de ligas, a entrada é confirmada imediatamente.")
 
 # Métricas no Topo
 m1, m2, m3, m4 = st.columns(4)
