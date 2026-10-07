@@ -106,6 +106,15 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
     if d.empty:
         return pd.DataFrame()
 
+    # Exclusão de entradas descartadas / fora da regra causal
+    d = d[~d.status.astype(str).str.contains("DESCARTADO|SKIP", case=False, na=False)]
+    # Teto estrito causal de Lay 2x2 (Odd Lay <= 14.00)
+    is_2x2 = d.Metodo.astype(str).str.contains("2x2", case=False, na=False)
+    odd_lay = pd.to_numeric(d.Odd_Lay, errors="coerce").fillna(999.0)
+    d = d[~(is_2x2 & (odd_lay > 14.0))].copy()
+    if d.empty:
+        return pd.DataFrame()
+
     # Filtros de governança de ligas (Feminino, Seleções, Divisões periféricas)
     from sinais_ko_core import eh_jogo_ignorado, RE_COPA
     mask_ignorado = d.apply(lambda r: eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")), axis=1)

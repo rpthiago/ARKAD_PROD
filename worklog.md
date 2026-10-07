@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-06 · Antigravity · Purificação das Planilhas Oficiais (Apenas Jogos Certos sob a Nova Regra Causal)
+
+- **Diretriz do Usuário:**
+  - *"atualiza Resultados dos Métodos em Validação Forward — ARKAD apenas com os jogos certos"*
+  - Confirmado que em 06/10 os 2 jogos chineses de Lay 2x2 (Changchun Yatai e Wuxi Wugou, odds 19.0 e 18.5) violavam o novo teto causal ($\text{Odd Lay} \le 14.00$) e não deveriam compor a grade oficial.
+- **Ações Realizadas:**
+  1. **Purificação da Planilha de 06/10 (`Sinais_Metodos_Aprovados_2026-10-06.xlsx`):**
+     - Removidos os 2 jogos de Lay 2x2 com odds fora do teto.
+     - Mantidos rigorosamente apenas os **2 jogos certos do dia**:
+       - `12:00` Raufoss 1 x 5 Start (Lay Home/DC X2, Odd 7.00) ➔ **🟢 GREEN** (+R$ 31,83).
+       - `21:35` Ponte Preta x Juventude (Lay Draw, Odd 6.20) ➔ **⏳ PENDENTE** (em andamento).
+  2. **Liquidação Pendente de 05/10 (`Sinais_Metodos_Aprovados_2026-10-05.xlsx`):**
+     - Liquidado oficialmente `Deportivo Riestra 1 x 1 Central Cordoba (SdE)` no método `Lay Over 4.5 FT (Under Pesado)` como **🟢 GREEN** (+R$ 10,06).
+  3. **Blindagem do Gerador Diário (`sinais_dia_coletor.py`):**
+     - Adicionado filtro explícito para descartar entradas com status `DESCARTADO` ou `SKIP` e corte automático de qualquer Lay 2x2 com odd de Lay $> 14.00$.
+     - Arquivo sincronizado com o coletor na VPS (`/home/ubuntu/betfair-collector/sinais_dia_coletor.py`).
+  4. **Atualização no Ledger Canônico (`forward_ko_ledger.csv`):**
+     - Linhas de Lay 2x2 de 06/10 marcadas como `DESCARTADO_TETO_14` e Deportivo Riestra liquidado como `GREEN`.
+- **Arquivos:** `sinais_dia_coletor.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-06.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-05.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `worklog.md`.
+
 ## 2026-10-06 · Antigravity · Conciliação da Grade do Dia 06/10, Explicação dos 3 Jogos e Sincronização Noturna
 
 - **Dúvida do Usuário:**
