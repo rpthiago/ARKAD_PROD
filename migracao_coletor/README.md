@@ -81,3 +81,31 @@ custa 2 minutos.
 A VPS de São Paulo continua útil: ela guarda os 3,1 GB de histórico e os serviços de estudo que não
 dependem da Betfair. O disjuntor evita que ela gaste tentativas de login. Se o bloqueio cair, o coletor
 volta sozinho na próxima janela.
+
+---
+
+## Criando o host novo — passo a passo (Google Cloud, e2-micro grátis)
+
+A chave pública já está em `migracao_coletor/chave_publica_ssh.txt`, com o usuário `ubuntu` no fim
+(o Google Cloud usa esse campo como nome de usuário). É a mesma chave que já abre a VPS atual, então
+nada muda no seu lado.
+
+1. **console.cloud.google.com** → criar conta (pede cartão para verificação; a e2-micro é grátis
+   permanente, não é trial) → criar um projeto, por exemplo `arkad-coletor`.
+2. **Compute Engine → VM instances → Create instance.**
+3. **Region: `us-east1` (South Carolina)** — é a região grátis mais próxima do Brasil. Zone: qualquer.
+4. **Machine configuration:** série **E2**, tipo **e2-micro** (2 vCPU compartilhadas, 1 GB).
+   Confira que aparece "Your first 744 hours of e2-micro are free".
+5. **Boot disk → Change:** Ubuntu **22.04 LTS**, tipo **Standard persistent disk**, **30 GB**
+   (é o teto do free tier; acima disso passa a cobrar).
+6. **Advanced options → Security → Manage Access → Add manually generated SSH keys → Add item**
+   e cole o conteúdo de `chave_publica_ssh.txt` **inteiro, incluindo o ` ubuntu` no final**.
+7. **Create.** Anote o **External IP** da instância.
+
+Depois disso é comigo: com o IP em mãos eu rodo o teste de acesso, empacoto, migro e subo os serviços.
+
+### Se preferir pagar para resolver um problema antigo
+O 1 GB de RAM já causou dois incidentes reais (o `trader-inplay` em crash-loop por 33 h e o travamento de
+3 h de 16/09). Uma VPS de ~US$ 4-5/mês (Hetzner CX22, 4 GB, 40 GB de disco) elimina essa classe de
+problema. Mas o caminho de menor arrependimento é testar primeiro no grátis: se a Betfair BR recusar
+login de IP estrangeiro, mudar de host não resolve e você não gastou nada descobrindo.
