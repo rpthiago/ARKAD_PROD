@@ -109,3 +109,30 @@ O 1 GB de RAM já causou dois incidentes reais (o `trader-inplay` em crash-loop 
 3 h de 16/09). Uma VPS de ~US$ 4-5/mês (Hetzner CX22, 4 GB, 40 GB de disco) elimina essa classe de
 problema. Mas o caminho de menor arrependimento é testar primeiro no grátis: se a Betfair BR recusar
 login de IP estrangeiro, mudar de host não resolve e você não gastou nada descobrindo.
+
+
+---
+
+## RESULTADO DO TESTE (07/10, host us-east1 criado e testado)
+
+Host novo: `arkad-coletor`, Google Cloud e2-micro, us-east1-b, Ubuntu 22.04, IP **136.108.221.253**.
+SSH funcionando com a mesma chave da VPS antiga.
+
+Teste de acesso rodado de lá:
+
+| endpoint | resposta dos EUA |
+|---|---|
+| `api.betfair.bet.br` (conta BR) | **302 → brasilsembets.gov.br** |
+| `api.betfair.com` (internacional) | 403 desafio do Cloudflare — host alcançável |
+| `identitysso-cert` (POST) | 400 do próprio servidor Betfair — **alcançável** |
+
+**Conclusão que muda a decisão: não é geo-bloqueio.** O domínio `api.betfair.bet.br` redireciona para a
+página do governo **de qualquer país** — a plataforma brasileira foi desligada, não apenas filtrada na
+rede brasileira. Nenhuma mudança de hospedagem resolve, e um túnel também não resolveria.
+
+A Betfair internacional (`.com`) responde normalmente dos EUA, mas exige **conta betfair.com**, que é
+plataforma separada da `.bet.br` — as credenciais não são intercambiáveis.
+
+**O teste anterior deu leitura errada** porque marcava qualquer HTML como bloqueio: um `405` em GET num
+endpoint que só aceita POST não é bloqueio. O script foi corrigido para separar bloqueio da MP, desafio
+do Cloudflare e resposta real do servidor, usando o método HTTP correto em cada endpoint.
