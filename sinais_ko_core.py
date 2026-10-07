@@ -83,7 +83,7 @@ def candidatos(mk, home, away, competicao):
     c = {M_0X3: None, M_2X2: None}
     # 0x3 desativado a pedido do usuario em 03/10/2026
     # if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85): c[M_0X3] = l03
-    if l22 and 8.0 <= l22 <= 20.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
+    if l22 and 8.0 <= l22 <= 14.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
         if not any(b in str(competicao or "").upper() for b in BLACKLIST_2X2): c[M_2X2] = l22
     return c
 
