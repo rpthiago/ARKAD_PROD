@@ -7,6 +7,18 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-06 · Antigravity · Fix DuplicateWidgetID na Página 04 (Radar de Jogos do Dia)
+
+- **Problema Relatado:**
+  - O Streamlit Cloud disparou a exceção `DuplicateWidgetID` na linha 362 de `pages/04_⚡_Radar_Jogos_do_Dia.py`:
+    `modo_view = st.radio("Visualização", ..., key=f"view_{titulo_bloco}")`
+- **Causa Raiz:**
+  - A aba "Bloco Atual" (`tab_atual`) e as abas específicas de cada bloco (`tab_b1`, `tab_b2`, etc.) chamavam `renderizar_jogos_bloco` utilizando o mesmo `titulo_bloco`. Quando a janela horária atual coincidia com o bloco correspondente, o `st.radio` e o `st.button` eram instanciados duas vezes no mesmo ciclo de renderização com a mesma chave, causando a colisão.
+- **Feito:**
+  - Adicionado o parâmetro `key_prefix` na função `renderizar_jogos_bloco` e nas chaves dos widgets (`key=f"view_{key_prefix}_{titulo_bloco}"` e `key=f"tg_{key_prefix}_{titulo_bloco}"`).
+  - Passados identificadores únicos para cada aba (`atual`, `b1`, `b2`, `b3`, `b4`, `b5`, `todos`), eliminando definitivamente a colisão de chaves.
+- **Arquivos:** `pages/04_⚡_Radar_Jogos_do_Dia.py`, `worklog.md`.
+
 ## 2026-10-06 · Antigravity · Auditoria dos Sinais Chineses (06/10), Bloqueio de 3ª Divisão e Deploy Causal na VPS
 
 - **Demanda do Usuário:**

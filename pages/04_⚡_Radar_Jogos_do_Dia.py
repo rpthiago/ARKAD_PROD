@@ -257,7 +257,7 @@ if not df_raw.empty:
         f"📋 Todos do Dia ({total_jogos})"
     ])
 
-    def renderizar_jogos_bloco(df_subset, titulo_bloco, desc_bloco, show_telegram_btn=True):
+    def renderizar_jogos_bloco(df_subset, titulo_bloco, desc_bloco, show_telegram_btn=True, key_prefix="bloco"):
         if df_subset.empty:
             st.info(f"Nenhum jogo qualificado registrado para o **{titulo_bloco}** nesta data.")
             return
@@ -268,11 +268,11 @@ if not df_raw.empty:
         # Modo de Visualização: Cards ou Tabela
         col_vis1, col_vis2 = st.columns([1, 1])
         with col_vis1:
-            modo_view = st.radio("Visualização", ["🗂️ Cards Detalhados", "📊 Tabela Completa"], horizontal=True, key=f"view_{titulo_bloco}")
+            modo_view = st.radio("Visualização", ["🗂️ Cards Detalhados", "📊 Tabela Completa"], horizontal=True, key=f"view_{key_prefix}_{titulo_bloco}")
             
         with col_vis2:
             if show_telegram_btn:
-                if st.button(f"📲 Disparar {len(df_subset)} jogos no Telegram", key=f"tg_{titulo_bloco}", use_container_width=True):
+                if st.button(f"📲 Disparar {len(df_subset)} jogos no Telegram", key=f"tg_{key_prefix}_{titulo_bloco}", use_container_width=True):
                     msg_linhas = [
                         f"🎯 *ARKAD — RADAR DE JOGOS ({ds_iso})*",
                         f"⚡ *{titulo_bloco}*",
@@ -353,41 +353,41 @@ if not df_raw.empty:
             (df_filtrado["Hora_Str"] >= bloco_atual_info["inicio"]) & 
             (df_filtrado["Hora_Str"] <= bloco_atual_info["fim"])
         ]
-        renderizar_jogos_bloco(df_atual, bloco_atual_info["nome"], bloco_atual_info["desc"])
+        renderizar_jogos_bloco(df_atual, bloco_atual_info["nome"], bloco_atual_info["desc"], key_prefix="atual")
 
     # 2. Tab Bloco 1 (Matinal)
     with tab_b1:
         b1_info = BLOCOS[1]
         df_b1 = df_filtrado[(df_filtrado["Hora_Str"] >= b1_info["inicio"]) & (df_filtrado["Hora_Str"] <= b1_info["fim"])]
-        renderizar_jogos_bloco(df_b1, b1_info["nome"], b1_info["desc"])
+        renderizar_jogos_bloco(df_b1, b1_info["nome"], b1_info["desc"], key_prefix="b1")
 
     # 3. Tab Bloco 2 (Europa 1)
     with tab_b2:
         b2_info = BLOCOS[2]
         df_b2 = df_filtrado[(df_filtrado["Hora_Str"] >= b2_info["inicio"]) & (df_filtrado["Hora_Str"] <= b2_info["fim"])]
-        renderizar_jogos_bloco(df_b2, b2_info["nome"], b2_info["desc"])
+        renderizar_jogos_bloco(df_b2, b2_info["nome"], b2_info["desc"], key_prefix="b2")
 
     # 4. Tab Bloco 3 (Europa 2)
     with tab_b3:
         b3_info = BLOCOS[3]
         df_b3 = df_filtrado[(df_filtrado["Hora_Str"] >= b3_info["inicio"]) & (df_filtrado["Hora_Str"] <= b3_info["fim"])]
-        renderizar_jogos_bloco(df_b3, b3_info["nome"], b3_info["desc"])
+        renderizar_jogos_bloco(df_b3, b3_info["nome"], b3_info["desc"], key_prefix="b3")
 
     # 5. Tab Bloco 4 (Tarde / Clássicos)
     with tab_b4:
         b4_info = BLOCOS[4]
         df_b4 = df_filtrado[(df_filtrado["Hora_Str"] >= b4_info["inicio"]) & (df_filtrado["Hora_Str"] <= b4_info["fim"])]
-        renderizar_jogos_bloco(df_b4, b4_info["nome"], b4_info["desc"])
+        renderizar_jogos_bloco(df_b4, b4_info["nome"], b4_info["desc"], key_prefix="b4")
 
     # 6. Tab Bloco 5 (Noite Américas)
     with tab_b5:
         b5_info = BLOCOS[5]
         df_b5 = df_filtrado[(df_filtrado["Hora_Str"] >= b5_info["inicio"]) & (df_filtrado["Hora_Str"] <= b5_info["fim"])]
-        renderizar_jogos_bloco(df_b5, b5_info["nome"], b5_info["desc"])
+        renderizar_jogos_bloco(df_b5, b5_info["nome"], b5_info["desc"], key_prefix="b5")
 
     # 7. Tab Todos do Dia
     with tab_todos:
-        renderizar_jogos_bloco(df_filtrado, f"Todos os Jogos do Dia ({ds_iso})", "Grade consolidada completa de todas as janelas horárias", show_telegram_btn=True)
+        renderizar_jogos_bloco(df_filtrado, f"Todos os Jogos do Dia ({ds_iso})", "Grade consolidada completa de todas as janelas horárias", show_telegram_btn=True, key_prefix="todos")
 
     # ── Exportação Excel ──
     st.markdown("---")
