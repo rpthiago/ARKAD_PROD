@@ -136,3 +136,57 @@ plataforma separada da `.bet.br` — as credenciais não são intercambiáveis.
 **O teste anterior deu leitura errada** porque marcava qualquer HTML como bloqueio: um `405` em GET num
 endpoint que só aceita POST não é bloqueio. O script foi corrigido para separar bloqueio da MP, desafio
 do Cloudflare e resposta real do servidor, usando o método HTTP correto em cada endpoint.
+
+---
+
+## VERIFICAÇÃO DA COLETA RESTAURADA (07/10, 23h UTC)
+
+A coleta voltou pela `api.betfair.com` com login mTLS em `identitysso-cert.betfair.bet.br`, através de
+proxy residencial UK. Serviços todos ativos (`betfair-collector`, `liquidador-betfair`, `trader-inplay`,
+`sinais-ko`, `xg-ht`), disjuntor nunca acionou, liquidador fechando mercados (55 numa passagem).
+
+### A base continua comparável? Sim, até onde é verificável
+
+Comparando a mesma hora em dias consecutivos — 06/10 23h (`.bet.br`) contra 07/10 23h (`.com`):
+
+| teste | 06/10 (`.bet.br`) | 07/10 (`.com`) |
+|---|---|---|
+| `selection_id` de runners padrão (Over 0.5 / "0 - 0" / Yes) | 5851483 / 1 / 30246 | **iguais** |
+| tipos de mercado capturados | os mesmos 9 | os mesmos 9 |
+| MATCH_ODDS com lay disponível | 95% | 96% |
+| `lay_size` mediano — Bangalore Super Division | R$ 130,62 | R$ 131,06 |
+| `lay_size` mediano — Bolivian Cup | R$ 162,56 | R$ 199,33 |
+| `lay_size` mediano — Chilean Cup | R$ 230,48 | R$ 272,07 |
+
+Formato de `market_id` também inalterado (`1.263449003`). Apareceu R$ 19,6 mil de `back_size` em
+Bragantino x Mirassol, ou seja, dinheiro brasileiro real chega pela `.com`. **Não dá para provar com os
+dois endpoints lado a lado**, porque o `.bet.br` morreu — a evidência é indireta, mas consistente.
+
+Achado lateral: a coluna `matched` está **zerada nos dois regimes**. Falha antiga do coletor, não do
+proxy. Liquidez só pode ser medida por `back_size`/`lay_size`.
+
+### Dois defeitos residuais
+
+**1. O proxy está em modo rotativo.** Seis chamadas seguidas saíram por seis IPs diferentes
+(80.40.102.214, 81.147.1.154, 82.0.119.205, 5.69.110.195, 82.7.177.196, 89.243.66.110). A Betfair
+invalida a sessão quando o IP muda, então:
+
+- **22% dos ciclos saem zerados** (`[ciclo 7] 0 cotacoes` seguido de "refazendo login") — buraco de
+  5 minutos cada;
+- **42 re-logins em 1h50** no liquidador. São logins que *dão certo*, então não é o caso dos 3.284 de
+  manhã — mas é login repetido vindo de IP novo cada vez, que é padrão que casa de aposta trata como
+  suspeito.
+
+Conserto: *sticky session* na credencial do iProyal, acrescentando à **senha** (não ao host):
+`_session-arkad1_lifetime-30m`. Não mexe em endpoint nem em regra de método.
+
+**2. `keep_alive` aponta para um host morto.** `coletar_betfair_direto.py:65` ainda tem
+`t.identity_uri = "https://identitysso.betfair.bet.br/api/"`, que devolve 302 → brasilsembets. Logo
+todo `keepAlive` falha e cai no re-login. O endpoint global responde JSON pelo proxy:
+
+```
+identitysso.betfair.com/api/keepAlive  -> HTTP 200 {"status":"FAIL","error":"INPUT_VALIDATION_ERROR"}
+identitysso.betfair.bet.br/api/keepAlive -> HTTP 302 brasilsembets.gov.br
+```
+
+Não apliquei: mudar o endpoint de autenticação é alteração que precisa da sua decisão explícita.
