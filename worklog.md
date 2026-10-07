@@ -7,6 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-06 · Antigravity · Conciliação da Grade do Dia 06/10, Explicação dos 3 Jogos e Sincronização Noturna
+
+- **Dúvida do Usuário:**
+  - *"08:00 Chinese League 1 Changchun Yatai x Yanbian Longding Lay 2x2 Top 3 | 08:00 Wuxi Wugou x Suzhou Dongwu Lay 2x2 Top 3 | 12:00 Norwegian Cup Raufoss x Start Lay Home — APENAS ESSES TRES JOGOS ?"*
+- **Diagnóstico & Esclarecimento:**
+  1. **Por que apareciam apenas esses 3 jogos na tela:**
+     - Durante a madrugada/manhã, o coletor bruto capturou 7 jogos.
+     - 3 partidas da **Chinese League 2** (Shanghai Second 04:30, Hubei Istar 06:00, Guangdong Mingtu 08:30) foram **excluídas pelo filtro de governança de ligas de divisões inferiores (`RE_DIV_BAIXA`)**, mantendo apenas ligas com liquidez e sem spread artificial.
+     - Restaram exatamente os **3 jogos matutinos e do meio-dia** listados na planilha até o fim da tarde.
+  2. **Entrada do 4º jogo na Noite:**
+     - Às 21:20 BRT (KO−15 min), a VPS capturou o 4º jogo oficial do dia: `21:35 Brazilian Serie B · Ponte Preta x Juventude` (`Lay Draw`, Odd Lay 6.20, Fav 1.29).
+     - Como a captura ocorreu pouco antes da partida, a planilha local e o repositório ainda estavam com o snapshot anterior de 3 jogos até este ciclo de sincronização.
+  3. **Liquidação dos Jogos do Dia:**
+     - `Changchun Yatai x Yanbian Longding` (08:00) ➔ Placar **0-1** (não deu 2x2) ➔ **🟢 GREEN** (+R$ 21,22).
+     - `Wuxi Wugou x Suzhou Dongwu` (08:00) ➔ Placar **2-2** ➔ **🔴 RED** (-R$ 400,00). *(Observação: com o novo teto causal de Lay 2x2 <= 14.00 deployado na VPS, entradas como essa não acontecerão mais).*
+     - `Raufoss x Start` (12:00) ➔ Placar **1-5** (Start venceu) ➔ **🟢 GREEN** (+R$ 31,83).
+     - `Ponte Preta x Juventude` (21:35) ➔ Partida da Série B em andamento / liquidação pendente.
+- **Feito:**
+  - `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-06.xlsx` e `metodos_aprovados/forward_ko_ledger.csv` atualizados e sincronizados com todos os 4 jogos e liquidações oficiais.
+  - Commit e push realizados para o GitHub (`origin/main`) para atualização instantânea no Streamlit Cloud.
+- **Arquivos:** `worklog.md`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-06.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`.
+
 ## 2026-10-06 · Antigravity · Fix DuplicateWidgetID na Página 04 (Radar de Jogos do Dia)
 
 - **Problema Relatado:**
