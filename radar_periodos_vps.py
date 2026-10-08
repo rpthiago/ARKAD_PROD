@@ -100,9 +100,7 @@ def extrair_candidatos_bloco(num_bloco, dia_alvo=None):
             if len(p) < 13:
                 continue
             mtype = p[1]
-            if mtype not in ("MATCH_ODDS", "OVER_UNDER_25", "OVER_UNDER_45", "CORRECT_SCORE"):
-                continue
-            if mtype == "CORRECT_SCORE" and p[7] != "2 - 2":
+            if mtype != "MATCH_ODDS":
                 continue
 
             ts_str, comp, home, away, ko_str = p[0], p[2], p[3], p[4], p[5]

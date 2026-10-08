@@ -4,6 +4,10 @@ sinais_ko_core.py — as regras do "Portfolio de Metodos em Validacao Forward" a
 captura do coletor perto do KO (odd de LAY real, liquidez visivel). Mesmo codigo no servico da VPS (sinais_ko_vps.py,
 ao vivo + Telegram) e no preenchimento historico (sinais_ko_backfill.py).
 
+Portfólio Ativo (1X2):
+1. Lay Draw (Fav <= 1.40) — Teto estrito: 4.50 <= Odd_Lay <= 7.00 (Mata-mata somente Mandante)
+2. Lay Home/DC X2 (FavVis <= 1.65) — Teto estrito: 2.00 <= Odd_Lay <= 8.00
+
 Filtros de Governanca de Ligas (GEMINI.md):
 - Bloqueia Futebol Feminino ((W), Women, Frauen, WSL, etc.)
 - Bloqueia Selecoes Nacionais e Torneios Internacionais (Nations League, World Cup, Friendlies, etc.)
@@ -14,9 +18,13 @@ import re
 
 JANELA_KO = (4.0, 16.0)          # minutos antes do KO em que a captura vale (coletor passa a cada ~5 min)
 LIQ_MIN = 0.0                    # liquidez gravada, nao filtra (igual ao ledger das 06:00)
-M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45 = (
-    "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)", "Lay 2x2 Top 3",
-    "Lay Draw (Fav<=1.40)", "Lay Home/DC X2 (FavVis<=1.65)", "Lay Over 4.5 (Under Pesado)"
+
+M_DRAW = "Lay Draw (Fav<=1.40)"
+M_HOME = "Lay Home/DC X2 (FavVis<=1.65)"
+
+# Constantes retrocompatíveis mantidas para evitar quebra de imports em scripts históricos
+M_0X3, M_0X3_AMPLA, M_2X2, M_O45 = (
+    "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)", "Lay 2x2 Top 3", "Lay Over 4.5 (Under Pesado)"
 )
 BLACKLIST_2X2 = ("SERB", "IRISH", "IRELAND", "TURK", "SCOT")
 
@@ -73,18 +81,25 @@ def eh_jogo_ignorado(home, away, competicao):
 
 
 def candidatos(mk, home, away, competicao):
-    """elegibilidade SEM ranking: {M_0X3: odd | None, M_2X2: odd | None} (para o conjunto do dia)."""
+    """elegibilidade para o radar do dia."""
     if eh_jogo_ignorado(home, away, competicao):
-        return {M_0X3: None, M_2X2: None}
+        return {M_DRAW: None, M_HOME: None}
 
     a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
-    u25, _ = _p(mk, "OVER_UNDER_25", "Under 2.5 Goals", "back")
-    l03, _ = _p(mk, "CORRECT_SCORE", "0 - 3", "lay"); l22, _ = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
-    c = {M_0X3: None, M_2X2: None}
-    # 0x3 desativado a pedido do usuario em 03/10/2026
-    # if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85): c[M_0X3] = l03
-    if l22 and 8.0 <= l22 <= 14.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
-        if not any(b in str(competicao or "").upper() for b in BLACKLIST_2X2): c[M_2X2] = l22
+    dl, _ = _p(mk, "MATCH_ODDS", "The Draw", "lay"); hl, _ = _p(mk, "MATCH_ODDS", home, "lay")
+    fav = min(h or 99.0, a or 99.0)
+    eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
+
+    c = {M_DRAW: None, M_HOME: None}
+    # Teto validado: Lay Draw <= 7.00
+    if h and a and dl and 4.5 <= dl <= 7.00:
+        if (eh_copa_jogo and h <= 1.40) or (not eh_copa_jogo and fav <= 1.40):
+            c[M_DRAW] = dl
+
+    # Teto validado: Lay Home <= 8.00
+    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00:
+        c[M_HOME] = hl
+
     return c
 
 
@@ -93,28 +108,22 @@ def e_top3(odd, odds_dia):
     return odd in sorted(list(odds_dia))[:3]
 
 
-def avaliar(mk, home, away, competicao, top3_dia):
+def avaliar(mk, home, away, competicao, top3_dia=None):
     """Devolve lista de sinais [(metodo, odd_lay, liq, odd_fav)] para este jogo nesta captura.
-    top3_dia: dict metodo -> lista de odds do CONJUNTO do dia local (avaliados + proximos); a odd deste jogo e
-    acrescentada aqui antes do teste."""
-    # 1. Filtro estrito de governança (Feminino, Seleções, Divisões periféricas)
+    Portfólio oficial 1X2 estritamente dentro dos tetos lucrativos homologados."""
     if eh_jogo_ignorado(home, away, competicao):
         return []
 
     out = []
     h, _ = _p(mk, "MATCH_ODDS", home, "back"); a, _ = _p(mk, "MATCH_ODDS", away, "back")
     dl, dls = _p(mk, "MATCH_ODDS", "The Draw", "lay"); hl, hls = _p(mk, "MATCH_ODDS", home, "lay")
-    u25, _ = _p(mk, "OVER_UNDER_25", "Under 2.5 Goals", "back")
-    o45l, o45s = _p(mk, "OVER_UNDER_45", "Over 4.5 Goals", "lay")
-    l03, l03s = _p(mk, "CORRECT_SCORE", "0 - 3", "lay"); l22, l22s = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
     fav = min(h or 99.0, a or 99.0)
 
-    # 3. Lay Draw: min(H,A) <= 1.40 e 4.5 <= lay empate <= 10
+    # 1. Lay Draw: min(H,A) <= 1.40 e 4.5 <= lay empate <= 7.00 (Teto Homologado)
     # Regra Estrutural de Copas (GEMINI.md): em COPAS, entra SOMENTE se o Super Fav for MANDANTE (H <= 1.40).
-    # Se o Super Fav for VISITANTE (A <= 1.40) em Copas, BLOQUEIA (taxa de empate salta para 20.7%, ROI -8.64%).
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
     draw_ok = False
-    if h and a and dl and 4.5 <= dl <= 10.0:
+    if h and a and dl and 4.5 <= dl <= 7.00:
         if eh_copa_jogo:
             draw_ok = (h <= 1.40)
         else:
@@ -122,24 +131,8 @@ def avaliar(mk, home, away, competicao, top3_dia):
     if draw_ok:
         out.append((M_DRAW, dl, dls, fav))
 
-    # 4. Lay Home em favorito visitante: A <= 1.65 e 2.0 <= lay mandante <= 10
-    if a and a <= 1.65 and hl and 2.0 <= hl <= 10.0:
+    # 2. Lay Home em favorito visitante: A <= 1.65 e 2.0 <= lay mandante <= 8.00 (Teto Homologado)
+    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00:
         out.append((M_HOME, hl, hls, a))
 
-    # 5. Lay Over 4.5 em jogo under: Under 2.5 back <= 1.50 e 4.0 <= lay Over 4.5 <= 20
-    if u25 and u25 <= 1.50 and o45l and 4.0 <= o45l <= 20.0:
-        out.append((M_O45, o45l, o45s, u25))
-
-    # 1. Lay 0x3: DESATIVADO DEFINITIVAMENTE a pedido do usuario em 03/10/2026 (cauda gorda / risco desnecessario)
-    # if u25 and u25 <= 2.10 and l03 and 14.0 <= l03 <= 35.0 and (a is None or a >= 1.85):
-    #     out.append((M_0X3_AMPLA, l03, l03s, u25))
-    #     lst = top3_dia.setdefault(M_0X3, []); lst.append(l03)
-    #     if l03 in sorted(lst)[:3]:
-    #         out.append((M_0X3, l03, l03s, u25))
-
-    # 2. Lay 2x2 Causal: Teto homologado 8.0 a 14.0 (sem look-ahead bias)
-    if l22 and 8.0 <= l22 <= 14.0 and ((u25 and u25 <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)):
-        comp = str(competicao or "").upper()
-        if not any(b in comp for b in BLACKLIST_2X2):
-            out.append((M_2X2, l22, l22s, fav))
     return out

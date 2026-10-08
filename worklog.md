@@ -7,7 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-08 · Antigravity · Harmonização dos Tetos 1X2 na VPS e Limpeza de Métodos Aposentados
+
+- **Demanda do Usuário:**
+  - *"pode fazer a atualizaçao, qual vps estamos usando?"*
+- **Esclarecimento de Infraestrutura:**
+  - A VPS em produção é a instância da **Oracle Cloud Infrastructure (OCI)**, IP `163.176.59.215` (`ubuntu@163.176.59.215`, chave `~/Downloads/ssh-key-2026-07-31.key`), operando 100% online com bypass de proxy residencial UK (`IPRoyal geo.iproyal.com:12321`).
+- **Implementação & Deploy na VPS:**
+  1. **Harmonização Estrita de Tetos de Odd (`sinais_ko_core.py`):**
+     - **Lay Draw:** Teto estrito travado em $4,50 \le \text{Odd}_{Lay} \le \mathbf{7,00}$ (em vez de $10,00$).
+     - **Lay Home:** Teto estrito travado em $2,00 \le \text{Odd}_{Lay} \le \mathbf{8,00}$ (em vez de $10,00$).
+  2. **Expurgo de Métodos Aposentados:**
+     - Removidos definitivamente `Lay 2x2 Top 3`, `Lay 0x3` e `Lay Over 4.5` do loop ativo de sinais e do radar de períodos.
+     - `radar_periodos_vps.py` simplificado para filtrar apenas mercados `MATCH_ODDS`.
+  3. **Deploy e Reinicialização na VPS:**
+     - Criados backups `sinais_ko_core.py.bak_20261008` e `radar_periodos_vps.py.bak_20261008` em `/home/ubuntu/betfair-collector/`.
+     - Atualizados arquivos via `scp` e reiniciado `sinais-ko.service`.
+     - Confirmados os 3 serviços ativos: `betfair-collector.service` (running), `liquidador-betfair.service` (running), `sinais-ko.service` (running).
+     - Testado disparo de `radar_periodos_vps.py --bloco 1` com retorno limpo (código 0).
+- **Arquivos:** `sinais_ko_core.py`, `radar_periodos_vps.py`, `worklog.md`.
+
 ## 2026-10-08 · Antigravity · Backtest do Fluxo Bet365 ➔ OrbitX (Agosto a Setembro/2026) e Submissão ao Claude
+
 
 - **Demanda do Usuário:**
   - *"so nao entendo pq nao fazemos isso como backteste, pegamos de agosto para ca pegamos os jogos da bet365 e depois vamos para a betfair e ver a odd se bate no nosso filtro o jogo e valido ai vamos saber o pl e winrate... pedir para o claude auditar novamente, montar prompt"*
