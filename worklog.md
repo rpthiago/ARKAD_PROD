@@ -7,7 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-08 · Antigravity · Backtest do Fluxo Bet365 ➔ OrbitX (Agosto a Setembro/2026) e Submissão ao Claude
+
+- **Demanda do Usuário:**
+  - *"so nao entendo pq nao fazemos isso como backteste, pegamos de agosto para ca pegamos os jogos da bet365 e depois vamos para a betfair e ver a odd se bate no nosso filtro o jogo e valido ai vamos saber o pl e winrate... pedir para o claude auditar novamente, montar prompt"*
+- **Engenharia & Análise Empírica:**
+  1. **Investigação do Regime de Coleta da API em 2026:**
+     - Provado matematicamente que o spread mediano da API caiu de $1,073\times$ (2024-2025) para $1,044\times$ (2026), e a odd Lay mediana do empate caiu de $8,40$ para $7,00$, confirmando a hipótese do usuário de que as odds em 2026 foram gravadas muito mais próximas do KO.
+  2. **Execução do Backtest Fiel ao Fluxo (`backtest_fluxo_agosto_setembro.py`):**
+     - Período: 01/08/2026 a 24/09/2026 (55 dias).
+     - Cruzamento exato de 4.180 jogos entre `Bases_de_Dados_API_FutPythonTrader_Bet365.csv` e `metodos_aprovados/.cache_base_betfair.csv` (com odd de Lay real da Betfair e placar oficial).
+     - **Lay Draw (Fav <= 1.40 + Lay <= 7.00):** $N = 426$, WR = $82,63\%$, Break-Even = $81,24\%$, $\Delta WR = +1,39\text{ pp}$, Lucro OrbitX (c=3%) = **`+44,52 u`** (ROI/liab: $+1,57\%$).
+     - **Lay Home (FavVis <= 1.65 + Lay <= 8.00):** $N = 271$, WR = $76,38\%$, Break-Even = $74,14\%$, $\Delta WR = +2,24\text{ pp}$, Lucro OrbitX (c=3%) = **`+32,82 u`** (ROI/liab: $+3,51\%$).
+     - **Lay Away (FavMand <= 1.40 + Lay <= 15.00):** $N = 370$, WR = $84,32\%$, Break-Even = $85,64\%$, Lucro = **`-34,42 u`** (Reprovado e descartado).
+     - **Portfólio Ativo (Lay Draw + Lay Home):** $N = 697$, Lucro acumulado = **`+77,34 u`** no OrbitX.
+  3. **Preparação para Auditoria do Claude:**
+     - Criado documento formal [PROMPT_AUDITORIA_CLAUDE_BACKTEST_AGOSTO_ORBITX.md](PROMPT_AUDITORIA_CLAUDE_BACKTEST_AGOSTO_ORBITX.md) com todas as métricas, código reproduzível e 4 perguntas forenses.
+- **Arquivos:** `backtest_fluxo_agosto_setembro.py`, `PROMPT_AUDITORIA_CLAUDE_BACKTEST_AGOSTO_ORBITX.md`, `worklog.md`.
+
 ## 2026-10-07 · Antigravity · Implementação do Radar de Candidatos por Turno no Telegram (Manhã, Tarde 10:30, Noite)
+
 
 - **Demanda do Usuário:**
   - *"quero agora q nao apenas mandar os jogos com 15 minutos antes do jogo, alem de mandar 15 min antes do jogo, mandar os jogos que poderam entrar, em periodos tipo jogos a partir de 5 da manha ate 11, os jogos de 11 ate 16 e os jogos da noite, O q vc acha? E sempre mandar os jogos individuais 15 min antes do jogo como ja acontecia, isso no telegram. pode ser 10:30, pq muitos jogos começar as 11:00"*
