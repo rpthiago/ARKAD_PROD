@@ -302,3 +302,43 @@ exigia login. Ele busca a lista de jogos de 30 em 30 min em vez de a cada ciclo,
 é custo de abrir conexão, 9 chamadas de catálogo por ciclo). Ao retomar, conferir no log a linha
 `[catalogo em cache] N mercados | renova em M min` e medir o tráfego de novo.
 Backup: `coletar_betfair_direto.py.bak_pre_cache`.
+
+---
+
+## 08/10 — detecção específica de recusa do proxy
+
+O proxy residencial é pré-pago. Quando o saldo acaba, ele recusa o CONNECT e o sintoma fica **idêntico
+ao do bloqueio da MP**: zero cotações, erro na API, disjuntor abrindo — sem nada dizer que acabou o
+crédito. Já custou meia hora de diagnóstico uma vez.
+
+Agora o coletor separa **três** causas, nesta ordem:
+
+| causa | como reconhece | o que faz |
+|---|---|---|
+| **proxy recusou** | `proxyerror`, `proxy authentication`, `tunnel connection failed`, `cannot connect to proxy`, `407 proxy`, … | avisa no Telegram e abre o disjuntor, **sem** refazer login |
+| bloqueio da MP | `brasilsembets`, `<!doctype html`, `medida provisoria`, … | abre o disjuntor, sem refazer login |
+| sessão expirada | qualquer outro erro com catálogo vazio | refaz login e **repete o ciclo na hora** |
+
+A mensagem no Telegram diz em uma linha o que é: *"o PROXY recusou a conexao. A coleta parou. Causa
+mais provavel: acabou o saldo de trafego do iProyal. Nao e bloqueio da MP e nao e sessao expirada."*
+Limitada a **1 aviso a cada 6 horas**, para não virar spam durante a espera do disjuntor.
+
+Testado antes de subir, com atenção aos falsos positivos — o risco real era um `market_id` como
+`1.263407811` ser lido como erro 407:
+
+| caso | detecta proxy? | esperado |
+|---|---|---|
+| `Tunnel connection failed: 407 Proxy Authentication Required` | sim | sim |
+| `ProxyError: Cannot connect to proxy` | sim | sim |
+| HTML do brasilsembets | não (cai em bloqueio) | correto |
+| `INVALID_SESSION_INFORMATION` | não | correto |
+| `erro no mercado 1.263407811` | **não** | correto |
+| `Read timed out` | não | correto |
+
+Envio de Telegram testado de verdade (uma mensagem entregue, a segunda silenciada pelo limite).
+Backup: `coletar_betfair_direto.py.bak_pre_proxydet`.
+
+### Confirmado em produção no mesmo restart
+
+`[ciclo 7r] 720 cotacoes | 20 jogos | 9 mercados | 23s (repetido na hora apos re-login)` — o conserto
+do ciclo zerado disparou pela primeira vez e recuperou um ciclo que antes teria virado buraco de 5 min.
