@@ -7,7 +7,21 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-08 · Antigravity · Registro do Método 1X2 Novo e Relógio Zerado Hoje
+
+- **Demanda do Usuário (Feedback Claude):**
+  - *"O liga_draw_rate < 0,23 não existe mais. Essa é a resposta à minha pergunta, e ela é mais importante do que parece... Se a produção trocou isso há meses pela governança nova (eh_jogo_ignorado + regra de copas), então o que está rodando não é o método que foi validado... O caminho limpo é tratar o que está no ar agora como método novo, com relógio zerado hoje."*
+- **Decisão Arquitetural & Registro Oficial:**
+  1. **Separação Epistemológica Estrita:**
+     - A validação antiga de $+11,9\%$ pertencia a `liga_draw_rate < 0,23`. Como a produção na VPS migrou para governança ampla (`eh_jogo_ignorado`) + regra estrutural de copas (`eh_copa_jogo`) e agora travou os tetos estritos ($\le 7,00$ no Draw e $\le 8,00$ no Home), **a regra anterior está formally extinta**.
+     - O portfólio 1X2 atual é formalmente classificado como **MÉTODO NOVO**.
+     - **Relógio de Validação Zerado Hoje:** A contagem oficial do forward pré-registrado na VPS (`forward_ko_ledger.csv`) e da operação em micro-stake no OrbitX inicia formalmente em **08/10/2026**. Todo histórico passado de Agosto-Setembro serve como referência exploratória/treino, mas a prova estatística recomeça do zero com regras imutáveis.
+  2. **Atualização do GEMINI.md:**
+     - Adicionada regra explícita no Hall of Shame: *Troca Silenciosa de Regra Pré-Registrada* (validação não se transfere; método novo = relógio zerado).
+- **Arquivos:** `GEMINI.md`, `worklog.md`.
+
 ## 2026-10-08 · Antigravity · Harmonização dos Tetos 1X2 na VPS e Limpeza de Métodos Aposentados
+
 
 - **Demanda do Usuário:**
   - *"pode fazer a atualizaçao, qual vps estamos usando?"*
