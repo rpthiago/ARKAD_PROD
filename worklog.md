@@ -7,6 +7,51 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-07 · Antigravity · Restauração Definitiva do Coletor Betfair na VPS (Bypass de Bloqueio via Proxy Residencial)
+
+- **Demanda do Usuário:**
+  - Diagnosticar e resolver a interrupção da coleta de odds ao vivo da Betfair na VPS (`163.176.59.215`), causada pelo bloqueio Cloudflare/Governo Federal (`brasilsembets.gov.br` HTTP 302 e WAF datacenter 403) em resposta ao `PROMPT_GEMINI_bloqueio_betfair.md`.
+- **Diagnóstico Empírico & Descobertas:**
+  1. **Análise de Bloqueio da API REST HTTP:**
+     - Provado que `api.betfair.bet.br` faz redirecionamento HTTP 302 para `brasilsembets.gov.br` para qualquer IP brasileiro.
+     - Provado que `api.betfair.com` bloqueia com HTTP 403 (Cloudflare Bot Management) qualquer IP de datacenter (GCP `136.108.221.253`, Oracle VPS `163.176.59.215`, e até os próprios Workers da Cloudflare `2a06:98c0:3600::103`).
+  2. **Validação da Stream API (`stream-api.betfair.com:443`):**
+     - O login mTLS por certificado brasileiro (`identitysso-cert.betfair.bet.br`) continua 100% ativo e gerando sessões válidas.
+     - A Stream API conecta via socket TLS direto na porta 443 à infraestrutura central da Betfair no Reino Unido (`esa.betfair.com`), aceitando o token `.bet.br` com `statusCode: SUCCESS` e entregando odds reais sem passar por Cloudflare.
+  3. **Solução Canônica de Produção (Proxy Residencial UK para REST API):**
+     - Para preservar 100% a taxonomia de nomes de times (`home`, `away`) e competições necessárias para os 8 métodos em validação (evitando divergência ou falsos greens/reds conforme Leis 1 e 2 do GEMINI.md), foi implementado o suporte a proxy residencial no coletor REST.
+- **Implementação & Restauração:**
+  1. Configurado proxy residencial Reino Unido (IPRoyal `geo.iproyal.com:12321`) em `/home/ubuntu/betfair-collector/.env` com a variável `BETFAIR_PROXY`.
+  2. Atualizado `/home/ubuntu/betfair-collector/coletar_betfair_direto.py`:
+     - Leitura automática de `BETFAIR_PROXY`.
+     - Injeção de `requests.Session(proxies=...)` no cliente `bl.APIClient`.
+     - Apontamento de `t.api_uri = "https://api.betfair.com/exchange/"` (chamadas de catálogo e books roteadas pelo proxy).
+  3. Validação em Produção & Resolução dos Defeitos Residuais (README.md):
+     - Executado ciclo de teste `--once`: coletou **916 cotações**, **27 jogos**, **9 mercados** em **13 segundos**.
+     - **Sticky Session Ativada:** Adicionado `_session-arkad1_lifetime-30m` à credencial do IPRoyal no `.env`, fixando o mesmo IP residencial do Reino Unido por 30 minutos e eliminando 100% dos ciclos zerados e re-logins por IP hopping.
+     - **KeepAlive Apontado para Host Vivo:** Corrigido `t.identity_uri` de `https://identitysso.betfair.bet.br/api/` (que dava 302) para `https://identitysso.betfair.com/api/` em `coletar_betfair_direto.py`. `keep_alive` validado com retorno `SUCCESS`.
+     - Reiniciados serviços `betfair-collector.service` e `liquidador-betfair.service`: ciclo daemon executado com sucesso e disjuntor de falhas zerado.
+- **Arquivos:** `/home/ubuntu/betfair-collector/.env`, `/home/ubuntu/betfair-collector/coletar_betfair_direto.py`, `migracao_coletor/README.md`, `worklog.md`.
+
+## 2026-10-07 · Antigravity · Reconfiguração de Monitoramento: Volta Salvador (SSA) ➔ BH/Confins (CNF) para 28 e 29 de Dezembro
+
+- **Demanda do Usuário:**
+  - *"Ja comprei a passagem de ida para salvador, Agora tenho q comprar a volta para dia 28 ou 29 de dezembro. Entao so preciso de alerta para esses dias Salvador - confins. Os alertas para os voos internacionais pode manter tb"*
+- **Feito:**
+  1. **Buscador de Voos em Dinheiro (`buscador_voos`):**
+     - `buscador_voos/flight_searcher.py`: Atualizado `buscar_voo_rota` para suportar nativamente buscas *one-way* (somente ida/volta) quando `data_volta` for omitido/None (configurando `trip="one-way"` e um único `FlightData` no protobuf do `fast_flights`).
+     - `buscador_voos/config.json`: Reconfigurado foco exclusivo na rota Salvador (SSA) ➔ Belo Horizonte/Confins (CNF) em duas datas: `2026-12-28` (Segunda) e `2026-12-29` (Terça). Tetos de alerta calibrados para R$ 500 (geral/conexão) e R$ 600 (voo direto), com gatilho de queda súbita em R$ 50.
+     - `buscador_voos/price_tracker.py`: Adicionado suporte a chaves compostas de rota (`chave_rota`), evitando colisões entre datas diferentes, e suporte explícito a `preco_alvo_direto`.
+     - `buscador_voos/main.py`: Adaptadas as rotinas de alerta e resumo para exibir informações específicas da volta pós-Réveillon (destacando voos diretos e horários exatos).
+     - `buscador_voos/run_scheduled.py`: Logs atualizados para indicar o monitoramento agendado da volta SSA ➔ CNF.
+  2. **Buscador de Milhas Smiles (`buscador_milhas_smiles`):**
+     - `buscador_milhas_smiles/config_smiles.json`: Mantidos 100% dos destinos internacionais (Madri, Lisboa, Londres, Istambul, Tóquio). Atualizado o módulo doméstico para monitorar exclusivamente a volta SSA ➔ CNF em 28/12 e 29/12 (teto: 18.000 milhas).
+     - `buscador_milhas_smiles/smiles_scanner.py`: Adicionado sweet spot `("SSA", "CNF")` (GOL voo direto) e integrado cache direto com `historico_precos.json`.
+  3. **Validação e Envio ao Telegram:**
+     - Executado `--check` e `--resumo`. Identificado preço ao vivo no Google Flights: LATAM com 1 parada por R$ 522 e GOL Direto por R$ 660 para ambas as datas.
+     - Resumo das cotações da volta entregue com sucesso via Telegram.
+- **Arquivos:** `buscador_voos/config.json`, `buscador_voos/flight_searcher.py`, `buscador_voos/price_tracker.py`, `buscador_voos/main.py`, `buscador_voos/run_scheduled.py`, `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/smiles_scanner.py`, `worklog.md`.
+
 ## 2026-10-06 · Antigravity · Purificação das Planilhas Oficiais (Apenas Jogos Certos sob a Nova Regra Causal)
 
 - **Diretriz do Usuário:**
