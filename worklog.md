@@ -7,6 +7,30 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-07 · Antigravity · Implementação do Radar de Candidatos por Turno no Telegram (Manhã, Tarde 10:30, Noite)
+
+- **Demanda do Usuário:**
+  - *"quero agora q nao apenas mandar os jogos com 15 minutos antes do jogo, alem de mandar 15 min antes do jogo, mandar os jogos que poderam entrar, em periodos tipo jogos a partir de 5 da manha ate 11, os jogos de 11 ate 16 e os jogos da noite, O q vc acha? E sempre mandar os jogos individuais 15 min antes do jogo como ja acontecia, isso no telegram. pode ser 10:30, pq muitos jogos começar as 11:00"*
+- **Arquitetura & Engenharia:**
+  1. **Separação de Papéis (Radar vs Execução):**
+     - O serviço `sinais-ko.service` continua intocado e focado exclusivamente na execução executável e precisa: 15 minutos antes do apito inicial (KO-10), avaliando odd de Lay real da Betfair e liquidez executável (Leis 1 e 2 do GEMINI.md).
+     - Criado módulo independente `radar_periodos_vps.py`, agendado via cron na VPS, para enviar o cardápio prévio de candidatos para planejamento do trader.
+  2. **Configuração dos 3 Blocos de Horário (Fuso de Brasília):**
+     - **Bloco 1 (Manhã): 06:00 BRT** (09:00 UTC) — cobrindo jogos das **06:00 às 10:30 BRT**.
+     - **Bloco 2 (Tarde / Europa): 10:30 BRT** (13:30 UTC) — cobrindo jogos das **10:30 às 16:30 BRT** (com 30 min de antecedência para os jogos das 11:00).
+     - **Bloco 3 (Noite / Américas): 16:30 BRT** (19:30 UTC) — cobrindo jogos das **16:30 às 23:59 BRT**.
+  3. **Motor de Avaliação e Governança:**
+     - Lê os ciclos mais recentes de `betfair_live_odds.csv` e reconstrói o catálogo de mercados das partidas futuras.
+     - Aplica estritamente os filtros de governança do `sinais_ko_core.py` (bloqueia feminino, seleções, várzea/divisões inferiores e periféricas; Lay 0x3 desativado).
+     - Avalia os métodos aprovados: `Lay Draw (Fav<=1.40)`, `Lay Home/DC X2 (FavVis<=1.65)`, `Lay Over 4.5 FT (Under Pesado)` e `Lay 2x2 Top 3`.
+     - Formatação limpa em HTML com disclaimer explícito de que a ordem oficial é confirmada no KO-10.
+  4. **Implantação na VPS (`163.176.59.215`):**
+     - Script instalado em `/home/ubuntu/betfair-collector/radar_periodos_vps.py`.
+     - Crontab configurado no usuário `ubuntu`: disparos às `0 9 * * *`, `30 13 * * *` e `30 19 * * *`.
+     - Disparo testado e validado com sucesso direto no bot do Telegram (`Envio Telegram: SUCESSO`).
+     - Atualizado `betfair-collector.service` com `--horas 8` para estender a visão noturna até 00:30 BRT.
+- **Arquivos:** `radar_periodos_vps.py`, `/home/ubuntu/betfair-collector/radar_periodos_vps.py` (VPS), `/etc/systemd/system/betfair-collector.service` (VPS), `crontab` (VPS), `worklog.md`.
+
 ## 2026-10-07 · Antigravity · Restauração Definitiva do Coletor Betfair na VPS (Bypass de Bloqueio via Proxy Residencial)
 
 - **Demanda do Usuário:**
