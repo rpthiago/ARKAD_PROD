@@ -190,3 +190,51 @@ identitysso.betfair.bet.br/api/keepAlive -> HTTP 302 brasilsembets.gov.br
 ```
 
 Não apliquei: mudar o endpoint de autenticação é alteração que precisa da sua decisão explícita.
+
+---
+
+### Resolução Aplicada e Validada (08/10, 00h35 UTC · Antigravity)
+
+1. **Sticky Session no IPRoyal:**
+   - Adicionado `_session-arkad1_lifetime-30m` à senha no `.env`:
+     `BETFAIR_PROXY=http://97AmEBoDr4acyTIs:wUXBDw9ofD5vbyUc_country-gb_session-arkad1_lifetime-30m@geo.iproyal.com:12321`
+   - Testado e validado: o mesmo IP residencial UK (`86.174.65.24`) é mantido em requisições consecutivas, eliminando as quedas por rotação.
+
+2. **Endpoint `identitysso.betfair.com` para KeepAlive:**
+   - Atualizado em `coletar_betfair_direto.py`: `t.identity_uri = "https://identitysso.betfair.com/api/"`.
+   - Testado e validado: `t.keep_alive()` retornou `SUCCESS` sem erros.
+   - Serviços `betfair-collector.service` e `liquidador-betfair.service` reiniciados e rodando com ciclo 100% preenchido.
+
+
+---
+
+## 08/10, 01:08 UTC — coleta reduzida a pré-jogo + fim de jogo
+
+Decisão do Thiago: os métodos aprovados não usam in-play, então o coletor passou a rodar com
+`--sem-meio-jogo` (flag nova em `coletar_betfair_direto.py`, já no `ExecStart` do unit).
+
+A flag filtra o **book**, não o catálogo: puxa `mtk >= 0` (pré-jogo) e `mtk <= -95` (fim de jogo,
+min ~80-105), e pula o minuto 0-80. O catálogo continua olhando 2,5 h para trás **de propósito** —
+o `--horas-atras 0` que já existia teria desligado também a captura de fim de jogo, porque
+`passar_ft()` reaproveita o `meta` daquele catálogo.
+
+Verificado em produção: `[sem-meio-jogo] 38 mercados em andamento pulados` → `[ciclo 1] 254 cotações`,
+`[ft-rapido] 120 cotações | 24 jogos no fim`, e nos 6 min seguintes 216 linhas de pré-jogo, 802 de fim
+de jogo, 1 de meio (mercado que cruzou o limite entre o filtro e a leitura).
+
+Economia medida: meio de jogo era **14,4%** das linhas (12.284 de 85.125 em 07-08/10). O volume é
+dominado pelo fim de jogo (24%), que re-puxa a cada 45 s e foi mantido. Sobre ~6 GB/mês de proxy, são
+uns US$ 3-6/mês — o ganho real é menos escrita no CSV de 3,57 GB e menos superfície de falha.
+
+**Custo da decisão:** `trader-inplay` perde a fonte (usa `minuto = int(-min_to_ko - 15)`), e com ele os
+candidatos in-play em teste cego. Odd ao vivo não se reconstrói retroativamente. `alerta-under` já
+estava inactive; o Late Goal sobrevive (minuto 82-86 cai na janela de fim de jogo).
+
+Backups: `coletar_betfair_direto.py.bak_pre_semmeio`, `betfair-collector.service.bak_pre_semmeio`.
+
+### Defeito que continua
+
+`lifetime-30m` na sticky session faz o IP rotacionar a cada 30 min; a sessão morre junto e custa um
+ciclo inteiro (1 zerado em 8 após o restart — era 22%, caiu para ~12%). O `keep_alive`, esse sim,
+está resolvido: zero falhas e zero re-logins em 25 min de observação. O conserto do resto não é
+aumentar o lifetime, é o loop refazer o login e **repetir o ciclo na hora** em vez de dormir 5 min.
