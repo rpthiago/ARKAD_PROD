@@ -238,3 +238,23 @@ Backups: `coletar_betfair_direto.py.bak_pre_semmeio`, `betfair-collector.service
 ciclo inteiro (1 zerado em 8 após o restart — era 22%, caiu para ~12%). O `keep_alive`, esse sim,
 está resolvido: zero falhas e zero re-logins em 25 min de observação. O conserto do resto não é
 aumentar o lifetime, é o loop refazer o login e **repetir o ciclo na hora** em vez de dormir 5 min.
+
+### Revertido em 08/10, 01:23 UTC — voltou a coleta inteira
+
+A economia de 14,4% foi considerada pouca para o preço de perder o in-play. O `ExecStart` voltou a
+`--horas 6 --intervalo 300`; a flag `--sem-meio-jogo` fica no código, desligada, para quando fizer
+sentido. Confirmado: `[ciclo 1] 390 cotações | 12 jogos` sem a linha de mercados pulados (eram 9 jogos
+com a flag). `trader-inplay` volta a receber dado — perdeu só os 15 min do experimento.
+
+### Conserto do ciclo zerado
+
+A cada 30 min o sticky session do iProyal troca de IP, a Betfair derruba a sessão, todos os catálogos
+falham e o ciclo sai zerado. O loop fazia o re-login e **ia dormir até o próximo intervalo**, então cada
+queda custava 5 minutos inteiros de gravação.
+
+Agora, depois do re-login bem-sucedido, ele **repete o ciclo na hora**. O ciclo repetido aparece no log
+como `[ciclo Nr] ... (repetido na hora apos re-login)`. Patch em `main()`, logo após
+"catalogo falhou em todos os mercados". Backup: `coletar_betfair_direto.py.bak_pre_retry`.
+
+Aumentar o `lifetime` da sticky session seria tratar o sintoma: a sessão cai de qualquer forma quando o
+IP muda, e com o retry o custo da queda deixa de existir.
