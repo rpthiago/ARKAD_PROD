@@ -7261,3 +7261,80 @@ AttributeError: 'numpy.float64' object has no attribute 'get'
 divergencias planilha x base: 1
   mestre | 2026-08-27 | Pafos FC x Dinamo Tirana | planilha: GREEN (?) | base: RED (2-2, planilha_dia)
 [telegram silenciado 18/09] remetente nao permitido: conferir_placares_manuais.py
+===== 08/10/2026  6:00:02,07 ===== 
+=== forward 5 metodos: 2026-08-01 -> 2026-10-08 ===
+  2026-08-01: 0 sinais (0 novos)
+  2026-08-02: 0 sinais (0 novos)
+  2026-08-03: 0 sinais (0 novos)
+  2026-08-04: 0 sinais (0 novos)
+  2026-08-05: 0 sinais (0 novos)
+  2026-08-06: 0 sinais (0 novos)
+  2026-08-07: 0 sinais (0 novos)
+  2026-08-08: 0 sinais (0 novos)
+  2026-08-09: 0 sinais (0 novos)
+  2026-08-10: 0 sinais (0 novos)
+  2026-08-11: 0 sinais (0 novos)
+  2026-08-12: 0 sinais (0 novos)
+  2026-08-13: 0 sinais (0 novos)
+  2026-08-14: 0 sinais (0 novos)
+  2026-08-15: 0 sinais (0 novos)
+  2026-08-16: 0 sinais (0 novos)
+  2026-08-17: 0 sinais (0 novos)
+  2026-08-18: 0 sinais (0 novos)
+  2026-08-19: 0 sinais (0 novos)
+  2026-08-20: 0 sinais (0 novos)
+  2026-08-21: 0 sinais (0 novos)
+  2026-08-22: 0 sinais (0 novos)
+  2026-08-23: 0 sinais (0 novos)
+  2026-08-24: 0 sinais (0 novos)
+  2026-08-25: 0 sinais (0 novos)
+  2026-08-26: 0 sinais (0 novos)
+  2026-08-27: 0 sinais (0 novos)
+  2026-08-28: 0 sinais (0 novos)
+  2026-08-29: 0 sinais (0 novos)
+  2026-08-30: 0 sinais (0 novos)
+  2026-08-31: 0 sinais (0 novos)
+  2026-09-01: 0 sinais (0 novos)
+  2026-09-02: 0 sinais (0 novos)
+  2026-09-03: 0 sinais (0 novos)
+  2026-09-04: 0 sinais (0 novos)
+  2026-09-05: 0 sinais (0 novos)
+  2026-09-06: 0 sinais (0 novos)
+  2026-09-07: 0 sinais (0 novos)
+  2026-09-08: 0 sinais (0 novos)
+  2026-09-09: 0 sinais (0 novos)
+  2026-09-10: 0 sinais (0 novos)
+  2026-09-11: 0 sinais (0 novos)
+  2026-09-12: 0 sinais (0 novos)
+  2026-09-13: 0 sinais (0 novos)
+  2026-09-14: 0 sinais (0 novos)
+  2026-09-15: 0 sinais (0 novos)
+  2026-09-16: 0 sinais (0 novos)
+  2026-09-17: 0 sinais (0 novos)
+  2026-09-18: 0 sinais (0 novos)
+  2026-09-19: 0 sinais (0 novos)
+  2026-09-20: 0 sinais (0 novos)
+  2026-09-21: 0 sinais (0 novos)
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\relatorio_forward_5metodos.py", line 1008, in <module>
+    main()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\relatorio_forward_5metodos.py", line 971, in main
+    L = atualizar(a.desde, a.ate)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\relatorio_forward_5metodos.py", line 432, in atualizar
+    ds = d.isoformat(); s = sinais_do_dia(ds)
+                            ^^^^^^^^^^^^^^^^^
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\relatorio_forward_5metodos.py", line 156, in sinais_do_dia
+    h, a = oh_b.get(i), oa_b.get(i)
+           ^^^^^^^^
+AttributeError: 'numpy.float64' object has no attribute 'get'
+  placares OFICIAIS (VPS): 3269 exatos + 509 por categoria (Any Other)
+  placares base betfair: +54666 (ate 2026-09-24)
+  placares b365 (DASHBOARD_ARKAD-1): +193210
+  placares das planilhas do dia (72 arquivos): +488
+  placares da base mestre (pagina 02): +1
+  placares manuais (ARKAD_PROD): +136
+  placares manuais (DASHBOARD_ARKAD-1): +41
+divergencias planilha x base: 1
+  mestre | 2026-08-27 | Pafos FC x Dinamo Tirana | planilha: GREEN (?) | base: RED (2-2, planilha_dia)
+[telegram silenciado 18/09] remetente nao permitido: conferir_placares_manuais.py
