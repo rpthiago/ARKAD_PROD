@@ -258,3 +258,47 @@ como `[ciclo Nr] ... (repetido na hora apos re-login)`. Patch em `main()`, logo 
 
 Aumentar o `lifetime` da sticky session seria tratar o sintoma: a sessão cai de qualquer forma quando o
 IP muda, e com o retry o custo da queda deixa de existir.
+
+---
+
+## 08/10 — PAUSA: conta travada, nada tenta login
+
+`API login: ACTIONS_REQUIRED` desde 08/10 02:02 UTC. Não há site onde cumprir a ação:
+`betfair.bet.br` devolve 302 → brasilsembets.gov.br (do Brasil **e** do Reino Unido), e
+`betfair.com` responde *"Due to regulatory changes, access to your account via Betfair.com has been
+restricted. Please visit betfair.bet.br to log in"* (`appliesTo=brazil`, `errorCode=AUTHORIZED_ONLY_F…`).
+Circuito fechado: cada plataforma manda para a outra.
+
+Antes da pausa, **48 tentativas de login por dia** saíam do cron (4 liquidadores de 2 em 2 horas), mais
+uma a cada 5 min assim que o cron religasse o coletor às 07:00 UTC. Login falhando em repetição numa
+conta já sinalizada é o pior cenário possível, então tudo foi parado.
+
+### O que foi desligado
+
+| o quê | como |
+|---|---|
+| `0 7 * * * systemctl start betfair-collector` | comentado no cron do root |
+| `settle_betfair.py` (×2), `late_goal_liquidar.py`, `radar_ht_liquidar.py` | comentados (marca `PAUSADO 08/10 ACTIONS_REQUIRED`) |
+| `betfair-collector`, `liquidador-betfair`, `trader-inplay`, `sinais-ko` | `stop` + `disable` |
+
+Backup do cron: `crontab_root.bak_pre_pausa`. Continua no ar: `xg-ht` (FotMob) e `radar_periodos_vps.py`.
+
+### Para retomar, quando o login voltar
+
+```bash
+cd /home/ubuntu/betfair-collector
+set -a; . ./.env; set +a
+./venv/bin/python -c "import coletar_betfair_direto as C; t=C.login(); print('LOGIN OK', t.account.get_account_funds().available_to_bet_balance)"
+#   só depois que a linha acima imprimir LOGIN OK:
+sudo crontab -l | sed -E 's/^# PAUSADO 08\/10 ACTIONS_REQUIRED: //' | sudo crontab -
+for u in betfair-collector liquidador-betfair trader-inplay sinais-ko; do sudo systemctl enable --now $u; done
+```
+
+### Pendência que ficou sem teste
+
+O **cache de catálogo** (`--catalogo-cada 30`, padrão) está aplicado e compila, mas nunca rodou — o teste
+exigia login. Ele busca a lista de jogos de 30 em 30 min em vez de a cada ciclo, mantendo as odds de 5 em
+5. Estimativa: corta 40-50% do tráfego de proxy (medido: ~13 GB/mês, e só ~26% disso é dado útil; o resto
+é custo de abrir conexão, 9 chamadas de catálogo por ciclo). Ao retomar, conferir no log a linha
+`[catalogo em cache] N mercados | renova em M min` e medir o tráfego de novo.
+Backup: `coletar_betfair_direto.py.bak_pre_cache`.
