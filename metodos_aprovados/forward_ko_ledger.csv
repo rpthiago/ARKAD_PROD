@@ -762,4 +762,6 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-10-06,Lay Draw (Fav<=1.40),Brazilian Serie B,Ponte Preta,Juventude,21:35,6.2,1.29,707.0,14.7,2026-10-07 00:20:15,live,PENDENTE,,,,,,,0.8455,,,,
 2026-10-07,Lay Draw (Fav<=1.40),Japanese Emperor Cup,Hiroshima,Iwaki SC,06:30,7.8,1.25,491.0,14.9,2026-10-07 09:15:08,live,PENDENTE,,,,,,,0.8774,,,,
 2026-10-08,Lay Draw (Fav<=1.40),Irish Premier Division,Shamrock Rovers,Drogheda,16:00,5.7,1.35,1602.0,15.8,2026-10-08 18:44:08,live,PENDENTE,,,,,,,0.8319,,,,
-2026-10-09,Lay Draw (Fav<=1.40),Myanmar National League,Ispe FC,Dagon FC,06:00,6.8,1.32,730.0,14.9,2026-10-09 08:45:06,live,PENDENTE,,,,,,,0.8593,,,,
+2026-10-09,Lay Home/DC X2 (FavVis<=1.65),Chinese Super League,Qingdao Hainiu,Beijing Guoan,08:35,7.8,1.42,564.0,14.7,2026-10-09 11:20:20,live,PENDENTE,,,,,,,0.8774,,,,
+2026-10-09,Lay Draw (Fav<=1.40),Ukrainian Premier League,Veres Rivne,Shakhtar,09:30,6.6,1.26,351.0,14.8,2026-10-09 12:15:07,live,PENDENTE,,,,,,,0.855,,,,
+2026-10-09,Lay Home/DC X2 (FavVis<=1.65),Israeli National League,MS Kfar Kasem,Bnei Yehuda,10:00,7.4,1.49,72.0,14.8,2026-10-09 12:45:08,live,PENDENTE,,,,,,,0.8707,,,,
