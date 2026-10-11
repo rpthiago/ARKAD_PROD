@@ -7,6 +7,23 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-11 · Antigravity · Resposta a Incidente de Segurança no Telegram & Blindagem de Credenciais
+
+- **Incidente Reportado pelo Usuário:**
+  - *"meu bot do telegram de apostas apareceu alguém que nao foi chamado por mim, parecia ser outro bot, acabei apagando"*
+- **Causa Raiz & Diagnóstico:**
+  - O arquivo `telegram_config.json` continha o token exposto e havia sido commitado no repositório.
+  - Um crawler/scraper automático de tokens do Telegram identificou o token no GitHub e chamou `setMyName` / `setMyDescription` via Telegram Bot API, renomeando o bot `@arkkad_bot` para spam adulto ("julinha 19 🍓").
+  - O usuário apagou a conversa com o bot no Telegram (gerando status 403 Forbidden temporário).
+- **Ações Imediatas de Remediação & Blindagem:**
+  1. **Revogação do Token:** Usuário revogou o token antigo no `@BotFather` e gerou o novo token `8725716533:AAEIH8JwxH0oNwrYsQE7R6YmycaPqLDtscs`.
+  2. **Atualização da VPS:** Atualizado `/home/ubuntu/betfair-collector/alerta.env` com o novo token e reiniciado `sinais-ko.service`.
+  3. **Blindagem de Repositório (.gitignore):**
+     - Adicionados `telegram_config.json`, `telegram_voos_config.json`, `telegram_smartwatch_config.json` e `*.env` ao `.gitignore`.
+     - Removidos os arquivos do rastreamento do Git (`git rm --cached`).
+  4. **Instrução ao Usuário:** Usuário deve abrir o bot `@arkkad_bot` no Telegram e clicar em "Iniciar" / "Desbloquear" para reativar as notificações privadas.
+- **Arquivos:** `.gitignore`, `telegram_config.json`, `worklog.md`.
+
 ## 2026-10-10 · Antigravity · Atualização e Liquidação Completa dos Resultados em Validação Forward (Página 02)
 
 - **Demanda do Usuário:**

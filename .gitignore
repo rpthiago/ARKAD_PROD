@@ -30,3 +30,10 @@ backup_coletor/
 forward_0x0/rodar_0x0.log
 alvos_xg.csv
 xg_ft_backfill.csv
+
+# Credenciais e Tokens do Telegram
+telegram_config.json
+telegram_voos_config.json
+telegram_smartwatch_config.json
+alerta.env
+*.env
