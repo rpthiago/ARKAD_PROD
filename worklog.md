@@ -7,6 +7,190 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-10 · Antigravity · Atualização e Liquidação Completa dos Resultados em Validação Forward (Página 02)
+
+- **Demanda do Usuário:**
+  - *"atualiza os Resultados dos Métodos em Validação Forward — ARKAD"*
+- **Ações Realizadas:**
+  1. **Download dos Placares Oficiais da Betfair da VPS:** Sincronizado `placares_ft.csv` atualizado da VPS contendo os resultados das partidas finalizadas hoje (10/10/2026).
+  2. **Liquidação das Pendências Históricas:**
+     - `06/10`: Ponte Preta 0 x 2 Juventude liquidado como **🟢 GREEN** no Lay Draw.
+     - `07/10`: Hiroshima x Iwaki SC (goleada) liquidado como **🟢 GREEN** no Lay Draw.
+  3. **Geração e Liquidação Completa do Dia 10/10:**
+     - Consolidada a grade de 22 partidas do dia em `Sinais_Metodos_Aprovados_2026-10-10.xlsx` via `sinais_dia_coletor.py`.
+     - 20 partidas liquidadas com placares oficiais: **16 Greens** e **4 Reds** (WR do dia: 80,0%).
+     - Apenas 2 jogos noturnos da MLS (Inter Miami CF x DC Utd e Philadelphia x Real Salt Lake) permanecem em andamento (`⏳ PENDENTE`).
+  4. **Sincronização Bidirecional VPS ↔ Local:**
+     - Ledger `forward_ko_ledger.csv` sincronizado com os status liquidados e enviado de volta para a VPS.
+  5. **Métricas Globais Consolidadas:**
+     - Total de 64 apostas liquidadas no forward: **54 Greens** e **10 Reds** (**84,38% WR**).
+- **Arquivos:** `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-06.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-07.xlsx`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-10.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `metodos_aprovados/placares_ft.csv`, `worklog.md`.
+
+## 2026-10-10 · Antigravity · Clarificação de Alerta de Teste vs Oferta Real
+
+- **Demanda do Usuário:**
+  - *"OPORTUNIDADE DE SMARTWATCH! Amazfit Balance 2 ... AMAZFIT200 ... o copom nao funciona"*
+- **Diagnóstico:**
+  - A mensagem recebida pelo usuário foi o disparo de teste simulado (`--teste-alerta`) disparado anteriormente para verificar a integridade da conexão do Telegram. O cupom `AMAZFIT200` era fictício/de exemplo.
+- **Ajustes:**
+  - Atualizado `disparar_teste_alerta()` em `buscador_smartwatch/main.py`: agora qualquer teste futuro traz a tag explícita `🧪 [TESTE TÉCNICO DE SISTEMA - NÃO É OFERTA REAL]` e remove menção a cupons fictícios para evitar qualquer confusão.
+- **Arquivos:** `buscador_smartwatch/main.py`, `worklog.md`.
+
+## 2026-10-10 · Antigravity · Auditoria de Funcionamento do Radar de Smartwatches
+
+- **Demanda do Usuário:**
+  - *"alerta do relógio ta funcionando ?"*
+- **Diagnóstico do Sistema:**
+  1. **Agendamento no Windows (`ARKAD_Buscador_Smartwatch`):** 100% ativo. Executou normalmente em 09/10/2026 às 09:15, 14:15 e 19:45 (código de saída `0`, ~27 ofertas avaliadas por ciclo). Próxima execução pontual hoje às 09:15:00.
+  2. **Motivo do Silêncio:** Nenhum alerta foi disparado porque **nenhum modelo atingiu a condição de queda $\ge \text{R\$\ } 200,00$**. O menor preço do Balance 2 permaneceu em R$ 1.440,64 (teto < R$ 1.200,00); T-Rex 3 em R$ 1.739,00 (teto < R$ 1.539,00); T-Rex 3 Pro em R$ 1.778,55 (teto < R$ 1.621,00).
+  3. **Conexão Telegram:** Disparado teste ao vivo para `@thiago_radar_smartwatches_bot` (`1126416089`), entregue com sucesso (status 200).
+- **Arquivos:** `buscador_smartwatch/execucoes_smartwatch.log`, `buscador_smartwatch/historico_smartwatch.json`, `worklog.md`.
+
+## 2026-10-09 · Antigravity · Bloqueio de Myanmar e Ligas Periféricas na Governança da VPS
+
+- **Demanda do Usuário:**
+  - *"KO−10 · 06:00 Ispe FC x Dagon FC Myanmar National League • Lay Draw (Fav<=1.40) — lay @6.80 (liq 730) · fav 1.32, essa liga passou pelo backtest, vale a pena eu fazer esse jogo? / pode aplicar"*
+- **Diagnóstico & Governança:**
+  1. **Zero Representatividade no Backtest:** Confirmado que a liga de Myanmar possui exatamente **0 jogos** tanto na base histórica Bet365 quanto na base Betfair FRESH.
+  2. **Brecha na Regex de Exclusão:** O filtro numérico disparou (Fav 1.32 <= 1.40 e Lay Draw 6.80 <= 7.00), mas a regex `RE_PERIFERICA` não continha o padrão para `MYANMAR\w*` e `BURM\w*`.
+- **Implementação & Deploy:**
+  1. Atualizado `RE_PERIFERICA` em `sinais_ko_core.py` e `metodo_lay2x2_strategy.py` com `MYANMAR\w*|BURM\w*|MALAYSIA\w*|LAOS|BRUNEI|TAIWAN|CHINESE TAIPEI|MALDIVES|SRI LANKA|NEPAL|FIJI|TAHITI|PAPUA|NEW CALEDONIA`.
+  2. Alterada verificação em `eh_jogo_ignorado` para buscar em `txt` (`RE_PERIFERICA.search(txt)`), garantindo filtro tanto por nome de liga quanto por identificador no time.
+  3. Realizado backup na VPS (`sinais_ko_core.py.bak_20261009`), upload via SCP de `sinais_ko_core.py` e reiniciado `sinais-ko.service` (PID 685287 ativo).
+  4. Expurgo da linha espúria `Ispe FC x Dagon FC` de `forward_ko_ledger.csv` na VPS (com backup `forward_ko_ledger.csv.bak_20261009`).
+- **Arquivos:** `sinais_ko_core.py`, `metodo_lay2x2_strategy.py`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Integração e Suporte à Loja Shopee
+
+- **Demanda do Usuário:**
+  - *"a para colocar a shoppe tb?"*
+- **Análise Técnica da Shopee:**
+  - A API interna da Shopee (`/api/v4/search/search_items` e `/api/v4/item/get`) possui proteção de perímetro Akamai rígida (`error 90309999`) e o frontend web não renderiza preços no HTML estático (`price: null`), exigindo tokens de sessão/app.
+  - No entanto, a Shopee é massivamente coberta pelo ecossistema de promoções do **Pelando**, onde a comunidade posta links diretos de ofertas, cupons de desconto (R$ 30, R$ 50, moedas) e frete grátis.
+- **Ajustes:**
+  - `config_smartwatch.json`: Adicionada `"Shopee"` à lista oficial de `lojas_permitidas`.
+  - `pelando_scanner.py`: O detector de lojas já mapeia e rotula ofertas vindas da Shopee (`loja = 'Shopee'`).
+  - Qualquer oportunidade ou cupom da Shopee que atinja o desconto de R$ 200 será capturado e disparado no Telegram com link direto.
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Portfólio Final Fechado: 6 Modelos de Smartwatch Monitorados
+
+- **Demanda do Usuário:**
+  - *"Amazfit Balance 2 (46mm), Amazfit Cheetah (46mm), Amazfit Balance 3 (46mm), Huawei Watch GT 7 Pro (46mm), Amazfit T-Rex 3, Amazfit T-Rex 3 pro esses serao os modelos"*
+- **Configuração Final Consolidada (`config_smartwatch.json`):**
+  1. `amazfit_balance_2`: Balance 2 (46mm) | Ref: R$ 1.400,00 | Alerta: < R$ 1.200,00
+  2. `amazfit_cheetah`: Cheetah (46mm) | Ref: R$ 1.099,00 | Alerta: < R$ 899,00
+  3. `amazfit_balance_3`: Balance 3 (46mm) | Ref: R$ 2.299,00 | Alerta: < R$ 2.099,00
+  4. `huawei_watch_gt_7_pro`: Watch GT 7 Pro (46mm) | Ref: R$ 1.999,00 | Alerta: < R$ 1.799,00
+  5. `amazfit_t_rex_3`: T-Rex 3 (47mm) | Ref: R$ 1.739,00 | Alerta: < R$ 1.539,00
+  6. `amazfit_t_rex_3_pro`: T-Rex 3 Pro (44mm/48mm) | Ref: R$ 1.821,00 | Alerta: < R$ 1.621,00
+- **Validação:**
+  - Varredura completa executada com sucesso. 28 ofertas avaliadas ao vivo. 0 falsos alertas.
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Restrição Estrita da Linha T-Rex para T-Rex 3 e T-Rex 3 Pro
+
+- **Demanda do Usuário:**
+  - *"vou quere nos modelos T-Rex o T-Rex 3 e o T- Rex 3 pro somente. quais sao esses modelos"*
+- **Explicação dos Modelos:**
+  - **Amazfit T-Rex 3:** Caixa de 47mm em aço inoxidável, tela AMOLED 1,5" Gorilla Glass de 2.000 nits, bateria de até 27 dias, 10 ATM e GPS duplo com mapas offline. Referência hoje: **R$ 1.739,00** (alerta < **R$ 1.539,00**).
+  - **Amazfit T-Rex 3 Pro:** Versão ultra-premium em **Titânio Grau 5** e **Cristal de Safira**, tela de 3.000 nits, opções de 44mm e 48mm, **lanterna LED bicolor integrada**, microfone/alto-falante para atender chamadas e mapas topográficos avançados. Referência hoje: **R$ 1.821,00** (alerta < **R$ 1.621,00**).
+- **Ajustes Implementados:**
+  - `config_smartwatch.json`: expurgados T-Rex 2, T-Rex antigo de 2021 e Ultra.
+  - Criados IDs exclusivos `amazfit_t_rex_3` e `amazfit_t_rex_3_pro` com termos negativos cruzados (`pro` descartado do T-Rex 3 base; exigido no T-Rex 3 Pro).
+- **Validação:**
+  - `amazfit_t_rex_3`: 2 ofertas capturadas (R$ 1.739 a R$ 1.937), 0 alertas.
+  - `amazfit_t_rex_3_pro`: 18 ofertas capturadas (R$ 1.821 a R$ 2.042+), 0 alertas.
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Preços de Hoje como Referência e Gatilho de Alerta de -R$ 200 em Todos os Modelos
+
+- **Demanda do Usuário:**
+  - *"todos os valores que estao hj eu quero que ele seja referencia, a baixo de 200 em todos os relogios que eu quero receber alerta"*
+- **Ajustes Implementados:**
+  1. **Tabela de Referência Atualizada (`config_smartwatch.json`):**
+     - `amazfit_balance_2`: Referência = **R$ 1.400,00** | Teto Alerta = **< R$ 1.200,00** (-R$ 200)
+     - `amazfit_t_rex`: Referência = **R$ 1.739,00** (menor preço hoje no Buscapé) | Teto Alerta = **< R$ 1.539,00** (-R$ 200)
+     - `amazfit_t_rex_pro`: Referência = **R$ 999,00** | Teto Alerta = **< R$ 799,00** (-R$ 200)
+     - `amazfit_balance_3`: Referência = **R$ 2.299,00** | Teto Alerta = **< R$ 2.099,00** (-R$ 200)
+     - `amazfit_cheetah`: Referência = **R$ 1.099,00** | Teto Alerta = **< R$ 899,00** (-R$ 200)
+     - `huawei_watch_gt_7_pro`: Referência = **R$ 1.999,00** | Teto Alerta = **< R$ 1.799,00** (-R$ 200)
+  2. **Regras Globais de Gatilho:**
+     - `desconto_minimo_alerta_reais`: atualizado globalmente de R$ 150 para **R$ 200,00**.
+     - `avaliar_alerta_smartwatch()` em `tracker_history.py` recalibrado: trava estrita onde o preço deve ser estritamente menor que o teto (`oferta.preco < teto`) e a queda vs referência deve ser $\ge \text{R\$\ } 200,00$.
+- **Validação:**
+  - Executado `python -m buscador_smartwatch.main --check`. 27 ofertas avaliadas ao vivo.
+  - Alertas disparados: 0 (todos os preços de hoje respeitam a faixa normal e só alertarão se caírem no mínimo R$ 200,00).
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `buscador_smartwatch/tracker_history.py`, `buscador_smartwatch/main.py`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Correção do Balance 2 (Teto R$ 1.200 / Normal R$ 1.400) e Bot Dedicado Telegram
+
+- **Demandas do Usuário:**
+  - *"o valor do balance 2 o valor de 1400 que é o normal, so abaixo de 1200 para me avisar"*
+  - *"OPORTUNIDADE DE SMARTWATCH! ⌚️ Amazfit Balance 3 (46mm) ... esse aqui esta errado, o relogio em questao é o balance 2"*
+  - Bot dedicado de smartwatches separado do bot de voos (Opção B - mensagens diretas privadas para Thiago no bot `@thiago_radar_smartwatches_bot`).
+- **Causa Raiz Identificada:**
+  1. *Falso Positivo de Classificação:* O verificador `e_produto_valido` fazia busca ingênua de substring `sub.lower() in t_lower`. O termo `"3"` do Balance 3 casava dentro do código de modelo `"A2430"` em títulos de Balance 2 (ex: *"Amazfit Balance 2 A2430 Black"*).
+  2. *Falso Alarme de Preço:* O Balance 2 estava com `preco_normal_referencia: 1599.0` e `desconto_minimo: 150.0`, disparando alerta para ofertas a R$ 1.440,64. Além disso, o teto não bloqueava alertas se a queda nominal de R$ 150 fosse atingida.
+- **Correções Aplicadas:**
+  1. **Telegram Bot Dedicado Configurado:**
+     - `telegram_smartwatch_config.json` atualizado com `chat_id: "1126416089"` e token `8889447889:AAGJC0dnCagAxzfK2-waqAbGkOTnzjS789c` (Bot: `@thiago_radar_smartwatches_bot`).
+  2. **Calibração Estrita do Amazfit Balance 2:**
+     - Preço normal de referência corrigido para **R$ 1.400,00**.
+     - Teto de oportunidade ajustado para **R$ 1.200,00** e `desconto_minimo_alerta_reais: 200.0`.
+     - Regra estrita em `avaliar_alerta_smartwatch`: se `oferta.preco >= teto`, **nenhum alerta é disparado**. Ofertas normais em R$ 1.440,64 agora são estritamente silenciosas.
+  3. **Word-Boundary Regex e Termos Negativos Cruzados:**
+     - Implementado `contem_termo()` com `\b` para dígitos e termos curtos (`\b3\b`, `\b2\b`, `\b7\b`). Evita confusão com códigos SKU como `A2430` ou `A2287`.
+     - Inseridos `termos_negativos` específicos: Balance 3 rejeita `balance 2`, `a2430`, etc.; Balance 2 rejeita `balance 3`, `a2287`; Huawei GT 7 Pro exige `7` e rejeita `gt 6`, `gt 5`, etc.
+- **Validação:**
+  - `python -m buscador_smartwatch.main --teste-alerta`: Alerta de teste entregue diretamente no privado do Telegram.
+  - `python -m buscador_smartwatch.main --check`: 27 ofertas avaliadas ao vivo, 0 falsos positivos, 0 alertas indevidos.
+  - `python -m buscador_smartwatch.main --resumo`: Resumo completo e ranking entregues com sucesso via Telegram.
+- **Arquivos:** `telegram_smartwatch_config.json`, `buscador_smartwatch/config_smartwatch.json`, `buscador_smartwatch/pelando_scanner.py`, `buscador_smartwatch/buscape_scanner.py`, `buscador_smartwatch/tracker_history.py`, `buscador_smartwatch/main.py`, `worklog.md`.
+
+## 2026-10-08 · Antigravity · Restrição Estrita aos 6 Modelos de Smartwatch Solicitados
+
+- **Demanda do Usuário:**
+  - *"vamos restringir os modelos... Amazfit Balance 2, Amazfit Balance 3, Amazfit t rex, Amazfit t rex pro, Amazfit Cheetah, Huawei Watch gt 7 pro"*
+- **Ajustes Implementados:**
+  1. **Configuração dos 6 Modelos em `config_smartwatch.json`:**
+     - `amazfit_balance_2`: Balance 2 (46mm)
+     - `amazfit_balance_3`: Balance 3 (46mm)
+     - `amazfit_t_rex`: T-Rex (2 / 3 / Ultra) (47mm-48mm)
+     - `amazfit_t_rex_pro`: T-Rex Pro (47.7mm)
+     - `amazfit_cheetah`: Cheetah (Round / Pro / Square) (46mm)
+     - `huawei_watch_gt_7_pro`: Watch GT 7 Pro (46mm, Titânio/Safira/ECG)
+  2. **Refinamento do Scraper Multilojas (`buscape_scanner.py`):**
+     - Ignoradas strings de parcelamento ("10x de R$ ...") para evitar registrar valor de parcela como preço à vista.
+     - Corrigida duplicação de domínio nos links de merchant lead (`/lead?oid=...`).
+     - Adicionado piso de segurança `preco_minimo_filtro` por modelo para descartar réplicas e acessórios.
+  3. **Validação & Execução:**
+     - 51 ofertas avaliadas ao vivo. Ranking atualizado enviado para o Telegram.
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `buscador_smartwatch/buscape_scanner.py`, `buscador_smartwatch/pelando_scanner.py`, `buscador_smartwatch/tracker_history.py`, `worklog.md`.
+
+
+## 2026-10-08 · Antigravity · Implementação do Monitor de Smartwatches com Cupons
+
+- **Demanda do Usuário:**
+  - *"vc consegue montar um alerta de preço para relogio SmartWatch? Amazfit (Balance, GTR/GTS), Huawei Watch GT, etc. Tamanho de caixa / conectividade: (ex: 40mm, 44mm, as lojas sao essas mesmos, olhar se tem cupom, valor a baixo de 150 do normal, apenas novos"*
+- **Construção & Arquitetura (`buscador_smartwatch/`):**
+  1. **Modelos:** Amazfit Balance (46mm), Amazfit GTR 4/3 (46mm), Amazfit GTS 4/Mini (40-43mm) e Huawei Watch GT 4 & GT 5 (41mm e 46mm).
+  2. **Scrapers Integrados:**
+     - `pelando_scanner.py`: Varre promoções ativas da comunidade, detectando códigos de cupom, moedas e lojas (Amazon, Mercado Livre, KaBuM, Magalu, AliExpress BR).
+     - `buscape_scanner.py`: Compara em tempo real os menores preços nas grandes redes do varejo nacional.
+  3. **Filtros e Regras de Negócio:**
+     - Descarte estrito de acessórios (pulseiras, películas, cabos, cases) e itens usados/recondicionados.
+     - Gatilho de alerta para quedas $\ge \text{R\$\ } 150,00$ do valor normal ou ativação de cupom de desconto.
+     - Cooldown anti-spam de 12 horas por produto em `historico_smartwatch.json`.
+  4. **Notificações Telegram:**
+     - Mensagens formatadas em HTML com nome do modelo, tamanho, loja, economia, código do cupom formatado para cópia em um clique e link direto.
+  5. **Agendamento no Windows:**
+     - Tarefa `ARKAD_Buscador_Smartwatch` registrada no Windows Task Scheduler rodando 3x ao dia (09:15, 14:15, 19:45) com injeção automática de OpenSSL DLLs do Anaconda.
+- **Validação:**
+  - Teste ao vivo avaliou 21 ofertas válidas, disparou alertas de oportunidade e postou o resumo com ranking no Telegram com sucesso (código de saída `0`).
+- **Arquivos:** `buscador_smartwatch/` (`config_smartwatch.json`, `pelando_scanner.py`, `buscape_scanner.py`, `tracker_history.py`, `telegram_sender.py`, `main.py`, `run_scheduled.py`, `executar_check.bat`, `executar_resumo.bat`).
+
+
 ## 2026-10-08 · Antigravity · Registro do Método 1X2 Novo e Relógio Zerado Hoje
 
 - **Demanda do Usuário (Feedback Claude):**
