@@ -284,3 +284,11 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-10.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [+] Envio Telegram (Bloco 5 (18:30) — Noite Américas): True (Mensagem enviada com sucesso!)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 1 (06:00) — Matinal — Data: 2026-10-11
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-11.xlsx atualizada: 2 jogos (0 liquidados, 0 Greens, 0 Reds).
+[+] Total geral do dia: 2 jogos | Neste Bloco (06:00 às 10:30): 0 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-11.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[*] Nenhum jogo neste bloco (06:00 às 10:30). Sem envio de mensagem redundante.
