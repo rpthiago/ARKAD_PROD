@@ -21,7 +21,7 @@
   3. **Blindagem de Repositório (.gitignore):**
      - Adicionados `telegram_config.json`, `telegram_voos_config.json`, `telegram_smartwatch_config.json` e `*.env` ao `.gitignore`.
      - Removidos os arquivos do rastreamento do Git (`git rm --cached`).
-  4. **Instrução ao Usuário:** Usuário deve abrir o bot `@arkkad_bot` no Telegram e clicar em "Iniciar" / "Desbloquear" para reativar as notificações privadas.
+  4. **Instrução ao Usuário & Validação Final:** Usuário desbloqueou o bot e redefiniu o nome para `Arkad Alertas`. Teste de envio de mensagem de confirmação via API executado com **100% de sucesso**.
 - **Arquivos:** `.gitignore`, `telegram_config.json`, `worklog.md`.
 
 ## 2026-10-10 · Antigravity · Atualização e Liquidação Completa dos Resultados em Validação Forward (Página 02)
