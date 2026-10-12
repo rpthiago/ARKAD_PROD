@@ -145,7 +145,16 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
 
         # 3. Lay Draw em Super Fav (Regra Estrutural Anti-Overfit: Ligas Casa/Fora <= 1.40 | Copas só Casa <= 1.40 | Sem Seleções | Bloqueado se _eh_lay_away_fortaleza)
         _liga_up = liga.upper().strip()
-        _eh_selecao = any(t in _liga_up for t in ("WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP"))
+        # Seleções nacionais: a regra de bloquear já existia, mas os termos cobriam só a
+        # nomenclatura da API. A base do coletor nomeia diferente ("Friendlies International",
+        # "CAF African Cup of Nations Qualifiers", ...) e 142 jogos de seleção passavam batido.
+        # Conferido contra as 387 competições do coletor: zero falso positivo em liga de clubes
+        # (cuidado com "English National League", que é clube — por isso NÃO se usa "NATIONAL").
+        _eh_selecao = any(t in _liga_up for t in (
+            "WORLD", "NATIONS LEAGUE", "EUROCUP", "AMERICA CUP",
+            "INTERNATIONAL", "CUP OF NATIONS", "AFCON", "OLYMPIC",
+            "CECAFA", "CARIBBEAN CUP", "COPA AMERICA", "EURO QUALIF",
+        ))
         _eh_copa = any(t in _liga_up for t in (
             "CUP", "COPA", "CHAMPIONS", "EUROPA LEAGUE", "CONFERENCE",
             "LIBERTADORES", "SUDAMERICANA", "POKAL", "COUPE", "COPPA",
