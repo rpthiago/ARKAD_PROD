@@ -124,8 +124,42 @@ def carregar_dados_aprovados(
     if not FOLDER.exists():
         return pd.DataFrame()
 
-    # Carregar EXCLUSIVAMENTE uma planilha por data YYYY-MM-DD.
-    # Prioriza a versão padrão Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx; usa _coletor apenas como fallback se a padrão não existir.
+    # ── FONTE CANONICA: o ledger forward ──────────────────────────────────────
+    # A pagina declara (acima) que "a autoridade canonica e o ledger forward".
+    # Ate 12/10/2026 ela lia so as planilhas diarias, que dependem de um passo de
+    # liquidacao a parte — e que ficaram 27 de 47 sinais atrasadas sem aviso.
+    # Agora: o ledger manda no periodo que ele cobre (a partir de 16/09/2026) e as
+    # planilhas diarias cobrem apenas as datas ANTERIORES ao inicio dele.
+    dfs = []
+    _corte_ledger = None
+    _led_path = FOLDER / "forward_ko_ledger.csv"
+    if _led_path.exists():
+        try:
+            _d = pd.read_csv(_led_path, encoding="utf-8-sig", low_memory=False)
+        except Exception:
+            _d = pd.DataFrame()
+        if not _d.empty and "Data" in _d.columns:
+            # SEM_PLACAR = jogo com mais de 7 dias sem placar; o proprio liquidador
+            # o tira da conta, entao ele nao entra como PENDENTE aqui.
+            if "status" in _d.columns:
+                _d = _d[_d["status"].astype(str).str.upper().str.strip() != "SEM_PLACAR"]
+            _d = _d.rename(columns={
+                "Metodo": "Método", "Odd_Lay": "Odd_Entrada", "placar": "Placar",
+                "resultado": "Resultado", "status": "Status", "origem": "Origem",
+                "liq_lay": "Liquidez_Lay",
+            })
+            _d["Jogo"] = (_d.get("Home", "").astype(str).str.strip() + " x "
+                          + _d.get("Away", "").astype(str).str.strip())
+            _d["Mercado"] = "Match Odds"
+            _d["Lado"] = "LAY"
+            _d["Resultado"] = (_d.get("Resultado", "").fillna("").astype(str).str.strip()
+                               .replace({"": "PENDENTE", "nan": "PENDENTE"}))
+            _d["_Arquivo"] = "forward_ko_ledger.csv"
+            _corte_ledger = str(_d["Data"].min())[:10]
+            dfs.append(_d.reset_index(drop=True))
+
+    # Planilhas diarias: so as datas ANTERIORES ao inicio do ledger (ou todas, se
+    # o ledger nao existir). Prioriza a versao padrao; _coletor so como fallback.
     todos_arquivos = sorted([
         f for f in FOLDER.glob("Sinais_Metodos_Aprovados_20*.xlsx")
         if not f.name.startswith("~$") and "Odds_Reais" not in f.name
@@ -136,17 +170,14 @@ def carregar_dados_aprovados(
         if not m:
             continue
         dt_k = m.group(1)
+        if _corte_ledger and dt_k >= _corte_ledger:
+            continue
         if "_coletor" in f.name:
             if dt_k not in mapa_arquivos:
                 mapa_arquivos[dt_k] = f
         else:
             mapa_arquivos[dt_k] = f
-    planilhas_diarias = sorted(mapa_arquivos.values())
-    if not planilhas_diarias:
-        return pd.DataFrame()
-
-    dfs = []
-    for f_novo in planilhas_diarias:
+    for f_novo in sorted(mapa_arquivos.values()):
         df_n = _ler_excel_seguro(f_novo)
         if df_n is not None and not df_n.empty:
             for c in list(df_n.columns):
