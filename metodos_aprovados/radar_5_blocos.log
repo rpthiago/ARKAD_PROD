@@ -336,3 +336,12 @@
 [+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 2 (10:30) — Europa Principal 1 — Data: 2026-10-12
 [*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
 [-] Nenhum sinal registrado para hoje até o momento.
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 3 (13:00) — Europa Principal 2 — Data: 2026-10-12
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-12.xlsx atualizada: 2 jogos (1 liquidados, 1 Greens, 0 Reds).
+[+] forward_ko_ledger.csv atualizado com 1 jogos liquidados.
+[+] Total geral do dia: 2 jogos | Neste Bloco (13:00 às 15:30): 1 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-12.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[+] Envio Telegram (Bloco 3 (13:00) — Europa Principal 2): True (Mensagem enviada com sucesso!)
