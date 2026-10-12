@@ -586,7 +586,7 @@ def atualizar_ko():
     except Exception as e:
         print("  [ko] scp falhou (%s) - usa o ledger local" % str(e)[:50])
     if os.path.exists(tmp):
-        for r in csv.DictReader(open(tmp, encoding="utf-8")):
+        for r in csv.DictReader(open(tmp, encoding="utf-8-sig")):
             k = chave(r["Data"], r["Metodo"], r["Home"], r["Away"])
             if k not in L:
                 L[k] = {c: r.get(c, "") for c in KO_COLS}
