@@ -7,6 +7,35 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-12 · Antigravity · Expansão do Radar para 8 Blocos: Bloco 7 (22h30 América do Norte) & Bloco 8 (00h30 Fechamento Geral)
+
+- **Demanda / Contexto:**
+  - O usuário identificou que jogos noturnos após as 22h (MLS, Liga MX, USL, torneios da América do Norte/Central e jogos tardios da América do Sul) não eram capturados nem liquidados no fechamento das 21h.
+  - Alinhamento de design: divisão em dois blocos extras — Bloco 7 às 22h30 (entradas frescas no KO-10 da América do Norte) e Bloco 8 à 00h30 (fechamento oficial, liquidação de 100% dos jogos do dia e consolidação de P&L).
+- **Ações Realizadas:**
+  1. **Motor de Execução (`executar_radar_5_blocos.py`):**
+     - Grade horária expandida para 8 blocos contínuos:
+       - Bloco 1 (06h00): Matinal (06h00 às 10h30)
+       - Bloco 2 (10h30): Europa Principal 1 (10h30 às 13h00)
+       - Bloco 3 (13h00): Europa Principal 2 (13h00 às 15h30)
+       - Bloco 4 (15h30): Tarde / Clássicos (15h30 às 18h00)
+       - Bloco 5 (18h30): Noite Américas 1 (18h00 às 21h00)
+       - Bloco 6 (21h00): Noite Américas 2 (21h00 às 22h30)
+       - Bloco 7 (22h30): América do Norte & Tardios (22h30 às 23h59)
+       - Bloco 8 (00h30): Fechamento Geral & Liquidação Definitiva (00h00 às 23h59)
+     - Tratamento especial da virada de data no Bloco 8 (liquida o dia anterior se invocado de madrugada).
+     - Telegram do Bloco 8 configurado para enviar Boletim de Fechamento Consolidado com KPIs (Total Jogos, Greens, Reds, WR%, P&L Líquido em R$).
+  2. **Streamlit Cockpit (`pages/04_⚡_Radar_Jogos_do_Dia.py`):**
+     - Adicionadas abas `🌎 7. América do Norte (22h30)` e `🏁 8. Fechamento (00h30)`.
+     - Lógica de `obter_bloco_atual()` ajustada para direcionar automaticamente para Bloco 7 (após 22h30) e Bloco 8 (de madrugada).
+  3. **Script Batch & Agendador de Tarefas do Windows:**
+     - `rotina_5_horarios.bat` atualizado.
+     - Criadas tarefas agendadas `ARKAD_Radar_22h30` (22h30 diário) e `ARKAD_Radar_00h30` (00h30 diário), ambas com estado `Ready`.
+  4. **Deploy e Testes:**
+     - Testes via CLI executados com sucesso para `--bloco 7` e `--bloco 8`.
+     - Commits enviados para `origin/main` para atualização automática do Streamlit Cloud.
+- **Arquivos:** `executar_radar_5_blocos.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `rotina_5_horarios.bat`, `worklog.md`.
+
 ## 2026-10-12 · Antigravity · Implementação do Bloco 6 (21h00 — Noite 2) & Blindagem Final do Token Telegram
 
 - **Demandas do Usuário:**
