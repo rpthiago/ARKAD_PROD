@@ -7,6 +7,25 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-12 · Antigravity · Implementação do Bloco 6 (21h00 — Noite 2) & Blindagem Final do Token Telegram
+
+- **Demandas do Usuário:**
+  1. Identificação da ausência de jogos noturnos na Página 04 (ex.: Criciúma x América-MG das 19h30).
+  2. Criação do Bloco 6 para cobrir jogos das 21h00 em diante no Radar Betfair Exchange.
+  3. Tratamento de alerta do GitGuardian sobre exposição de token de bot do Telegram.
+- **Ações Realizadas:**
+  1. **Arquitetura do Bloco 6 (21h00 — Noite 2 & Fechamento):**
+     - Em `executar_radar_5_blocos.py`: Adicionado bloco 6 (`21:00` às `23:59`) com escolha `choices=[1, 2, 3, 4, 5, 6]`.
+     - Em `pages/04_⚡_Radar_Jogos_do_Dia.py`: Adicionada aba `🌃 6. Noite 2 (21h00)` e atualizada a lógica de `obter_bloco_atual()` para selecionar a aba 6 automaticamente a partir das 21h.
+     - **Agendador de Tarefas do Windows:** Registrada a tarefa diária `ARKAD_Radar_21h00` às 21h00 executando `rotina_5_horarios.bat`.
+  2. **Remediação do Alerta GitGuardian & Blindagem:**
+     - Identificado que o token antigo estava registrado em commits anteriores e no `forward_0x0/tg.env`.
+     - `forward_0x0/tg.env` foi completamente desrastreado do git (`git rm --cached`) e sanitizado com placeholders neutros.
+     - Token novo fornecido pelo usuário via `@BotFather` foi instalado estritamente nos arquivos ignorados pelo git (`telegram_config.json` local e `alerta.env` na VPS).
+     - `sinais-ko.service` na VPS (`163.176.59.215`) reiniciado e operacional.
+     - Mensagens de teste enviadas com sucesso e confirmadas no chat `1126416089` tanto a partir da VPS quanto localmente.
+- **Arquivos:** `executar_radar_5_blocos.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `telegram_config.json`, `forward_0x0/tg.env`, `worklog.md`.
+
 ## 2026-10-12 · Antigravity · Auditoria Forense dos 5 Vetores de Ataque: Filtro de Spread no Lay Draw (spread <= 1.15)
 
 - **Demanda / Contexto:**
