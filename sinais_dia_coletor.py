@@ -68,21 +68,64 @@ COLS = ["Data", "Hora", "Liga", "Jogo", "Home", "Away", "Método", "Mercado", "L
 import subprocess
 
 def sincronizar_ledger_vps() -> bool:
-    """Baixa o forward_ko_ledger.csv mais recente da VPS para a pasta metodos_aprovados."""
+    """Traz as linhas NOVAS do ledger da VPS e MESCLA no ledger local, preservando
+    status, placar, resultado e PnL das linhas ja liquidadas no PC."""
     vps = "ubuntu@163.176.59.215"
     key = os.path.expanduser("~/Downloads/ssh-key-2026-07-31.key")
     if not os.path.exists(key):
         key = r"C:\Users\thiag\Downloads\ssh-key-2026-07-31.key"
     if not os.path.exists(key):
         return False
+    # MESCLA, nao sobrescreve. Antes isto era um scp direto por cima do arquivo do PC;
+    # como nada na VPS liquida o ledger (la tudo fica PENDENTE), cada chamada apagava
+    # todo o historico ja liquidado -- e isto roda em cada bloco do radar e a cada
+    # clique de Escanear nas paginas 04 e 05.
     remoto = f"{vps}:/home/ubuntu/betfair-collector/forward_ko_ledger.csv"
-    local_destino = os.path.join(ROOT, "metodos_aprovados", "forward_ko_ledger.csv")
+    destino = os.path.join(ROOT, "metodos_aprovados", "forward_ko_ledger.csv")
+    cache = os.path.join(ROOT, "metodos_aprovados", ".cache_forward_ko_vps.csv")
     try:
-        cmd = ["scp", "-i", key, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=10", remoto, local_destino]
-        res = subprocess.run(cmd, capture_output=True, timeout=20)
-        return res.returncode == 0
+        cmd = ["scp", "-i", key, "-o", "StrictHostKeyChecking=no", "-o", "ConnectTimeout=10", remoto, cache]
+        if subprocess.run(cmd, capture_output=True, timeout=20).returncode != 0:
+            return False
     except Exception:
         return False
+
+    def _chave(r):
+        return (str(r.get("Data", "")).strip(), str(r.get("Metodo", "")).strip(),
+                str(r.get("Home", "")).strip(), str(r.get("Away", "")).strip())
+
+    try:
+        novos = list(csv.DictReader(open(cache, encoding="utf-8-sig")))
+    except Exception:
+        return False
+    if not novos:
+        return False
+    atuais = []
+    if os.path.exists(destino):
+        try:
+            atuais = list(csv.DictReader(open(destino, encoding="utf-8-sig")))
+        except Exception:
+            atuais = []
+    if not atuais:
+        cols = list(novos[0].keys())
+        linhas = list(novos)
+    else:
+        cols = list(atuais[0].keys())
+        vistos = {_chave(r) for r in atuais}
+        add = [r for r in novos if _chave(r) not in vistos]
+        if not add:
+            return True
+        linhas = atuais + [{c: r.get(c, "") for c in cols} for r in add]
+    linhas.sort(key=lambda r: (str(r.get("Data", "")), str(r.get("Hora", "")),
+                               str(r.get("Metodo", "")), str(r.get("Home", ""))))
+    try:
+        with open(destino, "w", newline="", encoding="utf-8-sig") as fh:
+            w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+            w.writeheader()
+            w.writerows(linhas)
+    except Exception:
+        return False
+    return True
 
 
 def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_liq=0.0, sync_vps=True) -> pd.DataFrame:
