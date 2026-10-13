@@ -107,7 +107,8 @@ BLOCOS = {
     2: {"nome": "🏆 Bloco 2 (10:30) — Europa 1", "inicio": "10:30", "fim": "13:00", "desc": "Premier League, Championship, Escócia"},
     3: {"nome": "⚽ Bloco 3 (13:00) — Europa 2", "inicio": "13:00", "fim": "15:30", "desc": "Bundesliga, Serie A, La Liga, Ligue 1"},
     4: {"nome": "⚡ Bloco 4 (15:30) — Tarde / Clássicos", "inicio": "15:30", "fim": "18:00", "desc": "Grandes jogos europeus e Séries B/C"},
-    5: {"nome": "🌙 Bloco 5 (18:30) — Noite Américas", "inicio": "18:00", "fim": "23:59", "desc": "Brasileirão Série A, Libertadores, MLS, Liga MX"}
+    5: {"nome": "🌙 Bloco 5 (18:30) — Noite Américas 1", "inicio": "18:00", "fim": "21:00", "desc": "Brasileirão Séries A/B (18h-21h), Argentina"},
+    6: {"nome": "🌃 Bloco 6 (21:00) — Noite 2 & Fechamento", "inicio": "21:00", "fim": "23:59", "desc": "Jogos Noturnos Tardios (21h-23h59), Libertadores, MLS & Fechamento"}
 }
 
 def obter_bloco_atual():
@@ -120,8 +121,10 @@ def obter_bloco_atual():
         return 3
     elif agora < "18:30":
         return 4
-    else:
+    elif agora < "21:00":
         return 5
+    else:
+        return 6
 
 # ── Sidebar: Configuração de Banca e Filtros ──
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
@@ -247,13 +250,14 @@ if not df_raw.empty:
     st.markdown("---")
 
     # ── Tabs por Bloco de Horários ──
-    tab_atual, tab_b1, tab_b2, tab_b3, tab_b4, tab_b5, tab_todos = st.tabs([
+    tab_atual, tab_b1, tab_b2, tab_b3, tab_b4, tab_b5, tab_b6, tab_todos = st.tabs([
         f"⚡ Bloco Atual ({bloco_atual_info['inicio']}-{bloco_atual_info['fim']})",
         "🌅 1. Matinal (06h)",
         "🏆 2. Europa 1 (10h30)",
         "⚽ 3. Europa 2 (13h)",
         "⚡ 4. Tarde (15h30)",
-        "🌙 5. Noite (18h30)",
+        "🌙 5. Noite 1 (18h30)",
+        "🌃 6. Noite 2 (21h00)",
         f"📋 Todos do Dia ({total_jogos})"
     ])
 
@@ -379,13 +383,19 @@ if not df_raw.empty:
         df_b4 = df_filtrado[(df_filtrado["Hora_Str"] >= b4_info["inicio"]) & (df_filtrado["Hora_Str"] <= b4_info["fim"])]
         renderizar_jogos_bloco(df_b4, b4_info["nome"], b4_info["desc"], key_prefix="b4")
 
-    # 6. Tab Bloco 5 (Noite Américas)
+    # 6. Tab Bloco 5 (Noite Américas 1)
     with tab_b5:
         b5_info = BLOCOS[5]
         df_b5 = df_filtrado[(df_filtrado["Hora_Str"] >= b5_info["inicio"]) & (df_filtrado["Hora_Str"] <= b5_info["fim"])]
         renderizar_jogos_bloco(df_b5, b5_info["nome"], b5_info["desc"], key_prefix="b5")
 
-    # 7. Tab Todos do Dia
+    # 7. Tab Bloco 6 (Noite 2 & Fechamento)
+    with tab_b6:
+        b6_info = BLOCOS[6]
+        df_b6 = df_filtrado[(df_filtrado["Hora_Str"] >= b6_info["inicio"]) & (df_filtrado["Hora_Str"] <= b6_info["fim"])]
+        renderizar_jogos_bloco(df_b6, b6_info["nome"], b6_info["desc"], key_prefix="b6")
+
+    # 8. Tab Todos do Dia
     with tab_todos:
         renderizar_jogos_bloco(df_filtrado, f"Todos os Jogos do Dia ({ds_iso})", "Grade consolidada completa de todas as janelas horárias", show_telegram_btn=True, key_prefix="todos")
 

@@ -170,7 +170,8 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
             _draw_fav_ok = (fav_odd <= 1.40)
             _dfav_draw = fav_odd
 
-        if _draw_fav_ok and not _eh_lay_away_fortaleza and 4.5 <= od_lay.iloc[idx] <= 10.0:
+        _spread_draw = (od_lay.iloc[idx] / od_back.iloc[idx]) if (od_back.iloc[idx] > 1.0 and od_lay.iloc[idx] > 1.0) else 99.0
+        if _draw_fav_ok and not _eh_lay_away_fortaleza and 4.5 <= od_lay.iloc[idx] <= 7.00 and _spread_draw <= 1.15:
             odd_e = round(float(od_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({

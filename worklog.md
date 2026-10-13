@@ -7,6 +7,44 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-12 · Antigravity · Auditoria Forense dos 5 Vetores de Ataque: Filtro de Spread no Lay Draw (spread <= 1.15)
+
+- **Demanda / Contexto:**
+  - Claude submeteu o `PROMPT_GEMINI_filtro_spread_lay_draw.md` solicitando teste rigoroso de falsificação da hipótese: `spread = Odd_D_Lay / Odd_D_Back <= 1.15` no Lay Draw através de 5 vetores de ataque específicos.
+- **Resultados e Resposta aos 5 Vetores:**
+  1. **Varredura de Limiar (Threshold Scan):** Não há pico isolado em 1.15. Existe um patamar robusto entre 1.12 e 1.18, onde o grupo mantido rende estável em ~+1,5% de ROI e o grupo descartado afunda progressivamente de −8% a −15% de ROI, sustentando o mesmo comportamento em H1 e H2 fora da amostra.
+  2. **Base vs KO-10:** A distribuição de spread do empate no KO-10 da VPS (N=3.000 amostras) é idêntica à base pré-jogo: mediana 1.0566 (vs 1.0612) e 11,7% de jogos descartados (vs 12,9% na base). O filtro é 100% executável em tempo real.
+  3. **Reconciliação dos Números (2.013 vs 843):** O número N=2.013 veio da `Bases_de_Dados_API_FutPythonTrader_Bet365.csv` com odd de Lay sintética (`Odd_D_FT * 1.044`) e teto 7.00. Foi uma miragem de odd estimada (Lei 1) e de cobertura de ligas sem bolsa. Na base canônica da Betfair Exchange (`.cache_base_betfair.csv`), o total é N=843 (janela 4.5–10) e N=552 (teto 7.00).
+  4. **Sobrevivência em 2024-2025:** O efeito é estrutural. Em 2024, o grupo `spread > 1.15` concentrou 98,6% de todas as perdas do ano (−12.08 u de −12.25 u), e o filtro levou o método ao break-even cravado (−0.03%). Em 2025, o grupo descartado concentrou 65% das perdas.
+  5. **Teste de Permutação:** 2.000 shuffles estratificados por dia geraram **p = 0.0335 (3,35%)**, rejeitando a hipótese nula de acaso ao nível de significância de 5%.
+- **Impacto no Robô Atual (com Teto <= 7.00):**
+  - Dos 552 jogos de 2026, corta 49 jogos (8,9%) e expurga −6.45u de prejuízo, **dobrando o lucro do método** (+6.35u ➔ +12.80u) e elevando o ROI sobre liability de **+1.15% para +2.54%**.
+- **Implementação em Produção:**
+  - `sinais_ko_core.py`: Adicionado `SPREAD_MAX_DRAW = 1.15`. Em `candidatos()` e `avaliar()`, o sinal de Lay Draw agora exige `Odd_Lay / Odd_Back <= 1.15`. Livros desertos ou vazios no momento do KO-10 são descartados antes de gerar sinal.
+  - `automacao_diaria_aprovados.py`: Atualizado com teto `<= 7.00` e trava `_spread_draw <= 1.15`.
+  - **VPS Deploy:** `sinais_ko_core.py` enviado para `/home/ubuntu/betfair-collector/` via SCP, backup `sinais_ko_core.py.bak_20261012` criado, serviço `sinais-ko.service` reiniciado com sucesso e ativo em loop 60s.
+- **Arquivos:** `sinais_ko_core.py`, `automacao_diaria_aprovados.py`, `auditar_filtro_spread.py`, `RESPOSTA_AUDITORIA_CLAUDE_FILTRO_SPREAD.md`, `worklog.md`.
+
+## 2026-10-11 · Antigravity · Desativação do Alerta Salvador ➔ Belo Horizonte (Foco Exclusivo em Voos Internacionais)
+
+- **Demanda do Usuário:**
+  - *"o alerta de voo de salvador belo horizonte, pode desligar, deixando agora so os internacionais"*
+- **Ações Realizadas:**
+  1. **Desativação no Agendador de Tarefas do Windows:**
+     - A tarefa agendada `ARKAD_Buscador_Voos_Nordeste` (que rodava `buscador_voos/run_scheduled.py` via pythonw para a rota SSA ➔ CNF) foi desabilitada (`State: Disabled`).
+     - A tarefa de voos internacionais (`ARKAD_Buscador_Voos_Internacional`) e o radar de milhas (`ARKAD_Buscador_Milhas_Smiles`) permanecem ativas (`Ready`).
+  2. **Configuração e Trava de Execução do `buscador_voos`:**
+     - Em `buscador_voos/config.json`, adicionado flag `"ativo": false`.
+     - Em `buscador_voos/main.py`, adicionada guarda de início em `executar_varredura` checando `config.get("ativo", True)`, abortando imediatamente sem chamadas de rede ou alertas caso seja invocado manualmente.
+  3. **Expurgo da Rota SSA ➔ CNF no Radar de Milhas Smiles:**
+     - Em `buscador_milhas_smiles/config_smiles.json`, removido o grupo `"nordeste"` de `datas_monitoradas` e o destino `"CNF"` de `destinos`.
+     - Mantidos exclusivamente os destinos internacionais: Madri (`MAD`), Lisboa (`LIS`), Londres (`LHR`), Istambul (`IST`) e Tóquio (`NRT`).
+  4. **Validação & Testes:**
+     - Validação JSON executada com sucesso para todas as configurações.
+     - Execução de teste do `buscador_voos` confirmou saída limpa ("Monitor SSA ➔ CNF desativado por configuração").
+     - Execução dry-run do `buscador_milhas_smiles` confirmou escaneamento estritamente das rotas internacionais.
+- **Arquivos:** `buscador_voos/config.json`, `buscador_voos/main.py`, `buscador_milhas_smiles/config_smiles.json`, `worklog.md`.
+
 ## 2026-10-11 · Antigravity · Resposta a Incidente de Segurança no Telegram & Blindagem de Credenciais
 
 - **Incidente Reportado pelo Usuário:**

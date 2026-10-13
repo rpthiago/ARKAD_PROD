@@ -28,7 +28,8 @@ BLOCOS_INFO = {
     2: {"nome": "Bloco 2 (10:30) — Europa Principal 1", "inicio": "10:30", "fim": "13:00"},
     3: {"nome": "Bloco 3 (13:00) — Europa Principal 2", "inicio": "13:00", "fim": "15:30"},
     4: {"nome": "Bloco 4 (15:30) — Tarde / Clássicos", "inicio": "15:30", "fim": "18:00"},
-    5: {"nome": "Bloco 5 (18:30) — Noite Américas", "inicio": "18:00", "fim": "23:59"},
+    5: {"nome": "Bloco 5 (18:30) — Noite Américas 1", "inicio": "18:00", "fim": "21:00"},
+    6: {"nome": "Bloco 6 (21:00) — Noite 2 & Fechamento", "inicio": "21:00", "fim": "23:59"},
 }
 
 def detectar_bloco_atual():
@@ -41,8 +42,10 @@ def detectar_bloco_atual():
         return 3
     elif agora < "18:30":
         return 4
-    else:
+    elif agora < "21:00":
         return 5
+    else:
+        return 6
 
 def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, enviar_telegram=True):
     if not data_str:
@@ -138,8 +141,8 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     return df_bloco
 
 def main():
-    parser = argparse.ArgumentParser(description="Radar de Sinais em 5 Blocos de Horários")
-    parser.add_argument("--bloco", type=int, choices=[1, 2, 3, 4, 5], default=None, help="Número do bloco (1 a 5)")
+    parser = argparse.ArgumentParser(description="Radar de Sinais em 6 Blocos de Horários")
+    parser.add_argument("--bloco", type=int, choices=[1, 2, 3, 4, 5, 6], default=None, help="Número do bloco (1 a 6)")
     parser.add_argument("--data", type=str, default=None, help="Data formato YYYY-MM-DD")
     parser.add_argument("--banca", type=float, default=4000.0, help="Valor da banca em R$")
     parser.add_argument("--risco", type=float, default=0.05, help="Risco por aposta (ex: 0.05)")

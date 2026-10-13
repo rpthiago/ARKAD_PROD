@@ -59,8 +59,13 @@ RE_PERIFERICA = re.compile(
 )
 
 
+SPREAD_MAX_DRAW = 1.15          # Trava operacional de seguranca: descarta livros vazios/sem liquidez no empate
+
+
 def _p(mk, mt, runner, lado):
     r = mk.get(mt, {}).get(runner)
+    if not r and runner == "The Draw":
+        r = mk.get(mt, {}).get("Draw")
     if not r: return None, 0.0
     v, sz = (r[0], r[1]) if lado == "back" else (r[2], r[3])
     return (v if (v is not None and v > 1.0) else None), (sz or 0.0)
@@ -87,13 +92,15 @@ def candidatos(mk, home, away, competicao):
         return {M_DRAW: None, M_HOME: None}
 
     a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
+    db, _ = _p(mk, "MATCH_ODDS", "The Draw", "back")
     dl, _ = _p(mk, "MATCH_ODDS", "The Draw", "lay"); hl, _ = _p(mk, "MATCH_ODDS", home, "lay")
     fav = min(h or 99.0, a or 99.0)
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
 
     c = {M_DRAW: None, M_HOME: None}
-    # Teto validado: Lay Draw <= 7.00
-    if h and a and dl and 4.5 <= dl <= 7.00:
+    # Teto validado: Lay Draw <= 7.00 + Trava Operacional: Spread Empate <= 1.15 (Livro com Liquidez)
+    spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
+    if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
         if (eh_copa_jogo and h <= 1.40) or (not eh_copa_jogo and fav <= 1.40):
             c[M_DRAW] = dl
 
@@ -117,14 +124,17 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
 
     out = []
     h, _ = _p(mk, "MATCH_ODDS", home, "back"); a, _ = _p(mk, "MATCH_ODDS", away, "back")
+    db, _ = _p(mk, "MATCH_ODDS", "The Draw", "back")
     dl, dls = _p(mk, "MATCH_ODDS", "The Draw", "lay"); hl, hls = _p(mk, "MATCH_ODDS", home, "lay")
     fav = min(h or 99.0, a or 99.0)
 
     # 1. Lay Draw: min(H,A) <= 1.40 e 4.5 <= lay empate <= 7.00 (Teto Homologado)
+    # Trava Operacional de Seguranca: Spread do Empate <= 1.15 (livro sem liquidez/abandonado e descartado)
     # Regra Estrutural de Copas (GEMINI.md): em COPAS, entra SOMENTE se o Super Fav for MANDANTE (H <= 1.40).
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
+    spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
     draw_ok = False
-    if h and a and dl and 4.5 <= dl <= 7.00:
+    if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
         if eh_copa_jogo:
             draw_ok = (h <= 1.40)
         else:
