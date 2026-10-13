@@ -17,7 +17,9 @@ Filtros de Governanca de Ligas (GEMINI.md):
 import re
 
 JANELA_KO = (4.0, 16.0)          # minutos antes do KO em que a captura vale (coletor passa a cada ~5 min)
-LIQ_MIN = 0.0                    # liquidez gravada, nao filtra (igual ao ledger das 06:00)
+LIQ_MIN = 200.0                  # Piso operacional de liquidez no Lay (R$ 200 para garantir cobertura de liability)
+SPREAD_MAX_DRAW = 1.15           # Trava operacional de seguranca: descarta livros vazios/sem liquidez no empate
+SPREAD_MAX_HOME = 1.15           # Trava operacional de seguranca: descarta livros vazios/sem liquidez no mandante
 
 M_DRAW = "Lay Draw (Fav<=1.40)"
 M_HOME = "Lay Home/DC X2 (FavVis<=1.65)"
@@ -57,9 +59,6 @@ RE_PERIFERICA = re.compile(
     r"FAROE|ESTONIA\w*|LATVIA\w*|LITHUANIA\w*|ARMENIA\w*|GEORGIA\w*|AZERBAIJAN\w*|KAZAKHSTAN\w*|UZBEKISTAN\w*|JORDAN\w*|KUWAIT\w*|OMAN\w*|LEBAN\w*|QATAR\w*|UAE\w*|SAUDI\w*|BAHRAIN\w*|CYPRUS|CYPRIOT\w*|MALTA|MALTESE\w*|MOLDOVA\w*|BELARUS\w*|KOSOVO\w*|ALBANIA\w*|MONTENEGR\w*|BOSNIA\w*|OTHER COMPETITIONS)\b",
     re.IGNORECASE
 )
-
-
-SPREAD_MAX_DRAW = 1.15          # Trava operacional de seguranca: descarta livros vazios/sem liquidez no empate
 
 
 def _p(mk, mt, runner, lado):
@@ -104,8 +103,9 @@ def candidatos(mk, home, away, competicao):
         if (eh_copa_jogo and h <= 1.40) or (not eh_copa_jogo and fav <= 1.40):
             c[M_DRAW] = dl
 
-    # Teto validado: Lay Home <= 8.00
-    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00:
+    # Teto validado: Lay Home <= 8.00 + Trava Operacional: Spread Mandante <= 1.15
+    spread_home_ok = (h is not None and hl is not None and h > 1.0 and (hl / h) <= SPREAD_MAX_HOME)
+    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00 and spread_home_ok:
         c[M_HOME] = hl
 
     return c
@@ -129,12 +129,13 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
     fav = min(h or 99.0, a or 99.0)
 
     # 1. Lay Draw: min(H,A) <= 1.40 e 4.5 <= lay empate <= 7.00 (Teto Homologado)
-    # Trava Operacional de Seguranca: Spread do Empate <= 1.15 (livro sem liquidez/abandonado e descartado)
+    # Trava Operacional: Spread Empate <= 1.15 + Piso de Liquidez Lay >= R$ 200
     # Regra Estrutural de Copas (GEMINI.md): em COPAS, entra SOMENTE se o Super Fav for MANDANTE (H <= 1.40).
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
     spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
+    liq_draw_ok = (dls is not None and dls >= LIQ_MIN)
     draw_ok = False
-    if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
+    if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok and liq_draw_ok:
         if eh_copa_jogo:
             draw_ok = (h <= 1.40)
         else:
@@ -143,7 +144,10 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
         out.append((M_DRAW, dl, dls, fav))
 
     # 2. Lay Home em favorito visitante: A <= 1.65 e 2.0 <= lay mandante <= 8.00 (Teto Homologado)
-    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00:
+    # Trava Operacional: Spread Mandante <= 1.15 + Piso de Liquidez Lay >= R$ 200
+    spread_home_ok = (h is not None and hl is not None and h > 1.0 and (hl / h) <= SPREAD_MAX_HOME)
+    liq_home_ok = (hls is not None and hls >= LIQ_MIN)
+    if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00 and spread_home_ok and liq_home_ok:
         out.append((M_HOME, hl, hls, a))
 
     return out

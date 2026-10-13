@@ -229,8 +229,9 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liab_micro, "Resultado": "PENDENTE"
             })
 
-        # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 10.0)
-        if oa_back.iloc[idx] <= 1.65 and 2.0 <= oh_lay.iloc[idx] <= 10.0:
+        # 7. Lay Home / Dupla Chance X2 em Fav Visitante (Odd_A_Back <= 1.65 | 2.0 <= Odd_H_Lay <= 8.00 | Spread <= 1.15)
+        _spread_home = (oh_lay.iloc[idx] / oh_back.iloc[idx]) if (oh_back.iloc[idx] > 1.0 and oh_lay.iloc[idx] > 1.0) else 99.0
+        if oa_back.iloc[idx] <= 1.65 and 2.0 <= oh_lay.iloc[idx] <= 8.00 and _spread_home <= 1.15:
             odd_e = round(float(oh_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({
