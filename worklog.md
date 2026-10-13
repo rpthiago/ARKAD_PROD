@@ -7,6 +7,25 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Implementação de Travas Operacionais de Liquidez Mínima (>= R$ 200) e Spread no Lay Home (<= 1.15)
+
+- **Demanda / Incidente:**
+  - O usuário recebeu alertas matinais no Telegram para jogos da Copa da Eslováquia (`OFK Banik Lehota x Zemplin` e `FK Cadca x Tatran Presov`) em Lay Home/DC X2 na odd @7.00, com liquidez rasa (`liq 147` e `liq 448`), e questionou a necessidade de filtrar manualmente os sinais.
+  - Alinhamento de governança: o robô deve filtrar autonomamente livros desertos para que o usuário NUNCA precise fazer filtragem manual antes de executar.
+- **Ações Realizadas:**
+  1. **Trava de Piso de Liquidez Operacional (`LIQ_MIN = 200.0`):**
+     - Em `sinais_ko_core.py`: Definido `LIQ_MIN = 200.0` (exige no mínimo R$ 200 disponíveis para Lay no 1º nível de preço no KO-10).
+     - Aplicado em `avaliar()` para ambos os métodos do portfólio 1X2 (`M_DRAW` com `dls >= LIQ_MIN` e `M_HOME` com `hls >= LIQ_MIN`).
+     - Jogos com micro-livros (ex.: R$ 147) são agora descartados silenciosamente sem emissão de alerta.
+  2. **Trava de Spread no Lay Home (`SPREAD_MAX_HOME = 1.15`):**
+     - Em `sinais_ko_core.py`: Adicionada trava `spread_home_ok = (h is not None and hl is not None and h > 1.0 and (hl / h) <= 1.15)` tanto em `candidatos()` quanto em `avaliar()`.
+     - Em `automacao_diaria_aprovados.py`: Atualizado teto de odd para `<= 8.00` e adicionada verificação de spread `_spread_home <= 1.15`.
+  3. **Validação e Deploy:**
+     - Testes unitários locais confirmaram que os dois jogos de hoje da Eslováquia foram 100% rejeitados (um por liquidez < 200 e outro por spread > 1.15), enquanto jogos saudáveis com liquidez normal passaram limpos.
+     - `sinais_ko_core.py` enviado para a VPS (`163.176.59.215`) via SCP.
+     - Serviço `sinais-ko.service` reiniciado na VPS com sucesso (ativo em loop 60s).
+- **Arquivos:** `sinais_ko_core.py`, `automacao_diaria_aprovados.py`, `/home/ubuntu/betfair-collector/sinais_ko_core.py` (VPS), `worklog.md`.
+
 ## 2026-10-12 · Antigravity · Expansão do Radar para 8 Blocos: Bloco 7 (22h30 América do Norte) & Bloco 8 (00h30 Fechamento Geral)
 
 - **Demanda / Contexto:**
