@@ -444,3 +444,11 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-13.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [+] Envio Telegram (Fechamento Geral Bloco 8): True (Mensagem enviada com sucesso!)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 2 (10:30) — Europa Principal 1 — Data: 2026-10-14
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+2026-10-14 10:30:07.103 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run executar_radar_5_blocos.py [ARGUMENTS]
