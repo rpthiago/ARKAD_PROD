@@ -7,6 +7,29 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-14 · Antigravity · Blindagem do Fechamento Geral (Bloco 8): Expurgo de Jogos Inválidos, Universo Feed Estrito e Trava LIQ_MIN 200
+
+- **Demanda / Incidente:**
+  - O usuário alertou: *"No fechamento que rodou agora, teve jogos que não eram para ter entrado"*.
+  - O fechamento das 00h30 (Bloco 8) consolidou 7 jogos para 13/10, incluindo os 2 jogos da Copa da Eslováquia (`FK Cadca` [RED] e `Banik Lehota` [Liq 147]) e 3 jogos com `universo: fora` (África do Sul e Wolves x Bolton).
+- **Causa Raiz Identificada:**
+  1. *Jogos da Eslováquia:* Haviam sido gravados no `forward_ko_ledger.csv` da VPS às 09h45 da manhã, antes do deploy das travas de spread e liquidez feito às 11h30.
+  2. *Universo `fora`:* O gerador diário `sinais_dia_coletor.py` e o runner `executar_radar_5_blocos.py` usavam `universo="todos"` por padrão e `min_liq=0.0`, sem re-filtrar na consolidação.
+- **Ações Realizadas:**
+  1. **Expurgo & Marcação de Descarte:**
+     - Em `forward_ko_ledger.csv` (tanto local quanto na VPS `/home/ubuntu/betfair-collector/forward_ko_ledger.csv`), os jogos `FK Cadca x Tatran Presov` e `OFK Banik Lehota x Zemplin` de 2026-10-13 foram marcados oficialmente como `DESCARTADO_SPREAD_LIQ`.
+  2. **Blindagem de Código (`sinais_dia_coletor.py` e `executar_radar_5_blocos.py`):**
+     - `gerar_planilha_do_coletor` configurado com `universo="feed"` e `min_liq=200.0` como padrões inegociáveis.
+     - Adicionada verificação estrita de tetos (`Lay Home <= 8.00`, `Lay Draw <= 7.00`, `Lay Over 4.5 <= 20.00`) e filtro de `Liquidez_Lay >= 200.0` em `df_dia`.
+  3. **Re-execução e Consolidação Oficial de 13/10:**
+     - Planilha `Sinais_Metodos_Aprovados_2026-10-13.xlsx` re-gerada com estritamente os 2 jogos válidos do universo:
+       - `09:15 | Cong An Nhan Dan x Kashima` (AFC Champions League) ➔ 0-1 (GREEN, +R$ 32.93)
+       - `13:00 | Al-Sadd x Al-Hilal` (AFC Champions League) ➔ 0-2 (GREEN, +R$ 41.52)
+     - **Balanço Oficial Corrigido:** 2 jogos, 2 Greens, 0 Reds, 100% WR, Resultado Líquido: **+R$ 74.45**.
+     - Boletim oficial corrigido enviado ao Telegram via Bloco 8.
+     - Commits sincronizados no GitHub / Streamlit Cloud (`5fde0b5`).
+- **Arquivos:** `executar_radar_5_blocos.py`, `sinais_dia_coletor.py`, `forward_ko_ledger.csv` (local e VPS), `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-13.xlsx`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Auditoria Forense de Liquidez e Trava de Spread no Lay Over 4.5 (SPREAD_MAX_OVER45 = 1.25)
 
 - **Demanda do Usuário:**
