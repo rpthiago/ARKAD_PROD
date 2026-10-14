@@ -25,9 +25,18 @@
   - [ ] Medir **CLV** dos picks reais (`clv_0x0_log.csv` / `ARKAD_CLV_0x0`). **Aprova se CLV+ mediano E %CLV+ > 50%.**
   - [ ] Calibrar fuso do `Time` do feed no CLV (conferir 1º fechamento real).
   - [ ] Regra congelada (NÃO re-ajustar): liga_0x0<0,08 & mkt_prob<0,10 & 10≤lay≤20 & ev>0,02.
-- [ ] **Tríade base (Draw/Home/Over 4.5) — observar, não confirmado.**
-  - [ ] 5 fins de semana limpos + bootstrap. Sinal atual: marginal; **CLV só 34%+ (não bate fechamento).**
-  - [ ] Lay Home é o menos ruim (~+7% N=74); Draw esfriando; Over 4.5 N minúsculo.
+- [x] **Lay Over 4.5 FT (Under Pesado) — Trava Operacional de Spread (13/10).**
+  - [x] Estudo forense de liquidez: 100% dos reds de 2026 ocorreram em `Spread >= 1.258` (livros sem liquidez). Com `Spread <= 1.25` (gap max 25% entre Back e Lay): N=79, 79 Greens, 0 Reds (**WR 100,00%, ROI liab +5,24%**). Em 2025, expurgou 45 dos 48 reds (−20,37u ➔ +0,25u).
+  - [x] Trava `SPREAD_MAX_OVER45 = 1.25` + governança de ligas implementadas em `sinais_ko_core.py` (candidatos e avaliar), `automacao_diaria_aprovados.py` e `pages/01_🏆_Portfolio_Metodos_Aprovados.py`.
+  - [x] Deploy efetuado na VPS (`163.176.59.215`): backup criado e daemon `sinais-ko.service` reiniciado ativo em loop 60s.
+- [x] **Suíte de Correct Score (Lay 0x3, 3x0, 2x2 e 0x0) — Otimização e Alertas Telegram (13/10).**
+  - [x] Tetos calibrados na base 2026 (0x3 $\le 30.0$, 3x0 $\le 30.0$, 2x2 $\le 14.0$).
+  - [x] Integração completa nas páginas 01, 04, 09 e 17 do Streamlit e na rotina agendada do Telegram (`telegram_notifier.py` / `rotina_5_horarios.bat`).
+- [ ] **Tríade base (Draw/Home/Over 4.5) — ciclo forward.**
+  - [x] Lay Draw: trava de spread `Odd_Lay / Odd_Back <= 1.15` e teto $\le 7.00$ ativos na VPS.
+  - [x] Lay Home: teto $\le 8.00$ e spread $\le 1.15$ ativos na VPS.
+  - [x] Lay Over 4.5: trava `Odd_Lay / Odd_Back <= 1.25` e governança ativas na VPS.
+  - [ ] Acompanhar acúmulo contínuo no ledger KO-10 da VPS (`forward_ko_ledger.csv`).
 - [x] **Idea1 Back Under (min 10) — FECHADO 15/09:** 1.254 liquidados (57 pendentes resolvidos por base externa com placar exato;
         63 sem placar em liga sem base): **ROI −3,00%** (Under 2.5 −4,2% N=614 · Under 3.5 −1,85% N=640). Log liquidado em
         `varredura_over/idea1_log_liquidado_2026-09-15.csv`; original na VPS com backup `.bak_20260915`.
