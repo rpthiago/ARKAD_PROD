@@ -177,8 +177,21 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="feed", min_liq
     if d.empty:
         return pd.DataFrame()
 
+    # Se ha linhas sem universo preenchido para o dia, resolve contra o feed oficial da API
+    if (d["universo"].fillna("") == "").any():
+        try:
+            from relatorio_forward_5metodos import _feed_jogos, _no_feed
+            jogos_feed = _feed_jogos(dia)
+            if jogos_feed:
+                for idx, r in d.iterrows():
+                    if not r.get("universo"):
+                        val = "feed" if _no_feed(r, jogos_feed) else "fora"
+                        d.at[idx, "universo"] = val
+        except Exception:
+            pass
+
     if universo == "feed":
-        d = d[d.universo.fillna("") == "feed"]
+        d = d[d.universo.fillna("") != "fora"]
     if min_liq > 0:
         d = d[pd.to_numeric(d.liq_lay, errors="coerce").fillna(0) >= min_liq]
     if d.empty:
@@ -223,10 +236,9 @@ def main():
     datas = [a for a in sys.argv[1:] if re.fullmatch(r"\d{4}-\d{2}-\d{2}", a)]
     ap.add_argument("--separado", action="store_true",
                     help="grava como _coletor.xlsx em vez de sobrescrever a planilha do dia")
-    ap.add_argument("--universo", default="todos", choices=["feed", "todos"],
-                    help="todos (padrao) = tudo que o coletor viu; feed = so jogos que a API tambem enxergava "
-                         "(era o recorte comparavel, mas com o feed quebrado ele zera o dia)")
-    ap.add_argument("--min-liq", type=float, default=0.0, help="liquidez minima no lay")
+    ap.add_argument("--universo", default="feed", choices=["feed", "todos"],
+                    help="feed (padrao) = so jogos que pertencem ao feed oficial homologado; todos = tudo que o coletor viu")
+    ap.add_argument("--min-liq", type=float, default=200.0, help="liquidez minima no lay (padrao R$ 200)")
     ap.add_argument("--no-sync", action="store_true", help="nao sincroniza ledger da VPS antes de gerar")
     a = ap.parse_args([x for x in sys.argv[1:] if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", x)])
     dia = datas[0] if datas else datetime.now().strftime("%Y-%m-%d")

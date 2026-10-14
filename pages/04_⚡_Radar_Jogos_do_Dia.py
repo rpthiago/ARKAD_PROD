@@ -200,14 +200,22 @@ with col_h2:
 # ── Processamento de Stakes & Risco ──
 if not df_raw.empty:
     df = df_raw.copy()
-    # Tetos estritos causais homologados de Correct Score (GEMINI.md)
+    # Tetos estritos causais homologados e travas operacionais (GEMINI.md)
     odd_e_num = pd.to_numeric(df["Odd_Entrada"], errors="coerce").fillna(999.0)
     is_2x2 = df["Método"].astype(str).str.contains("2x2", case=False, na=False)
     is_0x3 = df["Método"].astype(str).str.contains("0x3", case=False, na=False)
     is_3x0 = df["Método"].astype(str).str.contains("3x0", case=False, na=False)
+    is_home = df["Método"].astype(str).str.contains("Home", case=False, na=False)
+    is_draw = df["Método"].astype(str).str.contains("Draw", case=False, na=False)
+    is_o45 = df["Método"].astype(str).str.contains("4.5", case=False, na=False)
     df = df[~(is_2x2 & (odd_e_num > 14.0))].copy()
     df = df[~(is_0x3 & (odd_e_num > 30.0))].copy()
     df = df[~(is_3x0 & (odd_e_num > 30.0))].copy()
+    df = df[~(is_home & (odd_e_num > 8.00))].copy()
+    df = df[~(is_draw & (odd_e_num > 7.00))].copy()
+    df = df[~(is_o45 & (odd_e_num > 20.00))].copy()
+    if "Liquidez_Lay" in df.columns:
+        df = df[pd.to_numeric(df["Liquidez_Lay"], errors="coerce").fillna(0) >= 200.0].copy()
     
     def _calcular_liability(metodo):
         m = str(metodo)
