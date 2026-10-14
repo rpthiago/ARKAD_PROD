@@ -130,7 +130,7 @@ def sincronizar_ledger_vps() -> bool:
     return True
 
 
-def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_liq=0.0, sync_vps=True) -> pd.DataFrame:
+def gerar_planilha_do_coletor(dia=None, separado=False, universo="feed", min_liq=200.0, sync_vps=True) -> pd.DataFrame:
     """Gera a planilha Sinais_Metodos_Aprovados_YYYY-MM-DD.xlsx a partir do ledger da VPS."""
     if dia is None:
         dia = datetime.now().strftime("%Y-%m-%d")
@@ -149,14 +149,20 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
     # Exclusão de entradas descartadas / fora da regra causal
     d = d[~d.status.astype(str).str.contains("DESCARTADO|SKIP", case=False, na=False)]
     
-    # Tetos estritos causais homologados de Correct Score (GEMINI.md)
+    # Tetos estritos causais homologados (GEMINI.md)
     odd_lay = pd.to_numeric(d.Odd_Lay, errors="coerce").fillna(999.0)
     is_2x2 = d.Metodo.astype(str).str.contains("2x2", case=False, na=False)
     is_0x3 = d.Metodo.astype(str).str.contains("0x3", case=False, na=False)
     is_3x0 = d.Metodo.astype(str).str.contains("3x0", case=False, na=False)
+    is_home = d.Metodo.astype(str).str.contains("Home", case=False, na=False)
+    is_draw = d.Metodo.astype(str).str.contains("Draw", case=False, na=False)
+    is_o45 = d.Metodo.astype(str).str.contains("4.5", case=False, na=False)
     d = d[~(is_2x2 & (odd_lay > 14.0))].copy()
     d = d[~(is_0x3 & (odd_lay > 30.0))].copy()
     d = d[~(is_3x0 & (odd_lay > 30.0))].copy()
+    d = d[~(is_home & (odd_lay > 8.00))].copy()
+    d = d[~(is_draw & (odd_lay > 7.00))].copy()
+    d = d[~(is_o45 & (odd_lay > 20.00))].copy()
     if d.empty:
         return pd.DataFrame()
 
@@ -172,7 +178,7 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
         return pd.DataFrame()
 
     if universo == "feed":
-        d = d[d.universo.fillna("") != "fora"]
+        d = d[d.universo.fillna("") == "feed"]
     if min_liq > 0:
         d = d[pd.to_numeric(d.liq_lay, errors="coerce").fillna(0) >= min_liq]
     if d.empty:

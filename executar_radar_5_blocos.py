@@ -71,7 +71,7 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     print(f"[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...")
     
     # 1. Atualiza e puxa o ledger da VPS
-    df_dia = gerar_planilha_do_coletor(data_str, sync_vps=True)
+    df_dia = gerar_planilha_do_coletor(data_str, universo="feed", min_liq=200.0, sync_vps=True)
     if df_dia.empty:
         print(f"[-] Nenhum sinal registrado para hoje até o momento.")
         return df_dia
@@ -86,15 +86,24 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     except Exception as e:
         print(f"[-] Aviso ao liquidar jogos: {e}")
         
-    # Tetos estritos causais homologados de Correct Score (GEMINI.md)
+    # Tetos estritos causais homologados e travas operacionais (GEMINI.md)
     if "Odd_Entrada" in df_dia.columns:
         odd_e_col = pd.to_numeric(df_dia["Odd_Entrada"], errors="coerce").fillna(999.0)
         is_2x2 = df_dia["Método"].astype(str).str.contains("2x2", case=False, na=False)
         is_0x3 = df_dia["Método"].astype(str).str.contains("0x3", case=False, na=False)
         is_3x0 = df_dia["Método"].astype(str).str.contains("3x0", case=False, na=False)
+        is_home = df_dia["Método"].astype(str).str.contains("Home", case=False, na=False)
+        is_draw = df_dia["Método"].astype(str).str.contains("Draw", case=False, na=False)
+        is_o45 = df_dia["Método"].astype(str).str.contains("4.5", case=False, na=False)
         df_dia = df_dia[~(is_2x2 & (odd_e_col > 14.0))].copy()
         df_dia = df_dia[~(is_0x3 & (odd_e_col > 30.0))].copy()
         df_dia = df_dia[~(is_3x0 & (odd_e_col > 30.0))].copy()
+        df_dia = df_dia[~(is_home & (odd_e_col > 8.00))].copy()
+        df_dia = df_dia[~(is_draw & (odd_e_col > 7.00))].copy()
+        df_dia = df_dia[~(is_o45 & (odd_e_col > 20.00))].copy()
+        
+    if "Liquidez_Lay" in df_dia.columns:
+        df_dia = df_dia[pd.to_numeric(df_dia["Liquidez_Lay"], errors="coerce").fillna(0) >= 200.0].copy()
         
     # 2. Filtra jogos pertencentes a esta janela ou pendentes
     df_dia["Hora_Str"] = df_dia["Hora"].astype(str).str[:5]
