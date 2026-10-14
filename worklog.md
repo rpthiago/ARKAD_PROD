@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Liquidação Oficial de 117 Pendências Históricas (Agosto e Setembro)
+
+- **Demanda do Usuário:**
+  - *"54 jogos jogos pendentes, que jogos sao esses e de que metodos ? ... sim [pode liquidar]"*
+- **Diagnóstico & Ações Realizadas:**
+  1. Identificadas 117 linhas marcadas como `⏳ PENDENTE` nas planilhas diárias oficiais de `metodos_aprovados/` (52 do Lay 3x0 com placar `"vs"`, 33 do Lay Draw, 18 do Lay Home, 3 do Lay Over 4.5 e 1 do Lay 0x3).
+  2. Cruzamento automatizado com a base oficial de resultados `Bases_de_Dados_API_FutPythonTrader_Bet365.csv` e `placares_ft.csv`:
+     - **107 partidas resolvidas** com placares oficiais finais (95 Greens, 12 Reds, 88,8% WR).
+     - **10 partidas sem placar oficial** (jogos de copas regionais menores/amadoras sem cobertura há mais de 7 dias) foram devidamente marcadas como `⚪ SEM_PLACAR`, saindo do cômputo conforme regra de governança.
+  3. Atualizadas 42 planilhas Excel diárias em `metodos_aprovados/` com placares, status e resultados finais consolidados.
+  4. **KPIs Finais Consolidados da Página 02:**
+     - **Total de Jogos:** 1.141 partidas (**1.131 liquidadas, 0 pendentes**).
+     - **Greens:** **1.025 (90,6% WR)** | **Reds:** **106**.
+     - **Lucro Líquido:** **+12.58 u** (R$ +1.732,10 sobre banca de R$ 2.000).
+- **Arquivos:** 42 planilhas `metodos_aprovados/Sinais_Metodos_Aprovados_*.xlsx`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Restauração da Página 02: Reversão da Injeção Indevida do Ledger VPS
 
 - **Demanda do Usuário:**
