@@ -242,10 +242,10 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-    # 8. Lay 3x0 Top 3 Menor Odd (Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 35] | Horário Distinto)
+    # 8. Lay 3x0 Top 3 Menor Odd (Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 30] | Horário Distinto)
     try:
         from estrategia_lay_3x0 import avaliar_jogos_lay_3x0_grade
-        res_3x0 = avaliar_jogos_lay_3x0_grade(df_games, top_n=3, u25_max=1.75, odd_h_min=1.80)
+        res_3x0 = avaliar_jogos_lay_3x0_grade(df_games, top_n=3, u25_max=1.75, odd_h_min=1.80, odd_lay_max=30.0)
         if res_3x0:
             for s3 in res_3x0:
                 odd_e = round(float(s3["odd_lay"]), 2)
@@ -253,6 +253,42 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 sinais.append({
                     "Data": data_str, "Hora": s3["hora"], "Liga": s3["league"], "Jogo": f"{s3['home']} x {s3['away']}",
                     "Método": "Lay 3x0 Top 3 (Aprovado)", "Mercado": "Correct Score (3x0)", "Lado": "LAY",
+                    "Odd_Entrada": odd_e, "Odd_Fav": 0.0,
+                    "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                    "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+                })
+    except Exception:
+        pass
+
+    # 9. Lay 0x3 Top 3 Menor Odd Otimizado (Under 2.5 <= 2.10 | Odd A >= 1.85 | Lay [14, 30] | Horário Distinto)
+    try:
+        from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
+        res_0x3 = avaliar_jogos_lay_0x3_grade(df_games, top_n=3, odd_lay_max=30.0)
+        if res_0x3:
+            for s03 in res_0x3:
+                odd_e = round(float(s03["odd_lay"]), 2)
+                stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+                sinais.append({
+                    "Data": data_str, "Hora": s03["hora"], "Liga": s03["league"], "Jogo": f"{s03['home']} x {s03['away']}",
+                    "Método": "Lay 0x3 Top 3 (Aprovado)", "Mercado": "Correct Score (0x3)", "Lado": "LAY",
+                    "Odd_Entrada": odd_e, "Odd_Fav": 0.0,
+                    "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
+                    "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
+                })
+    except Exception:
+        pass
+
+    # 10. Lay 2x2 Top 3 Menor Odd Otimizado (Under 2.5 <= 2.00 | Lay [8, 14] | Horário Distinto)
+    try:
+        from estrategia_lay_2x2 import avaliar_jogos_lay_2x2_grade
+        res_2x2 = avaliar_jogos_lay_2x2_grade(df_games, top_n=3)
+        if res_2x2:
+            for s22 in res_2x2:
+                odd_e = round(float(s22["odd_lay"]), 2)
+                stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
+                sinais.append({
+                    "Data": data_str, "Hora": s22["hora"], "Liga": s22["league"], "Jogo": f"{s22['home']} x {s22['away']}",
+                    "Método": "Lay 2x2 Top 3 (Aprovado)", "Mercado": "Correct Score (2x2)", "Lado": "LAY",
                     "Odd_Entrada": odd_e, "Odd_Fav": 0.0,
                     "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
                     "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"

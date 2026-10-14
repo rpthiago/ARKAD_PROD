@@ -261,16 +261,20 @@ with tab1:
             
             # Fallback direto idêntico ao motor da Página 16 para imunidade a falhas de importação/cache
             if not res_0x3:
+                from sinais_ko_core import eh_jogo_ignorado
                 sinais_0x3_raw = []
                 for _, row_0x3 in df.iterrows():
+                    h_0x3 = str(row_0x3.get("Home", row_0x3.get("Home_Team", "")))
+                    a_0x3 = str(row_0x3.get("Away", row_0x3.get("Away_Team", "")))
+                    l_0x3 = str(row_0x3.get("League", row_0x3.get("Div", "Liga Externa")))
+                    if eh_jogo_ignorado(h_0x3, a_0x3, l_0x3):
+                        continue
+
                     o_a_0x3 = float(row_0x3.get('Odd_A_Back') or row_0x3.get('Odd_A_FT_Back') or row_0x3.get('Odd_A_FT') or row_0x3.get('Odd_A') or 0.0)
                     o_u25_0x3 = float(row_0x3.get('Odd_Under25_FT_Back') or row_0x3.get('Odd_Under25_FT') or row_0x3.get('Odd_Under25') or 0.0)
                     o_0x3_val = float(row_0x3.get('Odd_CS_0x3_Lay') or row_0x3.get('Odd_CS_0x3') or 0.0)
                     
-                    if 0.0 < o_u25_0x3 <= 2.10 and 14.0 <= o_0x3_val <= 35.0 and (o_a_0x3 >= 1.85 or o_a_0x3 == 0.0):
-                        h_0x3 = str(row_0x3.get("Home", row_0x3.get("Home_Team", "")))
-                        a_0x3 = str(row_0x3.get("Away", row_0x3.get("Away_Team", "")))
-                        l_0x3 = str(row_0x3.get("League", row_0x3.get("Div", "Liga Externa")))
+                    if 0.0 < o_u25_0x3 <= 2.10 and 14.0 <= o_0x3_val <= 30.0 and (o_a_0x3 >= 1.85 or o_a_0x3 == 0.0):
                         tm_0x3 = str(row_0x3.get("Time", row_0x3.get("horario", "15:00")))[:5]
                         sinais_0x3_raw.append({
                             "hora": tm_0x3, "league": l_0x3, "home": h_0x3, "away": a_0x3, "odd_lay": o_0x3_val
@@ -330,12 +334,12 @@ with tab1:
         except Exception:
             pass
 
-        # 2b. Lay 3x0 Top 3 Menor Odd (Espelho Assimétrico do 0x3 — Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 35])
+        # 2b. Lay 3x0 Top 3 Menor Odd (Espelho Assimétrico do 0x3 — Under 2.5 <= 1.75 | Odd H >= 1.80 | Lay [14, 30])
         try:
             res_3x0 = None
             if avaliar_jogos_lay_3x0_grade is not None:
                 try:
-                    res_3x0 = avaliar_jogos_lay_3x0_grade(df, top_n=3, u25_max=1.75, odd_h_min=1.80)
+                    res_3x0 = avaliar_jogos_lay_3x0_grade(df, top_n=3, u25_max=1.75, odd_h_min=1.80, odd_lay_max=30.0)
                 except Exception:
                     res_3x0 = None
             if res_3x0:

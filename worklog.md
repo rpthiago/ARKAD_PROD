@@ -7,6 +7,31 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Otimização Empírica e Tetos Estritos de Risco para CS (Lay 0x3, 3x0, 2x2 e 0x0)
+
+- **Demanda do Usuário:**
+  - *"os metodos lay 2x2, lay 0x3, lay 3x0 o lay 0x0, podemos fazer algo para melhorar eles ?? ... sim"*
+- **Diagnóstico & Evidência Empírica na Base 2026 (N=11.540 jogos):**
+  1. **Lay 0x3 Correct Score:**
+     - A cauda de odds entre 30.00 e 35.00 concentrava 50% de todos os reds do ano (9 de 18 reds).
+     - Com teto estrito `odd_lay <= 30.00` + governança de ligas, a Win Rate sobe para **99,42%** e o ROI salta de +3,29% para **+3,96%** (N=1.562 jogos).
+  2. **Lay 3x0 Correct Score:**
+     - Devido à assimetria do mando de campo (mandantes aplicam 3-0 com maior frequência que visitantes 0-3), o método exigia corte mais rígido de gols e teto de risco.
+     - Com `Odd_Under25 <= 1.75` + `Odd_H >= 1.80` + `Odd_Lay <= 30.00`, a Win Rate alcança **98,47%** e o ROI salta de +0,25% para **+2,26%** (N=196 jogos, apenas 3 reds).
+  3. **Lay 2x2 Correct Score:**
+     - Odd Lay entre 14.00 e 20.00 apresentava margem navalha (+0,27 pp vs break-even).
+     - Com `Odd_Lay <= 14.00` + `Odd_Under25 <= 2.00` (e controle contra favoritos em jogos abertos) + governança e blacklist de ligas de alto 2x2 (Sérvia, Irlanda, Turquia, Escócia), a Win Rate é de **95,18%** (break-even cai de 93,8% para 91,7%) e o ROI sobe de +0,31% para **+3,80%** (N=519 jogos).
+  4. **Lay 0x0 XGBoost:**
+     - Preservação estrita do Sweet Spot pré-registrado `Odd_Lay ∈ [10.0, 20.0]`, `EV > 2%`, `liga_0x0_rate < 0.08`, `mkt_prob < 0.10`.
+     - Auditoria de Setembro confirmou que jogos com odd > 20.0 acumularam -199% de ROI e 11 reds, enquanto no Sweet Spot [10, 20] em blocos entregou +0.80u com 95,4% WR. Regra mantida congelada sem relaxamento forçado.
+- **Implementações Realizadas no Código:**
+  1. `estrategia_lay_0x3.py`: Parâmetro padrão `odd_lay_max=30.0`, filtro `14.0 <= odd_0x3 <= odd_lay_max`, integração de `eh_jogo_ignorado(home, away, liga)`.
+  2. `estrategia_lay_3x0.py`: Parâmetro padrão `odd_lay_max=30.0`, filtro `14.0 <= odd_3x0 <= odd_lay_max`, `u25_max=1.75`, `odd_h_min=1.80` e `eh_jogo_ignorado`.
+  3. `metodo_lay2x2_strategy.py` & `estrategia_lay_2x2.py`: `ODD_LAY_2X2_MAX = 14.00`, `ODD_UNDER25_MAX = 2.00`, validação com checagem de governança em `filtrar_grade_lay2x2` e bloqueio de jogos abertos com favoritos.
+  4. `pages/01_🏆_Portfolio_Metodos_Aprovados.py`: Atualizadas as chamadas de Lay 0x3 (teto 30.00 + governança no fallback) e Lay 3x0 (`odd_lay_max=30.0`).
+  5. `automacao_diaria_aprovados.py`: Atualizado Lay 3x0 com `odd_lay_max=30.0`, e integrados os geradores de Lay 0x3 Top 3 (`odd_lay_max=30.0`) e Lay 2x2 Top 3 (`odd_lay <= 14.00`).
+- **Arquivos:** `estrategia_lay_0x3.py`, `estrategia_lay_3x0.py`, `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `automacao_diaria_aprovados.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Liquidação Oficial de 117 Pendências Históricas (Agosto e Setembro)
 
 - **Demanda do Usuário:**

@@ -104,15 +104,15 @@ def validar_entrada_lay2x2(
     if odd_under25 is not None and pd.notna(odd_under25) and odd_under25 <= ODD_UNDER25_MAX:
         passou_filtro_tendencia = True
         motivo_filtro = f"Odd Under 2.5 ({odd_under25:.2f}) <= {ODD_UNDER25_MAX:.2f}"
-    elif odd_h is not None and pd.notna(odd_h) and odd_h <= 1.55:
-        passou_filtro_tendencia = True
-        motivo_filtro = f"Super Favorito Mandante (Odd {odd_h:.2f} <= 1.55)"
-    elif odd_a is not None and pd.notna(odd_a) and odd_a <= 1.60:
-        passou_filtro_tendencia = True
-        motivo_filtro = f"Super Favorito Visitante (Odd {odd_a:.2f} <= 1.60)"
     elif total_xg is not None and pd.notna(total_xg) and total_xg <= 2.40:
         passou_filtro_tendencia = True
         motivo_filtro = f"Total xG ({total_xg:.2f}) <= 2.40"
+    elif odd_h is not None and pd.notna(odd_h) and odd_h <= 1.55 and (odd_under25 is None or pd.isna(odd_under25) or odd_under25 <= 2.10):
+        passou_filtro_tendencia = True
+        motivo_filtro = f"Super Favorito Mandante (Odd {odd_h:.2f} <= 1.55)"
+    elif odd_a is not None and pd.notna(odd_a) and odd_a <= 1.60 and (odd_under25 is None or pd.isna(odd_under25) or odd_under25 <= 2.10):
+        passou_filtro_tendencia = True
+        motivo_filtro = f"Super Favorito Visitante (Odd {odd_a:.2f} <= 1.60)"
 
     # Se não houver informação de xG, Under 2.5 ou Favoritismo, rejeita
     if not passou_filtro_tendencia:
@@ -187,12 +187,19 @@ def filtrar_grade_lay2x2(df_jogos: pd.DataFrame) -> pd.DataFrame:
         odd_a_val = row.get("Odd_A_FT_Back") or row.get("Odd_A")
         odd_a = float(odd_a_val) if pd.notna(odd_a_val) else np.nan
         
+        liga_val = str(row.get("League") or row.get("Div") or "Liga Externa")
+        home_val = str(row.get("Home") or row.get("Home_Team") or "")
+        away_val = str(row.get("Away") or row.get("Away_Team") or "")
+
         ok, motivo = validar_entrada_lay2x2(
             odd_lay_2x2=odd_lay_2x2,
             odd_under25=odd_under25,
             total_xg=total_xg,
             odd_h=odd_h,
-            odd_a=odd_a
+            odd_a=odd_a,
+            liga=liga_val,
+            home=home_val,
+            away=away_val
         )
         
         if ok:

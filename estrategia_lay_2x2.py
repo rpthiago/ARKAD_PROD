@@ -51,9 +51,9 @@ def avaliar_jogos_lay_2x2_grade(df_dia, selecionar_1_por_horario=False, top_n=3)
         passou_tendencia = False
         if o_u25 is not None and o_u25 <= 2.00:
             passou_tendencia = True
-        elif o_h is not None and o_h <= 1.55: # Super favorito mandante
+        elif o_h is not None and o_h <= 1.55 and (o_u25 is None or o_u25 <= 2.10): # Super favorito mandante controlado
             passou_tendencia = True
-        elif o_a is not None and o_a <= 1.60: # Super favorito visitante
+        elif o_a is not None and o_a <= 1.60 and (o_u25 is None or o_u25 <= 2.10): # Super favorito visitante controlado
             passou_tendencia = True
             
         if not passou_tendencia:
