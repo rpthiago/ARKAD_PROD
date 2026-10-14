@@ -7,6 +7,24 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Integração dos Métodos de CS no Streamlit e Alertas Automáticos do Telegram
+
+- **Demanda do Usuário:**
+  - *"pode colocar ele para rodar no stremlit e no telegram para receber alertas"*
+- **Ações Realizadas:**
+  1. **Habilitação Plena de Alertas no Telegram (`telegram_notifier.py`):**
+     - Adicionados `executar_radar_5_blocos.py` e `streamlit` na whitelist de remetentes permitidos (`REMETENTES_PERMITIDOS`).
+     - Teste de conexão realizado com sucesso via API do Telegram (`Resultado: True`).
+  2. **Integração no Streamlit (Páginas de Sinais):**
+     - **Página 04 (`04_⚡_Radar_Jogos_do_Dia.py`):** Removida exclusão cega de 0x3, aplicando os tetos validados (0x3 $\le 30.0$, 3x0 $\le 30.0$, 2x2 $\le 14.0$). Botão de disparo por bloco no Telegram com `force=True`.
+     - **Página 01 (`01_🏆_Portfolio_Metodos_Aprovados.py`):** Atualizado o botão de disparo de sinais para enviar todos os métodos aprovados (incluindo CS) direto para o Telegram com `force=True`.
+     - **Página 17 (`17_⚽_Sinais_Lay_2x2.py`):** Adicionado botão nativo `📲 Disparar no Telegram` com formatação detalhada de stake, responsabilidade, odd e justificativa quantitativa.
+     - **Página 09 (`09_🎯_Sinais_Lay_0x0_XGBoost.py`):** Adicionado botão nativo `📲 Disparar Sinais no Telegram` para enviar os sinais do modelo Machine Learning com EV e odds.
+  3. **Rotina de Radar em 8 Horários (`rotina_5_horarios.bat` / `executar_radar_5_blocos.py`):**
+     - Alinhada com os tetos validados e ativada nas 8 tarefas do Agendador do Windows (06h, 10h30, 13h, 15h30, 18h30, 21h, 22h30 e 00h30).
+     - Dispara automaticamente os boletins do bloco ativo no Telegram e sincroniza com o GitHub / Streamlit Cloud.
+- **Arquivos:** `executar_radar_5_blocos.py`, `sinais_dia_coletor.py`, `telegram_notifier.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `pages/09_🎯_Sinais_Lay_0x0_XGBoost.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Otimização Empírica e Tetos Estritos de Risco para CS (Lay 0x3, 3x0, 2x2 e 0x0)
 
 - **Demanda do Usuário:**

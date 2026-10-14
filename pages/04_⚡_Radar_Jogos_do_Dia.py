@@ -200,8 +200,14 @@ with col_h2:
 # ── Processamento de Stakes & Risco ──
 if not df_raw.empty:
     df = df_raw.copy()
-    # Exclusão definitiva do Lay 0x3
-    df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()
+    # Tetos estritos causais homologados de Correct Score (GEMINI.md)
+    odd_e_num = pd.to_numeric(df["Odd_Entrada"], errors="coerce").fillna(999.0)
+    is_2x2 = df["Método"].astype(str).str.contains("2x2", case=False, na=False)
+    is_0x3 = df["Método"].astype(str).str.contains("0x3", case=False, na=False)
+    is_3x0 = df["Método"].astype(str).str.contains("3x0", case=False, na=False)
+    df = df[~(is_2x2 & (odd_e_num > 14.0))].copy()
+    df = df[~(is_0x3 & (odd_e_num > 30.0))].copy()
+    df = df[~(is_3x0 & (odd_e_num > 30.0))].copy()
     
     def _calcular_liability(metodo):
         m = str(metodo)

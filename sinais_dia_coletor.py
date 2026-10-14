@@ -55,11 +55,13 @@ def _ler_ledger_ko(caminho=KO_LEDGER) -> pd.DataFrame:
 # nomes como a pagina 02 e o stop diario esperam
 NOMES = {
     "Lay 0x3 Top 3": "Lay 0x3 Top 3 (Aprovado)",
+    "Lay 3x0 Top 3": "Lay 3x0 Top 3 (Aprovado)",
     "Lay 2x2 Top 3": "Lay 2x2 Top 3 (Aprovado)",
     "Lay Draw (Fav<=1.40)": "Lay Draw (Fav <= 1.40)",
     "Lay Home/DC X2 (FavVis<=1.65)": "Lay Home/DC X2 (FavVis <= 1.65)",
     "Lay Over 4.5 (Under Pesado)": "Lay Over 4.5 FT (Under Pesado)",
     "Lay 0x3 (Regra Ampla)": "Lay 0x3 (Regra Ampla)",
+    "Lay 0x0 XGBoost": "Lay 0x0 XGBoost",
 }
 COLS = ["Data", "Hora", "Liga", "Jogo", "Home", "Away", "Método", "Mercado", "Lado",
         "Odd_Entrada", "Odd_Fav", "Placar", "Resultado", "Status", "Origem", "Liquidez_Lay"]
@@ -144,17 +146,17 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="todos", min_li
     if d.empty:
         return pd.DataFrame()
         
-    # Exclusão definitiva do Lay 0x3 (a pedido do usuário em 03/10/2026)
-    d = d[~d.Metodo.str.contains("0x3", case=False, na=False)]
-    if d.empty:
-        return pd.DataFrame()
-
     # Exclusão de entradas descartadas / fora da regra causal
     d = d[~d.status.astype(str).str.contains("DESCARTADO|SKIP", case=False, na=False)]
-    # Teto estrito causal de Lay 2x2 (Odd Lay <= 14.00)
-    is_2x2 = d.Metodo.astype(str).str.contains("2x2", case=False, na=False)
+    
+    # Tetos estritos causais homologados de Correct Score (GEMINI.md)
     odd_lay = pd.to_numeric(d.Odd_Lay, errors="coerce").fillna(999.0)
+    is_2x2 = d.Metodo.astype(str).str.contains("2x2", case=False, na=False)
+    is_0x3 = d.Metodo.astype(str).str.contains("0x3", case=False, na=False)
+    is_3x0 = d.Metodo.astype(str).str.contains("3x0", case=False, na=False)
     d = d[~(is_2x2 & (odd_lay > 14.0))].copy()
+    d = d[~(is_0x3 & (odd_lay > 30.0))].copy()
+    d = d[~(is_3x0 & (odd_lay > 30.0))].copy()
     if d.empty:
         return pd.DataFrame()
 

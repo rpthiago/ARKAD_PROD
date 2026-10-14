@@ -162,6 +162,33 @@ with tab1:
                 hide_index=True
             )
             
+            if st.button("📲 Disparar Sinais no Telegram", type="primary", key="btn_tg_0x0", use_container_width=True):
+                try:
+                    from telegram_notifier import enviar_mensagem_telegram
+                    msg_linhas = [
+                        f"🎯 *ARKAD — SINAIS LAY 0x0 XGBOOST ({target_str})*",
+                        f"💰 *Banca:* R$ {banca_val:,.2f} | 🛡️ *Modo:* {gestao_mode}",
+                        f"📊 *{len(df_view)} Oportunidade(s) Qualificada(s)*\n",
+                        "━━━━━━━━━━━━━━━━━━━━━━━"
+                    ]
+                    for _, row in df_view.iterrows():
+                        msg_linhas.append(
+                            f"⏰ `{row['Horário']}` | 🏆 *{row['Liga']}*\n"
+                            f"⚽ *{row['Partida']}*\n"
+                            f"📌 *Lay 0x0 Betfair:* Odd `{row['Odd Lay Betfair']}`\n"
+                            f"🤖 *Prob. ML:* `{row['Prob. ML (XGBoost)']}` | *EV:* `{row['EV Estimado']}`\n"
+                            f"💵 *Stake:* `{row['Stake Back Betfair']}` | *Risco:* `{row['Liability (Risco)']}`\n"
+                            "───────────────────────"
+                        )
+                    msg_linhas.append("✅ *Critério:* Full Match (segurar até o apito final)")
+                    ok_tg, resp_tg = enviar_mensagem_telegram("\n".join(msg_linhas), force=True)
+                    if ok_tg:
+                        st.success("✅ Sinais do Lay 0x0 enviados com sucesso no Telegram!")
+                    else:
+                        st.error(f"Erro Telegram: {resp_tg}")
+                except Exception as e_tg:
+                    st.error(f"Falha ao enviar no Telegram: {e_tg}")
+
             st.caption("ℹ️ **Execução:** Manter a posição em Full Match até o fim da partida. Não efetuar cash out.")
         else:
             st.info(f"ℹ️ **Nenhum sinal aprovado para {target_str}.**")

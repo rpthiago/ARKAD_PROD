@@ -249,13 +249,44 @@ with col2:
                 df_show.to_excel(writer, index=False, sheet_name='Sinais_Lay_2x2')
             excel_data = buffer.getvalue()
             
-            st.download_button(
-                label="📥 Baixar Planilha de Sinais Lay 2x2 (Excel)",
-                data=excel_data,
-                file_name=f"sinais_lay2x2_{target_date.strftime('%Y-%m-%d')}.xlsx",
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                key="btn_dl_2x2"
-            )
+            col_b1, col_b2 = st.columns(2)
+            with col_b1:
+                st.download_button(
+                    label="📥 Baixar Planilha Excel",
+                    data=excel_data,
+                    file_name=f"sinais_lay2x2_{target_date.strftime('%Y-%m-%d')}.xlsx",
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    key="btn_dl_2x2",
+                    use_container_width=True
+                )
+            with col_b2:
+                if st.button("📲 Disparar no Telegram", type="primary", key="btn_tg_2x2", use_container_width=True):
+                    try:
+                        from telegram_notifier import enviar_mensagem_telegram
+                        msg_linhas = [
+                            f"🎯 *ARKAD — SINAIS LAY 2x2 QUANT ({target_date.strftime('%d/%m/%Y')})*",
+                            f"💰 *Banca:* R$ {banca_val:,.2f} | 🛡️ *Risco Máx por Jogo:* R$ {val_liab_fixed:,.2f}",
+                            f"📊 *TOP {len(df_show)} Oportunidades Selecionadas*\n",
+                            "━━━━━━━━━━━━━━━━━━━━━━━"
+                        ]
+                        for _, row in df_show.iterrows():
+                            msg_linhas.append(
+                                f"⏰ `{row['Horário']}` | 🏆 *{row['Liga']}*\n"
+                                f"⚽ *{row['Confronto']}*\n"
+                                f"📌 *Lay 2x2 Betfair:* Odd `{row['Odd Lay 2x2']:.2f}`\n"
+                                f"💵 *Stake:* `R$ {row['Stake Recomendada (R$)']:.2f}` ➔ *Lucro:* `+R$ {row['Lucro Estimado (R$)']:.2f}`\n"
+                                f"🛡️ *Filtro:* _{row['Justificativa Quant']}_\n"
+                                "───────────────────────"
+                            )
+                        msg_linhas.append("✅ *Critério:* Full Match (segurar até o apito final)")
+                        texto_tg = "\n".join(msg_linhas)
+                        ok_tg, resp_tg = enviar_mensagem_telegram(texto_tg, force=True)
+                        if ok_tg:
+                            st.success("✅ Sinais do Lay 2x2 enviados com sucesso no Telegram!")
+                        else:
+                            st.error(f"Erro Telegram: {resp_tg}")
+                    except Exception as e_tg:
+                        st.error(f"Falha ao enviar no Telegram: {e_tg}")
             
             st.caption("Opere essas entradas em **Full Match** (segurando até o final do jogo) para colher a expectativa matemática positiva.")
     else:

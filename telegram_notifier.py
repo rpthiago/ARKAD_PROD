@@ -65,13 +65,16 @@ REMETENTES_PERMITIDOS = (
     "stop_diario.py",
     "automacao_diaria_aprovados.py",
     "sinais_dia_coletor.py",
-    "enviar_sinais_telegram.py"
+    "enviar_sinais_telegram.py",
+    "executar_radar_5_blocos.py",
+    "streamlit"
 )
 
 
 def _remetente_permitido():
     import sys, os
-    return os.path.basename(sys.argv[0] or "") in REMETENTES_PERMITIDOS
+    prog = (sys.argv[0] or "").lower()
+    return any(r.lower() in prog for r in REMETENTES_PERMITIDOS)
 
 
 def enviar_mensagem_telegram(texto, parse_mode="Markdown", force=False):

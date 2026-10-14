@@ -621,7 +621,7 @@ with tab1:
                             "───────────────────────"
                         )
                     texto_tg = "\n".join(msg_linhas)
-                    ok_m, resp_m = enviar_mensagem_telegram(texto_tg)
+                    ok_m, resp_m = enviar_mensagem_telegram(texto_tg, force=True)
                     if ok_m:
                         st.success("✅ Mensagem formatada enviada com sucesso no seu Telegram!")
                     else:
