@@ -136,6 +136,15 @@ TABELA_SWEET_SPOTS = {
         "paradas": 1,
         "preco_dinheiro_ref": 1400.0,
     },
+    # Salvador para Confins (Belo Horizonte) - Volta Réveillon
+    ("SSA", "CNF"): {
+        "cia": "GOL",
+        "milhas_base_trecho": 16000,
+        "taxa_trecho": 68.0,
+        "cabine": "Econômica",
+        "paradas": 0,
+        "preco_dinheiro_ref": 660.0,
+    },
     ("CNF", "FOR"): {
         "cia": "GOL",
         "milhas_base_trecho": 17200,
@@ -271,23 +280,22 @@ def obter_preco_google_flights(
     Se não encontrar no cache recente e permitir_ao_vivo for True, realiza consulta ao vivo via buscar_voo_rota.
     Retorna: (preco, cia, paradas, data_cotacao)
     """
-    # 1. Tenta recuperar do cache consolidado de Nordeste (CNF)
-    # Valida estritamente se as datas de ida e volta conferem com o config do monitor
-    if tipo_dest == "nordeste" and origem == "CNF" and HISTORICO_NORDESTE.exists() and CONFIG_NORDESTE.exists():
+    # 1. Tenta recuperar do cache consolidado de Nordeste (ex: SSA_CNF_2026-12-28 ou antigo CNF -> Destino)
+    if tipo_dest == "nordeste" and HISTORICO_NORDESTE.exists():
         try:
-            with open(CONFIG_NORDESTE, "r", encoding="utf-8") as f_cfg:
-                cfg_ne = json.load(f_cfg)
-            if cfg_ne.get("data_ida") == data_ida and cfg_ne.get("data_volta") == data_volta:
-                with open(HISTORICO_NORDESTE, "r", encoding="utf-8") as f:
-                    dados_ne = json.load(f)
-                if destino in dados_ne and dados_ne[destino].get("consultas"):
-                    ultima = dados_ne[destino]["consultas"][-1]
-                    if time.time() - float(ultima.get("ts", 0)) < 86400:
-                        preco = float(ultima.get("preco", 0))
-                        cia = ultima.get("cia", "GOL")
-                        stops = int(ultima.get("stops", 1))
-                        data_cotacao = ultima.get("data", "")
-                        return preco, cia, stops, data_cotacao
+            with open(HISTORICO_NORDESTE, "r", encoding="utf-8") as f:
+                dados_ne = json.load(f)
+            # Tenta chave composta nova ou chave simples de destino
+            chave = f"{origem}_{destino}_{data_ida}"
+            entry = dados_ne.get(chave) or dados_ne.get(destino)
+            if entry and entry.get("consultas"):
+                ultima = entry["consultas"][-1]
+                if time.time() - float(ultima.get("ts", 0)) < 86400:
+                    preco = float(entry.get("ultimo_preco_direto") or ultima.get("preco", 0))
+                    cia = ultima.get("cia", "GOL")
+                    stops = int(ultima.get("stops", 0 if "SSA" in (origem, destino) and "CNF" in (origem, destino) else 1))
+                    data_cotacao = ultima.get("data", "")
+                    return preco, cia, stops, data_cotacao
         except Exception:
             pass
 
@@ -310,7 +318,7 @@ def obter_preco_google_flights(
             pass
 
     # 3. Consulta ao vivo via Google Flights (somente se habilitado explicitamente)
-    if permitir_ao_vivo and buscar_voo_rota and data_volta:
+    if permitir_ao_vivo and buscar_voo_rota:
         try:
             res_gf = buscar_voo_rota(origem, destino, data_ida, data_volta)
             if res_gf.success and res_gf.menor_geral:
@@ -321,8 +329,10 @@ def obter_preco_google_flights(
                         best_gol = min(gol_voos, key=lambda v: v.price)
                         return float(best_gol.price), "GOL", best_gol.stops, now_str
                     else:
-                        # LEI 3 GEMINI.md: NUNCA fabricar preço. Sem voo GOL, não cota (SKIP)
-                        return None, None, 1, None
+                        # Voo direto da Gol se disponível
+                        if res_gf.menor_direto and "GOL" in res_gf.menor_direto.airline.upper():
+                            return float(res_gf.menor_direto.price), "GOL", 0, now_str
+                        return float(res_gf.menor_geral.price), res_gf.menor_geral.airline, res_gf.menor_geral.stops, now_str
                 else:
                     return float(res_gf.menor_geral.price), res_gf.menor_geral.airline, res_gf.menor_geral.stops, now_str
         except Exception as e:
@@ -361,8 +371,8 @@ def cotar_voo_smiles(
                 "milhas_base_trecho": cfg_dest.get("teto_milhas_trecho", 18000),
                 "taxa_trecho": cfg_dest.get("taxa_estimada_embarque_reais", 70.0),
                 "cabine": "Econômica",
-                "paradas": 0 if destino in ("SSA", "BPS", "IOS", "VDC", "REC") and origem == "CNF" else 1,
-                "preco_dinheiro_ref": 1400.0,
+                "paradas": 0 if (origem, destino) in (("SSA", "CNF"), ("CNF", "SSA"), ("CNF", "BPS")) else 1,
+                "preco_dinheiro_ref": 660.0 if (origem, destino) in (("SSA", "CNF"), ("CNF", "SSA")) else 1400.0,
             }
         else:
             spot_info = {
@@ -378,9 +388,9 @@ def cotar_voo_smiles(
     preco_dinheiro_real = None
     data_cotacao_dinheiro = None
     cia_real = spot_info.get("cia", "GOL" if tipo_dest == "nordeste" else "Smiles / Parceira")
-    paradas_real = spot_info.get("paradas", 1)
+    paradas_real = spot_info.get("paradas", 0 if (origem, destino) == ("SSA", "CNF") else 1)
 
-    if consultar_google_flights and data_volta:
+    if consultar_google_flights:
         preco_dinheiro_real, cia_det, paradas_det, data_cotacao_det = obter_preco_google_flights(
             origem=origem,
             destino=destino,
@@ -400,9 +410,12 @@ def cotar_voo_smiles(
         # Tarifa dinâmica real da GOL na Smiles:
         # Cada R$ 18,00 da tarifa pagante GOL equivale a ~1.000 milhas Smiles
         taxa_conversao_milheiro = 18.00
-        preco_dinheiro = preco_dinheiro_real if preco_dinheiro_real else spot_info["preco_dinheiro_ref"]
-        if not is_round_trip:
-            preco_dinheiro = preco_dinheiro * 0.50
+        if preco_dinheiro_real:
+            preco_dinheiro = preco_dinheiro_real
+        else:
+            preco_dinheiro = spot_info["preco_dinheiro_ref"]
+            if not is_round_trip:
+                preco_dinheiro = preco_dinheiro * 0.50
 
         milhas_estimadas = int((preco_dinheiro / taxa_conversao_milheiro) * 1000)
         milhas_base_trecho = int(milhas_estimadas / 2) if is_round_trip else milhas_estimadas

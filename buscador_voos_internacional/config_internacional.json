@@ -77,5 +77,24 @@
     "alerta_se_nivel_google_baixo": false,
     "queda_minima_alerta_reais": 500,
     "cooldown_horas": 12
-  }
+  },
+  "rotas_especificas": [
+    {
+      "id": "carnaval_santiago_2027",
+      "nome": "Carnaval em Santiago do Chile 🇨🇱",
+      "origens": [
+        {"codigo": "GRU", "nome": "São Paulo (Guarulhos)"},
+        {"codigo": "CNF", "nome": "Belo Horizonte (Confins)"}
+      ],
+      "destino": "SCL",
+      "cidade": "Santiago",
+      "pais": "Chile",
+      "emoji": "🇨🇱",
+      "data_ida": "2027-02-06",
+      "data_volta": "2027-02-13",
+      "duracao_dias": 7,
+      "preco_teto_alerta": 1800,
+      "preco_referencia_normal": 2040
+    }
+  ]
 }

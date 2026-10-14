@@ -2,6 +2,24 @@ import sys
 import os
 import traceback
 
+# Garante carregamento das DLLs OpenSSL do Anaconda em segundo plano (Task Scheduler sem conda activate)
+def _configurar_dlls_anaconda():
+    prefixos = [getattr(sys, "prefix", None), getattr(sys, "base_prefix", None)]
+    for p in prefixos:
+        if not p:
+            continue
+        lib_bin = os.path.join(p, "Library", "bin")
+        if os.path.isdir(lib_bin):
+            if hasattr(os, "add_dll_directory"):
+                try:
+                    os.add_dll_directory(lib_bin)
+                except Exception:
+                    pass
+            if lib_bin not in os.environ.get("PATH", ""):
+                os.environ["PATH"] = lib_bin + os.pathsep + os.environ.get("PATH", "")
+
+_configurar_dlls_anaconda()
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CRASH_LOG = os.path.join(BASE_DIR, "crash.log")
 
@@ -25,11 +43,11 @@ try:
     from buscador_voos.main import carregar_config, executar_varredura
 
     def main():
-        logging.info("--- INICIANDO CHECAGEM AGENDADA DE VOOS BH -> NORDESTE ---")
+        logging.info("--- INICIANDO CHECAGEM AGENDADA: VOLTA SALVADOR (SSA) ➔ CONFINS (CNF) ---")
         try:
             config = carregar_config()
             resultados = executar_varredura(config, enviar_resumo=False)
-            logging.info("Varredura concluída com sucesso. %d destinos processados.", len(resultados))
+            logging.info("Varredura de volta concluída com sucesso. %d trechos avaliados.", len(resultados))
         except Exception as e:
             logging.exception("Erro crítico na execução agendada: %s", e)
 

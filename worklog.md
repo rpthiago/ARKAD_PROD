@@ -7,6 +7,123 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Radar de Jogos do Dia: Priorização de 'Todos do Dia' & Tabela Completa Nativa
+
+- **Demanda do Usuário:**
+  - *"Radar de Jogos do Dia — Betfair Exchange preciso que nessa parte ⚡ Bloco Atual (22:30-23:59) ... 📋 Todos do Dia (7) o primeiro seja de todos do dia, nao o bloco atual, e a vizualizaçao sempre em tabelha completa, nao quero cards detalhados mais"*
+- **Ações Realizadas:**
+  1. **Reordenação das Abas em `pages/04_⚡_Radar_Jogos_do_Dia.py`:**
+     - A aba `📋 Todos do Dia ({total_jogos})` foi movida para a **1ª posição** de `st.tabs()`. Assim, ao abrir a página, a visão completa de todos os jogos do dia já carrega selecionada por padrão.
+     - As abas seguintes seguem a sequência: `⚡ Bloco Atual`, `🌅 1. Matinal (06h)`, `🏆 2. Europa 1 (10h30)`, `⚽ 3. Europa 2 (13h)`, `⚡ 4. Tarde (15h30)`, `🌙 5. Noite 1 (18h30)`, `🌃 6. Noite 2 (21h00)`, `🌎 7. América do Norte (22h30)` e `🏁 8. Fechamento (00h30)`.
+  2. **Eliminação dos Cards Detalhados & Padronização de Tabela:**
+     - Removido o seletor `st.radio("Visualização", ["Cards Detalhados", "Tabela Completa"])` e toda a lógica de geração de cards HTML.
+     - Todas as abas agora renderizam direta e exclusivamente a **Tabela Completa** via `st.dataframe()`.
+     - Colunas formatadas e alinhadas: `⏰ Hora`, `🏆 Liga`, `⚽ Partida`, `📌 Método`, `Odd Lay`, `Odd Fav`, `Stake Sugerida`, `Lucro (Green)`, `Risco (Red)`, `Fila Betfair`, `Resultado` (GREEN/RED/PENDENTE), `Status` e `Placar FT`.
+     - Botão de disparo de boletim no Telegram preservado no topo de cada bloco/aba.
+  3. **Validação:**
+     - `py_compile` executado com código 0.
+- **Arquivos:** `pages/04_⚡_Radar_Jogos_do_Dia.py`, `worklog.md`.
+
+## 2026-10-13 · Antigravity · Rota Carnaval Santiago do Chile (SCL) & Integração Skyscanner
+
+- **Demanda do Usuário:**
+  - *"vamos ter q colocar mais um alerta de voo, agora indo para Santiago do chile, saindo de BH ou guarulhos, no final de semana do carnaval dia 6 de fevereiro a dia 13 de fevereiro, conseguimos tb colocar o skyscanner como buscador tb alem do google flights?"*
+- **Análise & Diagnóstico Técnico:**
+  1. **Preços de Mercado (Google Flights / 06/02 a 13/02/2027):**
+     - CNF ➔ SCL: R$ 1.967 (LATAM, 1 escala). Nível de preço normal.
+     - GRU ➔ SCL: R$ 2.040 (LATAM, voo direto). Nível de preço normal.
+     - Teto calibrado para **R$ 1.800** para capturar promoções agressivas sem falsos alertas no valor padrão.
+  2. **Viabilidade do Skyscanner como Motor de Busca:**
+     - SDK Python oficial descontinuado; API pública restrita a parceiros homologados. Scraping direto é bloqueado pela proteção Akamai/Cloudflare Bot Manager (requer CAPTCHA/proxies pagos).
+     - **Solução Arquitetural:** Motor de varredura automatizado via Google Flights (cobre 100% de voos regulares LATAM/Sky/JetSmart) + geração de **Deep Links Canônicos do Skyscanner Brasil** (`https://www.skyscanner.com.br/transporte/passagens-aereas/{orig}/{dest}/{YYMMDD_ida}/{YYMMDD_volta}/?adultsv2=1&cabinclass=economy`) em todos os alertas individuais e resumos consolidados.
+- **Ações Realizadas:**
+  1. **Configuração de Rotas Específicas (`config_internacional.json`):**
+     - Adicionada chave `rotas_especificas` com o evento `carnaval_santiago_2027` (GRU e CNF ➔ SCL, 06/02/2027 a 13/02/2027, teto R$ 1.800).
+  2. **Geração de Deep Link Skyscanner (`flight_scanner.py`):**
+     - Criada função `gerar_url_skyscanner` e campo `url_skyscanner` em `CotacaoRota`.
+  3. **Motor de Varredura e Resumos (`main.py` & `price_history.py`):**
+     - Varredura de rotas específicas integrada no loop principal e sob demanda com `--destino SCL`.
+     - Alertas individuais formatados com botão do Google Flights e botão do Skyscanner.
+     - Resumo consolidado do histórico atualizado para exibir links de ambas as plataformas para todos os destinos.
+     - URLs salvas no histórico persistente `historico_internacional.json`.
+  4. **Validação:**
+     - Testada consulta ao vivo de SCL (coletou R$ 1.967 CNF e R$ 2.040 GRU).
+     - Testado envio consolidado ao vivo para o Telegram via `--resumo-historico` com entrega 100% confirmada.
+- **Arquivos:** `buscador_voos_internacional/config_internacional.json`, `buscador_voos_internacional/flight_scanner.py`, `buscador_voos_internacional/main.py`, `buscador_voos_internacional/price_history.py`, `worklog.md`.
+
+## 2026-10-13 · Antigravity · Auditoria e Diagnóstico do Monitor de Voos Internacionais
+
+- **Demanda do Usuário:**
+  - *"nao estou recebendo tb os alertas de voos internacionais"*
+- **Causa Raiz & Diagnóstico:**
+  1. **Agendador de Tarefas e Bot 100% Saudáveis:**
+     - A tarefa agendada `ARKAD_Buscador_Voos_Internacional` rodou com sucesso hoje às 09:46 e avaliou 277 cotações em 8 destinos (Madri, Barcelona, Lisboa, Porto, Londres, Istambul, Tóquio Haneda e Tóquio Narita).
+     - O bot `@thiago_radar_voos_bot` está 100% ativo e conectado ao grupo `Alertas de Voos ✈️` (`-5476328797`).
+  2. **Mercado Aéreo com Preços Acima dos Tetos Agressivos de Oportunidade:**
+     - Os tetos foram calibrados para patamares de super promoção (ex.: Madri/Lisboa/Porto a R$ 3.200, Londres a R$ 3.500, Tóquio a R$ 5.500).
+     - No monitoramento do Google Flights de hoje, as menores tarifas encontradas no mercado foram:
+       - Madri: R$ 3.454 (Teto R$ 3.200)
+       - Barcelona: R$ 3.682 (Teto R$ 3.300)
+       - Lisboa: R$ 3.805 (Teto R$ 3.200)
+       - Londres: R$ 3.991 (Teto R$ 3.500)
+       - Porto: R$ 4.056 (Teto R$ 3.200)
+       - Istambul: R$ 5.293 (Teto R$ 4.500)
+       - Tóquio: R$ 6.457 (Teto R$ 5.500)
+     - Como nenhuma tarifa furou os tetos agressivos, o robô operou silenciosamente para evitar falsos alertas ou spam com tarifas cheias.
+  3. **No Radar de Milhas Smiles:**
+     - As cotações dinâmicas internacionais atuais estão entre 312k e 590k milhas, acima dos tetos promocionais (200k a 320k milhas).
+- **Ações Realizadas:**
+  1. **Implementação de `--resumo-historico` em `buscador_voos_internacional/main.py`:**
+     - Adicionado método para compilar instantaneamente o ranking dos melhores preços por destino a partir do histórico recente consolidado (sem necessidade de esperar 15 minutos de requisições ao vivo).
+     - Atualizado `executar_resumo.bat` para usar `--resumo-historico`.
+  2. **Envio de Prova de Vida ao Vivo no Telegram:**
+     - Ranking internacional completo de 10 dias com os melhores preços atuais de todas as cidades foi compilado e disparado com sucesso para o grupo `Alertas de Voos ✈️` via `@thiago_radar_voos_bot`.
+- **Arquivos:** `buscador_voos_internacional/main.py`, `buscador_voos_internacional/executar_resumo.bat`, `worklog.md`.
+
+## 2026-10-13 · Antigravity · Blindagem de Geração: Separação Estrita de Amazfit Balance 2 vs Balance 1
+
+- **Feedback do Usuário:**
+  - *"esse relogio é o balance 1 nao o 2"* (em resposta ao alerta de R$ 823 na Amazon).
+- **Diagnóstico:**
+  - O produto em oferta por R$ 823 na Amazon era o Amazfit Balance original (1ª geração, cód. A2291).
+  - O usuário deseja estritamente o **Amazfit Balance 2** (2ª geração, cód. A2430), com teto calibrado em R$ 1.200 (desconto de R$ 200 vs tabela de R$ 1.400).
+- **Ações Realizadas:**
+  1. **Blindagem de Termos Obrigatórios e Negativos em `config_smartwatch.json`:**
+     - Query restaurada para `amazfit balance 2`.
+     - `termos_obrigatorios`: `["balance", ["2", "ii", "segunda", "2ª", "2a", "a2430"]]`.
+     - `termos_negativos`: Adicionados `balance 1`, `balance i`, `a2287`, `a2291`.
+     - Anúncios sem a designação explícita de 2ª geração são agora 100% rejeitados.
+  2. **Limpeza do Histórico (`historico_smartwatch.json`):**
+     - Removido o registro do Balance 1 (R$ 823) para não poluir o histórico nem servir de menor preço base do Balance 2.
+  3. **Validação:**
+     - Varredura de teste executada: a oferta do Balance 1 foi descartada com precisão no Pelando (0 ofertas válidas), e 7 ofertas reais do Balance 2 no Buscapé (R$ 1.376 ~ R$ 1.652) foram mantidas em observação sem falso alerta.
+- **Arquivos:** `buscador_smartwatch/config_smartwatch.json`, `buscador_smartwatch/historico_smartwatch.json`, `worklog.md`.
+
+## 2026-10-13 · Antigravity · Diagnóstico e Correção do Radar de Smartwatches (Pelando DOM & Filtros Excessivos)
+
+- **Demanda do Usuário:**
+  - *"nao estou recebendo alertas de relogios"*
+- **Causa Raiz & Diagnóstico:**
+  1. **Bug no Parser do Pelando (`pelando_scanner.py`):**
+     - O seletor de busca de nó ascendente (`class_=re.compile(r"sc-|card|item|feed")`) casava antecipadamente com `_default-deal-card-header_`, que continha apenas o título e data, e não o elemento filho com o preço (`_default-deal-card-content_` e `_deal-card-stamp_`).
+     - Como resultado, todas as ofertas capturadas no Pelando vinham com `price_matches == []` e eram descartadas, retornando sistematicamente 0 ofertas em todas as checagens agendadas.
+  2. **Termos Excessivamente Restritivos para Amazfit Balance:**
+     - Exigia `"termos_obrigatorios": ["balance", ["2", "ii", "segunda"]]`. A listagem oficial na Amazon e nas grandes redes é simplesmente "Amazfit Balance" (sem o número "2"). O filtro rejeitava sumariamente promoções oficiais ativas (como o Balance na Amazon por R$ 823).
+  3. **Termos Excessivamente Restritivos para Huawei Watch GT:**
+     - Exigia compulsoriamente a palavra `"pro"`. Ofertas do modelo padrão GT 7 (como a oferta da Shopee a R$ 1.218 reportada pelo usuário) eram ignoradas.
+  4. **Preços do Buscapé sem Queda:**
+     - No Buscapé, os preços indexados estavam em valores de tabela normais (ex.: R$ 1.376 ~ R$ 1.440 no Balance, R$ 1.739 no T-Rex 3, R$ 1.821 no T-Rex 3 Pro), acima dos tetos calibrados de R$ 200 de desconto.
+- **Ações Realizadas:**
+  1. **Correção do Parser do Pelando:**
+     - Implementada subida robusta na árvore DOM até a raiz do card (`_deal-card_` / `deal-card`), garantindo a captura do texto completo, preços (`R$ 823`), carimbos, lojas e verificação de expiração.
+  2. **Flexibilização de Termos em `config_smartwatch.json`:**
+     - `amazfit_balance_2`: Ajustada query para `amazfit balance`, termos obrigatórios para `["balance"]` e mantidos termos negativos evitando modelos indesejados. Teto de oportunidade mantido em R$ 1.200 (desconto de R$ 200 vs referência R$ 1.400).
+     - `huawei_watch_gt_7_pro`: Ajustada query para `huawei watch gt 7`, e termos obrigatórios para `["huawei", "gt", ["7", "vii", "sétima", "setima"]]` (sem `"pro"` obrigatório, capturando ambas as versões).
+  3. **Validação Ao Vivo & Disparo Real:**
+     - Executada varredura manual: a oferta do **Amazfit Balance na Amazon por R$ 823,00** foi capturada no Pelando e disparada com sucesso via Telegram (`@thiago_radar_smartwatches_bot`).
+     - Executado `--resumo`: resumo completo dos 6 modelos enviado com sucesso para o canal do Telegram do usuário.
+- **Arquivos:** `buscador_smartwatch/pelando_scanner.py`, `buscador_smartwatch/config_smartwatch.json`, `buscador_smartwatch/historico_smartwatch.json`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Implementação de Travas Operacionais de Liquidez Mínima (>= R$ 200) e Spread no Lay Home (<= 1.15)
 
 - **Demanda / Incidente:**

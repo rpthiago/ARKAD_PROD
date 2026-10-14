@@ -121,6 +121,9 @@ def registrar_cotacao_internacional(cotacao, historico: Dict[str, Any], foi_aler
     if cotacao.menor_direto:
         item["ultimo_preco_direto"] = cotacao.menor_direto.price
 
+    item["url"] = getattr(cotacao, "url_google_flights", "")
+    item["url_skyscanner"] = getattr(cotacao, "url_skyscanner", "")
+
     if foi_alertado:
         item["ultimo_alerta_ts"] = time.time()
         item["ultimo_alerta_preco"] = preco_atual

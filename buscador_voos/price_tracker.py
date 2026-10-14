@@ -35,6 +35,7 @@ def avaliar_alerta(
     cfg_dest: Dict[str, Any],
     cfg_regras: Dict[str, Any],
     historico: Dict[str, Any],
+    chave_rota: Optional[str] = None,
 ) -> Tuple[bool, Optional[str], Optional[str]]:
     """
     Avalia se o resultado da busca constitui uma oportunidade de preço bom que justifique alerta.
@@ -48,15 +49,16 @@ def avaliar_alerta(
     # Considera o menor voo de até 1 parada (se configurado) ou o menor geral
     voo_referencia = res_busca.menor_ate_1_parada or res_busca.menor_geral
     preco_atual = voo_referencia.price
-    dest_code = res_busca.destino
+    chave = chave_rota or cfg_dest.get("id") or res_busca.destino
 
     preco_alvo = cfg_dest.get("preco_alvo", 999999)
+    preco_alvo_direto = cfg_dest.get("preco_alvo_direto")
     alerta_se_preco_alvo = cfg_regras.get("alerta_se_atingir_preco_alvo", True)
     alerta_se_nivel_baixo = cfg_regras.get("alerta_se_nivel_google_baixo", True)
     queda_subita_reais = cfg_regras.get("alerta_se_queda_subita_reais", 150)
     cooldown_horas = cfg_regras.get("cooldown_alerta_horas", 12)
 
-    dest_hist = historico.get(dest_code, {})
+    dest_hist = historico.get(chave, {})
     menor_anterior = dest_hist.get("menor_preco_historico")
     ultimo_preco = dest_hist.get("ultimo_preco")
     ultimo_alerta_ts = dest_hist.get("ultimo_alerta_ts", 0)
@@ -66,11 +68,19 @@ def avaliar_alerta(
     motivo = ""
     detalhes = []
 
-    # 1. Critério: Atingiu Preço Alvo
+    # 1. Critério: Atingiu Preço Alvo Geral
     if alerta_se_preco_alvo and preco_atual <= preco_alvo:
         deve_alertar = True
         motivo = "PRECO_ALVO"
         detalhes.append(f"Preço R$ {preco_atual:,} abaixo do teto estipulado de R$ {preco_alvo:,}")
+
+    # 1.1 Critério: Voo Direto atingiu Preço Alvo Direto
+    if alerta_se_preco_alvo and res_busca.menor_direto and preco_alvo_direto:
+        if res_busca.menor_direto.price <= preco_alvo_direto:
+            deve_alertar = True
+            if not motivo:
+                motivo = "PRECO_DIRETO"
+            detalhes.append(f"Voo DIRETO R$ {res_busca.menor_direto.price:,} ({res_busca.menor_direto.airline}) atingiu teto de R$ {preco_alvo_direto:,}")
 
     # 2. Critério: Google Flights classificou como "BAIXO" (low)
     if alerta_se_nivel_baixo and res_busca.price_level == "baixo":
@@ -100,21 +110,21 @@ def avaliar_alerta(
         pass
     elif horas_desde_ultimo < cooldown_horas:
         logger.info(
-            "Destino %s atingiu critério (%s), mas está em cooldown (alertado há %.1f horas por R$ %s).",
-            dest_code, motivo, horas_desde_ultimo, ultimo_alerta_preco
+            "Rota %s atingiu critério (%s), mas está em cooldown (alertado há %.1f horas por R$ %s).",
+            chave, motivo, horas_desde_ultimo, ultimo_alerta_preco
         )
         return False, None, None
 
     return True, motivo, " | ".join(detalhes)
 
 
-def registrar_cotacao(res_busca, historico: Dict[str, Any], foi_alertado: bool = False):
+def registrar_cotacao(res_busca, historico: Dict[str, Any], chave_rota: Optional[str] = None, foi_alertado: bool = False):
     """Atualiza o histórico persistente com os dados da última cotação."""
     if not res_busca.success or not res_busca.menor_geral:
         return
 
-    dest_code = res_busca.destino
-    dest_hist = historico.get(dest_code, {
+    chave = chave_rota or f"{res_busca.origem}_{res_busca.destino}_{res_busca.data_ida}"
+    dest_hist = historico.get(chave, {
         "menor_preco_historico": 999999,
         "maior_preco_historico": 0,
         "consultas": []
@@ -155,5 +165,5 @@ def registrar_cotacao(res_busca, historico: Dict[str, Any], foi_alertado: bool =
     })
     dest_hist["consultas"] = consultas[-50:]
 
-    historico[dest_code] = dest_hist
+    historico[chave] = dest_hist
     salvar_historico(historico)

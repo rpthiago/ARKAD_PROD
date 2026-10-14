@@ -52,22 +52,31 @@ def buscar_voo_rota(
     origem: str,
     destino: str,
     data_ida: str,
-    data_volta: str,
+    data_volta: Optional[str] = None,
     adultos: int = 1,
     classe: str = "economy",
     max_tentativas: int = 3,
     pausa_tentativa_segundos: float = 1.5,
 ) -> ResultadoBusca:
     """
-    Realiza a busca de voos ida e volta no Google Flights para o trecho especificado.
+    Realiza a busca de voos no Google Flights (ida e volta ou somente ida/volta).
     Extrai voos diretos, voos de até 1 parada e o menor preço absoluto.
     """
-    tfs = TFSData.from_interface(
-        flight_data=[
+    if data_volta:
+        flight_data = [
             FlightData(date=data_ida, from_airport=origem, to_airport=destino),
             FlightData(date=data_volta, from_airport=destino, to_airport=origem),
-        ],
-        trip="round-trip",
+        ]
+        trip = "round-trip"
+    else:
+        flight_data = [
+            FlightData(date=data_ida, from_airport=origem, to_airport=destino),
+        ]
+        trip = "one-way"
+
+    tfs = TFSData.from_interface(
+        flight_data=flight_data,
+        trip=trip,
         passengers=Passengers(adults=adultos),
         seat=classe,
     )

@@ -1,108 +1,38 @@
 {
-  "origem": "CNF",
-  "origem_nome": "Belo Horizonte (Confins)",
-  "data_ida": "2026-12-21",
-  "data_volta": "2026-12-28",
+  "nome_monitor": "Volta SSA ➔ CNF (Salvador para Belo Horizonte/Confins)",
+  "ativo": false,
+  "origem": "SSA",
+  "origem_nome": "Salvador/BA (SSA)",
+  "destino": "CNF",
+  "destino_nome": "Belo Horizonte/MG (Confins)",
+  "tipo_viagem": "one-way",
   "adultos": 1,
   "classe": "economy",
   "max_paradas_filtro": 1,
-  "destinos": [
+  "trechos": [
     {
-      "codigo": "BPS",
-      "cidade": "Porto Seguro",
-      "uf": "BA",
+      "id": "SSA_CNF_2026-12-28",
+      "data": "2026-12-28",
+      "dia_semana": "Segunda-feira",
+      "rotulo": "28/12/2026 (Segunda-feira)",
       "emoji": "🏖️",
-      "preco_alvo": 1150
+      "preco_alvo": 500,
+      "preco_alvo_direto": 600
     },
     {
-      "codigo": "SSA",
-      "cidade": "Salvador",
-      "uf": "BA",
-      "emoji": "🏛️",
-      "preco_alvo": 1300
-    },
-    {
-      "codigo": "MCZ",
-      "cidade": "Maceió",
-      "uf": "AL",
-      "emoji": "🌊",
-      "preco_alvo": 1400
-    },
-    {
-      "codigo": "FOR",
-      "cidade": "Fortaleza",
-      "uf": "CE",
-      "emoji": "🌴",
-      "preco_alvo": 1450
-    },
-    {
-      "codigo": "REC",
-      "cidade": "Recife",
-      "uf": "PE",
-      "emoji": "☀️",
-      "preco_alvo": 1550
-    },
-    {
-      "codigo": "IOS",
-      "cidade": "Ilhéus",
-      "uf": "BA",
-      "emoji": "🥥",
-      "preco_alvo": 1600
-    },
-    {
-      "codigo": "JPA",
-      "cidade": "João Pessoa",
-      "uf": "PB",
-      "emoji": "⛵",
-      "preco_alvo": 1700
-    },
-    {
-      "codigo": "NAT",
-      "cidade": "Natal",
-      "uf": "RN",
+      "id": "SSA_CNF_2026-12-29",
+      "data": "2026-12-29",
+      "dia_semana": "Terça-feira",
+      "rotulo": "29/12/2026 (Terça-feira)",
       "emoji": "🏖️",
-      "preco_alvo": 1800
-    },
-    {
-      "codigo": "AJU",
-      "cidade": "Aracaju",
-      "uf": "SE",
-      "emoji": "🦐",
-      "preco_alvo": 1800
-    },
-    {
-      "codigo": "SLZ",
-      "cidade": "São Luís",
-      "uf": "MA",
-      "emoji": "🦀",
-      "preco_alvo": 1800
-    },
-    {
-      "codigo": "VDC",
-      "cidade": "Vitória da Conquista",
-      "uf": "BA",
-      "emoji": "☕",
-      "preco_alvo": 1500
-    },
-    {
-      "codigo": "PNZ",
-      "cidade": "Petrolina",
-      "uf": "PE",
-      "emoji": "🍇",
-      "preco_alvo": 1650
-    },
-    {
-      "codigo": "THE",
-      "cidade": "Teresina",
-      "uf": "PI",
-      "emoji": "☀️",
-      "preco_alvo": 2000
+      "preco_alvo": 500,
+      "preco_alvo_direto": 600
     }
   ],
   "regras_alerta": {
     "alerta_se_atingir_preco_alvo": true,
     "alerta_se_nivel_google_baixo": true,
-    "alerta_se_queda_subita_reais": 150,
+    "alerta_se_queda_subita_reais": 50,
     "cooldown_alerta_horas": 12
   },
   "intervalo_monitoramento_minutos": 180

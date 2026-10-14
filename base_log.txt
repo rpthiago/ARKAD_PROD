@@ -216,3 +216,87 @@ remote: warning: GH001: Large files detected. You may want to try Git Large File
 To https://github.com/rpthiago/ARKAD_PROD.git
    b6806f5..ddce52a  main -> main
 (fim) 
+ 
+===== 05/10/2026  8:00:01,22 ===== 
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 248219 linhas | data max 2026-09-24 | 235 MB
+b365_base_lean.csv sincronizada: 248219 linhas | data max 2026-09-24 | 67 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_milhas_smiles/execucoes_smiles.log
+	modified:   buscador_voos/execucoes.log
+	modified:   buscador_voos/historico_precos.json
+	modified:   buscador_voos_internacional/execucoes_internacional.log
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   forward_oculto/forward_oculto.log
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-22.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 12/10/2026  8:00:01,05 ===== 
+C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py:22: DtypeWarning: Columns (4) have mixed types. Specify dtype option on import or set low_memory=False.
+  df = pd.read_csv(io.StringIO(r.text))
+baixando base completa de apicomunidade.futpythontrader.com ...
+base salva: 248219 linhas | data max 2026-09-24 | 235 MB
+b365_base_lean.csv sincronizada: 248219 linhas | data max 2026-09-24 | 67 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_milhas_smiles/config_smiles.json
+	modified:   buscador_milhas_smiles/execucoes_smiles.log
+	modified:   buscador_milhas_smiles/main.py
+	modified:   buscador_milhas_smiles/run_scheduled.py
+	modified:   buscador_milhas_smiles/smiles_scanner.py
+	modified:   buscador_voos/config.json
+	modified:   buscador_voos/execucoes.log
+	modified:   buscador_voos/flight_searcher.py
+	modified:   buscador_voos/historico_precos.json
+	modified:   buscador_voos/main.py
+	modified:   buscador_voos/price_tracker.py
+	modified:   buscador_voos/run_scheduled.py
+	modified:   buscador_voos/telegram_bot.py
+	modified:   buscador_voos_internacional/execucoes_internacional.log
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   buscador_voos_internacional/main.py
+	modified:   buscador_voos_internacional/run_scheduled.py
+	modified:   forward_oculto/forward_oculto.log
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-22.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   telegram_notifier.py
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	buscador_smartwatch/
+	cruzar_ledger_bet365.py
+	scratch_analise_2026.py
+	scratch_probe.py
+	scratch_test_prod_rules.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

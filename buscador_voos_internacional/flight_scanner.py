@@ -33,10 +33,28 @@ class CotacaoRota:
     data_volta: str
     price_level: str  # "baixo", "normal", "alto", "desconhecido"
     url_google_flights: str
+    url_skyscanner: str = ""
     menor_voo: Optional[VooInternacional] = None
     menor_direto: Optional[VooInternacional] = None
     todos_voos: List[VooInternacional] = None
     erro: Optional[str] = None
+
+
+def gerar_url_skyscanner(origem: str, destino: str, data_ida: str, data_volta: str) -> str:
+    """
+    Gera link canônico pré-configurado para busca no Skyscanner Brasil.
+    Formato das datas no Skyscanner: YYMMDD (ex: 2027-02-06 -> 270206)
+    """
+    try:
+        y_i, m_i, d_i = data_ida.split("-")
+        y_v, m_v, d_v = data_volta.split("-")
+        date_ida_sky = f"{y_i[-2:]}{m_i}{d_i}"
+        date_volta_sky = f"{y_v[-2:]}{m_v}{d_v}"
+        orig_sky = origem.lower()
+        dest_sky = destino.lower()
+        return f"https://www.skyscanner.com.br/transporte/passagens-aereas/{orig_sky}/{dest_sky}/{date_ida_sky}/{date_volta_sky}/?adultsv2=1&cabinclass=economy"
+    except Exception:
+        return f"https://www.skyscanner.com.br/transporte/passagens-aereas/{origem.lower()}/{destino.lower()}/"
 
 
 def extrair_inteiro_preco(texto: str) -> Optional[int]:
@@ -72,6 +90,7 @@ def consultar_voo_internacional(
 
     tfs_b64 = tfs.as_b64().decode("utf-8")
     url_google = f"https://www.google.com/travel/flights?tfs={tfs_b64}&curr=BRL&hl=pt-BR"
+    url_sky = gerar_url_skyscanner(origem, destino, data_ida, data_volta)
     params = {
         "tfs": tfs_b64,
         "hl": "pt-BR",
@@ -174,6 +193,7 @@ def consultar_voo_internacional(
                     data_volta=data_volta,
                     price_level=price_level,
                     url_google_flights=url_google,
+                    url_skyscanner=url_sky,
                     menor_voo=menor_voo,
                     menor_direto=menor_direto,
                     todos_voos=unicos[:5],
@@ -193,5 +213,6 @@ def consultar_voo_internacional(
         data_volta=data_volta,
         price_level="desconhecido",
         url_google_flights=url_google,
+        url_skyscanner=url_sky,
         erro=ultimo_erro or "Nenhum voo retornado pelo Google Flights",
     )

@@ -1,5 +1,24 @@
 import os
 import sys
+
+# Garante carregamento das DLLs OpenSSL do Anaconda em segundo plano (Task Scheduler sem conda activate)
+def _configurar_dlls_anaconda():
+    prefixos = [getattr(sys, "prefix", None), getattr(sys, "base_prefix", None)]
+    for p in prefixos:
+        if not p:
+            continue
+        lib_bin = os.path.join(p, "Library", "bin")
+        if os.path.isdir(lib_bin):
+            if hasattr(os, "add_dll_directory"):
+                try:
+                    os.add_dll_directory(lib_bin)
+                except Exception:
+                    pass
+            if lib_bin not in os.environ.get("PATH", ""):
+                os.environ["PATH"] = lib_bin + os.pathsep + os.environ.get("PATH", "")
+
+_configurar_dlls_anaconda()
+
 import time
 import json
 import logging
@@ -39,7 +58,11 @@ if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
 from buscador_voos.telegram_bot import enviar_mensagem
-from buscador_voos_internacional.flight_scanner import consultar_voo_internacional, CotacaoRota
+from buscador_voos_internacional.flight_scanner import (
+    consultar_voo_internacional,
+    CotacaoRota,
+    gerar_url_skyscanner,
+)
 from buscador_voos_internacional.price_history import (
     carregar_historico,
     avaliar_alerta_internacional,
@@ -65,6 +88,7 @@ def formatar_alerta_telegram(
     pais = cfg_dest.get("pais", "")
     emoji = cfg_dest.get("emoji", "✈️")
     teto = cfg_dest.get("preco_teto_alerta", 0)
+    nome_evento = cfg_dest.get("nome", "")
     origem_nome = origens_map.get(cotacao.origem, cotacao.origem)
 
     paradas_str = "Voo Direto (Sem Escalas)" if voo.stops == 0 else f"{voo.stops} escala(s)"
@@ -79,8 +103,13 @@ def formatar_alerta_telegram(
     if cotacao.menor_direto and cotacao.menor_direto.price != voo.price:
         info_direto = f"🛫 <b>Opção Direta:</b> R$ {cotacao.menor_direto.price:,} ({cotacao.menor_direto.airline})\n"
 
+    evento_hdr = f" — {nome_evento}" if nome_evento else ""
+    url_sky = getattr(cotacao, "url_skyscanner", "")
+    if not url_sky and cotacao.data_volta:
+        url_sky = gerar_url_skyscanner(cotacao.origem, cotacao.destino, cotacao.data_ida, cotacao.data_volta)
+
     msg = (
-        f"🚨 🔥 <b>MEGA PROMOÇÃO INTERNACIONAL! {emoji}</b>\n\n"
+        f"🚨 🔥 <b>MEGA PROMOÇÃO INTERNACIONAL! {emoji}</b>{evento_hdr}\n\n"
         f"✈️ <b>{origem_nome} ➔ {cidade}/{pais} ({cotacao.destino})</b>\n"
         f"🗓️ <b>{cotacao.data_ida} a {cotacao.data_volta}</b> ({duracao_dias} dias)\n\n"
         f"💰 <b>Preço: R$ {voo.price:,}</b> <i>(Ida e Volta com taxas!)</i>\n"
@@ -90,21 +119,22 @@ def formatar_alerta_telegram(
         f"📊 <b>Nível de Preço:</b> {nivel_str}\n"
         f"{info_direto}"
         f"⚡ <b>Gatilho:</b> {detalhes}\n\n"
-        f"🔗 <a href=\"{cotacao.url_google_flights}\"><b>👉 Ver e Emitir no Google Flights</b></a>"
+        f"🔗 <a href=\"{cotacao.url_google_flights}\"><b>👉 Ver no Google Flights</b></a>\n"
+        f"✈️ <a href=\"{url_sky}\"><b>👉 Comparar no Skyscanner</b></a>"
     )
     return msg
 
 
 def formatar_resumo_internacional(ranking: List[Dict[str, Any]]) -> str:
     linhas = []
-    # Agrupa por destino e pega a melhor opção encontrada
+    # Agrupa por identificador único (id_rota se existir, senão destino) e pega a melhor opção encontrada
     por_destino = {}
     for item in ranking:
         if not item.get("success"):
             continue
-        dest = item["destino"]
-        if dest not in por_destino or item["preco"] < por_destino[dest]["preco"]:
-            por_destino[dest] = item
+        chave_grp = item.get("id_rota") or item["destino"]
+        if chave_grp not in por_destino or item["preco"] < por_destino[chave_grp]["preco"]:
+            por_destino[chave_grp] = item
 
     ordenados = sorted(por_destino.values(), key=lambda x: x["preco"])
 
@@ -117,17 +147,28 @@ def formatar_resumo_internacional(ranking: List[Dict[str, Any]]) -> str:
         cia = it["cia"]
         stops = "Direto" if it["stops"] == 0 else f"{it['stops']}p"
         datas = f"{it['data_ida']} a {it['data_volta']}"
-        status = "🎯 PROMOÇÃO!" if preco <= it["teto"] else ""
+        status = "🎯 PROMOÇÃO!" if (it.get("teto") and preco <= it["teto"]) else ""
+        nome_extra = f" [{it['nome_evento']}]" if it.get("nome_evento") else ""
+
+        url_gf = it.get("url", "")
+        url_sky = it.get("url_skyscanner", "")
+        links_parts = []
+        if url_gf:
+            links_parts.append(f"<a href=\"{url_gf}\">Google Flights</a>")
+        if url_sky:
+            links_parts.append(f"<a href=\"{url_sky}\">Skyscanner</a>")
+        links_str = "   🔗 " + " | ".join(links_parts) if links_parts else ""
 
         linhas.append(
-            f"{idx}. {emoji} <b>{cidade}/{pais} ({it['destino']}): R$ {preco:,}</b>\n"
+            f"{idx}. {emoji} <b>{cidade}/{pais} ({it['destino']}){nome_extra}: R$ {preco:,}</b>\n"
             f"   ↳ <i>Saindo de {orig} | {cia} ({stops}) | {datas}</i> {status}"
+            + (f"\n{links_str}" if links_str else "")
         )
 
     tabela = "\n\n".join(linhas) if linhas else "Nenhuma cotação disponível no momento."
 
     msg = (
-        f"🌍 <b>RANKING INTERNACIONAL DE MENORES PREÇOS (10 DIAS)</b>\n"
+        f"🌍 <b>RANKING INTERNACIONAL DE MENORES PREÇOS</b>\n"
         f"🛫 <i>Saídas monitoradas: São Paulo (GRU), Rio (GIG) e BH (CNF)</i>\n\n"
         f"{tabela}\n\n"
         f"💡 <i>Alertas individuais são disparados imediatamente assim que qualquer tarifa furar o teto estipulado!</i>"
@@ -232,6 +273,7 @@ def executar_varredura_internacional(config: Dict[str, Any], enviar_resumo: bool
                     "data_ida": dt_ida,
                     "data_volta": dt_volta,
                     "url": cot.url_google_flights,
+                    "url_skyscanner": cot.url_skyscanner,
                 })
 
                 # Pausa amigável
@@ -239,6 +281,80 @@ def executar_varredura_internacional(config: Dict[str, Any], enviar_resumo: bool
 
         # Pequena pausa entre destinos
         time.sleep(1.5)
+
+    # Varredura de Rotas Específicas / Eventos (ex: Carnaval Santiago)
+    rotas_esp = config.get("rotas_especificas", [])
+    if rotas_esp:
+        print("\n" + "-" * 75)
+        print("🎯 VERIFICANDO ROTAS ESPECÍFICAS / EVENTOS ESPECIAIS:")
+        print("-" * 75)
+
+        for rota in rotas_esp:
+            dest_code = rota["destino"]
+            cidade = rota.get("cidade", dest_code)
+            pais = rota.get("pais", "")
+            emoji = rota.get("emoji", "✈️")
+            teto = rota.get("preco_teto_alerta", 999999)
+            dt_ida = rota["data_ida"]
+            dt_volta = rota["data_volta"]
+            duracao_rota = rota.get("duracao_dias", 7)
+            nome_evento = rota.get("nome", "")
+            origens_rota = rota.get("origens", origens)
+
+            if apenas_destino and dest_code.upper() != apenas_destino.upper():
+                continue
+
+            print(f"\n🔎 {emoji} Verificando rota específica: {nome_evento} ({cidade}/{pais} - {dest_code}) [Teto: R$ {teto:,}]...")
+
+            for orig in origens_rota:
+                orig_code = orig["codigo"]
+                cot = consultar_voo_internacional(
+                    origem=orig_code,
+                    destino=dest_code,
+                    data_ida=dt_ida,
+                    data_volta=dt_volta,
+                    adultos=1,
+                    classe="economy",
+                    max_tentativas=2,
+                )
+
+                if not cot.success or not cot.menor_voo:
+                    time.sleep(1.0)
+                    continue
+
+                voo = cot.menor_voo
+                preco = voo.price
+
+                deve, motivo, detalhe = avaliar_alerta_internacional(cot, rota, regras, historico)
+
+                if deve:
+                    print(f"   🚨 DISPARANDO PROMOÇÃO TELEGRAM! {orig_code}➔{dest_code}: R$ {preco:,} ({detalhe})")
+                    msg_alerta = formatar_alerta_telegram(cot, rota, origens_map, motivo, detalhe, duracao_rota)
+                    ok = enviar_mensagem(msg_alerta)
+                    registrar_cotacao_internacional(cot, historico, foi_alertado=ok)
+                else:
+                    registrar_cotacao_internacional(cot, historico, foi_alertado=False)
+
+                resultados.append({
+                    "id_rota": rota.get("id", f"{dest_code}_{dt_ida}"),
+                    "nome_evento": nome_evento,
+                    "origem": orig_code,
+                    "destino": dest_code,
+                    "cidade": cidade,
+                    "pais": pais,
+                    "emoji": emoji,
+                    "teto": teto,
+                    "success": True,
+                    "preco": preco,
+                    "cia": voo.airline,
+                    "stops": voo.stops,
+                    "data_ida": dt_ida,
+                    "data_volta": dt_volta,
+                    "url": cot.url_google_flights,
+                    "url_skyscanner": cot.url_skyscanner,
+                })
+
+                time.sleep(1.2)
 
     print("\n" + "=" * 75)
     print("🏁 Varredura internacional concluída!")
@@ -274,10 +390,78 @@ def exibir_status_historico():
     print("-" * 80)
 
 
+def enviar_resumo_do_historico(config: Dict[str, Any]) -> bool:
+    destinos_map = {d["codigo"]: d for d in config.get("destinos", [])}
+    rotas_esp = config.get("rotas_especificas", [])
+    rotas_esp_map = {}
+    for r in rotas_esp:
+        rotas_esp_map[f"{r['destino']}_{r['data_ida']}"] = r
+        if r["destino"] not in destinos_map:
+            destinos_map[r["destino"]] = r
+
+    historico = carregar_historico()
+    resultados = []
+    for chave, item in historico.items():
+        partes = chave.split("_")
+        if len(partes) < 3:
+            continue
+        orig, dest, data_ida = partes[0], partes[1], partes[2]
+
+        esp_key = f"{dest}_{data_ida}"
+        if esp_key in rotas_esp_map:
+            dest_cfg = rotas_esp_map[esp_key]
+            id_rota = dest_cfg.get("id", esp_key)
+            nome_evento = dest_cfg.get("nome", "")
+        else:
+            dest_cfg = destinos_map.get(dest, {})
+            id_rota = dest
+            nome_evento = ""
+
+        preco = item.get("ultimo_preco", 0)
+        if preco and preco > 0:
+            url_gf = item.get("url", "")
+            url_sky = item.get("url_skyscanner", "")
+            data_volta = item.get("data_volta", "")
+            if not url_sky and data_volta:
+                url_sky = gerar_url_skyscanner(orig, dest, data_ida, data_volta)
+
+            resultados.append({
+                "id_rota": id_rota,
+                "nome_evento": nome_evento,
+                "origem": orig,
+                "destino": dest,
+                "cidade": dest_cfg.get("cidade", dest),
+                "pais": dest_cfg.get("pais", ""),
+                "emoji": dest_cfg.get("emoji", "✈️"),
+                "teto": dest_cfg.get("preco_teto_alerta", 0),
+                "success": True,
+                "preco": preco,
+                "cia": item.get("ultima_cia", ""),
+                "stops": item.get("ultimas_paradas", 1),
+                "data_ida": item.get("data_ida", data_ida),
+                "data_volta": data_volta,
+                "url": url_gf,
+                "url_skyscanner": url_sky,
+            })
+    if resultados:
+        print("📨 Enviando Ranking Internacional consolidado para o Telegram...")
+        msg_resumo = formatar_resumo_internacional(resultados)
+        sucesso = enviar_mensagem(msg_resumo)
+        if sucesso:
+            print("✅ Ranking enviado com sucesso!")
+        else:
+            print("❌ Falha ao enviar ranking.")
+        return sucesso
+    else:
+        print("Nenhum histórico disponível para envio.")
+        return False
+
+
 def main():
     parser = argparse.ArgumentParser(description="Monitor de Voos Internacionais Agressivos (Europa, Turquia e Japão)")
     parser.add_argument("--check", action="store_true", help="Executa varredura silenciosa e alerta somente se houver preço agressivo")
-    parser.add_argument("--resumo", action="store_true", help="Executa varredura e envia o resumo completo com ranking no Telegram")
+    parser.add_argument("--resumo", action="store_true", help="Executa varredura completa e envia o resumo com ranking no Telegram")
+    parser.add_argument("--resumo-historico", action="store_true", help="Envia o ranking dos menores preços diretamente a partir do histórico recente consolidado")
     parser.add_argument("--status", action="store_true", help="Exibe o histórico de preços salvo localmente")
     parser.add_argument("--destino", type=str, default=None, help="Consulta apenas um destino específico (ex: MAD, LIS, LHR, IST, NRT)")
 
@@ -286,6 +470,8 @@ def main():
 
     if args.status:
         exibir_status_historico()
+    elif args.resumo_historico:
+        enviar_resumo_do_historico(config)
     elif args.resumo:
         executar_varredura_internacional(config, enviar_resumo=True, apenas_destino=args.destino)
     else:

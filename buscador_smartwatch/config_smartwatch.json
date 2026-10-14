@@ -1,0 +1,217 @@
+{
+  "nome": "Monitor de Preços & Cupons de Smartwatches",
+  "versao": "1.3.0",
+  "desconto_minimo_alerta_reais": 200.0,
+  "cooldown_horas": 12,
+  "lojas_permitidas": [
+    "Amazon",
+    "Mercado Livre",
+    "Shopee",
+    "KaBuM!",
+    "Magalu",
+    "AliExpress",
+    "Casas Bahia",
+    "Fast Shop",
+    "Girafa"
+  ],
+  "modelos": [
+    {
+      "id": "amazfit_balance_2",
+      "marca": "Amazfit",
+      "modelo": "Balance 2",
+      "tamanho_caixa": "46mm",
+      "emoji": "⌚",
+      "query_busca": "amazfit balance 2",
+      "termos_obrigatorios": [
+        "balance",
+        [
+          "2",
+          "ii",
+          "segunda",
+          "2ª",
+          "2a",
+          "a2430"
+        ]
+      ],
+      "termos_negativos": [
+        "balance 3",
+        "balance iii",
+        "balance 1",
+        "balance i",
+        "a2287",
+        "a2291",
+        "gtr",
+        "gts",
+        "bip"
+      ],
+      "preco_normal_referencia": 1400.0,
+      "preco_teto_oportunidade": 1200.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 700.0
+    },
+    {
+      "id": "amazfit_cheetah",
+      "marca": "Amazfit",
+      "modelo": "Cheetah",
+      "tamanho_caixa": "46mm",
+      "emoji": "🏃",
+      "query_busca": "amazfit cheetah",
+      "termos_obrigatorios": [
+        "cheetah"
+      ],
+      "termos_negativos": [],
+      "preco_normal_referencia": 1099.0,
+      "preco_teto_oportunidade": 899.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 550.0
+    },
+    {
+      "id": "amazfit_balance_3",
+      "marca": "Amazfit",
+      "modelo": "Balance 3",
+      "tamanho_caixa": "46mm",
+      "emoji": "⌚",
+      "query_busca": "amazfit balance 3",
+      "termos_obrigatorios": [
+        "balance",
+        [
+          "3",
+          "iii",
+          "terceira"
+        ]
+      ],
+      "termos_negativos": [
+        "balance 2",
+        "balance ii",
+        "balance 1",
+        "a2430",
+        "a2287",
+        "a2291"
+      ],
+      "preco_normal_referencia": 2299.0,
+      "preco_teto_oportunidade": 2099.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 850.0
+    },
+    {
+      "id": "huawei_watch_gt_7_pro",
+      "marca": "Huawei",
+      "modelo": "Watch GT 7 / GT 7 Pro",
+      "tamanho_caixa": "46mm (Titânio/Safira/ECG)",
+      "emoji": "💎",
+      "query_busca": "huawei watch gt 7",
+      "termos_obrigatorios": [
+        "huawei",
+        "gt",
+        [
+          "7",
+          "vii",
+          "sétima",
+          "setima"
+        ]
+      ],
+      "termos_negativos": [
+        "gt 6",
+        "gt 5",
+        "gt 4",
+        "gt 3",
+        "gt 2",
+        "gt6",
+        "gt5",
+        "gt4",
+        "gt3",
+        "gt2"
+      ],
+      "preco_normal_referencia": 1999.0,
+      "preco_teto_oportunidade": 1799.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 750.0
+    },
+    {
+      "id": "amazfit_t_rex_3",
+      "marca": "Amazfit",
+      "modelo": "T-Rex 3",
+      "tamanho_caixa": "47mm (Aço Inoxidável / 2000 nits)",
+      "emoji": "🛡️",
+      "query_busca": "amazfit t rex 3",
+      "termos_obrigatorios": [
+        [
+          "t-rex",
+          "t rex",
+          "trex"
+        ],
+        [
+          "3",
+          "iii"
+        ]
+      ],
+      "termos_negativos": [
+        "pro",
+        "ultra",
+        "t-rex 2",
+        "t rex 2",
+        "trex 2"
+      ],
+      "preco_normal_referencia": 1739.0,
+      "preco_teto_oportunidade": 1539.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 900.0
+    },
+    {
+      "id": "amazfit_t_rex_3_pro",
+      "marca": "Amazfit",
+      "modelo": "T-Rex 3 Pro",
+      "tamanho_caixa": "44mm / 48mm (Titânio / Safira / Lanterna)",
+      "emoji": "🛡️",
+      "query_busca": "amazfit t rex 3 pro",
+      "termos_obrigatorios": [
+        [
+          "t-rex",
+          "t rex",
+          "trex"
+        ],
+        [
+          "3",
+          "iii"
+        ],
+        "pro"
+      ],
+      "termos_negativos": [
+        "t-rex 2",
+        "t rex 2",
+        "trex 2"
+      ],
+      "preco_normal_referencia": 1821.0,
+      "preco_teto_oportunidade": 1621.0,
+      "desconto_minimo_alerta_reais": 200.0,
+      "preco_minimo_filtro": 1000.0
+    }
+  ],
+  "palavras_negativas": [
+    "pulseira",
+    "pulseiras",
+    "pelicula",
+    "película",
+    "peliculas",
+    "películas",
+    "carregador",
+    "case",
+    "cases",
+    "cabo",
+    "cabos",
+    "aro",
+    "capa",
+    "capas",
+    "suporte",
+    "tela touch",
+    "bateria",
+    "base carregador",
+    "adaptador",
+    "protetor",
+    "usado",
+    "recondicionado",
+    "com defeito",
+    "sucata",
+    "vitrine"
+  ]
+}

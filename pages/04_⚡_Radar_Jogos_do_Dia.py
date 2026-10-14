@@ -255,8 +255,9 @@ if not df_raw.empty:
 
     st.markdown("---")
 
-    # ── Tabs por Bloco de Horários ──
-    tab_atual, tab_b1, tab_b2, tab_b3, tab_b4, tab_b5, tab_b6, tab_b7, tab_b8, tab_todos = st.tabs([
+    # ── Tabs por Bloco de Horários (1º: Todos do Dia) ──
+    tab_todos, tab_atual, tab_b1, tab_b2, tab_b3, tab_b4, tab_b5, tab_b6, tab_b7, tab_b8 = st.tabs([
+        f"📋 Todos do Dia ({total_jogos})",
         f"⚡ Bloco Atual ({bloco_atual_info['inicio']}-{bloco_atual_info['fim']})",
         "🌅 1. Matinal (06h)",
         "🏆 2. Europa 1 (10h30)",
@@ -265,8 +266,7 @@ if not df_raw.empty:
         "🌙 5. Noite 1 (18h30)",
         "🌃 6. Noite 2 (21h00)",
         "🌎 7. América do Norte (22h30)",
-        "🏁 8. Fechamento (00h30)",
-        f"📋 Todos do Dia ({total_jogos})"
+        "🏁 8. Fechamento (00h30)"
     ])
 
     def renderizar_jogos_bloco(df_subset, titulo_bloco, desc_bloco, show_telegram_btn=True, key_prefix="bloco"):
@@ -274,15 +274,12 @@ if not df_raw.empty:
             st.info(f"Nenhum jogo qualificado registrado para o **{titulo_bloco}** nesta data.")
             return
 
-        st.subheader(f"{titulo_bloco} — {len(df_subset)} entradas")
-        st.caption(desc_bloco)
-        
-        # Modo de Visualização: Cards ou Tabela
-        col_vis1, col_vis2 = st.columns([1, 1])
-        with col_vis1:
-            modo_view = st.radio("Visualização", ["🗂️ Cards Detalhados", "📊 Tabela Completa"], horizontal=True, key=f"view_{key_prefix}_{titulo_bloco}")
+        col_tit, col_btn = st.columns([3, 1])
+        with col_tit:
+            st.subheader(f"{titulo_bloco} — {len(df_subset)} entradas")
+            st.caption(desc_bloco)
             
-        with col_vis2:
+        with col_btn:
             if show_telegram_btn:
                 if st.button(f"📲 Disparar {len(df_subset)} jogos no Telegram", key=f"tg_{key_prefix}_{titulo_bloco}", use_container_width=True):
                     msg_linhas = [
@@ -307,59 +304,44 @@ if not df_raw.empty:
                     else:
                         st.error(f"Erro Telegram: {res_m}")
 
-        if modo_view == "🗂️ Cards Detalhados":
-            for _, r in df_subset.iterrows():
-                res = str(r.get("Resultado", "PENDENTE"))
-                card_class = "game-card"
-                badge_res = '<span class="badge-status-pendente">⏳ PENDENTE</span>'
-                if res == "GREEN":
-                    card_class = "game-card game-card-green"
-                    badge_res = '<span class="badge-status-green">🟢 GREEN</span>'
-                elif res == "RED":
-                    card_class = "game-card game-card-red"
-                    badge_res = '<span class="badge-status-red">🔴 RED</span>'
+        cols_tabela = [
+            "Hora", "Liga", "Jogo", "Método", "Odd_Entrada", "Odd_Fav", 
+            "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Liquidez_Lay", "Resultado", "Status", "Placar"
+        ]
+        cols_show = [c for c in cols_tabela if c in df_subset.columns]
+        col_cfg = {
+            "Hora": st.column_config.TextColumn("⏰ Hora", width="small"),
+            "Liga": st.column_config.TextColumn("🏆 Liga", width="medium"),
+            "Jogo": st.column_config.TextColumn("⚽ Partida", width="large"),
+            "Método": st.column_config.TextColumn("📌 Método", width="medium"),
+            "Odd_Entrada": st.column_config.NumberColumn("Odd Lay", format="%.2f", width="small"),
+            "Odd_Fav": st.column_config.NumberColumn("Odd Fav", format="%.2f", width="small"),
+            "Stake_Sugerida_R$": st.column_config.NumberColumn("Stake Sugerida", format="R$ %.2f", width="small"),
+            "Lucro_Green_R$": st.column_config.NumberColumn("Lucro (Green)", format="R$ %.2f", width="small"),
+            "Risco_Red_R$": st.column_config.NumberColumn("Risco (Red)", format="R$ %.2f", width="small"),
+            "Liquidez_Lay": st.column_config.NumberColumn("Fila Betfair", format="R$ %d", width="small"),
+            "Resultado": st.column_config.TextColumn("Resultado", width="small"),
+            "Status": st.column_config.TextColumn("Status", width="small"),
+            "Placar": st.column_config.TextColumn("Placar FT", width="small"),
+        }
+        st.dataframe(
+            df_subset[cols_show],
+            column_config=col_cfg,
+            use_container_width=True,
+            hide_index=True
+        )
 
-                liq = float(r.get("Liquidez_Lay") or 0.0)
-                liq_txt = f"R$ {liq:,.0f}" if liq > 0 else "Profunda"
-                fav_odd = float(r.get("Odd_Fav") or 0.0)
-                fav_txt = f" · Fav @{fav_odd:.2f}" if fav_odd > 0 else ""
+    # 1. Tab Todos do Dia (Primeira Tab!)
+    with tab_todos:
+        renderizar_jogos_bloco(
+            df_filtrado,
+            f"Todos os Jogos do Dia ({ds_iso})",
+            "Grade consolidada completa de todas as janelas horárias",
+            show_telegram_btn=True,
+            key_prefix="todos"
+        )
 
-                st.markdown(f"""
-                <div class="{card_class}">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                        <div>
-                            <span class="badge-hora">⏰ {r.get('Hora', '')}</span>
-                            <span style="font-weight: 600; color: #94a3b8; margin-left: 8px;">🏆 {r.get('Liga', '')}</span>
-                        </div>
-                        <div>
-                            {badge_res}
-                        </div>
-                    </div>
-                    <div style="font-size: 1.15em; font-weight: bold; color: #f8fafc; margin-bottom: 6px;">
-                        ⚽ {r.get('Jogo', '')}
-                    </div>
-                    <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
-                        <span class="badge-metodo">📌 {r.get('Método', '')}</span>
-                        <span style="color: #cbd5e1;">Odd Lay: <b>{float(r.get('Odd_Entrada') or 0):.2f}</b>{fav_txt}</span>
-                        <span style="color: #64748b;">|</span>
-                        <span style="color: #94a3b8;">Fila Betfair: <b>{liq_txt}</b></span>
-                    </div>
-                    <div style="background-color: #0f172a; padding: 10px 14px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: #94a3b8;">💵 Stake Sugerida: <b style="color: #38bdf8;">R$ {float(r.get('Stake_Sugerida_R$') or 0):.2f}</b></span>
-                        <span style="color: #94a3b8;">🛡️ Risco Máx (Red): <b style="color: #f87171;">R$ {float(r.get('Risco_Red_R$') or 0):.2f}</b></span>
-                        <span style="color: #94a3b8;"> Lucro Potencial (Green): <b style="color: #4ade80;">+R$ {float(r.get('Lucro_Green_R$') or 0):.2f}</b></span>
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-        else:
-            cols_tabela = [
-                "Hora", "Liga", "Jogo", "Método", "Odd_Entrada", "Odd_Fav", 
-                "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Liquidez_Lay", "Status", "Placar"
-            ]
-            cols_show = [c for c in cols_tabela if c in df_subset.columns]
-            st.dataframe(df_subset[cols_show], use_container_width=True, hide_index=True)
-
-    # 1. Tab Bloco Atual
+    # 2. Tab Bloco Atual
     with tab_atual:
         df_atual = df_filtrado[
             (df_filtrado["Hora_Str"] >= bloco_atual_info["inicio"]) & 
@@ -367,56 +349,52 @@ if not df_raw.empty:
         ]
         renderizar_jogos_bloco(df_atual, bloco_atual_info["nome"], bloco_atual_info["desc"], key_prefix="atual")
 
-    # 2. Tab Bloco 1 (Matinal)
+    # 3. Tab Bloco 1 (Matinal)
     with tab_b1:
         b1_info = BLOCOS[1]
         df_b1 = df_filtrado[(df_filtrado["Hora_Str"] >= b1_info["inicio"]) & (df_filtrado["Hora_Str"] <= b1_info["fim"])]
         renderizar_jogos_bloco(df_b1, b1_info["nome"], b1_info["desc"], key_prefix="b1")
 
-    # 3. Tab Bloco 2 (Europa 1)
+    # 4. Tab Bloco 2 (Europa 1)
     with tab_b2:
         b2_info = BLOCOS[2]
         df_b2 = df_filtrado[(df_filtrado["Hora_Str"] >= b2_info["inicio"]) & (df_filtrado["Hora_Str"] <= b2_info["fim"])]
         renderizar_jogos_bloco(df_b2, b2_info["nome"], b2_info["desc"], key_prefix="b2")
 
-    # 4. Tab Bloco 3 (Europa 2)
+    # 5. Tab Bloco 3 (Europa 2)
     with tab_b3:
         b3_info = BLOCOS[3]
         df_b3 = df_filtrado[(df_filtrado["Hora_Str"] >= b3_info["inicio"]) & (df_filtrado["Hora_Str"] <= b3_info["fim"])]
         renderizar_jogos_bloco(df_b3, b3_info["nome"], b3_info["desc"], key_prefix="b3")
 
-    # 5. Tab Bloco 4 (Tarde / Clássicos)
+    # 6. Tab Bloco 4 (Tarde / Clássicos)
     with tab_b4:
         b4_info = BLOCOS[4]
         df_b4 = df_filtrado[(df_filtrado["Hora_Str"] >= b4_info["inicio"]) & (df_filtrado["Hora_Str"] <= b4_info["fim"])]
         renderizar_jogos_bloco(df_b4, b4_info["nome"], b4_info["desc"], key_prefix="b4")
 
-    # 6. Tab Bloco 5 (Noite Américas 1)
+    # 7. Tab Bloco 5 (Noite Américas 1)
     with tab_b5:
         b5_info = BLOCOS[5]
         df_b5 = df_filtrado[(df_filtrado["Hora_Str"] >= b5_info["inicio"]) & (df_filtrado["Hora_Str"] <= b5_info["fim"])]
         renderizar_jogos_bloco(df_b5, b5_info["nome"], b5_info["desc"], key_prefix="b5")
 
-    # 7. Tab Bloco 6 (Noite Américas 2)
+    # 8. Tab Bloco 6 (Noite Américas 2)
     with tab_b6:
         b6_info = BLOCOS[6]
         df_b6 = df_filtrado[(df_filtrado["Hora_Str"] >= b6_info["inicio"]) & (df_filtrado["Hora_Str"] <= b6_info["fim"])]
         renderizar_jogos_bloco(df_b6, b6_info["nome"], b6_info["desc"], key_prefix="b6")
 
-    # 8. Tab Bloco 7 (América do Norte & Tardios)
+    # 9. Tab Bloco 7 (América do Norte & Tardios)
     with tab_b7:
         b7_info = BLOCOS[7]
         df_b7 = df_filtrado[(df_filtrado["Hora_Str"] >= b7_info["inicio"]) & (df_filtrado["Hora_Str"] <= b7_info["fim"])]
         renderizar_jogos_bloco(df_b7, b7_info["nome"], b7_info["desc"], key_prefix="b7")
 
-    # 9. Tab Bloco 8 (Fechamento Geral & Liquidação Definitiva)
+    # 10. Tab Bloco 8 (Fechamento Geral & Liquidação Definitiva)
     with tab_b8:
         b8_info = BLOCOS[8]
         renderizar_jogos_bloco(df_filtrado, b8_info["nome"], b8_info["desc"], show_telegram_btn=True, key_prefix="b8")
-
-    # 10. Tab Todos do Dia
-    with tab_todos:
-        renderizar_jogos_bloco(df_filtrado, f"Todos os Jogos do Dia ({ds_iso})", "Grade consolidada completa de todas as janelas horárias", show_telegram_btn=True, key_prefix="todos")
 
     # ── Exportação Excel ──
     st.markdown("---")

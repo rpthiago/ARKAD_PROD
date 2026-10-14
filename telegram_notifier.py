@@ -1,5 +1,28 @@
-import os, json, requests
+import os
+import sys
+import json
 from pathlib import Path
+
+# Garante carregamento das DLLs OpenSSL do Anaconda em segundo plano (Task Scheduler sem conda activate)
+def _configurar_dlls_anaconda():
+    prefixos = [getattr(sys, "prefix", None), getattr(sys, "base_prefix", None)]
+    for p in prefixos:
+        if not p:
+            continue
+        lib_bin = os.path.join(p, "Library", "bin")
+        if os.path.isdir(lib_bin):
+            if hasattr(os, "add_dll_directory"):
+                try:
+                    os.add_dll_directory(lib_bin)
+                except Exception:
+                    pass
+            if lib_bin not in os.environ.get("PATH", ""):
+                os.environ["PATH"] = lib_bin + os.pathsep + os.environ.get("PATH", "")
+
+_configurar_dlls_anaconda()
+
+import requests
+
 
 ROOT = Path(__file__).resolve().parent
 CONFIG_FILE = ROOT / "telegram_config.json"
