@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-14 · Antigravity · Auditoria Rigorosa Ponta a Ponta: Blindagem da VPS, Governança Geográfica (África do Sul) e Sincronização do Cockpit
+
+- **Demanda do Usuário:**
+  - *"Faça uma auditoria e veja se nao estamos deixando nd escapar, pode ser bem rigoroso. E esta tudo blindado"*
+- **Vulnerabilidades Detectadas & Sanadas na Auditoria:**
+  1. *Fuga na Alça de Governança da VPS (`RE_PERIFERICA`):*
+     - A África do Sul (`SOUTH AFRICA 1` / PSL), que comprovamos historicamente ter 31,9% de empates e 21,3% de empates em super favoritos (perdedor no Lay Draw), NÃO constava na lista de exclusão do `RE_PERIFERICA` do robô da VPS.
+     - **Fix:** Inserido `SOUTH AFRICA\w*|SOUTH-AFRICA\w*|MOROCCO\w*|TUNISI\w*` em `sinais_ko_core.py`, enviado para a VPS via SCP e serviço `sinais-ko.service` reiniciado (ativo). Nenhuma entrada ou alerta sul-africano será gerado novamente.
+  2. *Resolução Dinâmica do Feed em Tempo Real (`sinais_dia_coletor.py`):*
+     - Durante a madrugada ou antes do relatório das 19h48, novas linhas gravadas pela VPS possuem `universo=""`. Se comparadas estritamente com `== "feed"`, jogos legítimos do dia seriam descartados.
+     - **Fix:** Implementada resolução dinâmica via `_feed_jogos(dia)` e `_no_feed` no ato do processamento, descartando estritamente `universo != "fora"`.
+  3. *Consistência de Linha de Comando (CLI):*
+     - O CLI de `sinais_dia_coletor.py` possuía `--universo todos` e `--min-liq 0.0` como padrões antigos.
+     - **Fix:** Padrões alterados para `--universo feed` e `--min-liq 200.0`.
+  4. *Blindagem no Cockpit do Streamlit (`04_⚡_Radar_Jogos_do_Dia.py`):*
+     - Adicionada camada redundante de filtragem visual para garantir que mesmo sob cache do navegador, jogos com `Liquidez_Lay < 200` ou odds fora dos tetos homologados (`Home > 8.00`, `Draw > 7.00`, `Over 4.5 > 20.00`) nunca apareçam nas abas dos blocos.
+  5. *Status de Deploy:*
+     - VPS atualizada e serviço `sinais-ko.service` rodando com travas de liquidez (R$ 200), spread (1.15) e governança geográfica.
+     - Commits sincronizados no GitHub (`dffef4c`).
+- **Arquivos:** `sinais_ko_core.py`, `sinais_dia_coletor.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `/home/ubuntu/betfair-collector/sinais_ko_core.py` (VPS), `worklog.md`.
+
 ## 2026-10-14 · Antigravity · Blindagem do Fechamento Geral (Bloco 8): Expurgo de Jogos Inválidos, Universo Feed Estrito e Trava LIQ_MIN 200
 
 - **Demanda / Incidente:**
