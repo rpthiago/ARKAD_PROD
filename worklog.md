@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Restauração da Página 02: Reversão da Injeção Indevida do Ledger VPS
+
+- **Demanda do Usuário:**
+  - *"o claude fez uma bagunca e alterou muita coisa no Resultados dos Métodos em Validação Forward — ARKAD antes aqui 1501 partidas 1448 liquidadas Greens / Taxa de Acerto 1295 (89.4%) 153 reds Lucro Líquido (Unidades) +1.99 u ... tinha 14 a 15 u agora ta 1,99"*
+- **Causa Raiz & Diagnóstico:**
+  1. No commit `65d6244` (12/10), o Claude alterou `pages/02_📊_Resultados_Metodos_Aprovados.py` para injetar o `forward_ko_ledger.csv` (log bruto do coletor KO-10 da VPS) como fonte de dados a partir de 16/09/2026 (`_corte_ledger`), descartando quase um mês de planilhas diárias oficiais (`Sinais_Metodos_Aprovados_*.xlsx`).
+  2. Essa substituição violou a **Lei 7 do GEMINI.md** (*"Uma base por método — nunca valide nem julgue um método em base diferente daquela em que ele nasceu"*):
+     - O ledger bruto da VPS não continha métodos aprovados oficiais como `Lay 3x0 Top 3` (+1.87 u) e `Lay Away Fortaleza 1X` (+2.44 u).
+     - Puxou 360 partidas extras sem os filtros estritos de liquidez/spread/ligas da governança, inflando de 94 para 153 reds (+59 reds espúrios) e derrubando o Lay Draw de +6.78 u para −5.36 u.
+     - Como consequência direta, o P&L líquido desabou de **+14.91 u / +16.63 u** para **+1.99 u** (+R$ 20,96).
+- **Ações Realizadas:**
+  1. Restaurada a função `carregar_dados_aprovados()` em `pages/02_📊_Resultados_Metodos_Aprovados.py` a partir do backup `pages/02_📊_Resultados_Metodos_Aprovados.py.bak_pre_ledger`, restabelecendo o carregamento exclusivo e integral de todas as planilhas oficiais diárias da pasta `metodos_aprovados/`.
+  2. Validação dos KPIs oficiais restabelecidos:
+     - **Total de Jogos:** 1.141 partidas (1.024 liquidadas).
+     - **Greens:** 930 (90,8% WR) | **Reds:** 94.
+     - **Lucro Líquido:** **+16.63 u** (comissão 3.5%) / **+14.91 u** (comissão conservadora 5.0%).
+     - **Lucro em R$:** **R$ +2.278,67** (+113,9% sobre banca de R$ 2.000).
+     - **Pendentes:** 117 jogos.
+- **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Radar de Jogos do Dia: Priorização de 'Todos do Dia' & Tabela Completa Nativa
 
 - **Demanda do Usuário:**
