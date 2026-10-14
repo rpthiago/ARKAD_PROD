@@ -20,13 +20,15 @@ JANELA_KO = (4.0, 16.0)          # minutos antes do KO em que a captura vale (co
 LIQ_MIN = 200.0                  # Piso operacional de liquidez no Lay (R$ 200 para garantir cobertura de liability)
 SPREAD_MAX_DRAW = 1.15           # Trava operacional de seguranca: descarta livros vazios/sem liquidez no empate
 SPREAD_MAX_HOME = 1.15           # Trava operacional de seguranca: descarta livros vazios/sem liquidez no mandante
+SPREAD_MAX_OVER45 = 1.25         # Trava operacional de liquidez no Over 4.5: descarta livros vazios/sem liquidez
 
 M_DRAW = "Lay Draw (Fav<=1.40)"
 M_HOME = "Lay Home/DC X2 (FavVis<=1.65)"
+M_O45 = "Lay Over 4.5 (Under Pesado)"
 
 # Constantes retrocompatíveis mantidas para evitar quebra de imports em scripts históricos
-M_0X3, M_0X3_AMPLA, M_2X2, M_O45 = (
-    "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)", "Lay 2x2 Top 3", "Lay Over 4.5 (Under Pesado)"
+M_0X3, M_0X3_AMPLA, M_2X2 = (
+    "Lay 0x3 Top 3", "Lay 0x3 (Regra Ampla)", "Lay 2x2 Top 3"
 )
 BLACKLIST_2X2 = ("SERB", "IRISH", "IRELAND", "TURK", "SCOT")
 
@@ -65,6 +67,10 @@ def _p(mk, mt, runner, lado):
     r = mk.get(mt, {}).get(runner)
     if not r and runner == "The Draw":
         r = mk.get(mt, {}).get("Draw")
+    if not r and runner == "Over 4.5 Goals":
+        r = mk.get(mt, {}).get("Over 4.5")
+    if not r and runner == "Under 2.5 Goals":
+        r = mk.get(mt, {}).get("Under 2.5")
     if not r: return None, 0.0
     v, sz = (r[0], r[1]) if lado == "back" else (r[2], r[3])
     return (v if (v is not None and v > 1.0) else None), (sz or 0.0)
@@ -88,7 +94,7 @@ def eh_jogo_ignorado(home, away, competicao):
 def candidatos(mk, home, away, competicao):
     """elegibilidade para o radar do dia."""
     if eh_jogo_ignorado(home, away, competicao):
-        return {M_DRAW: None, M_HOME: None}
+        return {M_DRAW: None, M_HOME: None, M_O45: None}
 
     a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
     db, _ = _p(mk, "MATCH_ODDS", "The Draw", "back")
@@ -96,7 +102,7 @@ def candidatos(mk, home, away, competicao):
     fav = min(h or 99.0, a or 99.0)
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
 
-    c = {M_DRAW: None, M_HOME: None}
+    c = {M_DRAW: None, M_HOME: None, M_O45: None}
     # Teto validado: Lay Draw <= 7.00 + Trava Operacional: Spread Empate <= 1.15 (Livro com Liquidez)
     spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
     if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
@@ -108,6 +114,14 @@ def candidatos(mk, home, away, competicao):
     if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00 and spread_home_ok:
         c[M_HOME] = hl
 
+    # 3. Lay Over 4.5 FT: Odd_Under25 <= 1.50 e 4.0 <= Lay Over 4.5 <= 20.0 (Trava Spread <= 1.25)
+    u25_b, _ = _p(mk, "OVER_UNDER_25", "Under 2.5 Goals", "back")
+    o45_b, _ = _p(mk, "OVER_UNDER_45", "Over 4.5 Goals", "back")
+    o45_l, _ = _p(mk, "OVER_UNDER_45", "Over 4.5 Goals", "lay")
+    spread_o45_ok = (o45_b is not None and o45_l is not None and o45_b > 1.0 and (o45_l / o45_b) <= SPREAD_MAX_OVER45)
+    if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok:
+        c[M_O45] = o45_l
+
     return c
 
 
@@ -118,7 +132,7 @@ def e_top3(odd, odds_dia):
 
 def avaliar(mk, home, away, competicao, top3_dia=None):
     """Devolve lista de sinais [(metodo, odd_lay, liq, odd_fav)] para este jogo nesta captura.
-    Portfólio oficial 1X2 estritamente dentro dos tetos lucrativos homologados."""
+    Portfólio oficial estritamente dentro dos tetos e travas de liquidez homologados."""
     if eh_jogo_ignorado(home, away, competicao):
         return []
 
@@ -149,5 +163,15 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
     liq_home_ok = (hls is not None and hls >= LIQ_MIN)
     if a and a <= 1.65 and hl and 2.0 <= hl <= 8.00 and spread_home_ok and liq_home_ok:
         out.append((M_HOME, hl, hls, a))
+
+    # 3. Lay Over 4.5 FT em Jogos Under: U25 <= 1.50 e 4.0 <= Lay Over 4.5 <= 20.0 (Teto Homologado)
+    # Trava Operacional: Spread Over 4.5 <= 1.25 + Piso de Liquidez Lay >= R$ 200
+    u25_b, _ = _p(mk, "OVER_UNDER_25", "Under 2.5 Goals", "back")
+    o45_b, _ = _p(mk, "OVER_UNDER_45", "Over 4.5 Goals", "back")
+    o45_l, o45_ls = _p(mk, "OVER_UNDER_45", "Over 4.5 Goals", "lay")
+    spread_o45_ok = (o45_b is not None and o45_l is not None and o45_b > 1.0 and (o45_l / o45_b) <= SPREAD_MAX_OVER45)
+    liq_o45_ok = (o45_ls is not None and o45_ls >= LIQ_MIN)
+    if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok and liq_o45_ok:
+        out.append((M_O45, o45_l, o45_ls, u25_b))
 
     return out

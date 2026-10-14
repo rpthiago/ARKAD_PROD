@@ -244,6 +244,7 @@ with tab1:
         
         ou25_back = pd.to_numeric(df.get("Odd_Under25_FT_Back"), errors="coerce")
         o25_back = pd.to_numeric(df.get("Odd_Over25_FT_Back"), errors="coerce")
+        o45_back = pd.to_numeric(df.get("Odd_Over45_FT_Back") if "Odd_Over45_FT_Back" in df.columns else df.get("Odd_Over45_Back", df.get("Odd_Over45_FT")), errors="coerce")
         o45_lay = pd.to_numeric(df.get("Odd_Over45_FT_Lay"), errors="coerce")
         
         l01 = pd.to_numeric(df.get("Odd_CS_0x1_Lay"), errors="coerce")
@@ -475,13 +476,20 @@ with tab1:
                     "Expectativa_WR": "85.4%", "EV_Estimado": "+2.87%"
                 })
 
-            # 5. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0)
-            if pd.notna(ou25_back.get(i)) and ou25_back[i] <= 1.50 and pd.notna(o45_lay.get(i)) and 4.0 <= o45_lay[i] <= 20.0:
+            # 5. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0 | Spread <= 1.25)
+            # Trava Operacional de Liquidez: Spread Over 4.5 <= 1.25 + Governança de Ligas
+            _sp_o45 = (o45_lay[i] / o45_back[i]) if (pd.notna(o45_back.get(i)) and o45_back[i] > 1.0 and pd.notna(o45_lay.get(i)) and o45_lay[i] > 1.0) else 99.0
+            if (
+                pd.notna(ou25_back.get(i)) and ou25_back[i] <= 1.50
+                and pd.notna(o45_lay.get(i)) and 4.0 <= o45_lay[i] <= 20.0
+                and _sp_o45 <= 1.25
+                and not eh_jogo_ignorado(h, a, liga)
+            ):
                 sinais.append({
                     "Data": ds_iso, "Hora": hora, "Liga": liga, "Jogo": jogo, "Home": h, "Away": a,
                     "Método": "Lay Over 4.5 FT (Under Pesado)", "Mercado": "Over 4.5 FT", "Lado": "LAY",
                     "Odd_Entrada": round(float(o45_lay[i]), 2), "Odd_Fav": round(float(ou25_back[i]), 2),
-                    "Expectativa_WR": "94.3%", "EV_Estimado": "+2.67%"
+                    "Expectativa_WR": "95.0%", "EV_Estimado": "+5.24%"
                 })
 
             # 6. Lay Away Fortaleza 1X em Super Fav Mandante + Jogo Controlado (Odd_H_Back <= 1.40 | Odd_Over25_FT_Back >= 1.75 | 4.5 <= Odd_A_Lay <= 15.0)

@@ -8,6 +8,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 
 import b365_data_utils
+from sinais_ko_core import eh_jogo_ignorado, SPREAD_MAX_DRAW, SPREAD_MAX_HOME, SPREAD_MAX_OVER45
 try:
     from telegram_notifier import enviar_mensagem_telegram, enviar_documento_telegram
 except ImportError:
@@ -89,6 +90,7 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     
     ou25_back = _get_series(df_games, ["Odd_Under25_FT_Back", "Odd_Under25_Back", "Odd_Under25_FT", "Odd_Under25"])
     o25_back = _get_series(df_games, ["Odd_Over25_FT_Back", "Odd_Over25_Back", "Odd_Over25_FT", "Odd_Over25"])
+    ou45_back = _get_series(df_games, ["Odd_Over45_FT_Back", "Odd_Over45_Back", "Odd_Over45_FT", "Odd_Over45"], default=np.nan)
     ou45_lay = _get_series(df_games, ["Odd_Over45_FT_Lay", "Odd_Over45_Lay"])
     
     l01 = _get_series(df_games, ["Odd_CS_0x1_Lay"])
@@ -182,8 +184,15 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
                 "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
             })
 
-        # 4. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0)
-        if ou25_back.iloc[idx] <= 1.50 and 4.0 <= ou45_lay.iloc[idx] <= 20.0:
+        # 4. Lay Over 4.5 FT em Jogos Under (Odd_Under25_Back <= 1.50 | 4.0 <= Odd_Over45_Lay <= 20.0 | Spread <= 1.25)
+        # Trava Operacional de Liquidez: Spread Over 4.5 <= 1.25 + Governança de Ligas
+        _spread_o45 = (ou45_lay.iloc[idx] / ou45_back.iloc[idx]) if (ou45_back.iloc[idx] > 1.0 and ou45_lay.iloc[idx] > 1.0) else 99.0
+        if (
+            ou25_back.iloc[idx] <= 1.50
+            and 4.0 <= ou45_lay.iloc[idx] <= 20.0
+            and _spread_o45 <= SPREAD_MAX_OVER45
+            and not eh_jogo_ignorado(h, a, liga)
+        ):
             odd_e = round(float(ou45_lay.iloc[idx]), 2)
             stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
             sinais.append({

@@ -7,6 +7,28 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-13 · Antigravity · Auditoria Forense de Liquidez e Trava de Spread no Lay Over 4.5 (SPREAD_MAX_OVER45 = 1.25)
+
+- **Demanda do Usuário:**
+  - *"e a liquidez fez estudo ? igual do lay draw?"*
+  - *"implementar a trava operacional SPREAD_MAX_OVER45 = 1.25 no gerador de sinais do Lay Over 4.5 em automacao_diaria_aprovados.py e no robô da VPS"*
+- **Diagnóstico & Estudo Forense de Spread/Liquidez em 2026:**
+  1. **Anatomia do Spread de Over 4.5:** Na base oficial Betfair Exchange (`FRESH3`, 2026), o spread (`Odd_Lay / Odd_Back`) varia de 1.05 a 17.82 (mediana 1.20, p75 1.44).
+  2. **Autópsia dos Reds em 2026:** 100% dos Reds de 2026 ocorreram com `Spread >= 1.258`, incluindo dois livros desertos sem liquidez (PAOK B com spread 10.89 e Sonderjyske com spread 2.50).
+  3. **Threshold Scan do Spread:**
+     - Com `Spread <= 1.25`, são mantidos 79 jogos líquidos em 2026 com **ZERO REDS (WR 100,00%, ROI sobre liability salta de +3,14% para +5,24%)**.
+     - Em 2025 (validação multi-ano), o filtro expurga 45 de 48 reds e reverte o ano de −20,37u (−5,40% ROI) para **+0,25u (+0,42% ROI)**.
+  4. **Lay Away Fortaleza:** Spread mediano de 1.10; o filtro de spread não altera significativamente sua margem estrutural (-0,76% a +1,10%), confirmando que sua fragilidade é margem de mercado, não apenas liquidez.
+- **Implementação em Produção:**
+  1. `sinais_ko_core.py`: Adicionado `SPREAD_MAX_OVER45 = 1.25`, suporte aos runners `"Over 4.5 Goals"` e `"Under 2.5 Goals"` em `_p`, e avaliação de `M_O45` em `candidatos()` e `avaliar()`.
+  2. `automacao_diaria_aprovados.py`: Adicionado cálculo de `_spread_o45 = ou45_lay / ou45_back`, exigindo `_spread_o45 <= 1.25` e `not eh_jogo_ignorado(h, a, liga)` no Lay Over 4.5 FT.
+  3. `pages/01_🏆_Portfolio_Metodos_Aprovados.py`: Adicionada trava `_sp_o45 <= 1.25` e governança de ligas no sinal de Lay Over 4.5 FT.
+  4. **Deploy na VPS (`163.176.59.215`):**
+     - Backup criado em `/home/ubuntu/betfair-collector/sinais_ko_core.py.bak_20261013`.
+     - Upload via SCP de `sinais_ko_core.py` atualizado.
+     - Reiniciado serviço `sinais-ko.service` com sucesso (`Active: active (running)`, PID 779304 em loop 60s).
+- **Arquivos:** `sinais_ko_core.py`, `automacao_diaria_aprovados.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `scratch/estudo_liquidez_o45_away.py`, `worklog.md`.
+
 ## 2026-10-13 · Antigravity · Integração dos Métodos de CS no Streamlit e Alertas Automáticos do Telegram
 
 - **Demanda do Usuário:**
