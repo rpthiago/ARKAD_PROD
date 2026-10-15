@@ -16,9 +16,10 @@
   2. Ao rodar `gerar_planilha_do_coletor` com `universo="feed"`, qualquer jogo legítimo capturado pela VPS à tarde/noite que não constasse nesse cache da API era marcado cegamente com `universo="fora"`, sendo descartado do radar e da liquidação oficial.
   3. Com isso, 4 partidas válidas (Champions League, Argentina Primera, Colômbia Primera A, Noruega 1st Division) com liquidez alta (> R$ 200) e dentro de todos os tetos ficaram presas como `PENDENTE` no ledger.
 - **Ações Realizadas:**
-  1. **Blindagem Lógica de Universo (`sinais_dia_coletor.py` e `relatorio_forward_5metodos.py`):**
-     - O fallback de `universo` agora respeita a governança: se o jogo não está no feed da API, só é marcado como `"fora"` se falhar em `eh_jogo_ignorado` (seleções, feminino, amadoras, ligas periféricas como África do Sul, etc.). Jogos de ligas principais e homologadas com liquidez são classificados legitimamente como `"feed"`.
-     - Deploy do código corrigido realizado tanto no repositório local quanto na VPS.
+  1. **Blindagem Lógica e Desacoplamento Total da API (`sinais_dia_coletor.py` e `relatorio_forward_5metodos.py`):**
+     - Eliminada a dependência parasita do endpoint diário da API FutPythonTrader. O robô operacional lê 100% da VPS (Betfair Exchange).
+     - O status de `universo` agora é regido estritamente pelas travas de governança (`eh_jogo_ignorado`) e liquidez ($\ge \text{R\$} 200$): se o jogo é de liga homologada (Champions, Argentina, Noruega, etc.), pertence ao universo de execução (`"feed"`). Só é descartado (`"fora"`) se violar a governança (África do Sul, Butão, feminino, etc.).
+     - Deploy do código corrigido realizado no repositório local e na VPS.
   2. **Liquidação e Consolidação Oficial dos 6 Jogos de 14/10:**
      - 07:00 | Mito x FC Tokyo (Japanese J League Cup) ➔ 1-0 (RED, -R$ 200.00)
      - 09:30 | Samorin x FK Humenne (Slovakian Cup) ➔ 2-1 (GREEN, +R$ 35.37)
