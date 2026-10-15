@@ -177,18 +177,23 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="feed", min_liq
     if d.empty:
         return pd.DataFrame()
 
-    # Se ha linhas sem universo preenchido para o dia, resolve contra o feed oficial da API
+    # Se ha linhas sem universo preenchido para o dia, resolve contra o feed oficial da API ou governança
     if (d["universo"].fillna("") == "").any():
         try:
             from relatorio_forward_5metodos import _feed_jogos, _no_feed
             jogos_feed = _feed_jogos(dia)
-            if jogos_feed:
-                for idx, r in d.iterrows():
-                    if not r.get("universo"):
-                        val = "feed" if _no_feed(r, jogos_feed) else "fora"
-                        d.at[idx, "universo"] = val
         except Exception:
-            pass
+            jogos_feed = set()
+            
+        for idx, r in d.iterrows():
+            if not r.get("universo") or pd.isna(r.get("universo")):
+                if jogos_feed and _no_feed(r, jogos_feed):
+                    d.at[idx, "universo"] = "feed"
+                elif eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")):
+                    d.at[idx, "universo"] = "fora"
+                else:
+                    # Jogo de liga homologada (Champions, Argentina 1, Noruega 1, etc.) pertence ao universo
+                    d.at[idx, "universo"] = "feed"
 
     if universo == "feed":
         d = d[d.universo.fillna("") != "fora"]

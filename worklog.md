@@ -7,6 +7,31 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-15 · Antigravity · Correção do Fechamento de 14/10: Resolução de Universo do Feed e Reconciliação dos 4 Jogos Omitidos
+
+- **Demanda do Usuário:**
+  - *"teve outros jogos que o fechamento nao pegou"* sobre o boletim oficial do Bloco 8 (00:30) de 14/10 que consolidou apenas 2 jogos (Mito x FC Tokyo e Samorin x FK Humenne, -R$ 164.63).
+- **Causa Raiz Identificada:**
+  1. A API externa FutPythonTrader disponibilizou apenas 2 partidas para 14/10 no snapshot matinal, que foram salvas no cache estático `.cache_feed_jogos.csv`.
+  2. Ao rodar `gerar_planilha_do_coletor` com `universo="feed"`, qualquer jogo legítimo capturado pela VPS à tarde/noite que não constasse nesse cache da API era marcado cegamente com `universo="fora"`, sendo descartado do radar e da liquidação oficial.
+  3. Com isso, 4 partidas válidas (Champions League, Argentina Primera, Colômbia Primera A, Noruega 1st Division) com liquidez alta (> R$ 200) e dentro de todos os tetos ficaram presas como `PENDENTE` no ledger.
+- **Ações Realizadas:**
+  1. **Blindagem Lógica de Universo (`sinais_dia_coletor.py` e `relatorio_forward_5metodos.py`):**
+     - O fallback de `universo` agora respeita a governança: se o jogo não está no feed da API, só é marcado como `"fora"` se falhar em `eh_jogo_ignorado` (seleções, feminino, amadoras, ligas periféricas como África do Sul, etc.). Jogos de ligas principais e homologadas com liquidez são classificados legitimamente como `"feed"`.
+     - Deploy do código corrigido realizado tanto no repositório local quanto na VPS.
+  2. **Liquidação e Consolidação Oficial dos 6 Jogos de 14/10:**
+     - 07:00 | Mito x FC Tokyo (Japanese J League Cup) ➔ 1-0 (RED, -R$ 200.00)
+     - 09:30 | Samorin x FK Humenne (Slovakian Cup) ➔ 2-1 (GREEN, +R$ 35.37)
+     - 14:00 | Bryne x Raufoss (Norwegian 1st Division) ➔ 1-1 (RED, -R$ 200.00)
+     - 16:00 | Slovan Bratislava x Stuttgart (UEFA Champions League) ➔ 0-3 (GREEN, +R$ 28.09)
+     - 18:30 | Junior FC Barranquilla x Deportivo Pereira (Colombian Primera A) ➔ 1-1 (RED, -R$ 200.00)
+     - 19:00 | Sarmiento de Junin x River Plate (Argentinian Primera Division) ➔ 1-1 (GREEN, +R$ 28.09)
+  3. **Balanço Consolidado Real de 14/10:**
+     - 6 jogos | 3 Greens / 3 Reds | 50.0% WR | P&L Líquido: **-R$ 508.45**.
+     - Planilha `Sinais_Metodos_Aprovados_2026-10-14.xlsx` e ledgers (local e VPS) 100% atualizados e liquidados.
+     - Fechamento oficial reenviado com sucesso ao Telegram via Bloco 8.
+- **Arquivos:** `sinais_dia_coletor.py`, `relatorio_forward_5metodos.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-14.xlsx`, `metodos_aprovados/forward_ko_ledger.csv`, `worklog.md`.
+
 ## 2026-10-14 · Antigravity · Auditoria Rigorosa Ponta a Ponta: Blindagem da VPS, Governança Geográfica (África do Sul) e Sincronização do Cockpit
 
 - **Demanda do Usuário:**

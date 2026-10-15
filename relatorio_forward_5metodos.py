@@ -597,7 +597,14 @@ def atualizar_ko():
         for r in sem_univ: por_dia.setdefault(r["Data"], []).append(r)
         for ds, rs in sorted(por_dia.items()):
             jogos = _feed_jogos(ds)
-            for r in rs: r["universo"] = ("feed" if _no_feed(r, jogos) else "fora") if jogos else ""
+            from sinais_ko_core import eh_jogo_ignorado
+            for r in rs:
+                if jogos and _no_feed(r, jogos):
+                    r["universo"] = "feed"
+                elif eh_jogo_ignorado(r.get("Home", ""), r.get("Away", ""), r.get("Liga", "")):
+                    r["universo"] = "fora"
+                else:
+                    r["universo"] = "feed"
         print("  ledger KO: universo preenchido em %d linhas" % sum(1 for r in sem_univ if r.get("universo")))
     pend = [r for r in L.values() if r["status"] == "PENDENTE"]
     if pend:
