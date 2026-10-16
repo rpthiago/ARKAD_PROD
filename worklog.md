@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-15 · Antigravity · Migração Operacional de Exchange: Saque OrbitX (BET-IBC) para Binance e Transição para BFB247 (96ex)
+
+- **Demanda / Contexto do Usuário:**
+  - O usuário relatou elevação contínua e abusiva nas taxas da sua conta OrbitX (*"Cada hora eles aumentam a taxa, vamos ter q mudar de casa"*).
+  - Investigação técnica comprovou que o broker utilizado (BET-IBC, conta `btrodriguest`) cobra comissão base de 5,0% mais taxas adicionais dinâmicas de provedor aplicadas automaticamente, corroendo substancialmente o yield dos métodos em Lay.
+  - O usuário decidiu migrar para a **BFB247** (operando no espelho `96ex.one`), onde a taxa de comissão sobre lucros no Exchange é de apenas **2,5% a 3,0%** (com a mesma liquidez Betfair).
+- **Ação Executada em 15/10/2026 (~18:00 BRT):**
+  1. **Solicitação Oficial de Saque na BET-IBC (`bet-ibc.com/request-withdrawal-form`):**
+     - Conta de Origem: `OrbitX` (Username: `btrodriguest`, Moeda: `EUR`).
+     - Destino: Carteira **Binance** do Thiago.
+     - Método / Rede: **Criptomoeda USDT na rede TRON (TRC-20)** (endereço iniciando com `T...`).
+     - Taxa de transferência expressa (+5%) mantida desmarcada.
+     - Prazo operacional estimado pela BET-IBC: até **24 horas úteis** (janela de compensação esperada entre 16/10 18:00 e 17/10).
+- **Roteiro Registrado para Próxima Sessão (Quando o Usuário Chamar):**
+  1. *Checagem do Saldo:* Verificar no app da Binance se o depósito em USDT (TRC-20) foi creditado com sucesso.
+  2. *Cadastro / Acesso na BFB247:* Auxiliar o usuário no cadastro ou ativação na BFB247 (`96ex.one`) utilizando o link e credenciais oficiais fornecidas pelo amigo.
+  3. *Depósito na BFB247:* Transferir os fundos em USDT da Binance para a BFB247 via rede TRC-20 ou BEP-20.
+  4. *Conferência de Parâmetros:* Confirmar que a comissão da nova conta está fixada em 2,5% - 3,0% e que os mercados de Lay (Match Odds, Correct Score, Over/Under) estão operacionais.
+  5. *Retomada das Operações:* Reatar as entradas diárias do portfólio aprovado com menor atrito de comissão.
+- **Arquivos:** `worklog.md`, `tasks.md`.
+
 ## 2026-10-15 · Antigravity · Correção do Fechamento de 14/10: Resolução de Universo do Feed e Reconciliação dos 4 Jogos Omitidos
 
 - **Demanda do Usuário:**

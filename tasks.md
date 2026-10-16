@@ -8,6 +8,12 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [ ] **Migração Operacional de Corretora: Saque OrbitX (BET-IBC) ➔ Binance ➔ BFB247 (15/10).**
+  - [x] Solicitado saque integral da conta `btrodriguest` no formulário oficial da BET-IBC via USDT Tron (TRC-20) para a Binance em 15/10 (~18:00 BRT).
+  - [ ] Aguardar compensação do saque na Binance (prazo de até 24 horas úteis, até 16/10 18:00 - 17/10).
+  - [ ] Realizar abertura/ativação na BFB247 (`96ex.one`) via link de indicação do amigo com comissão de 2,5% a 3,0%.
+  - [ ] Depositar USDT da Binance na BFB247 e reatar operações do ARKAD com menor arraste de comissão.
+
 - [x] **Laboratório de Observação Setembro/Outubro (Página 03 do Streamlit) — stake-zero (21/09).**
   - [x] Criada página dedicada (`pages/03_🔬_Observacao_Set_Out_2026.py`) para monitoramento prospectivo dos 6 métodos em quarentena/resgate durante Setembro e Outubro/2026 (incluindo Lay 0x1 Sniper no feed da API — Lei 7).
   - [x] Arquivada a página anterior `pages/03_⚡_Radar_Trader_InPlay.py` para `pages_arquivadas/`.
