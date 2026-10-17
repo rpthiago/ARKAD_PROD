@@ -7,6 +7,26 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-16 · Antigravity · Reativação Operacional de Lay 2x2 e Lay 0x3 no Robô KO-10 da VPS e Alertas do Telegram
+
+- **Demanda do Usuário:**
+  - *"Os metodos lay 2x2 e lay 0x3 estao alerta do telegram e no arkad, se nao pode colocar"*
+- **Diagnóstico:**
+  - Embora a Página 04 e o script de blocos (`executar_radar_5_blocos.py`) tivessem regras de exibição e filtros para CS, o motor central de geração em tempo real da VPS (`sinais_ko_core.py`) estava avaliando estritamente a Tríade 1X2 (`Lay Draw`, `Lay Home`, `Lay Over 4.5`), deixando `Lay 0x3` e `Lay 2x2` fora das funções `candidatos()` e `avaliar()`.
+  - Como consequência, o serviço `sinais-ko.service` da VPS não gerava nem gravava entradas de CS no `forward_ko_ledger.csv`, e o bot não disparava alertas de 0x3 e 2x2 no Telegram.
+- **Implementação & Ativação em Produção:**
+  1. `sinais_ko_core.py`:
+     - **Lay 0x3 Top 3:** Reativado com teto estrito calibrado `Odd_Lay <= 30.00`, `Odd_Under25 <= 2.10`, `Odd_A >= 1.85`, `Liquidez_Lay >= 200` e governança de ligas (`eh_jogo_ignorado`).
+     - **Lay 2x2 Top 3:** Reativado com teto estrito calibrado `Odd_Lay <= 14.00`, tendência Under/Favoritismo (`U25 <= 2.00` ou `H <= 1.55` ou `A <= 1.60`), `Liquidez_Lay >= 200`, governança e blacklist de ligas de alto 2x2 (`BLACKLIST_2X2`).
+  2. **Deploy na VPS (`163.176.59.215`):**
+     - Backup `sinais_ko_core.py.bak_20261016` gerado com sucesso.
+     - Upload via SCP de `sinais_ko_core.py` atualizado.
+     - Serviço `sinais-ko.service` reiniciado e confirmado com status `active (running)`.
+  3. **Integração no Ecossistema:**
+     - Sinais gerados no KO-10 serão enviados instantaneamente no Telegram com formatação de odd, liquidez e tag de bloco.
+     - Linhas serão consolidadas automaticamente no `forward_ko_ledger.csv` e exibidas no Radar da Página 04 do Streamlit.
+- **Arquivos:** `sinais_ko_core.py`, `worklog.md`.
+
 ## 2026-10-15 · Antigravity · Migração Operacional de Exchange: Saque OrbitX (BET-IBC) para Binance e Transição para BFB247 (96ex)
 
 - **Demanda / Contexto do Usuário:**

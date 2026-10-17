@@ -94,7 +94,7 @@ def eh_jogo_ignorado(home, away, competicao):
 def candidatos(mk, home, away, competicao):
     """elegibilidade para o radar do dia."""
     if eh_jogo_ignorado(home, away, competicao):
-        return {M_DRAW: None, M_HOME: None, M_O45: None}
+        return {M_DRAW: None, M_HOME: None, M_O45: None, M_0X3: None, M_2X2: None}
 
     a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
     db, _ = _p(mk, "MATCH_ODDS", "The Draw", "back")
@@ -102,7 +102,7 @@ def candidatos(mk, home, away, competicao):
     fav = min(h or 99.0, a or 99.0)
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
 
-    c = {M_DRAW: None, M_HOME: None, M_O45: None}
+    c = {M_DRAW: None, M_HOME: None, M_O45: None, M_0X3: None, M_2X2: None}
     # Teto validado: Lay Draw <= 7.00 + Trava Operacional: Spread Empate <= 1.15 (Livro com Liquidez)
     spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
     if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
@@ -121,6 +121,19 @@ def candidatos(mk, home, away, competicao):
     spread_o45_ok = (o45_b is not None and o45_l is not None and o45_b > 1.0 and (o45_l / o45_b) <= SPREAD_MAX_OVER45)
     if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok:
         c[M_O45] = o45_l
+
+    # 4. Lay 0x3 Top 3: Under 2.5 <= 2.10 | 14.0 <= Lay 0x3 <= 30.00 | Odd_A >= 1.85
+    l03, _ = _p(mk, "CORRECT_SCORE", "0 - 3", "lay")
+    if u25_b and u25_b <= 2.10 and l03 and 14.0 <= l03 <= 30.0 and (a is None or a >= 1.85):
+        c[M_0X3] = l03
+
+    # 5. Lay 2x2 Top 3: 8.0 <= Lay 2x2 <= 14.00 | Tendência Under/Fav | Sem Blacklist
+    l22, _ = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
+    comp_str = str(competicao or "").upper()
+    passou_blacklist_2x2 = not any(b in comp_str for b in BLACKLIST_2X2)
+    passou_tend_2x2 = (u25_b and u25_b <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)
+    if l22 and 8.0 <= l22 <= 14.0 and passou_tend_2x2 and passou_blacklist_2x2:
+        c[M_2X2] = l22
 
     return c
 
@@ -173,5 +186,28 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
     liq_o45_ok = (o45_ls is not None and o45_ls >= LIQ_MIN)
     if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok and liq_o45_ok:
         out.append((M_O45, o45_l, o45_ls, u25_b))
+
+    # 4. Lay 0x3 Top 3 (Teto Validado <= 30.00 + U25 <= 2.10 + Visitante >= 1.85 + Liq >= 200)
+    l03, l03s = _p(mk, "CORRECT_SCORE", "0 - 3", "lay")
+    liq_0x3_ok = (l03s is not None and l03s >= LIQ_MIN)
+    if u25_b and u25_b <= 2.10 and l03 and 14.0 <= l03 <= 30.0 and (a is None or a >= 1.85) and liq_0x3_ok:
+        if top3_dia and M_0X3 in top3_dia and top3_dia[M_0X3]:
+            if e_top3(l03, top3_dia[M_0X3]):
+                out.append((M_0X3, l03, l03s, a))
+        else:
+            out.append((M_0X3, l03, l03s, a))
+
+    # 5. Lay 2x2 Top 3 (Teto Validado <= 14.00 + Tendência Under/Fav + Sem Blacklist + Liq >= 200)
+    l22, l22s = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
+    comp_str = str(competicao or "").upper()
+    passou_blacklist_2x2 = not any(b in comp_str for b in BLACKLIST_2X2)
+    passou_tend_2x2 = (u25_b and u25_b <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)
+    liq_2x2_ok = (l22s is not None and l22s >= LIQ_MIN)
+    if l22 and 8.0 <= l22 <= 14.0 and passou_tend_2x2 and passou_blacklist_2x2 and liq_2x2_ok:
+        if top3_dia and M_2X2 in top3_dia and top3_dia[M_2X2]:
+            if e_top3(l22, top3_dia[M_2X2]):
+                out.append((M_2X2, l22, l22s, fav))
+        else:
+            out.append((M_2X2, l22, l22s, fav))
 
     return out
