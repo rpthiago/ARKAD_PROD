@@ -197,7 +197,7 @@ Não apliquei: mudar o endpoint de autenticação é alteração que precisa da 
 
 1. **Sticky Session no IPRoyal:**
    - Adicionado `_session-arkad1_lifetime-30m` à senha no `.env`:
-     `BETFAIR_PROXY=http://97AmEBoDr4acyTIs:wUXBDw9ofD5vbyUc_country-gb_session-arkad1_lifetime-30m@geo.iproyal.com:12321`
+     `BETFAIR_PROXY=http://<usuario>:<senha>_country-gb_session-arkad1_lifetime-30m@geo.iproyal.com:12321`
    - Testado e validado: o mesmo IP residencial UK (`86.174.65.24`) é mantido em requisições consecutivas, eliminando as quedas por rotação.
 
 2. **Endpoint `identitysso.betfair.com` para KeepAlive:**
@@ -342,3 +342,24 @@ Backup: `coletar_betfair_direto.py.bak_pre_proxydet`.
 
 `[ciclo 7r] 720 cotacoes | 20 jogos | 9 mercados | 23s (repetido na hora apos re-login)` — o conserto
 do ciclo zerado disparou pela primeira vez e recuperou um ciclo que antes teria virado buraco de 5 min.
+
+---
+
+## 18/10 — login de partida protegido pelo disjuntor
+
+Saldo do iProyal acabou de novo (proxy respondendo **402 Payment Required** no CONNECT). O loop já tratava
+isso, mas o **login de partida** e o re-login de `INVALID_SESSION` não: a exceção matava o processo e o
+systemd (`Restart=always`, `RestartSec=30`) subia de novo a cada 30 s — crash-loop com o log inchando.
+Pior caso evitado: se a Betfair **recusar o login** (ACTIONS_REQUIRED, senha), seria login em repetição a
+cada 30 s, o padrão que pode travar a conta.
+
+Agora os dois pontos usam `login_resiliente(disj)`: qualquer falha de login espera pelo disjuntor
+(5 → 15 → 30 → 60 → 120 min), avisa no Telegram se for proxy, e zera o contador no sucesso.
+Testado na VPS com login simulado (402 → senha recusada → ok: esperas 300 s e 900 s, contador zerado) e
+reiniciado: `NRestarts=0`, `[ciclo 1] 746 cotacoes | 22 jogos | 9 mercados`.
+Obs.: a mensagem do disjuntor ainda diz "API respondendo bloqueio" também para falha de login.
+Backup: `coletar_betfair_direto.py.bak_pre_loginresil`.
+
+Lição do painel do iProyal: **"Add funds" só põe dinheiro na carteira**. O tráfego só existe depois de
+"Create a new order" → Residential → GB pagos com o saldo. O auto top-up estava "Active" e mesmo assim
+o tráfego zerou — conferir em "Manage Top-Up" de onde ele cobra.
