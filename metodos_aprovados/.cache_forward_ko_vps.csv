@@ -1,4 +1,4 @@
-﻿Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,origem,status,gols_H,gols_A,placar,resultado,pnl_u,pnl_rs,break_even,liquidado_em,fonte_placar,universo,no_0600
+Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,origem,status,gols_H,gols_A,placar,resultado,pnl_u,pnl_rs,break_even,liquidado_em,fonte_placar,universo,no_0600
 2026-09-16,Lay Draw (Fav<=1.40),Bhutan Premier League,Tsirang FC,Thimphu FC,06:00,8.2,1.33,92.0,14.9,2026-09-16 08:45:08,live,LIQUIDADO,,,AO Away Win,GREEN,0.13194,13.19,0.8834,2026-10-13 19:48,betfair_oficial:cat,fora,
 2026-09-16,Lay Home/DC X2 (FavVis<=1.65),Bhutan Premier League,Tsirang FC,Thimphu FC,06:00,8.8,1.33,90.0,14.9,2026-09-16 08:45:08,live,LIQUIDADO,,,AO Away Win,GREEN,0.12179,12.18,0.8914,2026-10-13 19:48,betfair_oficial:cat,fora,
 2026-09-16,Lay 0x3 (Regra Ampla),Greek Cup,Niki Volou,Asteras Tripolis,09:00,32.0,1.57,178.0,13.5,2026-09-16 11:46:27,live,LIQUIDADO,0.0,3.0,0-3,RED,-1.0,-100.0,0.9703,2026-10-13 19:48,betfair_oficial:exato,fora,
@@ -821,18 +821,27 @@
 2026-10-14,Lay Home/DC X2 (FavVis<=1.65),UEFA Champions League,Slovan Bratislava,Stuttgart,16:00,7.8,1.4,6004.0,14.7,2026-10-14 18:45:15,live,LIQUIDADO,,,0-3,GREEN,0.1397,13.97,0.8774,2026-10-15 12:22,betfair_oficial,feed,
 2026-10-14,Lay Draw (Fav<=1.40),Colombian Primera A,Junior FC Barranquilla,Deportivo Pereira,18:30,5.9,1.35,1019.0,14.7,2026-10-14 21:15:16,live,LIQUIDADO,,,1-1,RED,-1.0,-100.0,0.8376,2026-10-15 12:22,betfair_oficial,feed,
 2026-10-14,Lay Home/DC X2 (FavVis<=1.65),Argentinian Primera Division,Sarmiento de Junin,River Plate,19:00,7.8,1.56,719.0,14.7,2026-10-14 21:45:16,live,LIQUIDADO,,,1-1,GREEN,0.1397,13.97,0.8774,2026-10-15 12:22,betfair_oficial,feed,
-2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Conference League,Egnatia Rrogozhine,Midtjylland,13:45,7.4,1.53,914.0,14.8,2026-10-15 16:30:10,live,PENDENTE,,,,,,,0.8707,,,,
-2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Conference League,CSKA Sofia,Monaco,13:45,7.0,1.52,1872.0,14.8,2026-10-15 16:30:10,live,PENDENTE,,,,,,,0.8633,,,,
-2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Europa League,Lech Poznan,Leverkusen,13:45,7.0,1.48,1540.0,14.8,2026-10-15 16:30:10,live,PENDENTE,,,,,,,0.8633,,,,
-2026-10-15,Lay Home/DC X2 (FavVis<=1.65),Turkish 1 Lig,Muglaspor,Bursaspor,14:00,6.2,1.65,351.0,14.8,2026-10-15 16:45:11,live,PENDENTE,,,,,,,0.8455,,,,
-2026-10-15,Lay Draw (Fav<=1.40),UEFA Conference League,Atalanta,Pafos FC,16:00,6.2,1.36,1579.0,14.7,2026-10-15 18:45:15,live,PENDENTE,,,,,,,0.8455,,,,
-2026-10-15,Lay Draw (Fav<=1.40),UEFA Conference League,Freiburg,FK Jablonec,16:00,6.6,1.29,889.0,14.7,2026-10-15 18:45:15,live,PENDENTE,,,,,,,0.855,,,,
-2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Swedish Allsvenskan,Brommapojkarna,Djurgardens,14:00,6.6,1.55,1369.0,9.5,2026-10-16 16:50:25,live,PENDENTE,,,,,,,0.855,,,,
-2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Dutch Eerste Divisie,Helmond Sport,NAC Breda,15:00,6.8,1.47,360.0,14.8,2026-10-16 17:45:10,live,PENDENTE,,,,,,,0.8593,,,,
-2026-10-16,Lay Draw (Fav<=1.40),Belgian Cup,Standard,FCV Dender,16:00,5.2,1.4,321.0,14.8,2026-10-16 18:45:10,live,PENDENTE,,,,,,,0.8155,,,,
-2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Icelandic Urvalsdeild,Breidablik,Vikingur Reykjavik,16:15,5.0,1.65,856.0,9.5,2026-10-16 19:05:25,live,PENDENTE,,,,,,,0.8081,,,,
-2026-10-16,Lay Over 4.5 (Under Pesado),Argentinian Primera Nacional,Atletico Rafaela,Quilmes,21:00,19.0,1.49,416.0,14.8,2026-10-16 23:45:14,live,PENDENTE,,,,,,,0.9499,,,,
-2026-10-17,Lay Draw (Fav<=1.40),Chinese League 1,Guangxi Hengchen,Changchun Yatai,08:30,6.4,1.32,492.0,14.9,2026-10-17 11:15:07,live,PENDENTE,,,,,,,0.8504,,,,
-2026-10-17,Lay Draw (Fav<=1.40),Chinese Super League,Qingdao Hainiu,Liaoning Tieren FC,08:35,7.0,1.29,3583.0,14.6,2026-10-17 11:20:21,live,PENDENTE,,,,,,,0.8633,,,,
-2026-10-17,Lay Draw (Fav<=1.40),Czech 1 Liga,Slavia Prague,Hradec Kralove,10:00,6.6,1.33,1356.0,14.8,2026-10-17 12:45:07,live,PENDENTE,,,,,,,0.855,,,,
-2026-10-17,Lay Draw (Fav<=1.40),Turkish Super League,Genclerbirligi,Galatasaray,10:00,5.9,1.36,276.0,14.8,2026-10-17 12:45:07,live,PENDENTE,,,,,,,0.8376,,,,
+2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Conference League,CSKA Sofia,Monaco,13:45,7.0,1.52,1872.0,14.8,2026-10-15 16:30:10,live,LIQUIDADO,,,1-2,GREEN,0.1583,15.83,0.8633,2026-10-15 18:30,betfair_oficial,,
+2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Conference League,Egnatia Rrogozhine,Midtjylland,13:45,7.4,1.53,914.0,14.8,2026-10-15 16:30:10,live,LIQUIDADO,,,1-1,GREEN,0.1484,14.84,0.8707,2026-10-15 18:30,betfair_oficial,,
+2026-10-15,Lay Home/DC X2 (FavVis<=1.65),UEFA Europa League,Lech Poznan,Leverkusen,13:45,7.0,1.48,1540.0,14.8,2026-10-15 16:30:10,live,LIQUIDADO,,,AO Away Win,GREEN,0.1583,15.83,0.8633,2026-10-15 18:30,betfair_oficial,,
+2026-10-15,Lay Home/DC X2 (FavVis<=1.65),Turkish 1 Lig,Muglaspor,Bursaspor,14:00,6.2,1.65,351.0,14.8,2026-10-15 16:45:11,live,LIQUIDADO,,,0-3,GREEN,0.1827,18.27,0.8455,2026-10-15 18:30,betfair_oficial,,
+2026-10-15,Lay Draw (Fav<=1.40),UEFA Conference League,Atalanta,Pafos FC,16:00,6.2,1.36,1579.0,14.7,2026-10-15 18:45:15,live,LIQUIDADO,,,3-1,GREEN,0.1827,18.27,0.8455,2026-10-15 18:30,betfair_oficial,,
+2026-10-15,Lay Draw (Fav<=1.40),UEFA Conference League,Freiburg,FK Jablonec,16:00,6.6,1.29,889.0,14.7,2026-10-15 18:45:15,live,LIQUIDADO,,,3-2,GREEN,0.1696,16.96,0.855,2026-10-15 18:30,betfair_oficial,,
+2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Swedish Allsvenskan,Brommapojkarna,Djurgardens,14:00,6.6,1.55,1369.0,9.5,2026-10-16 16:50:25,live,LIQUIDADO,,,0-2,GREEN,0.1696,16.96,0.855,2026-10-16 18:30,betfair_oficial,,
+2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Dutch Eerste Divisie,Helmond Sport,NAC Breda,15:00,6.8,1.47,360.0,14.8,2026-10-16 17:45:10,live,LIQUIDADO,,,0-2,GREEN,0.1638,16.38,0.8593,2026-10-16 18:30,betfair_oficial,,
+2026-10-16,Lay Draw (Fav<=1.40),Belgian Cup,Standard,FCV Dender,16:00,5.2,1.4,321.0,14.8,2026-10-16 18:45:10,live,LIQUIDADO,,,2-0,GREEN,0.2262,22.62,0.8155,2026-10-16 18:30,betfair_oficial,,
+2026-10-16,Lay Home/DC X2 (FavVis<=1.65),Icelandic Urvalsdeild,Breidablik,Vikingur Reykjavik,16:15,5.0,1.65,856.0,9.5,2026-10-16 19:05:25,live,LIQUIDADO,,,1-2,GREEN,0.2375,23.75,0.8081,2026-10-16 18:30,betfair_oficial,,
+2026-10-16,Lay Over 4.5 (Under Pesado),Argentinian Primera Nacional,Atletico Rafaela,Quilmes,21:00,19.0,1.49,416.0,14.8,2026-10-16 23:45:14,live,LIQUIDADO,,,1-0,GREEN,0.0528,5.28,0.9499,2026-10-17 00:30,betfair_oficial,,
+2026-10-17,Lay Draw (Fav<=1.40),Chinese League 1,Guangxi Hengchen,Changchun Yatai,08:30,6.4,1.32,492.0,14.9,2026-10-17 11:15:07,live,LIQUIDADO,,,2-2,RED,-1.0,-100.0,0.8504,2026-10-19 06:32,betfair_oficial,,
+2026-10-17,Lay Draw (Fav<=1.40),Chinese Super League,Qingdao Hainiu,Liaoning Tieren FC,08:35,7.0,1.29,3583.0,14.6,2026-10-17 11:20:21,live,LIQUIDADO,,,AO Away Win,GREEN,0.1583,15.83,0.8633,2026-10-19 06:32,betfair_oficial,,
+2026-10-17,Lay Draw (Fav<=1.40),Turkish Super League,Genclerbirligi,Galatasaray,10:00,5.9,1.36,276.0,14.8,2026-10-17 12:45:07,live,LIQUIDADO,,,0-1,GREEN,0.1939,19.39,0.8376,2026-10-19 06:32,betfair_oficial,,
+2026-10-17,Lay Draw (Fav<=1.40),Czech 1 Liga,Slavia Prague,Hradec Kralove,10:00,6.6,1.33,1356.0,14.8,2026-10-17 12:45:07,live,LIQUIDADO,,,0-0,RED,-1.0,-100.0,0.855,2026-10-19 06:32,betfair_oficial,,
+2026-10-17,Lay Draw (Fav<=1.40),Ukrainian Premier League,Shakhtar,Kolos Kovalyovka,12:00,6.8,1.28,230.0,14.8,2026-10-17 14:45:00,live,LIQUIDADO,2.0,1.0,2-1,GREEN,0.1638,16.38,0.8593,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Home/DC X2 (FavVis<=1.65),French Ligue 1,Strasbourg,Paris St-G,12:15,7.4,1.45,2730.0,14.8,2026-10-17 15:00:00,live,LIQUIDADO,1.0,3.0,1-3,GREEN,0.1484,14.84,0.8707,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Home/DC X2 (FavVis<=1.65),Italian Serie A,Bologna,Inter,13:00,6.8,1.62,1421.0,14.8,2026-10-17 15:45:00,live,LIQUIDADO,1.0,3.0,1-3,GREEN,0.1638,16.38,0.8593,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Draw (Fav<=1.40),Turkish Super League,Fenerbahce,Alanyaspor,13:00,6.8,1.31,1568.0,14.8,2026-10-17 15:45:00,live,LIQUIDADO,3.0,0.0,3-0,GREEN,0.1638,16.38,0.8593,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Draw (Fav<=1.40),Norwegian Eliteserien,Viking,Fredrikstad,13:00,6.2,1.39,1628.0,14.8,2026-10-17 15:45:00,live,LIQUIDADO,3.0,2.0,3-2,GREEN,0.1827,18.27,0.8455,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Home/DC X2 (FavVis<=1.65),Spanish La Liga,Betis,Barcelona,13:30,6.2,1.5,438.0,14.8,2026-10-17 16:15:00,live,LIQUIDADO,,,AO Away Win,GREEN,0.1827,18.27,0.8455,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Home/DC X2 (FavVis<=1.65),Israeli Premier League,Maccabi Petach Tikva,Maccabi Haifa,13:30,7.8,1.45,486.0,14.8,2026-10-17 16:15:00,live,LIQUIDADO,1.0,2.0,1-2,GREEN,0.1397,13.97,0.8774,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-17,Lay Draw (Fav<=1.40),Dutch Eredivisie,SC Telstar,Feyenoord,15:00,6.2,1.37,1706.0,14.8,2026-10-17 17:45:00,live,LIQUIDADO,,,AO Away Win,GREEN,0.1827,18.27,0.8455,2026-10-19 06:45,betfair_oficial,feed,sim
+2026-10-19,Lay 0x3 Top 3,Irish Premier Division,Derry City,St Patricks,16:00,24.0,1.99,867.0,14.4,2026-10-19 18:45:35,live,PENDENTE,,,,,,,0.9603,,,,
