@@ -2081,3 +2081,164 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 14/10/2026  8:45:02,25 ===== 
+[*] Buscando fixtures para a data: 2026-10-14...
+2026-10-14 08:45:08.862 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-14.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   metodos_aprovados/.cache_forward_ko_vps.csv
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	varredura_over/cs_coletor_2026-10-13.csv
+	varredura_over/cs_coletor_2026-10-13_apostas.csv
+	varredura_over/varredura_over_2026-10-13.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 15/10/2026  8:45:02,26 ===== 
+[*] Buscando fixtures para a data: 2026-10-15...
+2026-10-15 08:45:05.004 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-15.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	varredura_over/cs_coletor_2026-10-13.csv
+	varredura_over/cs_coletor_2026-10-13_apostas.csv
+	varredura_over/varredura_over_2026-10-13.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 16/10/2026  8:45:02,29 ===== 
+[*] Buscando fixtures para a data: 2026-10-16...
+2026-10-16 08:45:04.758 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-16.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	varredura_over/cs_coletor_2026-10-13.csv
+	varredura_over/cs_coletor_2026-10-13_apostas.csv
+	varredura_over/varredura_over_2026-10-13.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 17/10/2026  8:45:02,41 ===== 
+[*] Buscando fixtures para a data: 2026-10-17...
+2026-10-17 08:45:08.159 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-17.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	varredura_over/cs_coletor_2026-10-13.csv
+	varredura_over/cs_coletor_2026-10-13_apostas.csv
+	varredura_over/varredura_over_2026-10-13.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 18/10/2026  8:45:02,82 ===== 
+[*] Buscando fixtures para a data: 2026-10-18...
+2026-10-18 08:45:09.392 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-18.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	varredura_over/cs_coletor_2026-10-13.csv
+	varredura_over/cs_coletor_2026-10-13_apostas.csv
+	varredura_over/varredura_over_2026-10-13.csv
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

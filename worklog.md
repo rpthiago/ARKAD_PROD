@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-19 · Antigravity · Resolução do Rollover 3x BET-IBC (OrbitX) e Sincronização Geral
+
+- **Demanda do Usuário:**
+  - Suporte da BET-IBC rejeitou saque de € 235 alegando não atingimento do rollover 3x (€ 810) sobre o depósito de € 270.
+  - Usuário questionou como bater o turnover restante com segurança ("em vez de lay over 4.5, posso fazer under 4.5? / lay draw ou lay home, podemos fazer dupla chance?").
+  - "fazer commit e push de tudo".
+- **Diagnóstico do Rollover BET-IBC/OrbitX:**
+  - O sistema automatizado de turnover da OrbitX registra a coluna `Stake`.
+  - Em apostas **LAY**, o `Stake` computado é apenas o valor do apostador de back (~€ 6), ignorando a liability (€ 40-50). Com isso, 44 apostas em Lay geraram apenas ~€ 285 de turnover acumulado.
+  - Em apostas **BACK** (ex: Back Dupla Chance 12 / X2 ou Back Under 4.5), o `Stake` computado é 100% do dinheiro alocado (€ 105).
+  - Estratégia desenhada: 5 entradas de BACK com € 105 em linhas ultra-seguras (>90% WR / odd ~1.06 a 1.20) para gerar € 525 adicionais e ultrapassar com folga os € 810 necessários para liberação do saque total de € 235+.
+- **Sincronização do Repositório:**
+  - Adicionados e consolidados: logs do radar pré-jogo, histórico atualizado dos buscadores, placares oficiais de fechamento (`placares_ft.csv`) e arquivos de varredura CS.
+  - Efetuado commit e push completo para `origin/main`.
+- **Arquivos:** `worklog.md`, `metodos_aprovados/placares_ft.csv`, `metodos_aprovados/radar_5_blocos.log`, `metodos_aprovados/forward_5metodos.log`, `lay0x1_fav_log.txt`, `observar_under15_log.txt`, `varredura_over/*`.
+
 ## 2026-10-19 · Antigravity · Reconciliação dos 8 Sinais do Radar de 17/10 (Tarde) no Histórico Oficial e Backtest
 
 - **Demanda do Usuário:**
