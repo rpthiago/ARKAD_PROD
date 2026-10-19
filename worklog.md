@@ -7,6 +7,29 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-19 · Antigravity · Auditoria Forense da VPS, Sanção de Vazamento de Proxy e Reconciliação do Sistema
+
+- **Demanda do Usuário:**
+  - *"olha se a vps esta configurada certa, claude fez uma bagunça"* + conferência do [`HANDOVER_GEMINI_2026-10-19.md`](HANDOVER_GEMINI_2026-10-19.md).
+- **Diagnóstico Forense dos Fatos (12/10 a 19/10):**
+  1. **Vazamento de Credencial do Proxy:** No commit `fceaffb` (12/10), o Claude commitou a credencial do pool iProyal em texto puro na linha 200 do `migracao_coletor/README.md`. Deixou backup desprotegido `README.md.bak_pre_mascara` no disco e README mascarado por commitar.
+  2. **Apagão de Coleta de 16 Horas no Sábado (18/10):** Entre 07:00 UTC e 23:19 UTC, o coletor caiu em loop infinito de reinício (1.829 restarts no systemd) porque o saldo da recarga falhou e o `login_betfair()` não tinha disjuntor. Todo o sábado à tarde teve buraco de odds. Às 23:19 UTC, Claude criou o sub-user `arkad_coletor` (1 GB) e implementou `login_resiliente(disj)` com backoff exponencial (5m→15m→30m→60m→120m).
+  3. **Estado Atual dos Serviços na VPS (`163.176.59.215`):**
+     - `betfair-collector.service`: Ativo e estável (~2.500 cotações/ciclo, 70 jogos).
+     - `liquidador-betfair.service`: Ativo, gravando placares oficiais em `placares_ft.csv`.
+     - `sinais-ko.service`: Ativo, offset em dia (4,81 GB).
+     - `xg-ht.service`: Ativo e registrando stats do FotMob.
+     - Crontabs: root (pausa 03:30 UTC e retorno 07:00 UTC) e ubuntu (Blocos 1, 2, 3 do Telegram) operacionais (Bloco 1 disparou normal às 06:00 BRT).
+  4. **Crise Iminente do Proxy iProyal:** A carteira do iProyal possui apenas US$ 0,75 (recarga de 1 GB custa US$ 7). O sub-user atual está consumindo o limite de 1 GB concedido. Quando esgotar, o coletor pausará com disjuntor sem travar a conta Betfair. O script `migracao_coletor/instalar_proxy_vps.sh` foi preparado para transformar uma VPS nova (Ubuntu) em proxy 3proxy como alternativa definitiva e econômica.
+  5. **Liquidação Retida de 17/10:** Os 4 sinais de 17/10 (`Guangxi`, `Qingdao`, `Genclerbirligi`, `Slavia Prague`) estavam como `PENDENTE` no ledger.
+- **Ações Imediatas Executadas:**
+  1. **Sanitização de Segurança:** Apagado o arquivo de risco `migracao_coletor/README.md.bak_pre_mascara` e commitado o `migracao_coletor/README.md` mascarado (commit `b2dae17`).
+  2. **Liquidação Oficial dos Sinais de 17/10:** Executado `liquidar_sinais_dia.py --data 2026-10-17`, resolvendo os 4 jogos (2 Greens: Qingdao e Genclerbirligi; 2 Reds: Guangxi e Slavia Prague). Planilha e `forward_ko_ledger.csv` 100% liquidados e sincronizados via SCP para a VPS.
+- **Próximos Passos:**
+  1. Usuário revogar a credencial antiga do pool no painel do iProyal quando disponível.
+  2. Decidir sobre o proxy quando o tráfego do sub-user acabar: recarga iProyal vs subir VPS com `instalar_proxy_vps.sh`.
+- **Arquivos:** `migracao_coletor/README.md`, `metodos_aprovados/forward_ko_ledger.csv`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-17.xlsx`, `worklog.md`.
+
 ## 2026-10-16 · Antigravity · Reativação Operacional de Lay 2x2 e Lay 0x3 no Robô KO-10 da VPS e Alertas do Telegram
 
 - **Demanda do Usuário:**
