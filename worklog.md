@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-19 · Antigravity · Reconciliação dos 8 Sinais do Radar de 17/10 (Tarde) no Histórico Oficial e Backtest
+
+- **Demanda do Usuário:**
+  - *"temos esses jogos coloque ele no historico para ter junto ao backteste"* — fornecida lista com 8 partidas de 17/10 disparadas pelo radar pré-jogo (Shakhtar, Strasbourg, Bologna, Fenerbahce, Viking, Betis, Maccabi Petach Tikva, SC Telstar).
+- **Verificação Contra Placares Oficiais da Betfair (`placares_ft.csv`):**
+  1. `Shakhtar x Kolos Kovalyovka` (12:00, Lay Draw @6.80) ➔ Placar 2-1 ➔ **GREEN**
+  2. `Strasbourg x Paris St-G` (12:15, Lay Home/DC X2 @7.40) ➔ Placar 1-3 ➔ **GREEN**
+  3. `Bologna x Inter` (13:00, Lay Home/DC X2 @6.80) ➔ Placar 1-3 ➔ **GREEN**
+  4. `Fenerbahce x Alanyaspor` (13:00, Lay Draw @6.80) ➔ Placar 3-0 ➔ **GREEN**
+  5. `Viking x Fredrikstad` (13:00, Lay Draw @6.20) ➔ Placar 3-2 ➔ **GREEN**
+  6. `Betis x Barcelona` (13:30, Lay Home/DC X2 @6.20) ➔ Placar Any Other Away Win ➔ **GREEN**
+  7. `Maccabi Petach Tikva x Maccabi Haifa` (13:30, Lay Home/DC X2 @7.80) ➔ Placar 1-2 ➔ **GREEN**
+  8. `SC Telstar x Feyenoord` (15:00, Lay Draw @6.20) ➔ Placar Any Other Away Win ➔ **GREEN**
+- **Resultado Operacional:**
+  - **8 Acertos em 8 Jogos (100% Green)** nesta bateria da tarde de sábado.
+  - O dia 17/10 totalizou **12 jogos: 10 Greens e 2 Reds (83,3% WR)**.
+- **Ação Executada:**
+  - As 8 linhas foram inseridas e liquidadas em `metodos_aprovados/forward_ko_ledger.csv` (total: 845 registros) e na planilha executiva `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-17.xlsx`.
+  - Sincronizado o arquivo via SCP para a VPS (`/home/ubuntu/betfair-collector/forward_ko_ledger.csv`).
+- **Arquivos:** `metodos_aprovados/forward_ko_ledger.csv`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-17.xlsx`, `worklog.md`.
+
 ## 2026-10-19 · Antigravity · Auditoria Forense da VPS, Sanção de Vazamento de Proxy e Reconciliação do Sistema
 
 - **Demanda do Usuário:**
