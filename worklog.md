@@ -7,6 +7,27 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-20 · Antigravity · Blindagem Anti-Falso Alarme do Proxy Residencial (iProyal) no Coletor VPS
+
+- **Demanda do Usuário:**
+  - Usuário alertou sobre aviso recebido no Telegram às 05:32 BRT: *"ARKAD: o PROXY recusou a conexao. A coleta parou. Causa mais provavel: acabou o saldo de trafego do iProyal..."*.
+  - Aprovada a implementação de filtro inteligente anti-falso alarme para evitar alertas de pânico causados por rotações transitórias de IP residencial.
+- **Diagnóstico Técnico:**
+  - O proxy da iProyal opera em pool residencial rotativo (`geo.iproyal.com:12321`). Quando um peer doméstico oscila ou muda de rota, a requisição sofre um micro-timeout de poucos segundos.
+  - O coletor (`coletar_betfair_direto.py`) já possuía resiliência nativa (re-login automático no ciclo subsequente, ex: ciclo 14r), recuperando a conexão em menos de 30 segundos.
+  - No entanto, a função `avisar_proxy()` disparava o alerta alarmista no Telegram logo na primeira falha pontual, gerando falsos positivos frequentes enquanto o coletor seguia operando normalmente.
+- **Implementação & Deploy na VPS (`163.176.59.215`):**
+  1. `coletar_betfair_direto.py`:
+     - Adicionado acumulador de falhas consecutivas em `_AVISO_PROXY` (`min_falhas_alerta: 3`).
+     - Alertas no Telegram agora exigem **no mínimo 3 falhas seguidas** (~15 minutos sem dados reais), confirmando que houve esgotamento de saldo de fato.
+     - Falhas transitórias pontuais (1 ou 2) são registradas apenas localmente no `collector.log` aguardando autorrecuperação silenciosa.
+     - Sucesso em qualquer ciclo ou re-login (`Disjuntor.fechar()`) zera automaticamente o contador de falhas.
+  2. **Deploy & Validação em Produção:**
+     - Backup criado na VPS: `coletar_betfair_direto.py.bak_20261020`.
+     - Upload do script via SCP e reinício do serviço `betfair-collector`.
+     - Confirmado status `active` e ciclo 1 rodando com 2.770 cotações e 77 jogos coletados normalmente.
+- **Arquivos:** `coletar_betfair_direto.py`, `worklog.md`.
+
 ## 2026-10-19 · Antigravity · Resolução do Rollover 3x BET-IBC (OrbitX) e Sincronização Geral
 
 - **Demanda do Usuário:**
