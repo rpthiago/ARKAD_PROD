@@ -45,26 +45,46 @@ def _env():
     return e
 
 
+def _criar_session_proxy(proxy_url, forcar_novo_ip=False):
+    """Cria uma session requests com proxy residencial iProyal rotativo.
+    Gera dinamicamente um session-id unico a cada janela de 10 min ou sob demanda,
+    evitando que o coletor fique preso a um peer residencial que caiu ou encerrou o socket TLS."""
+    if not proxy_url:
+        return None
+    import requests, re, time, random
+    p_url = proxy_url
+    if "session-" in p_url:
+        salt = f"_{random.randint(100, 9999)}" if forcar_novo_ip else ""
+        sess_id = f"arkad_{int(time.time() // 600)}{salt}"
+        p_url = re.sub(r"session-[a-zA-Z0-9_]+", f"session-{sess_id}", p_url)
+    s = requests.Session()
+    s.proxies = {"http": p_url, "https": p_url}
+    return s
+
+
 def login():
     e = _env()
     for k in ["BETFAIR_USERNAME", "BETFAIR_PASSWORD", "BETFAIR_APP_KEY"]:
         if not e.get(k):
             print(f"ERRO: {k} ausente no .env"); sys.exit(1)
     
-    proxy_url = e.get("BETFAIR_PROXY")
-    session = None
-    if proxy_url:
-        import requests
-        session = requests.Session()
-        session.proxies = {"http": proxy_url, "https": proxy_url}
-
+    # 1. Login mTLS de certificado é feito DIRETO pela VPS (sem proxy)
+    # O endpoint brasileiro identitysso-cert.betfair.bet.br aceita o IP da VPS e nao precisa de proxy.
+    # Passar o certificado por proxy residencial UK quebra o handshake TLS (SSLError / close notify).
     t = bl.APIClient(e["BETFAIR_USERNAME"], e["BETFAIR_PASSWORD"], app_key=e["BETFAIR_APP_KEY"],
-                     cert_files=(e["BETFAIR_CERT_CRT_PATH"], e["BETFAIR_CERT_PEM_PATH"]),
-                     session=session)
+                     cert_files=(e["BETFAIR_CERT_CRT_PATH"], e["BETFAIR_CERT_PEM_PATH"]))
     t.api_uri = "https://api.betfair.com/exchange/"
     t.identity_uri = "https://identitysso.betfair.com/api/"
     t.identity_cert_uri = "https://identitysso-cert.betfair.bet.br/api/"
     t.login()
+
+    # 2. O proxy residencial UK e injetado EXCLUSIVAMENTE nas chamadas da Betting API (catalogo/books)
+    proxy_url = e.get("BETFAIR_PROXY")
+    if proxy_url:
+        sess_proxy = _criar_session_proxy(proxy_url)
+        t.session = sess_proxy
+        t.betting.session = sess_proxy
+
     return t
 
 
@@ -265,7 +285,8 @@ def _parece_bloqueio(msg):
 # IGUAL ao do bloqueio (0 cotacoes, erro na API). Estas marcas separam os dois casos.
 PROXY_MARCAS = ("proxyerror", "proxy authentication", "tunnel connection failed",
                 "cannot connect to proxy", "unable to connect to proxy", "407 proxy",
-                "forbidden by proxy", "proxy_auth")
+                "forbidden by proxy", "proxy_auth", "max retries exceeded", "ssl routines",
+                "connection reset", "remotely closed")
 _AVISO_PROXY = {
     "ts": 0.0,
     "falhas_consecutivas": 0,
@@ -383,9 +404,25 @@ def main():
             n = salvar(df)
             mkts = df[["home", "away"]].drop_duplicates().shape[0] if not df.empty else 0
             print(f"[ciclo {ciclo}] {n} cotacoes | {mkts} jogos | {df['market_type'].nunique() if not df.empty else 0} mercados | {time.time()-t0:.0f}s")
-            # todos os catalogos falharam e nada veio -> sessao provavelmente morta: refaz login
+            # todos os catalogos falharam e nada veio -> sessao provavelmente morta ou peer caiu
             if n_err and df.empty:
-                if _parece_proxy(ULTIMO_ERRO_CATALOGO):
+                proxy_url = _env().get("BETFAIR_PROXY")
+                if proxy_url and _parece_proxy(ULTIMO_ERRO_CATALOGO):
+                    print("  [PROXY] Peer residencial oscilou. Rotacionando IP da sessao iProyal...", flush=True)
+                    sess_proxy = _criar_session_proxy(proxy_url, forcar_novo_ip=True)
+                    trading.session = sess_proxy
+                    trading.betting.session = sess_proxy
+                    try:
+                        df, n_err, meta = um_ciclo(trading, args.horas, args.horas_atras, args.sem_meio_jogo, catalogo_cada=args.catalogo_cada)
+                        n = salvar(df)
+                        if n:
+                            mkts = df[["home", "away"]].drop_duplicates().shape[0] if not df.empty else 0
+                            print(f"  [PROXY] Conexao restaurada com novo IP! {n} cotacoes | {mkts} jogos", flush=True)
+                            disj.fechar()
+                            continue
+                    except Exception as e_rot:
+                        print(f"  [PROXY] Tentativa pos-rotacao falhou: {str(e_rot)[:80]}", flush=True)
+                    
                     avisar_proxy(ULTIMO_ERRO_CATALOGO)
                     time.sleep(disj.abrir())
                     continue
