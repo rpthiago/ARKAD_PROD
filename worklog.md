@@ -7,6 +7,60 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-22 · Antigravity · Resolução Definitiva do Proxy: Login mTLS Direto e Auto-Rotação Residencial iProyal
+
+- **Demanda do Usuário:**
+  - Alerta recebido no Telegram às 06:17 BRT: *"🚨 ARKAD: PROXY instavel ou sem saldo. Falha confirmada por 3 tentativas consecutivas (~15 min sem dados)..."*
+- **Diagnóstico Forense na VPS:**
+  1. **O Saldo NÃO Acabou:** Teste direto contra `api.ipify.org` através do proxy iProyal retornou IP residencial ativo e saudável.
+  2. **Causa Raiz 1 (Peer Residencial Morto):** O `BETFAIR_PROXY` continha uma string com sessão estática `session-arkad1`. O iProyal amarrou essa sessão ao IP doméstico britânico `82.1.158.184`. Esse peer caseiro caiu e passou a abortar os handshakes TLS com a Betfair (`close notify` / SSL error 35). Por ser sessão estática, todas as tentativas repetiam o mesmo peer morto.
+  3. **Causa Raiz 2 (Login mTLS Roteado Indevidamente pelo Proxy):** Quando a API falhava, o coletor tentava fazer re-login via `t.login()`. Como a sessão do cliente usava proxy globalmente, a chamada de certificado para `identitysso-cert.betfair.bet.br` tentava passar pelo proxy britânico, sofrendo erro SSL (certificado brasileiro rejeitado por proxy residencial estrangeiro).
+  4. **Validação do Endpoint Brasileiro:** O login direto da VPS (`identitysso-cert.betfair.bet.br`) funciona em milissegundos e nunca foi bloqueado por Cloudflare. O bloqueio geográfico existe exclusivamente na REST API (`api.betfair.com`).
+- **Implementação & Correção em Produção (`coletar_betfair_direto.py`):**
+  1. **Desacoplamento do Login mTLS:** `login()` agora autentica de forma 100% direta pela VPS (sem proxy), garantindo handshake limpo de certificado digital sem risco de corrupção.
+  2. **Injeção Cirúrgica de Proxy na Betting API:** O proxy residencial britânico é aplicado exclusivamente a `t.session` e `t.betting.session` (chamadas de catálogo e books).
+  3. **Auto-Rotação Dinâmica de Sessão iProyal:** Criada a função `_criar_session_proxy(proxy_url, forcar_novo_ip)`. A cada 10 minutos (ou imediatamente se um peer cair/falhar), um novo `session-id` dinâmico é gerado, forçando o iProyal a atribuir um novo IP residencial instantaneamente sem travar o processo.
+- **Validação:**
+  - Backup criado na VPS: `coletar_betfair_direto.py.bak_20261022`.
+  - Script testado com `--once`: **1.200 cotações**, **34 jogos**, **9 mercados** capturados em 17 segundos.
+  - Serviço `betfair-collector.service` reiniciado: Ciclo 1 ativo coletando **2.136 cotações**, **60 jogos** em 27 segundos com zero erros.
+- **Arquivos:** `coletar_betfair_direto.py`, `worklog.md`.
+
+## 2026-10-21 · Antigravity · Auditoria Forense de Sinais: Lay 2x2 e Lay Over 4.5 no Coletor VPS
+
+- **Demanda do Usuário:**
+  - Usuário perguntou por que não havia recebido alertas recentes de **Lay 2x2** nem de **Lay Over 4.5** no Telegram.
+- **Auditoria Forense (VPS `163.176.59.215` / `betfair_live_odds.csv` - 220 jogos no KO-10):**
+  - **Integridade do Sistema:** O robô e o coletor estão 100% ativos, gerando sinais normais em outros métodos (ex: Lay 0x3 Top 3 em Albirex Niigata @ 27.0 e Derry City @ 24.0; Lay Home e Lay Draw com alta frequência).
+  - **Diagnóstico do Lay Over 4.5:**
+    - Método ultra-seletivo (sniper) que exige Under 2.5 $\le 1.50$ + Spread $\le 1.25$ + Liq $\ge 200$.
+    - Apenas 1 jogo na semana atendeu às condições de preço e spread (*Atlético Rafaela x Quilmes* em 16/10 @ 19.0). Frequência esperada de 1 a 2 sinais/semana é o comportamento normal do método.
+  - **Diagnóstico do Lay 2x2:**
+    - Na Betfair Exchange real, a mediana da odd de Lay do 2-2 em jogos de tendência Under é **21.0** (p25 = **17.5**).
+    - Pela regra antiga ([8.0, 20.0]), 44 jogos teriam qualificado. Porém, com o teto de segurança estrito recalibrado para $\le 14.00$, **0 jogos qualificaram** (volume zerado pelo filtro de odd).
+- **Decisão do Usuário:**
+  - Usuário confirmou explicitamente que a checagem foi apenas para conferência e optou por **manter o teto estrito de $\le 14.00$** inalterado, priorizando a blindagem de liability e a regra "Dois reds eu paro".
+- **Próximos Passos:**
+  - Manter o pipeline e serviços na VPS operando sem alterações nos tetos.
+  - Aguardar a compensação do saque de USDT da BET-IBC/Binance para posterior setup na BFB247 (`96ex.one`).
+- **Arquivos:** `worklog.md`.
+
+## 2026-10-20 · Antigravity · Auditoria de Jogos do Dia e Filtros do Radar / Portfólio Ativo
+
+- **Demanda do Usuário:**
+  - *"hj nao teve nenhum jogo?"* — verificação sobre a existência de partidas no dia e por que não houve disparos de sinais.
+- **Diagnóstico Completo da Grade e dos Métodos:**
+  - **Jogos Ocorridos:** O mercado teve ampla liquidez hoje, com mais de 88 partidas rastreadas ativamente pelo coletor Betfair na VPS (rodada completa da UEFA Champions League e ligas inglesas Sky Bet Championship, League 1 e League 2).
+  - **Integridade dos Sistemas:** Os serviços `betfair-collector.service` e `sinais-ko.service` na VPS estão 100% ativos e saudáveis (ciclo 98 rodando, 62+ jogos no catálogo ao vivo).
+  - **Por que nenhum jogo gerou sinal (Travas de Proteção do GEMINI.md):**
+    1. *Man City x AEK Athens (@1.07) e Roma x Slovan (@1.11):* O Lay Empate explodiu para 12.0 e 20.0, estourando o teto causal de segurança de `Odd_Lay <= 7.00` (evitando liability excessiva).
+    2. *Napoli x Bodo Glimt (@1.28):* No KO-10, o Lay Empate bateu 4.40, ficando abaixo do piso estatístico homologado de 4.50 (`4.50 <= dl <= 7.00`).
+    3. *PSG x Barcelona & Liverpool x Villarreal & Stuttgart x Atlético:* Jogos equilibrados sem super favorito (odds 2.40 a 2.70; o critério exige `fav <= 1.40` ou visitante `fav <= 1.65`).
+    4. *Ligas Inglesas (L1/L2):* Favoritos fortes (Chesterfield, Walsall) tiveram Lay Empate > 7.50 a 8.60 (acima do teto); favoritos visitantes (Leicester, Salford) tiveram Lay Home de 19.5 a 40.0 (estourando teto de 8.00).
+    5. *Ligas Periféricas e Sub-21:* Filtradas pelas regras de governança (sem divisões amadoras / sub-21).
+- **Próximos Passos:** Monitoramento automático dos blocos noturnos (Américas / Série B / Colômbia).
+- **Arquivos:** `worklog.md`, `scratch/check_today_games.py`.
+
 ## 2026-10-20 · Antigravity · Blindagem Anti-Falso Alarme do Proxy Residencial (iProyal) no Coletor VPS
 
 - **Demanda do Usuário:**
