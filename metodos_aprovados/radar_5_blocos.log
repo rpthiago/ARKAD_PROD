@@ -907,3 +907,16 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-22.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [*] Nenhum jogo neste bloco (22:30 às 23:59). Sem envio de mensagem redundante.
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 8 (00:30) — Fechamento Geral & Liquidação Definitiva — Data: 2026-10-22
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-22.xlsx atualizada: 4 jogos (1 liquidados, 1 Greens, 0 Reds).
+[+] forward_ko_ledger.csv atualizado com 1 jogos liquidados.
+[+] Total geral do dia: 4 jogos | Neste Bloco (00:00 às 23:59): 4 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-22.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[+] Envio Telegram (Fechamento Geral Bloco 8): True (Mensagem enviada com sucesso!)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 1 (06:00) — Matinal — Data: 2026-10-23
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[-] Nenhum sinal registrado para hoje até o momento.
