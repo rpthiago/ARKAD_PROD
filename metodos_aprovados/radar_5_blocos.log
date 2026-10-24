@@ -1002,3 +1002,12 @@
 [+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-24.xlsx
 [+] Sinais sincronizados com GitHub / Streamlit Cloud.
 [+] Envio Telegram (Bloco 3 (13:00) — Europa Principal 2): True (Mensagem enviada com sucesso!)
+
+[+] ⏰ EXECUTANDO RADAR EM BLOCOS: Bloco 4 (15:30) — Tarde / Clássicos — Data: 2026-10-24
+[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...
+[+] Planilha Sinais_Metodos_Aprovados_2026-10-24.xlsx atualizada: 12 jogos (5 liquidados, 4 Greens, 1 Reds).
+[+] forward_ko_ledger.csv atualizado com 5 jogos liquidados.
+[+] Total geral do dia: 12 jogos | Neste Bloco (15:30 às 18:00): 0 jogos
+[+] Planilha consolidada atualizada: Sinais_Metodos_Aprovados_2026-10-24.xlsx
+[+] Sinais sincronizados com GitHub / Streamlit Cloud.
+[*] Nenhum jogo neste bloco (15:30 às 18:00). Sem envio de mensagem redundante.
