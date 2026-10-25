@@ -874,3 +874,6 @@ Data,Metodo,Liga,Home,Away,Hora,Odd_Lay,Odd_Fav,liq_lay,min_to_ko,ts_captura,ori
 2026-10-24,Lay Draw (Fav<=1.40),Colombian Primera B,Union Magdalena,Atletico FC Cali,17:30,7.0,1.3,1260.0,14.5,2026-10-24 20:15:25,live,PENDENTE,,,,,,,0.8633,,,,
 2026-10-24,Lay Draw (Fav<=1.40),Brazilian Serie B,Ponte Preta,Fortaleza EC,18:30,6.8,1.26,283.0,14.5,2026-10-24 21:15:26,live,PENDENTE,,,,,,,0.8593,,,,
 2026-10-24,Lay Draw (Fav<=1.40),Brazilian Serie B,CRB,Londrina,18:30,6.2,1.36,1274.0,14.5,2026-10-24 21:15:26,live,PENDENTE,,,,,,,0.8455,,,,
+2026-10-25,Lay 0x3 Top 3,Portuguese Segunda Liga,AVS Futebol SAD,Tondela,08:00,22.0,1.88,353.0,14.0,2026-10-25 10:46:00,live,PENDENTE,,,,,,,0.9567,,,,
+2026-10-25,Lay Draw (Fav<=1.40),Italian Serie A,Inter,Fiorentina,08:30,6.2,1.39,15907.0,14.8,2026-10-25 11:15:11,live,PENDENTE,,,,,,,0.8455,,,,
+2026-10-25,Lay Home/DC X2 (FavVis<=1.65),Danish Superliga,Silkeborg,FC Nordsjaelland,10:00,5.8,1.62,725.0,14.7,2026-10-25 12:45:13,live,PENDENTE,,,,,,,0.8348,,,,
