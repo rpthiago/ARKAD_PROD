@@ -7,6 +7,22 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-26 · Antigravity · Refinamento das Abas da Página 02: Remoção do Comparativo de Filtros e Integração dos Dados com 1 Stop Red
+
+- **Demanda do Usuário:**
+  - Remover a aba obsoleta `⚖️ Comparativo: Regra Base vs Filtros Novos`.
+  - Integrar os dados com 1 Stop Red nas abas: `🎯 Desempenho por Método`, `📅 Desempenho Dia a Dia` e `📈 Curva de Lucro Acumulado`.
+  - Manter as 5 abas finais: `🛡️ Tabela Consolidada (1 Stop Red por Método)`, `📋 Planilha Completa Jogo a Jogo`, `🎯 Desempenho por Método`, `📅 Desempenho Dia a Dia`, `📈 Curva de Lucro Acumulado`.
+- **Implementação:**
+  1. **Aba `🎯 Desempenho por Método`:** Adicionado seletor com 3 modos:
+     - `🛡️ Com 1 Stop Red por Método (Recomendado)`: Tabela com métricas calculadas após stop (Greens, Reds máx 1/dia, WR%, PnL em u e R$).
+     - `📋 Sem Stop (Todos os Jogos)`: Tabela de referência bruta.
+     - `⚖️ Comparativo Lado a Lado`: Tabela analítica mostrando Jogos, Reds, Reds Evitados e Diferença de PnL por método.
+  2. **Aba `📅 Desempenho Dia a Dia`:** Adicionado seletor (Com 1 Stop Red vs Sem Stop) com ordenação com as datas mais recentes no topo (Outubro/Setembro no topo e Agosto na base) e indicador de jogos cortados pelo stop em cada dia.
+  3. **Aba `📈 Curva de Lucro Acumulado`:** Adicionado gráfico comparativo multi-linha mostrando a curva de equity acumulada `Com 1 Stop Red` vs `Sem Stop`, com cartões de KPIs (Lucro final de cada curva, Reds evitados e jogos poupados de risco).
+  4. **Remoção:** Eliminada a aba `⚖️ Comparativo: Regra Base vs Filtros Novos` e todo o código residual.
+- **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `scratch/apply_tabs_update.py`, `worklog.md`.
+
 ## 2026-10-26 · Antigravity · Implementação da Tabela Consolidada com 1 Stop Red por Método no Streamlit (Página 02)
 
 - **Demanda do Usuário:**

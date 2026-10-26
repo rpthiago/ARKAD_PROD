@@ -452,13 +452,12 @@ def aplicar_stop1red_por_metodo(df_in):
 
 
 # ── Abas de Análise ──
-tab_stop1red, tab_geral, tab_metodo, tab_dia, tab_grafico, tab_comparativo = st.tabs([
+tab_stop1red, tab_geral, tab_metodo, tab_dia, tab_grafico = st.tabs([
     "🛡️ Tabela Consolidada (1 Stop Red por Método)",
     "📋 Planilha Completa Jogo a Jogo",
     "🎯 Desempenho por Método",
     "📅 Desempenho Dia a Dia",
-    "📈 Curva de Lucro Acumulado",
-    "⚖️ Comparativo: Regra Base vs Filtros Novos"
+    "📈 Curva de Lucro Acumulado"
 ])
 
 # 0. TABELA CONSOLIDADA COM 1 STOP RED POR MÉTODO
@@ -569,9 +568,17 @@ with tab_geral:
 # 2. DESEMPENHO POR MÉTODO
 with tab_metodo:
     st.subheader("🎯 Comparativo de Desempenho por Método")
-    if not df_liq.empty:
-        res_m = []
-        for m, g in df_liq.groupby("Método"):
+    modo_metodo = st.radio(
+        "Selecione a Gestão de Risco:",
+        ["🛡️ Com 1 Stop Red por Método (Recomendado)", "📋 Sem Stop (Todos os Jogos)", "⚖️ Comparativo Lado a Lado"],
+        horizontal=True
+    )
+
+    def _calc_stats_metodo(df_target):
+        if df_target.empty:
+            return pd.DataFrame()
+        res = []
+        for m, g in df_target.groupby("Método"):
             n_m = len(g)
             w_m = (g["Status"] == "🟢 GREEN").sum()
             r_m = (g["Status"] == "🔴 RED").sum()
@@ -581,7 +588,7 @@ with tab_metodo:
             roi_m = (pnl_m_u / n_m * 100) if n_m > 0 else 0.0
             liab_ex = g["Liability_R$"].iloc[0] if "Liability_R$" in g.columns else (banca_total * 0.05)
             pct_ex = (liab_ex / banca_total * 100) if banca_total > 0 else 5.0
-            res_m.append({
+            res.append({
                 "Método": m,
                 "% Banca (Risco)": f"{pct_ex:.1f}%",
                 "Liability / Entrada": f"R$ {liab_ex:,.2f}",
@@ -591,194 +598,152 @@ with tab_metodo:
                 "Win Rate %": f"{wr_m:.1f}%",
                 "ROI s/ Liability": f"{roi_m:+.2f}%",
                 "Lucro Líquido (u)": round(pnl_m_u, 3),
-                "Lucro Líquido (R$)": f"R$ {pnl_m_rs:+,.2f}"
+                "Lucro Líquido (R$)": f"R$ {pnl_m_rs:+,.2f}",
+                "_pnl_u": pnl_m_u,
+                "_pnl_rs": pnl_m_rs,
+                "_n": n_m,
+                "_w": w_m,
+                "_r": r_m,
+                "_wr": wr_m
             })
-        st.dataframe(pd.DataFrame(res_m), use_container_width=True, hide_index=True)
+        return pd.DataFrame(res)
+
+    df_stats_stop = _calc_stats_metodo(df_stop_liq)
+    df_stats_raw = _calc_stats_metodo(df_liq)
+
+    if modo_metodo == "🛡️ Com 1 Stop Red por Método (Recomendado)":
+        st.caption("ℹ️ Exibindo métricas com a aplicação de **1 Stop Red Diário por Método** (máximo 1 RED por método em cada dia).")
+        if not df_stats_stop.empty:
+            cols_show = [c for c in df_stats_stop.columns if not c.startswith("_")]
+            st.dataframe(df_stats_stop[cols_show], use_container_width=True, hide_index=True)
+        else:
+            st.info("Nenhum jogo liquidado no filtro atual.")
+    elif modo_metodo == "📋 Sem Stop (Todos os Jogos)":
+        st.caption("ℹ️ Exibindo métricas sobre **todos os jogos sem stop loss diário** (base bruta histórica).")
+        if not df_stats_raw.empty:
+            cols_show = [c for c in df_stats_raw.columns if not c.startswith("_")]
+            st.dataframe(df_stats_raw[cols_show], use_container_width=True, hide_index=True)
+        else:
+            st.info("Nenhum jogo liquidado no filtro atual.")
     else:
-        st.info("Nenhum jogo liquidado no filtro atual.")
+        st.caption("ℹ️ Comparativo direto do impacto da gestão de 1 Stop Red por método vs execução sem stop.")
+        if not df_stats_stop.empty and not df_stats_raw.empty:
+            comp_rows = []
+            for m in df_stats_raw["Método"].unique():
+                row_raw = df_stats_raw[df_stats_raw["Método"] == m]
+                row_stop = df_stats_stop[df_stats_stop["Método"] == m]
+                n_r = row_raw["_n"].iloc[0] if not row_raw.empty else 0
+                n_s = row_stop["_n"].iloc[0] if not row_stop.empty else 0
+                red_r = row_raw["_r"].iloc[0] if not row_raw.empty else 0
+                red_s = row_stop["_r"].iloc[0] if not row_stop.empty else 0
+                pnl_r = row_raw["_pnl_u"].iloc[0] if not row_raw.empty else 0.0
+                pnl_s = row_stop["_pnl_u"].iloc[0] if not row_stop.empty else 0.0
+                comp_rows.append({
+                    "Método": m,
+                    "Jogos (Stop)": n_s,
+                    "Jogos (Sem Stop)": n_r,
+                    "Jogos Cortados": max(0, n_r - n_s),
+                    "Reds (Stop)": red_s,
+                    "Reds (Sem Stop)": red_r,
+                    "Reds Evitados": max(0, red_r - red_s),
+                    "WR% (Stop)": f"{row_stop['_wr'].iloc[0]:.1f}%" if not row_stop.empty else "0%",
+                    "WR% (Sem Stop)": f"{row_raw['_wr'].iloc[0]:.1f}%" if not row_raw.empty else "0%",
+                    "PnL u (Stop)": round(pnl_s, 2),
+                    "PnL u (Sem Stop)": round(pnl_r, 2),
+                    "Diferença PnL (u)": round(pnl_s - pnl_r, 2)
+                })
+            st.dataframe(pd.DataFrame(comp_rows), use_container_width=True, hide_index=True)
 
 # 3. DESEMPENHO DIA A DIA
 with tab_dia:
     st.subheader("📅 Desempenho Detalhado por Data")
-    if not df_liq.empty:
-        res_d = []
-        for d, g in df_liq.groupby(df_liq["Data"].dt.strftime("%d/%m/%Y"), sort=False):
+    modo_dia = st.radio(
+        "Selecione a Visualização Diária:",
+        ["🛡️ Com 1 Stop Red por Método (Recomendado)", "📋 Sem Stop (Todos os Jogos)"],
+        horizontal=True
+    )
+
+    def _calc_stats_dia(df_target, is_stop=False):
+        if df_target.empty:
+            return pd.DataFrame()
+        res = []
+        for dt, g in df_target.groupby(df_target["Data"].dt.date):
             n_d = len(g)
             w_d = (g["Status"] == "🟢 GREEN").sum()
             r_d = (g["Status"] == "🔴 RED").sum()
             wr_d = (w_d / n_d * 100) if n_d > 0 else 0.0
             pnl_d_u = g["PnL_u"].sum()
             pnl_d_rs = g["PnL_Reais"].sum()
-            res_d.append({
-                "Data": d,
+            item = {
+                "Data": dt.strftime("%d/%m/%Y"),
+                "_dt": dt,
                 "Jogos": n_d,
                 "Greens": w_d,
                 "Reds": r_d,
                 "Win Rate %": f"{wr_d:.1f}%",
                 "Lucro do Dia (u)": round(pnl_d_u, 3),
                 "Lucro do Dia (R$)": f"R$ {pnl_d_rs:+.2f}"
-            })
-        st.dataframe(pd.DataFrame(res_d), use_container_width=True, hide_index=True)
+            }
+            if is_stop:
+                n_raw_dia = len(df_liq[df_liq["Data"].dt.date == dt])
+                item["Jogos Cortados"] = max(0, n_raw_dia - n_d)
+            res.append(item)
+        df_res = pd.DataFrame(res)
+        # Ordenação com datas mais recentes no topo
+        return df_res.sort_values("_dt", ascending=False).drop(columns=["_dt"]).reset_index(drop=True)
+
+    if modo_dia == "🛡️ Com 1 Stop Red por Método (Recomendado)":
+        st.caption("ℹ️ Desempenho diário com aplicação de 1 Stop Red por método (datas mais recentes no topo).")
+        df_dia_stop = _calc_stats_dia(df_stop_liq, is_stop=True)
+        if not df_dia_stop.empty:
+            st.dataframe(df_dia_stop, use_container_width=True, hide_index=True)
+        else:
+            st.info("Nenhum jogo liquidado no filtro atual.")
     else:
-        st.info("Nenhum jogo liquidado no filtro atual.")
+        st.caption("ℹ️ Desempenho diário bruto sem stop (datas mais recentes no topo).")
+        df_dia_raw = _calc_stats_dia(df_liq, is_stop=False)
+        if not df_dia_raw.empty:
+            st.dataframe(df_dia_raw, use_container_width=True, hide_index=True)
+        else:
+            st.info("Nenhum jogo liquidado no filtro atual.")
 
 # 4. GRÁFICO DE CURVA DE LUCRO
 with tab_grafico:
     st.subheader("📈 Curva de Lucro Acumulado (Equity)")
-    if not df_liq.empty:
+    if not df_stop_liq.empty:
+        # Prepara dados acumulados diários para a curva comparativa
+        _d_stop = df_stop_liq.groupby("Data")["PnL_Reais"].sum().rename("🛡️ Com 1 Stop Red (R$)")
+        _d_raw = df_liq.groupby("Data")["PnL_Reais"].sum().rename("📋 Sem Stop (R$)")
+        df_comp_chart = pd.concat([_d_stop, _d_raw], axis=1).fillna(0.0).cumsum()
+
+        st.markdown("#### ⚖️ Curva Comparativa de Equity: Com 1 Stop Red vs Sem Stop")
+        c_eq1, c_eq2, c_eq3, c_eq4 = st.columns(4)
+        lucro_fim_stop = df_comp_chart["🛡️ Com 1 Stop Red (R$)"].iloc[-1]
+        lucro_fim_raw = df_comp_chart["📋 Sem Stop (R$)"].iloc[-1]
+        reds_evitados_total = (df_liq["Status"] == "🔴 RED").sum() - (df_stop_liq["Status"] == "🔴 RED").sum()
+        
+        c_eq1.metric("Lucro Final (1 Stop Red)", f"R$ {lucro_fim_stop:+,.2f}", f"Banca: R$ {banca_total + lucro_fim_stop:,.2f}")
+        c_eq2.metric("Lucro Final (Sem Stop)", f"R$ {lucro_fim_raw:+,.2f}", f"Banca: R$ {banca_total + lucro_fim_raw:,.2f}")
+        c_eq3.metric("Reds Evitados pelo Stop", f"{reds_evitados_total} reds a menos", delta=f"-{reds_evitados_total} reds", delta_color="normal")
+        c_eq4.metric("Jogos Poupados de Risco", f"{len(df_liq) - len(df_stop_liq)} partidas", f"{((len(df_liq) - len(df_stop_liq))/len(df_liq)*100):.1f}% do volume")
+
+        st.line_chart(df_comp_chart)
+        st.caption("Comparativo da evolução patrimonial acumulada (em R$): linha com 1 Stop Red por método vs linha Sem Stop.")
+
+        st.markdown("---")
+        st.markdown("#### 🛡️ Evolução Jogo a Jogo — Com 1 Stop Red por Método")
+        df_stop_liq_sorted = df_stop_liq.sort_values(["Data", "Hora"]).reset_index(drop=True)
+        df_stop_liq_sorted["PnL_Acum_Reais"] = df_stop_liq_sorted["PnL_Reais"].cumsum()
+        df_stop_liq_sorted["Num_Jogo"] = range(1, len(df_stop_liq_sorted) + 1)
+        st.line_chart(df_stop_liq_sorted.set_index("Num_Jogo")["PnL_Acum_Reais"])
+        st.caption("Curva de equity jogo a jogo operando com a regra de 1 Stop Red diário por método.")
+
+        st.markdown("---")
+        st.markdown("#### 📋 Evolução Jogo a Jogo — Sem Stop (Referência Bruta)")
         df_liq_sorted = df_liq.sort_values(["Data", "Hora"]).reset_index(drop=True)
-        df_liq_sorted["PnL_Acum_u"] = df_liq_sorted["PnL_u"].cumsum()
         df_liq_sorted["PnL_Acum_Reais"] = df_liq_sorted["PnL_Reais"].cumsum()
         df_liq_sorted["Num_Jogo"] = range(1, len(df_liq_sorted) + 1)
-
-        # Simulação do Cenário B7: Gestão Dinâmica (Juros Compostos 5%/10%) + Stop Red (-10%) & Stop Green (+10%)
-        def _hm_min(h):
-            try:
-                p = str(h).strip()[:5].split(":")
-                return int(p[0]) * 60 + int(p[1])
-            except Exception:
-                return 15 * 60
-
-        _df_b7 = df_liq.copy()
-        _df_b7["ko_min"] = _df_b7["Hora"].apply(_hm_min)
-        _df_b7["end_min"] = _df_b7["ko_min"] + 115
-        _df_b7["pct_liab"] = _df_b7["Método"].apply(
-            lambda m: 0.15 if "Over 4.5" in str(m) else (0.10 if ("0x3" in str(m) or "2x2" in str(m) or "Away" in str(m) or "1X" in str(m)) else 0.05)
-        )
-        _df_b7 = _df_b7.sort_values(["Data", "ko_min", "Método"]).reset_index(drop=True)
-
-        _banca_comp = float(banca_total)
-        _rows_b7 = []
-        for _dt, _g in _df_b7.groupby(_df_b7["Data"].dt.strftime("%Y-%m-%d")):
-            _g = _g.sort_values("ko_min").copy()
-            _b_dia = _banca_comp
-            _g["liab_b7"] = _g["pct_liab"] * _b_dia
-            _g["pnl_b7_rs"] = _g["PnL_u"] * _g["liab_b7"]
-            _stop_t = 999999
-            for _t in sorted(_g["end_min"].unique()):
-                _done = _g[(_g["end_min"] <= _t) & (_g["ko_min"] < _stop_t)]
-                _pnl_now = _done["pnl_b7_rs"].sum()
-                if _pnl_now <= -0.10 * _b_dia or _pnl_now >= 0.10 * _b_dia:
-                    _stop_t = _t
-                    break
-            _kept = _g[_g["ko_min"] < _stop_t].copy()
-            _banca_comp += _kept["pnl_b7_rs"].sum()
-            _rows_b7.append(_kept)
-
-        if _rows_b7:
-            df_b7_res = pd.concat(_rows_b7, ignore_index=True)
-            df_b7_res["Num_Jogo"] = range(1, len(df_b7_res) + 1)
-            df_b7_res["Lucro_Acumulado_B7_R$"] = df_b7_res["pnl_b7_rs"].cumsum()
-            df_b7_res["Banca_Composta_B7_R$"] = float(banca_total) + df_b7_res["Lucro_Acumulado_B7_R$"]
-
-            st.markdown("#### 🏆 Cenário B7: Gestão Dinâmica (Juros Compostos 5%/10%) + Stop Red (-10%) & Stop Green (+10%)")
-            c_b7_1, c_b7_2, c_b7_3, c_b7_4 = st.columns(4)
-            _lucro_b7 = df_b7_res["Lucro_Acumulado_B7_R$"].iloc[-1]
-            _banca_fim_b7 = df_b7_res["Banca_Composta_B7_R$"].iloc[-1]
-            _gr_b7 = (df_b7_res["Status"] == "🟢 GREEN").sum()
-            _rd_b7 = (df_b7_res["Status"] == "🔴 RED").sum()
-            c_b7_1.metric("Banca Final (B7)", f"R$ {_banca_fim_b7:,.2f}", f"Início: R$ {banca_total:,.0f}")
-            c_b7_2.metric("Lucro Líquido (B7)", f"R$ {_lucro_b7:+,.2f}", f"{(_lucro_b7 / banca_total * 100):+.1f}% sobre banca")
-            c_b7_3.metric("Jogos Executados", f"{len(df_b7_res)} jogos", f"{len(df_liq) - len(df_b7_res)} cortados pelo Stop")
-            c_b7_4.metric("Win Rate (B7)", f"{(_gr_b7 / len(df_b7_res) * 100):.1f}%", f"{_gr_b7}G / {_rd_b7}R")
-
-            st.line_chart(df_b7_res.set_index("Num_Jogo")["Lucro_Acumulado_B7_R$"])
-            st.caption("Evolução do Lucro Acumulado (em R$) no Cenário B7 (Gestão Dinâmica Composta 5%/10% + Stop Diário -10%/+10%).")
-
-        st.markdown("---")
-        st.markdown("#### 📊 Curva de Lucro Acumulado — Banca Fixa Sem Stop (Referência)")
         st.line_chart(df_liq_sorted.set_index("Num_Jogo")["PnL_Acum_Reais"])
-        st.caption("Evolução do saldo financeiro acumulado (em R$) com Banca Fixa sem Stop.")
+        st.caption("Curva de equity jogo a jogo sem aplicação de stop loss.")
     else:
         st.info("Sem dados suficientes para gerar a curva de equity.")
-
-# 5. COMPARATIVO DIRETO: REGRA BASE vs FILTROS NOVOS
-with tab_comparativo:
-    st.subheader("⚖️ Prova Forense de Overfitting: Regra Base vs Filtros Refinados")
-    st.info("""
-    🔬 **TESTE DURO DE GOVERNANÇA: SUB-CONJUNTO MANTIDO vs DESCARTADO (Kept-vs-Discarded)**
-    Ao decompor os 189 jogos no teste mantido-vs-descartado, a estatística comprova:
-    * **Lay Draw:** O filtro refinado MANTIDO deu ROI **+4,0%** (N=46), enquanto o subconjunto DESCARTADO rendeu **+6,0%** (N=68).
-    * **Lay Home:** O filtro refinado MANTIDO deu ROI **+6,4%** (N=32), enquanto o subconjunto DESCARTADO rendeu **+8,7%** (N=31).
-    * **Veredito Científico:** O filtro refinado fica sistematicamente com a **metade pior** e corta favoritos visitantes mais fortes (o oposto do que o scan alegou). Isso comprova **sobreajuste (overfitting / garden of forking paths)**. Por isso a governança arquivou o filtro refinado e mantém a Regra Base Ampla.
-    """)
-    
-    if "Passa_Filtro_Refinado" in df_raw.columns:
-        df_base = df_raw.copy()
-        df_ref = df_raw[df_raw["Passa_Filtro_Refinado"] == True].copy()
-        df_cortados = df_raw[df_raw["Passa_Filtro_Refinado"] == False].copy()
-        
-        n_base = len(df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])])
-        w_base = (df_base["Status"] == "🟢 GREEN").sum()
-        pnl_base_u = df_base[df_base["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
-        pnl_base_rs = pnl_base_u * (banca_total * 0.05)
-        wr_base = (w_base / n_base * 100) if n_base > 0 else 0
-        
-        n_ref = len(df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])])
-        w_ref = (df_ref["Status"] == "🟢 GREEN").sum()
-        pnl_ref_u = df_ref[df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"])]["PnL_u"].sum()
-        pnl_ref_rs = pnl_ref_u * (banca_total * 0.05)
-        wr_ref = (w_ref / n_ref * 100) if n_ref > 0 else 0
-        
-        diff_n = n_ref - n_base
-        diff_pnl_u = pnl_ref_u - pnl_base_u
-        diff_pnl_rs = pnl_ref_rs - pnl_base_rs
-        
-        col_c1, col_c2, col_c3 = st.columns(3)
-        with col_c1:
-            st.markdown("### 👑 Regra Base Ampla")
-            st.metric("Total de Jogos", f"{n_base} partidas")
-            st.metric("Win Rate Real", f"{wr_base:.1f}%", f"{w_base} Greens / {n_base - w_base} Reds")
-            st.metric("Lucro Líquido", f"{pnl_base_u:+.2f} u", f"R$ {pnl_base_rs:+,.2f}")
-            
-        with col_c2:
-            st.markdown("### 🔬 Filtros Novos Refinados")
-            st.metric("Total de Jogos", f"{n_ref} partidas", f"{diff_n} jogos descartados")
-            st.metric("Win Rate Real", f"{wr_ref:.1f}%", f"{w_ref} Greens / {n_ref - w_ref} Reds")
-            st.metric("Lucro Líquido", f"{pnl_ref_u:+.2f} u", f"R$ {pnl_ref_rs:+,.2f}")
-            
-        with col_c3:
-            st.markdown("### 📊 Diferença de Performance")
-            st.metric("Volume Descartado", f"{abs(diff_n)} jogos a menos", delta=f"{diff_n} jogos", delta_color="inverse")
-            st.metric("Diferença na Win Rate", f"{wr_ref - wr_base:+.1f} pp", delta=f"{wr_ref - wr_base:+.1f} pp")
-            st.metric("Lucro Deixado na Mesa", f"{diff_pnl_u:+.2f} u", delta=f"R$ {diff_pnl_rs:+,.2f}", delta_color="inverse")
-
-        st.markdown("---")
-        st.subheader("🎯 Desempenho Desdobrado por Método")
-        
-        comp_metodos = []
-        for m in sorted(df_base["Método"].unique()):
-            sub_b = df_base[(df_base["Método"] == m) & (df_base["Status"].isin(["🟢 GREEN", "🔴 RED"]))]
-            sub_r = df_ref[(df_ref["Método"] == m) & (df_ref["Status"].isin(["🟢 GREEN", "🔴 RED"]))]
-            
-            nb = len(sub_b)
-            wb = (sub_b["Status"] == "🟢 GREEN").sum()
-            pnl_b = sub_b["PnL_u"].sum()
-            
-            nr = len(sub_r)
-            wr = (sub_r["Status"] == "🟢 GREEN").sum()
-            pnl_r = sub_r["PnL_u"].sum()
-            
-            comp_metodos.append({
-                "Método": m,
-                "Jogos (Base)": nb,
-                "WR (Base)": f"{(wb/nb*100):.1f}%" if nb>0 else "0%",
-                "PnL (Base)": f"{pnl_b:+.2f} u",
-                "Jogos (Filtro Novo)": nr,
-                "WR (Filtro Novo)": f"{(wr/nr*100):.1f}%" if nr>0 else "0%",
-                "PnL (Filtro Novo)": f"{pnl_r:+.2f} u",
-                "Diferença PnL": f"{(pnl_r - pnl_b):+.2f} u"
-            })
-        st.dataframe(pd.DataFrame(comp_metodos), use_container_width=True, hide_index=True)
-        
-        st.markdown("---")
-        st.subheader("🔍 Jogos Que os Filtros Novos Descartaram (E o que aconteceu neles)")
-        st.caption("Abaixo estão os 99 jogos cortados pelos filtros refinados: veja como a grande maioria deu Green com tranquilidade.")
-        
-        cols_corte = ["Data", "Liga", "Jogo", "Método", "Odd_Fav", "Odd_Entrada", "Placar", "Status", "PnL_u", "Detalhe_Filtro"]
-        cols_corte_disp = [c for c in cols_corte if c in df_cortados.columns]
-        df_cortados_show = df_cortados[cols_corte_disp].copy()
-        df_cortados_show["Data"] = pd.to_datetime(df_cortados_show["Data"]).dt.strftime("%d/%m/%Y")
-        st.dataframe(df_cortados_show, use_container_width=True, hide_index=True)
-    else:
-        st.info("A coluna de filtros refinados não está presente na base selecionada.")
