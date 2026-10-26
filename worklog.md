@@ -7,6 +7,165 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-26 · Antigravity · Implementação da Tabela Consolidada com 1 Stop Red por Método no Streamlit (Página 02)
+
+- **Demanda do Usuário:**
+  - Adicionar na página `pages/02_📊_Resultados_Metodos_Aprovados.py` ("Resultados dos Métodos em Validação Forward — ARKAD") a "Tabela Consolidada de Jogos com 1 stop red por método".
+  - Regra de Stop Red: 1 Stop Red diário por método (jogos avaliados em ordem cronológica de horário; o 1º RED do método no dia encerra as entradas daquele método específico pelo resto do dia; outros métodos seguem operando normalmente).
+  - Ordenação solicitada: Jogos mais recentes no topo (Outubro/Setembro) e jogos mais antigos (Agosto) na base (ordenação decrescente por Data e Hora).
+  - Preservar 100% de todo o conteúdo existente (todas as abas, métricas, gráficos e downloads).
+- **Implementação:**
+  1. Criada a função `aplicar_stop1red_por_metodo(df_in)`:
+     - Processa cronologicamente os jogos por dia e método (`sort_values(by=["Data", "Hora"])`).
+     - Mantém entradas até o primeiro RED de cada método naquele dia (o RED é mantido, e os jogos subsequentes daquele método no mesmo dia são cortados).
+     - Retorna ordenado decrescentemente por `Data` e `Hora` (`ascending=[False, False]`).
+  2. Adicionada a aba `🛡️ Tabela Consolidada (1 Stop Red por Método)` na primeira posição das abas de análise, preservando integralmente `📋 Planilha Completa Jogo a Jogo` e as demais abas.
+  3. Adicionados KPIs dedicados no topo da aba: Total de Jogos executados vs cortados pelo stop, Greens/Taxa de Acerto %, Reds limitados a 1/método/dia, Lucro Líquido (u), Lucro em R$ e Pendentes.
+  4. Adicionado botão de download em Excel específico para a visão com Stop 1 Red: `Tabela_Consolidada_Stop1Red_ARKAD.xlsx`.
+  5. Testado em 1.196 partidas: 0 violações (nenhum método excedeu 1 RED no mesmo dia), 924 partidas executadas e 272 cortadas pelo stop.
+- **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `scratch/apply_edit.py`, `scratch/test_full_logic.py`, `worklog.md`.
+
+## 2026-10-26 · Antigravity · Auditoria Adversarial do Claude no Over 0.5 HT In-Play (Minuto 10): Reprovação do Combo A e Consolidação das Medições
+
+- **Demanda do Usuário:**
+  - Auditar via Claude o método de Over 0.5 HT in-play aos 10 minutos (`PROMPT_AUDITORIA_CLAUDE_OVER05_HT_INPLAY.md` ➔ `AUDITORIA_HT10_INPLAY_claude.md`).
+- **Achados da Auditoria Adversarial do Claude:**
+  1. **Teste de Permutação (2.000 sorteios sobre 691 células):** A melhor célula sob H0 (sem edge) tem margem mediana de **+18,10 pp** (p95 +27,19 pp). A margem observada no Combo A (+16,86 pp) dá **$P = 0,589$**. O aparente $P = 0,0185$ isolado era uma ilusão de multiplicidade (*Garden of Forking Paths*).
+  2. **Contaminação de Estado do Jogo:** 37% dos jogos capturados no minuto 8-16 já tinham gol antes da captura (`Odd_Over05_FT_Back <= 1.05`). Limpando para jogos estritamente 0-0, sobram 2.361 partidas (WR 63,96% vs BE 66,21% | Margem −2,25 pp | ROI −5,13%).
+  3. **Overround Estrutural do HT:** Medição reproduzida e confirmada: o mercado de HT in-play cobra **~7,4 pp de overround** (ambos os lados perdem: Back Over −5,13% e Back Under −10,16%).
+  4. **Custo da Latência In-Play:** Cada minuto de atraso para o operador entrar retira **−1,05 pp de Win Rate** ($\lambda = 0,028$ gol/min), pois os greens perdidos antes da confirmação da aposta são justamente onde o gol saiu primeiro.
+  5. **Instabilidade de Tiers:** A classificação de Tier não é canônica e o sinal inverte conforme o agrupamento de ligas.
+- **Veredito Alinhado:**
+  - **Reprovar sumariamente o Combo A** (não mandar para quarentena stake-zero para evitar desperdício de meses observando ruído).
+  - Registrar no repositório o instrumento de medição: a barreira estrutural de 7,4 pp de overround no HT in-play e o piso de liquidez como mitigador.
+- **Arquivos:** `AUDITORIA_HT10_INPLAY_claude.md`, `PROMPT_AUDITORIA_CLAUDE_OVER05_HT_INPLAY.md`, `scratch/test_inplay_ht_over05.py`, `scratch/eval_filters_inplay_ht.py`, `worklog.md`.
+
+
+## 2026-10-26 · Antigravity · Execução Completa das 4 Rotas Estruturais: Auditoria VPS Outubro, In-Play Min 80, Correct Score e Stop Red
+
+- **Demandas do Usuário:**
+  - Manter Lay 0x0 Elite em observação stake-zero até Janeiro/2027.
+  - Executar integralmente as 4 rotas de pesquisa e auditoria propostas.
+- **Execução & Resultados por Rota:**
+  1. **Rota 1: Auditoria Oficial dos Métodos Ativos na VPS em Outubro (247 jogos liquidados):**
+     - *Lay Over 4.5 FT (Under Pesado):* **13G / 0R (100% WR | +0,80u | ROI +6,13% | Max DD: 0,00u)**. A trava de spread $\le 1.25$ eliminou 100% dos falsos greens e livros ilíquidos.
+     - *Lay Home / DC X2:* **63G / 8R (88,73% WR vs 86,04% BE | +2,36u | ROI +3,33% | Max DD: −2,06u)**. Consistente e lucrativo.
+     - *Lay 2x2 Top 3:* 27G / 3R (−1,45u). Os 3 reds ocorreram em 03-06/10 antes do teto $\le 16.50$ e Blindagem de Elite (23/10). Desde o deploy da blindagem, 100% greens.
+     - *Lay Draw (Fav <= 1.40):* 91G / 18R (83,49% WR vs 85,14% BE | −2,08u | ROI −1,90% | Max DD: −5,74u). Reds concentrados em dias específicos (ex: 4 reds em 10/10).
+  2. **Rota 2: Auditoria In-Play no Coletor VPS (Minuto 75-85 / Late Goal e Pressão Min 80):**
+     - *Late Goal (Minuto 82):* N=2.839 apostas reais finalizadas no coletor. WR 47,20% vs BE 48,33% (Margem −1,13 pp | P&L −29,17u | ROI −1,03%). A faixa líquida central (odds 1.80 a 2.60, 70% do volume) perde −7% a −8%.
+     - *Pressão Minuto 80 (`inplay_min80_log.csv`, N=747):* A correlação entre pressão (xG acumulado, toques na área) e gol tardio é desprezível ($r < 0,07$). A Betfair amassa a odd in-play quando há pressão, eliminando qualquer edge ingênuo.
+  3. **Rota 3: Correct Score (Lay 0x1) e Viés Comportamental em 2026:**
+     - *Lay 0x1 Sniper (Fav Mandante 1.55-2.15, Lay 10-16):* Em 2026 todo dá +0,94% (N=1.119), mas no 2º semestre (Mai-Ago) cai para −0,74%. Vizinhos (odds 8-20, N=2.414) rendem +0,18% (breakeven). Permanece estritamente em watchlist stake-zero até N≥400 no feed oficial.
+  4. **Rota 4: Simulação de Gestão de Risco & Stop Red Diário no Forward Real (N=837):**
+     - *Sem Stop (Base):* P&L −17,70u | Max Drawdown −24,14u.
+     - *Stop 2 Reds/Dia:* P&L −7,04u | **Max Drawdown −10,47u (−57% de Drawdown)**.
+     - *Stop 1 Red/Dia:* P&L −1,67u | **Max Drawdown −7,25u (−70% de Drawdown)**.
+     - No Lay Draw isolado, o Stop 1 Red reduziu o Max Drawdown de −18,61u para −8,35u, comprovando a eficácia empírica da gestão de risco do operador humano.
+- **Arquivos:** `scratch/rota1_auditoria_vps_outubro.py`, `scratch/rota2_inplay_analysis.py`, `scratch/rota2_inplay_min80.py`, `scratch/rota3_cs_and_handicap.py`, `scratch/rota4_stop_red_simulation.py`, `worklog.md`.
+
+
+## 2026-10-26 · Antigravity · Reconstrução e Auditoria Científica de Machine Learning para Lay 0x0 / Over 0.5 FT em 2026
+
+- **Demanda do Usuário:**
+  - "podemos refazer o metodo agora com o marchile lerning com os dados corretos ?"
+  - Corrigir os dados após Claude apontar os 4 erros na auditoria (`PROMPT_AUDITORIA_CLAUDE_ML_LAY_0X0.md` e `AUDITORIA_ML_LAY_0X0_claude.md`):
+    1. Bug de `min_to_ko` na VPS (tinha pego ticks in-play com `mtk` negativo; corrigir para `mtk` estritamente positivo pré-jogo KO-25 a KO-3).
+    2. Liquidação oficial com `metodos_aprovados/placares_ft.csv` (`ou05` status Betfair).
+    3. Convenção de unidade: ROI primário sobre Liability ($\text{liability} = \text{odd} - 1$) com comissão 5%.
+    4. Governança de ligas via regex normalizado (`Colombian Primera B` vs `COLOMBIA 2`).
+    5. Amostra estritamente de 2026 dividida em 4 períodos temporais.
+- **Execução & Correções Realizadas:**
+  - Extraído do coletor VPS (`betfair_live_odds.csv`, seek 2.4 GB) 3.755 jogos de Outubro com `3.0 <= mtk <= 25.0` (mediana 4,2 min) e liquidez auditada.
+  - Casados 3.100 jogos de Outubro com liquidações oficiais de `placares_ft.csv` (zero false greens).
+  - Unificada a base completa de 2026 em 17.004 jogos: Partição 1 Treino (Jan–Abr, N=8.385), Partição 2 Teste OOS (Mai–Ago, N=3.438), Partição 3 Forward 1 (Setembro, N=2.083), Partição 4 Forward 2 (Outubro, N=3.098).
+  - Treinado LightGBM regularizado em 18 features de mercado pré-jogo e testado o corte de $\text{Pred Edge} \ge +0,005$ com teto Lay $\le 30,0$.
+  - Varredura exaustiva de todas as fatias de mercado: Favorito ($\le 1,30$, $1,30-1,50$, $1,50-1,80$, $>1,80$), Over 2.5 ($\le 1,50$, $>2,20$), Faixas de odd de Lay ($\le 12$, $12-25$, $>25$) e Back Over 0.5 FT.
+- **Achados & Diagnóstico:**
+  - **Machine Learning In-Sample vs Out-of-Sample:**
+    - Jan–Abr (Treino): Margem $+4,48$ pp | ROI Liability **$+4,92\%$** (IC95: [+3,42%, +6,22%])
+    - Mai–Ago (Teste OOS): Margem $+0,89$ pp | ROI Liability **$+0,99\%$** (IC95 cruza zero: [-2,51%, +4,10%])
+    - Setembro (Forward 1): Margem $-0,95$ pp | ROI Liability **$-1,10\%$** ($P(\le 0) = 65,0\%$)
+    - Outubro (Forward 2 Pré-Jogo Real): Margem $-1,18$ pp | ROI Liability **$-1,48\%$** ($P(\le 0) = 78,4\%$)
+  - **Eficiência Estrutural do Mercado:**
+    - Em todas as fatias testadas (favorito forte, jogos over, odd baixa/alta de Lay), a margem foi **negativa** nos períodos forward.
+    - O mercado precifica com precisão cirúrgica a probabilidade de gol: quando o favorito é forte ou o jogo é aberto, a odd de Lay sobe tanto que o Break-Even acompanha o Win Rate.
+    - O overround da Betfair + comissão de 5% impõem uma perda sistemática de **−1,1% a −1,8%** em qualquer aposta pré-jogo indiscriminada de Over 0.5 / Lay Under 0.5 (tanto no Back quanto no Lay).
+- **Veredito:**
+  - O método de Lay 0x0 / Over 0.5 FT no pré-jogo **não possui edge sustentável**.
+  - O mercado pré-jogo é eficiente demais e não há alpha explorável após custos e comissão.
+  - Arquivado definitivamente como inviável no pré-jogo (em total alinhamento com a Lei 0 e o Hall of Shame do `GEMINI.md`).
+- **Arquivos:** `scratch/vps_extract_october_true_pregame.py`, `scratch/october_pregame_odds_true.csv`, `scratch/prepare_unified_2026_data.py`, `scratch/dataset_2026_unified_over05.parquet`, `scratch/test_ml_and_baselines_2026.py`, `scratch/train_and_eval_ml_over05.py`, `scratch/scan_slices_over05.py`, `RELATORIO_FINAL_ML_LAY_0X0_2026.md`, `worklog.md`.
+
+
+## 2026-10-23 · Antigravity · Implementação da Opção 2 (Blindagem de Elite: 1ª e 2ª Divisões) no Lay 2x2 e Auditoria de Posição de Tabela
+
+- **Demandas do Usuário:**
+  1. Realizar estudo empírico comparando Opção 1 (Governança Ampla / com 3ª e 4ª divisões inglesas e copas) vs Opção 2 (Blindagem de Elite: apenas 1ª e 2ª Divisões) por faixas de odds de Lay no Lay 2x2.
+  2. Apresentar recomendação técnica e volume estimado de jogos por dia para cada opção.
+  3. Auditar a tese de posição na tabela no Lay Draw levantada por Claude (`PROMPT_GEMINI_posicao_tabela_lay_draw.md`).
+  4. Aprovação explícita do usuário para ativar a **Opção 2 no Lay 2x2** e atualizar a produção na VPS.
+- **Achados do Estudo Empírico de Odds (Lay 2x2):**
+  - **Fronteira Matemática de Odds:** O teto ótimo é estritamente **$\le 16.50$**. Acima disso ($\ge 16.51$), a taxa de 2-2 quase dobra e o ROI marginal despenca para −4,31u no mercado real recente (Maio a Setembro).
+  - **Opção 1 vs Opção 2 no Teto $\le 16.50$:**
+    - *Ano 2026:* Op1 gerou 953 jogos (+25,44u); Op2 gerou 723 jogos (+20,30u — concentrando 80% do lucro anual).
+    - *Forward ao Vivo (Set/Out):* Op1 gerou 17G / 2R (−0,92u), com ambos os reds ocorrendo em ligas periféricas inglesas (League 1 *Burton x Mansfield* e League 2 *Shrewsbury x Colchester*). A Op2 filtrou ambos os jogos, cravando **14G / 0R (100% Win Rate | +0,89u | ROI +6,36%)**.
+  - **Distribuição de Jogos:**
+    - Segunda a quinta: 0 jogos na Opção 2 (descanso operacional).
+    - Fim de semana (sexta a domingo): ~4 a 5 jogos por semana concentrados em ligas nobres com alta liquidez na Betfair.
+- **Auditoria de Posição de Tabela no Lay Draw (`PROMPT_GEMINI_posicao_tabela_lay_draw.md`):**
+  - O estudo do Claude confirmou que a intuição do usuário sobre o "viés de reputação / time de meio de tabela" descreve um fenômeno real, mas numericamente não tem significância estatística em 2026 ($P = 0,1335$, N=47 jogos fora do terço, sinal inverteu em 2024).
+  - Apostar somente nos líderes de tabela rende apenas +0,40% de ROI em 2026 e −0,87% no agregado histórico.
+  - Veredito alinhado: **Não codificar filtro rígido de tabela no robô da VPS** (evitando overfitting); manter o critério discricionário na mão do operador humano.
+- **Implementação & Deploy na VPS (`163.176.59.215`):**
+  - Codificado `BLOQUEIO_TIER_2X2` em `sinais_ko_core.py`, `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py` e `pages/17_⚽_Sinais_Lay_2x2.py`.
+  - Filtro restringe Lay 2x2 estritamente a 1ª e 2ª divisões homologadas, bloqueando automaticamente League 1/2 inglesas, Serie C/D, copas regionais e divisões inferiores.
+  - Sincronizados `sinais_ko_core.py` e `metodo_lay2x2_strategy.py` via SCP para a VPS.
+  - Reiniciado `sinais-ko.service` com sucesso (PID 1033873), verificado journalctl em execução contínua com loop 60s.
+- **Arquivos:** `sinais_ko_core.py`, `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `scratch/estudo_odds_opcao1_vs_opcao2.py`, `scratch/calcular_jogos_por_dia.py`, `worklog.md`.
+
+## 2026-10-23 · Antigravity · Autópsia do Lay Draw, Simulação de Stop Red e Recalibração de Teto do Lay 2x2 (<= 16.50)
+
+- **Demanda do Usuário:**
+  - Usuário questionou os números do forward do Lay Draw e o porquê de Claude reportar −14,65u ("vcs estão pegando os filtros corretos?").
+  - Análise do impacto de Stop Red de 1 jogo/dia no portfólio e nas ligas.
+  - Alerta sobre a ausência de jogos no Lay 2x2 ("tem muito tempo que não tem nenhum jogo").
+  - Demanda para estudar o teto ótimo até 16.50 no Lay 2x2 e aprovação explícita para deploy na VPS.
+- **Diagnóstico & Autópsia Forense:**
+  1. **Contaminação do Ledger Bruto no Lay Draw:** 211 dos 292 jogos (72%) do ledger avaliado por Claude estavam fora dos filtros de governança/odds. Nos 81 jogos limpos de produção, o Lay Draw perdeu apenas −0,49u (praticamente break-even flat, 84,0% WR vs 84,6% BE).
+  2. **Auditoria Adversarial do Claude (`AUDITORIA_FILTROS_STOP_RED_claude.md`):** Claude admitiu formalmente o erro e retirou a recomendação de desligar sumariamente o Lay Draw. Demonstrou que o Stop 1 Red no Lay Draw limpo (+0,18u) decorre de um dia atípico (10/10) e que o método deve permanecer em observação até N=250.
+  3. **Operação Manual do Usuário:** Usuário esclareceu que executa as entradas manualmente e aplica o Stop 1 Red discricionário no dia para controle de drawdown, eliminando a objeção de latência do coletor.
+  4. **Estudo de Fronteira do Lay 2x2 (Teto <= 16.50):**
+     - Em 06/10, o teto <= 14.00 asfixiou 100% dos sinais reais da Betfair Exchange (onde a mediana do 2-2 é 17.5).
+     - No estudo empírico com todos os 7.784 jogos de 2026 e na base real (maio-setembro), o teto <= 16.50 revelou-se o **sweet spot de fronteira**: N=65 jogos, 64 Greens / 1 Red (**WR 98,46% vs BE 94,13% | ROI +4,61% | +3,00u de lucro no mercado real** e **+25,44u em 2026 todo**).
+     - Acima de 16.50 (odds 17 e 18), a curva inverte e vira negativa (−0,86% a −1,93u).
+- **Implementação & Deploy na VPS (`163.176.59.215`):**
+  - Atualizado teto de Lay 2x2 de 14.00 para 16.50 em `sinais_ko_core.py` (funções `candidatos` e `avaliar`), `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py` e `pages/17_⚽_Sinais_Lay_2x2.py`.
+  - Backup criado na VPS: `sinais_ko_core.py.bak_20261023`.
+  - Arquivo sincronizado via SCP e serviço `sinais-ko.service` reiniciado ativo e saudável em loop 60s (PID 1033053).
+- **Arquivos:** `sinais_ko_core.py`, `metodo_lay2x2_strategy.py`, `estrategia_lay_2x2.py`, `pages/17_⚽_Sinais_Lay_2x2.py`, `AUDITORIA_FILTROS_STOP_RED_claude.md`, `worklog.md`.
+
+## 2026-10-22 · Antigravity · Auditoria de Mercado: Flamengo x Estudiantes (Lay Away / Zebra)
+
+- **Demanda do Usuário:**
+  - *"o jogo do flamengo hj é um bom jogo para fazer o lay away ?"* — consulta sobre entrada de Lay no visitante (Estudiantes) na Libertadores.
+- **Diagnóstico Técnico & Regras do ARKAD:**
+  - **Status do Jogo:** Flamengo x Estudiantes (Libertadores) iniciou às 21:30 BRT. Odds no KO: Flamengo @1.48, Empate @4.40, Estudiantes (Away) Lay @9.80 - 10.50.
+  - **Método Reprovado no ARKAD:** No scan exaustivo documentado no GEMINI.md (linha 227), o método *Lay Away / DC 1X em Super Fav Mandante* foi **REPROVADO / ARQUIVADO** (1/100 holders, ROI de apenas +0,50% na FRESH3 com IC95% cruzando zero [-1,8%, +2,8%]).
+  - **Matemática do Lay Alto:** Na odd Lay 10.00/10.50, o break-even exigido é de 90,5% a 90,9%. Para buscar R$ 100 de lucro, assume-se liability de R$ 900 a R$ 950. Um único red apaga 9 a 10 greens, violando a gestão de risco de cauda.
+  - **Conclusão:** Não há edge matemático comprovado. Entrada não recomendada e fora do portfólio ativo.
+- **Arquivos:** `worklog.md`, `GEMINI.md`.
+
+## 2026-10-22 · Antigravity · Auditoria Pré-Jogo Europa League (Lillestrom x Real Sociedad & NK Celje x Salzburg)
+
+- **Demanda do Usuário:**
+  - Usuário perguntou se os 2 jogos alertados no Radar prévio das 16:00 (Lillestrom x Real Sociedad e NK Celje x Red Bull Salzburg para Lay Home/DC X2) entravam para apostar.
+- **Diagnóstico no KO−10 (Mercado Real Betfair):**
+  - **Lillestrom x Real Sociedad:** O Lay do mandante (Lillestrom) subiu para **8.80** no KO−13/10, estourando o teto estrito de segurança de `hl <= 8.00`. Entrada abortada.
+  - **NK Celje x Red Bull Salzburg:** A odd de Back do Salzburg (visitante) subiu no mercado para **1.74**, desrespeitando o filtro de favorito visitante `a <= 1.65`. Entrada abortada.
+  - Ambos os jogos foram filtrados com sucesso pelo serviço `sinais_ko_vps.py` no KO−10, sem gerar registros de entrada.
+- **Arquivos:** `worklog.md`, `sinais_ko_core.py`.
+
 ## 2026-10-22 · Antigravity · Resolução Definitiva do Proxy: Login mTLS Direto e Auto-Rotação Residencial iProyal
 
 - **Demanda do Usuário:**

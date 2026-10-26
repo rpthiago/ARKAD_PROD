@@ -414,8 +414,46 @@ kpi4.metric(
 kpi5.metric("Pendentes / Ao Vivo", f"{pendentes} jogos")
 st.markdown("---")
 
+# ── Função de Gestão de Risco: 1 Stop Red Diário por Método ──
+def aplicar_stop1red_por_metodo(df_in):
+    """
+    Aplica a regra de 1 Stop Red Diário por Método:
+    Para cada dia e para cada método, percorre os jogos em ordem cronológica de início (Hora).
+    Inclui os jogos normalmente até o 1º RED do método naquele dia.
+    Ao ocorrer o 1º RED, ele é registrado (encerra o dia para o método) e quaisquer jogos
+    posteriores daquele mesmo método na mesma data são excluídos (bloqueados pelo stop).
+    Outros métodos seguem operando normalmente.
+    Ordenação de saída: Mais recentes no topo (Outubro/Setembro) e mais antigos (Agosto) na base.
+    """
+    if df_in.empty:
+        return df_in.copy()
+    
+    # 1. Ordena cronologicamente para a simulação sequencial
+    df_temp = df_in.sort_values(by=["Data", "Hora"]).copy()
+    
+    rows_kept = []
+    for (d, m), grp in df_temp.groupby(["Data", "Método"], sort=False):
+        red_ocorrido = False
+        for _, r in grp.iterrows():
+            if red_ocorrido:
+                continue
+            rows_kept.append(r)
+            status_str = str(r.get("Status", "")).upper()
+            if "RED" in status_str:
+                red_ocorrido = True
+                
+    df_stop = pd.DataFrame(rows_kept)
+    if df_stop.empty:
+        return df_stop
+        
+    # 2. Ordenação solicitada: jogos mais recentes em cima, agosto lá embaixo
+    df_stop = df_stop.sort_values(by=["Data", "Hora"], ascending=[False, False]).reset_index(drop=True)
+    return df_stop
+
+
 # ── Abas de Análise ──
-tab_geral, tab_metodo, tab_dia, tab_grafico, tab_comparativo = st.tabs([
+tab_stop1red, tab_geral, tab_metodo, tab_dia, tab_grafico, tab_comparativo = st.tabs([
+    "🛡️ Tabela Consolidada (1 Stop Red por Método)",
     "📋 Planilha Completa Jogo a Jogo",
     "🎯 Desempenho por Método",
     "📅 Desempenho Dia a Dia",
@@ -423,9 +461,87 @@ tab_geral, tab_metodo, tab_dia, tab_grafico, tab_comparativo = st.tabs([
     "⚖️ Comparativo: Regra Base vs Filtros Novos"
 ])
 
+# 0. TABELA CONSOLIDADA COM 1 STOP RED POR MÉTODO
+with tab_stop1red:
+    st.subheader("🛡️ Tabela Consolidada de Jogos — 1 Stop Red por Método Diário")
+    st.info(
+        "🛡️ **Gestão com 1 Stop Red Diário por Método:**\n\n"
+        "• Cada método opera de forma independente no dia.\n\n"
+        "• As partidas são avaliadas em ordem cronológica de horário de início (`Hora`).\n\n"
+        "• Ao ocorrer o **1º RED** do método no dia, qualquer jogo subsequente daquele mesmo método é bloqueado (stop red).\n\n"
+        "• Os outros métodos do portfólio seguem operando normalmente.\n\n"
+        "• **Ordenação:** Jogos mais recentes (Outubro/Setembro) no topo e mais antigos (Agosto) na base."
+    )
+
+    # Cálculo do Stop 1 Red sobre a base filtrada por método e data
+    df_base_stop = df_raw.copy()
+    if filtro_metodo:
+        df_base_stop = df_base_stop[df_base_stop["Método"].isin(filtro_metodo)]
+    if isinstance(filtro_data, (list, tuple)) and len(filtro_data) == 2:
+        df_base_stop = df_base_stop[(df_base_stop["Data"].dt.date >= filtro_data[0]) & (df_base_stop["Data"].dt.date <= filtro_data[1])]
+
+    df_stop1red_all = aplicar_stop1red_por_metodo(df_base_stop)
+
+    # KPIs consolidados do Stop 1 Red (exclui métodos em observação/paralelo igual aos KPIs gerais)
+    _fora_stop = df_stop1red_all["Método"].astype(str).str.contains("Paralelo|Zebra|Micro-Liability", na=False)
+    df_stop_liq = df_stop1red_all[~_fora_stop & df_stop1red_all["Status"].isin(["🟢 GREEN", "🔴 RED"])].copy()
+
+    total_stop_jogos = int((~_fora_stop).sum())
+    stop_liq = len(df_stop_liq)
+    stop_greens = (df_stop_liq["Status"] == "🟢 GREEN").sum()
+    stop_reds = (df_stop_liq["Status"] == "🔴 RED").sum()
+    stop_pend = (df_stop1red_all["Status"] == "⏳ PENDENTE").sum()
+    stop_wr = (stop_greens / stop_liq * 100) if stop_liq > 0 else 0.0
+    stop_pnl_u = df_stop_liq["PnL_u"].sum() if not df_stop_liq.empty else 0.0
+    stop_pnl_rs = df_stop_liq["PnL_Reais"].sum() if not df_stop_liq.empty else 0.0
+
+    jogos_cortados = max(0, total_jogos - total_stop_jogos)
+
+    s_c1, s_c2, s_c3, s_c4, s_c5 = st.columns(5)
+    s_c1.metric("Jogos Executados (Stop 1 Red)", f"{total_stop_jogos} partidas", f"{jogos_cortados} cortadas pelo stop")
+    s_c2.metric("Greens / Taxa de Acerto", f"{stop_greens} ({stop_wr:.1f}%)", f"{stop_reds} reds (máx 1/mét/dia)")
+    s_c3.metric("Lucro Líquido (Unidades)", f"{stop_pnl_u:+.2f} u", delta=f"{stop_pnl_u - pnl_total_u:+.2f} u vs sem stop")
+    s_c4.metric(
+        f"Lucro em R$ (Banca R$ {banca_total:,.0f})",
+        f"R$ {stop_pnl_rs:+,.2f}",
+        delta=f"{(stop_pnl_rs / banca_total) * 100:+.1f}% sobre banca" if banca_total > 0 else ""
+    )
+    s_c5.metric("Pendentes / Ao Vivo", f"{stop_pend} jogos")
+
+    st.markdown("---")
+
+    # Aplicação de filtro visual de Status (se o usuário selecionou no topo)
+    df_stop1red_show = df_stop1red_all.copy()
+    if filtro_status:
+        df_stop1red_show = df_stop1red_show[df_stop1red_show["Status"].isin(filtro_status)]
+
+    cols_exibir = [
+        "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
+        "Odd_Entrada", "Odd_Fav", "Placar", "Status", "Liability_R$", "PnL_u", "PnL_Reais"
+    ]
+    cols_disp_stop = [c for c in cols_exibir if c in df_stop1red_show.columns]
+
+    df_stop_display = df_stop1red_show[cols_disp_stop].copy()
+    df_stop_display["Data"] = df_stop_display["Data"].dt.strftime("%d/%m/%Y")
+
+    st.dataframe(df_stop_display, use_container_width=True, hide_index=True)
+
+    # Download em Excel
+    _buf_stop = io.BytesIO()
+    with pd.ExcelWriter(_buf_stop, engine="openpyxl") as _writer:
+        df_stop_display.to_excel(_writer, index=False, sheet_name="Stop1Red_Consolidado")
+    st.download_button(
+        label="📥 Baixar Tabela Consolidada (1 Stop Red) (Excel)",
+        data=_buf_stop.getvalue(),
+        file_name="Tabela_Consolidada_Stop1Red_ARKAD.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        type="primary"
+    )
+
 # 1. PLANILHA GERAL
 with tab_geral:
-    st.subheader("📋 Tabela Consolidada de Jogos")
+    st.subheader("📋 Tabela Consolidada de Jogos — Sem Stop (Todos os Jogos)")
+    st.caption("Visão histórica contendo todos os sinais gerados, sem aplicação de stop loss diário.")
     
     cols_exibir = [
         "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 

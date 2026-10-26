@@ -16,7 +16,7 @@ import numpy as np
 
 # Parâmetros Padrão da Estratégia
 ODD_LAY_2X2_MIN = 8.00
-ODD_LAY_2X2_MAX = 14.00  # Teto estrito causal homologado (evita look-ahead bias e limita risco de cauda)
+ODD_LAY_2X2_MAX = 16.50  # Teto estrito causal homologado (evita look-ahead bias e limita risco de cauda)
 ODD_UNDER25_MAX = 2.00
 STAKE_PADRAO = 100.0
 COMISSAO_BETFAIR = 0.05
@@ -25,6 +25,18 @@ import re
 
 # Ligas com histórico de desequilíbrio e alta taxa de 2x2
 BLACKLIST_LIGAS_2X2 = ['SERBIA', 'IRELAND', 'TURKEY', 'SCOTLAND', 'SERB', 'IRISH', 'TURK', 'SCOT']
+
+# Blindagem de Elite Lay 2x2 (Opção 2): Restrito estritamente a 1ª e 2ª divisões
+BLOQUEIO_TIER_2X2 = (
+    " 3", " 4", " 5",
+    "SKY BET LEAGUE 1", "SKY BET LEAGUE 2",
+    "LEAGUE ONE", "LEAGUE TWO",
+    "ENGLISH LEAGUE 1", "ENGLISH LEAGUE 2",
+    "SERIE C", "SERIE D", "LIGA III", "LIGA IV",
+    "CUP", "COPA", "TROPHY", "SUPER DIVISION",
+    "CHINESE LEAGUE 2", "JAPANESE J LEAGUE 3",
+    "SWEDISH DIVISION 1", "EGYPTIAN SECOND DIVISION B"
+)
 
 # Regexes de Governança de Ligas (Alinhadas com sinais_ko_core.py e GEMINI.md)
 RE_FEMININO = re.compile(
@@ -56,6 +68,8 @@ def eh_jogo_ignorado_governanca(liga: str = "", home: str = "", away: str = "") 
     full = f"{liga} {home} {away}".upper()
     if any(b in full for b in BLACKLIST_LIGAS_2X2):
         return True, "Bloqueado por Blacklist 2x2 (Sérvia, Irlanda, Turquia, Escócia)"
+    if any(b in full for b in BLOQUEIO_TIER_2X2):
+        return True, "Bloqueado por Blindagem de Elite (Apenas 1ª e 2ª Divisões - sem copas ou divisões inferiores)"
     if RE_FEMININO.search(full):
         return True, "Bloqueado por Governança: Futebol Feminino"
     if RE_SELECAO.search(full):

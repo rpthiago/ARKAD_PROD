@@ -2242,3 +2242,282 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 19/10/2026  8:45:02,36 ===== 
+[*] Buscando fixtures para a data: 2026-10-19...
+2026-10-19 08:45:05.831 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-19.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 20/10/2026  8:45:02,36 ===== 
+[*] Buscando fixtures para a data: 2026-10-20...
+2026-10-20 08:45:07.628 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-20.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 21/10/2026  8:45:02,38 ===== 
+[*] Buscando fixtures para a data: 2026-10-21...
+2026-10-21 08:45:07.281 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-21.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 22/10/2026  8:45:02,41 ===== 
+[*] Buscando fixtures para a data: 2026-10-22...
+2026-10-22 08:45:05.326 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-22.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+To https://github.com/rpthiago/ARKAD_PROD.git
+   93184ad..e1bed50  main -> main
+(fim) 
+ 
+===== 23/10/2026  8:45:02,41 ===== 
+[*] Buscando fixtures para a data: 2026-10-23...
+2026-10-23 08:45:05.098 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-23.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   lay0x1_fav_log.txt
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   worklog.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 24/10/2026  8:45:02,42 ===== 
+[*] Buscando fixtures para a data: 2026-10-24...
+2026-10-24 08:45:05.772 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-24.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   estrategia_lay_2x2.py
+	modified:   lay0x1_fav_log.txt
+	modified:   metodo_lay2x2_strategy.py
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   "pages/17_\342\232\275_Sinais_Lay_2x2.py"
+	modified:   sinais_ko_core.py
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	AUDITORIA_FILTROS_STOP_RED_claude.md
+	AUDITORIA_LAY_ZEBRA_claude.md
+	PROMPT_AUDITORIA_CLAUDE_FILTROS_E_STOP_RED.md
+	PROMPT_GEMINI_posicao_tabela_lay_draw.md
+	auditoria_lay_zebra.py
+	auditoria_stop_red.py
+	lay_draw_tabela.py
+	lay_draw_tabela_teste.py
+	stop_manual_por_metodo.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 25/10/2026  8:45:02,43 ===== 
+[*] Buscando fixtures para a data: 2026-10-25...
+2026-10-25 08:45:05.287 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-25.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   estrategia_lay_2x2.py
+	modified:   lay0x1_fav_log.txt
+	modified:   metodo_lay2x2_strategy.py
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   "pages/17_\342\232\275_Sinais_Lay_2x2.py"
+	modified:   sinais_ko_core.py
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	AUDITORIA_FILTROS_STOP_RED_claude.md
+	AUDITORIA_LAY_ZEBRA_claude.md
+	BRIEFING_COLETOR_BETFAIR_para_terceiro.md
+	PROMPT_AUDITORIA_CLAUDE_FILTROS_E_STOP_RED.md
+	PROMPT_GEMINI_posicao_tabela_lay_draw.md
+	auditoria_lay_zebra.py
+	auditoria_stop_red.py
+	lay_draw_tabela.py
+	lay_draw_tabela_teste.py
+	stop_manual_por_metodo.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 26/10/2026  8:45:02,41 ===== 
+[*] Buscando fixtures para a data: 2026-10-26...
+2026-10-26 08:45:06.044 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run atualizar_feed_forward_diario.py [ARGUMENTS]
+[AVISO] Nenhum jogo encontrado para 2026-10-26.
+[INFO] Nenhuma fixture para processar.
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   estrategia_lay_2x2.py
+	modified:   lay0x1_fav_log.txt
+	modified:   metodo_lay2x2_strategy.py
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-24.xlsx
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-25.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   "pages/17_\342\232\275_Sinais_Lay_2x2.py"
+	modified:   sinais_dia_coletor.py
+	modified:   sinais_ko_core.py
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	AUDITORIA_FILTROS_STOP_RED_claude.md
+	AUDITORIA_LAY_ZEBRA_claude.md
+	BRIEFING_COLETOR_BETFAIR_para_terceiro.md
+	PROMPT_AUDITORIA_CLAUDE_FILTROS_E_STOP_RED.md
+	PROMPT_GEMINI_posicao_tabela_lay_draw.md
+	auditoria_lay_zebra.py
+	auditoria_stop_red.py
+	lay_draw_tabela.py
+	lay_draw_tabela_teste.py
+	stop_manual_por_metodo.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

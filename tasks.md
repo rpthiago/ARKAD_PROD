@@ -8,6 +8,13 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [x] **Tabela Consolidada com 1 Stop Red por Método no Streamlit (26/10).**
+  - [x] Implementada na página `pages/02_📊_Resultados_Metodos_Aprovados.py` a aba `"🛡️ Tabela Consolidada (1 Stop Red por Método)"` com processamento sequencial por dia e método.
+  - [x] Ao ocorrer o 1º RED do método no dia, o jogo é mantido e quaisquer partidas seguintes daquele método na mesma data são bloqueadas.
+  - [x] Ordenação rigorosa: jogos mais recentes (Outubro/Setembro) no topo e mais antigos (Agosto) na base (`Data` e `Hora` decrescentes).
+  - [x] KPIs dedicados (Jogos Executados vs Cortados, WR%, PnL em u e R$, Pendentes) e exportação em Excel (`Tabela_Consolidada_Stop1Red_ARKAD.xlsx`).
+  - [x] Preservação integral da `📋 Planilha Completa Jogo a Jogo` e de todas as abas anteriores.
+
 - [ ] **Migração Operacional de Corretora: Saque OrbitX (BET-IBC) ➔ Binance ➔ BFB247 (15/10).**
   - [x] Solicitado saque integral da conta `btrodriguest` no formulário oficial da BET-IBC via USDT Tron (TRC-20) para a Binance em 15/10 (~18:00 BRT).
   - [ ] Aguardar compensação do saque na Binance (prazo de até 24 horas úteis, até 16/10 18:00 - 17/10).
@@ -25,12 +32,10 @@
   - [x] Painel arquivado em `pages_arquivadas/03_⚡_Radar_Trader_InPlay.py` mantendo motor e logs ativos.
   - [ ] Acumular forward até $N \ge 200$ sinais executáveis ao vivo com odds reais Betfair Exchange.
   - [ ] Critério de aprovação: Piso do IC95% > 0.0% pós-FDR com $\ge 10$ reds reais.
-- [ ] **Lay 0x0 XGBoost — confirmar o edge (PRIORIDADE 1).**
-  - [x] Integrado oficialmente nas páginas centrais do Streamlit: `pages/01` (Radar e Auditoria 2026) e `pages/02` (Resultados e Curva de Equity unificada com 97 jogos forward).
-  - [ ] Acumular forward até **N ≥ 300** (hoje 46) via `ARKAD_Forward_0x0` (semanal).
-  - [ ] Medir **CLV** dos picks reais (`clv_0x0_log.csv` / `ARKAD_CLV_0x0`). **Aprova se CLV+ mediano E %CLV+ > 50%.**
-  - [ ] Calibrar fuso do `Time` do feed no CLV (conferir 1º fechamento real).
-  - [ ] Regra congelada (NÃO re-ajustar): liga_0x0<0,08 & mkt_prob<0,10 & 10≤lay≤20 & ev>0,02.
+- [ ] **Lay 0x0 Elite (Watchlist Stake-Zero — Revisão em Janeiro/2027).**
+  - [x] Estudo forense em 17.004 jogos de 2026: o mercado amplo pré-jogo é eficiente (−1,8% ROI).
+  - [x] Blindagem de Elite calibrada: Ligas Tier 1/2 + $\text{Fav} \le 1,80$ + $\text{Lay Size} \ge \$200$ (Outubro: 68G / 2R, WR 97,1%, ROI +1,09%).
+  - [ ] Acumular observação em stake-zero na VPS até Janeiro/2027 para deliberar sobre estabilidade temporal de longo prazo.
 - [x] **Lay Over 4.5 FT (Under Pesado) — Trava Operacional de Spread (13/10).**
   - [x] Estudo forense de liquidez: 100% dos reds de 2026 ocorreram em `Spread >= 1.258` (livros sem liquidez). Com `Spread <= 1.25` (gap max 25% entre Back e Lay): N=79, 79 Greens, 0 Reds (**WR 100,00%, ROI liab +5,24%**). Em 2025, expurgou 45 dos 48 reds (−20,37u ➔ +0,25u).
   - [x] Trava `SPREAD_MAX_OVER45 = 1.25` + governança de ligas implementadas em `sinais_ko_core.py` (candidatos e avaliar), `automacao_diaria_aprovados.py` e `pages/01_🏆_Portfolio_Metodos_Aprovados.py`.

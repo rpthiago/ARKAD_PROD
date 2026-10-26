@@ -157,7 +157,7 @@ def gerar_planilha_do_coletor(dia=None, separado=False, universo="feed", min_liq
     is_home = d.Metodo.astype(str).str.contains("Home", case=False, na=False)
     is_draw = d.Metodo.astype(str).str.contains("Draw", case=False, na=False)
     is_o45 = d.Metodo.astype(str).str.contains("4.5", case=False, na=False)
-    d = d[~(is_2x2 & (odd_lay > 14.0))].copy()
+    d = d[~(is_2x2 & (odd_lay > 16.50))].copy()
     d = d[~(is_0x3 & (odd_lay > 30.0))].copy()
     d = d[~(is_3x0 & (odd_lay > 30.0))].copy()
     d = d[~(is_home & (odd_lay > 8.00))].copy()

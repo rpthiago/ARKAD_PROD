@@ -33,14 +33,14 @@ Esta página monitora em **tempo real** as oportunidades quantitativas do métod
 ### 🛡️ Critérios de Filtro de Elite (Validados em 50.000+ Partidas):
 1. **Teto Estrito de Responsabilidade:** Odd Lay 2x2 Betfair entre **{ODD_LAY_2X2_MIN:.2f} e {ODD_LAY_2X2_MAX:.2f}** (Controla o risco de perda).
 2. **Tendência Under 2.5 / Favoritismo:** Odd Under 2.5 $\le {ODD_UNDER25_MAX:.2f}$ ou Total xG $\le 2.40$ ou Super Favorito em campo.
-3. **Filtro de Ligas de Risco:** Bloqueio automático das 4 ligas periféricas com histórico de desequilíbrio e alta taxa de 2-2 (Sérvia, Irlanda, Turquia, Escócia).
-4. **Desempenho Estatístico Comprovado:** Win Rate Histórico de **96.63%** com o filtro de liga.
-5. **Regra Causal Homologada:** Operação local em KO−15 sem viés de antecipação (look-ahead bias) com teto estrito de odd $\le 14.00$.
+3. **Blindagem de Elite (1ª e 2ª Divisões):** Operação restrita a ligas principais e de acesso direto. Bloqueio automático de 3ª, 4ª e 5ª divisões (League 1/2, Serie C/D), copas regionais e países com alta taxa de 2-2 (Sérvia, Irlanda, Turquia, Escócia).
+4. **Desempenho Estatístico Comprovado:** Win Rate Histórico de **95.02%** nas 1ª e 2ª divisões (+20.30u em 2026 e 100% Green no Forward recente).
+5. **Regra Causal Homologada:** Operação local em KO−15 sem viés de antecipação (look-ahead bias) com teto estrito de odd $\le 16.50$.
 
 > ⚠️ **REGRAS DO MERCADO:** A aposta ganha (**GREEN**) se a partida terminar com **qualquer placar diferente de 2x2**. O único placar perdedor (**RED**) é o placar exato de `2 x 2`.
 """)
 
-st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score 2-2 atinge liquidez ótima nos **15 a 60 minutos anteriores ao Kickoff**. Se no momento do KO−15 a odd estiver na faixa causal **[8.00, 14.00]** e passar na governança de ligas, a entrada é confirmada imediatamente.")
+st.info("⏱️ **Diretriz Operacional de Execução no Kickoff (KO):** O mercado de Correct Score 2-2 atinge liquidez ótima nos **15 a 60 minutos anteriores ao Kickoff**. Se no momento do KO−15 a odd estiver na faixa causal **[8.00, 16.50]** e passar na governança de ligas, a entrada é confirmada imediatamente.")
 
 # Métricas no Topo
 m1, m2, m3, m4 = st.columns(4)

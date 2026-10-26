@@ -300,3 +300,76 @@ Untracked files:
 no changes added to commit (use "git add" and/or "git commit -a")
 Everything up-to-date
 (fim) 
+ 
+===== 19/10/2026  8:00:01,23 ===== 
+baixando base completa de apicomunidade.futpythontrader.com ...
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py", line 21, in <module>
+    r.raise_for_status()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\.venv\lib\site-packages\requests\models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://apicomunidade.futpythontrader.com/api/dados/bet365/download/
+b365_base_lean.csv sincronizada: 248219 linhas | data max 2026-09-24 | 67 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 
+ 
+===== 26/10/2026  8:00:01,48 ===== 
+baixando base completa de apicomunidade.futpythontrader.com ...
+Traceback (most recent call last):
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\baixar_base_completa.py", line 21, in <module>
+    r.raise_for_status()
+  File "C:\Users\thiag\OneDrive\Documentos\GitHub\ARKAD_PROD\.venv\lib\site-packages\requests\models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://apicomunidade.futpythontrader.com/api/dados/bet365/download/
+b365_base_lean.csv sincronizada: 248219 linhas | data max 2026-09-24 | 67 MB
+agora: git add b365_base_lean.csv && git commit -m 'update: lean base' && git push
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   base_log.txt
+	modified:   buscador_smartwatch/historico_smartwatch.json
+	modified:   buscador_voos_internacional/historico_internacional.json
+	modified:   estrategia_lay_2x2.py
+	modified:   lay0x1_fav_log.txt
+	modified:   metodo_lay2x2_strategy.py
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-09-16.xlsx
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-24.xlsx
+	modified:   metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-25.xlsx
+	modified:   metodos_aprovados/forward_5metodos.log
+	modified:   metodos_aprovados/forward_ko_ledger.csv
+	modified:   metodos_aprovados/radar_5_blocos.log
+	modified:   observar_under15_log.txt
+	modified:   "pages/17_\342\232\275_Sinais_Lay_2x2.py"
+	modified:   sinais_dia_coletor.py
+	modified:   sinais_ko_core.py
+	modified:   worklog.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	AUDITORIA_FILTROS_STOP_RED_claude.md
+	AUDITORIA_LAY_ZEBRA_claude.md
+	BRIEFING_COLETOR_BETFAIR_para_terceiro.md
+	PROMPT_AUDITORIA_CLAUDE_FILTROS_E_STOP_RED.md
+	PROMPT_GEMINI_posicao_tabela_lay_draw.md
+	auditoria_lay_zebra.py
+	auditoria_stop_red.py
+	lay_draw_tabela.py
+	lay_draw_tabela_teste.py
+	stop_manual_por_metodo.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Everything up-to-date
+(fim) 

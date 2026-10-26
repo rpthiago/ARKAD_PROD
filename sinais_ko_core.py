@@ -32,6 +32,18 @@ M_0X3, M_0X3_AMPLA, M_2X2 = (
 )
 BLACKLIST_2X2 = ("SERB", "IRISH", "IRELAND", "TURK", "SCOT")
 
+# Blindagem de Elite Lay 2x2 (Opção 2): Restrito estritamente a 1ª e 2ª divisões
+BLOQUEIO_TIER_2X2 = (
+    " 3", " 4", " 5",
+    "SKY BET LEAGUE 1", "SKY BET LEAGUE 2",
+    "LEAGUE ONE", "LEAGUE TWO",
+    "ENGLISH LEAGUE 1", "ENGLISH LEAGUE 2",
+    "SERIE C", "SERIE D", "LIGA III", "LIGA IV",
+    "CUP", "COPA", "TROPHY", "SUPER DIVISION",
+    "CHINESE LEAGUE 2", "JAPANESE J LEAGUE 3",
+    "SWEDISH DIVISION 1", "EGYPTIAN SECOND DIVISION B"
+)
+
 # Regex de filtros de ligas e governança
 RE_FEMININO = re.compile(
     r"(\b(WOMEN|FEMININ\w*|FEMENIN\w*|FRAUEN|LADIES|WSL|W-LEAGUE|DAMALLSVENSKAN|PREMIERE LIGUE|LIGA F|DE LA REINA)\b|\(W\))",
@@ -127,12 +139,13 @@ def candidatos(mk, home, away, competicao):
     if u25_b and u25_b <= 2.10 and l03 and 14.0 <= l03 <= 30.0 and (a is None or a >= 1.85):
         c[M_0X3] = l03
 
-    # 5. Lay 2x2 Top 3: 8.0 <= Lay 2x2 <= 14.00 | Tendência Under/Fav | Sem Blacklist
+    # 5. Lay 2x2 Top 3: 8.0 <= Lay 2x2 <= 16.50 | Tendência Under/Fav | Sem Blacklist | Elite 1ª/2ª Div
     l22, _ = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
     comp_str = str(competicao or "").upper()
     passou_blacklist_2x2 = not any(b in comp_str for b in BLACKLIST_2X2)
+    passou_elite_2x2 = not any(b in comp_str for b in BLOQUEIO_TIER_2X2)
     passou_tend_2x2 = (u25_b and u25_b <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)
-    if l22 and 8.0 <= l22 <= 14.0 and passou_tend_2x2 and passou_blacklist_2x2:
+    if l22 and 8.0 <= l22 <= 16.5 and passou_tend_2x2 and passou_blacklist_2x2 and passou_elite_2x2:
         c[M_2X2] = l22
 
     return c
@@ -197,13 +210,14 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
         else:
             out.append((M_0X3, l03, l03s, a))
 
-    # 5. Lay 2x2 Top 3 (Teto Validado <= 14.00 + Tendência Under/Fav + Sem Blacklist + Liq >= 200)
+    # 5. Lay 2x2 Top 3 (Teto <= 16.50 + Tendência Under/Fav + Sem Blacklist + Elite 1ª/2ª Div + Liq >= 200)
     l22, l22s = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
     comp_str = str(competicao or "").upper()
     passou_blacklist_2x2 = not any(b in comp_str for b in BLACKLIST_2X2)
+    passou_elite_2x2 = not any(b in comp_str for b in BLOQUEIO_TIER_2X2)
     passou_tend_2x2 = (u25_b and u25_b <= 2.00) or (h and h <= 1.55) or (a and a <= 1.60)
     liq_2x2_ok = (l22s is not None and l22s >= LIQ_MIN)
-    if l22 and 8.0 <= l22 <= 14.0 and passou_tend_2x2 and passou_blacklist_2x2 and liq_2x2_ok:
+    if l22 and 8.0 <= l22 <= 16.5 and passou_tend_2x2 and passou_blacklist_2x2 and passou_elite_2x2 and liq_2x2_ok:
         if top3_dia and M_2X2 in top3_dia and top3_dia[M_2X2]:
             if e_top3(l22, top3_dia[M_2X2]):
                 out.append((M_2X2, l22, l22s, fav))
