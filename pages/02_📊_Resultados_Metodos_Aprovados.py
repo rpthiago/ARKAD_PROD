@@ -414,16 +414,16 @@ kpi4.metric(
 kpi5.metric("Pendentes / Ao Vivo", f"{pendentes} jogos")
 st.markdown("---")
 
-# ── Função de Gestão de Risco: 1 Stop Red Diário por Método ──
-def aplicar_stop1red_por_metodo(df_in):
+# ── Função de Gestão de Risco: Stop Red Seletivo por Método ──
+def aplicar_stop1red_por_metodo(df_in, metodos_com_stop=("Draw",)):
     """
-    Aplica a regra de 1 Stop Red Diário por Método:
-    Para cada dia e para cada método, percorre os jogos em ordem cronológica de início (Hora).
-    Inclui os jogos normalmente até o 1º RED do método naquele dia.
-    Ao ocorrer o 1º RED, ele é registrado (encerra o dia para o método) e quaisquer jogos
-    posteriores daquele mesmo método na mesma data são excluídos (bloqueados pelo stop).
-    Outros métodos seguem operando normalmente.
-    Ordenação de saída: Mais recentes no topo (Outubro/Setembro) e mais antigos (Agosto) na base.
+    Aplica a regra de Stop Red Seletivo por Método:
+    - O Stop 1 Red diário é aplicado exclusivamente aos métodos onde o clustering (agrupamento
+      de reds na rodada) é comprovado, como o Lay Draw (Fav <= 1.40), cortando dias de zika de empates.
+    - Métodos com eventos independentes e alta taxa de acerto, como o Lay Home (Fav Visitante <= 1.65)
+      e Lay Over 4.5, rodam em Fluxo Livre Contínuo (sem stop por red), evitando amputar a recuperação
+      natural dos múltiplos greens da tarde após um red isolado.
+    - Ordenação de saída: Mais recentes no topo (Outubro/Setembro) e mais antigos (Agosto) na base.
     """
     if df_in.empty:
         return df_in.copy()
@@ -433,14 +433,22 @@ def aplicar_stop1red_por_metodo(df_in):
     
     rows_kept = []
     for (d, m), grp in df_temp.groupby(["Data", "Método"], sort=False):
-        red_ocorrido = False
-        for _, r in grp.iterrows():
-            if red_ocorrido:
-                continue
-            rows_kept.append(r)
-            status_str = str(r.get("Status", "")).upper()
-            if "RED" in status_str:
-                red_ocorrido = True
+        tem_stop = any(s.lower() in str(m).lower() for s in metodos_com_stop)
+        
+        if not tem_stop:
+            # Fluxo livre contínuo: inclui todas as entradas do método
+            for _, r in grp.iterrows():
+                rows_kept.append(r)
+        else:
+            # Aplica Stop 1 Red (encerra entradas do método no dia após o 1º RED)
+            red_ocorrido = False
+            for _, r in grp.iterrows():
+                if red_ocorrido:
+                    continue
+                rows_kept.append(r)
+                status_str = str(r.get("Status", "")).upper()
+                if "RED" in status_str:
+                    red_ocorrido = True
                 
     df_stop = pd.DataFrame(rows_kept)
     if df_stop.empty:
@@ -453,22 +461,21 @@ def aplicar_stop1red_por_metodo(df_in):
 
 # ── Abas de Análise ──
 tab_stop1red, tab_geral, tab_metodo, tab_dia, tab_grafico = st.tabs([
-    "🛡️ Tabela Consolidada (1 Stop Red por Método)",
+    "🛡️ Tabela Consolidada (Stop Red Otimizado)",
     "📋 Planilha Completa Jogo a Jogo",
     "🎯 Desempenho por Método",
     "📅 Desempenho Dia a Dia",
     "📈 Curva de Lucro Acumulado"
 ])
 
-# 0. TABELA CONSOLIDADA COM 1 STOP RED POR MÉTODO
+# 0. TABELA CONSOLIDADA COM STOP RED OTIMIZADO
 with tab_stop1red:
-    st.subheader("🛡️ Tabela Consolidada de Jogos — 1 Stop Red por Método Diário")
+    st.subheader("🛡️ Tabela Consolidada de Jogos — Gestão de Risco com Stop Seletivo")
     st.info(
-        "🛡️ **Gestão com 1 Stop Red Diário por Método:**\n\n"
-        "• Cada método opera de forma independente no dia.\n\n"
-        "• As partidas são avaliadas em ordem cronológica de horário de início (`Hora`).\n\n"
-        "• Ao ocorrer o **1º RED** do método no dia, qualquer jogo subsequente daquele mesmo método é bloqueado (stop red).\n\n"
-        "• Os outros métodos do portfólio seguem operando normalmente.\n\n"
+        "🛡️ **Gestão com Stop Red Seletivo (Otimização Baseada em Evidências):**\n\n"
+        "• 🟡 **Lay Draw (Fav $\le 1,40$):** Aplica **1 Stop Red Diário** — interrompe as entradas do dia após o 1º red de empate (evitou 25 reds e reduziu o drawdown em −55%).\n\n"
+        "• 🔵 **Lay Home (Fav Visitante $\le 1,65$):** Opera em **Fluxo Livre Contínuo** — como 85% dos reds são isolados, não aplica corte prematuro, preservando os +1,94u de lucro (+5,01u a mais do que com stop cego).\n\n"
+        "• 🟢 **Demais Métodos (Over 4.5, CS Top 3, Away):** Operam normalmente em fluxo contínuo ótimo.\n\n"
         "• **Ordenação:** Jogos mais recentes (Outubro/Setembro) no topo e mais antigos (Agosto) na base."
     )
 
@@ -532,7 +539,7 @@ with tab_stop1red:
     st.download_button(
         label="📥 Baixar Tabela Consolidada (1 Stop Red) (Excel)",
         data=_buf_stop.getvalue(),
-        file_name="Tabela_Consolidada_Stop1Red_ARKAD.xlsx",
+        file_name="Tabela_Consolidada_StopOtimizado_ARKAD.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         type="primary"
     )
@@ -570,7 +577,7 @@ with tab_metodo:
     st.subheader("🎯 Comparativo de Desempenho por Método")
     modo_metodo = st.radio(
         "Selecione a Gestão de Risco:",
-        ["🛡️ Com 1 Stop Red por Método (Recomendado)", "📋 Sem Stop (Todos os Jogos)", "⚖️ Comparativo Lado a Lado"],
+        ["🛡️ Com Stop Red Otimizado (Recomendado)", "📋 Sem Stop (Todos os Jogos)", "⚖️ Comparativo Lado a Lado"],
         horizontal=True
     )
 
@@ -611,7 +618,7 @@ with tab_metodo:
     df_stats_stop = _calc_stats_metodo(df_stop_liq)
     df_stats_raw = _calc_stats_metodo(df_liq)
 
-    if modo_metodo == "🛡️ Com 1 Stop Red por Método (Recomendado)":
+    if modo_metodo == "🛡️ Com Stop Red Otimizado (Recomendado)":
         st.caption("ℹ️ Exibindo métricas com a aplicação de **1 Stop Red Diário por Método** (máximo 1 RED por método em cada dia).")
         if not df_stats_stop.empty:
             cols_show = [c for c in df_stats_stop.columns if not c.startswith("_")]
@@ -659,7 +666,7 @@ with tab_dia:
     st.subheader("📅 Desempenho Detalhado por Data")
     modo_dia = st.radio(
         "Selecione a Visualização Diária:",
-        ["🛡️ Com 1 Stop Red por Método (Recomendado)", "📋 Sem Stop (Todos os Jogos)"],
+        ["🛡️ Com Stop Red Otimizado (Recomendado)", "📋 Sem Stop (Todos os Jogos)"],
         horizontal=True
     )
 
@@ -692,7 +699,7 @@ with tab_dia:
         # Ordenação com datas mais recentes no topo
         return df_res.sort_values("_dt", ascending=False).drop(columns=["_dt"]).reset_index(drop=True)
 
-    if modo_dia == "🛡️ Com 1 Stop Red por Método (Recomendado)":
+    if modo_dia == "🛡️ Com Stop Red Otimizado (Recomendado)":
         st.caption("ℹ️ Desempenho diário com aplicação de 1 Stop Red por método (datas mais recentes no topo).")
         df_dia_stop = _calc_stats_dia(df_stop_liq, is_stop=True)
         if not df_dia_stop.empty:
@@ -731,7 +738,7 @@ with tab_grafico:
         st.caption("Comparativo da evolução patrimonial acumulada (em R$): linha com 1 Stop Red por método vs linha Sem Stop.")
 
         st.markdown("---")
-        st.markdown("#### 🛡️ Evolução Jogo a Jogo — Com 1 Stop Red por Método")
+        st.markdown("#### 🛡️ Evolução Jogo a Jogo — Com Stop Red Otimizado")
         df_stop_liq_sorted = df_stop_liq.sort_values(["Data", "Hora"]).reset_index(drop=True)
         df_stop_liq_sorted["PnL_Acum_Reais"] = df_stop_liq_sorted["PnL_Reais"].cumsum()
         df_stop_liq_sorted["Num_Jogo"] = range(1, len(df_stop_liq_sorted) + 1)

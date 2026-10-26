@@ -7,6 +7,25 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-26 · Antigravity · Otimização da Gestão de Risco: Stop Red Seletivo (Lay Draw com Stop; Lay Home em Fluxo Livre)
+
+- **Demanda do Usuário:**
+  - Ajustar a lógica da aba `🛡️ Tabela Consolidada` para aplicar o Stop Red apenas onde ele gera valor comprovado (como o Lay Draw) e deixar o Lay Home rodando em seu fluxo ótimo livre.
+- **Fundamentação Empírica:**
+  - **No Lay Draw:** 42,5% dos dias com red têm empates múltiplos (agrupamento temporal tóxico). O Stop 1 Red evita 25 reds e reduz o Max Drawdown em −55%.
+  - **No Lay Home:** 84,6% dos dias com red têm apenas 1 red isolado. Aplicar Stop 1 Red no Lay Home cortou 64 greens e apenas 5 reds (92,75% de WR nos cortados), transformando um método de +1,94u em −3,07u (−5,01u de prejuízo induzido).
+- **Implementação:**
+  1. Modificada a função `aplicar_stop1red_por_metodo(df_in, metodos_com_stop=("Draw",))`:
+     - Aplica Stop 1 Red estritamente aos métodos em `metodos_com_stop` (Lay Draw).
+     - Mantém fluxo livre contínuo para Lay Home e demais métodos do portfólio.
+  2. Atualizados os KPIs e a tabela da aba `🛡️ Tabela Consolidada (Stop Red Otimizado)`:
+     - Volume total: 1.005 partidas (188 cortadas do Lay Draw).
+     - Win Rate sobe para **91,0%** (905 Greens / 90 Reds).
+     - Lucro líquido do portfólio salta de **+1,98u para +7,71u (R$ +1.201,05)**.
+     - Preservados os +1,94u do Lay Home e os 25 reds evitados do Lay Draw.
+  3. Atualizadas as abas de Desempenho por Método, Desempenho Dia a Dia e Curva de Equity com os novos dados seletivos.
+- **Arquivos:** `pages/02_📊_Resultados_Metodos_Aprovados.py`, `scratch/apply_selective_stop.py`, `worklog.md`.
+
 ## 2026-10-26 · Antigravity · Refinamento das Abas da Página 02: Remoção do Comparativo de Filtros e Integração dos Dados com 1 Stop Red
 
 - **Demanda do Usuário:**
