@@ -106,7 +106,7 @@ def eh_jogo_ignorado(home, away, competicao):
 def candidatos(mk, home, away, competicao):
     """elegibilidade para o radar do dia."""
     if eh_jogo_ignorado(home, away, competicao):
-        return {M_DRAW: None, M_HOME: None, M_O45: None, M_0X3: None, M_2X2: None}
+        return {M_DRAW: None, M_HOME: None, M_O45: None, M_2X2: None}
 
     a, _ = _p(mk, "MATCH_ODDS", away, "back"); h, _ = _p(mk, "MATCH_ODDS", home, "back")
     db, _ = _p(mk, "MATCH_ODDS", "The Draw", "back")
@@ -114,7 +114,7 @@ def candidatos(mk, home, away, competicao):
     fav = min(h or 99.0, a or 99.0)
     eh_copa_jogo = bool(RE_COPA.search(str(competicao or "")))
 
-    c = {M_DRAW: None, M_HOME: None, M_O45: None, M_0X3: None, M_2X2: None}
+    c = {M_DRAW: None, M_HOME: None, M_O45: None, M_2X2: None}
     # Teto validado: Lay Draw <= 7.00 + Trava Operacional: Spread Empate <= 1.15 (Livro com Liquidez)
     spread_draw_ok = (db is not None and dl is not None and db > 1.0 and (dl / db) <= SPREAD_MAX_DRAW)
     if h and a and dl and 4.5 <= dl <= 7.00 and spread_draw_ok:
@@ -134,10 +134,7 @@ def candidatos(mk, home, away, competicao):
     if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok:
         c[M_O45] = o45_l
 
-    # 4. Lay 0x3 Top 3: Under 2.5 <= 2.10 | 14.0 <= Lay 0x3 <= 30.00 | Odd_A >= 1.85
-    l03, _ = _p(mk, "CORRECT_SCORE", "0 - 3", "lay")
-    if u25_b and u25_b <= 2.10 and l03 and 14.0 <= l03 <= 30.0 and (a is None or a >= 1.85):
-        c[M_0X3] = l03
+    # 4. Lay 0x3 Top 3: EXPURGADO / ARQUIVADO (EV- comprovado em forward e KO-10)
 
     # 5. Lay 2x2 Top 3: 8.0 <= Lay 2x2 <= 16.50 | Tendência Under/Fav | Sem Blacklist | Elite 1ª/2ª Div
     l22, _ = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")
@@ -200,15 +197,7 @@ def avaliar(mk, home, away, competicao, top3_dia=None):
     if u25_b and u25_b <= 1.50 and o45_l and 4.0 <= o45_l <= 20.0 and spread_o45_ok and liq_o45_ok:
         out.append((M_O45, o45_l, o45_ls, u25_b))
 
-    # 4. Lay 0x3 Top 3 (Teto Validado <= 30.00 + U25 <= 2.10 + Visitante >= 1.85 + Liq >= 200)
-    l03, l03s = _p(mk, "CORRECT_SCORE", "0 - 3", "lay")
-    liq_0x3_ok = (l03s is not None and l03s >= LIQ_MIN)
-    if u25_b and u25_b <= 2.10 and l03 and 14.0 <= l03 <= 30.0 and (a is None or a >= 1.85) and liq_0x3_ok:
-        if top3_dia and M_0X3 in top3_dia and top3_dia[M_0X3]:
-            if e_top3(l03, top3_dia[M_0X3]):
-                out.append((M_0X3, l03, l03s, a))
-        else:
-            out.append((M_0X3, l03, l03s, a))
+    # 4. Lay 0x3 Top 3: EXPURGADO / ARQUIVADO (EV- comprovado em forward e KO-10)
 
     # 5. Lay 2x2 Top 3 (Teto <= 16.50 + Tendência Under/Fav + Sem Blacklist + Elite 1ª/2ª Div + Liq >= 200)
     l22, l22s = _p(mk, "CORRECT_SCORE", "2 - 2", "lay")

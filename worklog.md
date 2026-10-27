@@ -7,6 +7,29 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-27 · Antigravity · Expurgamento Completo do Lay 0x3 do Portfólio Ativo e Confirmação do Teto 16.50 no Lay 2x2
+
+- **Demanda do Usuário:**
+  - Confirmar que o Lay 2x2 já está rodando com teto estrito de odd 16,50.
+  - Retirar definitivamente o método Lay 0x3 do portfólio ativo.
+- **Auditoria e Confirmação Técnica:**
+  - **Lay 2x2:** Confirmado rodando com teto $\le 16.50$ em `estrategia_lay_2x2.py` (L47: `if o_2x2 < 8.00 or o_2x2 > 16.50: continue`) e em `sinais_ko_core.py` (L220: `8.0 <= l22 <= 16.5`). No forward real, gerou +1,78u (131G/6R); todos os 6 reds ocorreram com odds $\ge 16.50$, e na faixa $\le 16.00$ registrou 100% de WR (33G/0R entre planilhas e KO-10).
+  - **Lay 0x3:** Auditoria comprovou EV negativo sistemático:
+    - Forward diário (`metodos_aprovados/`, N=116): 110G / 6R, WR 94,83% vs BE 96,16% (gap −1,34 pp, PnL **−1,62u**). Negativo em todos os meses (Ago −0,20u, Set −0,51u, Out −0,91u).
+    - VPS KO-10 (`forward_ko_ledger.csv`, N=83): 74G / 9R, WR 89,16% vs BE 96,29% (gap −7,13 pp, PnL **−6,14u**).
+    - Odd média ~25,7 exige 26 greens seguidos para pagar 1 red; zebra desesperada no 2T toma 0-3 no contra-ataque em 5,2% das vezes (vs 3,8% implícito). Todos os cortes de odd testados foram negativos.
+- **Implementação do Expurgamento:**
+  1. `pages/01_🏆_Portfolio_Metodos_Aprovados.py`: Removido da lista de métodos ativos na sidebar, dos filtros padrão, dos textos do Cenário B7 e desativada a geração de novos sinais no scanner ao vivo. Atualizada a tabela de auditoria da Tab 2 para `❌ REPROVADO / ARQUIVADO`.
+  2. `pages/02_📊_Resultados_Metodos_Aprovados.py`: Atualizado status de governança no header e textos de alocação da sidebar/tabelas para registrar Lay 0x3 como arquivado.
+  3. `pages/04_⚡_Radar_Jogos_do_Dia.py`: Filtragem explícita adicionada (`df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()`) e removido do cálculo de liability.
+  4. `pages/05_📈_Resultados_Jogos_do_Dia.py`: Removido de labels e da função de liability.
+  5. `sinais_ko_core.py`: Removido de `candidatos()` e `avaliar_grade_ko()`, interrompendo a produção de sinais KO-10 na VPS.
+  6. `automacao_diaria_aprovados.py`: Desativado bloco de geração do Lay 0x3 para não gravar novos sinais nas planilhas diárias.
+  7. `relatorio_forward_5metodos.py`: Adicionado `M_0X3` ao `FORA_DO_TOTAL` e removida chamada no gerador de sinais.
+  8. `GEMINI.md`: Registrado no Hall of Shame com dados empíricos completos.
+  9. `tasks.md`: Registrado na seção ☠️ ARQUIVADO.
+- **Arquivos:** `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/02_📊_Resultados_Metodos_Aprovados.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `pages/05_📈_Resultados_Jogos_do_Dia.py`, `sinais_ko_core.py`, `automacao_diaria_aprovados.py`, `relatorio_forward_5metodos.py`, `GEMINI.md`, `tasks.md`, `worklog.md`.
+
 ## 2026-10-26 · Antigravity · Otimização da Gestão de Risco: Stop Red Seletivo (Lay Draw com Stop; Lay Home em Fluxo Livre)
 
 - **Demanda do Usuário:**

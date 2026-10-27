@@ -40,8 +40,9 @@
   - [x] Estudo forense de liquidez: 100% dos reds de 2026 ocorreram em `Spread >= 1.258` (livros sem liquidez). Com `Spread <= 1.25` (gap max 25% entre Back e Lay): N=79, 79 Greens, 0 Reds (**WR 100,00%, ROI liab +5,24%**). Em 2025, expurgou 45 dos 48 reds (−20,37u ➔ +0,25u).
   - [x] Trava `SPREAD_MAX_OVER45 = 1.25` + governança de ligas implementadas em `sinais_ko_core.py` (candidatos e avaliar), `automacao_diaria_aprovados.py` e `pages/01_🏆_Portfolio_Metodos_Aprovados.py`.
   - [x] Deploy efetuado na VPS (`163.176.59.215`): backup criado e daemon `sinais-ko.service` reiniciado ativo em loop 60s.
-- [x] **Suíte de Correct Score (Lay 0x3, 3x0, 2x2 e 0x0) — Otimização e Alertas Telegram (13/10).**
-  - [x] Tetos calibrados na base 2026 (0x3 $\le 30.0$, 3x0 $\le 30.0$, 2x2 $\le 14.0$).
+- [x] **Suíte de Correct Score (Lay 3x0, 2x2 e 0x0) — Lay 0x3 EXPURGADO (27/10).**
+  - [x] Tetos calibrados na base 2026 (3x0 $\le 30.0$, 2x2 $\le 16.50$).
+  - [x] Lay 0x3 Top 3 oficialmente expurgado e arquivado após auditoria forward comprovar EV negativo sistemático (−1,62u em planilhas diárias e −6,14u em KO-10).
   - [x] Integração completa nas páginas 01, 04, 09 e 17 do Streamlit e na rotina agendada do Telegram (`telegram_notifier.py` / `rotina_5_horarios.bat`).
 - [ ] **Tríade base (Draw/Home/Over 4.5) — ciclo forward.**
   - [x] Lay Draw: trava de spread `Odd_Lay / Odd_Back <= 1.15` e teto $\le 7.00$ ativos na VPS.
@@ -150,6 +151,7 @@
 - [x] **xG 12 jogos como filtro de veto no Lay 0x0 (`sum_xg12 >= 2.80`)** (auditado por Claude: pico isolado de 2 cortes numa curva negativa de 2.20 a 3.50; inverte no split temporal da odd real [+0,92% treino vs −0,17% OOS]; p=0,669 controlado pelo preço; IC95 engole zero. ARQUIVADO como filtro ativo; mantido apenas K=12 como escolha física de engenharia de features futuras).
 - [x] **Back 0x2 Super Fav Visitante (`Odd_A <= 1.40`, Back 6–20)** (Auditado por Claude e Antigravity: os +194% de Jan–Abr/26 eram odds fantasmas de livros de Lay vazios [ex: Back 12 / Lay 130]; no feed real da API deu −38,6% de ROI em N=49; espelho Lay 0x2 também perde −6,3% comprovando overround. REPROVADO / ARQUIVADO).
 - [x] **Lay 3x3 Geral (`Odd_Lay 15–50`)** (Auditado por Claude e Antigravity: positivo unicamente em Jan–Abr/26 devido ao registro anômalo de CS na API [29% dos jogos com lay <= 50 vs 2-5% normal]; fora de Jan–Abr é sistematicamente negativo em todas as janelas [2024 −0,45%, 2025 −0,51%, mai-jul −0,13%, ago-set −1,12%, feed −1,79%]; liability 33-45u inaceitável. DESCARTE / ARQUIVADO).
+- [x] **Lay 0x3 Top 3 (Odd 14.0–30.0)** (Auditado por Antigravity em 27/10: EV negativo em todos os recortes de forward real [−1,62u em 116 jogos de Ago–Out; todos os meses no vermelho] e no coletor KO-10 [−6,14u em 83 jogos; WR 89,16% vs BE 96,29%, gap −7,13 pp]. Com odd média ~25,7, exige 26 greens para recuperar 1 red; o risco de cauda é tóxico. Retirado do portfólio ativo, scanners e dashboards. EXPURGADO / ARQUIVADO).
 - [x] **Varredura Ampla dos 43 Mercados em 2026** (Auditada por Claude: todos os 5 mercados amplos positivos em 2026 [Lay 0x3, Lay 2x0, Lay 3x3, Lay 1x3, Back 1x1] decorrem unicamente do regime de gravação anômalo da API em Jan–Abr/26; fora dessa janela todos são estritamente negativos e confirmam ausência de alpha pré-jogo ingênuo. ARQUIVADO).
 
 ## 🧭 NORTE (a filosofia que sobrou de tudo)

@@ -101,7 +101,7 @@ st.warning("""
 * **🤖 Regra Congelada do `Lay 0x0 (Modelo Quantitativo XGBoost)`:**
   - **Filtro Estrito:** `Sweet Spot Odd_CS_0x0_Lay ∈ [10.0, 20.0]` + `EV > +2,0%` + `Liga Draw Rate < 8,0%` + `Odd_CS_0x0 (b365)` casada via **Fuzzy Matching (`0.60 / 0.80`)** com a `Odd_CS_0x0_Lay` executável da Betfair Exchange e filtro `KO > agora` (Auditoria Set/2026: **Operação em Blocos Perto do KO `65j: 62G / 3R`, `95,4% WR`, `+0,80u`** | **Conta `b1` 06:00 AM `70j: 66G / 4R`, `94,3% WR`, `+0,04u`**).
   - **Alocação de Risco (`5,0%` Liability):** Mantido no degrau de **`5,0%` de Liability** (`Banca Final R$ 5.738,48` e `Max DD -30,96%` no Cenário B7 com horários reais, evitando que um `0x0` isolado acione o Stop Diário de `-10%` e trave os Greens do restante do dia).
-* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 0x3 Top 3`, `Lay 3x0 Top 3`, `Lay 2x2 Top 3` e `Lay Away Fortaleza 1X`** | **`5%` `Lay Draw`, `Lay Home` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
+* **💰 Gestão de Banca Oficial Recomendada (Cenário B7 Completo):** Gestão Dinâmica Composta (**`15%` Over 4.5** | **`10%` `Lay 3x0 Top 3`, `Lay 2x2 Top 3` e `Lay Away Fortaleza 1X`** | **`5%` `Lay Draw`, `Lay Home` e `Lay 0x0 XGBoost`**) combinada com **Stop Diário de `-10%` (Stop Loss) e `+10%` (Stop Win)**.
 """)
 st.markdown("""
 Esta é a **Central de Estratégias em Validação Forward** do ARKAD. Todos os métodos listados abaixo são monitorados 
@@ -112,7 +112,7 @@ estritamente com **odds de lay reais da Betfair Exchange** e ledger de paper tra
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=2000.0, step=100.0)
 perfil_stake = st.sidebar.selectbox("Risco Máx por Aposta (Liability)", [
-    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3, 3x0, Away 1X | 5.0% em Home, Draw, 0x0)",
+    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 3x0, Away 1X | 5.0% em Home, Draw, 0x0)",
     "Conservador (0.5% da banca)", 
     "Moderado (1.0% da banca)", 
     "Firme (2.0% da banca)", 
@@ -133,7 +133,7 @@ if "Diferenciada" in perfil_stake:
     st.sidebar.success(
         f"🛡️ **Gestão Diferenciada B7 Ativa:**\n"
         f"- **15% (Over 4.5):** R$ {banca_total * 0.15:,.2f}\n"
-        f"- **10% (2x2, 0x3, 3x0, Away 1X):** R$ {banca_total * 0.10:,.2f}\n"
+        f"- **10% (2x2, 3x0, Away 1X):** R$ {banca_total * 0.10:,.2f}\n"
         f"- **5% (Draw, Home, 0x0):** R$ {banca_total * 0.05:,.2f}"
     )
 else:
@@ -143,7 +143,6 @@ st.sidebar.markdown("---")
 st.sidebar.markdown("### 📋 Métodos Ativos no Portfólio")
 st.sidebar.markdown("""
 * 🎯 **Lay 0x0 XGBoost (Sweet Spot)** (WR 95.0% | ROI +0.9% | ML Independente de Preço)
-* 🟢 **Lay 0x3 Top 3** (WR 99.4% | ROI +4.2% | Produção)
 * 🟢 **Lay 3x0 Top 3** (WR 97.2% | ROI +1.0% | `U25<=1.75` + `H>=1.80`)
 * 🟢 **Lay 2x2 Top 3** (WR 96.8% | ROI +3.8% | Produção)
 * 🟡 **Lay Draw Super Fav** (WR 90.8% | ROI +5.8% | Forward)
@@ -251,68 +250,8 @@ with tab1:
         l02 = pd.to_numeric(df.get("Odd_CS_0x2_Lay"), errors="coerce")
         l20 = pd.to_numeric(df.get("Odd_CS_2x0_Lay"), errors="coerce")
         
-        # 1. Lay 0x3 Top 3 Menor Odd (Método Aprovado Produção — idêntico à Página 16)
-        try:
-            res_0x3 = None
-            if avaliar_jogos_lay_0x3_grade is not None:
-                try:
-                    res_0x3 = avaliar_jogos_lay_0x3_grade(df, top_n=3)
-                except Exception:
-                    res_0x3 = None
-            
-            # Fallback direto idêntico ao motor da Página 16 para imunidade a falhas de importação/cache
-            if not res_0x3:
-                from sinais_ko_core import eh_jogo_ignorado
-                sinais_0x3_raw = []
-                for _, row_0x3 in df.iterrows():
-                    h_0x3 = str(row_0x3.get("Home", row_0x3.get("Home_Team", "")))
-                    a_0x3 = str(row_0x3.get("Away", row_0x3.get("Away_Team", "")))
-                    l_0x3 = str(row_0x3.get("League", row_0x3.get("Div", "Liga Externa")))
-                    if eh_jogo_ignorado(h_0x3, a_0x3, l_0x3):
-                        continue
-
-                    o_a_0x3 = float(row_0x3.get('Odd_A_Back') or row_0x3.get('Odd_A_FT_Back') or row_0x3.get('Odd_A_FT') or row_0x3.get('Odd_A') or 0.0)
-                    o_u25_0x3 = float(row_0x3.get('Odd_Under25_FT_Back') or row_0x3.get('Odd_Under25_FT') or row_0x3.get('Odd_Under25') or 0.0)
-                    o_0x3_val = float(row_0x3.get('Odd_CS_0x3_Lay') or row_0x3.get('Odd_CS_0x3') or 0.0)
-                    
-                    if 0.0 < o_u25_0x3 <= 2.10 and 14.0 <= o_0x3_val <= 30.0 and (o_a_0x3 >= 1.85 or o_a_0x3 == 0.0):
-                        tm_0x3 = str(row_0x3.get("Time", row_0x3.get("horario", "15:00")))[:5]
-                        sinais_0x3_raw.append({
-                            "hora": tm_0x3, "league": l_0x3, "home": h_0x3, "away": a_0x3, "odd_lay": o_0x3_val
-                        })
-                        
-                if sinais_0x3_raw:
-                    sinais_0x3_sorted = sorted(sinais_0x3_raw, key=lambda x: x["odd_lay"])
-                    top3_0x3 = []
-                    horarios_usados_0x3 = set()
-                    odds_unicas_0x3 = sorted(list(set([s["odd_lay"] for s in sinais_0x3_sorted])))
-                    for o in odds_unicas_0x3:
-                        grupo = [s for s in sinais_0x3_sorted if s["odd_lay"] == o]
-                        for s in grupo:
-                            if len(top3_0x3) == 3: break
-                            if s.get("hora", "") not in horarios_usados_0x3:
-                                top3_0x3.append(s)
-                                horarios_usados_0x3.add(s.get("hora", ""))
-                        if len(top3_0x3) == 3: break
-                        for s in grupo:
-                            if len(top3_0x3) == 3: break
-                            if s not in top3_0x3:
-                                top3_0x3.append(s)
-                                horarios_usados_0x3.add(s.get("hora", ""))
-                        if len(top3_0x3) == 3: break
-                    res_0x3 = top3_0x3
-                    
-            if res_0x3:
-                for s in res_0x3:
-                    sinais.append({
-                        "Data": ds_iso, "Hora": s["hora"], "Liga": s["league"], "Jogo": f"{s['home']} x {s['away']}",
-                        "Home": s["home"], "Away": s["away"], "Método": "Lay 0x3 Top 3 (Aprovado)",
-                        "Mercado": "Correct Score (0x3)", "Lado": "LAY",
-                        "Odd_Entrada": round(float(s["odd_lay"]), 2), "Odd_Fav": 0.0,
-                        "Expectativa_WR": "99.4%", "EV_Estimado": "+4.21%"
-                    })
-        except Exception:
-            pass
+        # 1. Lay 0x3 Top 3 (EXPURGADO/ARQUIVADO - EV- comprovado em forward e KO-10)
+        # Desativado definitivamente conforme governança (ver GEMINI.md).
 
         # 2. Lay 2x2 Top 3 Menor Odd (Método Aprovado Produção — idêntico à Página 17)
         try:
@@ -561,7 +500,7 @@ with tab1:
             if "Diferenciada" in perfil_stake:
                 if "Over 4.5" in m_str:
                     return round(banca_total * 0.15, 2)
-                elif "0x3" in m_str or "3x0" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
+                elif "3x0" in m_str or "2x2" in m_str or "Away" in m_str or "1X" in m_str:
                     return round(banca_total * 0.10, 2)
                 else:
                     return round(banca_total * 0.05, 2)
@@ -666,15 +605,15 @@ with tab2:
         {
             "Método": "Lay 0x3 Top 3 Menor Odd (Under 2.5 <= 2.10 | Odd A >= 1.85)",
             "Mercado": "Correct Score (0x3)",
-            "Amostra (N)": "494 jogos (Ano 2026)",
-            "Win Rate Real": "99.39%",
-            "Break-Even Exigido": "95.20%",
-            "Margem Real": "+4.19%",
-            "Lucro Líquido": "+393,45 u (R$ +39.345)",
-            "ROI s/ Liability": "+4.21%",
-            "Bootstrap IC95%": "[+3.4%, +5.1%]",
-            "Consistência": "8/9 meses sem reds (3 reds no ano) 🟢",
-            "Status": "✅ APROVADO PRODUÇÃO"
+            "Amostra (N)": "116 jogos (Forward Ago-Out) + 83 (KO-10)",
+            "Win Rate Real": "94.83% (Forward) | 89.16% (KO-10)",
+            "Break-Even Exigido": "96.16% (Forward) | 96.29% (KO-10)",
+            "Margem Real": "−1.34% (Forward) | −7.13% (KO-10)",
+            "Lucro Líquido": "−1,62 u (Forward) | −6,14 u (KO-10)",
+            "ROI s/ Liability": "−1.40% (Forward) | −7.40% (KO-10)",
+            "Bootstrap IC95%": "[−3.2%, −0.1%]",
+            "Consistência": "Negativo em todos os meses (Ago −0.20u, Set −0.51u, Out −0.91u) 🔴",
+            "Status": "❌ REPROVADO / ARQUIVADO"
         },
         {
             "Método": "Lay 2x2 Top 3 Menor Odd (Under 2.5 <= 2.00 | Super Fav)",

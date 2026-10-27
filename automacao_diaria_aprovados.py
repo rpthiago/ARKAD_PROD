@@ -269,23 +269,8 @@ def gerar_sinais_manha(data_str=None, banca=4000.0, risco_pct=0.05, enviar_teleg
     except Exception:
         pass
 
-    # 9. Lay 0x3 Top 3 Menor Odd Otimizado (Under 2.5 <= 2.10 | Odd A >= 1.85 | Lay [14, 30] | Horário Distinto)
-    try:
-        from estrategia_lay_0x3 import avaliar_jogos_lay_0x3_grade
-        res_0x3 = avaliar_jogos_lay_0x3_grade(df_games, top_n=3, odd_lay_max=30.0)
-        if res_0x3:
-            for s03 in res_0x3:
-                odd_e = round(float(s03["odd_lay"]), 2)
-                stake_sug = round(liability_fixa / (odd_e - 1.0), 2)
-                sinais.append({
-                    "Data": data_str, "Hora": s03["hora"], "Liga": s03["league"], "Jogo": f"{s03['home']} x {s03['away']}",
-                    "Método": "Lay 0x3 Top 3 (Aprovado)", "Mercado": "Correct Score (0x3)", "Lado": "LAY",
-                    "Odd_Entrada": odd_e, "Odd_Fav": 0.0,
-                    "Stake_Sugerida_R$": stake_sug, "Lucro_Green_R$": round(stake_sug * 0.955, 2),
-                    "Risco_Red_R$": liability_fixa, "Resultado": "PENDENTE"
-                })
-    except Exception:
-        pass
+    # 9. Lay 0x3 Top 3 Menor Odd (EXPURGADO/ARQUIVADO - EV- comprovado em forward e KO-10)
+    # Desativado definitivamente conforme governança (ver GEMINI.md). Não gera novos sinais.
 
     # 10. Lay 2x2 Top 3 Menor Odd Otimizado (Under 2.5 <= 2.00 | Lay [8, 14] | Horário Distinto)
     try:

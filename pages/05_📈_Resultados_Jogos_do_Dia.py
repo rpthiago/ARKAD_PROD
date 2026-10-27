@@ -142,7 +142,7 @@ banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value
 tipo_gestao = st.sidebar.selectbox(
     "Modelo de Gestão de Risco (Liability)",
     options=[
-        "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3, Away 1X | 5.0% em Home, Draw)",
+        "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, Away 1X | 5.0% em Home, Draw)",
         "⚖️ Uniforme (5.0% Fixa - R$ 200 por Jogo)",
         "🛡️ Conservadora (2.0% Fixa - R$ 80 por Jogo)",
         "🔒 Protegida (1.0% Fixa - R$ 40 por Jogo)"
@@ -203,7 +203,7 @@ def carregar_e_processar_resultados(data_iso, forcar_sync=False):
         if "Diferenciada" in tipo_gestao:
             if "Over 4.5" in m_str:
                 return round(banca_total * 0.15, 2)
-            elif "2x2" in m_str or "0x3" in m_str or "3x0" in m_str or "Away" in m_str or "1X" in m_str:
+            elif "2x2" in m_str or "3x0" in m_str or "Away" in m_str or "1X" in m_str:
                 return round(banca_total * 0.10, 2)
             return round(banca_total * 0.05, 2)
         elif "2.0%" in tipo_gestao:

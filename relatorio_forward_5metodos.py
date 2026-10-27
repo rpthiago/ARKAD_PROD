@@ -52,7 +52,7 @@ M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA = (
 ORDEM = [M_0X3, M_0X3_AMPLA, M_2X2, M_DRAW, M_HOME, M_O45, M_0X2_ZEBRA, M_2X0_ZEBRA]
 # Fora do TOTAL/ACUMULADO/gestao: a Ampla contem os MESMOS jogos do 0x3 Top 3 (somar dobra o jogo);
 # as zebras sao observacao (stake zero). Aparecem como linha propria, marcadas com "*".
-FORA_DO_TOTAL = {M_0X3_AMPLA, M_0X2_ZEBRA, M_2X0_ZEBRA}
+FORA_DO_TOTAL = {M_0X3, M_0X3_AMPLA, M_0X2_ZEBRA, M_2X0_ZEBRA}
 
 
 def na_conta(rows):
@@ -120,7 +120,8 @@ def sinais_do_dia(ds):
                         Odd_Lay=round(odd, 2), Odd_Fav=round(fav, 2) if fav else ""))
 
     # 1 e 2: Top 3 menor odd, pelas funcoes oficiais
-    for fn, nome in ((avaliar_jogos_lay_0x3_grade, M_0X3), (avaliar_jogos_lay_2x2_grade, M_2X2)):
+    # Lay 0x3 expurgado/arquivado
+    for fn, nome in ((avaliar_jogos_lay_2x2_grade, M_2X2),):
         try:
             for s in fn(df, top_n=3):
                 odd = _num(s.get("odd_lay"))

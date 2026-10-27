@@ -136,7 +136,7 @@ def obter_bloco_atual():
 st.sidebar.header("⚙️ Gestão de Banca & Perfil")
 banca_total = st.sidebar.number_input("Banca Total (R$)", min_value=100.0, value=4000.0, step=100.0)
 perfil_stake = st.sidebar.selectbox("Risco Máx por Entrada (Liability)", [
-    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 0x3, 3x0, Away 1X | 5% em Draw, Home)",
+    "🎯 Diferenciada B7 (15% Over 4.5 | 10% em 2x2, 3x0, Away 1X | 5% em Draw, Home)",
     "Firme (5.0% da banca - R$ 200)",
     "Moderado (2.0% da banca - R$ 80)",
     "Conservador (1.0% da banca - R$ 40)",
@@ -203,13 +203,13 @@ if not df_raw.empty:
     # Tetos estritos causais homologados e travas operacionais (GEMINI.md)
     odd_e_num = pd.to_numeric(df["Odd_Entrada"], errors="coerce").fillna(999.0)
     is_2x2 = df["Método"].astype(str).str.contains("2x2", case=False, na=False)
-    is_0x3 = df["Método"].astype(str).str.contains("0x3", case=False, na=False)
+    # Exclusão definitiva do Lay 0x3 (EXPURGADO)
+    df = df[~df["Método"].astype(str).str.contains("0x3", case=False, na=False)].copy()
     is_3x0 = df["Método"].astype(str).str.contains("3x0", case=False, na=False)
     is_home = df["Método"].astype(str).str.contains("Home", case=False, na=False)
     is_draw = df["Método"].astype(str).str.contains("Draw", case=False, na=False)
     is_o45 = df["Método"].astype(str).str.contains("4.5", case=False, na=False)
     df = df[~(is_2x2 & (odd_e_num > 14.0))].copy()
-    df = df[~(is_0x3 & (odd_e_num > 30.0))].copy()
     df = df[~(is_3x0 & (odd_e_num > 30.0))].copy()
     df = df[~(is_home & (odd_e_num > 8.00))].copy()
     df = df[~(is_draw & (odd_e_num > 7.00))].copy()
@@ -224,7 +224,7 @@ if not df_raw.empty:
         if "Diferenciada" in perfil_stake:
             if "Over 4.5" in m:
                 return round(banca_total * 0.15, 2)
-            elif "0x3" in m or "3x0" in m or "2x2" in m or "Away" in m or "1X" in m:
+            elif "3x0" in m or "2x2" in m or "Away" in m or "1X" in m:
                 return round(banca_total * 0.10, 2)
             else:
                 return round(banca_total * 0.05, 2)
