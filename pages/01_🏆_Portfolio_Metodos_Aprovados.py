@@ -483,8 +483,24 @@ with tab1:
             except Exception:
                 pass
 
+        if df_radar.empty:
+            try:
+                from radar_prejogo_orbitx import escanear_jogos_candidatos_orbitx
+                df_fd = escanear_jogos_candidatos_orbitx(ds_str)
+                if not df_fd.empty:
+                    df_radar = df_fd
+                    fonte_origem = "Radar Pré-Jogo Internacional (Football-Data / Validação OrbitX)"
+            except Exception:
+                pass
+
     if not df_radar.empty:
-        if fonte_origem != "API Betfair (FutPythonTrader)":
+        if "OrbitX" in fonte_origem:
+            st.warning('''
+            🛰️ **Radar Pré-Jogo Resiliente Ativo (Football-Data ➔ Validação na OrbitX):**
+            * A grade abaixo foi gerada via feed de fixtures internacional (football-data.co.uk).
+            * **Procedimento Operacional:** Abra a **[OrbitX Exchange](https://orbitxch.com)** ou BFB247 e confirme se a odd de **LAY** real no book está abaixo do teto homologado indicado para cada método antes de entrar.
+            ''')
+        elif fonte_origem != "API Betfair (FutPythonTrader)":
             st.info(f"📡 **Fonte de Resiliência Ativa: {fonte_origem}** — A API externa retornou dados incompletos para {ds_str}; exibindo as entradas capturadas diretamente na Betfair Exchange pela sua VPS.")
         df_radar_filt = df_radar[df_radar["Método"].isin(metodos_filtro)] if metodos_filtro else df_radar
         st.success(f"🎯 **{len(df_radar_filt)} jogos qualificados encontrados para {ds_str}!** (Gestão Dinâmica: Risco travado em R$ {liability_fixa:.2f} por jogo / Zebras máx R$ 50)")
@@ -512,7 +528,7 @@ with tab1:
         
         cols_order = [
             "Data", "Hora", "Liga", "Jogo", "Método", "Mercado", "Lado", 
-            "Odd_Entrada", "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Expectativa_WR", "EV_Estimado"
+            "Odd_Entrada", "Teto_OrbitX", "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Expectativa_WR", "EV_Estimado", "Instrucao_OrbitX"
         ]
         cols_disp = [c for c in cols_order if c in df_calc.columns]
         df_display = df_calc[cols_disp].sort_values(["Data", "Hora"]).reset_index(drop=True)

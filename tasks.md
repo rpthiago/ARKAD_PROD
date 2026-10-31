@@ -8,6 +8,12 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [x] **Fallback Resiliente de Sinais Pré-Jogo (OrbitX / Football-Data) pós-bloqueio Betfair API (31/10).**
+  - [x] Desenvolvido scanner resiliente pré-jogo (`radar_prejogo_orbitx.py`) utilizando feed internacional aberto (`football-data.co.uk`) com conversão para horário de Brasília (UTC-3).
+  - [x] Integrado fallback automático nas páginas do Streamlit (`pages/01` e `pages/04`) e no pipeline agendado (`executar_radar_5_blocos.py`).
+  - [x] Incorporadas diretrizes operacionais de execução na OrbitX/BFB247 com tetos estritos de Lay e cálculo de stake/liability.
+  - [x] Disparo do Bloco 3 realizado com sucesso no Telegram com 5 partidas candidatas do dia.
+
 - [x] **Tabela Consolidada com 1 Stop Red por Método no Streamlit (26/10).**
   - [x] Implementada na página `pages/02_📊_Resultados_Metodos_Aprovados.py` a aba `"🛡️ Tabela Consolidada (1 Stop Red por Método)"` com processamento sequencial por dia e método.
   - [x] Ao ocorrer o 1º RED do método no dia, o jogo é mantido e quaisquer partidas seguintes daquele método na mesma data são bloqueadas.

@@ -70,8 +70,17 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
     print(f"\n[+] ⏰ EXECUTANDO RADAR EM BLOCOS: {info['nome']} — Data: {data_str}")
     print(f"[*] Sincronizando odds frescas diretamente da VPS (Betfair Exchange)...")
     
-    # 1. Atualiza e puxa o ledger da VPS
+    # 1. Atualiza e puxa o ledger da VPS (se online)
     df_dia = gerar_planilha_do_coletor(data_str, universo="feed", min_liq=200.0, sync_vps=True)
+    if df_dia.empty:
+        try:
+            from radar_prejogo_orbitx import escanear_jogos_candidatos_orbitx
+            df_dia = escanear_jogos_candidatos_orbitx(data_str)
+            if not df_dia.empty:
+                print(f"[+] Radar Resiliente (Football-Data / OrbitX) ativo: {len(df_dia)} jogos candidatos.")
+        except Exception as e:
+            print(f"[-] Erro ao carregar radar resiliente: {e}")
+
     if df_dia.empty:
         print(f"[-] Nenhum sinal registrado para hoje até o momento.")
         return df_dia
@@ -185,11 +194,13 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
                 stk = float(s.get("Stake_Sugerida_R$") or 0.0)
                 lucro = float(s.get("Lucro_Green_R$") or 0.0)
                 status = s.get("Status", "⏳ PENDENTE")
+                teto_txt = f"🎯 *Teto OrbitX (Lay):* `{s.get('Teto_OrbitX', '')}`\n" if s.get('Teto_OrbitX') else ""
                 msg_linhas.append(
                     f"⏰ `{s.get('Hora', '')}` | 🏆 *{s.get('Liga', '')}*\n"
                     f"⚽ *{s.get('Jogo', '')}*\n"
-                    f"📌 *{s.get('Método', '')}* (Odd Lay: `{odd_e:.2f}`)\n"
-                    f"💵 *Stake:* `R$ {stk:.2f}` ➔ *Lucro:* `+R$ {lucro:.2f}`\n"
+                    f"📌 *{s.get('Método', '')}* (Odd Ref: `{odd_e:.2f}`)\n"
+                    f"{teto_txt}"
+                    f"💵 *Stake Sugerida:* `R$ {stk:.2f}` ➔ *Lucro:* `+R$ {lucro:.2f}`\n"
                     f"Status: {status}\n"
                     "───────────────────────"
                 )

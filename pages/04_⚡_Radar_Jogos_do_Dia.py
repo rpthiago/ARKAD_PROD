@@ -164,12 +164,19 @@ btn_sincronizar = st.sidebar.button("🔄 Sincronizar Odds da VPS Agora", type="
 # ── Carregamento de Dados com Cache & Sincronização ──
 @st.cache_data(ttl=60)
 def carregar_dados_jogos(data_str, force_sync=False):
-    # Tenta sempre buscar as odds mais frescas da VPS (executa em 2s via SCP)
+    # Tenta buscar as odds mais frescas da VPS (se online)
     try:
         sincronizar_ledger_vps()
     except Exception:
         pass
     df = gerar_planilha_do_coletor(data_str, sync_vps=False)
+    # Se a VPS ou o feed estiverem vazios, usa o Radar Resiliente (Football-Data / OrbitX)
+    if df.empty:
+        try:
+            from radar_prejogo_orbitx import escanear_jogos_candidatos_orbitx
+            df = escanear_jogos_candidatos_orbitx(data_str)
+        except Exception:
+            pass
     return df
 
 if btn_sincronizar:
@@ -191,11 +198,22 @@ Monitoramento oficial de entradas nos **5 Horários Estratégicos**. As odds sã
 garantindo que cada jogo seja avaliado no momento em que a liquidez se consolida.
 """)
 
+is_orbitx = (not df_raw.empty and "OrbitX" in str(df_raw.iloc[0].get("Origem", "")))
+if is_orbitx:
+    st.warning('''
+    🛰️ **Radar Pré-Jogo Resiliente Ativo (Football-Data ➔ Validação na OrbitX):**
+    * Os jogos abaixo foram obtidos diretamente do feed internacional aberto (football-data.co.uk fixtures).
+    * **Operação:** Antes de entrar, abra a **[OrbitX Exchange](https://orbitxch.com)** e confira se a odd de **LAY** real no book está dentro do teto homologado indicado para cada método.
+    ''')
+
 col_h1, col_h2 = st.columns([3, 1])
 with col_h1:
     st.info(f"🕒 **Horário Atual:** `{hora_agora}` (Brasília) | 🟢 **Janela Ativa:** **{bloco_atual_info['nome']}** (`{bloco_atual_info['inicio']}` às `{bloco_atual_info['fim']}`)")
 with col_h2:
-    st.caption("📡 **Fonte de Odds:** `Betfair Exchange Oficial (VPS)`\n\n🛡️ **Liquidação:** `Runner Status Betfair (WINNER/LOSER)`")
+    if is_orbitx:
+        st.caption("📡 **Fonte de Odds:** `Football-Data (Resiliente)`\n\n🛡️ **Execução:** `Manual na OrbitX`")
+    else:
+        st.caption("📡 **Fonte de Odds:** `Betfair Exchange Oficial (VPS)`\n\n🛡️ **Liquidação:** `Runner Status Betfair (WINNER/LOSER)`")
 
 # ── Processamento de Stakes & Risco ──
 if not df_raw.empty:
@@ -319,8 +337,8 @@ if not df_raw.empty:
                         st.error(f"Erro Telegram: {res_m}")
 
         cols_tabela = [
-            "Hora", "Liga", "Jogo", "Método", "Odd_Entrada", "Odd_Fav", 
-            "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Liquidez_Lay", "Resultado", "Status", "Placar"
+            "Hora", "Liga", "Jogo", "Método", "Odd_Entrada", "Teto_OrbitX", "Odd_Fav", 
+            "Stake_Sugerida_R$", "Lucro_Green_R$", "Risco_Red_R$", "Liquidez_Lay", "Resultado", "Status", "Placar", "Instrucao_OrbitX"
         ]
         cols_show = [c for c in cols_tabela if c in df_subset.columns]
         col_cfg = {
@@ -328,7 +346,9 @@ if not df_raw.empty:
             "Liga": st.column_config.TextColumn("🏆 Liga", width="medium"),
             "Jogo": st.column_config.TextColumn("⚽ Partida", width="large"),
             "Método": st.column_config.TextColumn("📌 Método", width="medium"),
-            "Odd_Entrada": st.column_config.NumberColumn("Odd Lay", format="%.2f", width="small"),
+            "Odd_Entrada": st.column_config.NumberColumn("Odd Ref/Lay", format="%.2f", width="small"),
+            "Teto_OrbitX": st.column_config.TextColumn("🎯 Teto OrbitX", width="small"),
+            "Instrucao_OrbitX": st.column_config.TextColumn("📋 Instrução de Entrada", width="large"),
             "Odd_Fav": st.column_config.NumberColumn("Odd Fav", format="%.2f", width="small"),
             "Stake_Sugerida_R$": st.column_config.NumberColumn("Stake Sugerida", format="R$ %.2f", width="small"),
             "Lucro_Green_R$": st.column_config.NumberColumn("Lucro (Green)", format="R$ %.2f", width="small"),

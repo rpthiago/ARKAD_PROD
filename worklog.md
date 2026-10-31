@@ -7,6 +7,53 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-31 · Antigravity · Radar Resiliente Pré-Jogo OrbitX e Fallback para Bloqueio da API Betfair/FutPythonTrader
+
+- **Demanda do Usuário:**
+  - Usuário informou não ter recebido alertas de jogos no dia 31/10/2026.
+  - Apresentado documento `PROMPT_GEMINI_fim_do_coletor_betfair.md` sobre o bloqueio regulatório federal definitivo da Betfair API no Brasil (MP 1.394/2026) e congelamento da API FutPythonTrader.
+  - Alinhamento da nova rota operacional: jogos candidatos pré-jogo apurados a partir de feed aberto internacional resiliente (`football-data.co.uk`) e liquidação/entrada manual orientada na OrbitX Exchange (`orbitxch.com` / BFB247) com tetos rígidos de odd e spread.
+- **Diagnóstico:**
+  - `coletar_betfair_direto.py` bloqueado com `LoginError: API login: ACTIONS_REQUIRED` em 30/10/2026 às 12:03 UTC.
+  - API FutPythonTrader retornando `(0, 0)` jogos.
+  - A OrbitX (white-label da Betfair) segue 100% operacional no navegador com o mesmo livro de Lay; a ausência de sinais devia-se apenas à indisponibilidade dos coletores automatizados.
+- **Implementação Realizada:**
+  1. **Motor de Scanner Resiliente (`radar_prejogo_orbitx.py`):**
+     - Consome `https://www.football-data.co.uk/fixtures.csv` (112 jogos hoje, 50 amanhã), com cache local de 300s em `metodos_aprovados/.cache_fixtures_football_data.csv`.
+     - Converte horários de UTC para Brasília (`UTC-3`).
+     - Aplica as regras estritas dos métodos oficiais do ARKAD: Lay Draw Super Fav ($\le 1.40$, teto OrbitX $\le 7.00$), Lay Home Fav Visitante ($\le 1.65$, teto OrbitX $\le 8.00$), Lay Over 4.5 Under Pesado ($\le 1.50$, teto OrbitX $\le 20.00$), Lay Away Fortaleza 1X ($\le 1.40$ & Over 2.5 $\ge 1.75$, teto OrbitX $\le 15.00$).
+  2. **Integração no Streamlit (`pages/01_🏆_Portfolio_Metodos_Aprovados.py` e `pages/04_⚡_Radar_Jogos_do_Dia.py`):**
+     - Fallback automático: caso a API FutPythonTrader e a VPS estejam vazias, aciona o scanner resiliente do Football-Data/OrbitX.
+     - Exibe callout informativo com instruções operacionais e colunas `Teto_OrbitX` e `Instrucao_OrbitX`.
+  3. **Integração na Execução por Blocos (`executar_radar_5_blocos.py`):**
+     - Fallback incorporado na função `executar_bloco()`.
+     - Geração e enriquecimento de `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-31.xlsx` com 13 partidas candidatas no dia.
+     - Bloco 3 (13:00 às 15:30 BRT) disparado com sucesso para o Telegram com dados de stake, teto e odd de referência.
+- **Arquivos:** `radar_prejogo_orbitx.py`, `executar_radar_5_blocos.py`, `pages/01_🏆_Portfolio_Metodos_Aprovados.py`, `pages/04_⚡_Radar_Jogos_do_Dia.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-31.xlsx`, `worklog.md`.
+
+## 2026-10-30 · Antigravity · Inclusão de Tailândia (Bangkok - BKK) nos Alertas de Voos Internacionais e Smiles
+
+- **Demanda do Usuário:**
+  - *"No alerta de voos acrescentar Tailândia"*
+- **Análise & Diagnóstico:**
+  - **Aeroporto Principal:** Bangkok / Suvarnabhumi (`BKK`) é o principal hub internacional da Tailândia e a porta de entrada para voos da América do Sul (operado por Qatar Airways, Emirates, Ethiopian Airlines, Turkish, etc.).
+  - **Patamar de Preços Atuais (Google Flights):** Fares normais variam de R$ 7.446 a R$ 8.500 (ida e volta com taxas para 10 dias).
+  - **Calibração do Teto de Oportunidade:** Teto fixado em **R$ 6.000,00** em `config_internacional.json` (similar ao teto de Tóquio de R$ 5.500). Isso evita alertas falsos no preço regular e dispara o gatilho imediatamente quando houver mega promoção real.
+- **Ações Realizadas:**
+  1. **Configuração de Destino Internacional (`buscador_voos_internacional/config_internacional.json`):**
+     - Adicionado `BKK` (Bangkok, Tailândia 🇹🇭) com teto R$ 6.000.
+     - Monitoramento ativo para todas as janelas de datas (Novembro/2026 a Junho/2027) a partir de GRU, CNF e GIG.
+  2. **Radar de Milhas Smiles (`buscador_milhas_smiles/config_smiles.json` & `smiles_scanner.py`):**
+     - Adicionado `BKK` em `config_smiles.json` com parceiras internacionais (Ethiopian, Qatar, Emirates).
+     - Incluído benchmark de emissão award em `TABELA_SWEET_SPOTS` (`GRU` ➔ `BKK` a 158k milhas por trecho).
+  3. **Resiliência do Histórico (`buscador_voos_internacional/price_history.py`):**
+     - `salvar_historico()` aprimorado para efetuar merge com o disco antes de persistir, blindando contra sobreposição de processos concorrentes ou tarefas agendadas em segundo plano.
+  4. **Varredura e Validação:**
+     - Executada varredura completa de validação para BKK (`python -m buscador_voos_internacional.main --destino BKK`), populando 35 cotações em `historico_internacional.json` com links do Google Flights e deep links canônicos do Skyscanner.
+     - Menor tarifa atual coletada: **R$ 7.446** (Qatar Airways / Oman Air, saindo de GRU).
+     - Testada geração consolidada do ranking e checagem de milhas Smiles.
+- **Arquivos:** `buscador_voos_internacional/config_internacional.json`, `buscador_voos_internacional/main.py`, `buscador_voos_internacional/price_history.py`, `buscador_voos_internacional/run_scheduled.py`, `buscador_milhas_smiles/config_smiles.json`, `buscador_milhas_smiles/smiles_scanner.py`, `worklog.md`.
+
 ## 2026-10-27 · Antigravity · Expurgamento Completo do Lay 0x3 do Portfólio Ativo e Confirmação do Teto 16.50 no Lay 2x2
 
 - **Demanda do Usuário:**
