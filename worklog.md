@@ -7,6 +7,24 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-31 · Antigravity · Inclusão de Lay Home em Laboratório de Observação Stake-Zero com Ledger Dedicado
+
+- **Demanda do Usuário:**
+  - *"Pode mandar o lay home tb. Quero acompanhar ele ao vivo"*
+- **Governança & Isolamento Metodológico:**
+  - O **Lay Draw** permanece como o único método em validação forward oficial pré-registrada (`PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md`), alimentando estritamente seu próprio ledger (`ledger_lay_draw_forward.csv`).
+  - O **Lay Home** foi integrado como **Laboratório de Observação Stake-Zero** com ledger próprio e isolado (`ledger_lay_home_observacao.csv`) para não contaminar a amostra do pré-registro.
+  - Regra operacional: `BFEA <= 1.65` (visitante favorito na Betfair Exchange), cotação `BFEH` convertida em Lay estimado com spread 1,065x (`lay_est = round(BFEH * 1.065, 2) <= 8.00`).
+  - Stake cravada em `0.00` e liability em `1.0 u` (acompanhamento observacional / sem risco financeiro).
+- **Implementação & Validação:**
+  1. `radar_prejogo_orbitx.py`:
+     - Avalia Lay Home e alimenta `ledger_lay_home_observacao.csv` (112 jogos avaliados em 31/10: 4 elegíveis `SIM`, 108 `SKIP`).
+     - Sinais de hoje: Levante x Ath Madrid (10:00), East Kilbride x Ross County (12:00), Udinese x Roma (14:00) e Beveren x St. Gilloise (16:45 BRT).
+  2. `executar_radar_5_blocos.py`:
+     - Disparado Bloco 4 (15:30 às 18:00 BRT) com sucesso no Telegram contendo o sinal de Beveren x St. Gilloise (Lay Home [OBSERVAÇÃO STAKE-ZERO], Lay Est 6.07 <= 8.00).
+- **Arquivos:** `radar_prejogo_orbitx.py`, `ledger_lay_home_observacao.csv`, `executar_radar_5_blocos.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-31.xlsx`, `worklog.md`.
+
+
 ## 2026-10-31 · Antigravity · Congelamento do Pré-Registro Formal do Lay Draw Stake-Zero e Implementação do Ledger Oficial
 
 - **Demanda & Contexto:**

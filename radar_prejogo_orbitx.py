@@ -1,21 +1,28 @@
 # -*- coding: utf-8 -*-
 """
-radar_prejogo_orbitx.py — Radar e Ledger Oficial de Validação Forward (Lay Draw Stake-Zero)
+radar_prejogo_orbitx.py — Radar e Ledger Oficial de Validação Forward (Lay Draw & Lay Home Stake-Zero)
 
 Documento de Governança Vinculante: PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md
 Autor: Claude (camada de medição) & Antigravity/Gemini (implementação)
 Status: Forward ZERADO em 31/10/2026. Stake 0.00 em todos os registros.
 
 Regras Congeladas:
-1. min(BFEH, BFEA) <= 1.40 (em copas/mata-mata, apenas BFEH <= 1.40).
-2. Fonte de preço: estritamente BFED (Betfair Exchange Back do football-data).
-   Proibido usar B365D ou qualquer bookmaker como fallback. Sem BFED -> SKIP.
-3. Tabela de conversão congelada (SHA256: 1cbae42b32e118a11c7e3a3926d82229):
-   - 4.50 <= BFED < 6.00: razao = 1.0755 (faixa '4.5-6.0')
-   - 6.00 <= BFED <= 8.00: razao = 1.0616 (faixa '6.0-8.0')
-   - Fora da faixa -> SKIP ('BFED_FORA_FAIXA_CONGELADA').
-4. Teto rígido: lay_est = round(BFED * razao, 2) <= 7.00.
-5. Ledger append-only: ledger_lay_draw_forward.csv gravando todas as partidas avaliadas (inclusive SKIP).
+1. LAY DRAW (Pré-Registro Formal):
+   - min(BFEH, BFEA) <= 1.40 (em copas/mata-mata, apenas BFEH <= 1.40).
+   - Fonte de preço: estritamente BFED (Betfair Exchange Back do football-data). Sem BFED -> SKIP.
+   - Tabela de conversão congelada (SHA256: 1cbae42b32e118a11c7e3a3926d82229):
+     * 4.50 <= BFED < 6.00: razao = 1.0755 (faixa '4.5-6.0')
+     * 6.00 <= BFED <= 8.00: razao = 1.0616 (faixa '6.0-8.0')
+     * Fora da faixa -> SKIP ('BFED_FORA_FAIXA_CONGELADA').
+   - Teto rígido: lay_est = round(BFED * razao, 2) <= 7.00.
+   - Ledger oficial: ledger_lay_draw_forward.csv.
+
+2. LAY HOME (Laboratório de Observação Stake-Zero):
+   - Visitante Favorito: BFEA <= 1.65.
+   - Fonte de preço: BFEH (Betfair Exchange Back Mandante). Sem BFEH -> SKIP.
+   - Conversão estimada: lay_est = round(BFEH * 1.065, 2) <= 8.00.
+   - Ledger dedicado: ledger_lay_home_observacao.csv (não contamina o pré-registro do Lay Draw).
+   - Stake compulsoriamente 0.00 (Liability 1.0u) — acompanhamento observacional.
 """
 
 import io
@@ -36,6 +43,7 @@ except Exception:
 ROOT = Path(__file__).resolve().parent
 CACHE_FILE = ROOT / "metodos_aprovados" / ".cache_fixtures_football_data.csv"
 LEDGER_FORWARD_PATH = ROOT / "ledger_lay_draw_forward.csv"
+LEDGER_HOME_PATH = ROOT / "ledger_lay_home_observacao.csv"
 
 VERSAO_PREREGISTRO = "2026-10-31"
 SHA_TABELA = "1cbae42b32e118a11c7e3a3926d82229"
@@ -224,39 +232,38 @@ def avaliar_partida_lay_draw(row: pd.Series, data_iso: str) -> dict:
     return rec
 
 
-def sincronizar_ledger_forward(registros: list):
-    """Grava append-only em ledger_lay_draw_forward.csv sem duplicar partidas."""
+def sincronizar_ledger_forward(registros: list, arquivo_ledger: Path):
+    """Grava append-only em ledger sem duplicar partidas."""
     if not registros:
         return
 
     df_novos = pd.DataFrame(registros, columns=LEDGER_COLS)
     df_novos["chave"] = df_novos["data_ko"].astype(str) + "|" + df_novos["liga_fd"].astype(str) + "|" + df_novos["home"].astype(str) + "|" + df_novos["away"].astype(str)
 
-    if LEDGER_FORWARD_PATH.exists():
+    if arquivo_ledger.exists():
         try:
-            df_exist = pd.read_csv(LEDGER_FORWARD_PATH, encoding="utf-8")
+            df_exist = pd.read_csv(arquivo_ledger, encoding="utf-8")
             df_exist["chave"] = df_exist["data_ko"].astype(str) + "|" + df_exist["liga_fd"].astype(str) + "|" + df_exist["home"].astype(str) + "|" + df_exist["away"].astype(str)
             chaves_existentes = set(df_exist["chave"].dropna())
             df_novos = df_novos[~df_novos["chave"].isin(chaves_existentes)]
             if not df_novos.empty:
                 df_novos = df_novos.drop(columns=["chave"])
-                df_novos.to_csv(LEDGER_FORWARD_PATH, mode="a", header=False, index=False, encoding="utf-8")
-                print(f"[+] Ledger Forward: {len(df_novos)} novos registros adicionados.")
+                df_novos.to_csv(arquivo_ledger, mode="a", header=False, index=False, encoding="utf-8")
         except Exception as e:
-            print(f"[!] Erro ao anexar ao ledger forward: {e}")
+            print(f"[!] Erro ao anexar ao ledger ({arquivo_ledger.name}): {e}")
     else:
         df_novos = df_novos.drop(columns=["chave"])
-        df_novos.to_csv(LEDGER_FORWARD_PATH, index=False, encoding="utf-8")
-        print(f"[+] Ledger Forward criado: {len(df_novos)} registros salvos.")
+        arquivo_ledger.parent.mkdir(parents=True, exist_ok=True)
+        df_novos.to_csv(arquivo_ledger, index=False, encoding="utf-8")
 
 
 def escanear_jogos_candidatos_orbitx(data_iso: str = None) -> pd.DataFrame:
     """
     Escaneia os jogos da data especificada (YYYY-MM-DD).
-    Aplica rigorosamente o PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md:
-      - Alimenta o ledger forward (todas as partidas, inclusive SKIP).
-      - Retorna apenas as partidas com elegivel == 'SIM' (Lay Draw Super Fav).
-      - Stake 0.00 (observação pura / Stake-Zero).
+    Retorna os candidatos de:
+      1. Lay Draw Super Fav (Pré-Registro 31/10/2026 oficial);
+      2. Lay Home Fav Visitante (Laboratório de Observação Stake-Zero).
+    Ambos em STAKE 0.00 (observação pura / sem dinheiro).
     """
     if not data_iso:
         data_iso = datetime.now().strftime("%Y-%m-%d")
@@ -282,27 +289,31 @@ def escanear_jogos_candidatos_orbitx(data_iso: str = None) -> pd.DataFrame:
     if df_day.empty:
         return pd.DataFrame()
 
-    registros_ledger = []
+    registros_ledger_draw = []
+    registros_ledger_home = []
     candidatos_sim = []
 
     for _, row in df_day.iterrows():
-        rec = avaliar_partida_lay_draw(row, data_iso)
-        registros_ledger.append(rec)
+        div_code = str(row.get("Div", "")).strip()
+        liga_nome = DIV_NAMES.get(div_code, div_code)
+        home = str(row.get("HomeTeam", "")).strip()
+        away = str(row.get("AwayTeam", "")).strip()
+        tm_utc = str(row.get("Time", "")).strip()
+        hora_brt = _utc_para_brt(tm_utc)
 
-        if rec["elegivel"] == "SIM":
-            div_code = rec["liga_fd"]
-            liga_nome = DIV_NAMES.get(div_code, div_code)
-            home = rec["home"]
-            away = rec["away"]
-            fav = rec["fav_odd"]
-            bfed = rec["bfed"]
-            lay_est = rec["lay_est"]
-            hora_brt = rec["hora_ko_brt"]
+        bfeh = pd.to_numeric(row.get("BFEH"), errors="coerce")
+        bfed = pd.to_numeric(row.get("BFED"), errors="coerce")
+        bfea = pd.to_numeric(row.get("BFEA"), errors="coerce")
 
+        # 1. AVALIAÇÃO LAY DRAW (PRÉ-REGISTRO OFICIAL)
+        rec_draw = avaliar_partida_lay_draw(row, data_iso)
+        registros_ledger_draw.append(rec_draw)
+
+        if rec_draw["elegivel"] == "SIM":
             candidatos_sim.append({
                 "Data": data_iso,
                 "Hora": hora_brt,
-                "Hora_UTC": str(row.get("Time", "")).strip(),
+                "Hora_UTC": tm_utc,
                 "Liga": liga_nome,
                 "Jogo": f"{home} x {away}",
                 "Home": home,
@@ -310,11 +321,11 @@ def escanear_jogos_candidatos_orbitx(data_iso: str = None) -> pd.DataFrame:
                 "Método": "Lay Draw Super Fav (Pré-Registro 31/10)",
                 "Mercado": "The Draw (Empate)",
                 "Lado": "LAY",
-                "Odd_Entrada": lay_est,
-                "Odd_Ref_Exchange": bfed,
-                "Odd_Fav": fav,
-                "Faixa_BFED": rec["faixa"],
-                "Razao_Aplicada": rec["razao_aplicada"],
+                "Odd_Entrada": rec_draw["lay_est"],
+                "Odd_Ref_Exchange": rec_draw["bfed"],
+                "Odd_Fav": rec_draw["fav_odd"],
+                "Faixa_BFED": rec_draw["faixa"],
+                "Razao_Aplicada": rec_draw["razao_aplicada"],
                 "Teto_OrbitX": "<= 7.00",
                 "Spread_Max": "<= 1.15",
                 "Stake_Sugerida_R$": 0.00,
@@ -325,11 +336,82 @@ def escanear_jogos_candidatos_orbitx(data_iso: str = None) -> pd.DataFrame:
                 "Status": "⏳ PENDENTE (Stake-Zero)",
                 "Placar": "vs",
                 "Origem": "Football-Data (Exchange BFED)",
-                "Instrucao_OrbitX": f"Acompanhamento Stake-Zero -> Seleção 'The Draw' -> Lay Est `{lay_est:.2f}` (BFED `{bfed:.2f}` x {rec['razao_aplicada']})"
+                "Instrucao_OrbitX": f"Acompanhamento Stake-Zero -> Seleção 'The Draw' -> Lay Est `{rec_draw['lay_est']:.2f}` (BFED `{rec_draw['bfed']:.2f}` x {rec_draw['razao_aplicada']})"
             })
 
-    # Atualiza ledger forward append-only
-    sincronizar_ledger_forward(registros_ledger)
+        # 2. AVALIAÇÃO LAY HOME (LABORATÓRIO DE OBSERVAÇÃO STAKE-ZERO)
+        rec_home = {
+            "data_ko": data_iso,
+            "hora_ko_brt": hora_brt,
+            "liga_fd": div_code,
+            "home": home,
+            "away": away,
+            "bfeh": round(float(bfeh), 2) if pd.notna(bfeh) else None,
+            "bfed": round(float(bfed), 2) if pd.notna(bfed) else None,
+            "bfea": round(float(bfea), 2) if pd.notna(bfea) else None,
+            "fav_odd": round(float(bfea), 2) if pd.notna(bfea) else None,
+            "faixa": "MATCH_ODDS",
+            "razao_aplicada": 1.065,
+            "lay_est": None,
+            "elegivel": "SKIP",
+            "motivo_skip": "",
+            "stake": 0.00,
+            "liability": 0.0,
+            "gh": None,
+            "ga": None,
+            "res": None,
+            "resultado": "PENDENTE",
+            "pnl_u": 0.0,
+            "versao_preregistro": "OBS_HOME_2026-10-31",
+            "sha_tabela": "obs_lay_home_1.065",
+        }
+
+        if pd.isna(bfeh) or pd.isna(bfea) or bfeh <= 1.01 or bfea <= 1.01:
+            rec_home["motivo_skip"] = "SEM_BFE_EXCHANGE"
+        elif bfea > 1.65:
+            rec_home["motivo_skip"] = "FAV_VISITANTE_>_1.65"
+        else:
+            lay_est_home = round(float(bfeh * 1.065), 2)
+            rec_home["lay_est"] = lay_est_home
+            if lay_est_home > 8.00:
+                rec_home["motivo_skip"] = "TETO_LAY_ESTIMADO_>_8.00"
+            else:
+                rec_home["elegivel"] = "SIM"
+                rec_home["liability"] = 1.0
+                candidatos_sim.append({
+                    "Data": data_iso,
+                    "Hora": hora_brt,
+                    "Hora_UTC": tm_utc,
+                    "Liga": liga_nome,
+                    "Jogo": f"{home} x {away}",
+                    "Home": home,
+                    "Away": away,
+                    "Método": "Lay Home Fav Visitante [OBSERVAÇÃO STAKE-ZERO]",
+                    "Mercado": "Home (Mandante)",
+                    "Lado": "LAY",
+                    "Odd_Entrada": lay_est_home,
+                    "Odd_Ref_Exchange": round(float(bfeh), 2),
+                    "Odd_Fav": round(float(bfea), 2),
+                    "Faixa_BFED": "MATCH_ODDS",
+                    "Razao_Aplicada": 1.065,
+                    "Teto_OrbitX": "<= 8.00",
+                    "Spread_Max": "<= 1.15",
+                    "Stake_Sugerida_R$": 0.00,
+                    "Liability_u": 1.0,
+                    "Expectativa_WR": "92.3%",
+                    "EV_Estimado": "+6.18%",
+                    "Resultado": "PENDENTE",
+                    "Status": "⏳ PENDENTE (Stake-Zero)",
+                    "Placar": "vs",
+                    "Origem": "Football-Data (Exchange BFEH)",
+                    "Instrucao_OrbitX": f"Acompanhamento Stake-Zero -> Seleção '{home}' -> Lay Est `{lay_est_home:.2f}` (BFEH `{bfeh:.2f}` | Fav Visitante `{bfea:.2f}`)"
+                })
+
+        registros_ledger_home.append(rec_home)
+
+    # Sincroniza ambos os ledgers separadamente
+    sincronizar_ledger_forward(registros_ledger_draw, LEDGER_FORWARD_PATH)
+    sincronizar_ledger_forward(registros_ledger_home, LEDGER_HOME_PATH)
 
     df_out = pd.DataFrame(candidatos_sim)
     if not df_out.empty:
@@ -343,4 +425,4 @@ if __name__ == "__main__":
     df_cand = escanear_jogos_candidatos_orbitx(hoje)
     print(f"\n[+] Total de candidatos ELEGÍVEIS (SIM): {len(df_cand)}")
     if not df_cand.empty:
-        print(df_cand[["Hora", "Liga", "Jogo", "Odd_Ref_Exchange", "Odd_Entrada", "Teto_OrbitX", "Status"]].to_string(index=False))
+        print(df_cand[["Hora", "Liga", "Jogo", "Método", "Odd_Ref_Exchange", "Odd_Entrada", "Teto_OrbitX", "Status"]].to_string(index=False))
