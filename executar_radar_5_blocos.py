@@ -183,24 +183,26 @@ def executar_bloco(num_bloco=None, data_str=None, banca=4000.0, risco_pct=0.05, 
             print(f"[+] Envio Telegram (Fechamento Geral Bloco 8): {ok_m} ({res_m})")
         elif not df_bloco.empty:
             msg_linhas = [
-                f"🎯 *ARKAD — RADAR DE ODDS FRESCAS ({data_str})*",
+                f"🎯 *ARKAD — RADAR FORWARD STAKE-ZERO ({data_str})*",
                 f"⚡ *{info['nome']}* (Jogos das `{info['inicio']}` às `{info['fim']}`)",
-                f"💰 *Banca:* R$ {banca:,.2f} | 🛡️ *Risco Máx por Jogo:* R$ {liability_fixa:.2f} ({risco_pct*100:.1f}%)",
-                f"📊 *Entradas deste Bloco:* {len(df_bloco)} jogos\n",
+                f"🔬 *Governança:* Pré-Registro 2026-10-31 (Lay Draw Exchange)",
+                f"🛡️ *Stake:* `0.00` (Observação Formal / Liability 1.0u)",
+                f"📊 *Sinais Elegíveis deste Bloco:* {len(df_bloco)} jogos\n",
                 "━━━━━━━━━━━━━━━━━━━━━━━"
             ]
             for _, s in df_bloco.iterrows():
                 odd_e = float(s.get("Odd_Entrada") or 0.0)
                 stk = float(s.get("Stake_Sugerida_R$") or 0.0)
-                lucro = float(s.get("Lucro_Green_R$") or 0.0)
-                status = s.get("Status", "⏳ PENDENTE")
-                teto_txt = f"🎯 *Teto OrbitX (Lay):* `{s.get('Teto_OrbitX', '')}`\n" if s.get('Teto_OrbitX') else ""
+                status = s.get("Status", "⏳ PENDENTE (Stake-Zero)")
+                teto_txt = f"🎯 *Teto Lay Estimado:* `{s.get('Teto_OrbitX', '<= 7.00')}`\n" if s.get('Teto_OrbitX') else ""
+                odd_ref_txt = f" (BFED: `{s.get('Odd_Ref_Exchange')}`)" if s.get('Odd_Ref_Exchange') else ""
+                financeiro_txt = f"💵 *Stake Sugerida:* `R$ {stk:.2f}`\n" if stk > 0 else "🔬 *Stake:* `0.00` | *Liability:* `1.0 u` (Stake-Zero)\n"
                 msg_linhas.append(
                     f"⏰ `{s.get('Hora', '')}` | 🏆 *{s.get('Liga', '')}*\n"
                     f"⚽ *{s.get('Jogo', '')}*\n"
-                    f"📌 *{s.get('Método', '')}* (Odd Ref: `{odd_e:.2f}`)\n"
+                    f"📌 *{s.get('Método', '')}* (Odd Lay Est: `{odd_e:.2f}`{odd_ref_txt})\n"
                     f"{teto_txt}"
-                    f"💵 *Stake Sugerida:* `R$ {stk:.2f}` ➔ *Lucro:* `+R$ {lucro:.2f}`\n"
+                    f"{financeiro_txt}"
                     f"Status: {status}\n"
                     "───────────────────────"
                 )

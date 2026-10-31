@@ -8,6 +8,14 @@
 
 ## 🔴 ATIVO — em validação forward (o que importa agora)
 
+- [ ] **Validação Forward Stake-Zero: Lay Draw Favorito Pesado (Pré-Registro 31/10/2026).**
+  - [x] Documento vinculante congelado: `PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md` (autor: Claude).
+  - [x] Amostra forward iniciada do ZERO em 31/10/2026 com stake `0.00` e liability `1.0 u` por aposta.
+  - [x] Fonte de preço estrita: `BFED` da Betfair Exchange com tabela de conversão fixa (SHA256 `1cbae42b...`).
+  - [x] Ledger append-only implementado em `ledger_lay_draw_forward.csv` (112 jogos avaliados em 31/10: 5 SIM, 107 SKIP).
+  - [ ] Acumular forward diário até atingir o alvo de potência estatística $N = 250$ liquidados (~6,3 meses, alfa unilateral 0,05).
+  - [ ] Rotina de auditoria: diária (anexar jogos e SKIPs ao ledger), semanal (liquidar resultados de jogos finalizados).
+
 - [x] **Fallback Resiliente de Sinais Pré-Jogo (OrbitX / Football-Data) pós-bloqueio Betfair API (31/10).**
   - [x] Desenvolvido scanner resiliente pré-jogo (`radar_prejogo_orbitx.py`) utilizando feed internacional aberto (`football-data.co.uk`) com conversão para horário de Brasília (UTC-3).
   - [x] Integrado fallback automático nas páginas do Streamlit (`pages/01` e `pages/04`) e no pipeline agendado (`executar_radar_5_blocos.py`).

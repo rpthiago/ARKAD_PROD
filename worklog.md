@@ -7,6 +7,30 @@
 > `## data · autor · tema` → **Feito / Achados / Próximo / Arquivos**.
 > A autoridade das regras continua no GEMINI.md (5 Leis + Hall of Shame). Este é o diário de bordo.
 
+## 2026-10-31 · Antigravity · Congelamento do Pré-Registro Formal do Lay Draw Stake-Zero e Implementação do Ledger Oficial
+
+- **Demanda & Contexto:**
+  - Claude auditou o handoff e redigiu o documento oficial congelado `PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md` (10 KB), acompanhado de 4 scripts de reprodução (`extrai_mo3.py`, `tabela_celulas.py`, `diag_celula.py`, `fluxo_mapeado.py`).
+  - Identificados e corrigidos desvios da implementação anterior:
+    1. Inversão de prioridade de odds: bookmaker (`B365D`) removido; fonte única e mandatória passa a ser `BFED` (Betfair Exchange Back). Sem `BFED` -> `SKIP`.
+    2. Aplicação estrita da tabela congelada de conversão back->lay (SHA256 `1cbae42b32e118a11c7e3a3926d82229`):
+       - `[4.50, 6.00)` -> razão 1.0755
+       - `[6.00, 8.00]` -> razão 1.0616
+       - Fora da faixa -> `SKIP ('BFED_FORA_FAIXA_CONGELADA')`
+    3. Teto rígido: `lay_est <= 7.00`. Se exceder -> `SKIP ('TETO_LAY_ESTIMADO_>_7.00')`.
+    4. Expurgamento total de métodos sem validação forward (Lay Home, Lay Over 4.5, Lay Away) da geração de sinais executáveis.
+    5. Stake compulsoriamente fixada em `0.00` (`liability: 1.0u`) — observação formal forward.
+- **Implementação Realizada:**
+  1. **Motor & Ledger (`radar_prejogo_orbitx.py`):**
+     - Refatorado para avaliar todos os jogos do dia contra a especificação congelada e gravar de forma append-only no `ledger_lay_draw_forward.csv` (23 colunas, registrando inclusive todos os motivos de `SKIP`).
+     - Executado para 31/10/2026: 112 partidas processadas no ledger (5 elegíveis `SIM`, 107 `SKIP`: 101 `FAV_>_1.40`, 3 `TETO_LAY_ESTIMADO_>_7.00`, 3 `BFED_FORA_FAIXA_CONGELADA`).
+     - 5 elegíveis consolidados: Stockport x Wimbledon (Lay 6.79), Boreham Wood x Hartlepool (Lay 6.58), Fenerbahce x Goztep (Lay 6.24), Bayern Munich x Dortmund (Lay 6.58), Betis x Malaga (Lay 6.35).
+  2. **Radar por Blocos (`executar_radar_5_blocos.py`):**
+     - Adaptado para rotular mensagens como `🔬 Governança: Pré-Registro 2026-10-31 (Lay Draw Exchange)` com `Stake: 0.00` e `Liability: 1.0u`.
+     - Atualizada a planilha do dia `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-31.xlsx` contendo exclusivamente os 5 sinais válidos em stake-zero.
+- **Arquivos:** `PREREGISTRO_LAY_DRAW_FORWARD_2026-10-31.md`, `radar_prejogo_orbitx.py`, `ledger_lay_draw_forward.csv`, `executar_radar_5_blocos.py`, `metodos_aprovados/Sinais_Metodos_Aprovados_2026-10-31.xlsx`, `worklog.md`.
+
+
 ## 2026-10-31 · Antigravity · Radar Resiliente Pré-Jogo OrbitX e Fallback para Bloqueio da API Betfair/FutPythonTrader
 
 - **Demanda do Usuário:**
